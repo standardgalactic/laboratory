@@ -1,0 +1,98 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare static site
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          import html
+          import shutil
+
+          root = Path.cwd()
+          site = root / "_site"
+          site.mkdir(exist_ok=True)
+
+          excluded = {".git", ".github", "_site"}
+          for item in root.iterdir():
+              if item.name in excluded:
+                  continue
+              target = site / item.name
+              if item.is_dir():
+                  shutil.copytree(item, target, dirs_exist_ok=True)
+              elif item.is_file():
+                  shutil.copy2(item, target)
+
+          (site / ".nojekyll").touch()
+
+          if not (site / "index.html").exists():
+              files = sorted(
+                  path.relative_to(site).as_posix()
+                  for path in site.rglob("*")
+                  if path.is_file()
+                  and path.name not in {".nojekyll", "index.html"}
+              )
+              links = "\n".join(
+                  f'<li><a href="{quote(path, safe="/")}">{html.escape(path)}</a></li>'
+                  for path in files
+              )
+              page = f'''<!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Laboratory</title>
+            <style>
+              body {{ max-width: 52rem; margin: 4rem auto; padding: 0 1.25rem;
+                      font: 18px/1.55 system-ui, sans-serif; color: #202124; }}
+              h1 {{ font-size: 2.4rem; margin-bottom: .25rem; }}
+              p {{ color: #5f6368; }}
+              li {{ margin: .55rem 0; }}
+              a {{ color: #174ea6; text-decoration-thickness: .08em; }}
+            </style>
+          </head>
+          <body>
+            <h1>Laboratory</h1>
+            <p>Experimental papers and working documents.</p>
+            <ul>{links}</ul>
+          </body>
+          </html>
+          '''
+              (site / "index.html").write_text(page, encoding="utf-8")
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
