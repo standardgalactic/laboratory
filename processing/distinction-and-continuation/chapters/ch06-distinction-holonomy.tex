@@ -1,0 +1,116 @@
+%% ============================================================
+%% Chapter 6: Distinction Holonomy Theory (DHT)
+%% ============================================================
+
+\chapter{Distinction Holonomy Theory}
+\label{ch:ch06-distinction-holonomy}
+\section{The Distinction Bundle}
+
+A persistent object is usually treated as something that remains identical while time passes. Chapter~\ref{ch:ch05-ontological-reversal} proposed the opposite starting point: persistence is not the preservation of an object but the preservation of a family of admissible distinctions under transformation. This chapter formulates that reversal as a gauge theory over a bundle of admissible continuations, developed with attention to where the gauge-theoretic language is rigorously earned and where it remains a schematic borrowing to be discharged later.
+
+Let $M$ be a manifold of histories. A point $p \in M$ represents a local historical context: a physical time, computational stage, biological condition, conversational state, or organizational configuration. Above each $p$, define a fiber $E_p$ containing the distinctions available at that historical location, giving a fiber bundle $\pi : E \to M$.
+
+To keep the gauge-theoretic claims that follow rigorous rather than schematic, a minimal model is fixed and every subsequent generalization is treated as an explicit extension of it, not a silent redefinition. In the minimal model, $E_p$ is a finite-dimensional vector space of distinction observables, $G \subseteq \mathrm{GL}(E_p)$ is a structure group acting on the fibers, and
+\[
+\nabla : \Gamma(E) \to \Omega^1(M, E)
+\]
+is a connection compatible with $G$. Everything said in this chapter about connections, curvature, and holonomy is rigorous relative to this model; later generalizations, replacing the vector space fiber with a lattice, a Boolean or effect algebra, a category, or a measurable space, extend it in a technical sense, and expressions borrowed from that broader setting should be treated as provisional until re-derived there.
+
+A distinction in the minimal model is a linear observable $d \in E_p^\ast$; two states $x,y$ are equivalent relative to a family $\{d_i\} \subset E_p^\ast$ when $d_i(x) = d_i(y)$ for every $i$ in the family, even though $x \neq y$ as points of the underlying state space. This gives an explicit version of a familiar but usually informal phenomenon: a system can change continuously while remaining recognizably the same, because the relevant distinctions are held fixed while irrelevant coordinates move. The idea has a direct precursor in Gregory Bateson's definition of information as a difference which makes a difference: a physical variation only becomes informative relative to a receiving system for which it changes some subsequent state or action. The distinction fiber $E_p$ makes this compositional and quantitative: it does not contain every measurable difference at $p$, only those capable of changing which continuations remain admissible.
+
+\begin{definition}[Consequential distinction]
+A candidate distinction $d : X \to \mathcal{V}_d$ is \emph{consequential at $x$} when there exist $x_1, x_2$ with $d(x_1) \neq d(x_2)$ and $\mathsf{C}_d(x_1) \not\simeq \mathsf{C}_d(x_2)$, where $\mathsf{C}_d(x)$ denotes the continuations available when $d$ is retained.
+\end{definition}
+
+A detectable difference that has no effect on any relevant continuation need not belong to the constitutive distinction fiber; conversely, a difference may be physically small yet constitutive if it changes which transformations remain possible. This treats ``difference'' as a relation among an observation, a set of permitted operations, and a specified future horizon, not as a mystical or universal substance.
+
+\section{Continuation as a Connection}
+
+Suppose a history is parameterized by $\gamma : [0,1] \to M$. At each point $\gamma(t)$ there is a distinction fiber $E_{\gamma(t)}$. To transport a distinction along the history requires a map $\mathcal{P}_{\gamma,t_0\to t_1} : E_{\gamma(t_0)} \to E_{\gamma(t_1)}$. These transport operators always satisfy $\mathcal{P}_{t\to t} = I$ and
+\[
+\mathcal{P}_{t_1 \to t_2}\, \mathcal{P}_{t_0 \to t_1} = \mathcal{P}_{t_0 \to t_2}.
+\]
+This composition law is the ordinary functoriality of parallel transport along a single, concatenated path; it holds for curved connections exactly as it does for flat ones, and should not itself be read as a statement about ``perfect continuation.'' The property that does depend on curvature is different: whether two \emph{different} paths sharing the same endpoints induce the same transport, $\mathcal{P}_{\gamma_1} = \mathcal{P}_{\gamma_2}$ for $\gamma_1, \gamma_2 : p \to q$. This second property generally fails when curvature, or global topology, is nontrivial, and it is this failure, comparison across paths, not composition along one path, that the rest of this chapter is built on.
+
+In differential form, transport is generated by a connection $\nabla = d + A$, where $A$ is a connection one-form valued in the Lie algebra $\mathfrak{g}$ of $G$. For a curve $\gamma$, parallel transport satisfies
+\[
+\frac{Ds}{dt} = \frac{ds}{dt} + A_\mu(\gamma(t))\,\dot\gamma^\mu(t)\, s = 0, \qquad \text{so} \qquad \frac{ds}{dt} = -A_\mu \dot\gamma^\mu s.
+\]
+The connection $A$ answers: given what currently exists, what counts as the next admissible state? A conventional dynamical law evolves states. A continuation connection evolves admissibility.
+
+\section{Curvature versus Holonomy}
+
+The curvature of the connection is $F = dA + A \wedge A$. For two infinitesimal directions $X,Y$, $[\nabla_X, \nabla_Y] = F(X,Y)$, so curvature measures the infinitesimal failure of continuation operators to commute along nearby paths. It is essential not to conflate curvature with the broader notion of path-dependent memory. If $F=0$ everywhere, parallel transport is locally path-independent, but only locally, on a simply connected neighborhood. A flat connection on a base space that is not simply connected can still have nontrivial holonomy around a noncontractible loop:
+\[
+F = 0, \qquad \Hol_\gamma \neq I.
+\]
+This is not a corner case; it is the source of a second, purely topological, kind of memory. The theory therefore contains two distinct mechanisms for historical dependence: local, infinitesimal curvature, and global, topological holonomy on an otherwise flat connection. This is precisely the distinction Chapter~\ref{ch:ch05-ontological-reversal} used to separate a paracosm's holonomic triviality (its loops return to themselves, $T_\gamma(x) = x$) from a genuinely open system's holonomic residue.
+
+\section{Memory as Path-Dependent Transport}
+
+Let $\gamma_1, \gamma_2 : [0,1] \to M$ share endpoints. If $\mathcal{P}_{\gamma_1} \neq \mathcal{P}_{\gamma_2}$, the system's present distinction structure depends on its historical path. Memory is characterized by $\gamma_1 \sim \gamma_2 \iff \mathcal{P}_{\gamma_1} = \mathcal{P}_{\gamma_2}$. Nonzero curvature is sufficient to produce infinitesimal path dependence, but it is not necessary for holonomic memory, by the flat-but-multiply-connected case above. The correct general statement is therefore that memory is operationally detectable path-dependent transport. Curvature measures its local infinitesimal component; holonomy measures the finite, and potentially purely topological, result. A system whose present state differs after different histories contains a physical record of those histories in its present configuration, even though no separate symbolic storage variable was introduced: holonomy gives memory without a designated memory register, not memory without any present encoding at all.
+
+\section{Holonomy and Identity}
+
+Consider a closed loop $\gamma : S^1 \to M$ based at $p$. Parallel transport around the loop produces an operator
+\[
+\Hol_\gamma = \mathcal{P}\exp\left(-\oint_\gamma A\right) \in G.
+\]
+Under a gauge transformation $A \mapsto A^g$, holonomy transforms by conjugation, $\Hol_\gamma(A^g) = g(p)\,\Hol_\gamma(A)\,g(p)^{-1}$, so the conjugacy class of $\Hol_\gamma$ is gauge-invariant, while $\Hol_\gamma$ itself, in a chosen trivialization, is not. Belonging to a single fixed conjugacy class is gauge-invariant but generally too weak to determine identity: many inequivalent connections can share the holonomy of one particular loop without being continuation-equivalent in any richer sense.
+
+A better identity invariant is the full transport functor restricted to a family of constitutive paths, rather than one loop or its conjugacy class. Let $\Pi_1^{\mathrm{thin}}(M)$ be the thin path groupoid of $M$, paths identified only under homotopies sweeping out no area, the natural domain for parallel transport. Define $\mathcal{P}_A : \Pi_1^{\mathrm{thin}}(M) \to G\text{-}\mathbf{Tor}$, the transport functor sending each thin-homotopy class of path to the corresponding torsor map between fibers. Two connections are identity-equivalent, relative to a family $\Gamma_{\mathrm{ess}}$ of constitutive paths, when the restrictions of their transport functors to $\Gamma_{\mathrm{ess}}$ are naturally isomorphic, not merely when one particular holonomy's conjugacy class agrees: an object is the orbit, under the transport functor restricted to $\Gamma_{\mathrm{ess}}$, of distinguishability under continuation.
+
+\section{Repair as Gauge-Invariant Curvature Compensation}
+
+Ordinary theories of repair begin with a target state $x^\ast$ and define repair as minimizing distance from it. This is insufficient for systems whose identity depends on relational structure. Suppose the system suffers a deformation $A \to A + \delta A$. The repair problem is not necessarily $\min|\delta A|$. Instead a correction $R$ is sought such that the resulting connection $A' = A + \delta A + R$ restores some required transport structure, but the loss used to measure ``restoration'' must itself be gauge-invariant, or the theory will judge two physically identical connections as differently repaired merely because they are described in different trivializations.
+
+The naive loss $|\Hol_{A'}(\gamma) - \Hol_A(\gamma)|^2$ fails this test: a holonomy is a group element in a chosen trivialization, and its matrix difference changes under a gauge transformation even when nothing physical has changed. The corrected repair functional uses a class function of the holonomy instead, a Wilson loop observable
+\[
+W_\rho(\gamma; A) = \Tr\, \rho\bigl(\Hol_\gamma(A)\bigr)
+\]
+for a representation $\rho$ of $G$, invariant under conjugation and hence under gauge transformation. Let $\Gamma_{\mathrm{ess}}$ denote a family of essential loops. The repair functional is
+\[
+\mathcal{L}_{\mathrm{repair}}[R] = \int_{\Gamma_{\mathrm{ess}}} \bigl| W_\rho(\gamma; A+\delta A+R) - W_\rho(\gamma; A) \bigr|^2\, d\mu(\gamma) \;+\; \lambda |R|^2,
+\]
+so repair is $R^\ast = \arg\min_R \mathcal{L}_{\mathrm{repair}}[R]$. This produces a radical reinterpretation: repair does not restore the past state, it restores the continuation equivalence class, measured by quantities that cannot be faked by a mere change of description. A repaired organism, repaired machine, reconstructed institution, or recovered semantic concept may contain entirely different local material while preserving the same global continuation geometry.
+
+This raises a distinction worth keeping terminologically separate. A pure gauge transformation $A \mapsto A^g$ changes only the description of a connection, not the connection's physical content; performing one is \emph{diagnostic gauge alignment}, not repair. Genuine, physical repair changes the gauge-equivalence class of the damaged connection so that it approaches the original class, a compensatory intervention, not a redescription. Redescription, diagnostic gauge alignment, and physical compensatory intervention are three distinct operations, and conflating them is precisely the error that would let a system claim to have repaired something by merely re-describing it, a close formal cousin of the paracosm's habit, examined in Chapter~\ref{ch:ch04-paracosm-trap}, of mistaking internal coherence for external warrant.
+
+\section{The Minimal Repair Principle}
+
+The functional above generalizes to a broader family of constitutive distinctions. Let $\mathcal{D}$ be a set of distinctions considered constitutive of identity, and let $\Delta_D(A,A')$ measure the distortion of distinction $D$ under replacement of $A$ by $A'$, using a gauge-invariant comparison as above. Define the structural repair cost
+\[
+\mathcal{C}(A,A') = \int_{\mathcal{D}} w(D)\, \Delta_D(A,A')\, dD.
+\]
+The preferred repair is $A^\ast = \arg\min_{A'} \mathcal{C}(A,A')$ subject to
+\[
+\exists\, R \in \mathcal{R} \text{ such that } \Hol_{A_d+R}(\gamma) \in \mathcal{O}_\gamma \quad \forall\, \gamma \in \Gamma_{\mathrm{ess}},
+\]
+where $\mathcal{R}$ is the admissible space of repair one-forms and $\mathcal{O}_\gamma$ is the target conjugacy class for loop $\gamma$. The constraint is not equality with an original configuration but admissibility of the resulting holonomy class. This gives a mathematical basis for the intuition that successful repair often produces something different from the original that is nevertheless ``the same thing'': sameness is measured by continuation, not composition. This is the principle Chapter~\ref{ch:ch11-constitutional-space-of-refusal} draws on when treating refusal itself as a form of conserved continuation capacity rather than an absence of production.
+
+\section{Identity as a Restricted Transport Representation}
+
+Let $\Gamma_p$ denote the set of histories beginning at $p$ that share a common endpoint $q$, and define $\gamma_1 \approx \gamma_2$ when $\mathcal{P}_{\gamma_1} \sim \mathcal{P}_{\gamma_2}$ under gauge equivalence, restricted to pairs of paths with compatible endpoints. An entity is then represented not by one trajectory but by an equivalence class $[\gamma] \in \Gamma_p/{\approx}$, restricted to the constitutive path family $\Gamma_{\mathrm{ess}}$:
+\[
+\text{Entity} = \text{history class modulo continuation equivalence on } \Gamma_{\mathrm{ess}}.
+\]
+The traditional question, is this the same object, becomes $[\gamma_1] = [\gamma_2]$? The answer depends on the chosen distinction algebra, connection, and constitutive path family. Identity is therefore relative but not arbitrary: it is relative to a mathematically specified structure of admissible distinctions and tests, exactly the specification the CLIO architecture of Chapter~\ref{ch:ch10-clio-architecture} supplies for commitment.
+
+\section{A Non-Identifiability Theorem}
+
+The claim that present-state equivalence does not imply identity equivalence becomes substantive, rather than nearly tautological, when stated as a non-identifiability result about estimation.
+
+\begin{theorem}[Non-identifiability from observation alone]
+\label{thm:non-identifiability}
+Let $O : X \to Y$ be an observation map. Suppose there exist two latent continuation processes, with transport functors $\mathcal{P}_A$ and $\mathcal{P}_B$ over histories $\gamma_A, \gamma_B$ sharing a common base point and inducing the same distribution on $O(X_t)$ at every $t$, but with $\Hol_{\gamma_A} \neq \Hol_{\gamma_B}$ in the sense of distinct induced predictive distributions on future observations, or distinct restricted transport functors on $\Gamma_{\mathrm{ess}}$. Then no estimator that is a function of the instantaneous observation $O(X_t)$ alone can consistently recover the continuation class of the underlying process.
+\end{theorem}
+
+The proof is immediate from the hypothesis: any such estimator factors through $O(X_t)$, on which the two processes are indistinguishable by construction, so it must return the same value on both, contradicting the requirement to recover distinct classes. The content of the theorem lies entirely in exhibiting that such pairs $(\gamma_A, \gamma_B)$ exist whenever the continuation connection has nonzero curvature or nontrivial holonomy, which Chapter~\ref{ch:ch09-discrete-toy-model} exhibits explicitly. Identity is therefore necessarily historical whenever the continuation connection possesses nonzero curvature or nontrivial holonomy: the state can be identical while the future remains different, and no amount of instantaneous observation closes that gap. This theorem is the formal core underlying the recurring claim, made throughout Part~I in less formal terms, that a system's momentary agreement with itself, or with an ensemble of correlated observers, is never sufficient evidence of warranted persistence.
+
+\section{The Deep Unification}
+
+Several apparently unrelated phenomena become instances of the same mathematical object under this reading. A biological organism maintains a continuation bundle. A memory system maintains path-dependent transport. A repaired machine restores transport class. A discourse modifies the semantic connection, developed further in Chapter~\ref{ch:ch07-spherepop}. An institution persists when its admissible transformations remain coherent. A concept persists when its inferential continuation class survives reformulation. In every case the question is the same: which distinctions remain transportable through transformation, and relative to which family of constitutive tests? This yields a general hierarchy,
+\[
+\text{distinction} \to \text{admissibility} \to \text{continuation} \to \text{curvature} \to \text{holonomy} \to \text{persistence},
+\]
+with repair reversing the destructive direction, curvature $\to$ diagnosis $\to$ compensation $\to$ restored transport $\to$ renewed persistence, and memory occupying the intermediate position, path $\to$ noncommutativity or topological holonomy $\to$ historical dependence. The most consequential claim of the theory is that persistence precedes objecthood: if an object is defined as a stable equivalence class under admissible transformations rather than independently of its possible transformations, persistence is constitutive, $x \equiv [\mathsf{C}(x)]$, and the object is a stabilized possibility of continuation rather than a substance that happens to change or a process that happens to cohere.

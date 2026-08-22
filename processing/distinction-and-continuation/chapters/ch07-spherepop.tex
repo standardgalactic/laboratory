@@ -1,0 +1,133 @@
+%% ============================================================
+%% Chapter 7: Spherepop: An Event-Sourced Calculus of Time
+%% ============================================================
+
+\chapter{Spherepop: An Event-Sourced Calculus of Time}
+\label{ch:ch07-spherepop}
+\section{Introduction}
+
+Chapter~\ref{ch:ch06-distinction-holonomy} developed continuation, curvature, and holonomy abstractly, over a continuous distinction bundle. This chapter specializes that apparatus to a concrete discrete calculus: Spherepop, an event-sourced calculus of four primitive operations, Pop, Refuse, Bind, and Collapse. The specialization is not a metaphorical extension of the continuous theory; it is a genuine instance of it, with Spherepop's four primitives read as generators of a categorical connection whose curvature is literal operator noncommutativity, checkable by direct computation rather than only by analogy.
+
+\section{Spherepop as a Conservative Extension of Typed Lambda Calculus}
+
+Before Spherepop's four primitives can be read as generators of a continuation connection, it is worth establishing precisely what kind of calculus they generate. The claim is not that $\{\Pop, \Refuse, \Bind, \Collapse\}$ alone reconstitute the ordinary lambda calculus; on their canonical semantics they form a state-transition algebra over an append-only history and an option space. The provable claim is narrower and stronger: Spherepop is a conservative, history-enriched extension of typed lambda calculus. Conservative means every ordinary lambda term is a Spherepop term, every ordinary beta-reduction can be performed inside Spherepop, and Spherepop assigns the same result to a pure lambda term apart from the additional history recording its evaluation.
+
+A Spherepop configuration is $C = (\sigma, h)$, where $\sigma$ is the current live option space and $h = (e_1, \ldots, e_n)$ is the ordered append-only history. The primitive operations act on configurations:
+\[
+\Pop(\omega) : (\sigma,h) \to (\sigma \setminus \{\omega\},\, h \cdot e_{\mathrm{pop}}(\omega)), \qquad
+\Refuse(a) : (\sigma,h) \to (\sigma,\, h \cdot e_{\mathrm{refuse}}(a)),
+\]
+\[
+\Bind(x,a) : (\sigma,h) \to (\sigma[x \mapsto a],\, h \cdot e_{\mathrm{bind}}(x,a)), \qquad
+\Collapse_c : (\sigma,h) \to (\pi_c(\sigma),\, h \cdot e_{\mathrm{collapse}}(c)),
+\]
+where $\pi_c : X \twoheadrightarrow Q$ is an admissible quotient certified by $c$. Evaluation in Spherepop therefore both produces a value and changes the live continuation space, recording how the result became admissible.
+
+Ordinary application reduces by substitution, $(\lambda x{:}A.\,t)\,a \longrightarrow_\beta t[x:=a]$, usually treated as a metalevel operation with no persistent object-level trace. Spherepop internalizes the substitution as a binding event, $\Bind(H,x,a) = H \cdot e_{\mathrm{bind}}(x,a)$, extending the environment $\rho' = \rho[x \mapsto a]$. Spherepop beta-reduction is
+\[
+(\sigma, H, \rho, (\lambda x{:}A.\,t)\,a) \longrightarrow_{\beta_{\mathrm{SP}}} (\sigma', H \cdot e_{\mathrm{bind}}(x,a), \rho[x\mapsto a], t),
+\]
+so Spherepop preserves the defining computational operation of lambda calculus, application of an abstraction is substitution of an argument, and adds only the requirement that the substitution become an irreversible historical event.
+
+Define the embedding $\llbracket - \rrbracket : \Lambda \to \mathrm{Spherepop}$ recursively by $\llbracket x \rrbracket = x$, $\llbracket \lambda x{:}A.\,t \rrbracket = \lambda x{:}\llbracket A \rrbracket.\, \llbracket t \rrbracket$, and $\llbracket t\,u \rrbracket = \llbracket t \rrbracket\, \llbracket u \rrbracket$.
+
+\begin{proposition}[Substitution lemma]
+For all lambda terms $t,u$: $\llbracket t[x:=u] \rrbracket = \llbracket t \rrbracket[x := \llbracket u \rrbracket]$.
+\end{proposition}
+
+The proof is by structural induction on $t$, with the abstraction case using alpha-renaming to avoid variable capture; each case reduces directly to the induction hypothesis applied inside the embedding.
+
+\begin{theorem}[Simulation]
+If $t \longrightarrow_\beta t'$ in ordinary lambda calculus, then for every initial configuration $(\sigma, H)$, $(\sigma, H, \llbracket t \rrbracket) \longrightarrow_{\mathrm{SP}}^{+} (\sigma', H', \llbracket t' \rrbracket)$ for some $\sigma', H'$ with $H \preceq H'$ a prefix.
+\end{theorem}
+
+It suffices to check the beta-redex case $t = (\lambda x{:}A.\,v)\,u$, $t' = v[x:=u]$. Under the embedding, Spherepop performs the binding event $e_\beta = e_{\mathrm{bind}}(x, \llbracket u \rrbracket)$ and reduces to $\llbracket v \rrbracket[x := \llbracket u \rrbracket]$, which by the substitution lemma equals $\llbracket v[x:=u] \rrbracket = \llbracket t' \rrbracket$. Reduction inside a larger term follows by closure under evaluation contexts.
+
+\begin{theorem}[Typing preservation]
+If $\Gamma \vdash_\lambda t : A$, then $H; \llbracket \Gamma \rrbracket \vdash_{\mathrm{SP}} \llbracket t \rrbracket : \llbracket A \rrbracket \triangleright H'$ for some $H' \succeq H$.
+\end{theorem}
+
+The variable and abstraction rules carry over directly; the application rule becomes
+\[
+\frac{H;\Gamma \vdash f : \Pi x{:}A.\,B \qquad H;\Gamma \vdash a : A}{H;\Gamma \vdash f\,a : B[x:=a] \triangleright H \cdot e_{\mathrm{bind}}(x,a)},
+\]
+the ordinary application rule augmented by monotone history production; no ordinary derivation is invalidated.
+
+Define the erasure map $|-| : \mathrm{Spherepop} \to \Lambda$ on the pure fragment by $|x| = x$, $|\lambda x{:}A.\,t| = \lambda x{:}|A|.\,|t|$, $|t\,u| = |t|\,|u|$, discarding runtime histories: $|(\sigma, H, t)| = |t|$. Then $|\llbracket t \rrbracket| = t$ for every lambda term $t$, and any Spherepop step evaluating an embedded pure term either is administrative, with $|u| = t$ unchanged, or corresponds to lambda reduction, $t \longrightarrow_\beta |u|$.
+
+\begin{theorem}[Conservativity]
+For any closed pure lambda term $t$ and normal form $v$: $t \longrightarrow_\beta^\ast v$ if and only if $(\sigma_0, \epsilon, \llbracket t \rrbracket) \longrightarrow_{\mathrm{SP}}^\ast (\sigma_f, H_f, \llbracket v \rrbracket)$ up to administrative history events, and erasing the Spherepop state recovers $v$.
+\end{theorem}
+
+This follows by combining the embedding, simulation, typing preservation, and erasure results above. Spherepop therefore contains typed lambda calculus conservatively: its distinctive contribution is that substitution is no longer an invisible metalevel event. Selection becomes $\Pop$; inadmissibility becomes $\Refuse$; substitution becomes a recorded $\Bind$; quotienting becomes $\Collapse$. Schematically, ordinary beta-reduction becomes the richer transition
+\[
+\text{propose} \to \text{check} \to \text{bind} \to \text{commit or refuse} \to \text{record}.
+\]
+Spherepop's computational type can be written schematically as
+\[
+\llbracket A \to B \rrbracket_{\mathrm{SP}} = A \to \operatorname{State}(\Sigma)(\operatorname{Writer}(H)(B)),
+\]
+or, with refusal represented explicitly, $\Sigma \times H \to (B + \mathrm{Refusal}) \times \Sigma \times H$: a standard lambda-calculus architecture enriched by state, writer, and exception-like effects. Spherepop's originality is not abandoning lambda calculus but making historical commitment and continuation-space mutation constitutive of evaluation.
+
+\section{Spherepop as a Categorical Connection}
+
+Having fixed Spherepop's relation to lambda calculus, its four primitives can now be read as generators of continuation transport in the sense of Chapter~\ref{ch:ch06-distinction-holonomy}. The essential qualification is that $\Pop$, $\Refuse$, and $\Collapse$ are generally noninvertible, so the resulting theory is not an ordinary Lie-group gauge theory; it is a categorical, generally semigroup-valued, connection whose reversible sector reduces to the conventional case of that chapter.
+
+Over each historical context $p \in M$, define a fiber $E_p = (\Omega_p, \mathcal{R}_p, \mathcal{Q}_p)$, where $\Omega_p$ is the live option space, $\mathcal{R}_p$ the current dependency structure, and $\mathcal{Q}_p$ the current quotient structure. A Spherepop world is $\mathcal{W}_p = (H_p, E_p)$ with append-only history $H_p$. Each primitive operation produces a transport map $T_a : E_p \to E_q$ and appends the corresponding event: $(H_p, E_p) \xrightarrow{a} (H_p \cdot e_a, E_q)$. A history $\gamma = (a_1, \ldots, a_n)$ induces the composite $T_\gamma = T_{a_n} \circ \cdots \circ T_{a_1}$: Spherepop's discrete connection.
+
+For $\omega \in \Omega$ with committed set $K$,
+\[
+T_{\Pop(\omega)}(\Omega,K,\mathcal{R},\mathcal{Q}) = (\Omega \setminus \{\omega\}, K \cup \{\omega\}, \mathcal{R}, \mathcal{Q}):
+\]
+Pop moves $\omega$ from possible continuations into committed history, and is normally noninvertible, since the post-Pop state does not by itself contain every fact needed to reconstruct the pre-Pop option space. Pop is selection plus irreversible commitment.
+
+For a candidate $a$ with admissibility $\Adm_E(a) \in \{0,1\}$,
+\[
+T_{\Refuse(a)}(H,E) = (H \cdot e_{\Refuse}(a), E)
+\]
+in the canonical case where refusal does not consume $\Omega$. The live option space is unchanged, but the historical fiber changes, and future admissibility may depend on the record:
+\[
+\Adm_{H \cdot e_{\Refuse}(a), E}(b) \neq \Adm_{H,E}(b) \text{ in general}.
+\]
+Refuse is exclusion recorded without option consumption, the identity only after forgetting history.
+
+For a directed dependency relation $\mathcal{R} \subseteq X \times X$, $T_{\Bind(a,b)}(\Omega,\mathcal{R},\mathcal{Q}) = (\Omega, \mathcal{R} \cup \{(a,b)\}, \mathcal{Q})$; if Bind realizes substitution, $T_{\Bind(x,u)}(\rho) = \rho[x \mapsto u]$. Bind is a deformation of independence into relational continuation, and is the most natural source of noncommutativity among the four, since introducing one dependency can change the meaning of a later selection, refusal, or collapse.
+
+For a certified equivalence $\sim_c$ on $X$ with quotient $Q_c = X/{\sim_c}$ and projection $\pi_c : X \twoheadrightarrow Q_c$, $T_{\Collapse_c} = \pi_c$; represented as an endomorphism on a common ambient space it is idempotent, $T_{\Collapse_c}^2 = T_{\Collapse_c}$, hence a projection rather than generally a gauge transformation. Collapse is certified loss of distinctions through quotienting, preserving identity when its kernel contains no constitutive distinction, and destroying it otherwise.
+
+Because Pop, Refuse, and Collapse are generally noninvertible, their transports belong to a category or monoid rather than a Lie group $G$. Let $\mathcal{H}$ be the category whose objects are Spherepop configurations and whose morphisms are finite sequences of primitive operations, and let $\mathcal{D}$ be a category of distinction structures. A continuation functor
+\[
+\mathsf{T} : \mathcal{H} \to \mathcal{D}, \qquad \mathsf{T}(a) = T_a : E_p \to E_q, \qquad \mathsf{T}(\gamma_2 \circ \gamma_1) = \mathsf{T}(\gamma_2) \circ \mathsf{T}(\gamma_1)
+\]
+is the categorical form of the connection. Restricting to the maximal reversible subcategory $\mathcal{H}^\times \subseteq \mathcal{H}$ and to isomorphisms in $\mathcal{D}$ recovers a groupoid on which transport may be represented by the conventional group-valued connection of Chapter~\ref{ch:ch06-distinction-holonomy}. Outside $\mathcal{H}^\times$, Spherepop requires genuinely noninvertible parallel transport, and that chapter's theory should be read as governing this reversible sector exactly.
+
+\section{Curvature as Operational Noncommutativity}
+
+For two primitive operations $a,b$, order matters when $T_b T_a \neq T_a T_b$. When the transports act linearly on a common space, define the discrete curvature defect $F(a,b) = T_b T_a - T_a T_b$; in general, where subtraction is unavailable, curvature is represented by the pair $(T_b \circ T_a,\, T_a \circ T_b)$ or a comparison morphism between them. Curvature asks: does changing the order of two admissible operations change the future distinction structure?
+
+Concretely, $T_{\Pop(\omega)} T_{\Bind(a,\omega)} \neq T_{\Bind(a,\omega)} T_{\Pop(\omega)}$ when binding to $\omega$ is possible before $\omega$ is consumed but impossible afterward; $T_{\Collapse_c} T_{\Bind(a,b)} \neq T_{\Bind(\pi_c(a),\pi_c(b))} T_{\Collapse_c}$ when the collapse identifies distinctions needed to establish the binding; and $T_{\Pop(\omega)} T_{\Refuse(a)} \neq T_{\Refuse(a)} T_{\Pop(\omega)}$ whenever the recorded refusal modifies the admissibility of $\omega$. These are not analogies to curvature; they are explicit failures of transport squares to commute, formalized as the obstruction to a coherent identification $E_{ba} \cong E_{ab}$ between the two paths from $E$ to a common prospective target.
+
+A primitive curvature table records which generator pairs commute: $[\Pop,\Refuse] \neq 0$ in general, since exclusion can affect subsequent selection; $[\Pop,\Bind] \neq 0$, since a selected option may participate in a new dependency; $[\Pop,\Collapse] \neq 0$, when several selectable options collapse into one quotient class; $[\Refuse,\Bind] \neq 0$, when the refused relation is the one Bind would establish; $[\Refuse,\Collapse] \neq 0$, when Collapse erases the distinction identifying the refused candidate; and $[\Bind,\Collapse] \neq 0$, when projection identifies endpoints or removes a dependency distinction. The exact vanishing conditions are Spherepop's local flatness laws: for instance $[\Bind(a,b), \Collapse_c] = 0$ exactly when the binding descends through the quotient, that is, there exists a unique $\overline{\Bind}$ on $Q_c$ with $\pi_c \circ \Bind = \overline{\Bind} \circ \pi_c$, the standard categorical condition that Bind factor through Collapse.
+
+For a loop $\gamma : p \to p$ returning the observable base state to its starting point, $\Hol_\gamma = T_{a_n} \circ \cdots \circ T_{a_1}$. Even when the base state returns to $p$, the distinction structure or history may have changed, $\Hol_\gamma(E_p) \neq E_p$; in Spherepop this holonomy is, in general, a noninvertible endomorphism $\Hol_\gamma \in \operatorname{End}_{\mathcal{D}}(E_p)$ rather than an automorphism, a generalized or monoid-valued holonomy. If the observable option space returns to its original cardinality after selection and replenishment, the final history still contains the committed Pop, so
+\[
+\pi_{\mathrm{obs}}\bigl(\Hol_\gamma(E_p)\bigr) = \pi_{\mathrm{obs}}(E_p), \qquad \text{while} \qquad \Hol_\gamma(E_p) \neq E_p.
+\]
+The residual difference is Spherepop memory. This is exactly the discrete phenomenon Chapter~\ref{ch:ch09-discrete-toy-model}'s explicit matrix example demonstrates by direct computation: a loop returning to its base point while the fiber records a nontrivial residue. Spherepop is an event-generated categorical connection on a bundle of option spaces:
+\[
+\begin{aligned}
+\Pop &\leftrightarrow \text{selection and commitment}, & \Refuse &\leftrightarrow \text{recorded exclusion}, \\
+\Bind &\leftrightarrow \text{coupling}, & \Collapse &\leftrightarrow \text{projection},
+\end{aligned}
+\]
+with composites defining transport, noncommutativity defining curvature, and residual loop action defining holonomy.
+
+\section{Two Pathologies of Bind: The Double Bind and Schismogenesis}
+
+The categorical connection just constructed gives a precise home for two patterns first identified, without this apparatus, in Gregory Bateson's work on communication and relationship. These should be retained as interactional examples clarifying the formal machinery, not presented as an established general explanation of any clinical condition; the double bind's original clinical association with schizophrenia in particular is far stronger a claim than the material here supports, and is not asserted.
+
+In the present formalism, a double bind is a configuration in which a participant is subject to incompatible constraints and is additionally prevented from challenging the level at which those constraints are imposed. Let $a,b$ be candidate actions with admissibility predicates $\mathcal{A}_1(a)$, $\mathcal{A}_2(b)$. A simple contradiction is one in which no action satisfies both constraints, $\{x : \mathcal{A}_1(x)=1\} \cap \{x : \mathcal{A}_2(x)=1\} = \varnothing$. A double bind adds a metaconstraint forbidding refusal or reformulation of the constraint system itself: if $R$ denotes the operation of challenging the framing, then $\mathcal{A}_{\mathrm{meta}}(R) = 0$. The failure is therefore not merely that the object-level option space is empty; the system also excludes the operation that would revise that space. In Spherepop terms, incompatible $\Bind$s constrain every available $\Pop$, while $\Refuse$ is unavailable at the level where it would be effective: if $\Bind(a,x)$ and $\Bind(b,x)$ jointly constrain $x$ in a way no admissible $\Pop(\omega)$ can satisfy, and no morphism of $\mathcal{H}$ available at the object level targets the binding itself, then the object-level history admits no repair within the existing control space, not, more strongly, ``no admissible repair'' as such, since a repair may become possible once that control space is expanded. This is the operative distinction from a plain curvature trap: the obstruction is not that two paths disagree, but that the binding structure generating the incompatibility is not itself an admissible target of $\Pop$ or $\Refuse$ at the level where the victim operates. Repair, correspondingly, requires a metalevel change unavailable within the trapped level: distinguishing previously conflated message levels, refusing one of the bindings directly, or retiling the interaction, in the sense of Chapter~\ref{ch:ch08-tartan-tiling}, into contexts governed by different constraints.
+
+Schismogenesis, Bateson's term for the progressive amplification of a pattern of interaction between two parties, is the corresponding pathology of iterated, rather than blocked, $\Bind$. Let $x_n, y_n$ describe two coupled participants, $x_{n+1} = F(x_n,y_n)$, $y_{n+1} = G(y_n, x_{n+1})$, with combined update $T(x_n,y_n) = (F(x_n,y_n),\, G(y_n, F(x_n,y_n)))$. Divergence occurs when repeated application $T^n(x_0,y_0)$ amplifies a relational difference: in a symmetrical process, similar responses mutually escalate; in a complementary process, unlike responses reinforce an asymmetric relation. This should be described as divergent holonomy only under the precise condition that an identifiable interactional cycle returns the system to the same coarse relational context while changing its finer continuation structure, holonomy is not a synonym for any feedback loop, and applies specifically when a closed or recurrent path has a residual transport effect, $T^n$ returning the coarse-grained state while $\Hol_{T^n} \neq I$ on the finer distinction structure. Neither party's local state explains the divergence; it is generated entirely by repeated transport around the relational loop, exactly as Chapter~\ref{ch:ch06-distinction-holonomy}'s discourse-curvature apparatus would predict for a coupling that deforms its own connection at each iteration. This is a formal cousin of the coupled positive feedback examined in Chapter~\ref{ch:ch03-theatre-of-agreement}: recursive consensus inflation is schismogenesis between a user and an affirmation-biased ensemble, an iterated $\Bind$ that amplifies rather than dampens.
+
+It is worth being explicit about the scope of this comparison. Bateson supplies the phenomena and the essential intuition, that some communicative patterns admit no move within their own level, and that some relational dynamics diverge under their own iteration, well before any gauge-theoretic vocabulary existed to describe them. The formal apparatus above does not retroactively attribute the mathematics to Bateson, nor does it revive the stronger clinical claims associated with the double bind's original context; it shows only that the phenomena he identified are recognizable, in retrospect, as a pathological Bind structure and a divergent holonomy, respectively, within a machinery built for other purposes and only later found to fit.

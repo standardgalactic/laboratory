@@ -1,0 +1,31 @@
+%% ============================================================
+%% parts/part1.tex -- standalone compile for Part 1.
+%% Shares preamble.tex with main.tex so conventions (fonts,
+%% box environments, bibliography style) stay identical between
+%% per-part drafting compiles and the full-manuscript build.
+%%
+%% Compile: xelatex part1.tex && xelatex part1.tex
+%% (run from the parts/ directory, or adjust the \input paths)
+%% ============================================================
+
+\documentclass[11pt,twoside]{book}
+\input{../preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\part{Epistemic Foundations: The Limits of Evidence, Observation, and Consensus}
+\input{../chapters/ch01-latency-of-evidence.tex}
+\input{../chapters/ch02-accommodation-before-prediction.tex}
+\input{../chapters/ch03-theatre-of-agreement.tex}
+\input{../chapters/ch04-paracosm-trap.tex}
+
+\backmatter
+\appendix
+\input{../back/source-appendix.tex}
+\input{../back/bibliography.tex}
+
+\end{document}

@@ -1,0 +1,32 @@
+%% ============================================================
+%% parts/part2.tex -- standalone compile for Part 2.
+%% Shares preamble.tex with main.tex so conventions (fonts,
+%% box environments, bibliography style) stay identical between
+%% per-part drafting compiles and the full-manuscript build.
+%%
+%% Compile: xelatex part2.tex && xelatex part2.tex
+%% (run from the parts/ directory, or adjust the \input paths)
+%% ============================================================
+
+\documentclass[11pt,twoside]{book}
+\input{../preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\part{The Geometry of Persistence: Distinction Holonomy, Spherepop, and TARTAN}
+\input{../chapters/ch05-ontological-reversal.tex}
+\input{../chapters/ch06-distinction-holonomy.tex}
+\input{../chapters/ch07-spherepop.tex}
+\input{../chapters/ch08-tartan-tiling.tex}
+\input{../chapters/ch09-discrete-toy-model.tex}
+
+\backmatter
+\appendix
+\input{../back/source-appendix.tex}
+\input{../back/bibliography.tex}
+
+\end{document}

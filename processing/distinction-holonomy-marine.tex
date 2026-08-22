@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!40!black,urlcolor=blue!40!black,citecolor=blue!40!black}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+
+\title{Distinction Holonomy on Marine's Salience Map}
+\author{Flyxion \\ \textit{Independent Researcher}}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A bounded salience map closes a singularity, but boundedness alone does not say whether the map's remaining path-dependence is a defect or a feature. This essay applies distinction holonomy — the question of whether a quantity transported around a closed loop returns to itself — to Marine's salience recomputation across resonance cycles, and derives a concrete, checkable criterion for telling the two apart. The criterion does not require trusting the map's boundedness as sufficient on its own. It gives a way to confirm, or falsify, that the bound produced a genuinely well-behaved invariant rather than merely a suppressed symptom of the same underlying issue.
+\end{abstract}
+
+\section{What boundedness alone does not settle}
+
+An earlier reconstruction of Marine's salience mechanism replaced an unbounded $1/J$ term with a bounded map, closing a singularity that had made the original salience formula diverge under certain inputs. That fix answers one question — is the output finite — and leaves a different one open: as a candidate is reconsidered across multiple resonance cycles, does its salience assessment depend only on where it currently stands, or does it also depend, irreducibly, on the specific sequence of recomputations it passed through to get there. Boundedness rules out infinite drift. It says nothing about whether the drift that remains, however finite, is consistent.
+
+Distinction holonomy is built for exactly this question. It treats a computed quantity — here, a candidate's salience — as living in a fiber attached to that candidate, transported from one resonance cycle to the next by a connection: the recomputation rule itself. Holonomy asks what happens when that transport is carried around a closed loop — the candidate reconsidered under a sequence of resonance framings that returns, eventually, to a starting condition equivalent to where it began. If the transported value comes back unchanged, the loop is holonomy-trivial. If it does not, something about the path itself, not just the current state, has been absorbed into the value.
+
+\section{Setting up the fiber and the connection}
+
+Let a candidate under Marine's consideration be $c$, and let its salience at resonance step $k$ be $s_k(c)$, the fiber content at that step. The bounded salience map is a connection $\nabla$: it takes $s_k(c)$ together with the resonance context at step $k$ and produces $s_{k+1}(c)$,
+\[
+s_{k+1}(c) = \nabla\big(s_k(c),\, \mathrm{ctx}_k\big).
+\]
+Two distinct things can make this transport path-dependent, and distinguishing them is the entire point of separating curvature from holonomy.
+
+\emph{Curvature} is a local, infinitesimal property: it asks whether composing two nearby resonance steps in different orders yields different results — whether the connection itself has a built-in inconsistency at the level of single steps, independent of any global loop structure. A connection with nonzero curvature will generally produce nontrivial holonomy around every sufficiently small loop, including loops that ought, on any reasonable reading of what the resonance cycle is doing, to be trivial.
+
+\emph{Holonomy from topology}, by contrast, can be nonzero even when curvature is everywhere zero, if the space of resonance framings a candidate can pass through is not simply connected — if there exist genuinely distinct ways of looping back to an equivalent starting condition that cannot be continuously deformed into one another. In that case, nontrivial holonomy is not a defect. It is the connection correctly registering that the candidate was reconsidered along paths that are not the same path, even though they end in the same place. This is what an unrelated instance of the same formalism calls topological memory: the flat-but-multiply-connected case, where the absence of local inconsistency coexists with a genuine, structured dependence on global path.
+
+\section{The test}
+
+The two cases are distinguished by a specific, checkable comparison, in the spirit of gauge-invariant repair via Wilson loops rather than raw holonomy differences: never trust an isolated holonomy value on its own, only compare holonomies across loops that the system's own admissibility structure treats as equivalent.
+
+\begin{proposition}
+Fix a small resonance loop $\gamma$ — a short sequence of recomputation steps that returns a candidate to a context equivalent, under Marine's own resonance-equivalence criterion, to where it started. If $\gamma$ and any continuous deformation $\gamma'$ of it (still within a single resonance framing, no genuinely distinct reconsideration path) both yield trivial holonomy, and this holds uniformly across small loops, the connection is curvature-free at that scale: the bound closed the singularity without leaving behind a masked local inconsistency. If instead some small, resonance-equivalent loop yields nontrivial holonomy, curvature is still present — the boundedness fix suppressed the symptom (divergence) without addressing the underlying path-dependence that produced it, and the salience map is not yet trustworthy as an invariant.
+\end{proposition}
+
+This is a test that can actually be run: construct several small resonance loops known, by Marine's own equivalence criterion, to be reconsiderations of the same thing under the same framing, and check whether $s(c)$ returns to itself along each. Agreement across all of them is evidence for flatness. Any disagreement among them, holding the equivalence class fixed, is evidence of residual curvature — and unlike the original $1/J$ divergence, this failure mode would not announce itself by blowing up. It would look like ordinary numerical noise, which is exactly why it needs a dedicated test rather than being assumed absent because the output stays finite.
+
+\section{What a good result would look like}
+
+Suppose the small-loop test comes back clean — flatness confirmed at the scale the equivalence criterion can currently distinguish. The next question is not whether holonomy is ever nonzero, but where. If nonzero holonomy shows up only on large loops — reconsideration paths that pass through genuinely different resonance framings, not equivalent ones, before returning to a comparable state — that is the topological-memory signature, and it is a positive result, not a residual defect. It would mean Marine's salience is doing something more than ranking candidates by a locally recomputed score: it is registering, in a principled and checkable way, that a candidate reconsidered via one route through the resonance space is not epistemically identical to the same candidate reconsidered via a different route, even when both routes happen to land in the same place. That is a real distinction worth preserving, and one the current bounded map may already be capturing without yet having a name for what it is doing.
+
+\section{Conclusion}
+
+Boundedness answers whether Marine's salience map produces finite numbers. It does not answer whether those numbers are trustworthy as an invariant across repeated reconsideration, and the two questions can come apart in a way that looks, from the outside, like nothing more than noise. Distinction holonomy gives a specific, small test for telling apart a masked local inconsistency from a genuine and desirable path-sensitivity, using only the resonance-equivalence criterion the algorithm already has to have in order to define what counts as reconsidering the same candidate twice. Running that test is a way of finding out which one is actually there, rather than assuming the bound already settled the question.
+
+\end{document}

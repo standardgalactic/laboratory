@@ -1,0 +1,32 @@
+%% ============================================================
+%% parts/part3.tex -- standalone compile for Part 3.
+%% Shares preamble.tex with main.tex so conventions (fonts,
+%% box environments, bibliography style) stay identical between
+%% per-part drafting compiles and the full-manuscript build.
+%%
+%% Compile: xelatex part3.tex && xelatex part3.tex
+%% (run from the parts/ directory, or adjust the \input paths)
+%% ============================================================
+
+\documentclass[11pt,twoside]{book}
+\input{../preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\part{The Systems Architecture: Verification, Admissibility, and the CLIO Protocol}
+\input{../chapters/ch10-clio-architecture.tex}
+\input{../chapters/ch11-constitutional-space-of-refusal.tex}
+\input{../chapters/ch12-verify-seams.tex}
+\input{../chapters/ch13-verification-inheritance.tex}
+\input{../chapters/ch14-model-capsules.tex}
+
+\backmatter
+\appendix
+\input{../back/source-appendix.tex}
+\input{../back/bibliography.tex}
+
+\end{document}

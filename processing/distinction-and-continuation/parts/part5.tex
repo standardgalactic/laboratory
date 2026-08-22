@@ -1,0 +1,31 @@
+%% ============================================================
+%% parts/part5.tex -- standalone compile for Part 5.
+%% Shares preamble.tex with main.tex so conventions (fonts,
+%% box environments, bibliography style) stay identical between
+%% per-part drafting compiles and the full-manuscript build.
+%%
+%% Compile: xelatex part5.tex && xelatex part5.tex
+%% (run from the parts/ directory, or adjust the \input paths)
+%% ============================================================
+
+\documentclass[11pt,twoside]{book}
+\input{../preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+\part{Political Economy and Social Extraction: Ledgers Without Value and Unfinishable Systems}
+\input{../chapters/ch19-ledgers-without-value.tex}
+\input{../chapters/ch20-rebel-without-a-cost.tex}
+\input{../chapters/ch21-unfinishable-games.tex}
+\input{../chapters/ch22-sheaves-of-necessity.tex}
+
+\backmatter
+\appendix
+\input{../back/source-appendix.tex}
+\input{../back/bibliography.tex}
+
+\end{document}

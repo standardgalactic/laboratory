@@ -1,0 +1,68 @@
+% ============================================================
+% main.tex — Distinction and Continuation: Admissibility, Repair,
+% and the Limits of Local Coherence
+%
+% Full-manuscript assembly. For faster iteration while drafting,
+% compile a single part instead — see parts/partN.tex, each of
+% which is a standalone compilable document sharing this preamble.
+%
+% Compile: xelatex main.tex && xelatex main.tex   (two passes,
+% per convention, for cross-references and the ToC)
+% ============================================================
+
+\documentclass[11pt,twoside]{book}
+\input{preamble.tex}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\input{front/abstract.tex}
+\tableofcontents
+
+\mainmatter
+
+% ---------------- Part I: Epistemic Foundations ----------------
+\part{Epistemic Foundations: The Limits of Evidence, Observation, and Consensus}
+\input{chapters/ch01-latency-of-evidence.tex}
+\input{chapters/ch02-accommodation-before-prediction.tex}
+\input{chapters/ch03-theatre-of-agreement.tex}
+\input{chapters/ch04-paracosm-trap.tex}
+
+% ---------------- Part II: The Geometry of Persistence ----------------
+\part{The Geometry of Persistence: Distinction Holonomy, Spherepop, and TARTAN}
+\input{chapters/ch05-ontological-reversal.tex}
+\input{chapters/ch06-distinction-holonomy.tex}
+\input{chapters/ch07-spherepop.tex}
+\input{chapters/ch08-tartan-tiling.tex}
+\input{chapters/ch09-discrete-toy-model.tex}
+
+% ---------------- Part III: Systems and Admissibility ----------------
+\part{The Systems Architecture: Verification, Admissibility, and the CLIO Protocol}
+\input{chapters/ch10-clio-architecture.tex}
+\input{chapters/ch11-constitutional-space-of-refusal.tex}
+\input{chapters/ch12-verify-seams.tex}
+\input{chapters/ch13-verification-inheritance.tex}
+\input{chapters/ch14-model-capsules.tex}
+
+% ---------------- Part IV: Representations and Compression ----------------
+\part{Representations and Compression: Holography, Sparsity, and the Fallacy of Brevity}
+\input{chapters/ch15-compression-fallacy.tex}
+\input{chapters/ch16-compression-after-expansion.tex}
+\input{chapters/ch17-sparse-holographic-steganography.tex}
+\input{chapters/ch18-clifford-fhe.tex}
+
+% ---------------- Part V: Political Economy and Social Extraction ----------------
+\part{Political Economy and Social Extraction: Ledgers Without Value and Unfinishable Systems}
+\input{chapters/ch19-ledgers-without-value.tex}
+\input{chapters/ch20-rebel-without-a-cost.tex}
+\input{chapters/ch21-unfinishable-games.tex}
+\input{chapters/ch22-sheaves-of-necessity.tex}
+
+\backmatter
+\appendix
+\input{back/source-appendix.tex}
+\input{back/bibliography.tex}
+
+\end{document}

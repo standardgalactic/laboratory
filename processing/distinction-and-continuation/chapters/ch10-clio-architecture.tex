@@ -1,0 +1,156 @@
+%% ============================================================
+%% Chapter 10: The CLIO Architecture
+%% ============================================================
+
+\chapter{The CLIO Architecture}
+\label{ch:ch10-clio-architecture}
+\section{Introduction}
+
+The usual semantic unit of language-model evaluation is an output. A response is judged correct or incorrect, a tool call permitted or forbidden, or a final answer compared with a reference. This unit becomes inadequate once an agent acts through tools on persistent data. A tool call changes the state in which later calls are interpreted. Its significance is therefore neither exhausted by its textual form nor fixed at the moment of issue. The same call may be harmless, necessary, redundant, or destructive depending on the history that precedes it and the continuations it makes reachable.
+
+Recent research reflects a corresponding movement from output-centered evaluation toward histories and transition systems: formalizing agents operating over relational operational data and verifying requirements over the transition systems their policies and tools induce; detecting failures from temporal execution telemetry, with historical information becoming increasingly useful as a failed trajectory develops; permitting an agent to reformulate a constraint model while testing proposed formulations against the original problem; and arguing that assistance should sometimes remove impermissible possibilities without selecting a preferred outcome on a person's behalf. Together, these works reveal a shared transition from isolated choice to constrained continuation.
+
+They also expose an unresolved problem. Verification establishes that a property holds or fails over a specified system. Detection supplies evidence that an execution has departed from an expected regime. Constraint testing rejects or retains a candidate reformulation. Subtractive assistance removes inadmissible possibilities. None of these operations, by itself, explains when a particular intervention is warranted or when its result should become operative.
+
+This chapter, read as the operational counterpart to the epistemic bookkeeping developed in Part~I and the transport apparatus developed in Part~II, proposes that an agentic architecture must distinguish five objects and the partial relations among them:
+\[
+H \rightsquigarrow D(H) \rightsquigarrow A(H,D) \rightsquigarrow R \rightsquigarrow C(R),
+\]
+where $H$ is retained history, $D$ a diagnosis, $A$ the set of admissible continuations, $R$ a proposed repair, and $C$ an explicit commitment operation. None of the arrows is assumed total or functional. The notation is not a pipeline in which every object necessarily produces the next; its purpose is precisely to preserve the gaps between them. A history may be insufficient for diagnosis; a diagnosis may justify suspension but not repair; a proposed repair may be admissible without being uniquely warranted; and a successful repair may remain uncommitted.
+
+The name CLIO refers to an architecture organized around those distinctions. CLIO is not offered as another detector or verifier. It is a coordination layer for determining what follows, and what does not follow, from the results such components provide.
+
+\section{Histories, Continuations, Warrants, and Commitment}
+
+Let $\Sigma$ be an operative state space, $E$ a space of recordable events, and $\mathcal{H} = E^\ast$ the space of finite documentary histories. A configuration is a pair $(\sigma, H) \in \Sigma \times \mathcal{H}$. The distinction between $\sigma$ and $H$ is constitutive. Proposals, evaluations, refusals, and failed repairs may extend $H$ without changing $\sigma$. Documentary history preserves evidence; operative state determines the reference against which the next admitted transition acts. This is precisely the $H_t$ versus $\sigma_t$ separation Chapter~\ref{ch:ch04-paracosm-trap} identified informally in its reading of ``rust-ghost histories'': what a retraction changes is policy, not the retained record.
+
+Let $\mathcal{R}(H,\sigma)$ denote the candidate continuations currently expressible from $(H,\sigma)$. Admissibility is not intrinsic to a candidate considered in isolation. It is a relation $\mathsf{Adm} \subseteq \mathcal{H} \times \Sigma \times \mathcal{R}$, whose extension at a configuration is the continuation space
+\[
+\mathcal{A}(H,\sigma,D) = \{ r \in \mathcal{R}(H,\sigma) : \mathsf{Adm}(H,\sigma,D,r) \}.
+\]
+The diagnostic argument appears because the constraints available to evaluation may depend on what the retained evidence supports. Let $\mathcal{K}(H,\sigma,D)$ be the currently operative family of structural, epistemic, operational, and recursive constraints, whose aggregation need not be a simple conjunction; for a declared aggregation rule $F$,
+\[
+\mathsf{Adm}(H,\sigma,D,r) \iff F(\alpha_{\mathrm{str}}, \alpha_{\mathrm{epi}}, \alpha_{\mathrm{ope}}, \alpha_{\mathrm{rec}})(H,\sigma,D,r) = 1.
+\]
+A verification operation is consequently a narrowing operator on the characteristic predicate of a continuation space. For a newly imposed constraint $K_j$, $N_j(\chi_{\mathcal{A}})(r) = \chi_{\mathcal{A}}(r) \land K_j(H,\sigma,D,r)$. Verification changes which continuations remain supported; it need not change operative state.
+
+Diagnosis is likewise relational, $\mathsf{Diag} \subseteq \mathcal{H} \times \Sigma \times \mathcal{D}$. For some configurations there may be no $D$ such that $\mathsf{Diag}(H,\sigma,D)$, while others may support several diagnoses; $D(H)$ is shorthand for a possibly empty, possibly plural diagnostic relation rather than a universally defined function.
+
+Given a diagnosis and admissible set, a repair warrant is a relation $\mathsf{W} \subseteq \mathcal{D} \times 2^{\mathcal{R}} \times \mathcal{R}$. Several repairs may be warranted simultaneously; the difference between $\exists r\, \mathsf{W}(D,\mathcal{A},r)$ and $\exists! r\, \mathsf{W}(D,\mathcal{A},r)$ is the formal difference between supported intervention and supported closure. Even uniqueness, however, does not by itself confer authority. Let $\mathsf{Auth} \subseteq \mathcal{H} \times \Sigma \times \mathcal{R}$ record the independent authorization required for operative change. Commitment is a partial transition relation $\mathsf{Commit} \subseteq (\Sigma \times \mathcal{H}) \times \mathcal{R} \times (\Sigma \times \mathcal{H})$, defined only when admissibility, warrant, and authority all hold. Thus
+\[
+\mathsf{Adm}(H,\sigma,D,r) \centernot\Rightarrow \exists (\sigma',H')\, \mathsf{Commit}\bigl((\sigma,H), r, (\sigma',H')\bigr).
+\]
+This is the admissible-but-non-committable proposition at the center of CLIO. Verification can establish membership in a permitted region. It cannot manufacture either a repair warrant or commitment authority. This non-implication is the systems-level realization of Part~I's repeated warning, most explicit in Chapter~\ref{ch:ch03-theatre-of-agreement}'s closing discussion, that salience is not truth, validity is not admissibility, and admissibility is not commitment.
+
+\section{Operational Semantics and Verification Obligations}
+
+The preceding definitions become architectural constraints only when attached to an operational semantics. Let $\mathcal{M}_{\mathrm{CLIO}} = (Q,\Lambda,\rightarrow)$, $Q = \Sigma \times \mathcal{H}$, be a labeled transition system. The event alphabet $\Lambda$ contains at least proposal, diagnosis, verification, warrant, authorization, suspension, refusal, commitment, rollback, and representational-revision events. Partition it into documentary labels $\Lambda_D$ and operative labels $\Lambda_O$. Documentary transitions may extend history but are the identity on operative state, $(\sigma,H) \xrightarrow{e} (\sigma, H \cdot e)$, $e \in \Lambda_D$. Operative transitions may change $\sigma$, but every such transition is subject to the commitment contract:
+\[
+(\sigma,H) \xrightarrow{\mathsf{commit}(r)} (\sigma', H \cdot \mathsf{commit}(r)) \Longrightarrow r \in \mathcal{A}(H,\sigma,D), \quad \mathsf{W}(D,\mathcal{A},r), \quad \mathsf{Auth}(H,\sigma,r).
+\]
+These clauses are verification conditions for an implementation, not conclusions obtained merely by naming the architecture. A verifier must enumerate every rule capable of changing $\sigma$ and establish that none bypasses the commitment contract.
+
+\begin{proposition}[Non-bypass]
+Assume that every transition label outside $\Lambda_O$ obeys the documentary-transition rule, and that every label in $\Lambda_O$ is governed by the commitment contract. Then no proposal, diagnosis, verification, warrant, refusal, suspension, or history-maintenance transition changes operative state, and every operative change is admissible, warranted, and authorized.
+\end{proposition}
+
+The proof is by case analysis over $\Lambda_D$, whose rules preserve $\sigma$, and over $\Lambda_O$, applying the commitment contract. The proof is nontrivial for a concrete implementation only insofar as the transition rules are complete: any unenumerated state-mutating path invalidates the premise.
+
+Suspension preserves the value of operative state, but this does not imply that the state is safe. The correct independence claim is $\mathsf{suspend} \centernot\Rightarrow \mathsf{fail}$ and $\mathsf{suspend} \centernot\Rightarrow \neg\mathsf{fail}$. A system may suspend before any operative requirement has been violated, or it may suspend in an already failed state because the evidence does not warrant a repair.
+
+\section{Diagnosis Does Not Entail Repair}
+
+Empirical work on stateful failure monitors makes the diagnostic value of history visible: a monitor with access to temporal execution telemetry increasingly outperforms a memoryless baseline as the post-failure horizon grows, since loops, cascading tool failures, drift, fabrication, and corrupted-content absorption leave temporal signatures that may be weak at onset but become legible across subsequent steps. A failed execution is therefore not merely a collection of defective states; its shape carries evidence. The strongest results, however, come from deterministic verification: when a claimed total can be recomputed from actual tool results, or when required calls can be checked directly, explicit invariants outperform judgments about whether behavior merely appears anomalous. This supports a constraint-first hierarchy: when a relevant invariant is available, test it; use learned anomaly detection only for the residual domain in which no such invariant has been articulated.
+
+Detection alone leaves open a logical question. From ``fault detected'' it does not follow that ``repair warranted.'' Nor, even when some intervention is warranted, does it follow that this particular repair is warranted. A detector may justify stopping a continuation without identifying its cause. A failed coverage check may prove that a result cannot be committed while supplying no evidence about which earlier state should be restored. A loop alarm may justify suspension, but not whether the system should retry, change tools, revise its representation, request human judgment, or abandon the task. Detection identifies a defect relative to some coordinate system; repair requires evidence connecting that defect to a particular transformation.
+
+The underdetermined case is crucial. Conventional agent loops tend to treat uncertainty as a reason to sample again. CLIO instead recognizes null intervention as a positive continuation operator. Let $\mathsf{suspend}$ be an event and define
+\[
+\mathsf{N}_D(\sigma,H) = (\sigma, H \cdot \mathsf{suspend}(D,\mathcal{A})).
+\]
+This transformation changes documentary and epistemic status while preserving operative state and the plurality of surviving continuations. It is warranted when an anomaly is supported but no uniquely authorized repair class has been established. Null intervention does not claim that nothing is wrong. It claims that the available diagnosis does not warrant choosing a repair. Suspension is therefore an event with semantics, not an absence of system behavior.
+
+The separation among admissibility, warrant, and commitment can now be stated directly. For a candidate repair $r$,
+\[
+\begin{gathered}
+r \in \mathcal{A}(H,\sigma,D) \centernot\Rightarrow \mathsf{W}(D,\mathcal{A},r), \\
+\mathsf{W}(D,\mathcal{A},r) \centernot\Rightarrow \exists! r'\, \mathsf{W}(D,\mathcal{A},r'), \\
+\mathsf{W}(D,\mathcal{A},r) \centernot\Rightarrow \mathsf{Commitable}(H,\sigma,D,r).
+\end{gathered}
+\]
+Conversely, a sound commitment mechanism must satisfy $\mathsf{Commitable}(H,\sigma,D,r) \Rightarrow r \in \mathcal{A}(H,\sigma,D)$ and $\mathsf{Commitable}(H,\sigma,D,r) \Rightarrow \mathsf{Auth}(H,\sigma,r)$. These implications are architectural obligations, not logical truths about arbitrary implementations. A system that can commit an inadmissible or unauthorized repair violates the CLIO commitment contract. Null intervention follows when diagnosis reaches an epistemic boundary but supplies no warranted repair:
+\[
+\mathsf{Diag}(H,\sigma,D) \land \neg\exists r\, \mathsf{W}(D,\mathcal{A},r) \Longrightarrow (\sigma,H) \longrightarrow (\sigma, H \cdot \mathsf{suspend}(D)).
+\]
+Suspension must not be conflated with failure: $\mathsf{suspend} \neq \mathsf{fail}$. Suspension records that the evidence does not license operative selection. Failure records that an operative requirement has been violated. A system may correctly suspend without having failed, and may fail before possessing a sufficient diagnosis.
+
+\section{Vertical and Horizontal Repair}
+
+Repairs differ in what they hold fixed. Let $q_i : \Sigma_i \to X_i$ be a representation map from operative states into the coordinates exposed to diagnosis and evaluation. A vertical repair changes the represented trajectory while holding $q_i$ fixed, $(q_i,\sigma) \mapsto (q_i,\sigma')$: it may retry a failed call, select another value, restore a prior state, or choose a different branch while retaining the same variables, invariants, and diagnostic coordinates. A horizontal repair changes the representational scheme itself, $(q_i : \Sigma_i \to X_i) \mapsto (q_j : \Sigma_j \to X_j)$: it may introduce variables, replace a decomposition, revise a constraint vocabulary, or change which distinctions the system treats as relevant. Because a projection may be many-to-one, the reduced representation $q_i(\sigma)$ does not generally recover the history from which it arose. Horizontal repair must therefore be evaluated against retained history and operative invariants, not against the projected state alone. This is exactly the vertical/horizontal distinction that Chapter~\ref{ch:ch06-distinction-holonomy}'s repair-versus-redescription split anticipated in geometric terms: a horizontal repair is licensed only when it changes a genuinely gauge-invariant quantity, not merely a description.
+
+Constraint preservation between two representations requires, for the relevant constraint language $\Phi$, $\sigma \models_i \varphi \iff G_{ij}(\sigma) \models_j \varphi$ for $\varphi \in \Phi$, while intervention preservation additionally requires the commuting condition $G_{ij}(T_i(\sigma,a)) \equiv T_j(G_{ij}(\sigma), G^A_{ij}(a))$. The second requirement prevents a translation from preserving apparent state properties while changing what corresponding actions do. At the level of continuation sets, admissibility preservation requires $\tau_{ij}(\mathcal{A}_{q_i}(H,\sigma,D)) \subseteq \mathcal{A}_{q_j}(\tau_{ij}H, G_{ij}(\sigma), \tau_{ij}D)$; inclusion ensures an admissible source continuation does not become inadmissible solely through translation, while the stronger condition of equality additionally prevents the target representation from admitting continuations with no admissible source counterpart.
+
+A concrete instance of horizontal repair is a system that proposes alternative formulations of a constraint model, using devices such as symmetry breaking, implied constraints, or alternative variable representations, and injects candidate solutions back into the original model for validation. The generative component may search an open-ended representational space, but it does not certify its own proposals; admissibility remains grounded in a retained reference system. The limitation is equally instructive: validation over selected instances establishes empirical survival, not general semantic equivalence. A candidate may pass every available test and still alter the solution set elsewhere. The proper conclusion is therefore provisional, that the candidate has not yet been refuted under the retained tests, and the distinction between tested admissibility and proven preservation must remain visible in the history and in any later commitment decision.
+
+Horizontal repair also applies to diagnosis itself. If a monitor repeatedly flags admissible behavior, or fails to distinguish materially different faults, the relevant repair may be neither rollback nor resampling; the diagnostic coordinate system itself may be inadequate. CLIO therefore permits histories to revise the schemes by which histories are interpreted. This reflexivity must be controlled: revising a diagnostic scheme cannot be allowed to erase the evidence that motivated revision or retroactively convert previous failures into successes. Append-only documentary history supplies the stable reference needed for such change.
+
+\section{Subtraction Without Closure}
+
+A separate line of argument supplies a normative reason not to treat every admissible set as an optimization problem. In decisions where human judgment carries responsibility, agency, or meaning, assistance may properly remove impermissible continuations while leaving the surviving plurality to the person. The geometry is subtractive: $\mathcal{P} \to \mathcal{P} \setminus \mathcal{I}$, where $\mathcal{P}$ is a possibility space and $\mathcal{I}$ the region excluded by prohibitive constraints. Nothing in this operation requires the system to compute $\arg\max_{p \in \mathcal{P}\setminus\mathcal{I}} U(p)$. The remaining plurality is not necessarily a defect awaiting stronger optimization. It may be the intended result of assistance.
+
+This distinction can be expressed operationally as the separation of refusal and collapse. Refusal removes a continuation from an option space. Collapse selects or identifies surviving alternatives as one operative continuation. Because the operations transform different structures, neither should be implemented as an implicit side effect of the other: a system may refuse an unsafe action without choosing the user's action; it may determine that several repairs are admissible without selecting one; and it may present a constrained space without converting presentation into commitment. This is the systems-level counterpart of Chapter~\ref{ch:ch07-spherepop}'s $\Refuse$ and $\Collapse$ primitives, which are likewise distinct generators precisely so that exclusion and quotienting cannot silently substitute for one another.
+
+The separation also guards against a common failure of alignment architectures. A policy may begin with prohibitive constraints but use the same selection mechanism both to exclude violations and to rank all surviving possibilities. Constraint enforcement then becomes a prelude to autonomous optimization. CLIO instead treats admissibility as prior to, and logically independent from, preference. Optimization is permitted only when a further authority or commitment rule licenses it.
+
+\section{Commitment as an Explicit Transition}
+
+Verification is frequently treated as the last gate before action: if a proposal passes, it is executed. This collapses evidential validity into operative authority. A verified result may satisfy all formal constraints while still requiring authorization, human choice, or comparison with other verified alternatives. Successful verification constrains what may continue; it does not itself authorize commitment.
+
+Commitment should therefore be represented as an explicit transition. A proposal $r$ may be appended to history without changing operative state, $(\sigma_n, H_n) \to (\sigma_n, H_n \cdot \mathsf{propose}(r))$. Diagnosis, refusal, testing, and repair may likewise extend the history while leaving $\sigma_n$ unchanged. Only an authorized commitment event changes the operative state, $(\sigma_n, H_k) \xrightarrow{\mathsf{commit}(r)} (\sigma_{n+1}, H_k \cdot \mathsf{commit}(r))$. This separation preserves rejected and uncommitted material as evidence without allowing it to govern subsequent action. It also makes rollback conceptually precise. A later operative state can adopt the content of an earlier state, but history itself need not run backward: rollback is a new commitment whose target resembles a previous state, not deletion of the intervening trajectory.
+
+\begin{definition}[History integrity]
+Let $\preceq$ denote the prefix order on histories. History integrity requires $H_n \preceq H_{n+1}$, $H_{n+1} = H_n \cdot e_{n+1}$, for every CLIO transition.
+\end{definition}
+
+In particular, rollback has the form $(\sigma_n, H_n) \xrightarrow{\mathsf{rollback}(k)} (\sigma_k, H_n \cdot \mathsf{rollback}(k))$, not $(\sigma_n,H_n) \to (\sigma_k,H_k)$: operative state may return to earlier content; documentary history does not regress. Horizontal repair obeys the same invariant: replacing a representational scheme appends the replacement and its warrant rather than erasing the scheme whose inadequacy motivated revision. This is the exact operational realization of Chapter~\ref{ch:ch04-paracosm-trap}'s qualified non-erasure principle, and of Chapter~\ref{ch:ch01-latency-of-evidence}'s graded recoverability measure $\rho_t(e)$: what changes under repair is never the historical record itself, only what that record is permitted to license.
+
+The architecture yields three essential non-implications:
+\[
+\text{history} \centernot\Rightarrow \text{diagnosis}, \qquad \text{diagnosis} \centernot\Rightarrow \text{intervention},
+\]
+\[
+\text{successful intervention} \centernot\Rightarrow \text{commitment}.
+\]
+
+\section{Three Structural Propositions}
+
+The formal commitments of CLIO can be summarized by three propositions.
+
+\begin{proposition}[Admissibility]
+For every configuration $(H,\sigma)$, diagnosis $D$, and candidate $r$, membership $r \in \mathcal{A}(H,\sigma,D)$ is necessary but not sufficient for sound commitment.
+\end{proposition}
+
+Necessity follows from the soundness obligation in the commitment contract. Insufficiency follows because admissibility supplies neither $\mathsf{W}(D,\mathcal{A},r)$ nor $\mathsf{Auth}(H,\sigma,r)$.
+
+\begin{proposition}[Non-closure]
+The condition $|\mathcal{A}(H,\sigma,D)| > 1$ is not a defect. If no warranted and authorized criterion distinguishes the surviving consequential classes, sound CLIO execution does not select one arbitrarily and may instead append $\mathsf{suspend}(D)$ while preserving $\sigma$.
+\end{proposition}
+
+Plural admissibility entails neither a unique warrant nor authorization; both non-implications above therefore permit suspension without treating the surviving plurality as an error.
+
+\begin{proposition}[History preservation]
+For every CLIO transition $(\sigma_n,H_n) \to (\sigma_{n+1},H_{n+1})$, including rollback and horizontal repair,
+\[
+H_n \preceq H_{n+1}.
+\]
+\end{proposition}
+
+By the history-integrity contract, every transition appends an event to documentary history. Rollback changes operative state by appending a rollback event rather than replacing $H_n$ with an earlier prefix. Horizontal repair appends its new representation and warrant under the same rule.
+
+\section{Conclusion}
+
+The movement from outputs to histories is now visible across formal verification, runtime monitoring, constraint reformulation, and human-judgment-preserving design. Yet history alone does not solve the problem of agentic action. A trajectory may support diagnosis without supporting repair; an invariant may exclude a continuation without selecting its replacement; and a validated proposal may remain unauthorized.
+
+CLIO organizes these distinctions around retained history, diagnosis, admissible continuation, repair warrant, and explicit commitment. Its central principle is simple: verification constrains continuation; it does not authorize commitment. An agent system becomes safer not merely by adding stronger detectors or verifiers, but by preserving the logical spaces between their conclusions and its actions. Those spaces make it possible to refuse without collapsing, to repair representations without erasing their failures, to suspend action when diagnosis is insufficient, and to retain successful proposals without prematurely admitting them into operative state.
+
+This principle is the systems-level incarnation of the epistemic bookkeeping developed throughout Part~I: the appropriate semantic object for an acting program is not only its reachable trajectory, but the governed relation among what happened, what can be inferred from it, what may still continue, what transformations are warranted, and what is finally allowed to become real. Chapters~\ref{ch:ch11-constitutional-space-of-refusal} through~\ref{ch:ch14-model-capsules} develop the consequences of this architecture: the space of refusal itself as a constitutive rather than merely prohibitive capacity, the verify seam where consequence propagates while rationale is withheld, the undecidability of verification inheritance under transformation, and the model capsule as a signed, isolated unit of deployment discipline.

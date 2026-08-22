@@ -1,0 +1,77 @@
+% ============================================================
+% preamble.tex — shared preamble for Distinction and Continuation
+% Compile with XeLaTeX (fallback if LuaLaTeX's font cache misbehaves
+% in this environment, per established convention).
+% ============================================================
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{centernot}
+\usepackage[a4paper,margin=1.1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{microtype}
+\usepackage{enumitem}   % kept only for the rare structural list (proofs, definitions); body prose stays continuous
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Theorem-like environments (math content, distinct from body prose) ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{assumption}[theorem]{Assumption}
+
+% --- Recurring box: connective cross-reference note ---
+% Used wherever a chapter explicitly links back to an earlier chapter's
+% apparatus (e.g. Ch.11 -> Ch.10, Ch.19/20 <-> Ch.10) so the connective
+% architecture stays visible in the typeset text, not just the ledger.
+\newtcolorbox{connective}[1][Connective Note]{
+  colback=white, colframe=black, boxrule=0.4pt,
+  arc=0pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries, title=#1, breakable
+}
+
+% --- (Drafting-stage source/status/dependency boxes have been
+% removed from the chapters; the consolidated record now lives in
+% back/source-appendix.tex as a single appendix table.) ---
+
+% --- Body prose convention: no itemized/bulleted lists in prose ---
+% (per established convention; enumitem loaded above only for proofs,
+% definitions, and the rare structural list, not narrative paragraphs)
+
+% --- Bibliography: thebibliography, not BibTeX (per convention) ---
+% Each part/chapter that needs citations pulls entries from
+% back/bibliography.tex, assembled once at the end of the full compile.
+% No self-citations.
+
+% --- Shared macros from the distinction-holonomy / Spherepop source
+% material (Ch.6-9), kept in the shared preamble so any chapter can
+% use them consistently ---
+\newcommand{\Hol}{\operatorname{Hol}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Adm}{\operatorname{Adm}}
+\newcommand{\Pop}{\mathrm{Pop}}
+\newcommand{\Refuse}{\mathrm{Refuse}}
+\newcommand{\Bind}{\mathrm{Bind}}
+\newcommand{\Collapse}{\mathrm{Collapse}}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+
+
+\title{Distinction and Continuation \\[0.3em] \large Admissibility, Repair, and the Limits of Local Coherence}
+\author{Flyxion \\ \textit{Independent Researcher}}
+% Date deliberately left as month+year rather than an exact date,
+% per established convention (avoids over-reactive "brand new work"
+% framing from AI tools reading the title page).
+\date{August 2026}

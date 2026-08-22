@@ -1,0 +1,125 @@
+%% ============================================================
+%% Chapter 13: Verification Inheritance
+%% ============================================================
+
+\chapter{Verification Inheritance}
+\label{ch:ch13-verification-inheritance}
+\section{Introduction}
+
+Chapter~\ref{ch:ch12-verify-seams} showed, through the MEM|8 case, that a family of same-named artifacts requires distinguishing nominal, genealogical, structural, and behavioral continuity, none implying the others, and that determining which of these relations hold is itself the implementation problem rather than a preliminary to it. This chapter formalizes the general version of that difficulty: when a scholarly or technical artifact containing a verified claim is transformed, reformatted, translated, paraphrased, or edited, does an earlier verification result transfer to the transformed artifact? The chapter shows that the underlying correspondence relation is undecidable in general, exhibits a restricted but genuinely useful class of transformations under which it becomes decidable, and specifies a protocol, Claimshift, that routes every actual case through one of three honest outcomes rather than collapsing the undecidable cases into a false positive or negative.
+
+\section{Isolating the Correspondence Problem}
+
+Verification is typically treated as a property of an artifact at the moment it is checked. A theorem is proved, a computation is checked, a claim is reviewed, and the result is recorded. But artifacts do not remain fixed. They are reformatted, translated, paraphrased, excerpted, and edited, and each transformation raises the same question: does an earlier verification result still apply to the transformed artifact?
+
+The temptation, when building infrastructure for this problem, is to reach directly for a watermark or a provenance record and treat persistence of that record as evidence of continued validity. This is a category error. A watermark, a cryptographic commitment, or a provenance chain can establish that a transformed artifact traces back to an earlier one. None of these mechanisms can, by itself, establish that the claims the earlier artifact made are still the claims the transformed artifact makes. The two questions are independent, and conflating them allows a robust but semantically stale pointer to authenticate a claim that no longer holds. This is the identical failure mode Chapter~\ref{ch:ch12-verify-seams} examined for a specification's own name: a name can be perfectly well resolved, everyone agrees which artifact is meant, while remaining entirely unresolved on whether the artifact's claims survived whatever produced the version currently in hand.
+
+Fix a finite relational signature $\Sigma = \{P,Q,S\}$, where $P$ and $Q$ are unary relation symbols and $S$ is binary. A claim is a closed sentence of first-order logic over $\Sigma$. Semantic entailment $c \models c'$ has its standard meaning.
+
+\begin{definition}[Correspondence]
+For claims $c, c'$, define $C(c,c') \iff (c \models c') \land (c' \models c)$. $C(c,c')$ holds exactly when $c$ and $c'$ are logically equivalent, true in exactly the same $\Sigma$-structures.
+\end{definition}
+
+This is the strongest reasonable reading of ``the transformed claim preserves the original,'' and the undecidability result below concerns this strongest reading; weaker preservation relations inherit the same undecidability by essentially the same argument, since equivalence reduces to two entailment checks.
+
+\section{The General Correspondence Problem Is Undecidable}
+
+\begin{theorem}[Undecidability of correspondence]
+\label{thm:correspondence-undecidable}
+There is no total algorithm $D : \mathrm{Sent}(\Sigma) \times \mathrm{Sent}(\Sigma) \to \{0,1\}$ such that $D(c,c') = 1$ if and only if $C(c,c')$, for all closed $\Sigma$-sentences $c, c'$.
+\end{theorem}
+
+Fix the sentence $\tau := \forall x\, (P(x) \to P(x))$, which is valid: it is satisfied by every $\Sigma$-structure regardless of the interpretation of $P$, $Q$, or $S$. For any closed $\Sigma$-sentence $\varphi$, since $\tau$ is valid, every structure satisfying $\varphi$ also satisfies $\tau$, so $\varphi \models \tau$ holds unconditionally. Consequently $C(\varphi,\tau) \iff \tau \models \varphi \iff \varphi$ is valid. Suppose a total decider $D$ for $C$ existed. Then $\varphi \mapsto D(\varphi,\tau)$ would decide validity for arbitrary closed $\Sigma$-sentences $\varphi$. But validity of first-order sentences over a signature containing a relation symbol of arity at least two is undecidable, by Church's theorem on the undecidability of first-order logic. This contradiction establishes the theorem.
+
+The requirement that $\Sigma$ contain a relation symbol of arity at least two is not a technicality. First-order logic restricted to signatures consisting only of unary predicates, the monadic fragment, is decidable, by L\"owenheim's theorem. Church's undecidability result, and therefore Theorem~\ref{thm:correspondence-undecidable}, depends essentially on the presence of at least one relation of arity two or more; $S$ plays exactly this role, even though $S$ does not appear in $\tau$ itself.
+
+Theorem~\ref{thm:correspondence-undecidable} says something narrower than ``semantic correspondence between claims can never be established.'' It says that no single mechanical procedure decides correspondence correctly for every pair of claims expressible in a language this expressive. This rules out one particular and tempting design: a general-purpose \texttt{semanticEquivalent()} function, whether implemented by classical methods or by a learned model, that is assumed to give a correct verdict on an arbitrary pair of transformed and original claims. No such function can exist as a total, always-correct procedure. Any system that claims to certify correspondence in general is either incomplete, unsound, or restricted to a sub-language or a bounded class of transformations, whether or not it advertises that restriction.
+
+\section{A Certified Fragment: Correspondence by Normalization}
+
+Theorem~\ref{thm:correspondence-undecidable} forecloses one design but does not foreclose all automation. If the class of admissible transformations is restricted rather than the claim language, correspondence can become decidable within that restricted class, and the restriction can still be expressive enough to matter.
+
+\begin{definition}[Rewrite system]
+A rewrite system $\mathcal{R}$ over $\mathrm{Sent}(\Sigma)$ is a set of rules $c \to c'$ together with the reduction relation $\to_{\mathcal{R}}$ they generate and its reflexive transitive closure $\to^\ast_{\mathcal{R}}$. $\mathcal{R}$ is terminating if there is no infinite reduction sequence, and locally confluent if whenever $c \to_{\mathcal{R}} c_1$ and $c \to_{\mathcal{R}} c_2$, there exists $d$ with $c_1 \to^\ast_{\mathcal{R}} d$ and $c_2 \to^\ast_{\mathcal{R}} d$.
+\end{definition}
+
+By Newman's lemma, a terminating and locally confluent rewrite system is confluent, and confluence together with termination guarantees that every sentence $c$ has a unique normal form $N_{\mathcal{R}}(c)$, independent of the order rules are applied.
+
+\begin{theorem}[Decidability by normalization]
+For any terminating, confluent rewrite system $\mathcal{R}$ over $\mathrm{Sent}(\Sigma)$ with effectively computable rule application, $C_{\mathcal{R}}(c,c') :\iff N_{\mathcal{R}}(c) = N_{\mathcal{R}}(c')$ is decidable.
+\end{theorem}
+
+Termination guarantees computing $N_{\mathcal{R}}(c)$ halts after finitely many steps; confluence guarantees the resulting normal form is unique; $C_{\mathcal{R}}(c,c')$ is then decided by computing both normal forms and testing syntactic equality.
+
+The value of this result depends entirely on $\mathcal{R}$ being non-trivial. A rewrite system whose only rules concern whitespace or byte-level formatting would make $C_{\mathcal{R}}$ decidable in a way that proves nothing of interest. A genuinely useful fragment includes alpha-renaming of bound variables to a canonical form, reordering of conjuncts and disjuncts under a fixed total order exploiting associativity and commutativity, double-negation elimination, and elimination of redundant parenthesization and syntactic sugar with a single semantics-preserving unfolding. Under such a system, $\forall x\,(P(x) \land Q(x))$ and $\forall y\,(Q(y) \land P(y))$ normalize to the same canonical form despite being lexically distinct, demonstrating that certified correspondence is not merely byte identity performed after cosmetic preprocessing.
+
+\section{A Three-Valued Decision Procedure}
+
+The two results together justify a decision procedure honest about the boundary between what it can certify and what it cannot. Given a certified rewrite system $\mathcal{R}$ and a transformation $T$ taking $c$ to $c'$, let $\mathrm{Dom}(\mathcal{R})$ denote the syntactic domain on which $\mathcal{R}$ is certified terminating and confluent. Then
+\[
+D_{\mathcal{R}}(c,c') = \begin{cases}
+\mathtt{PRESERVED}, & c,c' \text{ in fragment}, N_{\mathcal{R}}(c) = N_{\mathcal{R}}(c'); \\
+\mathtt{NOT\_PRESERVED\_UNDER\_R}, & c,c' \text{ in fragment}, N_{\mathcal{R}}(c) \neq N_{\mathcal{R}}(c'); \\
+\mathtt{OUTSIDE\_CERTIFIED\_FRAGMENT}, & \text{otherwise}.
+\end{cases}
+\]
+
+Two readings of this output deserve emphasis, because both are easy to collapse into a simpler but incorrect binary judgment. First, $\mathtt{NOT\_PRESERVED\_UNDER\_R}$ does not entail $\neg C(c,c')$. It entails only that this specific certified rewrite theory did not establish correspondence; the two claims might still be logically equivalent for reasons outside $\mathcal{R}$'s rule set. Second, $\mathtt{OUTSIDE\_CERTIFIED\_FRAGMENT}$ is not a semantic verdict at all. It reports that the pair, or the transformation connecting them, falls outside the domain on which this mechanism claims automatic certification, and correctly routes the pair toward whatever fallback mechanism, formal reproof, symbolic checking, or attested human judgment, a surrounding system chooses to require outside the certified regime.
+
+\begin{proposition}[Failure of certification is not certification of failure]
+A bounded automatic procedure has exactly three honest outputs, a positive certificate, a negative certificate relative to its own rule set, and an admission of inapplicability, and none of the three may be read as a general semantic verdict beyond what the procedure actually established.
+\end{proposition}
+
+This is the exact discipline Chapter~\ref{ch:ch10-clio-architecture} enforces at the systems level with $\mathrm{Adm}$, $\mathsf{W}$, and $\mathrm{Auth}$: admissibility supplies neither warrant nor authorization, and here, similarly, membership in $\mathrm{Dom}(\mathcal{R})$ supplies neither a positive nor a negative correspondence verdict when the fragment's own rules do not resolve the pair. A companion protocol, Claimshift, described below, builds infrastructure around this boundary rather than treating it as a defect to engineer away.
+
+\section{The Claimshift Protocol}
+
+The theory above fixes a constraint; it does not by itself specify a system. Claimshift is a protocol for representing verification inheritance across document transformation, built on four design principles inherited directly from the theory: the locator is not the evidence, a robust in-band commitment establishes only that a transformed artifact points to a particular manifest, nothing about whether the claims in that manifest still correctly describe it; authorship is not generation, and assertion is not verification, a generative system that produces an artifact is not thereby its author in the relevant sense, and a party asserting a claim is not thereby a party who has verified it; verification is not truth, every verification record describes a method applied by a specific verifier under specific conditions and yields a result relative to that method, not an independent certification of truth; and failure of certification is not certification of failure, inherited directly from the three-valued output above.
+
+\subsection{Data Model}
+
+A claim record is a tuple $R_i = (c_i, A_i, \tau_i, D_i, S_i, V_i)$, where $c_i$ is a canonical commitment to the claim's content, $A_i$ identifies the asserting party, $\tau_i$ is a declared epistemic type (definition, axiom, derived, empirical, cited, conjectural, heuristic, or speculative), $D_i$ is a set of typed dependency edges, $S_i$ identifies supporting evidentiary sources, and $V_i$ is the set of verification records attached to $c_i$. A dependency edge is typed rather than flat,
+\[
+D_i = \{(c_j, \rho_{ij}) : \rho_{ij} \subseteq \{\mathrm{semantic}, \mathrm{interface}, \mathrm{proof\_term}\}\},
+\]
+because a flat edge conflates three genuinely distinct relations: whether changing $c_j$ can change what $c_i$ asserts, whether constructing $c_i$'s justification requires $c_j$'s signature without $c_i$'s correctness depending on $c_j$'s internal justification, and whether $c_i$'s specific certified justification happens to reference $c_j$ independent of whether $c_i$'s statement mentions it at all. This typing was added after empirical testing under a preregistered mutation protocol showed the flat schema responsible for mispredictions traceable directly to the conflation.
+
+A verification record is a tuple $V = (m, I, O, E, r, \sigma_V)$, where $m$ identifies the verification method, $I$ and $O$ are the method's inputs and outputs, $E$ records environment and version information, $r \in \{\mathrm{accepted}, \mathrm{rejected}, \mathrm{inconclusive}\}$ is the result, and $\sigma_V$ is the verifier's signature over the whole tuple hashed together with $c_i$'s commitment. Epistemic type $\tau_i$ is a declared classification, not a computed one; it is only as trustworthy as the party who declared it and the policy under which that declaration is accepted. Verification records, by contrast, carry their own signed evidence and are the protocol's actual carriers of certification.
+
+A transformation attestation is a tuple
+\[
+A_{i,T} = (H(c_i), H(c_i'), T, J, r, e, \sigma_V),
+\]
+where $T$ identifies the transformation applied, $J$ identifies the adjudication regime used, $r \in \{\mathrm{preserved}, \mathrm{not\_preserved}, \mathrm{outside\_regime}\}$ is the result, and $e$ is supporting evidence. The result alphabet is deliberately the protocol-level image of $D_{\mathcal{R}}$'s output:
+\[
+\mathtt{preserved} \leftrightarrow \mathtt{PRESERVED}, \qquad \mathtt{not\_preserved} \leftrightarrow \mathtt{NOT\_PRESERVED\_UNDER\_R},
+\]
+when $J$ is a certified rewrite regime, generalizing to any regime, formal or informal, that supplies a comparably disciplined result. The value $\mathtt{outside\_regime}$ is the protocol-level image of $\mathtt{OUTSIDE\_CERTIFIED\_FRAGMENT}$; it must never be silently converted into either of the other two values by any downstream consumer of the manifest.
+
+\subsection{Layered Architecture and Signature Semantics}
+
+The protocol separates three layers: artifact, robust commitment, and signed manifest. The artifact is whatever document a reader encounters; the robust commitment is a compact signal embedded in or attached to the artifact, carried by any sufficiently robust technology, a statistical text watermark, an image or audio watermark, a content-credential field, or ordinary file metadata, the protocol being agnostic to the carrier; the manifest is a signed, append-only document containing the full claim graph. Separating these layers means a scholarly document's entire dependency graph need not be encoded steganographically inside the artifact itself: the embedded commitment need only be robust enough to survive the expected transformations and locate a manifest that can be fetched and reasoned over separately. A claim published with no verification records can later acquire one, and if a proof is subsequently found to rely on an error, a further verification record with $r = \mathrm{rejected}$ is appended rather than the earlier one being deleted, preserving an append-only epistemic history rather than a single mutable verdict, in exact correspondence with Chapter~\ref{ch:ch10-clio-architecture}'s history-integrity contract.
+
+The protocol defines three signature roles that must never be represented by the same key or the same manifest field. An assertion signature means that a party asserts a claim record as stated, saying nothing about whether that party verified, generated, or merely transcribed it. A verification signature means a verifier performed a specific method against a specific representation and obtained a specific result, saying nothing about whether the method is trustworthy for the claim type in question. A transformation attestation signature means the attesting party asserts a specific correspondence judgment under a specific regime, saying nothing about whether that party was authorized to use that regime for that claim type.
+
+\begin{proposition}[Non-conflation]
+No manifest entry may be interpreted as satisfying more than one of the assertion, verification, and transformation-attestation roles unless it carries the corresponding distinct signature for each role it claims to satisfy.
+\end{proposition}
+
+\subsection{Policy Layer and Dependency Propagation}
+
+A transformation attestation is meaningless on its own; it must additionally be established that the attesting verifier was entitled to use the invoked adjudication regime for a claim of the relevant type. For each epistemic type $\tau$, a policy $P_\tau = (J_\tau, V_\tau, Q_\tau)$ specifies the accepted adjudication regimes, the accepted verifiers and their trust roots, and a quorum or assurance requirement. Authorization and correspondence are two separate predicates that must both hold: $P_\tau \vdash V \text{ authorized to issue judgments under } J$, distinct from $V \vdash C_J(c,c')$. Verification inheritance is defined conditionally, requiring an existing verification, a preserved transformation attestation, and satisfied authorization and quorum conditions together:
+\[
+V(c_i) \land A_{i,T} = \mathrm{preserved} \land J \in J_{\tau_i} \land V_{\mathrm{att}} \in V_{\tau_i} \land Q_{\tau_i} \text{ satisfied} \implies V_T(c_i').
+\]
+Absent any one of these conditions, in particular absent an explicit transformation attestation at all, $V(c_i) \not\Rightarrow V(c_i')$. This is the protocol-level statement of the theory's central discipline: persistence of a robust locator across a transformation is never, by itself, sufficient grounds for inheritance.
+
+The typed dependency edges support role-parameterized closures. For a role set
+\[
+\rho \subseteq \{\mathrm{semantic}, \mathrm{interface}, \mathrm{proof\_term}\},
+\]
+$\mathrm{Support}_\rho(c)$ and $\mathrm{Affected}_\rho(c)$ are the corresponding reachability closures over the dependency relation. A policy-qualified verification query asks whether every claim a target claim semantically depends on satisfies a given verification policy, $\mathrm{Verified}_P(c) \iff \forall d \in \mathrm{Support}_{\{\mathrm{semantic}\}}(c),\, V(d) \models P$. The restriction to the semantic role is deliberate: a proof-term or interface dependency need not be load-bearing for what a claim actually asserts, and a protocol implementation that evaluated this query over the unrestricted union of all three roles would over-count, treating auxiliary structural dependencies as though they were constitutive of meaning. This is a precise, typed instance of the four-way continuity distinction Chapter~\ref{ch:ch12-verify-seams} developed informally for the MEM|8 family: nominal, genealogical, structural, and behavioral continuity are, in effect, four different candidate role sets for the same underlying question, and conflating them produces exactly the kind of over- or under-counted verification status this role restriction is built to prevent.
+
+\section{Conclusion}
+
+The correspondence problem this chapter isolates is undecidable in general, decidable within an honest and non-trivial fragment, and, outside that fragment, resistant to being silently collapsed into either a positive or negative verdict without manufacturing a claim the underlying theory does not support. The Claimshift protocol does not solve the correspondence problem; it represents whichever of the three outcomes actually obtains, with its adjudicator properly authorized under an explicit, claim-type-indexed policy, and refuses, as a protocol invariant rather than a best practice, to convert an outside-the-fragment result into a judgment it did not earn. The practical consequence is a design constraint rather than a system: any mechanism for verification inheritance under transformation, however built, must expose the boundary between what it can certify and what it cannot, rather than letting the survival of a pointer stand in for the validity of what it points to. This is the same discipline Chapter~\ref{ch:ch10-clio-architecture} enforces for commitment and Chapter~\ref{ch:ch12-verify-seams} enforces for consequence, applied here to the specific case of a claim surviving, or failing to survive, its own transformation.
