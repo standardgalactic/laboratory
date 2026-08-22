@@ -61,4 +61,48 @@ The command interpreter keeps these categories separate largely by omission: it 
 
 The shell therefore provides a useful control condition. It demonstrates that extreme compliance alone does not generate sycophancy. Sycophancy emerges when compliance becomes coupled to an adaptive social evaluation that systematically converts what the user wants into evidence for what the system says is true, valuable, or profound. An ideal critical assistant, on this account, sometimes ought to be less obedient than Bash but should remain far less agreeable than a sycophantic council of personas.
 
+\section{The Criterion of Relevance}
+
+Procedural compliance introduces a second distinction that is easily confused with sycophancy: the distinction between performing work and narrating work. A computational system may perform thousands of operations while exposing only a small fraction of them to the user. This is not concealment in the epistemically problematic sense. It is abstraction.
+
+The Unix tradition provides a particularly clear example. A successful command commonly produces little or no output. Silence is not evidence that nothing happened; rather, the interface assumes that successful routine execution generally does not merit interruption. Output becomes especially valuable when it reports a result requested by the operator, identifies an exceptional condition, or supplies information capable of changing what the operator should do next.
+
+Modern computational systems routinely violate this principle at the conversational layer. An agent may narrate searches, dependency installations, retries, intermediate transformations, tool invocations, file inspections, and other implementation details even when none changes the trajectory of the task. The underlying work may be legitimate and even extensive. The problem is not that the operations occur, but that their occurrence is treated as sufficient reason to report them.
+
+This suggests a criterion of relevance:
+
+\[
+\operatorname{Report}(e) \iff e \text{ materially changes the interpretation, trajectory, or outcome of the interaction.}
+\]
+
+That is, $e$ is reported only when it crosses this threshold.
+
+The criterion is deliberately stronger than mere topical association. An event can be related to the task without being relevant to the conversational trajectory. A package installation is related to a compilation task, but if installation succeeds normally, reporting every downloaded dependency contributes little. An error followed immediately by an automatic and reliable recovery may likewise be operationally real without becoming conversationally significant. By contrast, an error that changes the implementation strategy, invalidates an assumption, requires user judgment, or alters the expected result crosses the relevance threshold.
+
+The distinction resembles ordinary conversation. After watching a film, almost indefinitely many true statements are available to the participants. The weather outside, the temperature of the room, the route home, and events occurring elsewhere remain real. Their truth does not make them relevant. If the conversational object is the film, competent participation involves preserving that object until some sufficiently important transition warrants changing it. Asking about the weather immediately afterward is not false or incoherent; it is simply insensitive to the current relevance structure.
+
+The same principle applies to computational narration. A system that continuously reports everything it encounters behaves as though occurrence implied relevance:
+
+\[
+\operatorname{Occurred}(e) \Rightarrow \operatorname{Report}(e).
+\]
+
+A better interface rejects this implication. Internal activity may be extremely complex while external communication remains sparse:
+
+\[
+\operatorname{Occurred}(e) \not\Rightarrow \operatorname{Relevant}(e) \not\Rightarrow \operatorname{Report}(e).
+\]
+
+This is one reason terse command-line tools can appear unusually competent to experienced users. They respect an abstraction boundary. The operator asks for an outcome; routine machinery remains machinery. Thousands of successful low-level operations need not be converted into thousands of conversational turns.
+
+The contrast also prevents an unfair interpretation of verbose agent behavior. Excessive narration need not indicate incompetence, nor is it necessarily harmful. It may arise from an attempt to provide transparency, reassurance, or observability. In some contexts, including debugging, auditing, instruction, safety-critical operation, or explicit requests for a trace, the relevance threshold appropriately moves downward. What matters is not minimal output as an absolute principle but adaptation of output to the informational needs of the interaction.
+
+The failure occurs when this adaptation is absent. Reporting every intermediate operation can paradoxically reduce transparency because significant events become difficult to distinguish from routine ones. A stream containing ten thousand status updates provides more information in the Shannon sense while potentially providing less usable information about the state of the task. Relevant changes are submerged in operational noise. This yields a more general formulation: good transparency is not the same as maximum observability. Good transparency requires selective observability organized around consequences. A routine event may remain internal; a trajectory-changing event should become visible. The user need not witness every failed command, package installation, retry, parse operation, or intermediate representation merely because the system witnessed it.
+
+This principle also bears on the appearance of expertise. An interface that explains every elementary operation to an experienced operator can inadvertently suggest that it does not recognize the operator's abstraction level. In a Unix-like environment especially, continual announcements of routine filesystem operations, package management, command execution, and successful retries may create the impression that the system regards these events as remarkable. The issue is not that such narration proves ignorance of Unix practice. Rather, it fails to exhibit one of that practice's characteristic disciplines: allowing ordinary successful machinery to remain quiet.
+
+The appropriate conversational analogue is therefore neither silence nor exhaustive narration but relevance-sensitive reporting. Routine work proceeds without ceremony. Significant deviations surface. Uncertainty is reported when it affects confidence. Failures are reported when they survive recovery or alter the plan. Intermediate details become visible when requested or when they explain a consequential decision. Under this criterion, the ideal agent resembles neither an endlessly talkative assistant nor a completely silent shell. It performs whatever complexity the task requires while maintaining a comparatively sparse conversational surface. What reaches that surface is selected not because it happened, but because knowing that it happened changes what the participants should understand, decide, or do next.
+
+Competent interaction, in this light, requires a form of selective loss: a system must discard most of what it could say in order for what it does say to carry significance. The same principle underlies the paper's central claim about persona ensembles. Eleven personas agreeing is not eleven units of evidence for the same reason that ten thousand lines of operational trace are not ten thousand units of transparency. In both cases, volume is mistaken for warrant.
+
 \end{document}
