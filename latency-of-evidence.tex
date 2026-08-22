@@ -82,4 +82,20 @@ L^e_t(e,p) \;:\Leftrightarrow\; L^s_t(e) \land W_t(e,p,I) \text{ for some } I \t
 
 An undeciphered inscription lacks semantic legibility outright. A fully readable laboratory notebook containing an unrecognized anomaly possesses semantic legibility while lacking evidential legibility with respect to a theory not yet formulated. Much of what earlier discussions of this topic call illegibility is, on inspection, unrecognized evidential relevance rather than an inability to read the material at all, and keeping the two apart is necessary for the debugging and scientific-anomaly sections below to say something precise rather than merely evocative.
 
+\section{Availability Is Not Application}
+
+A second correction concerns where latency comes from. The earlier version of this argument treated the absence of a query as the sole source of delay, which is the most original part of the claim but becomes reductive if left as the whole explanation. A query can already belong to $Q_t$, in the sense that it is conceptually and procedurally available to some potential interpreter, without anyone actually applying it to a given trace, because investigation is costly, an archive is poorly indexed, access is restricted, incentives favor not looking, or an institution is unwilling to reconsider a settled conclusion. Membership in $Q_t$ does not imply application:
+
+\[
+q \in Q_t \;\nRightarrow\; \operatorname{Apply}_t(q,e).
+\]
+
+A more complete definition of practical legibility therefore requires access to the trace and actual application of an available, warranted procedure, not merely the abstract existence of such a procedure somewhere in the relevant field:
+
+\[
+L_t(e,p) \;:\Leftrightarrow\; \exists\, q \in Q_t,\, I \in \mathcal I_t \;\bigl[\, \operatorname{Access}_t(e) \land \operatorname{Apply}_t(I,q,e) \land I(q,e)=p \land W_t(e,p,I) \,\bigr].
+\]
+
+This decomposition lets the essay separate delay by cause rather than treat every instance of latency as a single conceptual failure to formulate the right question. Conceptual latency occurs when $Q_t$ genuinely lacks the query. Technical latency occurs when $Q_t$ contains the query but $\mathcal I_t$ lacks a reliable procedure to execute it. Archival latency occurs when $e$ exists but $\operatorname{Access}_t(e)$ fails, because the material is poorly catalogued or physically difficult to reach. Institutional latency occurs when access and method both exist but the institution declines to apply them, for reasons of cost, incentive, or resistance to revisiting a settled matter. Attentional latency occurs when nothing prevents application except that no one has yet directed attention to that trace among the many competing for it. These are different mechanisms with different remedies, and treating them as a single phenomenon, as an earlier version of this essay did, obscures exactly the distinctions that make the framework useful.
+
 \end{document}
