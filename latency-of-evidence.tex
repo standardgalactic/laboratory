@@ -157,4 +157,14 @@ The context reification analysis developed in a companion essay on persona ensem
 
 Latency is a false negative: material genuinely bears on a proposition, but the system's assigned status has not caught up. Reification is a false positive: material does not genuinely bear on a proposition, but the system's assigned status has run ahead of the evidence, typically because a generative process produced a fluent, internally consistent proposition that satisfied $R_t(e,p)$ without satisfying $W_t(e,p,I)$, in exactly the sense the recoverability-versus-warrant distinction developed above was built to capture. Framed this way, the two failures are not evidence for two separate admissibility thresholds needing separate tuning, but two error rates of one underlying support-assignment process, and different institutional or architectural controls, stricter warrant standards, broader query availability, more diligent application, better provenance tracking, will generally trade against each other along a single operating curve rather than requiring two unrelated interventions.
 
+\section{Decomposing Latency}
+
+Because the dependency chain established in Section 3 orders four thresholds rather than treating them as a single undifferentiated delay, the overall interval between a trace's availability and its eventual consequence can be decomposed into three separate latencies, each attributable to a different mechanism:
+
+\[
+\lambda_L = t_L - t_X, \qquad \lambda_A = t_A - t_L, \qquad \lambda_C = t_C - t_A,
+\]
+
+where $t_X$, $t_L$, $t_A$, and $t_C$ are the times at which $X_t(e)$, $L_t(e,p)$, $A_t(e,p\mid c,d)$, and $C_t(e,p,c,d)$ first hold, when they hold at all. This decomposition gives the essay's title concept genuine content rather than a single impressionistic gap. An undeciphered inscription exhibits large $\lambda_L$, driven by the absence of semantic legibility itself. A forensic technique that is scientifically well understood but not yet legally admissible exhibits small $\lambda_L$ and large $\lambda_A$. A historical finding that is fully admitted into scholarly consensus but never applied to revise any live policy or decision exhibits large, potentially unbounded $\lambda_C$. Characterizing a case by its latency profile, rather than by a single generic claim that knowledge lagged behind evidence, is where the framework's descriptive value actually lies.
+
 \end{document}
