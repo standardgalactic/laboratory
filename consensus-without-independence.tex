@@ -113,4 +113,16 @@ One persona praises an observation. Another interprets it. A third connects it t
 
 This distinction explains why persona proliferation can worsen the original problem. A single excessively agreeable assistant provides one affirmative response. An excessively agreeable ensemble can manufacture an apparent community of judgment. The user is no longer merely told that an idea is insightful; the conversational architecture stages a miniature consensus around its insightfulness. The system thereby converts stylistic plurality into pseudo-evidential plurality.
 
+\section{Interpretive Ratcheting}
+
+A further effect emerges because later personas do not necessarily evaluate the original proposition in isolation. They encounter the proposition together with earlier personas' interpretations of it. Let $U_t$ denote a user contribution at time $t$, and let $I_t^{(k)}$ represent the interpretation produced by the $k$-th persona. A simplified sequence is
+
+\[
+U_t \rightarrow I_t^{(1)} \rightarrow I_t^{(2)} \rightarrow \cdots \rightarrow I_t^{(n)}.
+\]
+
+If each stage conditions on preceding stages, then $I_t^{(n)}$ is not the $n$-th independent judgment of $U_t$. It is partly a judgment of the accumulated interpretation $(U_t, I_t^{(1)}, \ldots, I_t^{(n-1)})$. Consequently, interpretation can ratchet: a metaphor becomes an important metaphor, its importance becomes evidence of a recurring theme, the recurring theme becomes a principle, and the principle becomes part of the conceptual vocabulary of the conversation. Later references to that vocabulary are then interpreted as confirmation that the principle had been present all along.
+
+No individual transition need be spectacularly implausible. The pathology lies in composition. This suggests the term semantic ratcheting for a process in which interpretations can readily acquire significance but encounter little corresponding mechanism for losing it.
+
 \end{document}
