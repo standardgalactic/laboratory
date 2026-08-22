@@ -132,4 +132,16 @@ The history of DNA evidence illustrates this without needing to be flattened int
 
 Historical testimony exhibits a related pattern with the trace replaced by an account rather than a physical residue. Testimony can achieve full evidential legibility, in the sense that a careful listener can state exactly what is being claimed and why it would bear on a disputed proposition, while remaining excluded from $A_t(\cdot \mid c, d)$ for a dominant institutional narrative, because that community is unwilling, for reasons independent of the testimony's evidential merit, to admit it toward the relevant judgment. A later shift in the composition or commitments of $c$ can produce $A_{t'}(e,p \mid c,d)$ for testimony that had satisfied $L_t(e,p)$ unchanged since $t$, which is a case of uptake changing while the underlying support relation $S(e,p)$ did not.
 
+\section{Machine Learning: Encoding, Extractability, and Use}
+
+The same structure recurs within machine learning systems, with the interpreter replaced by a trained model, though the earlier version of this argument used illegibility too broadly here as well. A feature can be present in raw data in several distinct senses that should not be treated as equivalent: it may be explicitly encoded in a single variable, statistically recoverable only from a combination of variables, recoverable only with information external to the dataset, or merely correlated within one particular sample and unlikely to generalize. Separately, a model may fail to use a feature because its architecture cannot represent the relevant function, because optimization fails to discover a representation that exists in principle within its hypothesis class, because the training objective does not reward extracting it, or because regularization actively suppresses it. Collapsing all of these into a single notion of illegibility, as an earlier version of this essay did, conceals which mechanism is actually responsible.
+
+A more disciplined formulation separates three distinct non-implications, mirroring the structure used throughout the essay:
+
+\[
+\text{encoded in } D \;\nRightarrow\; \text{extractable by } M \;\nRightarrow\; \text{used for task } T.
+\]
+
+Data can encode a pattern without any particular model architecture being able to extract it; a model can be capable of extracting a pattern without its training objective ever rewarding that extraction for the task at hand. A change in architecture, training procedure, or auxiliary objective can move a feature from encoded-but-inextractable to extractable, and separately from extractable-but-unused to used, without any change to the underlying data, in direct structural parallel to a scientific theory establishing evidential legibility for an unchanged measurement or a statutory reform establishing admissibility for an unchanged sample.
+
 \end{document}
