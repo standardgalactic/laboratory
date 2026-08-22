@@ -181,4 +181,16 @@ The defensible form of the argument is therefore a rebuttable principle rather t
 
 Deletion decisions should weigh epistemic option value alongside privacy, security, cost, consent, and discoverability, rather than treating any one of these considerations, including future evidential value, as automatically dominant.
 
+\section{Deletion as Reduction in Recoverability, Not Total Foreclosure}
+
+A related overstatement in the earlier version of this argument was the claim that the asymmetry between illegibility and deletion is total, illegibility being reversible and deletion being an irreversible foreclosure of every future query. This is rhetorically effective but formally false in both directions. A deleted trace may survive in copies, caches, quotations, derived statistics, backups, human memory, or causally downstream records, and its content may in some cases be partially reconstructed from this redundancy, though the chain of provenance connecting the reconstruction to the original event may be degraded or lost even where the content itself survives, which can eliminate the evidentiary force of the material without eliminating its informational content. Conversely, an undeleted trace can become effectively unrecoverable through media decay, format obsolescence, loss of a decryption key, or loss of the contextual information needed to interpret it, so that its formal continued existence, $X_t(e)$, provides little practical difference from deletion.
+
+The more accurate model replaces a binary distinction between existing and deleted with a continuous or graded measure of recoverability,
+
+\[
+\rho_t(e) \in [0,1],
+\]
+
+or, where a numerical value is unwarranted, a small ordered set of qualitative states such as intact, degraded, indirectly reconstructible, inaccessible, and destroyed. Preservation policy, on this view, is better understood as an attempt to manage the trajectory of $\rho_t(e)$ over time for the traces judged worth the associated costs, rather than as a binary decision to keep or discard, and deletion is better understood as a sharp downward step in $\rho_t(e)$, often but not always to its floor, rather than as an act of total metaphysical foreclosure.
+
 \end{document}
