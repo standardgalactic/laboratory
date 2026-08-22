@@ -55,4 +55,31 @@ X \nRightarrow L, \qquad L \nRightarrow A, \qquad A \nRightarrow C.
 
 This is a more modest claim than mutual independence, and it is the claim the rest of the essay actually needs. A trace can exist without being legible, be legible without being admissible, and be admissible without becoming consequential; but a trace cannot become consequential without first having been admitted, admitted without first having been legible, or legible without having existed, at least at some earlier time, in some accessible form. What can appear to violate the ordering is retrospective attribution, in which a later interpreter judges that an old trace would have satisfied an earlier threshold had the right method or standing existed at the time; a court may recognize that a decades-old sample would have been admissible under a rule adopted only recently, or an institution may act on material before formally admitting it through its own procedures. These are real and important phenomena, but they are cases of a later re-evaluation of an earlier trace, not cases of consequence literally preceding existence.
 
+\section{Legibility, Warrant, and Two Kinds of Recovery}
+
+The concept doing the most work in this essay is legibility, and it was defined too weakly in an earlier version of this argument. A definition stating only that some available procedure produces a proposition from a trace,
+
+\[
+R_t(e,p) \;:\Leftrightarrow\; \exists\, q \in Q_t,\; I \in \mathcal I_t \quad \text{such that} \quad I(q,e) = p,
+\]
+
+is satisfied by any procedure that outputs $p$ when queried, whether or not the output is warranted. A confabulating interpreter, human or computational, can satisfy $R_t(e,p)$ as easily as a careful one. $R_t$ is therefore properly understood as recoverability, not legibility: it says only that $p$ is producible, not that $p$ is supported.
+
+Legibility requires an additional condition, a warrant relation $W_t(e,p,I)$ asserting that the interpretation was produced by a procedure reliable enough, under an explicit standard, to be trusted on pairs like $(e,p)$. Legibility is then recoverability plus warrant:
+
+\[
+L_t(e,p) \;:\Leftrightarrow\; R_t(e,p) \land W_t(e,p,I).
+\]
+
+A further distinction is needed within legibility itself, because the scientific and debugging cases discussed later expose a category the earlier version conflated. Semantic legibility concerns whether a trace's immediate content can be recovered at all: whether a script can be decoded, a number read, a log line parsed. Evidential legibility concerns whether the trace's warranted bearing on a specific proposition $p$ can be established:
+
+\[
+L^s_t(e) \;:\Leftrightarrow\; \text{the content of } e \text{ can be decoded},
+\]
+\[
+L^e_t(e,p) \;:\Leftrightarrow\; L^s_t(e) \land W_t(e,p,I) \text{ for some } I \text{ recovering } p \text{ from } e.
+\]
+
+An undeciphered inscription lacks semantic legibility outright. A fully readable laboratory notebook containing an unrecognized anomaly possesses semantic legibility while lacking evidential legibility with respect to a theory not yet formulated. Much of what earlier discussions of this topic call illegibility is, on inspection, unrecognized evidential relevance rather than an inability to read the material at all, and keeping the two apart is necessary for the debugging and scientific-anomaly sections below to say something precise rather than merely evocative.
+
 \end{document}
