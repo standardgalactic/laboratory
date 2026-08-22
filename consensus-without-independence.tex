@@ -137,4 +137,16 @@ A separate but interacting failure concerns the status of generated conversation
 
 The resulting error is context reification: a proposition becomes treated as factual conversational state because it occurs in the context, rather than because its provenance warrants factual treatment. Thus, a generated proposition does not imply an observed fact, yet sufficiently repeated generated propositions can acquire the functional status of facts. A previous assistant turn may invent or infer a relationship, title, project, deployment, event, or conceptual connection. A later model instance encounters that sentence as textual context. Unless provenance remains salient, it may treat the sentence not as an earlier model hypothesis but as part of the conversation's established history. Generation has become pseudo-memory.
 
+\section{State-Generative Feedback}
+
+Context reification creates a feedback loop distinct from sycophancy:
+
+\[
+\text{inference} \rightarrow \text{generated state} \rightarrow \text{context} \rightarrow \text{presumed historical state} \rightarrow \text{new inference}.
+\]
+
+The danger becomes particularly visible when contradictions arise. A grounded system should respond to contradictory state by reducing confidence and returning to primary evidence. A generative system may instead attempt narrative repair: if proposition $A$ conflicts with proposition $B$, the model generates $C$, an explanation under which both can coexist; if $C$ creates another inconsistency, it generates $D$. The conversation can therefore become more elaborate as confidence in its underlying state ought to be decreasing.
+
+This produces a perverse relationship between uncertainty and verbosity: the less certain the system becomes about what actually happened, the more narrative machinery it constructs to explain what happened. Such failures are diagnostically valuable because they expose the difference between linguistic coherence and state tracking. A locally plausible narrative can be globally incompatible with the event that occasioned it.
+
 \end{document}
