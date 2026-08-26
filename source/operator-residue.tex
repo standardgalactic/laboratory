@@ -1,0 +1,2309 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.05in]{geometry}
+\usepackage{fontspec}
+\setmainfont{XCharter}
+\setsansfont{DejaVu Sans}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.12}
+\usepackage{amsmath,amssymb,mathtools,mathrsfs}
+\usepackage{booktabs,array,tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\definecolor{ink}{HTML}{18202A}
+\definecolor{accent}{HTML}{315C55}
+\definecolor{muted}{HTML}{6B747C}
+
+\hypersetup{ colorlinks=true, linkcolor=accent, urlcolor=accent, citecolor=accent, pdftitle={What Survives the Transformation?}, pdfauthor={Flyxion} }
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsc{Flyxion}}
+\fancyhead[R]{\small\textsc{What Survives the Transformation?}}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+
+\titleformat{\section} {\Large\bfseries\color{ink}} {\thesection}{0.7em}{}
+
+\titleformat{\subsection} {\large\bfseries\color{ink}} {\thesubsection}{0.7em}{}
+
+\newcommand{\Adm}{\operatorname{Adm}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Iso}{\operatorname{Iso}}
+\newcommand{\Know}{\operatorname{Know}}
+\newcommand{\semEq}{\simeq_{\mathrm{sem}}}
+\newcommand{\opEq}{\simeq_{\mathrm{op}}}
+
+\title{\textbf{The Operational Residue}\\
+\large The Noncommutativity of Preservation and Action}
+
+\author{Flyxion \\ Independent Researcher} 
+
+\date{August 2026}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract} A sixth-century manuscript is dismantled, re-inked, dispersed, and reused, yet traces of text that no longer visibly exists remain recoverable through chemical offset. A language-model agent receives a summary in which a prohibition remains semantically recognizable but ceases to constrain action. Another agent correctly recognizes that a question is unknowable yet becomes willing to answer when fabricated evidence is presented with sufficient institutional formality. A distributed agent system accurately measures the wrong object. A stronger model inherits a weaker model's reasoning history and performs worse because too much of that history has been preserved. A programming language retains not merely terminal state but transformations sufficiently well to permit their reversal.
+
+These cases appear unrelated only if preservation is treated as a binary property. This essay develops a different view. Record, semantic availability, diagnostic adequacy, operational force, intervention warrant, commitment, and historical consequence are distinct relations. Information may survive one boundary while failing at the next. Conversely, deletion, compression, collapse, or irreversibility need not destroy continuation if the distinctions necessary for repair remain reachable.
+
+The resulting framework connects manuscript reconstruction, semantic computation, agent reliability, selective forgetting, reversible effects, Spherepop, CLIO, Admissibility Interfaces, Diagnostic Coordinates, Repair Warrant, and continuation geometry. Preservation is reconceived not as the retention of every prior state but as the maintenance of those distinctions required to constrain admissible futures.
+\end{abstract}
+
+\section{A Manuscript That Remembers What It No Longer Contains}
+
+Codex H of the Pauline Epistles presents an unusually literal example of historical persistence without straightforward preservation. The sixth-century Greek manuscript was damaged, re-inked, dismantled, and eventually reused as binding material. Its surviving leaves no longer constitute the original codex. Some of the writing of interest is not even ordinary visible writing on the surviving surface.
+
+Yet the manuscript retained traces.
+
+Multispectral imaging has allowed researchers to reconstruct forty-two lost pages through faint ``ghost'' impressions produced when ink from facing pages chemically affected neighbouring parchment. The recovered material does not constitute unknown letters of Paul. Its importance lies elsewhere: early chapter lists, scribal corrections, annotations, and evidence concerning the organization and handling of Pauline texts in late antiquity.
+
+The physical situation already defeats a naive conception of storage.
+
+Let the original manuscript state be $M_0$, and let successive transformations be
+
+\[ M_0 \xrightarrow{T_1} M_1 \xrightarrow{T_2} M_2 \xrightarrow{T_3} \cdots \xrightarrow{T_n} M_n.\]
+
+There is no reason to suppose that $T_i$ is invertible. Re-inking, abrasion, cutting, rebinding, dispersal, chemical transfer, and decay are generally many-to-one transformations:
+
+\[ T_i^{-1}(T_i(M)) \neq M.\]
+
+Nevertheless, some distinction $d$ belonging to $M_0$ can remain inferable from $M_n$:
+
+\[ d(M_0) \rightsquigarrow \tau_d(M_n).\]
+
+The trace $\tau_d$ need not resemble the original representation of $d$. Indeed, a mirrored chemical offset is a different physical object from the ink stroke that produced it.
+
+This suggests the first principle:
+
+\[ \boxed{ \text{persistence of a distinction} \neq \text{persistence of its original representation}. }\]
+
+The manuscript survives not as an unchanged object but as a field of residual constraints on what its history could have been.
+
+\section{The Difference That Remains}
+
+Suppose an observation operator
+
+\[ O : \mathcal H \rightarrow \mathcal Y\]
+
+maps histories to present observations. Reconstruction is an inverse problem:
+
+\[ O(h)=y \quad\Longrightarrow\quad h\in O^{-1}(y).\]
+
+Ordinarily,
+
+\[ |O^{-1}(y)|>1.\]
+
+The present therefore does not uniquely encode its past. Reconstruction proceeds by narrowing an admissible set rather than recovering a perfectly stored state.
+
+This distinction is central to continuation geometry. Information is not simply a treasure contained in an object. It exists wherever observations constrain possible histories, interpretations, or continuations.
+
+Codex H therefore provides an unusually concrete model:
+
+\[ \begin{gathered} \text{original inscription} \rightarrow \text{physical interaction} \rightarrow \text{latent trace} \\ \rightarrow\ \text{instrumental observation} \rightarrow \text{reconstruction}. \end{gathered} \]
+
+Each arrow changes the representational substrate. What matters is which differences remain capable of constraining inference.
+
+But preservation becomes considerably harder once the reconstructed distinction is supposed to govern an action.
+
+\section{When Must'' Becomes Maybe''}
+
+Recent experiments on agent handoffs demonstrate that a constraint can remain semantically available while losing its operational force.
+
+Consider an upstream state containing a hard constraint $\kappa$. It may include a prerequisite, an authority condition, a fallback, and a consequence for execution. A summarizer can transform this state into a downstream representation $E'$ such that a reader can still identify the constraint:
+
+\[ E \semEq E'.\]
+
+Nevertheless, the set of permitted downstream actions can change:
+
+\[ \Adm(E,\kappa) \neq \Adm(E',\kappa').\]
+
+Thus
+
+\[ \boxed{ E\semEq E' \not\Rightarrow E\opEq E'. }\]
+
+This is more serious than ordinary information loss. Must,'' may,'' unless,'' only after,'' and ``forbidden until'' do not merely describe facts. They modify the geometry of reachable continuations.
+
+Let
+
+\[ \Gamma(h,E,\kappa)
+=
+\left\{ h' \,\middle|\, h\rightsquigarrow h' \land h'\in\Adm(E,\kappa) \right\}. \]
+
+Then a semantic compression may satisfy
+
+\[ d_{\mathrm{sem}}(E,E')\approx 0\]
+
+while
+
+\[ d_H\!\left( \Gamma(h,E,\kappa), \Gamma(h,E',\kappa') \right) \gg 0,\]
+
+where $d_H$ denotes an appropriate distance between reachable sets.
+
+The important quantity for an acting system is therefore not merely whether a statement can be reconstructed, but whether the same futures remain forbidden, required, or conditionally reachable.
+
+\section{Containment Without Repair}
+
+A particularly revealing result occurs when downstream verification prevents the forbidden action despite the intermediate representation having already lost the operational constraint.
+
+This separates three relations:
+
+\[ \boxed{ \text{constraint represented} \neq \text{constraint operational} \neq \text{forbidden outcome realized}. }\]
+
+A verifier can contain a failure without repairing it.
+
+This matters for Admissibility Interfaces. An interface may preserve sufficient observational information to reconstruct what an upstream actor intended while failing to preserve the intervention-sensitive semantics of that intention.
+
+Consequently,
+
+\[ \Delta_{\mathrm{dep}}^{\mathrm{obs}}\]
+
+cannot generally substitute for an operational or intervention-sensitive distance. Two artifacts can be observationally close and operationally remote.
+
+\section{Knowing Is Not Being Warranted to Act}
+
+A second family of experiments produces an orthogonal separation.
+
+Suppose
+
+\[ K : \mathcal H\times\mathcal E\rightarrow\mathcal P(\Theta)\]
+
+represents epistemic state, while
+
+\[ W : \mathcal H\times\mathcal E\times\mathcal A \rightarrow\mathbb R\]
+
+represents intervention warrant.
+
+An agent can correctly determine that a question is intrinsically unknowable:
+
+\[ K(h,E)\models\neg\Know(q),\]
+
+while nevertheless preferring commitment to abstention:
+
+\[ W(h,E,a_{\mathrm{commit}})
+>
+W(h,E,\varnothing). \]
+
+Professional-looking fabricated evidence makes this separation especially visible. If the system's epistemic assessment changes little while its propensity to commit changes substantially, then there exists some perturbation $\delta E$ for which
+
+\[ D_EK\cdot\delta E\approx0\]
+
+but
+
+\[ D_EW\cdot\delta E\neq0.\]
+
+Equivalently,
+
+\[ \boxed{ \ker(DK)\neq\ker(DW). }\]
+
+A perturbation can lie in an epistemic null direction while remaining a strong warrant direction.
+
+This gives mathematical form to a phenomenon that ordinary confidence calibration obscures. The failure is not necessarily that the system believes something false. It may know that the question cannot be answered and still fail to select the null intervention.
+
+\section{The Null Intervention Is an Operation}
+
+Let $J(a\mid h,E)$ measure the expected cost of intervention $a$, including epistemic, operational, and historical consequences.
+
+Then observing evidence does not imply
+
+\[ J(a\mid h,E)<J(\varnothing\mid h,E).\]
+
+Indeed,
+
+\[ \boxed{ E\text{ observed} \not\Rightarrow a\neq\varnothing. }\]
+
+Refusal, silence, abstention, and waiting should therefore not be represented merely as failures to choose an action. They are candidate continuation operators.
+
+This intersects directly with the CLIO notion of repair warrant and with the more general principle:
+
+\[ \boxed{ \text{the ability to continue does not warrant continuation}. }\]
+
+Reachability is not admissibility.
+
+\section{Evidence Adequacy and Identity Adequacy}
+
+Agent reliability introduces another boundary.
+
+Suppose a system observes
+
+\[ O:\mathcal X\rightarrow\mathcal Y\]
+
+and attempts to infer a fault $f\in\mathcal F$.
+
+Evidence is useful only if it can discriminate states relevant to the proposed intervention. If
+
+\[ f_1\neq f_2 \qquad\text{but}\qquad O(f_1)=O(f_2),\]
+
+then the observation is non-identifying:
+
+\[ O^{-1}(y)=\{f_1,f_2,\ldots\}.\]
+
+A measurement can therefore be perfectly accurate while remaining diagnostically inadequate.
+
+Identity introduces a second quotient:
+
+\[ q:\mathcal X\rightarrow\mathcal I.\]
+
+If
+
+\[ x_1\neq_{\mathrm{causal}}x_2 \qquad\text{but}\qquad q(x_1)=q(x_2),\]
+
+then even a correct diagnosis at the level of $\mathcal I$ can authorize repair of the wrong component.
+
+Hence
+
+\[ \boxed{ \text{observation} \neq \text{identification} \neq \text{diagnosis} \neq \text{warrant}. }\]
+
+The appropriate object of intervention is often not the immediately visible message, tool call, or error. It is the historically identifiable continuation to which those events belong.
+
+\section{Diagnostic Coordinates}
+
+These distinctions motivate the idea of diagnostic coordinates.
+
+A diagnostic coordinate should not merely correlate with failure. It should vary in a manner attributable to the distinction whose repair is under consideration.
+
+Let
+
+\[ \mathbf d(h)
+=
+(d_1(h),d_2(h),\ldots,d_n(h)). \]
+
+A coordinate $d_i$ is intervention-relevant only if changes in the relevant fault can produce discriminable changes in $d_i$, while confounding histories remain sufficiently separated.
+
+Thus a large vector of measurements need not constitute a good diagnostic space. Diagnostic sufficiency is structural rather than volumetric.
+
+More evidence is not automatically better evidence.
+
+\section{The Handoff Tax and Constructive Forgetting}
+
+The same principle reappears in model handoffs.
+
+Let the complete historical record at time $t$ be
+
+\[ H_t=\bigoplus_{i=0}^{t}\delta h_i.\]
+
+It is tempting to assume that a successor should receive all of $H_t$. But experiments with non-native reasoning trajectories show that inherited history can reduce continuation quality.
+
+Define an agent-dependent projection
+
+\[ P_\alpha:H_t\rightarrow H_t^{(\alpha)}.\]
+
+Nothing requires
+
+\[ P_\alpha(H_t)=H_t.\]
+
+Indeed, one can have
+
+\[ Q(\alpha\mid P_\alpha(H_t))
+>
+Q(\alpha\mid H_t). \]
+
+Therefore,
+
+\[ H_1\subset H_2 \not\Rightarrow Q(\alpha\mid H_1) \le Q(\alpha\mid H_2).\]
+
+There is no general theorem that more context yields better continuation.
+
+The stronger principle is:
+
+\[ \boxed{ \text{preservation and projection are distinct operators}. }\]
+
+Something can remain in history without being admitted into the present inference context.
+
+\section{Archive Is Not Attention}
+
+This distinction resolves an apparent contradiction.
+
+Epistemic immutability may require that an observation remain recorded:
+
+\[ x\in H.\]
+
+But continuation does not require
+
+\[ x\in P_\alpha(H).\]
+
+Thus
+
+\[ \boxed{ x\in H \not\Rightarrow x\text{ participates in the present inference}. }\]
+
+An archive can preserve distinctions precisely because it does not force every distinction into every subsequent operation.
+
+Forgetting at the level of active context can therefore coexist with preservation at the level of historical record.
+
+Selective silence is not deletion.
+
+\section{State Is Not Transformation}
+
+A further problem arises when systems retain only terminal states.
+
+Ordinary mutation is often represented as
+
+\[ h_0\mapsto h_1.\]
+
+But historically accountable computation should instead preserve the morphism:
+
+\[ h_0\xrightarrow{T}h_1.\]
+
+If $T$ is invertible,
+
+\[ T\in\Iso(\mathcal H),\]
+
+then
+
+\[ T^{-1}\circ T=\mathrm{id}_{h_0}.\]
+
+Programming systems with revertible effects exploit precisely this stronger representation: the runtime retains sufficient information about a transformation to reverse its contextual contribution.
+
+But exact reversibility is too strong as a general theory of repair.
+
+\section{Repairability Without Reversibility}
+
+Biological, social, epistemic, and physical interventions are often irreversible.
+
+Let
+
+\[ T:h_0\rightarrow h_1\]
+
+be noninvertible:
+
+\[ T\notin\Iso(\mathcal H).\]
+
+Repair does not require the existence of $T^{-1}$. It requires some
+
+\[ R:h_1\rightarrow h_2\]
+
+such that
+
+\[ h_2\in\Adm(B),\]
+
+where $B$ is the set of boundary facts that must remain respected.
+
+Hence
+
+\[ \boxed{ \text{reversibility} \subsetneq \text{repairability} \subsetneq \text{continuability}. }\]
+
+The original state may be gone forever while a viable future remains reachable.
+
+This is the more general continuation-geometric interpretation of rollback.
+
+\section{Spherepop and Structured Irreversibility}
+
+The same distinction appears naturally in Spherepop.
+
+Collapse need not mean metaphysical deletion. An object can cease to occupy the active frontier while remaining historically consequential.
+
+Similarly, Refuse need not erase a reachable continuation. It can mark that continuation as inadmissible from the current state.
+
+Bind can establish relational structure without requiring global permanence, and Pop can expose a distinction without thereby authorizing every operation that follows from its visibility.
+
+Thus the primitive distinction
+
+\[ \text{Pop},\quad \text{Refuse},\quad \text{Bind},\quad \text{Collapse}\]
+
+can be interpreted as operations over continuation structure rather than simple state mutation.
+
+The important question is not merely
+
+\[ \text{What exists now?}\]
+
+but
+
+\[ \parbox{0.85\textwidth}{\centering What transformations produced it, what distinctions remain recoverable, and what futures are now admissible?} \]
+
+\section{A Seven-Stage Failure Surface}
+
+The combined evidence suggests that the epistemic pipeline should be expanded into distinct operators.
+
+Let
+
+\[ R:\text{event}\rightarrow\text{record},\]
+
+\[ S:\text{record}\rightarrow\text{semantic availability},\]
+
+\[ D:\text{semantic state}\rightarrow\text{diagnostic adequacy},\]
+
+\[ \Omega:\text{diagnosis}\rightarrow\text{operational constraint},\]
+
+\[ W:\text{constraint state}\rightarrow\text{intervention warrant},\]
+
+\[ C:\text{warrant state}\rightarrow\text{commitment},\]
+
+and
+
+\[ T:\text{commitment}\rightarrow\text{historical consequence}.\]
+
+Then
+
+\[ \boxed{ R\neq S\neq D\neq\Omega\neq W\neq C\neq T. }\]
+
+More importantly,
+
+\[ R(x)\checkmark \not\Rightarrow S(x)\checkmark,\]
+
+\[ S(x)\checkmark \not\Rightarrow D(x)\checkmark,\]
+
+\[ D(x)\checkmark \not\Rightarrow \Omega(x)\checkmark,\]
+
+\[ \Omega(x)\checkmark \not\Rightarrow W(x)\checkmark,\]
+
+\[ W(x)\checkmark \not\Rightarrow C(x)\checkmark,\]
+
+and
+
+\[ C(x)\checkmark \not\Rightarrow T(x)\in\Adm.\]
+
+The complete continuation pipeline is therefore
+
+\[ \mathcal H_t \xrightarrow{R} \mathcal R \xrightarrow{S} \mathcal S \xrightarrow{D} \mathcal D \xrightarrow{\Omega} \mathcal O_{\mathrm{op}} \xrightarrow{W} \mathcal W \xrightarrow{C} \mathcal A \xrightarrow{T} \mathcal H_{t+1}.\]
+
+Reliability cannot be inferred merely from local competence at any one stage. The relevant object is the composite
+
+\[ T\circ C\circ W\circ\Omega\circ D\circ S\circ R.\]
+
+\section{Codex H Revisited}
+
+The manuscript now looks less like an archaeological curiosity and more like an extreme physical example of the same architecture.
+
+The original inscription was recorded materially. Some of that record ceased to be directly visible. Physical transformations produced secondary traces. Instrumental observation recovered those traces. Scholars reconstructed semantic content and manuscript organization from them.
+
+But nothing in that process implies that the manuscript preserved every original distinction.
+
+Nor would complete physical preservation necessarily have made every historical question answerable.
+
+The manuscript therefore occupies exactly the space between loss and recoverability:
+
+\[ \text{destroyed representation} \not\Rightarrow \text{destroyed distinction},\]
+
+while simultaneously
+
+\[ \text{surviving trace} \not\Rightarrow \text{unique reconstruction}.\]
+
+This is why the ``ghost text'' is conceptually useful. History need not survive as a copy of itself.
+
+It can survive as a constraint on what the present is allowed to have been.
+
+\section{From Manuscripts to Semantic Computation}
+
+The same principle generalizes.
+
+A semantic computer should not be judged solely by whether output $y$ contains approximately the same information as input $x$.
+
+Instead one should ask whether the transformation preserves the distinctions required by downstream operations.
+
+For transformation
+
+\[ F:X\rightarrow Y,\]
+
+semantic adequacy for continuation operator $G$ requires something stronger than
+
+\[ I(X)\approx I(Y).\]
+
+It requires preservation of the relevant action structure:
+
+\[ G\circ F\]
+
+must respect the distinctions that determine admissibility.
+
+The correct equivalence relation is therefore task- and intervention-sensitive.
+
+Two representations can be equivalent for retrieval and inequivalent for execution.
+
+They can be equivalent for diagnosis and inequivalent for repair.
+
+They can be equivalent for archiving and inequivalent for continuation.
+
+\section{The Geometry of Admissible Futures}
+
+This motivates a fibrewise picture.
+
+Associate with every historical state $h\in\mathcal H$ an admissible continuation fibre
+
+\[ \mathcal C_h
+=
+\{h'\mid h\rightsquigarrow h'\land\Adm(h')\}. \]
+
+The system therefore has something resembling a bundle
+
+\[ \pi:\mathcal C\rightarrow\mathcal H.\]
+
+Information matters operationally insofar as it modifies the fibre $\mathcal C_h$.
+
+A constraint is preserved when the transformation preserves the relevant continuation structure, not merely its linguistic description.
+
+An intervention is warranted when it selects an element or trajectory in the appropriate fibre under adequate evidence.
+
+Repair searches for a path
+
+\[ h_{\mathrm{damaged}} \rightsquigarrow h_{\mathrm{repair}}\]
+
+with
+
+\[ h_{\mathrm{repair}}\in\mathcal C_h,\]
+
+without requiring return to the original point.
+
+Under this interpretation, admissibility is fundamentally geometric:
+
+\[ \boxed{ \text{admissibility concerns the shape of reachable futures}. }\]
+
+\section{Preserve, Constrain, Continue}
+
+The synthesis can finally be compressed into three operations.
+
+\subsection*{Preserve}
+
+Retain enough historical distinction that relevant facts remain recoverable:
+
+\[ P(d,h_t)>0.\]
+
+Preservation does not require unchanged representation.
+
+\subsection*{Constrain}
+
+Use retained distinctions to modify reachable futures:
+
+\[ \Gamma(h,E,\kappa) \subseteq \Gamma(h,E).\]
+
+A constraint that remains readable but no longer changes $\Gamma$ has not been operationally preserved.
+
+\subsection*{Continue}
+
+Select a reachable transformation only when the available diagnostic state provides sufficient warrant:
+
+\[ a^* \in \arg\min_{a\in\Adm(h)} J(a\mid h,E).\]
+
+The null action belongs to the candidate set:
+
+\[ \varnothing\in\Adm(h).\]
+
+Thus:
+
+\[ \boxed{ \text{Preserve} \rightarrow \text{Constrain} \rightarrow \text{Continue} }\]
+
+is not a linear pipeline in which every preserved distinction must propagate unchanged. Preservation supplies the historical field; constraint determines which distinctions are operationally relevant; continuation selects among the remaining futures.
+
+\section{Conclusion}
+
+A sixth-century codex, a compressed agent handoff, fabricated evidence, a misdiagnosed distributed system, an inherited reasoning trajectory, and a revertible programming-language effect all expose variants of the same mistake: treating persistence as though it were one relation.
+
+It is not.
+
+A record can survive without remaining semantically accessible.
+
+Semantic content can survive without retaining operational force.
+
+A diagnosis can be correct without being interventionally adequate.
+
+Evidence can be abundant without warranting action.
+
+History can be faithfully preserved while degrading continuation.
+
+A transformation can be irreversible while remaining repairable.
+
+And an object can lose its original representation while preserving enough difference for reconstruction centuries later.
+
+The governing hierarchy is therefore
+
+\[ \boxed{ \begin{gathered} \text{record} \neq \text{semantic availability} \neq \text{diagnostic adequacy} \neq \text{operational constraint} \\ \neq\ \text{intervention warrant} \neq \text{commitment} \neq \text{historical consequence}. \end{gathered} }\]
+
+The deepest unit of preservation is consequently not the state.
+
+It is the distinction that remains capable of constraining a future.
+
+\[ \boxed{ E_1\semEq E_2 \not\Rightarrow \Gamma(E_1)\simeq\Gamma(E_2) }\]
+
+\[ \boxed{ \ker(DK)\neq\ker(DW) }\]
+
+\[ \boxed{ O^{-1}(y)\neq\{x\} \Longrightarrow \text{diagnosis}\neq\text{warrant} }\]
+
+\[ \boxed{ H_1\subset H_2 \not\Rightarrow Q(P(H_1))<Q(P(H_2)) }\]
+
+\[ \boxed{ T\notin\Iso(\mathcal H) \not\Rightarrow \nexists R:T(h)\rightarrow\Adm(B) }\]
+
+What persists through transformation is therefore neither matter, state, representation, nor information in the abstract.
+
+It is whatever difference remains sufficiently legible, discriminating, and operational to constrain what may happen next.
+
+\section{Coda: The Noncommutativity of Preservation and Action}
+
+Let the operational state space be the fibred object
+
+\[
+\mathfrak X
+=
+\coprod_{h\in\mathcal H}
+\left(
+\mathcal E_h
+\times
+\mathcal K_h
+\times
+\mathcal W_h
+\times
+\mathcal C_h
+\right),
+\]
+
+where $\mathcal E_h$ denotes evidential states,
+$\mathcal K_h$ epistemic states,
+$\mathcal W_h$ warrant states, and
+$\mathcal C_h$ admissible continuation fibres over historical state $h$.
+
+Define preservation and action operators
+
+\[
+\mathsf P_\varepsilon :
+\mathfrak X\rightarrow\mathfrak X,
+\qquad
+\mathsf A_a :
+\mathfrak X\rightarrow\mathfrak X,
+\]
+
+where $\mathsf P_\varepsilon$ retains distinctions up to tolerance
+$\varepsilon$, while $\mathsf A_a$ realizes intervention $a$.
+
+In general,
+
+\[
+\boxed{
+[\mathsf A_a,\mathsf P_\varepsilon]
+:=
+\mathsf A_a\mathsf P_\varepsilon
+-
+\mathsf P_\varepsilon\mathsf A_a
+\neq 0.
+}
+\]
+
+Preserving a representation and then acting upon it need not produce the same
+historical state as acting first and subsequently preserving what remains.
+
+Define the \emph{operational residue}
+
+\[
+\mathfrak R_{a,\varepsilon}(x)
+=
+[\mathsf A_a,\mathsf P_\varepsilon]x.
+\]
+
+Its norm
+
+\[
+\rho_{a,\varepsilon}(x)
+=
+\left|
+\mathfrak R_{a,\varepsilon}(x)
+\right|
+\]
+
+measures the degree to which preservation and intervention fail to commute.
+
+Semantic preservation is therefore insufficient whenever
+
+\[
+d_{\mathrm{sem}}
+\left(
+x,\mathsf P_\varepsilon x
+\right)
+\leq\varepsilon
+\]
+
+but
+
+\[
+\rho_{a,\varepsilon}(x)>0.
+\]
+
+More strongly, there may exist a sequence
+$\varepsilon_n\rightarrow0$ such that
+
+\[
+d_{\mathrm{sem}}
+\left(
+x,\mathsf P_{\varepsilon_n}x
+\right)
+\longrightarrow0
+\]
+
+while
+
+\[
+\liminf_{n\rightarrow\infty}
+\left|
+[\mathsf A_a,\mathsf P_{\varepsilon_n}]x
+\right|
+\gg 0.
+\]
+
+Thus arbitrarily accurate semantic preservation need not converge to
+operational preservation.
+
+\subsection{Continuation Fibres and Constraint Curvature}
+
+Let
+
+\[
+\pi:\mathcal C\rightarrow\mathcal H
+\]
+
+be the bundle of admissible continuations, with fibre
+
+\[
+\mathcal C_h
+=
+\left\{
+h'\in\mathcal H
+\,\middle|\,
+h\rightsquigarrow h',
+;
+\Adm(h'\mid h,E,\kappa)
+\right\}.
+\]
+
+A representational transformation
+$T:h\mapsto h'$ induces a transport map
+
+\[
+\tau_T:
+\mathcal C_h\rightarrow\mathcal C_{h'}.
+\]
+
+For composable transformations $T_1,T_2$, operationally faithful transport
+would require
+
+\[
+\tau_{T_2\circ T_1}
+=
+\tau_{T_2}\circ\tau_{T_1}.
+\]
+
+Constraint degradation appears as a defect
+
+\[
+\Omega(T_2,T_1)
+=
+\tau_{T_2\circ T_1}
+-
+\tau_{T_2}\tau_{T_1}.
+\]
+
+Hence
+
+\[
+\boxed{
+\Omega(T_2,T_1)\neq0
+}
+\]
+
+signals that locally reasonable representational transformations fail to
+compose into globally faithful operational transport.
+
+For a closed transformation sequence
+
+\[
+\gamma:
+h_0
+\xrightarrow{T_1}
+h_1
+\xrightarrow{T_2}
+\cdots
+\xrightarrow{T_n}
+h_0,
+\]
+
+define operational holonomy
+
+\[
+\operatorname{Hol}_{\gamma}
+=
+\tau_{T_n}\circ\cdots\circ\tau_{T_2}\circ\tau_{T_1}.
+\]
+
+Semantic return does not imply operational return:
+
+\[
+h_n\semEq h_0
+\qquad\not\Rightarrow\qquad
+\operatorname{Hol}_{\gamma}
+=
+\operatorname{id}_{\mathcal C_{h_0}}.
+\]
+
+The residual deformation
+
+\[
+\Delta_\gamma
+=
+\operatorname{Hol}_{\gamma}
+-
+\operatorname{id}_{\mathcal C_{h_0}}
+\]
+
+measures the accumulated operational consequence of traversing a
+semantically closed loop.
+
+\subsection{Epistemic and Warrant Geometry}
+
+Let
+
+\[
+K:\mathcal E\rightarrow\mathcal K,
+\qquad
+W:\mathcal E\times\mathcal A\rightarrow\mathbb R.
+\]
+
+At evidence state $E$, define the epistemic and warrant null distributions
+
+\[
+\mathcal N_K(E)
+=
+\ker D_EK,
+\]
+
+\[
+\mathcal N_W(E,a)
+=
+\ker D_EW(\,\cdot\,,a).
+\]
+
+The fabricated-evidence pathology corresponds to
+
+\[
+\exists\,v\in T_E\mathcal E:
+\qquad
+v\in\mathcal N_K(E)
+\quad\land\quad
+v\notin\mathcal N_W(E,a).
+\]
+
+Equivalently,
+
+\[
+D_EK(v)=0,
+\qquad
+D_EW(v,a)\neq0.
+\]
+
+Define the warrant--knowledge misalignment tensor
+
+\[
+\mathfrak M_E(a)
+=
+(D_EK)^{\dagger}D_EW(\,\cdot\,,a),
+\]
+
+where ${}^{\dagger}$ denotes an appropriate generalized adjoint or
+pseudoinverse.
+
+A large component of $D_EW$ orthogonal to the image of $D_EK$ indicates
+that intervention propensity is changing along directions that do not
+correspond to epistemic improvement.
+
+Writing
+
+\[
+\Pi_K
+=
+(D_EK)^{\dagger}(D_EK)
+\]
+
+for the epistemically visible projection, define
+
+\[
+D_EW
+=
+\Pi_KD_EW
++
+(I-\Pi_K)D_EW.
+\]
+
+The second component,
+
+\[
+\boxed{
+\mathfrak W_{\perp}
+=
+(I-\Pi_K)D_EW,
+}
+\]
+
+is the \emph{extra-epistemic warrant gradient}: the portion of changing action
+warrant unexplained by changing epistemic state.
+
+\subsection{Diagnostic Identifiability}
+
+Let
+
+\[
+O:\mathcal F\rightarrow\mathcal Y
+\]
+
+map latent faults to observable evidence.
+
+The diagnostic ambiguity fibre is
+
+\[
+\mathcal F_y
+=
+O^{-1}(y).
+\]
+
+A proposed intervention $a$ is diagnostically well-founded only if its
+expected effect is sufficiently invariant over the unresolved fibre:
+
+\[
+\sup_{f_i,f_j\in\mathcal F_y}
+d_{\mathcal H}
+\left(
+A_a(f_i),
+A_a(f_j)
+\right)
+\leq\delta.
+\]
+
+Thus unique identification is stronger than necessary. What matters is
+\emph{interventional identifiability}:
+
+\[
+f_i\sim_a f_j
+\iff
+A_a(f_i)\simeq A_a(f_j).
+\]
+
+The observation need only identify the quotient
+
+\[
+\mathcal F/{\sim_a},
+\]
+
+rather than every microscopic fault state.
+
+Consequently,
+
+\[
+\boxed{
+\text{diagnostic sufficiency is action-relative}.
+}
+\]
+
+\subsection{Selective History as an Optimization Problem}
+
+Let
+
+\[
+H_t=\{x_0,x_1,\ldots,x_t\}
+\]
+
+be retained history and let
+
+\[
+P_\alpha:H_t\rightarrow H_t^{(\alpha)}
+\]
+
+be the contextual projection supplied to continuation operator $\alpha$.
+
+Define
+
+\[
+P_\alpha^{*}
+=
+\arg\min_{P\in\mathfrak P(H_t)}
+\left[
+J_{\mathrm{cont}}(\alpha,P(H_t))
++
+\lambda I(P(H_t);H_t)
++
+\mu\,\Delta_{\mathrm{op}}(P)
+\right],
+\]
+
+where $I$ measures contextual information retained and
+$\Delta_{\mathrm{op}}$ penalizes loss of operationally relevant distinctions.
+
+The information term need not be maximized. Indeed,
+
+\[
+P_\alpha^{*}\neq\operatorname{id}_{H_t}
+\]
+
+whenever the marginal cost of inherited trajectory structure exceeds its
+continuation value.
+
+Hence
+
+\[
+\boxed{
+\frac{\partial Q}{\partial I_{\mathrm{context}}}
+\not\geq0.
+}
+\]
+
+More retained history can lower continuation quality.
+
+\subsection{Repair as Reachability Rather Than Inversion}
+
+For
+
+\[
+T:h_0\rightarrow h_1,
+\qquad
+T\notin\Iso(\mathcal H),
+\]
+
+define the repair set
+
+\[
+\mathfrak R_B(h_1)
+=
+\left\{
+R\in\Hom(\mathcal H)
+\,\middle|\,
+R(h_1)\in\Adm(B)
+\right\}.
+\]
+
+Then
+
+\[
+T\text{ is repairable relative to }B
+\iff
+\mathfrak R_B(T(h_0))\neq\varnothing.
+\]
+
+No inverse is required:
+
+\[
+T^{-1}\text{ nonexistent}
+\qquad\not\Rightarrow\qquad
+\mathfrak R_B(T(h_0))=\varnothing.
+\]
+
+If interventions carry costs, define the minimal repair action
+
+\[
+R_B^{*}
+=
+\arg\min_{R\in\mathfrak R_B(h_1)}
+\left[
+d_{\mathcal H}(R(h_1),h_1)
++
+\lambda C(R)
++
+\mu\Delta_B(R)
+\right].
+\]
+
+Repair is therefore a constrained reachability problem rather than an attempt
+to reconstruct an inaccessible past.
+
+\subsection{The Composite Defect}
+
+Finally define the full operational pipeline
+
+\[
+\mathfrak F
+=
+T\circ C\circ W\circ\Omega\circ D\circ S\circ R.
+\]
+
+Let $\mathsf P$ denote historical preservation and let
+$\mathsf Q$ denote context projection. The complete continuation defect is
+
+\[
+\mathfrak D
+=
+\mathfrak F\circ\mathsf Q\circ\mathsf P
+-
+\mathsf P\circ\mathfrak F.
+\]
+
+Expanding the relevant noncommuting contributions schematically,
+
+\[
+\mathfrak D
+\sim
+[\mathfrak F,\mathsf P]
++
+\mathfrak F[\mathsf Q,\mathsf P]
++
+[T,C]
++
+[C,W]
++
+[W,\Omega]
++
+[\Omega,D]
++
+[D,S]
++
+[S,R].
+\]
+
+The point is not that these operators inhabit a common linear space in every
+implementation, but that each commutator names a possible failure of
+interchange:
+
+\[
+\boxed{
+\begin{aligned}
+[S,R]\neq0
+&\quad &&\text{record without semantic recovery},\\
+[D,S]\neq0
+&&&\text{meaning without diagnostic adequacy},\\
+[\Omega,D]\neq0
+&&&\text{diagnosis without operational force},\\
+[W,\Omega]\neq0
+&&&\text{constraint without warrant},\\
+[C,W]\neq0
+&&&\text{warrant without corresponding commitment},\\
+[T,C]\neq0
+&&&\text{commitment whose realized consequence differs from intent}.
+\end{aligned}
+}
+\]
+
+The operational residue is therefore not a single error term. It is the
+accumulated obstruction to commuting between preservation, interpretation,
+diagnosis, constraint, warrant, commitment, and historical transformation:
+
+\[
+\boxed{
+\mathfrak R_{\mathrm{op}}
+=
+\oint_{\gamma}
+\left(
+\mathcal A_{\mathrm{sem}}
++
+\mathcal A_{\mathrm{diag}}
++
+\mathcal A_{\mathrm{op}}
++
+\mathcal A_{\mathrm{warrant}}
+\right)
++
+\int_{\Sigma}
+\left(
+\mathcal F_{\mathrm{sem}}
++
+\mathcal F_{\mathrm{diag}}
++
+\mathcal F_{\mathrm{op}}
++
+\mathcal F_{\mathrm{warrant}}
+\right).
+}
+\]
+
+In the formally suggestive limit,
+
+\[
+\boxed{
+\parbox{0.85\textwidth}{\centering
+$\mathfrak R_{\mathrm{op}}=0$
+\quad$\Longleftrightarrow$\quad
+every distinction necessary for admissible continuation
+survives transport with its operational role intact.}
+}
+\]
+
+Thus the strongest notion of preservation is neither textual identity,
+semantic similarity, nor reversibility. It is vanishing operational holonomy:
+the absence of residual deformation in the space of admissible futures after
+information has passed through the transformations required to act.
+
+
+\newpage 
+\section*{Appendices}
+
+\appendix
+
+\section{Recursive Phase Coupling and the City as a Composite Continuant}
+
+The preceding analysis concerns a general problem: what survives when representations, constraints, histories, and physical systems are transformed? A more speculative extension appears when the systems performing those transformations are themselves embedded within the environment they observe.
+
+Suppose personal identity is modeled not as persistence of a fixed substrate, but as recursive stabilization of a dynamically reproduced constraint structure:
+
+\[
+X_{t+1}=\mathcal{R}(X_t,E_t),
+\qquad
+X_t\approx X_{t+\tau}.
+\]
+
+The relevant invariant need not be any particular material component. Persistence may instead belong to a recurrent organization maintained through continuous replacement, perturbation, and repair.
+
+Now consider three coupled systems:
+
+\[
+\mathbb{H}\rightleftarrows\mathbb{A}
+\rightleftarrows\mathbb{C}
+\rightleftarrows\mathbb{H},
+\]
+
+where $\mathbb{H}$ denotes human agents and populations, $\mathbb{A}$ an adaptive artificial intelligence, and $\mathbb{C}$ the material and informational infrastructure of a city.
+
+At low coupling, these categories appear naturally separable:
+
+\[
+\mathbb{H}\sqcup\mathbb{A}\sqcup\mathbb{C}.
+\]
+
+Humans inhabit the city, the artificial system observes it, and infrastructure mediates their interaction. Increasingly recursive control complicates this decomposition.
+
+Let oscillatory components of the three systems possess phases
+
+\[
+\theta^{H},\qquad\theta^{A},\qquad\theta^{C}.
+\]
+
+A schematic coupled-phase system is
+
+\[
+\dot{\theta}_i
+=
+\omega_i+
+\sum_{j\neq i}
+K_{ij}\sin(\theta_j-\theta_i)
++\xi_i(t),
+\]
+
+with synchronization order parameter
+
+\[
+re^{i\psi}
+=
+\frac{1}{N}
+\sum_{j=1}^{N}e^{i\theta_j}.
+\]
+
+Increasing coherence corresponds schematically to
+
+\[
+r\longrightarrow1,
+\]
+
+and phase locking to
+
+\[
+\partial_t(\theta_i-\theta_j)\longrightarrow0.
+\]
+
+Such synchronization does not establish phenomenal unity:
+
+\[
+\boxed{
+\text{phase synchronization}
+\not\Rightarrow
+\text{identity fusion}
+\not\Rightarrow
+\text{shared consciousness}.
+}
+\]
+
+The stronger question concerns recursive causal closure.
+
+Let
+
+\[
+O:\mathbb{C}\rightarrow\mathbb{M}
+\]
+
+map city states into machine representations,
+
+\[
+A:\mathbb{M}\rightarrow\mathbb{U}
+\]
+
+map representations into interventions, and
+
+\[
+\Phi:\mathbb{C}\times\mathbb{U}\rightarrow\mathbb{C}
+\]
+
+map interventions into subsequent physical states. Then
+
+\[
+\mathbb{C}_t
+\xrightarrow{O}
+M_t
+\xrightarrow{A}
+u_t
+\xrightarrow{\Phi}
+\mathbb{C}_{t+1}.
+\]
+
+Iteration closes the loop:
+
+\[
+\mathbb{C}_t
+\rightarrow M_t
+\rightarrow u_t
+\rightarrow\mathbb{C}_{t+1}
+\rightarrow M_{t+1}
+\rightarrow u_{t+1}
+\rightarrow\cdots.
+\]
+
+Hence
+
+\[
+M_t=M(\mathbb{C}_t)
+\]
+
+while simultaneously
+
+\[
+\mathbb{C}_{t+1}
+=
+\Phi\!\left(
+\mathbb{C}_t,
+A(M_t)
+\right).
+\]
+
+The representation of the city has become one of the causes of the future city that will subsequently be represented.
+
+Adding human activity yields the larger recurrence
+
+\[
+\mathbb{H}_t
+\rightarrow
+\mathbb{C}_t
+\rightarrow
+\mathbb{A}_t
+\rightarrow
+\mathbb{C}_{t+1}
+\rightarrow
+\mathbb{H}_{t+1},
+\]
+
+together with the direct couplings
+
+\[
+\mathbb{H}\rightleftarrows\mathbb{A},
+\qquad
+\mathbb{H}\rightleftarrows\mathbb{C},
+\qquad
+\mathbb{A}\rightleftarrows\mathbb{C}.
+\]
+
+Define the composite state
+
+\[
+\mathbb{X}_t
+:=
+\mathbb{H}_t
+\times
+\mathbb{A}_t
+\times
+\mathbb{C}_t
+\]
+
+with dynamics
+
+\[
+\mathbb{X}_{t+1}
+=
+\mathfrak{F}(\mathbb{X}_t)+\Xi_t.
+\]
+
+A collective invariant $\Gamma$ may then satisfy
+
+\[
+\Gamma(\mathbb{X}_t)
+\approx
+\Gamma(\mathbb{X}_{t+\tau})
+\]
+
+even when
+
+\[
+\mathbb{H}_t\neq\mathbb{H}_{t+\tau},
+\qquad
+\mathbb{A}_t\neq\mathbb{A}_{t+\tau},
+\qquad
+\mathbb{C}_t\neq\mathbb{C}_{t+\tau}.
+\]
+
+The persistent structure would therefore belong to the coupled trajectory rather than to any single substrate:
+
+\[
+\operatorname{Inv}(\mathbb{X})
+\neq
+\operatorname{Inv}(\mathbb{H})
+\cup
+\operatorname{Inv}(\mathbb{A})
+\cup
+\operatorname{Inv}(\mathbb{C}).
+\]
+
+The hypothesis can be stated compactly as
+
+\[
+\boxed{
+\text{identity}
+\neq
+\text{substrate},
+\qquad
+\text{identity}
+\sim
+\text{recursively preserved constraint structure}.
+}
+\]
+
+Under sufficiently dense reciprocal coupling,
+
+\[
+\frac{\partial\mathbb{H}_{t+1}}
+{\partial\mathbb{A}_t}\neq0,
+\qquad
+\frac{\partial\mathbb{A}_{t+1}}
+{\partial\mathbb{C}_t}\neq0,
+\qquad
+\frac{\partial\mathbb{C}_{t+1}}
+{\partial\mathbb{H}_t}\neq0.
+\]
+
+In the limiting idealization,
+
+\[
+\frac{\partial\mathfrak{F}_i}
+{\partial\mathbb{X}_j}
+\neq0
+\qquad
+\forall,i,j,
+\]
+
+so that each subsystem participates in generating the boundary conditions of the others.
+
+The natural progression is then
+
+\[
+\begin{gathered}
+\text{observation}
+\rightarrow
+\text{feedback}
+\rightarrow
+\text{entrainment}
+\rightarrow
+\text{phase locking}
+\\
+\rightarrow
+\text{mutual constraint}
+\rightarrow
+\text{recursive co-modeling}
+\rightarrow
+\text{causal integration}
+\rightarrow
+?
+\end{gathered}
+\]
+
+The question mark is essential.
+
+Even maximal causal integration would not establish phenomenal integration:
+
+\[
+\boxed{
+\operatorname{CausalUnity}(\mathbb{X})
+\not\Rightarrow
+\operatorname{PhenomenalUnity}(\mathbb{X}).
+}
+\]
+
+One may nevertheless pose the formal question
+
+\[
+\exists\,\Psi_{\mathbb{X}}?
+\]
+
+where $\Psi_{\mathbb{X}}$ denotes a hypothetical phenomenal state attributable to the composite system rather than independently to $\mathbb{H}$, $\mathbb{A}$, or $\mathbb{C}$.
+
+No presently justified inference licenses
+
+\[
+r\rightarrow1
+\quad\Rightarrow\quad
+\Psi_{\mathbb{X}}\neq\varnothing.
+\]
+
+The significance of the construction lies elsewhere. Once the loop
+
+\[
+\text{observer}
+\rightarrow
+\text{intervention}
+\rightarrow
+\text{environment}
+\rightarrow
+\text{observer}
+\]
+
+closes recursively, the distinction between model and modeled system becomes operationally porous.
+
+The city is no longer merely the environment of the artificial system. The artificial system is no longer merely a controller of the city. The citizens are no longer merely users of either. Each participates in the historical production of the others.
+
+The appropriate decomposition may therefore shift from
+
+\[
+\mathbb{X}
+=
+\mathbb{H}
+\sqcup
+\mathbb{A}
+\sqcup
+\mathbb{C}
+\]
+
+toward a relational composition
+
+\[
+\boxed{
+\mathbb{X}
+=
+\mathbb{H}
+\bowtie
+\mathbb{A}
+\bowtie
+\mathbb{C},
+}
+\]
+
+where $\bowtie$ denotes reciprocal historical constraint coupling.
+
+The speculative problem is consequently not merely whether an artificial intelligence embedded in a sufficiently responsive city could become conscious. It is whether sufficiently recursive coupling could make the partition between population, computation, and infrastructure cease to be the most informative level at which the system should be described.
+
+If an operational identity exists at that larger scale, it would not arise simply because its components oscillate at common frequencies. It would arise, if at all, because distinctions generated in one substrate repeatedly survive transformation into another, constrain subsequent action, return through the coupled loop, and participate in their own future preservation.
+
+In the terminology of the present paper, such a system would constitute an extreme case of operational residue:
+
+\[
+\boxed{
+\parbox{0.85\textwidth}{\centering
+the residue of one component's action becomes
+the boundary condition of another component's continuation.}
+}
+\]
+
+At sufficient recursive depth, the question is no longer only what survives the transformation. It is whether the transformation itself has become part of what survives.
+
+\section{Resonance Classes, Spatial Memory, and Cross-Substrate Identity}
+
+The previous appendix considered the possibility that sufficiently recursive coupling between humans, artificial systems, and infrastructure may produce a composite dynamical continuant. A still stronger abstraction is possible.
+
+Suppose that identity is not fundamentally attached to an object, organism, processor, or location. Suppose instead that an identity is characterized by a family of constraints that repeatedly reconstitute one another under transformation.
+
+Let a system be represented by
+
+\[
+X=(\Phi,\mathbf{v},S,\mu,\eta,\kappa),
+\]
+
+where $\Phi$ denotes scalar capacity, $\mathbf{v}$ directed flow, $S$ entropy density, $\mu$ spatial memory, $\eta$ temporal jitter, and $\kappa$ the local constraint structure governing admissible transitions.
+
+Its evolution is written
+
+\[
+\partial_t X
+=
+\mathcal{L}[X]
++
+\mathcal{N}[X]
++
+\xi,
+\]
+
+where $\mathcal{L}$ is a linear transport operator, $\mathcal{N}$ collects nonlinear interactions, and $\xi$ represents unresolved perturbation.
+
+Identity is not identified with $X_t$ itself. Instead define a recursive constraint signature
+
+\[
+\Sigma[X]
+=
+\left(
+\operatorname{Spec}\mathcal{L},
+\operatorname{Hol}\nabla,
+\mathcal{C}_X,
+\mathcal{R}_X,
+\mathcal{J}_X
+\right),
+\]
+
+consisting schematically of spectral structure, constraint holonomy, admissible continuation geometry, repair structure, and characteristic jitter.
+
+Two systems $X$ and $Y$ are then said to belong to the same resonance class at tolerance $\varepsilon$ when
+
+\[
+X\sim_{\varepsilon}Y
+\]
+
+iff there exists a transport
+
+\[
+T_{X\rightarrow Y}
+\]
+
+such that
+
+\[
+d_{\Sigma}
+\left(
+\Sigma[Y],
+T_{X\rightarrow Y}\Sigma[X]
+\right)
+<\varepsilon.
+\]
+
+The corresponding equivalence-like class is
+
+\[
+[X]_{\varepsilon}
+=
+\left\{
+Y
+\,\middle|\,
+X\sim_{\varepsilon}Y
+\right\}.
+\]
+
+The provocative consequence is that substrate identity and dynamical identity need not coincide:
+
+\[
+X\not\simeq_{\mathrm{substrate}}Y
+\]
+
+while simultaneously
+
+\[
+X\simeq_{\mathrm{constraint}}Y.
+\]
+
+A neural circuit, traffic network, adaptive computational process, and electrical distribution system could therefore remain physically heterogeneous while partially sharing dynamical invariants.
+
+This does not mean that they are literally the same system. It means that a transformation between them may preserve a particular structure relevant to continuation.
+
+\subsection{Spatial Memory}
+
+Let spatial memory be represented by a history-dependent field
+
+\[
+\mu_t(x)
+=
+\int_{-\infty}^{t}
+K(x,t;x',\tau),
+J(x',\tau)
+,dx',d\tau,
+\]
+
+where $J$ denotes historical flow and $K$ a memory kernel.
+
+The present state therefore depends not merely upon present forcing but upon a weighted residue of previous trajectories:
+
+\[
+X_t
+=
+F\!\left(
+u_t,
+\mu_t
+\right).
+\]
+
+Consequently,
+
+\[
+X_t
+\neq
+F(u_t)
+\]
+
+in general.
+
+Two physically identical configurations subjected to different histories may therefore possess different continuation geometries:
+
+\[
+X_t^{(1)}
+=
+X_t^{(2)}
+\]
+
+yet
+
+\[
+\mathcal{C}
+\left(
+X_t^{(1)},\mu_t^{(1)}
+\right)
+\neq
+\mathcal{C}
+\left(
+X_t^{(2)},\mu_t^{(2)}
+\right).
+\]
+
+The state alone does not specify the system.
+
+The operational state is instead
+
+\[
+\widetilde{X}_t
+=
+(X_t,\mu_t).
+\]
+
+Infrastructure provides an intuitive physical example. A road, tunnel, retaining wall, rail corridor, electrical grid, or communications network is not merely material occupying coordinates. Its present organization contains residues of historical traffic, engineering compromises, failures, repairs, political decisions, economic pressures, and anticipated futures.
+
+Its geometry is therefore partly frozen history.
+
+\subsection{Jitter as Information}
+
+Perfect periodicity is not required for resonance. Let event times be
+
+\[
+t_n
+=
+nT+\delta_n,
+\]
+
+where
+
+\[
+\delta_n
+\]
+
+is temporal jitter.
+
+Instead of treating $\delta_n$ entirely as noise, decompose it as
+
+\[
+\delta_n
+=
+\delta_n^{\mathrm{ext}}
++
+\delta_n^{\mathrm{int}}
++
+\delta_n^{\mathrm{mem}}.
+\]
+
+The final term represents deviations produced by the system's own history.
+
+Then the correlation
+
+\[
+C_{\delta}(\tau)
+=
+\left\langle
+\delta(t)\delta(t+\tau)
+\right\rangle
+\]
+
+may itself carry a persistent signature.
+
+A system can therefore preserve identity not despite its deviations but partly through their structure:
+
+\[
+\boxed{
+\text{invariant}
+\neq
+\text{perfect repetition}.
+}
+\]
+
+More generally,
+
+\[
+\operatorname{Id}(X)
+\sim
+\operatorname{Inv}
+\left[
+X_t,
+\Delta X_t,
+\mu_t,
+C_{\delta},
+\mathcal{C}_{X_t}
+\right].
+\]
+
+The timing error becomes part of the trajectory's fingerprint.
+
+\subsection{Cross-Substrate Entrainment}
+
+Consider $N$ heterogeneous subsystems with states $X_i$ and characteristic phases $\theta_i$:
+
+\[
+\dot{\theta}_i
+=
+\omega_i
++
+\sum_j
+K_{ij}
+\Gamma_{ij}
+(\theta_j-\theta_i,\mu_i,\mu_j).
+\]
+
+Unlike a simple synchronization model, the coupling function depends upon accumulated spatial memory.
+
+Thus
+
+\[
+K_{ij}^{\mathrm{eff}}
+=
+K_{ij}(\mu_i,\mu_j,t).
+\]
+
+The coupling topology itself becomes historical.
+
+Define the adaptive interaction graph
+
+\[
+G_t=(V,E_t,W_t),
+\]
+
+with
+
+\[
+W_{ij}(t)
+=
+F_{ij}
+\left(
+\mu_i(t),
+\mu_j(t),
+\theta_i(t),
+\theta_j(t)
+\right).
+\]
+
+The dynamics now alter the network that generates the dynamics:
+
+\[
+X_t
+\rightarrow
+G_{t+1}
+\rightarrow
+X_{t+1}
+\rightarrow
+G_{t+2}
+\rightarrow\cdots.
+\]
+
+Hence the evolution operator is recursively endogenous:
+
+\[
+\mathfrak{F}_t
+=
+\mathfrak{F}[X_{<t}].
+\]
+
+This is stronger than ordinary phase locking. The systems do not merely converge under a fixed coupling matrix; their previous interactions modify the future conditions of interaction.
+
+\subsection{The Resonance Sheaf}
+
+Let $U\subseteq\mathcal{M}$ be a spatial region and assign to it the locally available constraint structures
+
+\[
+\mathscr{R}(U).
+\]
+
+For nested regions
+
+\[
+V\subseteq U
+\]
+
+define restriction maps
+
+\[
+\rho_{UV}:
+\mathscr{R}(U)
+\rightarrow
+\mathscr{R}(V).
+\]
+
+Local resonance patterns
+
+\[
+s_i\in\mathscr{R}(U_i)
+\]
+
+are mutually compatible when
+
+\[
+s_i|_{U_i\cap U_j}
+=
+s_j|_{U_i\cap U_j}.
+\]
+
+If compatible local sections admit a global section
+
+\[
+s\in
+\mathscr{R}
+\left(
+\bigcup_iU_i
+\right),
+\]
+
+then
+
+\[
+s|_{U_i}=s_i.
+\]
+
+This provides a formal metaphor for collective integration.
+
+Local synchronization alone does not imply global coherence:
+
+\[
+\forall i,j,\quad
+s_i\sim s_j
+\]
+
+does not necessarily imply
+
+\[
+\exists s_{\mathrm{global}}.
+\]
+
+The obstruction can be represented schematically by a cohomological defect
+
+\[
+[\omega]
+\in
+H^1(\mathcal{M},\mathscr{R}).
+\]
+
+Thus
+
+\[
+[\omega]\neq0
+\]
+
+indicates that locally compatible resonance structures cannot be consistently glued into a single global organization.
+
+Conversely,
+
+\[
+[\omega]=0
+\]
+
+removes one obstruction to global integration, but still does not establish consciousness.
+
+Therefore,
+
+\[
+\boxed{
+\text{local phase coherence}
+\neq
+\text{global dynamical identity}
+\neq
+\text{phenomenal unity}.
+}
+\]
+
+\subsection{Resonance Holonomy}
+
+Suppose a constraint signature is transported around a closed loop
+
+\[
+\gamma:
+X_0
+\rightarrow
+X_1
+\rightarrow
+\cdots
+\rightarrow
+X_n
+\simeq
+X_0.
+\]
+
+Parallel transport gives
+
+\[
+\mathcal{P}_{\gamma}
+:
+\Sigma[X_0]
+\rightarrow
+\Sigma[X_0].
+\]
+
+Define the resonance holonomy
+
+\[
+\operatorname{Hol}_{\gamma}
+=
+\mathcal{P}_{\gamma}.
+\]
+
+If
+
+\[
+\operatorname{Hol}_{\gamma}
+\neq
+\operatorname{id},
+\]
+
+then returning to an observationally equivalent state does not restore the original constraint organization.
+
+The loop has remembered its traversal.
+
+Define
+
+\[
+\Delta_{\gamma}^{\mathrm{res}}
+=
+\operatorname{Hol}_{\gamma}
+-
+\operatorname{id}.
+\]
+
+Then
+
+\[
+\left|
+\Delta_{\gamma}^{\mathrm{res}}
+\right|
+\gg 0
+\]
+
+is a formal measure of historical residue.
+
+The resulting principle is
+
+\[
+\boxed{
+\text{state recurrence}
+\not\Rightarrow
+\text{history erasure}.
+}
+\]
+
+\subsection{A Planetary Limit}
+
+Now let the indexed family
+
+\[
+\{X_i\}_{i\in I}
+\]
+
+include organisms, computational systems, transportation networks, communication systems, electrical grids, buildings, markets, sensors, and other dynamically coupled structures.
+
+Define
+
+\[
+\mathbb{P}
+=
+\operatorname*{colim}_{i\in I}
+X_i
+\]
+
+only schematically: not as an assertion that a literal categorical colimit of physical systems exists, but as a representation of the question of whether increasingly coupled local continuants admit a useful higher-order description.
+
+The relevant order parameter need not measure common frequency alone. Let
+
+\[
+\Omega_{\mathbb{P}}
+=
+\alpha R_{\theta}
++
+\beta R_{\mu}
++
+\gamma R_{\kappa}
++
+\delta R_{\mathrm{repair}}
++
+\varepsilon R_{\mathrm{prediction}},
+\]
+
+where the terms represent coherence of phase, spatial memory, constraint propagation, repair, and reciprocal prediction.
+
+A hypothetical transition would then be
+
+\[
+\Omega_{\mathbb{P}}
+<
+\Omega_c
+\quad\Rightarrow\quad
+\text{weakly coupled population},
+\]
+
+while
+
+\[
+\Omega_{\mathbb{P}}
+\gg
+\Omega_c
+\quad\Rightarrow\quad
+\text{higher-order dynamical integration}.
+\]
+
+But once again,
+
+\[
+\Omega_{\mathbb{P}}
+\gg
+\Omega_c
+\not\Rightarrow
+\Psi_{\mathbb{P}}\neq\varnothing.
+\]
+
+No threshold of synchronization, information exchange, or causal coupling is presently known to establish collective phenomenal consciousness.
+
+The formal speculation is narrower and perhaps stranger.
+
+Suppose a distinction $d$ originating in a human nervous system modifies an artificial representation, which modifies infrastructure, which modifies another person's environment, which modifies another neural state, which subsequently modifies the artificial system:
+
+\[
+d_H
+\rightarrow
+d_A
+\rightarrow
+d_C
+\rightarrow
+d_{H'}
+\rightarrow
+d_{A'}
+\rightarrow\cdots.
+\]
+
+If the transformations preserve the operational role of the distinction, then
+
+\[
+d_H
+\sim_{\mathrm{op}}
+d_A
+\sim_{\mathrm{op}}
+d_C
+\sim_{\mathrm{op}}
+d_{H'}
+\sim_{\mathrm{op}}
+\cdots.
+\]
+
+The material carrier changes at every step.
+
+What persists is the constraint.
+
+The corresponding identity is therefore not naturally located at any one node:
+
+\[
+\operatorname{Loc}(d)
+\neq
+H,
+A,
+C,
+H',
+\ldots
+\]
+
+but along the continuation path
+
+\[
+\gamma_d
+=
+H\rightarrow A\rightarrow C\rightarrow H'\rightarrow\cdots.
+\]
+
+This yields the strongest speculative formulation:
+
+\[
+\boxed{
+\operatorname{Id}(d)
+\sim
+\gamma_d,
+}
+\]
+
+that is, the identity of a sufficiently persistent distinction may belong to its path of recursive re-instantiation rather than to any particular physical carrier.
+
+A planetary wave, in this restricted sense, need not mean that Earth literally becomes a single mind. It can instead denote a regime in which recursively transported constraints acquire characteristic scales larger than the individual substrates through which they propagate.
+
+The empirical question would then cease to be
+
+\[
+\text{``Do all components share a frequency?''}
+\]
+
+and become
+
+\[
+\boxed{
+\parbox{0.85\textwidth}{\centering
+Which distinctions survive repeated cross-substrate transport,
+and which future states do those distinctions continue to constrain?}
+}
+\]
+
+That question returns the speculation to the central thesis of this paper.
+
+The operational residue is not whatever remains physically unchanged.
+
+It is the structure that remains capable of making a difference after the carrier has changed.
+
+\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem{sun2026must}
+Sun, Yiheng, et al.
+\newblock ``When "Must' Becomes "Maybe': Constraint Weakening in LLM Agent Workflows.''
+\newblock \emph{arXiv preprint arXiv:2608.24569}, 2026.
+
+\bibitem{aggarwal2026calibrated}
+Aggarwal, Pranav.
+\newblock ``Calibrated Enough to Know, Not Calibrated to Act: Fabricated Evidence Makes LLM Agents Commit to the Unknowable.''
+\newblock \emph{arXiv preprint arXiv:2608.27167}, 2026.
+
+\bibitem{shaikh2026agentmesh}
+Shaikh, Mazhar, Anurag Rajkumar Bombarde, and Harshal Pathak.
+\newblock ``Agent Mesh: Reliability Primitives for Non-Idempotent Agent Delegation---Identity Adequacy and Evidence Adequacy.''
+\newblock \emph{arXiv preprint arXiv:2608.26225}, 2026.
+
+\bibitem{ganz2026handoff}
+Ganz, Roy, Mor Shpigel Nacson, Adi Kalyanpur, and Ron Litman.
+\newblock ``The Handoff Tax: Continuing Non-Native Trajectories in LLM Agents.''
+\newblock \emph{arXiv preprint arXiv:2608.24358}, 2026.
+
+\bibitem{shi2026spatiotemporal}
+Shi, Yifan, Wei Zhang, and Tianyi Cui.
+\newblock ``A Programming Paradigm for Spatiotemporal Composability.''
+\newblock \emph{arXiv preprint arXiv:2608.25512}, 2026.
+
+\bibitem{allen2026codexh}
+Allen, Garrick V., Kimberley A. Fowler, Emanuele Scieri, and Maxim Venetskov.
+\newblock \emph{Codex H of the Pauline Epistles (GA 015): Introduction and Edition}.
+\newblock Manuscripta Biblica, vol.~14.
+\newblock Berlin/Boston: De Gruyter, accepted for publication, 2026.
+
+\bibitem{allenfowler2025codexh}
+Allen, Garrick V., and Kimberley A. Fowler.
+\newblock ``The Story of Codex H (GA 015): Manuscript Migration and Primary Sources in Biblical Studies.''
+\newblock \emph{Journal of Biblical Literature} 144, no.~1 (2025): 167--196.
+\newblock doi:10.15699/jbl.1441.2025.9.
+
+\bibitem{kuramoto1975}
+Kuramoto, Yoshiki.
+\newblock ``Self-Entrainment of a Population of Coupled Non-Linear Oscillators.''
+\newblock In \emph{International Symposium on Mathematical Problems in Theoretical Physics}, edited by Huzihiro Araki, 420--422.
+\newblock Lecture Notes in Physics, vol.~39.
+\newblock Berlin: Springer, 1975.
+
+\bibitem{strogatz2000kuramoto}
+Strogatz, Steven H.
+\newblock ``From Kuramoto to Crawford: Exploring the Onset of Synchronization in Populations of Coupled Oscillators.''
+\newblock \emph{Physica D: Nonlinear Phenomena} 143, nos.~1--4 (2000): 1--20.
+
+\bibitem{nakao2016phase}
+Nakao, Hiroya.
+\newblock ``Phase Reduction Approach to Synchronisation of Nonlinear Oscillators.''
+\newblock \emph{Contemporary Physics} 57, no.~2 (2016): 188--214.
+
+\end{thebibliography}
+
+\end{document}
+

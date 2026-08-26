@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vertical Teletype Reading Pacer</title>
+<style>
+:root{
+  --bg:#090909;
+  --fg:#f3f0e7;
+  --dim:#85827a;
+  --rule:#34332f;
+  --font-size:30px;
+  --char-step:36px;
+  --column-step:46px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--fg);
+  overflow:hidden;
+}
+body{
+  height:100dvh;
+  font-family:Georgia,"Times New Roman",serif;
+  /* touch-action intentionally left at its default ("auto") rather than
+     "manipulation": iOS Safari has a long-standing bug where "manipulation"
+     disables pinch-zoom entirely, contrary to spec. Leaving this unset
+     restores the ability to pinch-zoom the page (and therefore the font). */
+}
+#reader{
+  position:relative;
+  width:100vw;
+  height:100dvh;
+  overflow:hidden;
+  background:var(--bg);
+}
+#field{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
+.column{
+  position:absolute;
+  bottom:0;
+  width:var(--column-step);
+  height:100%;
+  transition:transform .12s linear;
+}
+.glyph{
+  position:absolute;
+  left:50%;
+  width:1.15em;
+  height:1.15em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translateX(-50%);
+  font-size:var(--font-size);
+  line-height:1;
+  color:var(--fg);
+  text-align:center;
+}
+.glyph.new{
+  animation:stamp .13s ease-out;
+}
+@keyframes stamp{
+  from{opacity:0;filter:blur(3px);transform:translateX(-50%) scale(1.18)}
+  to{opacity:1;filter:blur(0);transform:translateX(-50%) scale(1)}
+}
+#cursor{
+  position:absolute;
+  bottom:14px;
+  width:30px;
+  height:2px;
+  background:var(--fg);
+  opacity:.85;
+  animation:blink .75s steps(1,end) infinite;
+}
+@keyframes blink{50%{opacity:.15}}
+#readRule{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:calc(18px + var(--column-step) / 2);
+  border-left:1px solid var(--rule);
+  pointer-events:none;
+}
+#controls{
+  position:absolute;
+  z-index:5;
+  left:10px;
+  right:10px;
+  bottom:max(10px,env(safe-area-inset-bottom));
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 10px;
+  border:1px solid #292929;
+  border-radius:12px;
+  background:rgba(9,9,9,.88);
+  font:13px system-ui,sans-serif;
+  transition:opacity .25s;
+}
+#controls.hidden{opacity:0;pointer-events:none}
+button{
+  min-height:42px;
+  padding:0 14px;
+  border:1px solid #393939;
+  border-radius:9px;
+  background:#171717;
+  color:#eee;
+  font:inherit;
+}
+label{
+  display:flex;
+  flex:1;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+#speedReadout{
+  min-width:4.5em;
+  text-align:right;
+  color:#bbb;
+  font-variant-numeric:tabular-nums;
+}
+input[type=range]{width:100%}
+#source{
+  position:absolute;
+  z-index:8;
+  inset:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:14px;
+  border:1px solid #333;
+  border-radius:14px;
+  background:#111;
+  font-family:system-ui,sans-serif;
+}
+#source[hidden]{display:none}
+textarea{
+  flex:1;
+  min-height:180px;
+  width:100%;
+  resize:none;
+  padding:12px;
+  border:1px solid #333;
+  border-radius:10px;
+  background:#080808;
+  color:#eee;
+  font:16px/1.45 Georgia,"Times New Roman",serif;
+}
+.hint{margin:0;color:#aaa;font-size:13px;line-height:1.4}
+.source-actions{display:flex;gap:8px}
+</style>
+</head>
+<body>
+<main id="reader">
+  <div id="field" aria-label="Bottom-to-top teletype reading field"></div>
+  <div id="readRule"></div>
+  <div id="cursor"></div>
+
+  <section id="source">
+    <p class="hint">
+      Paste a document. Each line is typed upward from the bottom, one upright
+      character at a time. When the vertical line fills, it moves left and a new line begins at the
+      far right edge. Completed lines remain fully visible until they leave the screen.
+    </p>
+
+    <textarea id="textInput">A thing is not merely the shape it wore. It is what can change and still endure. Information lives wherever choices narrow, where futures close and others remain possible. This reader turns prose into a slow vertical teletype: upright letters, read from bottom to top, with finished lines moving sideways across the screen. 
+
+Neither is it exhausted by the outline through which it first became visible, nor by the name assigned to it when someone decided that its changes had momentarily slowed enough to be recognized. Shape is only one temporary settlement among many. It is the contour produced when a longer process pauses within a particular field of pressure, memory, material, and expectation. The shape may bend, fracture, unfold, or disappear while something more persistent continues through the transformation. What matters is not perfect resemblance between one moment and the next, but the preservation of a difference capable of surviving alteration.
+
+A thing is what can change and still endure. Its identity lies neither in complete rigidity nor in unrestricted variation, but in the constrained passage between them. If nothing may change, the thing cannot adapt, repair itself, or enter a new environment. If everything may change at once, nothing remains by which its continuation can be recognized. Endurance therefore depends upon selective transformation. Some features may be surrendered so that others can persist. Some boundaries may move so that the relation they protect does not collapse. Some structures must be rebuilt in forms that no longer resemble their origins. Continuation is not the refusal of change. It is the organization of change around what must not be lost.
+
+Information lives wherever choices narrow, where futures close and others remain possible. It does not sit motionless inside a symbol like an object hidden in a box. It appears through constraint: in the path taken rather than the paths abandoned, in the word selected rather than the words that could have occupied its place, in the surviving interpretation after incompatible meanings have been excluded. Every distinction alters the field of what can happen next. To receive information is to enter a world with fewer admissible continuations than before, but also with clearer ways forward. Knowledge does not eliminate possibility altogether. It gives possibility a shape.
+
+Reading makes this narrowing visible. At first, the unwritten sentence could become almost anything. Each arriving letter removes countless alternatives. A vertical stroke appears, then a curve, then a space. The field contracts. A word becomes recoverable before it is complete, although another letter may still overturn the expectation. The sentence advances by repeatedly producing and revising these small anticipations. Meaning does not wait at the end like a sealed package. It accumulates through partial commitments, remembered beginnings, corrected predictions, and the changing relation between what has already appeared and what may still arrive.
+
+This reader slows that process until continuation itself becomes perceptible. Prose enters as a vertical teletype, one upright letter at a time. The letters are not turned sideways and they are not stacked as decorative typography. Each remains correctly oriented, but the direction of reading has been displaced. The eye begins near the bottom and moves upward through a growing tower of language. A word rises into existence. A phrase gathers above it. The sentence becomes a temporary column whose meaning must be held vertically rather than carried along the familiar horizontal line.
+
+When a line is finished, it moves sideways across the screen. Completion does not make it disappear immediately. The completed line becomes part of the visible past, displaced but still available, while a new column begins to form. The reader therefore encounters several times at once: the unfinished present in which letters are still arriving, the recent past sliding laterally away, and the anticipated future implied by the fragment currently under construction. Reading becomes less like scanning a page and more like watching a memory organize itself.
+
+The unusual direction interrupts habitual speed. Ordinary prose invites the eye to leap ahead, recognize word shapes, skim clauses, and predict the structure before every letter has been consciously received. Here, those shortcuts are weakened. The reader must wait for each distinction to become available. A word cannot be consumed all at once because its form has not yet arrived. The pacing restores uncertainty to language. Meaning is experienced as something produced through time, not merely recovered from a completed surface.
+
+The slow movement also makes disappearance important. As finished lines travel sideways, they approach the edge of visibility. Their departure does not erase their contribution. What has left the screen remains active in the interpretation of what follows. The absent line constrains the present one through memory. In this way, the display becomes a model of continuation: the earlier form is no longer materially present, yet something of it endures as an influence upon the next admissible reading.
+
+The reader is therefore not simply presenting text in an eccentric orientation. It is exposing the temporal structure ordinarily concealed by the page. Language appears as a sequence of commitments. Identity appears as persistence through displacement. Memory appears as the continued force of what can no longer be directly inspected. Information appears at the point where possibilities are reduced without being annihilated. The screen becomes a small theater of constraint in which every letter closes some futures, preserves others, and changes the meaning of all that came before.
+
+Nothing on the screen remains completely still, yet the passage remains intelligible. Its endurance does not depend upon retaining a single permanent shape. It depends upon relations surviving the movement: letters remaining ordered within words, words remaining recoverable within lines, and lines continuing to constrain one another after they have moved apart. The text persists because its transformations are structured. It changes position without surrendering sequence, changes visibility without losing consequence, and changes from possibility into memory without becoming irrelevant.
+
+A thing is therefore not merely the shape it wore. It is the difference carried across its changes, the constraint that survives translation, and the relation that can be repaired when its first embodiment fails. To read this way is to watch that principle happen slowly. Each letter arrives as a new distinction. Each completed line becomes a remembered form. Each sideways movement separates presence from persistence. The passage continues not because everything remains before the eye, but because enough survives each transformation to make the next moment intelligible.
+
+
+
+</textarea>
+    <div class="source-actions">
+      <button id="startButton" type="button">Start</button>
+    </div>
+  </section>
+
+  <nav id="controls" aria-label="Reader controls">
+    <button id="pauseButton" type="button">Pause</button>
+    <label>Speed
+      <input id="speed" type="range" min="4" max="400" value="20" step="1">
+      <span id="speedReadout">20 cps</span>
+    </label>
+    <button id="editButton" type="button">Text</button>
+  </nav>
+</main>
+
+<script>
+(() => {
+  const reader = document.querySelector("#reader");
+  const field = document.querySelector("#field");
+  const cursor = document.querySelector("#cursor");
+  const source = document.querySelector("#source");
+  const input = document.querySelector("#textInput");
+  const startButton = document.querySelector("#startButton");
+  const pauseButton = document.querySelector("#pauseButton");
+  const editButton = document.querySelector("#editButton");
+  const speed = document.querySelector("#speed");
+  const speedReadout = document.querySelector("#speedReadout");
+  const controls = document.querySelector("#controls");
+
+  let text = "";
+  let index = 0;
+  let columns = [];
+  let current = null;
+  let row = 0;
+  let paused = true;
+  let hideTimer = null;
+
+  // Pacing runs on requestAnimationFrame rather than setTimeout. setTimeout
+  // has a practical minimum delay (~4ms, and much worse in background/
+  // throttled tabs), which caps achievable characters-per-second and makes
+  // high speeds stutter. Instead we track elapsed time each frame and emit
+  // as many characters as that time entitles us to, which stays smooth and
+  // accurate at any speed the slider allows.
+  let rafId = null;
+  let lastFrameTime = null;
+  let charDebt = 0;
+
+  function loop(now){
+    if(paused){
+      rafId = null;
+      lastFrameTime = null;
+      return;
+    }
+    if(lastFrameTime === null) lastFrameTime = now;
+    const dt = now - lastFrameTime;
+    lastFrameTime = now;
+
+    const cps = Number(speed.value);
+    charDebt += (dt / 1000) * cps;
+
+    while(charDebt >= 1 && index < text.length){
+      emit(text[index++]);
+      charDebt -= 1;
+    }
+
+    if(index >= text.length){
+      paused = true;
+      pauseButton.textContent = "Play";
+      rafId = null;
+      lastFrameTime = null;
+      return;
+    }
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function schedule(){
+    if(!paused && index < text.length && rafId === null){
+      lastFrameTime = null;
+      rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  function updateSpeedReadout(){
+    speedReadout.textContent = `${speed.value} cps`;
+  }
+
+  function metrics(){
+    const styles = getComputedStyle(document.documentElement);
+    const charStep = parseFloat(styles.getPropertyValue("--char-step")) || 36;
+    const columnStep = parseFloat(styles.getPropertyValue("--column-step")) || 46;
+    const usable = Math.max(100, field.clientHeight - 76);
+    return {
+      charStep,
+      columnStep,
+      rows: Math.max(3, Math.floor(usable / charStep)),
+      center: field.clientWidth / 2
+    };
+  }
+
+  function makeColumn(){
+    const m = metrics();
+    const col = document.createElement("div");
+    col.className = "column";
+    field.appendChild(col);
+    columns.push(col);
+    current = col;
+    row = 0;
+    layoutColumns();
+    updateCursor();
+  }
+
+  function layoutColumns(){
+    const m = metrics();
+    const rightPadding = 18;
+    const newestX = field.clientWidth - m.columnStep - rightPadding;
+
+    columns.forEach((col, i) => {
+      const age = columns.length - 1 - i;
+      const x = newestX - age * m.columnStep;
+      col.style.transform = `translateX(${x}px)`;
+      col.style.opacity = "1";
+    });
+
+    while(columns.length && columns.length * m.columnStep > field.clientWidth + m.columnStep * 3){
+      const old = columns.shift();
+      old.remove();
+    }
+  }
+
+  function updateCursor(){
+    const m = metrics();
+    const rightPadding = 18;
+    cursor.style.left = `${field.clientWidth - m.columnStep - rightPadding + (m.columnStep / 2) - 15}px`;
+    cursor.style.bottom = `${14 + row * m.charStep}px`;
+  }
+
+  function emit(ch){
+    const m = metrics();
+    if(!current) makeColumn();
+
+    if(ch === "\r") return;
+
+    if(ch === "\n"){
+      makeColumn();
+      return;
+    }
+
+    if(row >= m.rows){
+      makeColumn();
+    }
+
+    const glyph = document.createElement("span");
+    glyph.className = "glyph new";
+    glyph.textContent = ch === " " ? "·" : ch;
+    if(ch === " ") glyph.style.color = "var(--dim)";
+    glyph.style.bottom = `${14 + row * m.charStep}px`;
+    current.appendChild(glyph);
+    row++;
+    updateCursor();
+  }
+
+  function setPaused(value){
+    paused = value;
+    pauseButton.textContent = paused ? "Play" : "Pause";
+    if(rafId !== null){
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    lastFrameTime = null;
+    if(!paused) schedule();
+    showControls();
+  }
+
+  function reset(){
+    if(rafId !== null){
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    lastFrameTime = null;
+    charDebt = 0;
+    field.replaceChildren();
+    columns = [];
+    current = null;
+    row = 0;
+    index = 0;
+    makeColumn();
+  }
+
+  function showControls(){
+    controls.classList.remove("hidden");
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      if(!paused && source.hidden) controls.classList.add("hidden");
+    }, 2200);
+  }
+
+  startButton.addEventListener("click", () => {
+    text = input.value;
+    if(!text.trim()) return;
+    reset();
+    source.hidden = true;
+    setPaused(false);
+  });
+
+  pauseButton.addEventListener("click", () => setPaused(!paused));
+
+  editButton.addEventListener("click", () => {
+    setPaused(true);
+    source.hidden = false;
+    controls.classList.remove("hidden");
+    input.focus();
+  });
+
+  speed.addEventListener("input", () => {
+    updateSpeedReadout();
+    if(!paused) schedule();
+  });
+
+  reader.addEventListener("click", e => {
+    if(e.target.closest("button,input,textarea,#source,#controls")) return;
+    setPaused(!paused);
+  });
+
+  reader.addEventListener("pointerdown", showControls);
+
+  window.addEventListener("resize", () => {
+    layoutColumns();
+    updateCursor();
+  });
+
+  updateSpeedReadout();
+  makeColumn();
+})();
+</script>
+</body>
+</html>

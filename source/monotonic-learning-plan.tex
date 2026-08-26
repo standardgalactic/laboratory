@@ -1,0 +1,239 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=black, citecolor=black}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{1.8em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.3em}{0.4em}
+
+\newenvironment{bookentry}[3]{%
+  \par\noindent\rule{\linewidth}{0.5pt}\par\vspace{0.5em}
+  {\Large\bfseries #1}\\[0.15em]
+  {\itshape\large #2}\\[0.3em]
+  {\small\textbf{Prerequisite:} #3}\par\vspace{0.6em}
+}{\par\vspace{0.8em}}
+
+\newenvironment{sectionlist}{%
+  \begin{itemize}[leftmargin=1.4em, itemsep=0.45em, topsep=0.3em]
+}{%
+  \end{itemize}
+}
+
+\newcommand{\secitem}[3]{\item \textbf{#1} (\textasciitilde#2 frames) --- #3}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancyhead[L]{\small\itshape The Monotonic Learning Series}
+\fancyhead[R]{\small\thepage}
+
+\title{\vspace{-2em}\textbf{The Monotonic Learning Series}\\[0.3em]
+\large Programmed Texts in Distinction, Repair, and Continuation\\[0.3em]
+\normalsize Full Series Plan --- Detailed Edition}
+\author{Flyxion}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\tableofcontents
+\thispagestyle{fancy}
+\newpage
+
+\section*{Shared Architecture Across All Seven Books}
+\addcontentsline{toc}{section}{Shared Architecture Across All Seven Books}
+
+\subsection*{The frame}
+Every book advances through numbered frames. Each frame targets exactly one distinction --- not necessarily one logically atomic proposition, since even a simple contrast typically rests on several background propositions, but exactly one new thing the frame is teaching. Everything else in a frame must either have been established in an earlier frame or be ordinary background knowledge the book has explicitly licensed. This gives authoring a testable rule without pretending frames can be made logically atomic. A frame is followed immediately by a question requiring the reader to reconstruct the distinction in a new instance, not merely recognize a restatement of the frame's own wording.
+
+\subsection*{The section and three gates}
+Frames are grouped into sections of roughly 30--50 frames, each covering one coherent sub-topic (e.g., ``boundary'' within Book One). A reader passes a section only by clearing three distinct gates, because human memory itself is not monotonic even where the curriculum's structure is:
+\begin{itemize}[leftmargin=1.4em, itemsep=0.3em, topsep=0.3em]
+\item \textbf{Immediate reconstruction} --- the per-frame question, answered while the frame's wording is still active in working memory. This shows the reader can use the distinction, not that it has been retained.
+\item \textbf{Integrated application} --- the section-ending \textbf{Continuation Check}: a compound question or short scenario combining two or more frames from earlier in the section, sometimes reaching into an earlier section or book. An incorrect answer identifies the specific frame where the missing distinction was introduced, so the reader repairs the specific gap rather than restarting the section.
+\item \textbf{Delayed recovery} --- unannounced \textbf{Persistence Checks} scattered through later sections, drawing on material last encountered roughly 20, 50, or 100 frames earlier. These are the only gate that actually tests retention rather than momentary competence, and they are what catch a distinction that passed its Continuation Check but was never truly internalized.
+\end{itemize}
+
+\subsection*{The book}
+Each book is six sections plus a closing exercise that requires the reader to run the whole chain of distinctions taught in that book against a scenario they have not seen before, without being told which section's tools apply. This is the test of whether the material generalizes rather than having been pattern-matched frame by frame.
+
+\subsection*{Monotonicity as a design constraint, not just a title}
+``Monotonic Learning'' is not a marketing name; it constrains what the author is allowed to write. A later frame may extend what the reader can do, but it may never require silently discarding a distinction verified earlier. If two frames appear to conflict, the resolution must be written as a repair (a refinement of the earlier claim's scope) rather than an implicit overwrite. This rule applies across books as well as within them: Book Six's operational treatment of ``refusal'' must remain compatible with Book Two's more abstract treatment, not redefine it.
+
+\subsection*{Repetition under changed constraint}
+Distinctions taught early reappear throughout the series in new material rather than being retired once tested. The same core distinction --- for example, record vs.\ recognition, first taught in Book One with a sensor-log example --- resurfaces in Book Four as a repair-diagnosis case, in Book Five as an evidentiary-latency case, and in Book Six as a property of an append-only event log. What stays invariant across those four appearances is what the reader has actually internalized; what changes is only the surface material, which is the point of the exercise.
+
+\subsection*{Shared glossary}
+A cumulative glossary is maintained across all seven books, generated from a single source rather than retyped per volume. Each entry is defined operationally (what a reader must be able to do to demonstrate understanding of the term) rather than descriptively (a sentence asserting what the term means). Appending without ever editing would preserve history at the cost of also preserving errors and forcing readers through obsolete definitions, so the governing rule is instead:
+
+\begin{quote}
+\itshape The cumulative glossary preserves every published definition and its revision history. A definition may be refined or superseded but never silently replaced. Each revision states which earlier definition it modifies, what problem required the repair, and which parts remain valid.
+\end{quote}
+
+This implements epistemic immutability of the \emph{record} without confusing it with immutability of the \emph{claim} --- exactly the distinction the series itself teaches in Book Four. Each printed volume includes only the glossary entries used in that volume, drawn from the same generated source as the complete cumulative glossary published separately; this avoids reprinting the full glossary seven times and the synchronization problems that would create.
+
+\section*{The Seven Books}
+\addcontentsline{toc}{section}{The Seven Books}
+
+\begin{bookentry}{Book One --- Distinction}{How Differences Become Thinkable}{None. Entry point for the series.}
+Establishes the atomic vocabulary the rest of the series depends on: object vs.\ representation, difference vs.\ boundary, identity vs.\ persistence, record vs.\ recognition. Concrete throughout --- no RSVP, category theory, Lean, or Spherepop required. Approximately 250 frames across six sections.
+
+\begin{sectionlist}
+\secitem{Difference}{35}{a difference becomes operative for a system only when the system can discriminate it or be differentially affected by it --- a claim about operativeness, not a denial of substrate-level differences no current observer recognizes}
+\secitem{Boundary}{35}{where a distinction stops applying; boundaries are relative to a single distinction at a time and multiple boundaries need not coincide}
+\secitem{Representation}{45}{the gap between an object and any record of it; what a representation preserves, discards, and can be mistaken for}
+\secitem{Persistence}{45}{what it means for ``the same thing'' to continue existing across changes to its parts, position, or observers}
+\secitem{Observation}{45}{occurrence vs.\ record vs.\ recognition as three distinct stages, and what can go wrong at each transition between them}
+\secitem{Repair (preview)}{45}{a first, informal pass at failure-as-signal, setting up Book Four without yet requiring its full vocabulary}
+\end{sectionlist}
+\textbf{Closing exercise:} the reader is given a raw, undescribed difference (a changed reading on an unfamiliar instrument) and must derive, unaided, a verified rule for when that difference should be treated as a continuation-relevant distinction. \textit{(Drafting in progress --- Sections I--II drafted as a granularity test.)}
+\end{bookentry}
+
+\begin{bookentry}{Book Two --- Admissibility}{How Possibilities Become Available}{Book One (difference, boundary)}
+Moves from ``what can be distinguished'' to ``what can occur.'' Introduces the vocabulary of states, constraint, and refusal as a source of information rather than mere prohibition.
+
+\begin{sectionlist}
+\secitem{State spaces}{35}{what counts as a state for a given system, and why the same physical situation can correspond to different state spaces depending on which distinctions are tracked}
+\secitem{Constraint}{40}{constraints as what narrows a state space rather than as external rules imposed on an otherwise free system}
+\secitem{Reachability}{40}{the difference between a state being conceivable and a state being reachable from the current one under the system's actual transition rules}
+\secitem{Refusal as information}{40}{a refused transition is itself a data point about the constraint structure, not simply an absence of action}
+\secitem{Authorization}{40}{the difference between a transition being physically reachable and being authorized --- two independent gates that are often conflated}
+\secitem{The admissible/inadmissible boundary}{40}{synthesizing the section, with cases where the boundary is sharp and cases where it is itself uncertain or contested}
+\end{sectionlist}
+\textbf{Closing exercise:} given a stated constraint set for a novel scenario, the reader must classify each candidate next-state along both independent gates at once --- reachable and authorized; reachable and unauthorized; unreachable but authorized; unreachable and unauthorized --- and derive admissibility from that two-axis classification rather than placing it beside the other categories as a third, ambiguous option.
+\end{bookentry}
+
+\begin{bookentry}{Book Three --- Continuation}{How Systems Persist Through Change}{Book Two (states, constraint)}
+Asks how a system holds an identity across a sequence of admissible states, introducing the preserve-constrain-continue triad as the series' central recurring pattern.
+
+\begin{sectionlist}
+\secitem{Persistence under transformation}{35}{what must be preserved, as opposed to merely present, for a transformation to count as a continuation rather than a replacement}
+\secitem{Preserve-constrain-continue}{45}{the core triad: what is preserved, what constrains the next step, and what continuation actually requires beyond both}
+\secitem{Recursive solvability}{40}{when a continuation problem can be decomposed into smaller continuation problems of the same type, and when that decomposition breaks down}
+\secitem{Identity across transformation}{40}{criteria for ``the same system'' surviving a transformation, contrasted with superficial similarity}
+\secitem{Continuation geometry}{40}{treating a sequence of admissible states as a path with structure --- shortest paths, dead ends, and points of no return; and the case that gives the section its sharpest Continuation Check, that an admissible path can exist without preserving the invariant that identifies the system, while a discontinuous reconstruction not naturally representable as a path can still preserve it}
+\secitem{Failure of continuation}{40}{cases where no admissible next state preserves what needs to be preserved --- the direct setup for Book Four}
+\end{sectionlist}
+\textbf{Closing exercise:} the reader traces a continuation path through a multi-step transformation scenario and must identify, without being told in advance, the exact step at which continuation would break under a specified additional constraint, and separately identify a case in the same scenario where path existence and true continuation come apart.
+\end{bookentry}
+
+\begin{bookentry}{Book Four --- Repair}{How Failure Becomes Information}{Book Three (continuation, breakpoints)}
+Translates \textit{The Epistemology of Repair} into exercise form: failure is treated throughout as an information-producing event rather than simply a deviation to be corrected.
+
+\begin{sectionlist}
+\secitem{Failure as signal}{35}{reframing a breakdown as evidence about the system's actual (as opposed to assumed) constraint structure}
+\secitem{Localization}{40}{distinguishing where a failure is detected from where it originated, and the diagnostic work of closing that gap}
+\secitem{Workaround vs.\ fix}{40}{a workaround restores requested function by routing around a diagnosed failure condition; a fix modifies the mechanism that produces that failure condition. Neither term is intrinsically superior --- when the underlying constraint is a real, unremovable environmental limit, a robust workaround is the correct repair, and what matters is verification, recurrence, and fitness rather than which intervention earns the socially favorable label}
+\secitem{Constraint discovery through breakage}{45}{failures that reveal a constraint the system's designers or operators did not know existed}
+\secitem{Verified recovery}{40}{what distinguishes ``it seems to work now'' from a recovery that has actually been verified against the original failure condition}
+\secitem{Repair vs.\ restart}{40}{ties back to the series' own monotonicity principle: repair preserves what was already verified, restart discards it}
+\end{sectionlist}
+\textbf{Closing exercise:} the reader is given a failure scenario with no worked solution and must produce a full localization-to-verified-recovery diagnosis using only the method, not a memorized case.
+\end{bookentry}
+
+\begin{bookentry}{Book Five --- Verification}{How Claims Cross the Evidence Boundary}{Requires Book One; recommends Book Four}
+Applies the repair vocabulary to claims rather than physical systems: verifying a claim is treated as diagnosing whether it has actually crossed from asserted to established. Books Four and Five are mutually reinforcing rather than purely sequential --- repair already presupposes evidence about failure, localization, and recovery, so Verification is not simply downstream of Repair even though this plan presents it second. Book Five is written to remain independently readable with only Book One as a hard prerequisite.
+
+\begin{sectionlist}
+\secitem{Record vs.\ witness}{35}{a claim can be recorded without ever having been witnessed, and witnessed without being recorded in a form others can access}
+\secitem{The admit/commit gate}{40}{the distinction between a claim being logged as a candidate and being committed as accepted, and what should be required to cross that gate}
+\secitem{Latency}{35}{the delay between an event and the evidence about it becoming available, and how that delay itself distorts what gets believed first}
+\secitem{Query depth}{40}{how far back a claim's support can actually be traced versus how far it appears to be traceable at a glance}
+\secitem{Countermodels}{40}{constructing an alternative account consistent with the same evidence, as a test of whether a claim is actually pinned down by that evidence}
+\secitem{Consensus without independence}{45}{when apparent agreement among many sources reflects a shared origin or correlated error rather than independent confirmation}
+\end{sectionlist}
+\textbf{Closing exercise:} given a body of ostensibly corroborating evidence for a claim, the reader must determine whether the evidence is independent enough to establish the claim or is largely restating a single origin with different voices.
+\end{bookentry}
+
+\begin{bookentry}{Book Six --- Spherepop}{Computing from Pop, Refuse, Bind, and Collapse}{Books One through Five (this is the operational synthesis volume)}
+Where the prior five books' vocabulary becomes executable. Built around the four primitives --- Pop, Refuse, Bind, Collapse --- as the minimal operational basis for everything taught so far.
+
+\begin{sectionlist}
+\secitem{The four primitives}{40}{Pop, Refuse, Bind, and Collapse defined operationally, each tied back to a distinction from Books One--Three}
+\secitem{Events and logs}{40}{an append-only event log as the concrete form that ``record'' takes once it becomes executable}
+\secitem{Branching and refusal in practice}{45}{implementing the admissibility/refusal vocabulary from Book Two as actual branch conditions}
+\secitem{Namespaces and paths}{40}{how identity and boundary (Book One) become addressable structure in a running system}
+\secitem{Links and deletion}{40}{four distinct operations that ordinary filesystem language collapses into one word: deletion (removing a retained record), unlinking (removing one path to a record without touching the record), reachability loss (a record survives but no path currently reaches it), and erasure (removing a record such that it cannot be reconstructed even in principle) --- treated as one of the section's strongest original contributions rather than compressed away}
+\secitem{Persistence as a reconstructible relation}{45}{the closing synthesis, stated carefully: operational persistence belongs not to any single object or log in isolation, but to a reconstructible relation among retained events, transition semantics, and an available execution substrate --- a log alone cannot reconstruct anything without an interpreter and a substrate on which replay occurs}
+\end{sectionlist}
+\textbf{Closing exercise:} the reader builds a small admissible process from the four primitives and must correctly predict its refusal behavior when given a malformed input it was not designed for.
+\end{bookentry}
+
+\begin{bookentry}{Book Seven --- Capacity, Flow, and Unresolved Structure}{subtitled internally as ``Scalar Capacity, Vector Flow, and Entropy''}{Book Six (process and event vocabulary as scaffolding for ``flow'')}
+Introduces the RSVP field-theoretic material without leading with its mathematics. The book-level title avoids implying that $\Phi$, $\mathbf{v}$, and $S$ carry their ordinary textbook meanings; the familiar physics phrase is retained only as an internal subtitle once the concrete sections have redefined the terms. Concrete systems (traffic, plumbing, budgets, attention) carry the concepts until the formalism is named at the end.
+
+\begin{sectionlist}
+\secitem{Capacity}{35}{locally available potential for supporting, redirecting, or absorbing transformation, taught through concrete bottlenecks before any symbol is introduced --- not reduced to a fixed storage or occupancy limit}
+\secitem{Directed transfer}{40}{flow as a vector quantity --- not just how much moves, but in which direction and along which path}
+\secitem{Congestion}{40}{what happens when directed transfer exceeds local capacity, and how congestion propagates backward through a system}
+\secitem{Entropy density}{45}{locally concentrated unresolved multiplicity: how many materially different configurations remain indistinguishable or unrecoverable under the system's currently available distinctions --- deliberately not introduced as ``disorder,'' since the corpus this series draws from repeatedly rejects that folk equation}
+\secitem{Regeneration}{40}{how systems restore capacity or reduce local entropy density, and the limits on how fast that can happen}
+\secitem{Naming the formalism}{50}{the closing section finally introduces RSVP notation as compressed notation for exactly the five preceding sections, with nothing new added conceptually}
+\end{sectionlist}
+\textbf{Closing exercise:} the reader translates a concrete congestion scenario (of their own choosing or one provided) into field terms unaided, using only the vocabulary built across the section.
+\end{bookentry}
+
+\section*{Series-Wide Frame Budget}
+\addcontentsline{toc}{section}{Series-Wide Frame Budget}
+
+\begin{longtable}{@{}p{4.2cm}p{1.6cm}p{1.6cm}p{6.8cm}@{}}
+\toprule
+\textbf{Book} & \textbf{Sections} & \textbf{Frames (est.)} & \textbf{Depends on} \\
+\midrule
+\endhead
+One --- Distinction & 6 & \textasciitilde250 & --- \\
+Two --- Admissibility & 6 & \textasciitilde235 & One \\
+Three --- Continuation & 6 & \textasciitilde240 & Two \\
+Four --- Repair & 6 & \textasciitilde240 & Three \\
+Five --- Verification & 6 & \textasciitilde235 & Four \\
+Six --- Spherepop & 6 & \textasciitilde250 & One--Five \\
+Seven --- Capacity, Flow \& Unresolved Structure & 6 & \textasciitilde250 & Six \\
+\midrule
+\textbf{Total} & \textbf{42} & \textbf{\textasciitilde1{,}700} & \\
+\bottomrule
+\end{longtable}
+
+These are planning estimates, not commitments; the granularity test in Book One's first two sections (43 frames covering roughly what was planned as 70) suggests the true count may run somewhat lower once drafting reveals which planned distinctions collapse into a single frame and which must be split.
+
+\section*{Sequencing Logic}
+\addcontentsline{toc}{section}{Sequencing Logic}
+
+The order is a genuine dependency chain, not a difficulty ramp. Distinction supplies the atomic unit (a discriminable difference). Admissibility asks which differences can become states a system can occupy. Continuation asks how a system holds an identity across a sequence of admissible states. Repair asks what happens when continuation fails. Verification asks how failure and success get established as knowledge rather than assumed. Spherepop makes all five prior notions executable. Field Thinking generalizes the executable primitives to continuous systems.
+
+A reader could in principle stop after Book Three with a coherent, self-contained framework (distinction $\rightarrow$ admissibility $\rightarrow$ continuation), which is a useful internal checkpoint if the full seven-book arc turns out to be too large a commitment to sustain at roughly 250 frames each. Stopping after Book Five would additionally give a complete epistemic arc (distinction through verification) without requiring the operational or field-theoretic material at all --- a plausible alternate ``core five'' edition if the series is ever split for a different audience.
+
+\section*{Open Questions Before Drafting Further}
+\addcontentsline{toc}{section}{Open Questions Before Drafting Further}
+
+\subsection*{Should Spherepop move earlier?}
+Spherepop's primitives (Pop/Refuse/Bind/Collapse) already implicitly contain repair and admissibility. There is a real argument for teaching the operational vocabulary earlier --- perhaps immediately after Book Two --- and using it as the worked-example substrate for Books Three through Five, rather than saving it as a purely synthetic Book Six. The cost is not merely that Repair and Verification would need to be taught partly in executable terms from the start; it is that doing so converts a difficulty ramp into a difficulty cliff at exactly the point where the reader is still learning to hold purely conceptual boundaries in mind. Books One through Three establish distinction, admissibility, and continuation without any parser or execution-model overhead competing for attention. Keeping Spherepop at Book Six protects that ramp: the reader first earns the concepts on their own terms, and only then discovers that the vocabulary they already have turns out to be executable. Moving Spherepop earlier would trade that discovery for tactile feedback sooner, at the cost of asking the reader to absorb an execution model and a conceptual boundary in the same pass.
+
+\subsection*{Frame identifiers: semantic, not global-ordinal}
+Global ordinal numbering (``see Frame 214'') breaks under revision --- inserting a frame anywhere upstream shifts every later number, and printed references go stale immediately. The resolved approach is stable semantic identifiers per section: \texttt{DIF-017}, \texttt{ADM-032}, \texttt{REP-041}, and so on. A printed reader sees ``Frame DIF-017''; the source repository additionally tracks edition and revision metadata behind that identifier, so cross-book and cross-edition references remain valid even as individual sections grow or are resequenced internally.
+
+\subsection*{Glossary distribution, resolved}
+Each printed volume carries only the glossary entries actually used in that volume, generated from the same single source as a separately published complete cumulative glossary (with full revision history, per the epistemic-immutability rule above). This avoids reprinting the entire glossary seven times and the synchronization problems that repetition would create, while still keeping each volume self-contained for the terms it actually needs.
+
+\subsection*{Pilot testing as part of the framework's own verification boundary}
+Piloting the first section (Difference, \textasciitilde35 frames) on a reader unfamiliar with the corpus, before drafting the remaining \textasciitilde215 frames of Book One, is not merely a usability check --- it is the series applying its own Book Five vocabulary to itself. The pilot should specifically test: whether a wrong Continuation Check answer localizes cleanly to one frame rather than several; whether questions require reconstruction rather than rewarding verbal mimicry of the frame's own wording; whether a distinction billed as freestanding secretly depends on unstated background knowledge; and whether the delayed Persistence Checks catch forgetting that the immediate and integrated gates miss entirely.
+
+The asymmetry in these outcomes matters more than it first appears. A pilot in which every failure localizes cleanly to a single frame is weak evidence by itself --- it is equally consistent with the atomic-distinction rule actually holding and with the pilot sample simply not being large or adversarial enough to surface a counterexample. The informative outcome is the opposite one: a Continuation Check failure that will not localize to any single upstream frame is direct evidence that some frame upstream silently carried two target distinctions rather than one, in violation of the frame rule stated at the start of this plan. The pilot's job is therefore not to confirm the rule but to go looking for the frame where it quietly failed to hold, since that is the only result the outline itself could not have predicted.
+
+\subsection*{Reflexivity as the standard of success}
+With the repairs above incorporated, the architecture is held to its own standard: the series itself must record, verify, repair, and continue rather than merely teaching those four operations to a reader. A glossary that silently overwrote earlier definitions, a workaround/fix distinction that moralized instead of measuring fitness, or a persistence claim that outran what a log alone can guarantee would each have been a place where the finished product failed the test it sets for everyone else. The revision history of this plan document is itself the first instance of the practice it describes.
+
+\end{document}

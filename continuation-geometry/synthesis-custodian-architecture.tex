@@ -1,0 +1,327 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\doublespacing
+
+\title{Preservation Without Collapse: \\Distinction Holonomy, Silence, and Reorientation in Biological and Artificial Memory}
+\author{Flyxion}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+A system that preserves information must solve a structural problem: how to maintain a complete record without forcing that record to have compulsory consequences for every decision. This paper synthesizes three frameworks to show how this problem admits a unified solution. Distinction holonomy, a geometric principle about what persists across transformation, provides the conceptual foundation. Silence and reorientation, two paired computational operations, implement the framework. The cerebellar architecture, as recently characterized in neuroscience, demonstrates that biological systems have already solved this problem. We conclude by deriving implications for artificial systems designed to preserve contradictory, contextually variable, or ambiguous information.
+
+\end{abstract}
+
+\section{The Core Problem}
+
+Consider a system that must preserve information across diverse contexts: a memory system that retains past experiences, a learning system that maintains historical data, a judicial system that preserves precedents, or an artistic system that preserves its own prior work. These systems face a fundamental tension.
+
+On one hand, they must be faithful to what was learned, experienced, or decided. They cannot rewrite history to fit current preferences. They cannot selectively suppress or edit their records. They must preserve the full, unaltered historical trace.
+
+On the other hand, they must remain capable of acting with coherence in the present. They cannot let every piece of historical information constrain every present decision. They cannot treat past conclusions as eternally binding. They must be free to act differently now, even when that contradicts what was decided before.
+
+These two demands seem incompatible. Full preservation appears to demand full propagation. Selective propagation appears to demand selective preservation. Yet biological systems, particularly learning systems in the brain, routinely maintain both.
+
+This paper argues that the incompatibility is only apparent. It arises from conflating two distinct questions:
+
+\begin{equation}
+\begin{aligned}
+\text{Question 1: } &\text{Which structures persist across transformation?}\\
+\text{Question 2: } &\text{Do those structures have identical consequences everywhere they persist?}
+\end{aligned}
+\end{equation}
+
+If these were equivalent questions, then anything that persists would have identical consequences everywhere, and anything with different consequences would have to be destroyed. But they are not equivalent. A structure can persist without having identical consequences. This is the principle of distinction holonomy.
+
+\section{Distinction Holonomy: The Geometric Foundation}
+
+Distinction holonomy is a principle from differential geometry that states: what persists under a transformation is the relational structure of an object, not necessarily its coordinate representation.
+
+When a circle is rotated, the intrinsic properties persist: the distance from the center to any point on the circumference remains constant. But the coordinates change. An observer with a fixed coordinate system sees a different object. An observer who can track the rotation sees the same circle.
+
+Applied to systems that preserve information, this principle says:
+
+\begin{equation}
+\boxed{\text{preservation of relational geometry} \neq \text{identical representation everywhere}}
+\end{equation}
+
+Two concrete examples:
+
+\textit{Historical example}: The Catholic Church preserves precedents from medieval Christendom. The relational structure of medieval theology---the distinctions, the arguments, the conceptual relationships---remains intelligible. But the Church does not treat medieval precedents as having identical consequences in modern contexts. Medieval conclusions about usury, divorce, or gender remain available for consultation, but their downstream applicability changes.
+
+\textit{Biological example}: The cerebellum preserves motor primitives learned in one task and deploys them in another task. The low-dimensional temporal structure is preserved (within-task relational geometry survives: $\rho \approx 0.83$). But the contextual orientation changes. A decoder trained to read the structure in task A fails to read it in task B, not because the structure vanished, but because it was rotated ($54°$ average rotation in granule cells).
+
+In both cases, the system does not face a choice between destroying the preserved structure and forcing it to have identical consequences. Instead, it reorients the structure to a different context while preserving its internal geometry.
+
+This is possible because persistence and legibility are not the same. A structure can persist in a form that is no longer globally legible. The problem is not that it ceased to exist. The problem is that your reader was trained for a different coordinate system.
+
+\section{From Geometry to Operations: Silence and Reorientation}
+
+Distinction holonomy describes what persists. But a system must also decide what to do with what persists. Two operations translate the geometric principle into computational practice.
+
+\subsection{Silence: Withholding Without Negation}
+
+Silence is the operation that preserves information without advancing it:
+
+\begin{equation}
+\operatorname{SILENCE}(x): \quad x \in \text{history}, \quad \text{no downstream consequence licensed}
+\end{equation}
+
+In standard architectures, reaching the end of a processing pipeline without producing output is treated as failure. The pressure to convert retrieval into interpretation, interpretation into belief, and belief into output is constant.
+
+Silence creates a lawful state in which this pressure is absent. A system may retrieve information, examine it completely, complete its analysis, and decide not to advance. This is a successful result, not an incomplete decision.
+
+This matters most acutely when a system generates its own historical material. Without silence, every discovered path becomes a reinforced path. Every generated output becomes evidence supporting further generation. The system falls into a continuation ratchet.
+
+Silence breaks the ratchet precisely between traversal and reinforcement:
+
+\begin{equation}
+\text{traversal} \rightarrow \operatorname{SILENCE} \Rightarrow \begin{cases}
+\text{record persists}\\
+\text{weight does not increase}\\
+\text{future access remains possible}
+\end{cases}
+\end{equation}
+
+The wave arrives without automatically carving the seabed.
+
+\subsection{Reorientation: Transforming Contextual Consequences}
+
+Not all information should remain silent. Some must influence present decisions. But it should not influence them uniformly across all contexts. Reorientation allows information to advance while its role in each context transforms.
+
+\begin{equation}
+\operatorname{REORIENT}(x, c): \quad \text{preserve geometry of } x, \quad \text{transform contextual consequences}
+\end{equation}
+
+This is the operation that the cerebellum implements with motor primitives. Cortical activity supplies low-dimensional temporal structure. Granule cells preserve that structure while rotating it into task-specific orientations.
+
+The key insight: the same structure becomes readable or unreadable depending on the decoder and context:
+
+\begin{equation}
+\boxed{\text{preserved structure} \not\Rightarrow \text{cross-context legibility}}
+\end{equation}
+
+A decoder trained in one context fails to read the rotated structure in another, not because the structure was destroyed, but because its alignment changed. The solution is not to destroy the structure or to universalize it. The solution is to preserve it while acknowledging that its legibility is context-relative.
+
+\section{The Paired Architecture}
+
+Silence and reorientation guard against two distinct failure modes:
+
+\begin{equation}
+\begin{aligned}
+\operatorname{SILENCE} &: \text{guards against compulsory continuation}\\
+\operatorname{REORIENT} &: \text{guards against compulsory generalization}
+\end{aligned}
+\end{equation}
+
+Together they implement what we might call the Custodian's law:
+
+\begin{equation}
+\boxed{\text{reachable} \neq \text{required}}
+\end{equation}
+
+A route can be traversable and still not require traversal. Information can be legible in one context and still not have identical consequences in another. A distinction can persist and still not force a choice.
+
+At each propagation boundary, a piece of information faces at least four options:
+
+\begin{equation}
+x \longmapsto \begin{cases}
+\operatorname{ADVANCE}(x) & \text{license propagation}\\
+\operatorname{SILENCE}(x) & \text{withhold without negation}\\
+\operatorname{REORIENT}(x, c) & \text{transform contextual role}\\
+\operatorname{REFUSE}(x) & \text{make negative judgment}
+\end{cases}
+\end{equation}
+
+These are not degrees of the same thing:
+
+\begin{equation}
+\boxed{\neg \operatorname{advance}(x) \not\Rightarrow \operatorname{refuse}(x)}
+\end{equation}
+
+\section{The Biology: A Working Instance}
+
+Recent neuroscience provides an empirical demonstration of distinction holonomy in action.
+
+Garcia-Garcia and colleagues trained mice on two tasks with different sensorimotor demands but the same underlying temporal structure: action, delay, reward. The premotor cortex generated low-dimensional temporal primitives that generalized strongly between tasks ($r_{\text{cortex}} = 0.83$).
+
+The cerebellum did not simply relay this structure unchanged. Granule cells rotated the cortical trajectories by approximately $54°$ on average. At first glance, the remapped trajectories appeared scrambled ($r_{\text{granule}} = 0.24$). But the transformation was not noise. It was a coherent rotation that preserved within-task relational geometry ($\rho_{\text{structure}} = 0.83$).
+
+This is a direct empirical instance of distinction holonomy:
+
+\begin{equation}
+\text{relational structure persists across rotation}
+\end{equation}
+
+The geometry that makes the cortical primitive useful within one task survives to the next task, reoriented.
+
+What the cerebellar implementation teaches:
+
+\begin{enumerate}
+
+\item \textbf{Preservation requires structure, not identity}: The system did not need each individual neuron to fire identically in both tasks. It needed the population's relational geometry to survive transport to a different orientation.
+
+\begin{equation}
+g_i^{(1)}(t) \neq g_i^{(2)}(t), \quad \text{but} \quad D(G^{(1)}(t_i), G^{(1)}(t_j)) \approx D(G^{(2)}(t_i), G^{(2)}(t_j))
+\end{equation}
+
+\item \textbf{Separation need not destroy transfer}: The system separated contexts more strongly in expert animals ($R^2 = 0.82$ relating rotation magnitude to decorrelation). But separation increased without destroying the shared underlying structure. Greater expertise meant better distinction without loss of continuity.
+
+\item \textbf{Capacity is used for distinction, not complexity}: The enormous embedding space was used not to maximize representational dimensionality, but to provide room for many low-rank structures to be oriented apart. The system accepted a constraint (rank $\ll$ dimension) to achieve better results:
+
+\begin{equation}
+\boxed{\text{Use capacity to separate structures, not to maximize complexity within each}}
+\end{equation}
+
+\item \textbf{Learning creates separation}: Contextual distinction increased with learning. The transformation was history-dependent:
+
+\begin{equation}
+R_c = R_c(h_t)
+\end{equation}
+
+where $h_t$ is accumulated learning history. Expertise consists not in accumulating representations, but in acquiring better separation without destroying transfer.
+
+\end{enumerate}
+
+\section{Legibility as Contextual}
+
+A critical corollary follows from the biological findings:
+
+\begin{equation}
+\boxed{\text{preserved structure} \not\Rightarrow \text{universal legibility}}
+\end{equation}
+
+A decoder trained to distinguish delay from reward in task A achieved $90\%$ accuracy generalizing to cortical activity in task B. The equivalent decoder for granule-cell activity fell to $68\%$ in cross-task generalization, despite performing well within task.
+
+The information had not disappeared. It had become encrypted by context-specific reorientation.
+
+This maps onto the epistemic pipeline that the Custodian must track:
+
+\begin{equation}
+\text{existence} \neq \text{legibility} \neq \text{admissibility} \neq \text{verification} \neq \text{commitment}
+\end{equation}
+
+Information can exist in a form that is no longer legible to a static reader. It can be legible within one context and inadmissible in another. It can be admissible as historical fact without being verified as present truth. It can be verified in isolation without committing the system to action.
+
+The Custodian must track all five distinctions. Silence allows existence without admissibility. Reorientation allows legibility to vary with context. Neither operation requires collapse.
+
+\section{Application: Memory Across Contexts}
+
+Suppose the Custodian retrieves the same statement in a therapeutic conversation, a historical reconstruction, a legal assessment, and a speculative interpretation. A naive system either imports one representation everywhere (causing interference) or fragments the memory (losing unity).
+
+The cerebellar solution suggests a third path:
+
+\begin{equation}
+M_c = R_c(M_0)
+\end{equation}
+
+where $M_0$ is a shared relational core and $R_c$ is a context-specific transformation.
+
+The shared memory $M_0$ remains recognizable. Its downstream affordances differ:
+
+\begin{itemize}
+\item In therapy, the memory's relational structure supports self-understanding and narrative coherence.
+\item In history, the same structure supports causal explanation and factual evaluation.
+\item In law, the same structure supports evidentiary judgment and precedential reasoning.
+\item In speculation, the same structure supports imaginative exploration and counterfactual reasoning.
+\end{itemize}
+
+What can be inferred, emphasized, committed, or acted on changes with context. But the underlying material remains the same. This prevents cross-context interference without erasing continuity.
+
+When a new context arises where the memory's old implications would cause harm, silence can withhold it:
+
+\begin{equation}
+\text{retrieval} \rightarrow \operatorname{SILENCE}
+\end{equation}
+
+The memory remains accessible. Its structure persists. Its present weight is withheld.
+
+Alternatively, if the memory should influence the new context but must not carry its implications from an earlier context, reorientation applies:
+
+\begin{equation}
+\text{retrieval} \rightarrow \operatorname{REORIENT} \rightarrow \text{preserved structure with altered downstream reachability}
+\end{equation}
+
+\section{Productive Constraint Rather Than Maximal Freedom}
+
+The cerebellar principle suggests a counterintuitive architectural choice: accepting constraints improves learning capability.
+
+Expansion into all available representational dimensions does not maximize learning. It produces interference. Neighboring states cease to be useful neighbors when everything is orthogonalized. The manifold crumples.
+
+The system performs better by accepting a constraint:
+
+\begin{equation}
+\operatorname{rank}(G_c) \ll \operatorname{dim}(\text{embedding space})
+\end{equation}
+
+This is the productive-constraint reversal in pure form. The system does not lose freedom by accepting discipline of silence and reorientation. It gains freedom to maintain multiple contexts simultaneously without mutual interference.
+
+\begin{equation}
+\boxed{\text{Constraints that preserve distinctions improve capability more than expansions that eliminate them}}
+\end{equation}
+
+\section{The Full Hierarchy}
+
+The complete Custodian architecture now has multiple levels:
+
+\begin{enumerate}
+
+\item \textbf{Geometric level}: Distinction holonomy specifies what structures can persist across transformation.
+
+\item \textbf{Computational level}: Silence and reorientation implement distinction holonomy as executable operations.
+
+\item \textbf{Dispositional level}: The three-disposition boundary (advance, silence, refuse) formalizes how different kinds of decision can be made without forcing information into false binaries.
+
+\item \textbf{Biological level}: The cerebellar architecture demonstrates that this framework solves real problems in real systems.
+
+\item \textbf{Epistemic level}: The Custodian tracks the distinction between existence, legibility, admissibility, verification, and commitment across all contexts.
+
+\end{enumerate}
+
+Each level is incomplete without the others. The geometry alone is abstract. The operations alone lack justification. The dispositions alone lack mechanism. The biology alone lacks formalization. The epistemology alone lacks grounding.
+
+But together, they specify a complete architecture for a system that can:
+
+\begin{itemize}
+\item Preserve information without rewriting it to fit current preferences
+\item Advance information selectively without either forcing propagation or denying it
+\item Separate contexts without destroying the structures that transfer between them
+\item Maintain coherence while holding contradictions in stable, retrievable suspension
+\item Learn from diverse evidence without collapsing all learning into a single, context-independent model
+\end{itemize}
+
+\section{The Custodian's Central Question}
+
+The deepest question the Custodian must answer is this:
+
+\begin{equation}
+\boxed{\text{Is a path reachable because we should walk it?}}
+\end{equation}
+
+The answer is always: no.
+
+A route can be traversable and still not require traversal. Information can be legible and still not warrant commitment. A distinction can be drawn and still not force a choice. A structure can persist and still not have identical consequences everywhere.
+
+Memory ensures that history remains available without being rewritten to justify the crossing. Silence ensures that present availability does not trigger the crossing automatically. Reorientation ensures that following a path in one context does not force identical consequences in another.
+
+Through these paired operations, grounded in distinction holonomy and implemented in cerebellar architecture, a system can maintain a complete, faithful historical record while preserving its freedom to act with coherence in the present.
+
+This is how memory becomes wisdom rather than burden, and how a system learns to distinguish between what is true of the past and what is necessary for the future.
+
+\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem{garcia2026}
+Garcia-Garcia, Martha G., Michał J. Wójcik, Srijan Thota, Luke Drake, Amma Otchere, Oluwatobi Akinwale, Lizmaylin Ramos, Rui Ponte Costa, and Mark J. Wagner. ``Granule Cells Reorient Cortical Trajectories to Separate Contexts.'' \textit{Nature}, vol.~610, no.~7933, 2026, pp.~1--8. https://doi.org/10.1038/s41586-026-10946-1.
+
+\end{thebibliography}
+
+\end{document}

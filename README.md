@@ -1,5 +1,9 @@
 # laboratory
 
+[Continuation Geometry](https://github.com/standardgalactic/laboratory/blob/main/continuation-geometry/README.md)
+
+![](newline.png)
+
 [Depth Before Derivation](https://standardgalactic.github.io/laboratory/depth_before_derivation.pdf)
 
 [Distinction and Continuation](https://standardgalactic.github.io/laboratory/distinction-and-continuation.pdf)
@@ -18,3 +22,4 @@
 
 [Latency of Evidence](https://standardgalactic.github.io/laboratory/latency-of-evidence.pdf)
 
+![](basic-prompt.gif)

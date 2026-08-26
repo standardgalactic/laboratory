@@ -1,0 +1,3148 @@
+\documentclass[11pt,oneside]{book}
+
+% ---------- Encoding & fonts ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+% ---------- Math ----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% ---------- Page layout ----------
+\usepackage[margin=1.25in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ---------- Quotes / typography ----------
+\usepackage{csquotes}
+\usepackage[protrusion=true,expansion=false]{microtype}
+
+% ---------- Links (load late) ----------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  pdftitle={The Crinkle-Cut Supercube},
+  pdfauthor={Flyxion}
+}
+
+% ---------- Section numbering depth ----------
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% ---------- Quote environment styling (used for the Crinkle-Cut Principle, etc.) ----------
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\itshape}
+
+% ---------- Pandoc compatibility macros ----------
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\title{\textbf{The Crinkle-Cut Supercube}\\[0.5em]
+\large Constraint-Directed Infolding, Hidden Surface Area,\\
+and the Geometry of Emergent Boundaries}
+\author{Flyxion}
+\date{}
+
+
+\begin{document}
+\pagestyle{plain}
+
+\frontmatter
+
+\maketitle
+
+\hypertarget{abstract}{%
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}\label{abstract}}
+
+Ordinary origami specifies a transformation and treats the resulting
+boundary as its consequence: a sequence of folds, or the crease pattern
+that records their result, is given in advance, and the finished shape
+follows from executing it. This monograph describes and formalizes a
+different construction, in which a small number of relations the
+finished boundary must satisfy are specified instead, and the
+transformation that satisfies them is discovered rather than prescribed.
+
+The central example is a physical construction, the Crinkle-Cut
+Supercube, in which three non-contiguous squares were marked on a single
+large sheet, each annotated with the edge and vertex roles it was to
+occupy in a finished cube corner. No crease pattern connected the three
+squares in advance. The sheet was folded, pleated, and where necessary
+crumpled until the three marked regions achieved their declared exterior
+relations, with the remainder of the sheet, considerably larger in area
+than the three faces it supports, folded into the object's interior
+rather than trimmed away.
+
+The monograph argues that existing origami notation, built around
+sequences of operations or complete crease patterns, cannot describe a
+specification of this kind, and introduces a fourth descriptive level,
+the constraint level, together with a formal vocabulary of marked
+regions, local frames, boundary grammars, and a constrained search
+operator, sufficient to state such a specification precisely. This
+formalism is then used to establish the monograph's central theoretical
+claim: that a finished boundary satisfying a declared specification does
+not, and structurally cannot, disclose which of the many interior
+histories capable of satisfying that same specification actually
+produced it. Exterior equivalence, in the sense the monograph makes
+precise, does not imply structural, crease, or procedural equivalence
+among the realizations that share it.
+
+The argument is extended to the embodied character of the search process
+itself, to a carefully bounded structural analogy with the folding of
+the cerebral cortex, and to a formally hedged principle describing the
+conditions under which spatially separated, locally framed regions can
+be brought into a shared exterior configuration without cutting the
+sheet that connects them. Throughout, the monograph distinguishes what a
+single constructive demonstration actually establishes from what remains
+conjectural, and treats the finished, visibly irregular object not as an
+imperfect execution of a clean design but as a physical certificate that
+a sparse specification, realized by a much larger and largely
+unrecoverable hidden process, was in fact satisfiable.
+
+\tableofcontents
+
+\mainmatter
+
+\hypertarget{introduction-the-boundary-before-the-fold}{%
+\chapter*{Introduction: The Boundary Before the Fold}
+\addcontentsline{toc}{chapter}{Introduction: The Boundary Before the Fold}\label{introduction-the-boundary-before-the-fold}}
+
+Ordinary origami begins with a transformation and ends with a shape. A
+sequence of folds, or a crease pattern that records their result, is
+specified in advance, and the folder's task is to execute it faithfully.
+The final boundary of the object is a consequence of the folds, not
+their premise.
+
+Constraint-directed infolding inverts this order. Instead of specifying
+the transformation and observing what boundary results, the constructor
+specifies a small number of relations the final boundary must satisfy
+and permits the transformation itself to be found rather than
+prescribed. Selected regions of a sheet are marked and assigned roles:
+this edge is to become a bottom edge, that one a side edge, these three
+corners are to meet at a shared vertex. Nothing is specified about how
+the material between those regions is to be folded, or in what order, or
+with what crease pattern. It is left free to buckle, pleat, invert,
+overlap, or crumple, provided that whatever it does, the marked
+relations end up satisfied.
+
+The Crinkle-Cut Supercube is the constructive example around which this
+monograph is built. Three non-contiguous squares were marked on a single
+large sheet, at some distance from one another and with no shared edge.
+Each square carried edge annotations indicating which of its sides
+should occupy the bottom, and which the side, of a finished cube. The
+sheet was then folded, without a predetermined crease pattern, until
+those three marked squares had been brought together as three mutually
+adjacent faces sharing a common corner. The remainder of the sheet,
+considerably larger in area than the three faces it was made to support,
+was not cut away. It was pushed, pleated, and crumpled into the interior
+of the resulting box, where it remains, hidden but present, as the
+material cost of the exterior that is visible.
+
+This is not a polished folding technique, and it is not offered as one.
+The finished object is visibly irregular. Its value lies elsewhere: it
+demonstrates that a target exterior can be specified more sparsely than
+a complete crease pattern requires, and that the gap between a sparse
+specification and a complete physical object can be closed by permitting
+unconstrained material to absorb whatever geometric surplus the
+specification does not resolve. What is prescribed is preserved. What is
+not prescribed is not thereby prevented; it is simply free, and the
+sheet finds \emph{some} way to accommodate it.
+
+The central claim developed across the monograph is the following:
+
+\begin{quote}
+Constraint-directed infolding preserves selected surface distinctions by
+transferring unresolved geometric surplus into hidden interior
+structure.
+\end{quote}
+
+Everything that follows is an attempt to make this claim precise, to
+give it a formal vocabulary, to trace its consequences for what a
+finished boundary can and cannot disclose about its own history, and to
+ask how far a strategy discovered by hand with a single sheet of paper
+generalizes to other systems in which a legible exterior is achieved
+atop a much larger, much less legible interior.
+
+\hypertarget{scope-and-disclaimers}{%
+\section{Scope and disclaimers}\label{scope-and-disclaimers}}
+
+Three things this monograph does not attempt should be stated plainly
+before the argument begins.
+
+It does not offer a universal folding theorem. The claims advanced here
+are existence claims for a demonstrated class of constructions, not
+general theorems about which boundary specifications are realizable from
+which sheets. Where a stronger conjecture is stated, it is marked as a
+conjecture and not treated as established.
+
+It does not offer a complete physical theory of crumpling. Crumpling is
+treated throughout as a name for a family of admissible deformations
+whose exact microstructure is left underdetermined by design, not as a
+phenomenon whose mechanics this monograph resolves. Existing work in the
+physics of crumpled sheets is drawn on where relevant but is not the
+subject of the monograph.
+
+It does not offer a literal model of cortical development. A structural
+analogy is developed in Part V between the paper construction and the
+folding of the cerebral cortex, because both involve an area-rich
+surface accommodating itself to a volume-limited environment. That
+analogy is developed carefully and its limits are stated explicitly, in
+the same chapter in which it is introduced, precisely because the
+temptation to overstate it is real and the biological literature does
+not support a literal reading.
+
+\hypertarget{how-the-argument-proceeds}{%
+\section{How the argument proceeds}\label{how-the-argument-proceeds}}
+
+The monograph has three movements.
+
+The first movement, comprising Part I, is constructive. It reconstructs
+the original experiment in enough detail to establish exactly what was
+demonstrated, and it identifies precisely why existing origami notation,
+built around operations and crease patterns, cannot describe what the
+experiment did. This motivates the introduction of a fourth descriptive
+level, above operations, creases, and shapes: the level of constraints.
+
+The second movement, comprising Parts II and III, is formal. A
+vocabulary of marked regions, local frames, boundary conditions, and a
+search-like infolding operator is developed in enough detail to state
+the Supercube's specification precisely. This formal apparatus is then
+used to show why a satisfied specification cannot, by inspection of the
+exterior alone, disclose the interior history that satisfied it. This is
+the monograph's central theoretical result, and it follows directly from
+the formalism rather than being asserted independently of it.
+
+The third movement, comprising Parts IV through VI, extends the argument
+outward: to the embodied, externally-scaffolded character of the search
+process itself; to a carefully bounded structural analogy with cortical
+folding; and finally to a general principle, stated with appropriate
+hedges, about when spatially separated marked regions can be brought
+into a shared exterior configuration without cutting the sheet that
+connects them.
+
+The finished Supercube is, in the end, treated as a witness rather than
+as a specimen. It does not prove that every boundary specification is
+realizable. It proves that at least one nontrivial specification was,
+and it does so in a form that can be inspected, unfolded, and reasoned
+about directly. The rest of the monograph is an attempt to say, as
+precisely as possible, what that single physical fact actually shows.
+
+\part{The Constructive Problem}
+
+\hypertarget{chapter-1.-a-cube-without-a-net}{%
+\chapter{A Cube Without a
+Net}\label{chapter-1.-a-cube-without-a-net}}
+
+\hypertarget{the-ordinary-cube-net-as-a-solved-problem}{%
+\section{The ordinary cube net as a solved
+problem}\label{the-ordinary-cube-net-as-a-solved-problem}}
+
+Before describing what the Crinkle-Cut Supercube did, it is worth being
+precise about what an ordinary folded cube does not have to do.
+
+A standard cube net is six squares arranged in the plane so that each
+pair of squares meant to become adjacent faces already shares an edge in
+the unfolded layout. The classic cross-shaped net is one such
+arrangement among eleven possible ones, but every valid net shares the
+same property: the planar adjacency of its squares has already been
+chosen to match the adjacency the finished cube requires. Folding along
+the marked edges does not discover this adjacency. It executes it. The
+hard part of the problem, choosing which squares should touch which, has
+already been solved on paper before a single fold is made.
+
+This is worth stating because it is easy to mistake the appearance of a
+folding task for its actual content. A net looks like raw material
+waiting to be shaped, but it is closer to a solution waiting to be
+unpacked. The folder's contribution is real but narrow: fold accurately
+along the given lines, in a sensible order, and the geometry follows
+automatically because it was arranged to follow automatically.
+
+\hypertarget{a-different-starting-point}{%
+\section{A different starting
+point}\label{a-different-starting-point}}
+
+The Crinkle-Cut Supercube began from a different kind of specification,
+one that did not solve the adjacency problem in advance.
+
+A single large sheet, substantially bigger than the six-square area a
+minimal net would require, was the starting material. Three squares were
+marked on this sheet, and critically, the three squares were not
+adjacent to one another and did not share edges. They sat at separated
+locations across the sheet, connected only through the intervening
+material that lay between them.
+
+Each square was annotated along two of its edges to indicate the role
+that edge was meant to play in the finished object. One edge was marked
+to become a bottom edge of the eventual cube; another was marked to
+become a side edge. A third mark, shared conceptually across the three
+squares even though it appeared as a separate small annotation on each,
+indicated that a particular corner of each square was meant to become
+the same corner of the finished object; the three squares were to meet,
+eventually, at one shared exterior vertex.
+
+Nothing else about the sheet was specified. No crease pattern connected
+the three squares to one another. No instructions indicated how the
+intervening material should be treated, in what order the folds should
+proceed, or what shape that material would end up taking. Only the
+exterior relations among the three marked squares were declared: which
+edges belonged where, and which corners were to coincide.
+
+\hypertarget{what-the-marks-meant}{%
+\section{What the marks meant}\label{what-the-marks-meant}}
+
+It is worth dwelling on what kind of information the blue markings
+actually carried, because it is easy to mistake them for crease
+instructions and they were not that.
+
+A crease instruction says: fold here, in this direction. The blue marks
+on the Supercube's three squares said something different: this edge,
+wherever it ends up and however it gets there, must be the bottom edge;
+this other edge must be the side edge; this corner must coincide with
+these two other corners. The marks were coordinate annotations, not
+motion instructions. They fixed a target relation among features of the
+sheet without fixing the path by which that relation would be reached.
+
+This distinction turns out to matter a great deal, and later chapters
+will develop it formally. For now it is enough to notice that the three
+marked squares functioned like local frames: each one carried its own
+small coordinate system, indicating which of its edges corresponded to
+which role in the eventual object, independent of where that square
+happened to sit on the original sheet or how far it was from the other
+two.
+
+\hypertarget{the-construction}{%
+\section{The construction}\label{the-construction}}
+
+The construction proceeded, as closely as the surviving photographs and
+the constructor's account allow it to be reconstructed, through four
+rough stages.
+
+\textbf{Marking.} The three squares were identified on the flat sheet
+and their edges annotated as described above. At this stage the sheet
+was still entirely flat, and the three squares were visibly separated by
+substantial intervening area, some of it many times the area of the
+squares themselves.
+
+\textbf{Approximate alignment.} The sheet was folded, without a
+predetermined sequence, in whatever way brought the three marked squares
+closer to one another and closer to the relative orientation their
+annotations demanded. This stage involved a great deal of trial: a fold
+that brought two squares closer together might leave them misoriented
+relative to each other, requiring a different fold, or an additional
+one, to correct the orientation without losing the proximity already
+gained.
+
+\textbf{Corner formation.} At some point in this process, the three
+squares arrived at a configuration in which their marked corners could
+be brought together at a single shared vertex, with their bottom and
+side edges correctly oriented relative to one another. This was the
+decisive moment in the construction. Once achieved, it gave the object a
+partial cube frame: three faces, correctly adjacent, correctly oriented,
+sharing a corner, even though the object as a whole was still far from
+resembling a finished cube.
+
+\textbf{Infolding of the remainder.} The material that had not been
+selected as one of the three faces, still connected to all three of them
+and still comprising the great majority of the sheet's total area, was
+folded, pleated, and where necessary crumpled inward, so that it came to
+occupy the interior of the box the three faces now defined. This
+material was not trimmed or discarded at any point. It was compressed
+and redirected until it fit inside the boundary that the three marked
+faces had established, becoming the hidden bulk of the finished object.
+
+The photographs of this sequence show exactly this progression: a flat
+sheet with a crease pattern and blue markings visible on regions
+destined to become exterior faces; a partially folded intermediate state
+in which those regions are beginning to approach one another; a
+recognizable, if visibly imperfect, cube with the three marked squares
+legible as its faces; and, in a separate but related sequence, the same
+sheet carried further, through a series of increasingly dense crumples,
+into shapes that are no longer cube-like at all, while the same marked
+regions remain identifiable within them. This second sequence is
+discussed at length in later chapters, since it demonstrates that the
+same marked sheet admits more than one admissible resolution and that
+the cube was one outcome among a family of outcomes compatible with the
+same declared constraints.
+
+\hypertarget{what-was-and-was-not-discarded}{%
+\section{What was, and was not,
+discarded}\label{what-was-and-was-not-discarded}}
+
+The distinction between the three selected faces and everything else
+deserves to be stated as sharply as possible, because the entire
+argument of the monograph depends on it.
+
+The unselected material was not waste. It was not treated as scrap to be
+trimmed away once its purpose, holding the three squares in their
+original flat positions, had been served. It remained physically present
+throughout, attached to all three faces at every stage, and it remains
+present inside the finished object. What changed was not its existence
+but its visibility: it went from being spread out and legible on the
+flat sheet to being folded, layered, and hidden inside a boundary that
+no longer displays it.
+
+This is the first appearance of a distinction that recurs throughout the
+monograph, between a substrate, a realized exterior, and a hidden
+remainder. The substrate is the whole sheet. The realized exterior is
+the small fraction of it, in this case three squares, that was selected
+in advance and that remains legible in the finished object. The hidden
+remainder is everything else: present, load-bearing in the sense that it
+gives the object its bulk and its stability, but not designed to be
+looked at.
+
+\hypertarget{what-the-experiment-demonstrates-precisely}{%
+\section{What the experiment demonstrates,
+precisely}\label{what-the-experiment-demonstrates-precisely}}
+
+It is important to state the result of this experiment narrowly, because
+it is tempting to overstate it.
+
+The Crinkle-Cut Supercube does not demonstrate that any assignment of
+three non-contiguous squares to face roles on any sheet can be folded
+into a coherent cube corner. It demonstrates one instance. What can be
+said with confidence is this:
+
+\begin{quote}
+At least one non-contiguous, locally oriented face assignment can be
+realized as a coherent box boundary when the intervening surface is
+permitted to infold.
+\end{quote}
+
+This is a constructive existence claim, and its force comes entirely
+from the fact that it is constructive. No argument by symmetry, no
+appeal to general folding theorems, and no computational search
+established that this configuration was achievable. A physical sheet,
+folded by hand, established it, by actually reaching the required
+configuration. The object itself is the proof, in the sense that its
+existence settles the only question that was actually at issue: whether
+the declared relations among the three marked squares were realizable at
+all, given a sheet large enough and permission to infold everything
+else.
+
+What the experiment leaves open, and what the rest of the monograph is
+largely occupied with, is how far this single instance generalizes. Does
+the same strategy work for four squares instead of three? For different
+relative placements, different orientations, different ratios of
+selected area to total sheet area? Does it work reliably, or did this
+particular configuration happen to be an easy one? These are the
+questions that motivate the formal apparatus developed in Part II, and
+they cannot be answered by staring harder at the single artifact
+described in this chapter. They require a vocabulary in which the
+artifact's construction can be described precisely enough to be varied,
+tested, and reasoned about beyond the one sheet that was actually
+folded.
+
+Chapter 2 develops the reason such a vocabulary does not already exist
+within conventional origami description, and identifies exactly where
+the descriptive gap lies.
+
+\hypertarget{chapter-2.-why-existing-origami-notation-is-insufficient}{%
+\chapter{Why Existing Origami Notation Is
+Insufficient}\label{chapter-2.-why-existing-origami-notation-is-insufficient}}
+
+\hypertarget{what-a-fold-diagram-is-for}{%
+\section{What a fold diagram is
+for}\label{what-a-fold-diagram-is-for}}
+
+Origami diagramming, in the form most widely used today, descends from
+the notation system introduced by Akira Yoshizawa and later standardized
+and extended by Samuel Randlett and Robert Harbin. Its vocabulary is by
+now familiar even to casual folders: a dashed line for a valley fold, a
+dash-dot line for a mountain fold, arrows indicating the direction and
+sometimes the destination of a fold, and further symbols for operations
+such as reversing a fold, sinking a point inward, rotating the model, or
+inflating a pocket.
+
+This notation answers a specific question, asked at a specific moment in
+a construction: what should the folder do next? It is addressed to a
+reader who has the model in hand, at a known intermediate state, and who
+needs to know which edge to bring to which, in which direction, before
+turning the page. The notation succeeds by being unambiguous at exactly
+this local level. It does not need to explain why the fold is being
+made, what larger structure it contributes to, or what would happen if a
+different fold were made instead. It is an instruction, not an
+explanation, and it is a good one precisely because instructions of this
+kind are what a folder executing a known design actually needs.
+
+\hypertarget{what-a-crease-pattern-is-for}{%
+\section{What a crease pattern is
+for}\label{what-a-crease-pattern-is-for}}
+
+A crease pattern generalizes this a step further. Rather than a sequence
+of individual instructions, it presents the complete set of fold lines,
+mountain and valley, superimposed on the flattened sheet, from which the
+entire model can in principle be folded at once, provided the folder can
+determine a workable order for collapsing the pattern.
+
+Crease patterns support a substantial body of mathematics: theorems
+about which patterns can be folded flat at all, results connecting local
+vertex configurations to global flat-foldability, techniques for
+designing a crease pattern to produce a specified silhouette, and
+methods for verifying that a proposed folding sequence does not require
+the paper to pass through itself. This mathematics is powerful, and it
+answers a different question than a step-by-step diagram does: not what
+should the folder do next, but what is the complete geometric
+relationship between this flat sheet and this folded form?
+
+Both notations, the sequential diagram and the global crease pattern,
+share an assumption that is worth making explicit because the
+Crinkle-Cut Supercube violates it. Both assume that the relevant crease
+structure, whether presented incrementally or all at once, is knowable
+and statable in advance, and that describing the fold is largely
+equivalent to describing the object. Once the creases are given, the
+object is determined, up to the ordinary variability of hand execution.
+
+\hypertarget{practices-that-already-relax-this-assumption}{%
+\section{Practices that already relax this
+assumption}\label{practices-that-already-relax-this-assumption}}
+
+This assumption has already been relaxed in several existing origami
+practices, and it is worth being clear about how far those practices go,
+so that what remains undescribed after them can be located precisely.
+
+Wet folding introduces controlled curvature into what would otherwise be
+flat facets, using dampened paper's plasticity to hold gentle curves
+rather than sharp creases. The resulting surface is not fully specified
+by a crease pattern in the traditional sense, since the exact curvature
+achieved depends on how the paper is shaped by hand while damp, but the
+target form is still generally known in advance and the folder is still
+working toward a predetermined shape.
+
+Curved folding extends this further, using continuous curved creases
+whose interaction produces developable surfaces that are difficult to
+specify by discrete fold lines alone. This mathematics is more demanding
+than flat-crease theory, but it remains a theory of how a known target
+surface arises from a known family of creases.
+
+Crumpling, treated as a technique in its own right rather than as an
+accident to be avoided, appears in sculptural and textural origami,
+where an artist may crumple paper deliberately to produce organic,
+non-planar surface texture as part of a larger design. Here the exact
+microstructure of the crumple is genuinely left unspecified. But the
+crumpled region is typically decorative or textural. It is not usually
+required to satisfy a precise exterior relation to some other,
+separately specified part of the model. Its underdetermination is a
+feature of its appearance, not a device for realizing a boundary
+constraint that would otherwise be unreachable.
+
+Each of these practices weakens the connection between crease
+specification and final form in a particular, limited way. None of them
+provides a vocabulary for the situation the Supercube presents: several
+widely separated regions of a sheet, each carrying its own oriented
+target relation to the finished exterior, with the entire remainder of
+the sheet left free to do whatever is necessary, structurally rather
+than decoratively, to bring those regions into their required relation.
+
+\hypertarget{the-question-none-of-these-notations-ask}{%
+\section{The question none of these notations
+ask}\label{the-question-none-of-these-notations-ask}}
+
+It is possible to state the gap directly. Sequential diagrams answer:
+what should the folder do next? Crease patterns answer: along which
+lines must the sheet fold to produce this form? Wet folding and curved
+folding answer variants of the same question, extended to continuous
+curvature. Textural crumpling answers: how can this region's appearance
+be varied without a fixed target? None of them answers the question the
+Supercube's construction was actually organized around:
+
+\begin{quote}
+Which relations must hold at the final boundary, regardless of the exact
+crease network through which they are realized?
+\end{quote}
+
+This is a question about the object's exterior, posed independently of
+any particular route to achieving it. It does not ask which creases to
+make. It asks what must be true when the folding is finished, leaving
+the folding itself, and everything about it that does not bear on that
+final truth, unconstrained. A crease pattern can be seen as one
+particular, fully-specified answer to a question of this kind, in the
+special case where every degree of freedom has been resolved in advance.
+The Supercube's specification is a much sparser answer to the same
+general kind of question, one that resolves only the exterior relations
+among three regions and leaves everything else open.
+
+\hypertarget{four-descriptive-levels}{%
+\section{Four descriptive levels}\label{four-descriptive-levels}}
+
+It is useful to organize this discussion around four distinct levels at
+which a paper construction can be described, moving from the most local
+and procedural to the most global and declarative.
+
+At the \textbf{operation level}, description consists of individual
+actions: fold this edge to that one, reverse this flap, sink this point.
+This is the level of the sequential diagram. It is addressed to the
+hands, one instruction at a time.
+
+At the \textbf{crease level}, description consists of the complete
+pattern of fold lines on the flattened sheet, without necessarily
+specifying an order of execution. This is the level of crease-pattern
+mathematics. It is addressed to the sheet as a whole, but still in terms
+of where it must fold.
+
+At the \textbf{shape level}, description consists of the target
+three-dimensional form itself: a cube, a crane, a tessellated surface.
+This is the level at which a finished model is usually named and
+recognized. It says what the object is, without saying how it got that
+way.
+
+At the \textbf{constraint level}, description consists of a set of
+relations that selected features of the finished object must satisfy:
+this edge here, this corner there, these three regions mutually
+adjacent, this much material relegated to the interior. This level does
+not specify operations, does not specify a complete crease pattern, and
+does not even specify the complete shape. It specifies only the subset
+of the shape's structure that has been chosen to matter, and it leaves
+everything else, including the exact crease network by which those
+chosen relations come to be satisfied, as free variables to be resolved
+during construction rather than before it.
+
+Existing origami description operates almost entirely at the first two
+levels, with the third level, the target shape, usually serving as an
+informal label attached to a complete crease-level specification rather
+than as an independent description in its own right. The Crinkle-Cut
+Supercube's specification belongs to the fourth level. Three squares and
+their edge and corner annotations constitute a constraint-level
+description: sparse, declarative, and silent about the crease network
+required to satisfy it. The remaining chapters of Part II are devoted to
+giving this fourth level a formal vocabulary of its own, since none of
+the existing levels can be stretched to cover it without losing the very
+property, the deliberate underdetermination of everything not explicitly
+marked, that makes the Supercube's construction what it is.
+
+\hypertarget{reproducibility-reconsidered}{%
+\section{Reproducibility
+reconsidered}\label{reproducibility-reconsidered}}
+
+One further consequence of working at the constraint level is worth
+drawing out before moving on, because it changes what it would mean for
+someone else to reproduce the Crinkle-Cut Supercube.
+
+A conventional diagram aims at a strong form of reproducibility: a
+second folder, following the same instructions, should arrive at very
+nearly the same crease network and the same final layering as the
+original. Fidelity to the instructions is fidelity to the object.
+
+A constraint-level specification supports, and arguably only supports, a
+weaker but more interesting form of reproducibility. A second folder
+given the same three marked squares and the same edge and corner
+annotations, but no information about how the original sheet was
+actually folded, might arrive at a finished cube corner by an entirely
+different sequence of folds, with an entirely different interior crease
+network and layering, while still satisfying the same declared
+relations. Both constructions would be, in a sense to be made precise in
+Chapter 6, equivalent: not because they share a folding history, but
+because they share a boundary.
+
+This is not a weaker notion of success. It is a different one, and it is
+the notion the rest of this monograph will be built around. Two
+realizations count as satisfying the same specification when they agree
+on what was declared to matter, whatever else may differ between them.
+Chapter 3 begins the work of stating what, exactly, is declared to
+matter, and how.
+
+\part{A Formal Language of Infolding}
+
+\hypertarget{chapter-3.-marked-surfaces-and-local-frames}{%
+\chapter{Marked Surfaces and Local
+Frames}\label{chapter-3.-marked-surfaces-and-local-frames}}
+
+\hypertarget{the-sheet-as-a-material-surface}{%
+\section{The sheet as a material
+surface}\label{the-sheet-as-a-material-surface}}
+
+The formal apparatus developed in this and the following two chapters is
+built to describe exactly the situation Chapter 1 reconstructed: a
+single connected sheet, most of it destined to disappear from view, a
+small number of regions on it singled out in advance, and a target
+relation among those regions that the finished object must satisfy.
+
+Let \(P\) denote the sheet. At the coarsest level of description, \(P\)
+can be treated as a connected, bounded two-dimensional surface,
+initially lying flat in the plane. This idealization is useful for
+stating relations precisely, but it should not be mistaken for a claim
+that the sheet's material properties are irrelevant. Real paper has
+thickness, stiffness, grain direction, and a limited capacity to bend
+before it creases plastically rather than elastically; it resists
+self-intersection and cannot pass through itself. These properties
+govern what is physically achievable and are reintroduced wherever the
+argument depends on them, particularly in Chapter 6's treatment of
+surplus area and Chapter 9's treatment of obstructions. For the purpose
+of stating what is being specified, however, it is enough to treat \(P\)
+as a surface whose points can be tracked through a deformation.
+
+\hypertarget{selected-regions-and-the-infoldable-remainder}{%
+\section{Selected regions and the infoldable
+remainder}\label{selected-regions-and-the-infoldable-remainder}}
+
+A finite collection of regions is selected on \(P\) in advance:
+
+\[E = \{E_1, E_2, \ldots, E_n\}\]
+
+These are the regions intended to remain legible on the finished
+object's exterior. In the Supercube, \(n = 3\), and each \(E_i\) is one
+of the three marked squares.
+
+The complement of this selection,
+
+\[I = P \setminus E\]
+
+is the infoldable remainder: every part of the sheet not singled out for
+exterior legibility.
+
+The word ``infoldable'' is chosen deliberately over alternatives like
+``excess'' or ``waste,'' because those alternatives suggest that \(I\)
+is material to be gotten rid of, and it is not. Nothing about \(I\) is
+discarded, cut, or treated as disposable. What distinguishes \(I\) from
+\(E\) is only that its final geometry has not been declared in advance.
+It is free where \(E\) is fixed. This is a statement about how much has
+been specified, not a statement about the region's importance to the
+finished object; as Chapter 6 will argue at length, \(I\) typically
+constitutes the great majority of the object's material bulk even though
+it constitutes none of its declared exterior.
+
+\hypertarget{local-frames}{%
+\section{Local frames}\label{local-frames}}
+
+Each selected region carries more than just its own extent. It carries
+an orientation: a declaration of which of its features correspond to
+which roles in the target exterior.
+
+Write a framed region as a pair:
+
+\[F_i = (E_i, o_i)\]
+
+where \(o_i\) is the orientation data attached to \(E_i\). For a square
+region, this orientation data might distinguish a bottom edge from a
+side edge from a top edge, or equivalently specify a distinguished
+corner together with the two edge directions incident to it. The precise
+content of \(o_i\) depends on the shape of \(E_i\) and on how many of
+its features are given a target role; nothing in the formalism requires
+\(E_i\) to be a square, or requires every edge of \(E_i\) to be labeled.
+
+In the Supercube, the physical blue marks are best understood as a
+direct, material instantiation of this orientation data. They were not
+drawn to indicate where the sheet should fold. They were drawn to
+indicate which edge of each marked square was to become which edge of
+the finished cube, independent of the square's position on the original
+flat sheet or its distance from the other two marked squares. A local
+frame, in other words, is portable in exactly the sense the marked
+squares needed to be: it travels with the region through whatever
+deformation eventually brings that region into its target position, and
+it is legible on the region wherever that region ends up.
+
+\hypertarget{what-a-local-frame-does-not-specify}{%
+\section{What a local frame does not
+specify}\label{what-a-local-frame-does-not-specify}}
+
+It is worth being precise about the boundary of what a local frame
+declares, because the formalism depends on this boundary being sharp.
+
+A local frame \(F_i = (E_i, o_i)\) specifies the identity of a region
+and the roles assigned to some of its features. It does not specify
+where \(E_i\) currently sits relative to the other selected regions. It
+does not specify how \(E_i\) is to be moved, folded, or reoriented in
+order to bring \(o_i\) into agreement with the corresponding roles on
+the target object. And critically, it says nothing at all about the
+material outside \(E_i\), including the material immediately adjacent to
+it. A local frame is a statement about one region, made independently of
+every other region and independently of the deformation that will
+eventually be required to realize it.
+
+This independence is what makes it possible to declare relations among
+widely separated regions without having to say anything about the
+intervening sheet. The three squares of the Supercube could be marked
+without reference to one another and without reference to the material
+lying between them, because each mark was a self-contained statement
+about one region's intended role. The relations \emph{among} the three
+frames, which edges must meet which, which corners must coincide, are a
+separate layer of specification, introduced in Chapter 4. A local frame,
+on its own, only ever describes a single region's target orientation.
+
+\hypertarget{edge-roles-and-partial-labeling}{%
+\section{Edge roles and partial
+labeling}\label{edge-roles-and-partial-labeling}}
+
+Within a local frame, individual edges (or, more generally, individual
+boundary features) can be assigned symbolic roles. A short,
+non-exhaustive vocabulary suffices for most purposes:
+
+\begin{itemize}
+\tightlist
+\item
+  \(B\), for an edge intended to become a bottom edge of the target
+  object;
+\item
+  \(S\), for an edge intended to become a side edge;
+\item
+  \(T\), for an edge intended to become a top edge;
+\item
+  \(J_k\), for an edge intended to join a specific other labeled edge,
+  indexed by \(k\);
+\item
+  \(V_k\), for an edge incident to a designated target vertex, indexed
+  by \(k\);
+\item
+  \(X\), for an edge explicitly prohibited from exterior exposure,
+  should such a prohibition be needed.
+\end{itemize}
+
+A framed region can then be written compactly. For instance, one of the
+Supercube's three squares might be written:
+
+\[F_1 = [E_1;\ B = e_1,\ S = e_2]\]
+
+indicating that edge \(e_1\) of region \(E_1\) is assigned the bottom
+role and edge \(e_2\) is assigned the side role, with the remaining
+edges of \(E_1\) left unlabeled.
+
+That last clause, the remaining edges left unlabeled, is not an
+oversight to be corrected in a more careful specification. It is the
+specification. A local frame need not assign a role to every edge of its
+region. Leaving an edge unlabeled is a positive declaration that the
+final orientation or adjacency of that edge is not being constrained,
+not a gap that a more thorough author would have filled in. This is what
+is meant, throughout this monograph, by a \textbf{partial
+specification}: not an incomplete draft of a complete one, but a
+deliberately incomplete final statement of exactly those relations the
+constructor has chosen to care about.
+
+\hypertarget{why-partiality-is-load-bearing}{%
+\section{Why partiality is
+load-bearing}\label{why-partiality-is-load-bearing}}
+
+It is worth pausing on why this partiality matters, rather than treating
+it as an incidental economy of notation.
+
+A specification that labeled every edge of every region, and
+additionally specified the exact relation of every point of \(I\) to
+every other point, would no longer be a constraint-level description in
+the sense of Chapter 2. It would have collapsed back into something
+closer to a complete crease pattern: a full account of the finished
+object's geometry, articulated region by region rather than crease by
+crease, but no less total in its coverage. Total specification of this
+kind is not wrong, but it is a different project. It reintroduces
+exactly the assumption Chapter 2 identified as the limiting feature of
+existing notation, that describing the object is equivalent to
+describing its complete geometry, and it forecloses the very freedom
+that allowed the Supercube's surrounding material to find its own
+accommodation.
+
+The formalism's usefulness depends on keeping the labeled portion small
+relative to the unlabeled portion. A specification that declares three
+edges and one shared vertex, out of a sheet with area many times larger
+than the three regions those edges belong to, constrains a
+correspondingly enormous space of possible deformations down to whatever
+subset of that space happens to satisfy the three declared relations.
+The interesting content of the theory, developed across the remaining
+chapters of Part II and the whole of Part III, concerns what can be said
+about that subset, how large or small it is, what its members have in
+common beyond the declared relations themselves, and what physical
+process might be relied upon to locate a member of it. None of this
+content is visible if the specification is allowed to grow until it
+covers the whole sheet.
+
+\hypertarget{sparse-specification-as-the-chapters-central-idea}{%
+\section{Sparse specification as the chapter's central
+idea}\label{sparse-specification-as-the-chapters-central-idea}}
+
+The formal objects introduced in this chapter, the substrate \(P\), the
+selected regions \(E\) and their complement \(I\), and the local frames
+\(F_i\) with their partially labeled edge roles, are deliberately
+minimal. They say only as much as the Supercube's actual construction
+said: which regions matter, and which of their features are assigned
+target roles. Everything else about the sheet's eventual geometry is
+left open by construction, not by omission.
+
+This is the sense in which the Supercube's specification is
+\textbf{sparse}: a small, explicitly bounded set of declared relations
+governing a much larger surface, with no claim made, and no claim
+needed, about anything the specification does not mention. Chapter 4
+extends this vocabulary from single regions to relations among regions,
+stating formally what it means for two or more framed regions to be
+required to meet, align, or coincide at the finished object's boundary,
+and introduces the graphic notation by which such a specification can be
+recorded on the sheet itself, in the same spirit as the original blue
+marks.
+
+\hypertarget{chapter-4.-boundary-grammar-and-infolding-notation}{%
+\chapter{Boundary Grammar and Infolding
+Notation}\label{chapter-4.-boundary-grammar-and-infolding-notation}}
+
+\hypertarget{from-single-frames-to-relations-among-frames}{%
+\section{From single frames to relations among
+frames}\label{from-single-frames-to-relations-among-frames}}
+
+Chapter 3 gave a vocabulary for describing one selected region at a
+time: its identity, its extent, and the roles assigned to some of its
+edges. That vocabulary is not yet sufficient to state the Supercube's
+specification, because the specification's real content lies in the
+relations \emph{among} the three marked squares, not in any one square
+considered alone. This chapter introduces that relational layer,
+together with a compact graphic notation for recording it directly on a
+sheet.
+
+Let \(\Omega\) denote the effective volume of the object that results
+from a given deformation, and let \(\partial\Omega\) denote its apparent
+exterior boundary. A \textbf{realization} is a deformation \(f\)
+carrying the marked sheet \(P\) into a folded state that satisfies a
+declared set of constraints \(C\). The remainder of this chapter defines
+the constraint types that make up \(C\).
+
+\hypertarget{exposure}{%
+\section{Exposure}\label{exposure}}
+
+The simplest constraint asserts that a selected region ends up visible
+on the finished exterior:
+
+\[f(E_i) \subset \partial\Omega\]
+
+within whatever tolerance the construction's purpose demands. An exact
+reading of this condition would require every point of \(E_i\) to lie
+precisely on the boundary surface; a more forgiving reading, appropriate
+to a hand-folded object like the Supercube, allows \(E_i\) to be
+substantially, though not perfectly, exposed, with minor overlap or
+partial occlusion at its edges tolerated. Chapter 6 returns to the
+question of how such tolerance should be measured; for now it is enough
+to note that an exposure condition is a claim about where a region ends
+up, not about its exact shape once it gets there.
+
+\hypertarget{adjacency}{%
+\section{Adjacency}\label{adjacency}}
+
+An adjacency condition requires a specified edge of one region to meet a
+specified edge of another in the finished exterior:
+
+\[A(E_i:e_a,\ E_j:e_b)\]
+
+This notation reads: edge \(e_a\) of region \(E_i\) must be adjacent, in
+the realized object, to edge \(e_b\) of region \(E_j\). Adjacency can be
+directed, when the orientation of the meeting matters, distinguishing an
+aligned meeting from a reversed one, and it can further distinguish a
+flush meeting from a merely incident one, in which the two edges touch
+without running parallel along their full length. The Supercube's
+construction relied on adjacency conditions of exactly this kind to
+specify that the bottom edge of one marked square was to meet the side
+edge of another.
+
+\hypertarget{vertex-gluing}{%
+\section{Vertex-gluing}\label{vertex-gluing}}
+
+Where three or more frames are required to meet not merely edge-to-edge
+but at a single common point, a vertex-gluing condition is used:
+
+\[G(F_1, F_2, F_3) = V\]
+
+This states that the designated corners of the three named frames must
+become incident to one shared exterior vertex \(V\) in the realized
+object. This was the single most consequential condition in the
+Supercube's specification. Chapter 1 described the moment at which this
+condition first became satisfied as the decisive turn in the
+construction: once the three marked corners could be brought together at
+one point with their associated edges correctly oriented, the object
+possessed a coherent partial cube frame, even though the great majority
+of the sheet remained unresolved. A vertex-gluing condition is, in this
+sense, disproportionately powerful relative to its brevity: it ties
+together conditions on several frames at once, and its satisfaction
+tends to lock a large amount of the surrounding geometry into place as a
+side effect.
+
+\hypertarget{orientation}{%
+\section{Orientation}\label{orientation}}
+
+A region may satisfy every adjacency and vertex condition demanded of it
+while still being incorrectly rotated or reflected relative to its
+intended role, a bottom edge occupying a side position, for instance,
+even where the correct edges happen to touch. An orientation condition
+rules this out by requiring the realized deformation to carry a frame's
+declared orientation into agreement with its target orientation:
+
+\[D f_i(o_i) \approx O_i\]
+
+The notation here is not meant to invoke a literal derivative or to
+require smooth differentiability of \(f\) everywhere; the sheet's actual
+deformation includes sharp creases at which no such derivative would be
+classically defined. What the notation expresses is the preservation of
+the directional roles declared in \(o_i\): that whatever the deformation
+does elsewhere, the marked bottom edge ends up oriented as a bottom
+edge, the marked side edge as a side edge, and so on, up to the
+tolerance the construction allows.
+
+\hypertarget{relegation}{%
+\section{Relegation}\label{relegation}}
+
+The infoldable remainder \(I\), defined in Chapter 3, is not left
+entirely unconstrained. It is subject to one standing condition, which
+can be stated as a relegation constraint:
+
+\[f(I) \subset \Omega \cup H\]
+
+where \(H\) denotes the collection of hidden boundary layers, seams,
+overlaps, and interior pockets the realized object may contain. This is
+not a claim that the free material occupies a literal, zero-thickness
+mathematical interior; a folded sheet has thickness, and its layers
+press against one another and against the interior surfaces of the
+exposed faces. The condition should be read practically: the free
+material must end up tucked inside the apparent envelope of the object,
+or hidden beneath its designated exterior faces, rather than protruding
+as unaccounted-for exterior surface of its own. Relegation is what
+allows the object's declared exterior, in the Supercube's case just
+three squares, to remain the only legible surface of an object built
+from a sheet many times larger than those three squares combined.
+
+\hypertarget{closure}{%
+\section{Closure}\label{closure}}
+
+A final constraint type governs how complete, stable, or functionally
+container-like the finished object must be. Closure is deliberately left
+as a family of conditions rather than a single formula, since what
+counts as adequate closure depends entirely on the construction's
+purpose. Possible closure conditions include: that the boundary contains
+no large unintended openings; that the relegated material remains
+contained without external support once the folder's hands are removed;
+that the object holds its shape for some specified duration; or, at the
+least demanding end, only that the vertex-gluing and adjacency
+conditions above remain satisfied, with no further requirement on the
+object's overall rigidity or permanence.
+
+The Supercube's own closure was modest by this reckoning: the three
+marked faces held their adjacency and vertex relations, and the bulk of
+the sheet was contained within the resulting boundary, but the object
+was not rigid, was not sealed against all gaps, and would not have
+survived indefinite handling without some of its relations loosening.
+This is treated in this monograph not as a shortfall but as an accurate
+report of exactly which conditions the construction was actually able to
+secure, a report that later chapters, particularly Chapter 9's
+discussion of protected and sacrificial distinctions, will show was
+itself a meaningful outcome rather than a simple failure to finish the
+job.
+
+\hypertarget{the-boundary-grammar-as-a-whole}{%
+\section{The boundary grammar as a
+whole}\label{the-boundary-grammar-as-a-whole}}
+
+Together, exposure, adjacency, vertex-gluing, orientation, relegation,
+and closure constitute what this monograph calls a \textbf{boundary
+grammar}: a set of relation types by which a finished object's exterior
+can be specified without specifying the deformation that produces it.
+The Supercube's full specification can now be written compactly,
+gathering the pieces introduced across this chapter and the last:
+
+\begin{gather*}
+\text{INFOLD}(P \setminus E \mid \text{Exposure}(E),\ \text{Adjacency}(A),\\
+\text{Orientation}(O),\ \text{Vertex}(V),\ \text{Closure}(K))
+\end{gather*}
+
+The left-hand argument, \(P \setminus E\), names the free material to be
+searched over. The right-hand arguments name the boundary grammar
+conditions that free material's eventual configuration must satisfy, or
+must not prevent the rest of the object from satisfying. Chapter 5 takes
+up the \(\text{INFOLD}\) operator itself, and the search process it
+denotes, in detail. The remainder of this chapter turns from the
+algebraic notation above to a graphic notation suited to marking these
+same conditions directly on a physical sheet, in the spirit of the
+original blue annotations.
+
+\hypertarget{a-graphic-vocabulary}{%
+\section{A graphic vocabulary}\label{a-graphic-vocabulary}}
+
+A workable notation for constraint-directed infolding should be usable
+by hand, without requiring a computational model to interpret it, and it
+should visually distinguish protected material from free material at a
+glance. The following elements are proposed to meet those requirements;
+the exact graphic conventions are not claimed to be uniquely correct,
+only sufficient, and Appendix A collects them in a single reference
+sheet.
+
+\textbf{Protected faces.} A selected region \(E_i\) is marked with a
+heavy outline and given a short identifier, \(F_1\), \(F_2\), \(F_3\),
+and so on. The heavy outline distinguishes it visually, at a glance,
+from the surrounding free material.
+
+\textbf{Free material.} Regions belonging to \(I\), the infoldable
+remainder, are left unmarked or given only a light shading. This absence
+of marking is itself informative: it signals that the region's internal
+crease structure is outside the specification, not merely that it has
+not yet been decided how to draw it.
+
+\textbf{Edge-role ticks.} Rather than adopting mountain- and valley-fold
+lines for this purpose, which already carry a specific and different
+meaning, edge roles are marked with short ticks or letters placed near
+the relevant edge: a single solid tick for a bottom-role edge, a double
+tick for a side-role edge, and a matching pair of letters, placed near
+two edges required to meet, to indicate an adjacency condition between
+them.
+
+\textbf{Vertex labels.} A small circled label, such as \(V_1\), repeated
+at a corner of each of several selected regions, indicates that those
+corners are required to become incident to one shared exterior vertex.
+Repetition of the same label across multiple regions is what carries the
+vertex-gluing condition; a single unrepeated label carries no such
+requirement.
+
+\textbf{Exposure status.} Where a region's exposure is not simply
+assumed, a short status label may be attached: \(\text{OUT}\) for a
+region intended to be principally exterior, \(\text{IN}\) for one
+intended to be principally interior, \(\text{FREE}\) where either status
+is acceptable, and \(\text{SEAM}\) for a region permitted to appear only
+as a narrow boundary strip or overlap rather than as a full exterior
+face.
+
+\textbf{Phase annotations.} Where a construction benefits from being
+described in stages, brief phase labels may be added separately from the
+geometric marks themselves: \emph{realize \(V_1\)}, then \emph{align the
+bottom-edge cycle}, then \emph{relegate the remaining surplus}. These
+annotations describe the order in which constraints are to be secured,
+not the exact hand motions by which any one of them is secured; they are
+closer to a solver's schedule than to a fold-by-fold diagram.
+
+\hypertarget{compatibility-with-conventional-symbols}{%
+\section{Compatibility with conventional
+symbols}\label{compatibility-with-conventional-symbols}}
+
+None of the notation introduced in this chapter is intended to replace
+the existing vocabulary of mountain and valley folds, reversals, sinks,
+and the rest. A hybrid diagram is not only permitted but often
+desirable: conventional fold symbols can specify a known local
+operation, perhaps a reversal used to bring two marked edges into
+contact, while the constraint-level symbols introduced here specify what
+that operation is being performed in order to preserve or achieve. The
+two vocabularies operate at different descriptive levels, in the sense
+of Chapter 2, and a complete practical diagram for a constraint-directed
+construction may well need both: the constraint level to state what must
+be true when the folder is finished, and the operation level to record
+whatever specific moves the folder actually found useful along the way.
+
+Chapter 5 turns to the process this notation describes rather than
+merely records: the search, denoted \(\text{INFOLD}\), by which a folder
+actually locates a deformation satisfying a declared boundary grammar,
+and the auxiliary operations, locking, relaxing, and repairing a
+constraint mid-construction, that make such a search tractable by hand.
+
+\hypertarget{chapter-5.-the-infold-operator-and-constraint-preserving-search}{%
+\chapter{The Infold Operator and Constraint-Preserving
+Search}\label{chapter-5.-the-infold-operator-and-constraint-preserving-search}}
+
+\hypertarget{a-different-kind-of-instruction}{%
+\section{A different kind of
+instruction}\label{a-different-kind-of-instruction}}
+
+The notation developed in Chapter 4 describes what a finished
+realization must satisfy. It does not, by itself, describe the process
+of arriving at one. This chapter introduces that process, in the form of
+a single operator that stands in deliberate contrast to an ordinary fold
+instruction.
+
+An ordinary fold instruction, of the kind Chapter 2 associated with the
+operation level of description, names a specific action: bring this edge
+to that one, in this direction. Executed correctly, it produces one
+determinate result. The operator introduced here, written
+\(\text{INFOLD}\), does not name a specific action and does not produce
+one determinate result. It names a family of permitted actions and a set
+of conditions those actions must eventually satisfy, and it leaves the
+choice of any particular sequence of actions unresolved.
+
+\[\text{INFOLD}(I \mid C)\]
+
+reads: deform the free region \(I\) through any combination of the
+permitted operations, in any order and to any extent, such that the
+constraint set \(C\) comes to be satisfied, or is not thereby made
+unsatisfiable. \(\text{INFOLD}\) is better understood as a search
+instruction than as a fold instruction. It tells the constructor what
+must be true at the end without telling them how to get there, in the
+same sense that a specification tells an engineer what a bridge must
+bear without telling them which member to weld first.
+
+\hypertarget{the-supercubes-instruction-written-out}{%
+\section{The Supercube's instruction, written
+out}\label{the-supercubes-instruction-written-out}}
+
+Gathering the constraint types introduced in Chapter 4, the Supercube's
+full specification can be written:
+
+\begin{gather*}
+\text{INFOLD}(P \setminus E \mid \text{Exposure}(E),\ \text{Adjacency}(A),\\
+\text{Orientation}(O),\ \text{Vertex}(V),\ \text{Closure}(K))
+\end{gather*}
+
+Read in full: deform the material outside the three marked squares, by
+any combination of folding, pleating, and crumpling, such that the three
+squares remain exposed, their marked edges meet as declared, their
+marked orientations are preserved, their marked corners coincide at a
+shared vertex, and the resulting object achieves at least the modest
+closure the construction actually required. Nothing in this instruction
+specifies which fold to make first, how many creases the free material
+should acquire, or what shape that material takes once it is no longer
+visible. Those questions are left to whatever process actually carries
+out the search, which is the subject of the remainder of this chapter
+and, from a different angle, of Chapter 7.
+
+\hypertarget{the-permitted-operation-family}{%
+\section{The permitted operation
+family}\label{the-permitted-operation-family}}
+
+\(\text{INFOLD}\) ranges over a specific, if broad, family of physical
+operations. Bending, buckling, pleating, corrugating, sinking, local
+inversion, crumpling, nesting, overlapping, wrapping, and the insertion
+of one layer beneath another are all permitted. Cutting and adhesive
+bonding are not permitted by default; a construction that requires
+either should say so explicitly, since both operations change the
+sheet's connectivity in ways the rest of this monograph's argument,
+particularly Chapter 6's treatment of intrinsic connectivity, depends on
+being ruled out unless stated otherwise. Tearing occupies an
+intermediate position: depending on the construction's purpose, an
+accidental tear may either invalidate the realization outright or be
+treated as a separate, weaker category of success, a distinction Chapter
+9 returns to when it discusses obstructions to realizability.
+
+\hypertarget{protected-and-sacrificial-geometry}{%
+\section{Protected and sacrificial
+geometry}\label{protected-and-sacrificial-geometry}}
+
+The asymmetry between the three marked squares and the rest of the
+sheet, already familiar from Chapters 3 and 4, can now be stated as an
+asymmetry in how much freedom \(\text{INFOLD}\) grants to different
+parts of \(I\).
+
+Some geometry is \textbf{protected}: it corresponds directly to a
+declared constraint, and \(\text{INFOLD}\) must not sacrifice it in the
+course of resolving anything else. The three marked squares' exposure,
+their edge roles, and their shared vertex are protected in this sense
+throughout the Supercube's construction.
+
+Other geometry is \textbf{sacrificial}: its precise final shape and its
+crease history are explicitly not protected, and \(\text{INFOLD}\) is
+free to let this geometry take whatever form is convenient for
+satisfying the protected constraints. It is important to be precise
+about what ``sacrificial'' means here, since the word can misleadingly
+suggest destruction. No material is destroyed. What is sacrificed is
+specificity: the constructor gives up any claim to control the exact
+shape this geometry ends up taking, in exchange for the freedom that
+surrender buys elsewhere in the construction. The bulk of \(I\) in the
+Supercube is sacrificial in exactly this sense. Its final crumpled form
+was never specified, was not predictable in advance, and does not need
+to be reproduced by a second constructor working from the same
+specification; only the protected relations need to be reproduced.
+
+This asymmetry, high constraint on a small selected exterior, low
+constraint on a large hidden connective mass, is the operational heart
+of constraint-directed infolding. It is what allows a sparse
+specification, in the sense of Chapter 3, to be realized at all: the
+freedom given up on the sacrificial majority of the sheet is exactly the
+freedom that makes it possible to satisfy demanding relations on the
+small protected minority.
+
+\hypertarget{locking-a-relation-once-achieved}{%
+\section{Locking a relation once
+achieved}\label{locking-a-relation-once-achieved}}
+
+A search process that has to keep every constraint simultaneously at
+risk throughout construction is harder to carry out, by hand or
+otherwise, than one that can secure a relation and then set it aside.
+The Supercube's own construction, as reconstructed in Chapter 1, relied
+on securing the vertex-gluing condition first and only then addressing
+the remaining material, and this reliance can be given a name.
+
+\[\text{LOCK}(C_k)\]
+
+denotes the decision to treat a currently satisfied constraint \(C_k\)
+as provisionally fixed, so that subsequent operations are chosen, or
+avoided, specifically to preserve it. For the Supercube, once the three
+marked corners had been brought together at a shared vertex, that
+relation was locked:
+
+\[\text{LOCK}\big(G(F_1,F_2,F_3) = V\big)\]
+
+and the remaining infolding was carried out under this lock, meaning
+that no subsequent manipulation of the free material was permitted to
+disturb the vertex once it had been achieved. Combined with the operator
+introduced above, the full sequence can be written:
+
+\[\text{INFOLD}\big(I \mid \text{LOCK}(V),\ \text{Closure}(K)\big)\]
+
+This expresses precisely the strategy Chapter 1 described in narrative
+form: establish the three-face corner first, treat it thereafter as
+fixed, and resolve everything else in whatever way that fixed corner
+permits.
+
+\hypertarget{relaxing-a-lock-that-has-become-an-obstruction}{%
+\section{Relaxing a lock that has become an
+obstruction}\label{relaxing-a-lock-that-has-become-an-obstruction}}
+
+A locked relation, useful as it is for organizing a search, can also
+become an obstruction. Material rearranged elsewhere in the sheet may,
+at some point, be unable to proceed without disturbing a relation that
+was locked earlier. Rather than treating this as a dead end, the
+formalism permits a controlled relaxation:
+
+\[\text{RELAX}(C_k, \varepsilon)\]
+
+which permits the previously locked relation \(C_k\) to drift,
+temporarily, within a stated tolerance \(\varepsilon\), so that the
+surrounding obstruction can be cleared. This is not an abandonment of
+the constraint. It is an explicit, bounded loosening, made in service of
+eventually satisfying the construction as a whole, and it is paired with
+a corresponding operation for restoring the relation once the
+obstruction has passed:
+
+\[\text{REPAIR}(C_k)\]
+
+which reasserts \(C_k\), ideally within its original tolerance, once the
+surrounding material has been rearranged sufficiently to permit this.
+
+\hypertarget{why-relaxation-and-repair-matter-beyond-bookkeeping}{%
+\section{Why relaxation and repair matter beyond
+bookkeeping}\label{why-relaxation-and-repair-matter-beyond-bookkeeping}}
+
+It would be possible to regard \(\text{LOCK}\), \(\text{RELAX}\), and
+\(\text{REPAIR}\) as mere bookkeeping devices, convenient shorthand for
+describing a process that could equally well be described without them.
+This understates their significance.
+
+What these three operations jointly capture is that constraint-directed
+infolding, as actually practiced by hand, is not a monotonic process in
+which each constraint, once satisfied, remains satisfied until the end.
+It is a process with local setbacks that are recoverable precisely
+because the constraint was never irreversibly fused with the surrounding
+sheet; a locked relation, expressed this way, is always understood to be
+provisionally locked, subject to exactly the kind of temporary loosening
+\(\text{RELAX}\) names. A notation that only recorded successes, and had
+no vocabulary for a temporary, bounded, intentional step backward, would
+misrepresent how the construction actually proceeded, and would offer no
+way to distinguish a principled, recoverable relaxation from an
+accidental, possibly unrecoverable failure of the same relation. Chapter
+7 develops the embodied side of this same point, treating a blocked fold
+not as an error external to the search but as information about the
+current boundary of what is reachable; \(\text{RELAX}\) and
+\(\text{REPAIR}\) are this chapter's formal counterpart to that later,
+more experiential discussion.
+
+\hypertarget{what-chapter-5-has-and-has-not-established}{%
+\section{What Chapter 5 has and has not
+established}\label{what-chapter-5-has-and-has-not-established}}
+
+This chapter has given the Supercube's construction a precise
+operational vocabulary: an operator, \(\text{INFOLD}\), denoting
+constrained search over a permitted family of deformations; a
+distinction between protected and sacrificial geometry that explains why
+such a search is tractable at all; and a small set of auxiliary
+operations, \(\text{LOCK}\), \(\text{RELAX}\), and \(\text{REPAIR}\),
+that describe how a constraint can be provisionally secured, temporarily
+loosened, and subsequently restored over the course of a single
+construction.
+
+What it has not established, and what the remaining chapters of the
+monograph take up in turn, is any general account of when a given
+\(\text{INFOLD}\) instruction is satisfiable at all, how large the space
+of satisfying deformations tends to be, or what, if anything, the
+members of that space have in common beyond satisfying the same declared
+constraints. These are the questions Part III addresses, beginning with
+Chapter 6's treatment of the relationship between a sheet's original
+connectivity and the exterior adjacency its infolded remainder makes
+possible.
+
+\part{Hidden Geometry and Exterior Underdetermination}
+
+\hypertarget{chapter-6.-adjacency-surplus-surface-and-historical-interior}{%
+\chapter{Adjacency, Surplus Surface, and Historical
+Interior}\label{chapter-6.-adjacency-surplus-surface-and-historical-interior}}
+
+\hypertarget{two-graphs-on-the-same-sheet}{%
+\section{Two graphs on the same
+sheet}\label{two-graphs-on-the-same-sheet}}
+
+The Supercube's construction can be described by two different graphs,
+and the entire theoretical argument of this chapter follows from
+noticing that these two graphs need not agree.
+
+The first is the \textbf{sheet graph}, written \(G_0\), whose nodes
+correspond to the marked regions and the intervening portions of the
+flat, unfolded sheet, and whose edges record which of these regions are
+directly connected across the original planar surface. In the Supercube,
+\(G_0\) records the fact that the three marked squares are widely
+separated, joined only through a large connected mass of unmarked
+material, with no two of the three squares sharing an edge anywhere on
+the flat sheet.
+
+The second is the \textbf{boundary graph}, written \(G_\partial\), whose
+nodes correspond to the regions actually visible on the finished
+exterior, and whose edges record which of these regions are adjacent to
+one another in the realized object. In the Supercube, \(G_\partial\)
+records that the three marked squares, after folding, are mutually
+adjacent, meeting pairwise along the edges their annotations declared
+and sharing the common vertex their vertex-gluing condition demanded.
+
+The Supercube's construction was organized around producing a specific,
+wanted disagreement between these two graphs:
+
+\[G_\partial \neq \text{(the exposed subgraph induced by } G_0\text{)}\]
+
+The three squares are not adjacent in \(G_0\). They are adjacent in
+\(G_\partial\). Something has to account for this difference, and it is
+worth being precise about what does and does not account for it.
+
+\hypertarget{what-changes-and-what-does-not}{%
+\section{What changes, and what does
+not}\label{what-changes-and-what-does-not}}
+
+It might seem that producing new adjacency where none existed before
+requires cutting the sheet, since cutting is the ordinary way material
+connectivity is altered. This is not what happened, and the reason it is
+not what happened is the central fact this chapter exists to draw out.
+
+The sheet's intrinsic material connectivity, its status as a single
+connected piece of paper with no tears or seams introduced, is unchanged
+by the construction. Every point of the original sheet remains connected
+to every other point by some continuous path through the material,
+exactly as it was before any fold was made. What changes is which of
+these connections lie on the exterior boundary of the finished object
+and which have been folded away from it.
+
+The two squares that end up adjacent in \(G_\partial\) were never made
+adjacent in \(G_0\); no new material connection was created between
+them. Instead, the material that used to separate them in the flat
+sheet, previously visible and lying between them in the plane, has been
+displaced away from the exterior, folded inward, so that the two squares
+can now touch directly at the boundary while the displaced material
+persists, hidden, along a folded and occluded route that still connects
+them exactly as it always did, just no longer where anyone looking at
+the finished object can see it.
+
+This can be stated as a general principle, though a modest one: new
+visible adjacency does not require new material connectivity. What the
+construction changes is which relations among the sheet's points are
+expressed at the boundary, not the sheet's underlying connectedness. The
+apparent paradox, that two regions never touching in the flat layout end
+up touching in the folded object, dissolves once hidden layers are
+admitted as a legitimate place for material to be, rather than treated
+as an embarrassment to be minimized.
+
+\hypertarget{the-exterior-as-a-quotient}{%
+\section{The exterior as a
+quotient}\label{the-exterior-as-a-quotient}}
+
+A useful way to state this relationship formally is to treat the
+finished, visible object as a coarse quotient of the complete folded
+state. The complete folded state includes every layer, every fold, every
+point of contact between one part of the sheet and another, all of it.
+Most of this detail becomes observationally indistinguishable once only
+the exterior is inspected: many different interior arrangements of
+hidden layers would produce the same visible exterior, and an observer
+confined to looking at the outside of the object has no way to tell
+which of these arrangements actually occurred.
+
+The quotient retains exactly what the boundary grammar of Chapter 4
+declared mattered: face identity, orientation, and the adjacency
+relations among exposed regions. It suppresses everything else, not
+because everything else is unimportant to the object's physical
+structure, it plainly is important, load-bearing, and literally what
+gives the object its bulk, but because the exterior, considered purely
+as a visible surface, does not preserve enough information to
+reconstruct it.
+
+\hypertarget{surplus-area}{%
+\section{Surplus area}\label{surplus-area}}
+
+The preceding two sections established that new exterior adjacency can
+be produced without new material connectivity, provided there is
+somewhere for the intervening material to go. This section asks how much
+material that actually involves, since the answer bears directly on how
+demanding a given specification turns out to be in practice.
+
+Define the \textbf{surplus ratio}:
+
+\[\sigma = \frac{\text{Area}(P) - \text{Area}(E_{\text{visible}})}{\text{Area}(E_{\text{visible}})}\]
+
+where \(\text{Area}(P)\) is the total area of the original sheet and
+\(\text{Area}(E_{\text{visible}})\) is the combined area of the regions
+actually intended to remain exposed. A conventional cube net, built from
+close to the minimal area six unit squares require, has a surplus ratio
+near zero: essentially all of the sheet becomes visible exterior, give
+or take whatever small tabs are needed for joining. The Supercube's
+surplus ratio was, by contrast, substantial: the three marked squares
+accounted for only a modest fraction of the sheet's total area, with the
+remainder, several times larger, constituting pure surplus, none of it
+intended for exterior legibility.
+
+A high value of \(\sigma\) is not, by itself, a difficulty. It is a
+resource. The surplus material is exactly what makes the vertex-gluing
+and adjacency conditions of Chapter 4 achievable in the first place,
+since it is the material that gets folded away to create the separation
+between the flat layout and the folded exterior that Section 6.2
+described. What a high surplus ratio does introduce is a downstream
+question: where does all of that material actually go once it has been
+folded away, and what does accommodating it cost the rest of the
+construction. That question is taken up directly in Section 6.5.
+
+\hypertarget{the-central-tradeoff}{%
+\section{The central tradeoff}\label{the-central-tradeoff}}
+
+The material displaced by a high surplus ratio does not vanish; it has
+to be accommodated somewhere inside the boundary the exposed faces
+define, and accommodating it is not free. This yields the tradeoff at
+the center of this chapter's argument:
+
+\[\text{exterior regularity} \;\leftrightarrow\; \text{hidden interior complexity}\]
+
+A cleaner, more regular exterior, flatter faces, sharper edges, more
+exact adjacency, does not come for free when the surplus ratio is high.
+It is typically purchased by a more complicated interior: a greater
+number of hidden layers, sharper curvature concentrated out of view,
+more stored elastic energy in the tightly folded material, or a more
+elaborate route by which the surplus is threaded through the available
+interior space without disturbing the exposed faces it is tucked behind.
+
+This tradeoff is visible directly in the photographic record of the
+Supercube's construction. The version of the object in which the three
+marked squares present as relatively clean, recognizable faces required
+the surrounding material to be folded and crumpled quite densely to fit
+inside; the alternative crumpled states, photographed as the same sheet
+was carried further into increasingly irregular configurations, show the
+same marked regions still present and still identifiable, but no longer
+held to the same exterior regularity, with the freed regularity
+apparently absorbed as a less constrained, more loosely packed interior.
+Neither state is more or less correct relative to the declared
+specification. The specification, recall from Chapter 4, said nothing
+about the sacrificial material's degree of regularity. Both states are
+realizations of the same boundary grammar, purchased at different points
+along the same tradeoff.
+
+It is worth naming a related, practical consequence directly:
+\textbf{material congestion}. As more surplus is folded inward, the
+available interior space fills, and the material already there can begin
+to resist further rearrangement, potentially forcing an
+already-established face outward, disturbing an adjacency that had
+previously been achieved, or blocking a corner from closing correctly.
+Section 5.6's discussion of relaxation and repair describes the
+operational response to exactly this kind of congestion; this chapter's
+contribution is to note that congestion is not an incidental hazard of
+infolding but a direct, quantifiable consequence of how much surplus a
+given specification's surplus ratio requires the construction to absorb.
+
+\hypertarget{creases-as-a-historical-record}{%
+\section{Creases as a historical
+record}\label{creases-as-a-historical-record}}
+
+Every fold introduced during the Supercube's construction left a
+physical trace on the sheet: a crease, a compressed region of fibers, a
+line along which the paper's resistance to bending has been permanently
+reduced. These traces persist even where the fold that produced them is
+later reversed or relaxed. This section treats them as what they are, a
+physical record of the construction's actual history, rather than as
+incidental byproducts of reaching the finished shape.
+
+The declared markings, the three squares and their edge and vertex
+annotations, state what the finished object was required to achieve. The
+accumulated crease network states, after the fact, what path the sheet
+was actually taken along in order to achieve it. These are different
+kinds of information, and the distinction between them, a declared
+target and a witnessed trajectory, is one this monograph will return to
+directly in Section 6.8.
+
+A crease is not merely evidence that a particular fold occurred at a
+particular moment. It also constrains what can happen afterward. Paper
+that has already been creased along one line bends more readily along
+that line in the future and more stiffly elsewhere; a region that has
+already been compressed into a tight pleat cannot easily be returned to
+a flat, unstressed state without visible residual curvature. This means
+that the space of configurations reachable from the sheet's current
+state depends on the specific history that brought the sheet to that
+state, not merely on the sheet's current visible shape. Two sheets that
+look identical at some intermediate stage of construction, but that
+arrived at that stage by different sequences of folds, may not have the
+same set of configurations reachable from that point onward.
+
+This dependency is worth naming explicitly:
+
+\[\text{Reach}(P, h_t)\]
+
+denotes the set of configurations reachable from the sheet's current
+state, given that its deformation history up to time \(t\) has been
+\(h_t\). The notation makes explicit what the previous paragraph argued
+informally: reachability is a property of the pair, sheet and history,
+not of the sheet's current shape alone. A construction that has locked a
+relation, in the sense of Section 5.5, and creased the surrounding
+material accordingly, has narrowed \(\text{Reach}(P, h_t)\) in a way
+that a differently-creased sheet at the same superficial stage would not
+have narrowed it.
+
+\hypertarget{many-histories-one-boundary}{%
+\section{Many histories, one
+boundary}\label{many-histories-one-boundary}}
+
+The preceding sections established two facts that combine into this
+chapter's central result. First, a given exterior specification can be
+satisfied while displacing surplus material along many different routes
+through the interior, since the specification says nothing about how
+that displacement is to be organized. Second, the specific route
+actually taken is recorded, irreversibly to a first approximation, in
+the sheet's accumulated crease network, and different routes leave
+different, generally distinguishable, records.
+
+Putting these together: many different folding histories, producing many
+different interior crease networks and layer arrangements, can realize
+the identical exterior boundary specification.
+
+\[\text{many histories} \;\rightarrow\; \text{many interiors} \;\rightarrow\; \text{one boundary class}\]
+
+This is not a hypothetical possibility raised for the sake of argument.
+It is directly demonstrated by the Supercube's own photographic record:
+the same marked sheet, carried through different further manipulations,
+produces both a relatively regular cube-corner exterior and a family of
+considerably more irregular crumpled exteriors, all of them consistent
+with the same declared face, edge, and vertex conditions, none of them
+privileged by the specification over any other. The specification
+defines a class of acceptable exteriors, or in the strictest cases a
+class of acceptable exact exteriors together with a much larger class of
+acceptable approximate ones, and any member of that class, however it
+was reached, counts as satisfying it.
+
+\hypertarget{boundary-form-does-not-disclose-interior-history}{%
+\section{Boundary form does not disclose interior
+history}\label{boundary-form-does-not-disclose-interior-history}}
+
+The consequence of Section 6.7 that matters most for the remainder of
+this monograph is epistemological rather than constructional, and it
+deserves to be stated as directly as possible.
+
+Given only the finished, folded exterior of an object realized by
+constraint-directed infolding, an observer cannot, by inspection of that
+exterior alone, recover which of the many possible interior histories
+actually produced it. The exterior does not encode this information,
+because the specification that governs the exterior was never designed
+to encode it; recall from Chapter 4 that the boundary grammar constrains
+only exposure, adjacency, orientation, vertex incidence, relegation, and
+closure, and says nothing whatsoever about the internal route by which
+relegation is achieved. An object satisfying that grammar is, from the
+standpoint of the grammar itself, complete and correct regardless of
+which member of the many-histories-many-interiors class it happens to
+be.
+
+This should be distinguished carefully from a claim that the interior is
+unknowable in principle. It is not unknowable; Chapter 8's discussion of
+imaging and destructive unfolding takes up exactly how an interior might
+be recovered by means other than inspecting the exterior. The claim is
+narrower and, for that reason, sharper: the exterior itself, considered
+purely as a boundary satisfying a declared grammar, carries no reliable
+trace of its own history. Recovering that history requires additional
+access, physical or otherwise, beyond what the finished boundary
+presents.
+
+This licenses a distinction among several notions of equivalence that
+have been used loosely up to this point and that now need to be kept
+separate.
+
+Two realizations are \textbf{boundary-equivalent} when they satisfy the
+same declared exposure, adjacency, orientation, vertex, and closure
+conditions, regardless of anything else about them. This is the weakest
+and most important notion for the purposes of this monograph, since it
+is the notion the Supercube's specification was actually designed to
+secure.
+
+Two realizations are \textbf{structurally equivalent} when they are
+boundary-equivalent and additionally share the same pattern of interior
+layer contacts, even if the specific creases producing those contacts
+differ in detail.
+
+Two realizations are \textbf{crease-equivalent} when they share, in
+addition to structural equivalence, the same crease network up to a
+specified tolerance, meaning not merely that the same layers touch but
+that they touch along recognizably the same fold lines.
+
+Two realizations are \textbf{procedurally equivalent} when they were
+produced by the same sequence of operations, in the same order, the
+strongest and least useful notion of equivalence for present purposes,
+since it is closest to the strong reproducibility Chapter 2 associated
+with conventional sequential diagrams.
+
+These four notions form a hierarchy, each one a strictly stronger
+requirement than the last, and the Supercube's two documented outcomes,
+the relatively regular cube corner and the family of more irregular
+crumpled states, are boundary-equivalent to a considerable degree,
+agreeing on the exposure, adjacency, and vertex conditions the
+specification actually demanded, while being neither structurally,
+crease-, nor procedurally equivalent to one another in any strong sense.
+This is not a defect in either realization. It is the expected
+consequence of specifying at the constraint level, in the sense of
+Chapter 2, rather than at the crease or operation level: a
+constraint-level specification purchases its sparseness at the price of
+exactly this kind of underdetermination, and the underdetermination is
+not a loose end to be tied up but the specification doing precisely what
+it was built to do.
+
+The chapter's argument can now be closed with the proposition it has
+been building toward throughout:
+
+\begin{quote}
+Exterior equivalence does not imply structural, crease, or procedural
+equivalence.
+\end{quote}
+
+A simple, legible exterior can be the visible quotient of a complicated,
+irreversible, and largely unrecoverable interior process, and nothing
+about the exterior's simplicity licenses an inference about the
+simplicity, or even the singularity, of the process that produced it.
+Chapter 7 takes up the other side of this same fact, asking what it
+means to conduct the search this chapter has been analyzing after the
+fact, from the inside, without the benefit of already knowing which
+interior history one is going to end up leaving behind.
+
+\part{Embodied Search}
+
+\hypertarget{chapter-7.-folding-without-a-complete-internal-image}{%
+\chapter{Folding Without a Complete Internal
+Image}\label{chapter-7.-folding-without-a-complete-internal-image}}
+
+\hypertarget{the-search-from-the-inside}{%
+\section{The search from the
+inside}\label{the-search-from-the-inside}}
+
+Chapter 6 described the space of possible realizations of a boundary
+specification from the outside, as an analyst might look back on it once
+several outcomes were available for comparison. This chapter asks what
+the same search looks like from the inside, to a constructor who has
+only the marked sheet, their hands, and the sheet's own resistance to
+work with, and who does not yet know, and cannot know in advance, which
+member of the many-histories-many-interiors class described in Section
+6.7 they are going to end up producing.
+
+This is not a digression from the formal argument. It bears directly on
+what kind of specification a constraint-level description, in the sense
+of Chapter 2, can actually be expected to support. A specification that
+could only be realized by a constructor holding a complete mental image
+of the finished object's interior, planned out in advance down to every
+crease, would not really be sparse in the sense Chapter 3 claimed for
+it; the sparseness would be an illusion, with all the missing detail
+simply relocated into the constructor's head rather than genuinely left
+open. What this chapter argues is that the Supercube's construction did
+not require this, and that its actual method is more interesting, and
+more generally useful, than a mental substitute for the missing
+specification would have been.
+
+\hypertarget{externalized-visualization}{%
+\section{Externalized
+visualization}\label{externalized-visualization}}
+
+The marked sheet itself carries the information a constructor needs to
+proceed, at any given moment, without requiring that constructor to hold
+a complete picture of the finished object in mind. The three squares,
+their edge annotations, and their shared vertex label remain physically
+present and physically inspectable throughout the construction. A
+constructor does not need to remember, in the sense of recalling from
+memory, which edge was meant to be the bottom edge; the mark is still
+there, on the sheet, wherever the sheet currently is, and can simply be
+looked at again.
+
+This matters more than it might first appear to, because it changes what
+kind of cognitive demand the construction actually places on whoever is
+carrying it out. The demand is not: hold the complete target geometry in
+mind and manipulate the sheet to match it. The demand is narrower and
+more local: look at the currently visible marks, notice which declared
+relations are not yet satisfied, and make whatever move seems likely to
+bring one of them closer to being satisfied. The marked sheet functions
+as an external store of exactly the information that a complete mental
+image would otherwise have had to hold internally.
+
+This point bears specifically, and should be stated carefully, on
+aphantasia, the reported absence or marked reduction of voluntary visual
+imagery in some individuals. It would be a significant overreach to
+suggest that this construction method demonstrates anything about the
+spatial reasoning capacities of people who report aphantasia, and no
+such claim is made here. What can be said, more modestly, is that a
+construction method built around externalized, physically inspectable
+marks and iterative local search does not appear to presuppose the kind
+of detailed, sustained voluntary visual imagery whose absence aphantasia
+describes. Whether or not a given constructor experiences vivid mental
+imagery of the finished cube while folding toward it, the marked sheet
+supplies, externally, the same information that imagery might otherwise
+have supplied internally. This is a claim about what the method
+requires, not a claim about what any particular person's imagery does or
+does not include, and it should not be read more broadly than that.
+
+\hypertarget{local-solvability}{%
+\section{Local solvability}\label{local-solvability}}
+
+A further consequence of working from externalized marks rather than a
+complete internal plan is that the construction can proceed by
+addressing small, local questions one at a time, rather than requiring
+the global configuration to be solved all at once.
+
+At any given moment in the Supercube's construction, a useful next move
+could be identified by asking a narrow question: can these two marked
+edges be brought closer together without disturbing a relation already
+secured? Can the corner that has already been formed be held steady
+while the material around it is rearranged? Can a bulge of surplus
+material, currently protruding where a marked face needs to sit flat, be
+pushed further inward? None of these questions requires an answer to the
+larger question of what the finished object will ultimately look like in
+its entirety. Each is answerable by inspecting the sheet's current state
+against the declared marks and judging, from that comparison alone, what
+the next useful move might be.
+
+Global coherence, on this account, is not planned in advance and then
+executed. It accumulates, as a consequence of a sequence of locally
+useful moves, each one chosen for its immediate contribution to
+satisfying some currently unsatisfied relation, none of them requiring a
+synoptic view of the whole. This is worth stating plainly because it is
+a genuinely different model of how a complex spatial construction can be
+carried out than the model implicit in a conventional crease pattern,
+which does presuppose that the complete relationship between flat sheet
+and folded form is knowable, and known, before folding begins.
+
+\hypertarget{failure-as-information}{%
+\section{Failure as information}\label{failure-as-information}}
+
+A fold that does not work, an edge that will not reach its declared
+partner, a corner that keeps slipping out of alignment as soon as
+attention moves elsewhere, is not, on the account developed here, an
+event external to the search process, an interruption to be gotten past
+as quickly as possible. It is itself a piece of information about the
+current shape of what Section 6.6 called \(\text{Reach}(P, h_t)\): the
+set of configurations still reachable given the sheet's history up to
+that point.
+
+A blocked fold indicates one of a small number of specific things: that
+the surrounding material has become congested, in the sense of Section
+6.5, and needs to be redistributed before the fold can proceed; that two
+regions have been brought into an orientation genuinely incompatible
+with the fold being attempted, requiring one or the other to be
+repositioned first; that insufficient slack remains in the surrounding
+sheet to permit the motion required, requiring surplus to be drawn in
+from elsewhere; or that a relation locked earlier, in the sense of
+Section 5.5, is now standing in the way of further progress and needs to
+be relaxed, per Section 5.6, before construction can continue. In each
+case, the failure is diagnostic. It reveals something true about the
+sheet's current reachable set that was not evident before the failed
+attempt was made, and it narrows the space of useful next moves rather
+than merely wasting the move that failed.
+
+\hypertarget{repair-and-workaround}{%
+\section{Repair and workaround}\label{repair-and-workaround}}
+
+The natural response to a blocked fold, on this account, is not to undo
+the entire construction back to some earlier, unblocked state, though
+that remains available as a last resort. It is to introduce a local
+workaround: an additional pleat that provides the slack a
+straightforward fold could not; a pocket that temporarily holds a corner
+in place while attention moves to a different part of the sheet; a
+rotation of an already-folded bundle of material to relieve pressure
+against an adjacent, protected face; or a deliberate, bounded
+distortion, tolerated for the remainder of the construction, that trades
+a small amount of cosmetic regularity for continued progress toward the
+relations that actually matter.
+
+These workarounds are local in the specific sense that they enlarge the
+reachable configuration space in the immediate vicinity of the
+obstruction without requiring the constructor to revisit or reconsider
+relations that have already been secured elsewhere on the sheet. This is
+what makes the process tractable by hand: a constructor need not hold
+the entire history of the construction in active consideration at every
+step, only the currently active obstruction and whatever already-secured
+relations that obstruction's resolution must not disturb.
+
+\hypertarget{traces-and-self-scaffolding}{%
+\section{Traces and
+self-scaffolding}\label{traces-and-self-scaffolding}}
+
+Each fold made during construction leaves a trace, in the form of a
+crease, an established edge, or a temporary pocket, and these traces are
+available to guide subsequent action in a way that goes beyond simply
+recording that the fold occurred. An edge that has already been folded
+provides a stable reference against which a later fold can be aligned. A
+pocket formed to hold one corner in place can, incidentally, provide a
+convenient boundary against which an adjacent region can be pressed
+flat. The sheet, over the course of construction, progressively builds
+its own scaffolding: later moves are made easier, or made possible at
+all, by structure the earlier moves happened to leave behind.
+
+This is a form of what is sometimes called stigmergic coordination in
+other contexts, where independent agents, or in this case a single agent
+acting over time, coordinate not through a shared plan held in common
+but through modifications each leaves in a shared environment that the
+others, or the agent's own later self, can perceive and respond to. No
+single moment of the Supercube's construction contained the complete
+solution. The solution, such as it was, emerged from the accumulated
+interaction among the declared markings, which never changed, the
+sheet's physical resistance, which shaped what could be attempted at
+each step, the traces left by earlier folds, which scaffolded later
+ones, and the ongoing comparison between the sheet's current state and
+the relations still outstanding.
+
+This observation extends naturally, though only briefly needs to be
+extended here, to the possibility of multiple constructors, or multiple
+robotic manipulators, working on the same sheet without a complete
+shared plan. If each agent can perceive the declared marks and the
+traces left by prior actions, whether their own or another agent's,
+coordination of a genuinely useful kind becomes possible without
+requiring the agents to have agreed in advance on a complete sequence of
+operations. This possibility is noted here as a natural extension of the
+single-constructor account just given, rather than developed as an
+independent theory in its own right; the single-constructor case already
+contains everything essential to the point this chapter has been making,
+and multiplying the number of hands involved does not change the
+underlying logic of local, trace-guided, constraint-preserving search.
+
+\hypertarget{what-the-embodied-account-adds-to-the-formal-one}{%
+\section{What the embodied account adds to the formal
+one}\label{what-the-embodied-account-adds-to-the-formal-one}}
+
+Chapter 5 gave a formal vocabulary, \(\text{INFOLD}\), \(\text{LOCK}\),
+\(\text{RELAX}\), \(\text{REPAIR}\), for describing constraint-directed
+search as a sequence of operations subject to declared conditions. This
+chapter has given the same process an experiential description,
+addressed to what it is actually like, and what it actually requires, to
+carry that search out by hand.
+
+The two descriptions are not competing accounts of the same phenomenon
+so much as two different vantage points on it. The formal vocabulary
+specifies what a valid sequence of operations must accomplish, without
+saying anything about how a constructor is to discover such a sequence.
+This chapter has argued that the discovery process does not require, and
+in the Supercube's case did not involve, a complete internal image of
+the finished object; it required only a persistent external record of
+what mattered, a willingness to proceed by local, diagnostic, reversible
+steps, and a sheet whose own accumulated creases progressively
+scaffolded the steps that followed.
+
+This has a direct bearing on the practical usefulness of
+constraint-directed infolding as a method, beyond its interest as a
+piece of formal theory. A specification that can be realized this way,
+sparse, externally inspectable, and searchable through local moves
+alone, is a specification that does not require its constructor to be an
+expert planner capable of anticipating a complete folding sequence in
+advance. It requires only the ability to compare a sheet's current state
+against a small number of declared marks and to recognize, moment to
+moment, whether the gap between them is narrowing. Chapter 8 turns to a
+different kind of surface facing a structurally similar problem, one
+where no constructor, human or otherwise, is available to carry out this
+kind of moment-to-moment comparison at all.
+
+\part{Biological Analogy}
+
+\hypertarget{chapter-8.-cortical-infolding-under-surface-volume-constraint}{%
+\chapter{Cortical Infolding Under Surface-Volume
+Constraint}\label{chapter-8.-cortical-infolding-under-surface-volume-constraint}}
+
+\hypertarget{a-structural-resemblance-stated-cautiously}{%
+\section{A structural resemblance, stated
+cautiously}\label{a-structural-resemblance-stated-cautiously}}
+
+This chapter develops an analogy between the paper construction
+described in the preceding chapters and the folded structure of the
+mammalian cerebral cortex. It is important to state at the outset,
+before any of the resemblance is drawn out, exactly what kind of claim
+is and is not being made. The claim is structural: both systems involve
+a surface whose area substantially exceeds what could be smoothly
+accommodated within the volume that contains it, and both resolve this
+excess through folding rather than through simple expansion of the
+containing boundary. The claim is not mechanistic: this chapter does not
+propose, and does not believe, that the specific process by which a
+sheet of paper is folded by hand bears any direct resemblance to the
+specific biological processes by which a developing cortex actually
+folds. Those processes are addressed on their own terms in Section 8.3,
+and the differences between them and the paper construction are
+addressed directly and at comparable length in Section 8.4. The purpose
+of drawing the analogy at all is narrower than a claim of mechanism
+would be: it is to illustrate, using a case that can be inspected
+directly and folded by hand, a general geometric fact about area-rich
+surfaces in volume-limited environments that plausibly bears on the
+cortex without being confused with an account of how the cortex actually
+achieves it.
+
+\hypertarget{the-shared-problem}{%
+\section{The shared problem}\label{the-shared-problem}}
+
+Stated abstractly, the shared problem is this: a surface possesses more
+area than the volume in which it is to be contained could accommodate if
+that surface remained smooth and unfolded. Something has to give. Either
+the containing volume expands to match the surface, or the surface's
+exposed extent is reduced by folding it into a smaller effective
+envelope, with the folded surface's full area preserved but no longer
+laid out flat.
+
+The Supercube's sheet faced this problem directly, and by design: the
+three marked squares required a specific exterior configuration, and the
+sheet's substantial surplus area, defined formally in Section 6.4, had
+nowhere to go except into the interior the marked squares' configuration
+made available. The cerebral cortex, over the course of development,
+appears to face a structurally comparable problem: the cortical sheet's
+surface area increases considerably during a period in which the skull's
+interior volume is comparatively constrained, and a smooth, unfolded
+cortex of the area actually present in a mature human brain would not
+fit within a skull of ordinary size. Folding, in the form of the
+familiar pattern of gyri and sulci, the ridges and grooves visible on
+the brain's surface, allows substantially more cortical surface to exist
+within a given cranial volume than an unfolded sheet of the same area
+could.
+
+This much is a shared geometric circumstance, and it is worth being
+clear that stating it this way commits to nothing about mechanism. It
+states only that both systems face an area-in-excess-of-volume problem
+and that both resolve it, whatever the process, by folding rather than
+by simple expansion.
+
+\hypertarget{an-expansive-metaphor-and-the-established-mechanistic-accounts}{%
+\section{An expansive metaphor, and the established mechanistic
+accounts}\label{an-expansive-metaphor-and-the-established-mechanistic-accounts}}
+
+One evocative way to describe a surface's response to a spatial
+constraint imposed by its own growth, and by the growth of neighboring
+structures around it, borrows the phenomenon sometimes called crown
+shyness in forestry: the observation that the crowns of certain tree
+species, growing close to one another, tend to stop just short of
+touching, leaving a visible channel of open sky between adjacent
+canopies. This image is invoked here purely as a metaphor for
+constrained, mutually negotiated expansion into a bounded and already
+partially occupied space, and it should be understood as nothing more
+than that. Crown shyness is not itself an accepted account of cortical
+folding, and no claim is made that the mechanisms producing it in forest
+canopies bear any relation to the mechanisms producing folds in cortical
+tissue. The metaphor's only role is to evoke, vividly, the general idea
+of an expanding surface whose form is shaped by the presence of
+neighboring constraints rather than by its own growth in isolation, a
+general idea the cortex's situation shares even though the specific
+dynamics involved are entirely different.
+
+The actual, established explanations for cortical gyrification are
+mechanistic and biological, and several distinct candidate mechanisms
+currently coexist in the literature without a single one having
+displaced the others as a complete account. Differential tangential
+expansion proposes that the cortical gray matter expands more rapidly,
+or along different constraints, than the white matter beneath it,
+producing a mechanical instability comparable to the buckling of a
+stiff, expanding layer bonded to a more slowly expanding substrate.
+Radial constraint accounts emphasize the geometric confinement imposed
+by the shape and growth rate of underlying structures. Axonal tension
+hypotheses propose that mechanical tension along developing white-matter
+connections pulls strongly interconnected cortical regions toward one
+another, contributing to the folding pattern. Additional accounts point
+to regional variation in cortical thickness, to the developmental
+sequencing and heterogeneity of different cortical areas, to the growth
+of underlying white matter volume, and to the geometry of the
+ventricular system as further contributing factors. These accounts are
+not mutually exclusive, and the current state of the relevant
+developmental biology treats gyrification as very likely multicausal,
+with different mechanisms contributing at different developmental stages
+and in different regions. Adjudicating among them is not the purpose of
+this chapter, and no attempt is made here to do so; they are listed to
+make clear that a substantial, ongoing, and specifically biological
+research program already exists to explain cortical folding, and that
+the paper analogy developed in this chapter is not offered as a
+contribution to that program or as a substitute for it.
+
+\hypertarget{what-the-analogy-usefully-captures}{%
+\section{What the analogy usefully
+captures}\label{what-the-analogy-usefully-captures}}
+
+With the mechanistic accounts of Section 8.3 kept firmly separate, the
+structural analogy can be stated with some precision.
+
+Both the folded sheet and the folded cortex preserve material continuity
+while changing extrinsic spatial relations. Just as Chapter 6 showed
+that the Supercube's three marked squares became exterior neighbors
+without any new material connection being formed between them, cortical
+regions that lie at some geodesic distance from one another along the
+intrinsic, unfolded cortical surface can end up in close
+three-dimensional proximity once the mature, folded cortex is examined,
+without any claim that this proximity reflects a direct developmental or
+connective relationship between those regions. Conversely, and just as
+significantly, two points that are close together on the folded
+exterior, sitting on either side of a sulcus, for instance, may be quite
+distant from one another along the cortical sheet's own intrinsic
+surface. Three-dimensional spatial proximity in a folded structure,
+whether paper or cortex, is not a reliable guide to intrinsic adjacency,
+and intrinsic adjacency is not a reliable guide to three-dimensional
+proximity.
+
+This licenses a distinction, already familiar from the paper case, among
+several different notions of nearness that a cortical structure's
+geometry can support simultaneously and that do not, in general,
+coincide: material or intrinsic surface adjacency, three-dimensional
+geometric proximity after folding, connective or axonal proximity,
+developmental or lineage-based proximity, and functional or task-based
+association. The paper construction demonstrates cleanly, because it can
+be unfolded and directly inspected, that these several notions of
+nearness genuinely can diverge from one another once a surface has been
+folded; it offers this as a general geometric possibility available to
+any folded surface, cortex included, without asserting anything further
+about which of these notions of nearness the cortex's actual folding
+pattern happens to preserve or disrupt in any specific instance.
+
+A further point of resemblance concerns history. Section 6.6 argued that
+a folded sheet's crease network functions as a partial, physically
+embedded record of its own folding history, and that this record
+constrains, without fully determining, what future configurations remain
+reachable. A mature, folded cortex likewise carries the residue of its
+own developmental history in its specific pattern of gyri and sulci, a
+pattern shaped by the developmental constraints, whichever combination
+of the mechanisms described in Section 8.3 turns out to have been
+operative, that were actually in force during its formation. And just as
+Section 6.7 showed that the same declared boundary specification could
+be reached by many different interior histories, it is a live
+possibility, consistent with current developmental biology though not
+established as fact by anything in this chapter, that similar mature
+folding patterns could arise from somewhat different combinations of the
+contributing developmental parameters, and that small differences
+arising early in development could be amplified into more substantial
+differences in the mature folding pattern. This is offered as a
+structural possibility the paper analogy makes vivid, not as an
+empirical claim about cortical development that this monograph is in a
+position to establish.
+
+\hypertarget{where-the-analogy-breaks}{%
+\section{Where the analogy breaks}\label{where-the-analogy-breaks}}
+
+Several differences between the two systems are fundamental enough that
+the analogy should not be pressed past the structural point Section 8.4
+draws from it, and each is worth stating plainly rather than left as an
+implicit qualification.
+
+Paper is a passive, manufactured material, externally manipulated by an
+agent, the constructor, who exists outside the sheet and who folds it
+according to a plan, however sparse. Cortical tissue is living matter
+that grows, differentiates, remodels itself, develops its own
+vasculature, and interacts mechanically with the tissues surrounding it,
+all without an external agent folding it according to any plan at all;
+whatever organizing structure the process has is generated from within
+the developing tissue and its immediate environment, not imposed from
+outside by a hand holding a target specification.
+
+The Supercube began with an explicit symbolic specification: three
+marked squares, each carrying declared edge roles and a declared shared
+vertex, fixed in advance of any folding and legible throughout the
+construction as an external reference the constructor could return to at
+any point. Cortical development does not appear to require, and there is
+no evidence that it involves, any comparable symbolic representation of
+the mature cortex's eventual folded form, held somewhere in advance of
+the folding process and consulted during it. Whatever determines the
+mature folding pattern is encoded, if the word encoded is even
+appropriate, in genetic, molecular, and mechanical factors operating
+locally and dynamically during development, not in anything resembling
+the three discrete, externally legible marks that organized the paper
+construction.
+
+Uncontrolled crumpling, of the kind demonstrated in the alternative,
+more irregular states the Supercube's sheet was carried into in Section
+6.5's discussion, can produce sharp ridges, localized regions of high
+curvature, and structural singularities that a passive sheet of paper
+tolerates without consequence but that living tissue plausibly could
+not, given constraints on cell viability, blood supply, and mechanical
+stress that a folded sheet of paper simply does not face. Cortical
+folding, whatever its precise mechanism, evidently proceeds under
+biological constraints on curvature, thickness, and structural integrity
+that have no counterpart in the paper case, and there is no reason to
+expect the geometric strategies available to an unconstrained sheet of
+paper to all be available to living cortical tissue.
+
+\hypertarget{a-restrained-conclusion}{%
+\section{A restrained conclusion}\label{a-restrained-conclusion}}
+
+Given the qualifications of Section 8.5, the appropriate claim this
+chapter is entitled to make is considerably narrower than a reader might
+have expected on first encountering the analogy, and it is worth stating
+in a form precise enough to prevent the analogy from being carried
+further than this chapter intends.
+
+\begin{quote}
+The Crinkle-Cut Supercube is not a model of the mechanism of cortical
+gyrification. It is a model of the more general geometric fact that
+infolding allows an area-rich surface to inhabit a volume-limited
+environment while generating spatial relations absent from its unfolded
+presentation.
+\end{quote}
+
+Everything specific to how the cortex actually achieves this, which of
+the mechanisms surveyed in Section 8.3 predominates, in what
+combination, at what developmental stage, in what region, is a question
+for developmental biology to answer, and nothing in this chapter
+contributes to answering it. What the paper construction contributes is
+a directly inspectable, foldable, unfoldable demonstration that the
+general strategy, preserving material continuity while displacing
+surplus surface away from a constrained exterior, is geometrically
+available at all, and that a folded structure's exterior configuration,
+once achieved, will not by itself disclose the specific history or
+mechanism that produced it. This last point is the one thread that
+connects this chapter most directly back to the argument of Chapter 6,
+and it is the thread Chapter 9 now picks up in more general form, asking
+what can be said, formally, about when a target exterior configuration
+of this kind is achievable at all.
+
+\part{General Principle and Consequences}
+
+\hypertarget{chapter-9.-continuation-reachability-and-the-crinkle-cut-principle}{%
+\chapter{Continuation, Reachability, and the Crinkle-Cut
+Principle}\label{chapter-9.-continuation-reachability-and-the-crinkle-cut-principle}}
+
+\hypertarget{admissibility-at-each-stage}{%
+\section{Admissibility at each
+stage}\label{admissibility-at-each-stage}}
+
+At any moment during the construction of the Supercube, the sheet
+occupied some particular partially folded state, and from that state,
+some further moves were available and others were not. This is true
+trivially, in the sense that any physical process unfolds through a
+sequence of intermediate states, but it is worth making the observation
+precise, because the distinction between moves that remain available and
+moves that do not is what the rest of this chapter is built on.
+
+Call a move \textbf{locally admissible} if making it does not
+irreparably violate a protected constraint, in the sense of Section 5.4,
+and does not damage the material integrity of the sheet itself, through
+tearing or an impermissible crease. A locally admissible move need not
+bring the construction closer to completion. It only needs to avoid
+closing off possibilities that were previously open.
+
+\hypertarget{local-admissibility-is-not-enough}{%
+\section{Local admissibility is not
+enough}\label{local-admissibility-is-not-enough}}
+
+It is tempting to suppose that a construction proceeds successfully
+whenever each individual move, taken on its own, is locally admissible:
+if no single step damages anything already secured, the construction as
+a whole ought to succeed. This is false, and it is worth being precise
+about why, since the failure mode involved is exactly the kind of
+failure the Supercube's own construction had to navigate around.
+
+A move can be locally admissible, in the narrow sense of Section 9.1,
+while still closing off the global path to completion. Bringing two of
+the three marked faces into close alignment, for instance, does not
+itself violate any protected constraint and may look, examined in
+isolation, like straightforward progress. But if that alignment traps a
+mass of surplus material in a position from which the third marked face
+cannot subsequently be brought into its required adjacency without
+either disturbing the first two or exceeding the sheet's capacity to
+bend without tearing, then the move was locally admissible and globally
+harmful at once. Nothing about examining the move on its own terms, at
+the moment it is made, reveals this consequence; the consequence only
+becomes visible once later moves are attempted and found to be blocked.
+
+This distinction between local admissibility and \textbf{global
+reachability}, the continued existence of at least one path from the
+current state to a configuration satisfying every declared constraint,
+is the central technical idea of this chapter. A construction can
+proceed for a considerable time making only locally admissible moves and
+still arrive at a state from which no completion is reachable at all.
+Recognizing this possibility, and organizing the construction to guard
+against it, is a large part of what made the Supercube's own
+construction, as reconstructed in Chapter 1, proceed by establishing the
+vertex-gluing condition early and treating it as a stable anchor, in the
+sense of Section 5.5's \(\text{LOCK}\) operation, rather than by
+pursuing whichever local improvement happened to present itself first.
+
+\hypertarget{a-hierarchy-of-protected-distinctions}{%
+\section{A hierarchy of protected
+distinctions}\label{a-hierarchy-of-protected-distinctions}}
+
+Because not every locally admissible move preserves global reachability,
+and because a construction carried out by hand cannot exhaustively
+verify global reachability before every move, some principle is needed
+for deciding which relations to protect most strongly when a choice has
+to be made between preserving one relation and preserving another. The
+Supercube's construction, examined in retrospect, appears to have
+followed an implicit ranking of exactly this kind, and it is useful to
+state that ranking explicitly:
+
+\begin{gather*}
+\text{material continuity} \;>\; \text{selected-face identity} \;>\; \text{required incidence} \\
+{}\;>\; \text{edge orientation} \;>\; \text{planarity} \;>\; \text{cosmetic regularity}
+\end{gather*}
+
+Read from left to right, this hierarchy states that the sheet's basic
+material continuity, its status as a single connected surface without
+tears, is protected above everything else, since its loss would
+undermine the entire theoretical apparatus of Chapter 6, which depends
+on new exterior adjacency being achievable without new material
+connection. Below that, the identity of the three selected faces, which
+regions of the sheet count as the declared exterior at all, is protected
+more strongly than any specific relation among them. Below that again,
+the required incidence at the shared vertex and the required edge
+orientations are protected in turn, followed by the planarity of the
+individual faces, and finally by the cosmetic regularity of the finished
+object's overall appearance, which sits at the bottom of the hierarchy
+and was, in the Supercube's actual case, the distinction most freely
+sacrificed.
+
+This hierarchy explains a fact that would otherwise be puzzling: why the
+finished Supercube, visibly rough and imperfect, nonetheless counts as a
+successful realization of its declared specification. Exact planarity,
+the fifth-ranked distinction, was sacrificed; cosmetic regularity, the
+sixth, was sacrificed considerably further. But material continuity,
+face identity, vertex incidence, and edge orientation, the four
+higher-ranked distinctions, were all preserved. Measured against the
+hierarchy rather than against an implicit standard of overall neatness,
+the construction achieved exactly what it was organized to achieve, and
+its visible roughness is the direct, expected consequence of having
+correctly prioritized higher-ranked distinctions over lower-ranked ones
+when a choice between them arose, rather than evidence of an unfinished
+or poorly executed construction.
+
+\hypertarget{repair-as-renewed-reachability}{%
+\section{Repair as renewed
+reachability}\label{repair-as-renewed-reachability}}
+
+Section 5.6 introduced \(\text{RELAX}\) and \(\text{REPAIR}\) as
+operations permitting a locked relation to be temporarily loosened and
+subsequently restored. This chapter's distinction between local
+admissibility and global reachability gives those operations a sharper
+justification than mere convenience.
+
+A repair succeeds, in the sense relevant here, not merely when it
+restores the relation's prior appearance, but when it reopens a path
+toward eventual completion that had been at risk of closing, while not
+sacrificing any distinction ranked above the one being repaired in the
+hierarchy of Section 9.3. A repair that restored a relation's cosmetic
+appearance while permanently foreclosing the construction's ability to
+satisfy a higher-ranked distinction elsewhere would not be a successful
+repair in this sense, whatever it looked like at the moment it was made.
+Repair, understood this way, is not restoration for its own sake. It is
+a targeted reopening of global reachability, undertaken at the specific
+point where reachability had become locally threatened, and evaluated by
+whether the threat is actually resolved rather than by whether the
+repaired region looks as it did before.
+
+\hypertarget{the-finished-object-as-a-certificate}{%
+\section{The finished object as a
+certificate}\label{the-finished-object-as-a-certificate}}
+
+Once a construction reaches a state satisfying every constraint in its
+declared boundary grammar, that finished object stands as more than a
+completed artifact. It is a physical certificate that the declared
+specification was, in fact, satisfiable, given the sheet, the material,
+and the permitted operations actually available.
+
+This is worth stating with some formality, because the distinction
+between demonstrating that a specification is satisfiable and merely
+conjecturing that it might be is exactly the distinction Chapter 1 drew,
+in its own terms, between a constructive existence claim and a general
+theorem. The Supercube's finished form does not certify that every
+non-contiguous three-face assignment is realizable; it certifies only
+that this one was, by the direct and irrefutable method of having
+actually been realized. The hidden folds inside the object, invisible
+from the exterior in exactly the sense Chapter 6 described, are the
+material trace of the successful search: a physical record, though not,
+per Section 6.8, a legible one, that some path through the space of
+admissible deformations was actually found and actually taken.
+
+\hypertarget{a-formal-statement-the-crinkle-cut-principle}{%
+\section{A formal statement: the Crinkle-Cut
+Principle}\label{a-formal-statement-the-crinkle-cut-principle}}
+
+The preceding sections license a formal statement of what the
+Supercube's construction actually demonstrates, phrased with the
+deliberate restraint the word ``some'' is doing real work to provide:
+
+\begin{quote}
+\textbf{The Crinkle-Cut Principle.} For some connected sheets containing
+spatially separated, locally framed regions, a target exterior adjacency
+among those regions can be realized without cutting the sheet, when the
+complementary region is permitted sufficient infolding, overlap,
+curvature, and hidden interior occupation.
+\end{quote}
+
+The word ``some'' in this statement is not a placeholder for a stronger
+claim the monograph is unable to fully justify. It is the precise scope
+the constructive evidence actually supports. One sheet, with one
+specific assignment of three separated, framed regions, was successfully
+realized. This licenses the existence claim above, for that class of
+sheets and assignments broadly similar to the one demonstrated, and it
+licenses nothing stronger without further argument or further
+construction.
+
+\hypertarget{a-stronger-conjecture}{%
+\section{A stronger conjecture}\label{a-stronger-conjecture}}
+
+A more ambitious claim can nonetheless be stated, clearly marked as a
+conjecture rather than as a result this monograph has established:
+
+\begin{quote}
+\textbf{Conjecture.} Broad families of finite boundary specifications
+are realizable from sufficiently large connected sheets, subject to
+constraints imposed by orientation, thickness, material continuity, edge
+length, self-contact, interior capacity, and tolerance.
+\end{quote}
+
+This conjecture generalizes the Crinkle-Cut Principle from the
+demonstrated case of three separated square regions to a much wider
+class of possible boundary specifications, arbitrary numbers of regions,
+arbitrary shapes, arbitrary target adjacency graphs, while making
+explicit that realizability cannot be expected to hold unconditionally.
+The qualifying clause is not a formality. Section 9.8 takes up, in turn,
+several of the specific ways a boundary specification can fail to be
+realizable regardless of how much surplus surface and permitted
+infolding is made available, and these obstructions are exactly what the
+conjecture's qualifying clause is intended to acknowledge in advance.
+
+\hypertarget{obstructions}{%
+\section{Obstructions}\label{obstructions}}
+
+Several distinct failure modes deserve to be named individually, since
+they arise for different reasons and would need to be ruled out
+separately in any attempt to establish the conjecture of Section 9.7 for
+a specific class of specifications.
+
+A specification may demand \textbf{contradictory edge roles}: two edges
+each required, by the declared orientation conditions, to occupy roles
+that cannot simultaneously be satisfied by any consistent assignment of
+orientation to the intervening sheet. No amount of surplus material or
+permitted infolding resolves a contradiction of this kind, since the
+obstruction is combinatorial rather than geometric.
+
+A specification may demand adjacency among regions separated by
+\textbf{insufficient connecting area}, requiring the intervening
+material to be compressed or displaced beyond what its actual area
+permits, regardless of how it is folded. This obstruction is geometric
+rather than combinatorial, and it interacts directly with the surplus
+ratio \(\sigma\) defined in Section 6.4: a specification with too low a
+surplus ratio, relative to what the declared adjacency and vertex
+conditions actually demand, may be unrealizable for reasons of raw
+material insufficiency alone.
+
+A specification may be obstructed by \textbf{excessive material
+thickness}, where the sheet's actual physical thickness prevents the
+tight folding radii a given configuration requires, an obstruction with
+no counterpart in the idealized zero-thickness surface of Section 3.1
+but a very real one for any physical sheet.
+
+A specification may demand \textbf{impossible orientation requirements},
+asking a region to be simultaneously reflected and unreflected relative
+to some other region, in a way no continuous deformation of a connected
+sheet can satisfy without tearing.
+
+A specification may run into \textbf{inadequate interior volume}, where
+the target exterior's enclosed volume is simply too small to contain the
+surplus material the specification's surplus ratio requires to be
+relegated, an obstruction distinct from insufficient connecting area,
+since it concerns not whether the material can reach the interior but
+whether the interior can hold it once it arrives, closely related to the
+congestion discussed in Section 6.5.
+
+A specification may produce a \textbf{self-locking trajectory}, in which
+every locally admissible sequence of moves available from some
+intermediate state leads to a configuration from which no further
+locally admissible move preserves global reachability, an obstruction
+that depends not on the specification alone but on the specific sequence
+of moves attempted, and that a differently-ordered construction,
+following Section 9.3's hierarchy more carefully, might have avoided
+even where a less careful one could not.
+
+Finally, a specification may simply demand \textbf{geometric exactness
+incompatible with crumpling}, requiring a degree of precision in the
+final exterior that the permitted family of operations, which after all
+includes buckling and crumpling among its admissible deformations,
+cannot reliably deliver, even where a less exacting tolerance would have
+been readily achievable by the same means.
+
+\hypertarget{ideal-mechanical-and-practical-realizability}{%
+\section{Ideal, mechanical, and practical
+realizability}\label{ideal-mechanical-and-practical-realizability}}
+
+It is worth closing this chapter by distinguishing three distinct senses
+in which a specification can be said to be realizable, since the
+obstructions of Section 9.8 do not all apply equally to each.
+
+A specification is \textbf{ideally realizable} if some continuous
+deformation of an idealized, zero-thickness, infinitely flexible surface
+satisfies it, without regard to whether any physical material could
+actually achieve that deformation. A specification is
+\textbf{mechanically realizable} if some physically plausible
+deformation of a sheet with realistic thickness, stiffness, and plastic
+behavior satisfies it, accounting for the obstructions of Section 9.8
+that arise specifically from material properties. A specification is
+\textbf{practically realizable} if a construction process, whether
+carried out by hand, by a computational search of the kind Chapter 10
+briefly considers, or by some other method, can actually be found to
+locate a satisfying deformation within a reasonable amount of effort,
+distinct from the mere fact that such a deformation exists somewhere in
+the space of possibilities.
+
+These three notions can, and in general do, come apart. A specification
+might be ideally realizable while being mechanically unrealizable for
+any sheet of nonzero thickness; it might be mechanically realizable
+while remaining practically elusive, its satisfying deformation existing
+but proving difficult for any actual search process, human or
+computational, to locate. The Supercube's own specification was
+demonstrated to be practically realizable, by the strongest possible
+evidence such a claim admits, an actual, physical, hand-executed
+construction that reached it. Nothing in this chapter should be read as
+extending that demonstrated practical realizability to any specification
+beyond the one actually constructed, and the Crinkle-Cut Principle of
+Section 9.6 is worded precisely to reflect this limit.
+
+Chapter 10 closes the monograph's substantive argument by briefly
+indicating how the questions this chapter has posed, but deliberately
+not answered in general form, might be pursued further: through
+systematic variation of the specification, through computational search
+over the space of admissible deformations, and through comparison of
+independently constructed realizations of the same declared boundary
+grammar.
+
+\hypertarget{chapter-10.-further-work}{%
+\chapter{Further Work}\label{chapter-10.-further-work}}
+
+\hypertarget{what-remains-open}{%
+\section{What remains open}\label{what-remains-open}}
+
+The preceding chapters have established a constructive existence claim,
+a formal vocabulary adequate to state it precisely, a theoretical
+account of why a satisfied boundary specification cannot disclose the
+interior history that satisfied it, and a hedged principle, together
+with an explicit list of the ways that principle's stronger conjectured
+form could fail to hold. What they have not done, and do not attempt to
+do, is settle any of the questions that principle and conjecture leave
+open. This short chapter indicates, briefly and without developing any
+of them into a research program in their own right, the directions in
+which that settling might proceed.
+
+\hypertarget{systematic-variation}{%
+\section{Systematic variation}\label{systematic-variation}}
+
+The most direct way to test how far the Crinkle-Cut Principle of Section
+9.6 extends beyond the single demonstrated case is to vary the
+specification systematically and observe where realizability holds and
+where it fails. This means constructing further sheets with different
+numbers of selected regions, different relative placements and
+separations, different assigned edge orientations, and different surplus
+ratios, and attempting, by the same hand-folding methods described in
+Chapter 7, to realize each one. Success and failure should both be
+recorded, including the specific obstruction encountered in each failed
+attempt, drawn from the list in Section 9.8, since a pattern of which
+obstructions recur under which conditions would itself be informative
+about where the boundary of practical realizability actually lies.
+
+A closely related line of variation concerns material rather than
+specification: repeating a fixed specification across sheets of
+differing thickness, stiffness, and plastic behavior, to determine how
+much of the boundary between success and failure is a property of the
+abstract specification and how much is a property of the particular
+material used to realize it. Section 9.9's distinction between ideal,
+mechanical, and practical realizability makes exactly this kind of
+variation necessary to disentangle, since a specification's mechanical
+realizability depends on material properties in a way its ideal
+realizability does not.
+
+\hypertarget{independent-realizations-of-the-same-specification}{%
+\section{Independent realizations of the same
+specification}\label{independent-realizations-of-the-same-specification}}
+
+Chapter 6 argued, from a single sheet carried through two documented
+outcomes, that the same boundary specification can be satisfied by more
+than one interior history. A stronger version of this claim would ask
+several independent constructors, given the same specification and no
+knowledge of one another's methods, to realize it separately, and would
+then compare the resulting interiors, by the destructive unfolding or
+sectioning such a comparison would require, to determine how much
+genuine diversity of interior structure a single boundary class actually
+admits in practice, as opposed to in principle. This would give
+empirical content to the equivalence hierarchy introduced in Section
+6.8, boundary, structural, crease, and procedural equivalence, by
+measuring how far apart independently produced realizations of the same
+specification actually tend to fall along that hierarchy.
+
+\hypertarget{computational-and-robotic-search}{%
+\section{Computational and robotic
+search}\label{computational-and-robotic-search}}
+
+The \(\text{INFOLD}\) operator of Chapter 5 was framed throughout as a
+search instruction rather than a determinate procedure, and nothing in
+principle restricts that search to a human hand. A computational model
+could represent the selected regions as rigid or near-rigid panels
+connected by a deformable sheet, and search, by whatever optimization
+method proves suitable, for a configuration satisfying a declared
+boundary grammar while minimizing some combination of bending energy,
+self-collision, and interior congestion. Whether such a search reliably
+locates realizations that a human constructor would also find, or
+instead discovers structurally different solutions unavailable to
+hand-folding, would itself bear on the practical-realizability question
+raised in Section 9.9.
+
+A robotic implementation, capable of perceiving the declared marks on a
+physical sheet and manipulating it directly, would test a further and
+more demanding question: whether the constraint-level notation developed
+in Chapter 4 carries enough information to guide a search process that
+has no access to the embodied, trace-guided intuitions described in
+Chapter 7, or whether some of what made the Supercube's construction
+tractable by hand depended on forms of tactile feedback and local
+judgment that a notation, however carefully specified, cannot fully
+substitute for.
+
+\hypertarget{a-deliberate-limit-on-this-chapters-scope}{%
+\section{A deliberate limit on this chapter's
+scope}\label{a-deliberate-limit-on-this-chapters-scope}}
+
+None of the preceding directions is developed here beyond the brief
+indication given above. Detailed experimental templates, replication
+protocols, measurement instruments, and standardized recording forms
+belong to a separate, purpose-built replication supplement rather than
+to the body of this monograph, should such a supplement later be
+prepared. Including that material here would extend the monograph well
+past the scope this final part is meant to occupy, and would risk
+obscuring, under a mass of procedural detail, the more limited claim the
+monograph has actually been concerned to establish throughout: that one
+nontrivial constraint-directed infolding was successfully demonstrated,
+and that its formal and theoretical consequences, worked out across the
+preceding chapters, hold independently of whether any of the further
+work sketched in this chapter is ever carried out at all.
+
+\hypertarget{conclusion.-the-visible-solution}{%
+\chapter*{Conclusion: The Visible Solution}
+\addcontentsline{toc}{chapter}{Conclusion: The Visible Solution}\label{conclusion.-the-visible-solution}}
+
+\hypertarget{returning-to-the-object}{%
+\section{Returning to the object}\label{returning-to-the-object}}
+
+It is worth returning, at the end of this monograph, to the object
+itself, rather than to the formal apparatus that has accumulated around
+it across the preceding chapters. Three squares were marked on a sheet
+considerably larger than the three of them combined. Each square carried
+a small amount of annotation: which edge was to be a bottom edge, which
+a side edge, which corner was to meet the corresponding corners of the
+other two squares at a single shared vertex. Nothing else about the
+sheet was specified in advance.
+
+Nothing about the shape of the finished object was declared, in the
+sense that a cube net declares it, by laying out beforehand which
+regions must touch which. What was declared were fragments: three local
+frames and the relations required to hold among them. The rest of the
+sheet, unmarked and unaddressed by anything in the specification, was
+left to become whatever it needed to become in order for those fragments
+to be brought into their required configuration.
+
+\hypertarget{what-the-construction-preserved-and-what-it-surrendered}{%
+\section{What the construction preserved and what it
+surrendered}\label{what-the-construction-preserved-and-what-it-surrendered}}
+
+The finished object honored the fragments. The three marked squares
+ended up mutually adjacent, correctly oriented, and incident to a shared
+corner, exactly as their annotations had specified. Everything else
+about the object, the exact route the surplus material took to reach the
+interior, the specific creases that route left behind, the object's
+overall neatness or lack of it, was never specified and was never, in
+any meaningful sense, decided in advance. It was discovered, by hand,
+through the kind of local, trace-guided search Chapter 7 described, and
+it could have been discovered differently, by a different sequence of
+moves, without the finished object thereby failing to satisfy the
+specification that governed it.
+
+This is the sense in which the object's visible roughness is not a
+shortfall to be apologized for. Measured against the hierarchy of
+protected distinctions set out in Chapter 9, the construction preserved
+everything ranked above cosmetic regularity and sacrificed cosmetic
+regularity itself, which was, from the specification's own standpoint,
+exactly the correct trade to make. A cleaner object would not have been
+a more successful realization of this specification. It would have been
+evidence that a different, more demanding specification had been in
+force, one this monograph never claimed to be testing.
+
+\hypertarget{what-generalizes-and-what-does-not}{%
+\section{What generalizes and what does
+not}\label{what-generalizes-and-what-does-not}}
+
+Sparse boundary constraints, this monograph has argued, can govern a
+physical transformation without determining its trajectory. This is not
+a paradox, once the distinction between a declared relation and a
+realized history, developed formally in Chapter 6 and experienced
+directly in Chapter 7, is kept in view. A specification that declares
+only a small number of relations leaves correspondingly many degrees of
+freedom open, and a physical sheet, permitted to fold, pleat, and
+crumple freely within those open degrees of freedom, will find some
+resolution of them, though not a predetermined one and not necessarily
+the same one twice.
+
+The monograph has been careful, throughout, to keep this claim at the
+scale the evidence actually supports. One sheet, with one declared
+specification, was successfully realized, more than once, in more than
+one interior configuration, all of them satisfying the same declared
+exterior relations. This licenses the Crinkle-Cut Principle of Chapter 9
+in its stated, deliberately narrow form, and it licenses the stronger
+conjecture stated alongside it only as a conjecture, not as a result
+this monograph has established. The cortical analogy of Chapter 8 was
+developed under the same discipline: a structural resemblance worth
+drawing out precisely because it is structural, and precisely because it
+was kept apart, explicitly and at comparable length, from any claim
+about mechanism that the paper construction cannot support and was never
+meant to.
+
+\hypertarget{the-hidden-disorder-is-not-the-opposite-of-the-visible-relation}{%
+\section{The hidden disorder is not the opposite of the visible
+relation}\label{the-hidden-disorder-is-not-the-opposite-of-the-visible-relation}}
+
+The object's visible simplicity, three legible faces meeting correctly
+at a corner, and its hidden disorder, a densely folded and largely
+unrecoverable mass of surplus material, are not opposed to one another,
+and it would misread the entire argument of this monograph to treat them
+as though they were. The hidden disorder is not an unfortunate cost paid
+for the visible relation, tolerated because no better alternative was
+available. It is the specific mechanism by which the visible relation
+became achievable at all. A specification this sparse, governing regions
+this widely separated, could not have been realized by a sheet forbidden
+from crumpling; the freedom to crumple, and the resulting interior
+disorder that freedom produces, is not a defect the construction had to
+work around but the very capacity the construction depended on
+throughout.
+
+This is the point at which the monograph's central formulation should be
+restated, now that the chapters supporting it have been laid out in
+full:
+
+\begin{quote}
+The boundary is not the whole object and does not contain its complete
+explanation. It is the visible residue of constraints successfully
+preserved through a larger, partly hidden history of deformation.
+\end{quote}
+
+\hypertarget{a-closing-note-on-what-has-been-offered}{%
+\section{A closing note on what has been
+offered}\label{a-closing-note-on-what-has-been-offered}}
+
+This monograph has offered a description, a notation, a theoretical
+account of what a satisfied boundary specification can and cannot
+disclose about its own history, a restrained biological analogy, and a
+formally hedged principle, together with an explicit account of where
+that principle's stronger form might fail. It has not offered a complete
+theory of paper mechanics, a general algorithm for realizing arbitrary
+boundary specifications, or a mechanistic account of cortical
+development, and it has said so plainly at every point where the
+temptation to claim more than this arose.
+
+What it has offered, at bottom, is an argument built from a single
+physical object: that a boundary can be specified more sparsely than a
+complete crease pattern requires, that the gap between a sparse
+specification and a finished physical form can be closed by permitting
+unconstrained material to absorb whatever the specification leaves open,
+and that the resulting object, whatever else can be said about it,
+stands as a record, though not a legible one, of exactly this having
+been done. The three marked squares are still there, on the finished
+object, wherever it ends up. Everything else about it was found, not
+planned, and the finding is the part of the construction this monograph
+has tried, across its length, to take seriously as a subject in its own
+right.
+
+\appendix
+
+\hypertarget{appendix-a.-infolding-symbol-set}{%
+\chapter{Infolding Symbol
+Set}\label{appendix-a.-infolding-symbol-set}}
+
+This appendix collects, in one place, the graphic notation introduced in
+Section 4.9. It is intended as a working reference for marking a
+physical sheet or a diagram of one, not as a restatement of the
+reasoning behind each symbol, which appears in the body of Chapter 4.
+
+\hypertarget{protected-faces}{%
+\section{Protected faces}\label{protected-faces}}
+
+A selected region \(E_i\) is drawn with a heavy outline, distinguishing
+it at a glance from unmarked, free material. Each protected face is
+given a short identifier, \(F_1\), \(F_2\), \(F_3\), and so on, placed
+inside or adjacent to the outlined region.
+
+\hypertarget{free-material}{%
+\section{Free material}\label{free-material}}
+
+Regions belonging to the infoldable remainder \(I\) are left unmarked,
+or given only a light, uniform shading if some visual indication of
+extent is useful. The absence of a heavy outline is itself the operative
+signal: it declares that the region's internal crease structure lies
+outside the specification, not merely that it has not yet been drawn in.
+
+\hypertarget{edge-role-ticks}{%
+\section{Edge-role ticks}\label{edge-role-ticks}}
+
+Edge roles are marked near the relevant edge, close to the outline of a
+protected face, using short ticks rather than the mountain- or
+valley-fold lines of conventional notation, which already carry a
+different meaning.
+
+\begin{itemize}
+\tightlist
+\item
+  A single solid tick marks an edge assigned the bottom role, \(B\).
+\item
+  A double tick marks an edge assigned the side role, \(S\).
+\item
+  A triple tick marks an edge assigned the top role, \(T\), where a
+  construction requires one.
+\item
+  A matching pair of small letters, placed near two edges belonging to
+  different protected faces, marks an adjacency condition
+  \(A(E_i{:}e_a,\, E_j{:}e_b)\) between them: the two edges carrying the
+  same letter are the two required to meet.
+\item
+  A small \(\times\) near an edge marks that edge as prohibited from
+  exterior exposure, the role \(X\).
+\end{itemize}
+
+\hypertarget{vertex-labels}{%
+\section{Vertex labels}\label{vertex-labels}}
+
+A small circled label, such as \(V_1\), placed at a corner of a
+protected face, indicates that this corner participates in a
+vertex-gluing condition. The same label, repeated at a corner of each of
+the other protected faces required to meet it, indicates that all
+corners carrying that label must become incident to one shared exterior
+vertex in the realized object. An unrepeated label, appearing at only
+one corner, carries no such requirement and should not be used; every
+vertex label in a complete diagram should appear at two or more corners.
+
+\hypertarget{exposure-status}{%
+\section{Exposure status}\label{exposure-status}}
+
+Where a region's exposure status is not simply assumed from its being
+marked as protected or left free, a short label may be attached directly
+to the region:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\text{OUT}\), for a region intended to be principally exterior.
+\item
+  \(\text{IN}\), for a region intended to be principally interior.
+\item
+  \(\text{FREE}\), for a region where either status is acceptable to the
+  specification.
+\item
+  \(\text{SEAM}\), for a region permitted to appear only as a narrow
+  boundary strip or overlap, rather than as a full exterior face.
+\end{itemize}
+
+\hypertarget{phase-annotations}{%
+\section{Phase annotations}\label{phase-annotations}}
+
+Where a construction is more easily communicated in stages, brief phase
+labels may be written separately from the geometric marks, typically in
+the margin or on an accompanying line of text rather than on the sheet
+itself: for example, \emph{Phase 1: realize \(V_1\)}, followed by
+\emph{Phase 2: align the bottom-edge cycle}, followed by \emph{Phase 3:
+relegate the remaining surplus}. These annotations record the order in
+which constraints are intended to be secured. They do not record, and
+should not be read as recording, the exact hand motions by which any one
+phase is to be carried out.
+
+\hypertarget{compatibility-note}{%
+\section{Compatibility note}\label{compatibility-note}}
+
+None of the symbols above are intended to replace the standard
+mountain-fold, valley-fold, reversal, sink, and rotation symbols of
+conventional origami diagramming. A single diagram may combine both
+vocabularies freely: conventional symbols specifying a particular local
+operation, and the symbols above specifying what that operation is being
+performed in order to achieve or preserve. Section 4.10 discusses this
+compatibility at greater length.
+
+\hypertarget{appendix-b.-formal-definitions}{%
+\chapter{Formal
+Definitions}\label{appendix-b.-formal-definitions}}
+
+This appendix gathers, without re-deriving, the formal terms introduced
+across Chapters 3 through 6 and Chapter 9, for reference. Each entry
+cites the section in which the term is originally motivated and
+explained.
+
+\textbf{Substrate (\(P\)).} The connected material sheet on which a
+construction is carried out, treated for formal purposes as a connected,
+bounded two-dimensional surface initially lying flat in the plane.
+(Section 3.1)
+
+\textbf{Selected region (\(E_i\)).} One of a finite collection
+\(E = \{E_1, \ldots, E_n\}\) of regions marked in advance on the
+substrate, intended to remain legible on the finished object's exterior.
+(Section 3.2)
+
+\textbf{Infoldable complement (\(I\)).} The set-theoretic complement
+\(I = P \setminus E\): the portion of the substrate not selected for
+exterior legibility, whose final geometry is not declared in advance.
+Not to be understood as disposable or unimportant material. (Section
+3.2)
+
+\textbf{Local frame (\(F_i\)).} A pair \(F_i = (E_i, o_i)\), where
+\(o_i\) is orientation data assigning target roles to some or all of the
+boundary features of \(E_i\), independent of the region's current
+position or its distance from other selected regions. (Section 3.3)
+
+\textbf{Edge role.} A symbolic label attached to an edge of a local
+frame, drawn from a vocabulary including \(B\) (bottom), \(S\) (side),
+\(T\) (top), \(J_k\) (joining edge, indexed), \(V_k\) (vertex-incident
+edge, indexed), and \(X\) (exposure-prohibited). (Section 3.5)
+
+\textbf{Partial specification.} A local frame or boundary grammar in
+which some edges or relations are deliberately left unlabeled,
+constituting a positive declaration that the corresponding feature's
+final configuration is not being constrained, rather than an omission.
+(Section 3.5, Section 3.6)
+
+\textbf{Realization (\(f\)).} A deformation carrying the marked
+substrate \(P\) into a folded state, evaluated against whether it
+satisfies a declared constraint set \(C\). (Section 4.1)
+
+\textbf{Boundary grammar.} The set of constraint types, exposure,
+adjacency, vertex-gluing, orientation, relegation, and closure, taken
+together, by which a finished object's exterior can be specified without
+specifying the deformation that produces it. (Section 4.8)
+
+\textbf{Exposure condition.} The requirement
+\(f(E_i) \subset \partial\Omega\), that a selected region ends up on the
+finished object's apparent exterior boundary, within a stated tolerance.
+(Section 4.2)
+
+\textbf{Adjacency condition.} The requirement
+\(A(E_i{:}e_a,\, E_j{:}e_b)\), that a specified edge of one selected
+region meet a specified edge of another in the realized exterior.
+(Section 4.3)
+
+\textbf{Vertex-gluing condition.} The requirement
+\(G(F_1, F_2, F_3) = V\), that designated corners of several local
+frames become incident to one shared exterior vertex. (Section 4.4)
+
+\textbf{Orientation condition.} The requirement that a realized
+deformation carry a local frame's declared orientation into agreement
+with its target orientation, up to tolerance. (Section 4.5)
+
+\textbf{Relegation condition.} The requirement
+\(f(I) \subset \Omega \cup H\), that the infoldable complement's image
+lie within the object's interior or its hidden boundary layers \(H\),
+rather than protruding as unaccounted-for exterior surface. (Section
+4.6)
+
+\textbf{Closure condition.} Any of a family of requirements governing
+how complete, stable, or functionally container-like the finished object
+must be; deliberately left as a family rather than a single formula,
+since adequate closure depends on the construction's purpose. (Section
+4.7)
+
+\textbf{\(\text{INFOLD}(I \mid C)\).} The operator denoting constrained
+search: deform the free region \(I\) through any permitted combination
+of admissible operations such that the constraint set \(C\) is
+satisfied, or is not thereby rendered unsatisfiable. Denotes a search
+family, not a determinate procedure. (Section 5.1)
+
+\textbf{Protected geometry.} Geometry corresponding directly to a
+declared constraint, which a realization must not sacrifice in the
+course of resolving anything else. (Section 5.4)
+
+\textbf{Sacrificial geometry.} Geometry whose precise final shape and
+crease history are not protected, and whose specificity, though not
+whose material, may be surrendered in service of satisfying protected
+constraints elsewhere. (Section 5.4)
+
+\textbf{\(\text{LOCK}(C_k)\).} The operation of treating a currently
+satisfied constraint as provisionally fixed, so that subsequent
+operations are chosen or avoided specifically to preserve it. (Section
+5.5)
+
+\textbf{\(\text{RELAX}(C_k, \varepsilon)\).} The operation of permitting
+a previously locked constraint to drift within a stated tolerance
+\(\varepsilon\), undertaken to clear an obstruction elsewhere in the
+construction. (Section 5.6)
+
+\textbf{\(\text{REPAIR}(C_k)\).} The operation of reasserting a relaxed
+constraint, ideally within its original tolerance, once the obstruction
+that necessitated relaxation has been cleared. (Section 5.6)
+
+\textbf{Sheet graph (\(G_0\)).} A graph whose nodes correspond to marked
+regions and intervening portions of the flat, unfolded substrate, and
+whose edges record direct connection across the original planar surface.
+(Section 6.1)
+
+\textbf{Boundary graph (\(G_\partial\)).} A graph whose nodes correspond
+to regions visible on the finished exterior, and whose edges record
+adjacency among them in the realized object. (Section 6.1)
+
+\textbf{Surplus ratio (\(\sigma\)).} The quantity
+\(\sigma = \big(\text{Area}(P) - \text{Area}(E_{\text{visible}})\big) / \text{Area}(E_{\text{visible}})\),
+measuring how much of the substrate's area lies outside the declared
+exterior, relative to the declared exterior's own area. (Section 6.4)
+
+\textbf{Reachable set (\(\text{Reach}(P, h_t)\)).} The set of
+configurations reachable from the substrate's current state, given a
+specific deformation history \(h_t\) up to time \(t\); a property of the
+pair of sheet and history, not of the sheet's current shape alone.
+(Section 6.6)
+
+\textbf{Boundary equivalence.} Two realizations satisfy the same
+declared exposure, adjacency, orientation, vertex, and closure
+conditions, regardless of anything else about them. The weakest and, for
+this monograph's purposes, most important notion of equivalence among
+realizations. (Section 6.8)
+
+\textbf{Structural equivalence.} Two realizations are
+boundary-equivalent and additionally share the same pattern of interior
+layer contacts. (Section 6.8)
+
+\textbf{Crease equivalence.} Two realizations are structurally
+equivalent and additionally share the same crease network up to a stated
+tolerance. (Section 6.8)
+
+\textbf{Procedural equivalence.} Two realizations were produced by the
+same sequence of operations in the same order; the strongest notion of
+equivalence among realizations, and the one closest to the
+reproducibility conventional sequential diagrams aim at. (Section 6.8)
+
+\textbf{Local admissibility.} A move that does not irreparably violate a
+protected constraint and does not damage the substrate's material
+integrity, evaluated on its own terms without regard to its consequences
+for later moves. (Section 9.1)
+
+\textbf{Global reachability.} The continued existence, from a given
+intermediate state, of at least one path to a configuration satisfying
+every declared constraint. Distinct from, and not implied by, a sequence
+of individually locally admissible moves. (Section 9.2)
+
+\textbf{Hierarchy of protected distinctions.} The ranking material
+continuity \(>\) selected-face identity \(>\) required incidence \(>\)
+edge orientation \(>\) planarity \(>\) cosmetic regularity, used to
+decide which relation to preserve when preserving one requires
+sacrificing another. (Section 9.3)
+
+\textbf{Ideal realizability.} A specification is ideally realizable if
+some continuous deformation of an idealized, zero-thickness, infinitely
+flexible surface satisfies it. (Section 9.9)
+
+\textbf{Mechanical realizability.} A specification is mechanically
+realizable if some physically plausible deformation of a sheet with
+realistic thickness, stiffness, and plastic behavior satisfies it.
+(Section 9.9)
+
+\textbf{Practical realizability.} A specification is practically
+realizable if a construction process can actually be found, within
+reasonable effort, to locate a satisfying deformation, distinct from the
+mere existence of one. (Section 9.9)
+
+\hypertarget{appendix-c.-open-problems}{%
+\chapter{Open Problems}\label{appendix-c.-open-problems}}
+
+The following questions are left unresolved by this monograph. Each is
+stated with a pointer to the chapter in which the relevant background
+concept was introduced, but none is developed here beyond the statement
+given.
+
+\textbf{Realizability.} Beyond the single demonstrated case, what is the
+actual scope of the conjecture stated in Section 9.7? Is there a
+decision procedure, even in principle, for determining whether a given
+boundary specification is realizable from a given substrate, or is the
+question undecidable in general once crumpling is admitted as a
+permitted operation? (Section 9.6, Section 9.7)
+
+\textbf{Minimum surplus.} For a given target boundary specification,
+what is the smallest surplus ratio \(\sigma\), as defined in Section
+6.4, from which the specification remains realizable? Does this minimum
+depend only on the specification's combinatorial structure, or also on
+material properties in the sense of Section 9.9's distinction between
+ideal and mechanical realizability?
+
+\textbf{Internal complexity.} Given a realized object, can a meaningful
+measure of its hidden interior's complexity be defined, and if so, does
+exterior regularity reliably predict a high value of that measure, as
+the tradeoff discussed in Section 6.5 would suggest, or are there
+realizations that combine a regular exterior with a comparatively simple
+interior?
+
+\textbf{Diversity of interiors.} How many structurally distinct
+interiors, in the sense of the equivalence hierarchy of Section 6.8, can
+realize the same boundary specification in practice? The single sheet
+examined in this monograph demonstrated at least two; the general shape
+of this space, for a fixed specification, remains unexamined. (Section
+10.3 proposes an experimental approach.)
+
+\textbf{Material scaling.} How do the obstructions catalogued in Section
+9.8, particularly those arising from thickness and plastic behavior,
+scale with the size of the substrate and the size of the target object?
+Does a sufficiently large sheet overcome obstructions that a smaller
+sheet of the same material cannot?
+
+\textbf{Verification.} Given a finished, unopened object, what can be
+determined about whether it satisfies a claimed boundary specification
+without destructively unfolding it, and how does the difficulty of this
+verification compare to the difficulty of the original search that
+produced the object? (Section 9.9, Section 10.4)
+
+\textbf{Computational search.} Does a computational solver, searching
+the space of admissible deformations directly, tend to discover the same
+class of realizations a human constructor finds by hand, or does it
+discover structurally different solutions unavailable to embodied,
+trace-guided search of the kind described in Chapter 7? (Section 10.4)
+
+\textbf{Robotic construction.} Does the constraint-level notation of
+Chapter 4 carry sufficient information to guide a robotic manipulator
+lacking the tactile feedback described in Chapter 7, or does successful
+hand construction depend on forms of local judgment the notation does
+not, and perhaps cannot, fully capture? (Section 10.4)
+
+\textbf{The cortical analogy's limits.} Nothing in this monograph
+establishes which, if any, of the mechanisms surveyed in Section 8.3 the
+structural analogy of Chapter 8 actually bears on beyond the general
+geometric point stated in Section 8.6. Whether the notion of a boundary
+grammar, suitably adapted, could contribute any precise, testable
+content to developmental biology, as opposed to serving only as an
+illustrative analogy, is left entirely open.
+
+\textbf{Expressive completeness.} Does the notation developed in Chapter
+4, together with the operators of Chapter 5, suffice to state every
+boundary specification of practical interest, or are there classes of
+desired exterior relations that resist expression in this vocabulary and
+require its extension?
+
+\backmatter
+
+\hypertarget{bibliography}{%
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}\label{bibliography}}
+
+Cambou, Anne D., and Narayanan Menon. ``Three-Dimensional Structure of a
+Sheet Crumpled into a Ball.'' \emph{Proceedings of the National Academy
+of Sciences} 108, no. 36 (2011): 14741--14745.
+
+Cerda, Enrique, and L. Mahadevan. ``Geometry and Physics of Wrinkling.''
+\emph{Physical Review Letters} 90, no. 7 (2003): 074302.
+
+Demaine, Erik D., and Joseph O'Rourke. \emph{Geometric Folding
+Algorithms: Linkages, Origami, Polyhedra}. Cambridge: Cambridge
+University Press, 2007.
+
+Grassé, Pierre-Paul. ``La Reconstruction du Nid et les Coordinations
+Interindividuelles chez \emph{Bellicositermes natalensis} et
+\emph{Cubitermes} sp. La Théorie de la Stigmergie.'' \emph{Insectes
+Sociaux} 6, no. 1 (1959): 41--80.
+
+Harbin, Robert. \emph{Secrets of Origami: The Japanese Art of Paper
+Folding}. London: Hodder and Stoughton, 1963.
+
+Hull, Thomas C. \emph{Project Origami: Activities for Exploring
+Mathematics}. 2nd ed.~Boca Raton: A K Peters/CRC Press, 2012.
+
+Lang, Robert J. \emph{Origami Design Secrets: Mathematical Methods for
+an Ancient Art}. 2nd ed.~Boca Raton: A K Peters/CRC Press, 2011.
+
+Randlett, Samuel. \emph{The Art of Origami}. New York: E. P. Dutton,
+1961.
+
+Theraulaz, Guy, and Eric Bonabeau. ``A Brief History of Stigmergy.''
+\emph{Artificial Life} 5, no. 2 (1999): 97--116.
+
+Tallinen, Tuomas, Jun Young Chung, François Rousseau, Nadine Girard,
+Julien Lefèvre, and L. Mahadevan. ``On the Growth and Form of Cortical
+Convolutions.'' \emph{Nature Physics} 12, no. 6 (2016): 588--593.
+
+Toro, Roberto, and Yves Burnod. ``A Morphogenetic Model for the
+Development of Cortical Convolutions.'' \emph{Cerebral Cortex} 15, no.
+12 (2005): 1900--1913.
+
+Van Essen, David C. ``A Tension-Based Theory of Morphogenesis and
+Compact Wiring in the Central Nervous System.'' \emph{Nature} 385, no.
+6614 (1997): 313--318.
+
+Witten, Thomas A. ``Stress Focusing in Elastic Sheets.'' \emph{Reviews
+of Modern Physics} 79, no. 2 (2007): 643--675.
+
+Zeman, Adam, Michaela Dewar, and Sergio Della Sala. ``Lives Without
+Imagery --- Congenital Aphantasia.'' \emph{Cortex} 73 (2015): 378--380.
+
+Zilles, Karl, Nicola Palomero-Gallagher, and Katrin Amunts.
+``Development of Cortical Folding During Evolution and Ontogeny.''
+\emph{Trends in Neurosciences} 36, no. 5 (2013): 275--284.
+
+\end{document}
+

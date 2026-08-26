@@ -1,0 +1,446 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{parskip}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\title{\textbf{The Attention Compiler: Prerequisite Routing, Adaptive Curricula, and the Triage of Novel Ideas}}
+\author{Flyxion \\ \small Independent Researcher}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This essay introduces a system through which many people can engage a single thinker, research group, or institution without forcing every interaction into the same chronological queue. Rather than functioning merely as a chatbot, search engine, FAQ, or educational platform, the proposed device transforms heterogeneous submissions into answered questions, clarified disagreements, developed conjectures, and compact packets of residual novelty. Previously resolved questions are routed through existing answers; underdeveloped ideas receive conceptual and mathematical preparation; and genuinely unresolved contributions are escalated to scarce human attention. Because such routing depends on determining what an interlocutor already understands, the system maintains a provisional and continuously revised model of each participant's epistemic state. Subtle diagnostic feedback allows it to calibrate the level of explanation, distinguish incomprehension from disagreement, and estimate when direct conversation between a particular participant and recipient is likely to produce something neither the archive nor the intermediary can generate alone. The system thereby treats attention as a limited computational resource while preserving the possibility that strange, initially inarticulate ideas may become important through structured development.
+\end{abstract}
+
+\section{The Many-to-One Problem of Intellectual Communication}
+
+An asymmetry sits at the root of this problem. The number of people who may wish to communicate with a given individual has no fixed ceiling, while the individual's available attention does. Digital communication greatly increases access without increasing the recipient's time proportionally, and email, comments, social media, and open submission systems collapse routine questions, personal requests, familiar objections, and genuinely original ideas into a single chronological queue that treats them all alike.
+
+The central problem is not simply information overload. It is the repeated loss of previously performed cognitive labor. When each interlocutor begins without access to the distinctions, arguments, and corrections accumulated in earlier conversations, the recipient must repeatedly reconstruct the same conceptual path with each new arrival.
+
+The proposed device addresses this as a problem of conversational concurrency: how can many people speak toward one intellectual center without requiring that center to restart every conversation from zero?
+
+\section{From the Inbox to the Attention Compiler}
+
+The proposed system is best understood as an attention compiler. A compiler does not merely filter its input; it transforms expressions from one representational level into another while detecting failures and preserving relevant structure. The system converts raw human submissions into forms appropriate for different kinds of treatment in exactly this sense.
+
+An incoming message may be transformed into an existing-answer retrieval, a clarified question, a known disagreement, a mathematical conjecture, an empirical proposal, a personal request, a collective pattern, or an escalation packet. The objective is not to decide immediately whether a message is valuable, but to determine what operations must be applied before its value can be assessed.
+
+The basic sequence is:
+
+\begin{center}
+Submission $\rightarrow$ charitable reconstruction $\rightarrow$ claim and question extraction $\rightarrow$ comparison with existing knowledge $\rightarrow$ prerequisite diagnosis $\rightarrow$ guided development $\rightarrow$ adversarial testing $\rightarrow$ residual novelty extraction $\rightarrow$ resolution or escalation
+\end{center}
+
+\section{The Archive as Computed Conversational History}
+
+Essays, papers, code, formal proofs, recorded discussions, previous answers, and rejected conjectures can all serve as durable conversational memory, but only if they are not treated as an undifferentiated document collection. They can instead be decomposed into answer nodes representing questions, distinctions, arguments, counterexamples, prerequisites, unresolved problems, and connections to other nodes.
+
+This decomposition converts an archive from passive storage into an executable map of prior reasoning. A recurring question can be routed to the point at which it was previously addressed, while the system tracks whether the new interlocutor's version contains a meaningful difference.
+
+The archive must retain provenance. The device should distinguish what the thinker explicitly wrote, what the system inferred from that writing, and what a new interlocutor contributed. Without this separation, automated mediation risks fabricating positions and attributing them to the person whose attention it supposedly protects.
+
+\section{Prerequisite-Sensitive Routing}
+
+The ``gauntlet'' at the center of this system is best understood as a sequence of necessary distinctions rather than an exclusionary barrier. Some questions cannot be addressed productively because they presuppose unresolved ambiguities. A person discussing infinity may conflate unbounded processes with completed infinite sets; someone discussing consciousness may conflate reportability, awareness, identity, and phenomenal experience; someone discussing information may move between semantic and statistical meanings without noticing.
+
+The system detects these dependencies and routes the conversation through the smallest relevant set of prerequisites. It does not require ceremonial completion of readings. A person may bypass a prerequisite by demonstrating the corresponding understanding through explanation, application, proof, or counterexample.
+
+The difference between comprehension and assent is essential here. A participant passes a conceptual gate by accurately understanding a distinction, not by agreeing with the system or its author. Collapsing that difference would turn prerequisite routing into ideological screening.
+
+\section{Adaptive Mathematical Curricula}
+
+Mathematical curricula in this system are dynamically generated paths attached to particular ideas, not a single linear course a person is told to complete before returning. Instead of telling someone to ``learn more mathematics,'' the system determines which mathematical structures are required to express or test the submitted proposal.
+
+An idea about transformations that preserve identity might generate a route through functions, equivalence relations, invariants, groups, group actions, and holonomy. A proposal about uncertainty might require probability spaces, conditional probability, Bayesian inference, entropy, and identifiability. A theory of causal organization might need graphs, partial orders, transition systems, dynamical systems, or category theory.
+
+Each concept is taught through its application to the original idea. After learning equivalence relations, the participant must identify what their proposal treats as equivalent. After encountering invariants, they must specify what survives transformation. After studying probability, they must distinguish uncertainty about a system from stochasticity within the system.
+
+The curriculum therefore performs both education and diagnosis. It reveals whether an intuition corresponds to known mathematics, remains internally unstable, or becomes an original extension once expressed precisely.
+
+\section{Competency Graphs Rather Than Fixed Courses}
+
+Ability in this system is represented as a graph of demonstrated competencies rather than a transcript of completed courses. Someone might understand group actions while remaining unreliable with quantifiers; another person might possess strong geometric intuition but lack proof techniques; a programmer might understand operational semantics through implementation without knowing its conventional vocabulary.
+
+Competency is inferred provisionally from performance. The system records what has been demonstrated, what remains uncertain, and what has failed under application, and these judgments remain revisable because a single exercise cannot conclusively establish general mastery. This approach follows the same logic as knowledge tracing in intelligent tutoring systems, which models a learner's mastery of individual skills as a probabilistic estimate updated from observed performance rather than as a fixed credential \cite{corbett1994}.
+
+This permits multiple routes to the same frontier: proof-oriented, computational, visual, historical, experimental, or model-building curricula. The route is selected according to the person's existing abilities and the structure of the proposed idea.
+
+\section{Conversational Calibration and Epistemic State Estimation}
+
+Prerequisite routing requires more than matching a question to a curriculum. The same question can express elementary confusion, compressed expertise, terminological disagreement, exploratory speculation, or a deliberate challenge to an established premise. Correct routing therefore depends on a provisional model of what the interlocutor knows, what they intend, and where their uncertainty lies.
+
+This introduces a limited operational theory of mind into the system. The attention compiler does not need to reconstruct the participant's complete psychology, nor should it claim access to an inaccessible inner state. It needs only a revisable estimate of the epistemic conditions relevant to the present conversation: which distinctions the person can use, which commitments they accept or reject, which vocabulary they recognize, how confidently they are speaking, and what kind of response they are attempting to obtain.
+
+Calibration must occur through subtle feedback rather than through a single entrance examination. A direct question such as ``Do you understand probability?'' provides little reliable information, because people interpret both ``understand'' and ``probability'' differently. A more useful intervention asks the participant to apply a distinction to the idea under discussion. Asking whether uncertainty belongs to the modeled process or to the observer, for example, simultaneously advances the conversation and reveals whether the participant can use the relevant probabilistic distinction.
+
+The system should therefore select prompts that serve two functions at once. Each prompt should help develop the submitted idea while also reducing uncertainty about the participant's epistemic state. A request for an example, counterexample, reformulation, prediction, or limiting case can reveal far more than a detached test of terminology because it measures transfer rather than recognition.
+
+This calibration also protects unusual ideas from premature dismissal. A person may possess a strong geometric intuition without conventional mathematical vocabulary, understand an algorithm through implementation rather than proof, or recognize a consequence without knowing the established theory to which it belongs. Failure to use expected terminology is therefore evidence about the communication channel, not conclusive evidence of conceptual failure.
+
+Conversely, polished language and advanced vocabulary do not establish understanding. A participant who repeatedly shifts definitions or cannot apply a claimed distinction may require prerequisite work despite appearing technically sophisticated. The epistemic model must consequently remain local, probabilistic, and revisable rather than assigning the person a global rank such as ``beginner'' or ``expert.''
+
+The purpose of this model is not to classify the participant as a person. It is to estimate the conversational distance between their current formulation and a productive encounter with the intended recipient. As that distance changes, the attention compiler changes its behavior: answering directly, supplying a prerequisite, asking a diagnostic question, initiating adversarial testing, or escalating the remaining issue.
+
+\section{Developmental Triage for Unusual Ideas}
+
+Evaluating ideas whose authors cannot yet express them clearly is difficult precisely because conventional review often rewards proposals that already resemble recognized disciplinary forms. This can exclude ideas that are genuinely original but terminologically immature. Conversely, novelty rhetoric can conceal incoherence, ignorance of prior work, or claims constructed to evade evaluation.
+
+Novelty is therefore treated as a condition requiring characterization rather than as an automatic mark of value. An idea may be historically novel, combinatorially novel, terminologically novel, empirically novel, formally novel, or merely idiosyncratic.
+
+Developmental triage gives an unusual idea a workspace in which it can be reconstructed, compared with neighboring theories, divided into claims, and connected to possible consequences. It asks what the idea excludes, what would distinguish it from existing accounts, and what observations or derivations could expose its failure.
+
+\section{Residual Novelty}
+
+Residual novelty is the portion of a submission remaining after known answers, terminological substitutions, prerequisite deficiencies, and familiar objections have been removed.
+
+A raw message may initially appear entirely original but collapse into an established concept once normalized. Another may initially resemble a familiar question yet contain a new counterexample that survives comparison with the archive. The device evaluates novelty after transformation, not before it, which places it closer to the anomaly and novelty-detection literature than to simple keyword or similarity matching: the question is not whether a submission looks unfamiliar on its surface, but whether it falls outside what the existing model of the domain already accounts for \cite{markou2003a,markou2003b}.
+
+A strong escalation packet preserves the initial expression, the charitable reconstruction, the closest known ideas, the prerequisites traversed, the claims withdrawn or revised, the tests survived, and the precise unresolved remainder. The human recipient thereby encounters the frontier of the conversation rather than its entire preliminary history.
+
+\section{Adversarial Testing Without Premature Rejection}
+
+Structured opposition is necessary before escalation. A developed proposal can be tested for internal consistency, hidden equivocation, existing counterexamples, incompatibility with evidence, lack of discriminating consequences, and dependence on unfalsifiable escape clauses.
+
+Adversarial testing should be constructive and symmetrical. Established ideas should not receive automatic protection merely because they possess conventional terminology, and unconventional ideas should not be subjected to impossible evidential standards solely because they are strange.
+
+The system's purpose is not to prove that the submitter is wrong. It is to expose the strongest surviving formulation of the contribution and identify why it remains unresolved.
+
+\section{Semantic and Distributional Novelty}
+
+Novelty within an individual message is not the same thing as novelty revealed by the behavior of many messages. A recurring question may contain no new semantic content, yet its repeated appearance can reveal a missing explanation, a social change, a newly important application, or a systematic point of misunderstanding.
+
+Call the former semantic novelty and the latter distributional novelty. The system preserves aggregate patterns even when it resolves individual submissions automatically.
+
+If hundreds of people fail at the same conceptual transition, the problem may lie in the curriculum or original exposition rather than in the participants. Repetition becomes feedback about the topology of the knowledge structure.
+
+\section{Escalation as Allocation of Scarce Attention}
+
+Escalation is a resource-allocation decision, not a judgment of personal worth. Messages may deserve escalation because they contain a new counterexample, formal result, empirical observation, synthesis, application, correction, or unusually consequential question. Other submissions may require human attention because automated interpretation remains uncertain or because the matter is ethically sensitive.
+
+This framing places the design problem alongside selective classification, where a model is permitted to abstain from a prediction rather than commit to one under uncertainty, trading coverage for reliability at a chosen risk level \cite{geifman2017}, and alongside active learning, where a system directs scarce human labeling effort toward the examples whose resolution would improve the model most \cite{settles2009}. Direct access should not depend solely on linguistic polish, credentials, institutional affiliation, or familiarity with academic conventions; the developmental layers described above are partly intended to prevent those surface features from determining who appears capable of contributing.
+
+Importance, relevance, and salience must remain distinct. Importance concerns the possible consequence of a query. Relevance concerns its relation to the recipient's work, responsibilities, or unresolved problems. Salience concerns why it merits attention under present conditions. A question can be important in general while irrelevant to a particular recipient, or familiar in general while highly salient because it exposes an error in the recipient's current work.
+
+Escalation is therefore recipient-relative. Let $r$ denote the intended recipient, $K_r$ that recipient's recorded knowledge and unresolved questions, and $\theta_i$ the current model of participant $i$. The escalation function should be written
+\[
+S(x_i \mid r,K_r,\theta_i,t)
+\]
+rather than simply $S(x_i)$. Its value depends not only on the intrinsic properties assigned to the message but also on the relation between this submission, this participant, this recipient, and the present moment.
+
+The strongest reason for escalation is not necessarily that the submission has obtained the highest independent novelty score. It may instead be that direct interaction between participant $i$ and recipient $r$ has unusually high expected complementary value. Let
+\[
+\Delta_{\mathrm{joint}}(x_i,r)
+\]
+denote the intellectual gain expected from reasoning that becomes possible only through their direct interaction. Escalation is warranted when
+\[
+\mathbb{E}\!\left[
+\Delta_{\mathrm{joint}}(x_i,r)
+\mid y_{1:t},K_r
+\right]
+>
+c_i,
+\]
+where $c_i$ is the anticipated attention cost. This defines the inner boundary of the system: a submission moves upward when the archive, curriculum, and automated intermediary have reached the point at which further progress is expected to require reciprocal attention from the particular person being addressed.
+
+The system also retains mechanisms for random review and appeal. Purely automated selection could otherwise create a closed feedback loop in which only ideas recognizable to the existing model are judged novel.
+
+\section{Governance and the Danger of Epistemic Gatekeeping}
+
+The same architecture that protects attention could become coercive. A prerequisite graph may encode contested assumptions as though they were neutral foundations. Novelty detection may reward fashionable formulations. Competency assessments may reproduce educational bias. The system may falsely claim that a question has already been answered, or use endless prerequisites to prevent criticism from reaching the protected person.
+
+Safeguards should include visible routing explanations, provenance for claimed answers, opportunities to challenge classifications, alternative curricular paths, uncertainty reporting, audit logs, and periodic human examination of rejected or stalled submissions.
+
+The participant must be able to say, ``I understand this prerequisite and reject it,'' ``this source does not answer my question,'' or ``the system has reconstructed my claim incorrectly.'' Such objections become inputs to the routing process rather than grounds for exclusion.
+
+\section{Two Topologies of Concentrated Attention}
+
+The device described so far inverts the topology most people associate with one person addressing many. A lecture, a sermon, a broadcast, or a political rally sends a single stream outward to an audience that has no individual channel back. Power in that arrangement concentrates in the exclusive right to speak: one voice fixes the shared content for everyone listening, and no listener can renegotiate what was said before it reaches the rest of the room. This is the structure classical accounts of charismatic and rhetorical authority describe, and it is also the structure of mass broadcast media, where a small number of transmission points determine what a large audience receives.
+
+The attention compiler reverses the direction of flow. Many people speak toward one recipient rather than one recipient speaking toward many. It would be a mistake, however, to conclude that reversing the direction of communication automatically reverses the distribution of power. A convergence point can concentrate authority just as effectively as a transmission point. In broadcast, power derives from the exclusive right to be heard by everyone at once. In a many-to-one triage system, power derives instead from the exclusive right to decide what counts as having been adequately said. The prerequisite graph, the competency model, the escalation function, and the archive against which residual novelty is measured are all authored, directly or indirectly, by the same party the system protects. A recipient who controls the criteria for escalation occupies a structurally similar position to a broadcaster who controls the criteria for what gets transmitted, even though the arrows in the diagram point the opposite way.
+
+This is close to what media scholarship calls a gatekeeping function: a single point through which many potential messages must pass before some are selected and the rest are not. Traditional gatekeeping sits between a source and an audience; the attention compiler's gatekeeping sits between an audience and a source. The two arrangements produce different failure modes rather than different amounts of concentrated control. A broadcaster who never encounters dissent can lose track of whether the audience actually agrees. A recipient at the convergence point of a triage system can lose track of whether the archive, prerequisites, and novelty criteria it relies on have themselves become self-confirming, since every incoming idea is evaluated against a knowledge structure that the same recipient built.
+
+The asymmetry is not itself objectionable. Finite attention is a real constraint, and some convergence point is unavoidable if that constraint is to be respected at all. What matters is whether the convergence point remains accountable to the people routed through it in something like the way a fair broadcaster remains accountable to editorial standards, rather than becoming an unexamined authority simply because its filtering happens before rather than after the message is heard. The governance safeguards described above, visible routing explanations, contestable classifications, alternative curricular paths, and audited escalation decisions, are what stand between a many-to-one triage architecture and a new, quieter version of the same concentrated authority it was built to avoid reproducing in one-to-many form.
+
+\section{A Minimal Technical Architecture}
+
+A practical implementation can be built from an indexed corpus, an answer-node graph, a competency graph, a conversation-state manager, retrieval tools, language models, and an escalation queue.
+
+The archive supplies authoritative material. Retrieval identifies relevant nodes. A language model performs provisional reconstruction and generates clarification questions. The competency graph determines possible curricular routes. A comparison component searches for neighboring concepts and prior art. A testing component generates objections and counterexamples. The escalation component assembles the residual contribution with its provenance and traversal history.
+
+The model is not authorized to declare questions resolved without cited support. When no reliable answer node exists, the system classifies the matter as related, uncertain, or unresolved rather than inventing closure.
+
+\section{Evaluation}
+
+The device should be evaluated according to whether it reduces repeated human labor without suppressing important contributions. Relevant measures include the accuracy of existing-answer detection, preservation of minority interpretations, improvement in question precision, participant learning, false rejection of novel ideas, false escalation of empty novelty, time saved for the recipient, and the number of escalated proposals that lead to productive work.
+
+Evaluation should also compare the participant's initial and final formulations. A successful interaction need not reach the human recipient. It may succeed because the participant finds an existing answer, abandons an untenable claim, discovers the correct field of study, or produces a much stronger version of the original idea.
+
+\section{Intellectual Institutions as Conversational Systems}
+
+The device invites comparison with universities, peer review, office hours, libraries, scholarly correspondence, seminars, and editorial screening. These institutions already perform partial forms of prerequisite routing and attention allocation, but they typically do so through credentials, disciplinary membership, and slow institutional procedures rather than through an explicit, inspectable routing process.
+
+The attention compiler makes these functions explicit and potentially more permeable. It resembles a continuously operating university in which admission, education, examination, research development, and access to advanced interlocutors occur within the same evolving conversation.
+
+Contemporary scholarly platforms already implement a rudimentary precursor to this architecture. A platform may invite a reader to discuss a paper because its recommendation system detects overlap between the paper's features and the reader's recorded interests. Such matching establishes predicted relevance but not conversational readiness or complementary value. It does not determine what the reader understands, which unresolved claim they might address, or whether interaction with the author could produce a result unavailable from either person's archive alone. The attention compiler extends recommendation into calibrated mediation: it reconstructs the prospective contribution, supplies missing context, and forwards a precise account of the residual issue rather than merely attempting to increase engagement.
+
+The distinction is worth making concrete. A recommendation engine of this kind computes something close to
+\[
+\text{paper features} \times \text{reader-history features} \rightarrow \text{predicted relevance},
+\]
+and stops there: it performs recipient matching but not the reconstruction, comparison, or residual extraction described throughout this essay. An invitation built this way conveys little more than ``this person follows related topics.'' A calibrated invitation, by contrast, would name the specific unresolved intersection between the reader's own unpublished work and the paper's claims, of the kind an escalation packet from earlier sections would produce:
+
+\begin{quote}
+Your work on distinction holonomy treats path-dependent residual structure as an operational record of transformation. After comparison with the paper's protocol, the unresolved intersection concerns whether its irreversible-point construction distinguishes endpoint falsification from path-dependent phase history. This appears not to be addressed in the paper and may warrant direct discussion.
+\end{quote}
+
+The difference between the two is not one of degree. The first predicts that engagement is likely; the second identifies what, specifically, two people's archives leave unresolved between them, which is the condition for escalation defined by $\Delta_{\mathrm{joint}}(x_i,r)$ above.
+
+\section{Mathematical Core: Attention Under Prerequisite Constraints}
+
+The preceding sections describe the attention compiler in narrative terms. This section formalizes routing, prerequisite traversal, residual novelty, and finite attention, so that the proposal can be checked rather than merely read as metaphor. The formalization does not attempt to reduce originality to a single score; it aims instead to make explicit what a routing system is actually optimizing, and to expose the tradeoffs any implementation must make openly.
+
+\subsection{The congestion problem}
+
+Submissions arrive at times $t_1, t_2, \dots$ with average arrival rate $\lambda$. Because submissions vary greatly in evaluation cost, stability should be stated in terms of attention time rather than submission count. Let $C$ denote the attention cost of a submission and $A$ the attention available per unit time. The relevant stability condition is
+\[
+\lambda\,\mathbb{E}[C] < A,
+\]
+not a bare comparison of arrival and processing counts. This distinction between counting items and costing attention time is the queueing-theoretic starting point for the whole design \cite{kleinrock1975}.
+
+Instead of forwarding every raw submission $x_i$ directly, the system applies a transformation $T$:
+\[
+T(x_i, K, \kappa_i) = (a_i, p_i, r_i, u_i),
+\]
+where $K$ is the existing knowledge structure, $\kappa_i$ is the participant's demonstrated competency state, $a_i$ is the portion answered by existing material, $p_i$ is the required prerequisite route, $r_i$ is the unresolved residual, and $u_i$ represents uncertainty about the system's own classification. Writing $\kappa_i$ for competency, rather than reusing $c_i$, keeps this quantity distinct from the evaluation cost $c_i$ introduced below.
+
+The central recipient does not receive $x_i$ directly. They receive $r_i$ together with its provenance. Let $E$ denote the event that a submission is escalated. After triage, the operative stability condition becomes
+\[
+\lambda\,\Pr(E)\,\mathbb{E}[C \mid E] < A,
+\]
+which makes explicit that triage can restore stability by reducing the number of escalations, by reducing their average evaluation cost, or by some combination of both. A system succeeds only if it satisfies this bound while maintaining a sufficiently low probability of suppressing valuable residuals; a system that satisfies the bound by discarding everything has solved congestion but destroyed intellectual access.
+
+\subsection{The prerequisite graph}
+
+The available curriculum is represented as a directed graph
+\[
+G = (V, E),
+\]
+where each vertex $v \in V$ is a concept or demonstrated competency, and an edge $u \to v$ means that $u$ is normally required to engage $v$ reliably. The graph need not be acyclic: competencies can be mutually reinforcing, since proof ability helps mathematical reading while mathematical reading improves proof ability in turn. Rather than forbidding cycles outright, the route planner avoids nonproductive cycles, and strongly connected groups of mutually reinforcing competencies can be compressed into single curricular modules when the route through them does not need to be decomposed further.
+
+For participant $i$, let $C_i \subseteq V$ be the competencies already demonstrated. Let $R(x_i) \subseteq V$ be the concepts required to evaluate submission $x_i$. The missing prerequisite set is
+\[
+M_i = R(x_i) \setminus \mathrm{closure}(C_i),
+\]
+where $\mathrm{closure}(C_i)$ contains the competencies already demonstrated and everything the system can reasonably infer from them, including any curricular module already covered as a compressed strongly connected group.
+
+The curriculum-selection problem is to find a route $P_i$ that covers $M_i$ while minimizing unnecessary burden:
+\[
+P_i^{*} = \arg\min_{P} \left[ \mathrm{cost}(P) + \alpha \cdot \mathrm{redundancy}(P) + \beta \cdot \mathrm{dropout\text{-}risk}(P) \right]
+\]
+subject to
+\[
+M_i \subseteq \mathrm{closure}(C_i \cup P).
+\]
+This prevents the system from treating an entire discipline as a prerequisite when only a short conceptual bridge is needed. The optimal route is not necessarily the shortest route, because a slightly longer route may fit the participant's existing abilities much better.
+
+\subsection{Demonstration rather than attendance}
+
+Let $d_i(v) \in [0,1]$ denote the system's confidence that participant $i$ can use competency $v$. This value is updated from demonstrated performance rather than declared familiarity. After observing response $y$ to diagnostic task $q$, the system updates:
+\[
+d_i'(v) = \mathrm{Update}(d_i(v), y, q).
+\]
+A Bayesian form would be
+\[
+\Pr(v \text{ understood} \mid y) \propto \Pr(y \mid v \text{ understood}) \cdot \Pr(v \text{ understood}),
+\]
+which is the same probabilistic-mastery structure used in Bayesian knowledge tracing for intelligent tutoring systems \cite{corbett1994}. The system retains uncertainty rather than converting one correct answer into permanent mastery, and it distinguishes recognition from transfer: selecting a definition correctly is weaker evidence than applying the concept to the participant's own proposal.
+
+\subsection{Theory-of-mind calibration as sequential inference}
+
+The competency estimate above is one component of a broader conversational state. Let
+\[
+\theta_i(t)
+\]
+denote the system's provisional model of participant $i$ at conversational time $t$. This state may include demonstrated competencies, operative definitions, confidence, intentions, unresolved uncertainties, and the participant's apparent model of the recipient's position. It is not directly observable. The system instead maintains a posterior distribution
+\[
+\Pr\!\left(\theta_i(t) \mid y_{1:t}\right),
+\]
+where $y_{1:t}$ is the interaction history up to time $t$.
+
+Calling this an operational theory of mind does not imply that the system has recovered the participant's complete mental state. It means only that successful routing requires inference about latent epistemic variables from observable conversational behavior. Every explanation, reformulation, example, hesitation, correction, and counterexample changes the posterior estimate.
+
+The choice of the next prompt is therefore a sequential experimental-design problem. Let $q$ be a possible diagnostic or developmental prompt, and let $Y_q$ denote the range of responses it might produce. The expected information gain about the participant is
+\[
+\operatorname{IG}(q)
+=
+H\!\left(\theta_i(t)\mid y_{1:t}\right)
+-
+\mathbb{E}_{Y_q}
+\left[
+H\!\left(\theta_i(t)\mid y_{1:t},Y_q\right)
+\right],
+\]
+where $H$ denotes entropy. A prompt with high information gain sharply distinguishes among competing interpretations of what the participant understands.
+
+Information gain alone is not sufficient. An interrogation can reveal much about a participant while doing little to advance the submitted idea, and an excessively elementary question can impose needless friction. Let $\operatorname{Prog}(q)$ denote the expected progress made on the inquiry, and let $\operatorname{Burden}(q)$ denote the expected conversational cost, including repetition, frustration, and risk of disengagement. The next prompt can then be chosen by
+\[
+q_{t+1}^{*}
+=
+\arg\max_q
+\left[
+\operatorname{IG}(q)
++
+\alpha\,\operatorname{Prog}(q)
+-
+\beta\,\operatorname{Burden}(q)
+\right].
+\]
+
+This criterion formalizes subtle feedback calibration. The best prompt is not necessarily the hardest or most discriminating test. It is the prompt that most efficiently improves the system's model of the participant while helping the original inquiry become more precise. Questions requiring transfer to the participant's own proposal will often dominate questions that merely test recognition of standard terminology.
+
+Because the state estimate is uncertain, routing decisions should be reversible. If a participant's later responses conflict with the current estimate, the system updates
+\[
+\Pr\!\left(\theta_i(t+1)\mid y_{1:t+1}\right)
+\propto
+\Pr\!\left(y_{t+1}\mid\theta_i(t+1)\right)
+\Pr\!\left(\theta_i(t+1)\mid y_{1:t}\right)
+\]
+and may shorten, lengthen, or replace the current prerequisite route. The curriculum is therefore not merely personalized once at entry; it is continuously recalibrated throughout the conversation.
+
+\subsection{Residual novelty}
+
+Let $K$ contain known claims, arguments, models, and objections, reconstructed as a set of normalized propositions the archive already establishes, subsumes, or otherwise disposes of. Let $Q(x)$ be the set of normalized claims extracted from submission $x$ after charitable reconstruction. The residual is then defined operationally as
+\[
+R(x \mid K) = \{ q \in Q(x) : K \nvDash q \},
+\]
+where $K \nvDash q$ means that the archive does not entail, subsume, or already dispose of claim $q$. This still depends on imperfect semantic judgment about what counts as entailment or subsumption at the level of reconstructed claims rather than raw text, but it specifies what the residual is supposed to contain rather than leaving it as an unspecified difference operator. Two messages can be textually dissimilar while having nearly empty residual novelty, whereas two almost identical arguments may differ by one decisive assumption.
+
+Residual novelty is represented as a vector rather than a scalar:
+\[
+\rho(x) = (\rho_s, \rho_f, \rho_e, \rho_c, \rho_a),
+\]
+where $\rho_s$ is semantic novelty, $\rho_f$ formal novelty, $\rho_e$ empirical novelty, $\rho_c$ combinatorial novelty, and $\rho_a$ applicative novelty. An idea may be mathematically familiar but novel in application, or verbally unfamiliar while formally equivalent to an existing construction. This multidimensional treatment follows the broader novelty-detection literature's insight that ``unfamiliar'' is not a single property but a family of distinct departures from a reference model \cite{markou2003a,markou2003b}.
+
+Novelty alone is insufficient. A random sequence can be highly novel and completely useless. Escalation must also consider coherence $h$, consequence $g$, tractability $\tau$, evidential support $e$, and classification uncertainty $u$. A provisional escalation value could be written as
+\[
+S(x) = w_\rho \cdot \rho + w_h h + w_g g + w_\tau \tau + w_e e + w_u u - w_c c,
+\]
+where $c$ is the human cost of evaluating the residual and $w_\rho \cdot \rho$ denotes a weighted combination of the novelty dimensions. The weights should remain visible and revisable, since they encode institutional priorities rather than objective natural constants.
+
+\subsection{Attention allocation}
+
+Suppose the recipient has attention budget $A$ during a given interval. Each surviving submission $i$ has estimated evaluation cost $c_i$ and estimated intellectual value $\widehat{v}_{ir}$. The value is written with a hat deliberately: the system cannot observe the true value $V_{ir}$ of an idea before escalation, only an estimate
+\[
+\widehat{v}_{ir} = \mathbb{E}\left[V_{ir} \mid I_i, K_r, \theta_i, t\right]
+\]
+conditioned on the information $I_i$ available after triage, the recipient's recorded knowledge $K_r$, the current epistemic model $\theta_i$ of the participant, and the present moment $t$. Writing the value as $\widehat{v}_{ir}$ rather than $\widehat{v}_i$ makes explicit that intellectual value in this system is never recipient-independent: the same residual can be highly valuable to one recipient and irrelevant to another. This distinction matters because the exploration budget introduced below exists precisely to compensate for errors in $\widehat{v}_{ir}$.
+
+Selection becomes a constrained allocation problem that also rewards expected joint value
+\[
+\widehat{\Delta}_{\mathrm{joint}}(x_i,r),
+\]
+the estimated gain from direct interaction between participant $i$ and recipient $r$ introduced in the discussion of escalation above:
+\[
+\text{maximize} \sum_i z_i \left(\widehat{v}_{ir} + \omega\,\widehat{\Delta}_{\mathrm{joint}}(x_i,r)\right) \quad \text{subject to} \quad \sum_i z_i c_i \leq A,
+\]
+with $z_i \in \{0,1\}$ indicating whether submission $i$ is escalated. This is the same coverage-versus-risk tradeoff studied in selective classification, where a system chooses which instances to act on directly and which to defer, subject to a resource or risk constraint \cite{geifman2017}, extended here so that the value being weighed against cost is a recipient-relative, complementarity-aware estimate rather than a context-free score.
+
+A purely greedy implementation would favor easily evaluated ideas and disadvantage difficult proposals. The objective therefore needs additional terms for exploration, uncertainty, and neglected domains:
+\[
+\text{maximize} \sum_i z_i \left( \widehat{v}_{ir} + \omega\,\widehat{\Delta}_{\mathrm{joint}}(x_i,r) + \gamma u_i + \delta e_i^x + \eta n_i \right),
+\]
+where $u_i$ rewards review of uncertain classifications in a manner analogous to uncertainty sampling in active learning \cite{settles2009}, $e_i^x$ rewards exploration outside familiar regions of the knowledge graph, and $n_i$ compensates for systematic neglect of a domain or participant class.
+
+A fixed fraction of the attention budget is reserved for random or deliberately diversity-seeking review. Write
+\[
+A = A_p + A_x, \qquad A_x = \xi A,
+\]
+where $A_p$ supports predicted high-value submissions, $A_x$ supports exploration, and $\xi \in (0,1)$ is the exploration fraction. This parameter is kept notationally distinct from the false-suppression bound $\varepsilon$ introduced below; conflating an attention-allocation fraction with an error-rate bound would obscure two different design decisions behind one symbol. Without $A_x$, the system can only recognize novelty that resembles what it has previously learned to value.
+
+\subsection{Collective recurrence}
+
+Let $q$ be a familiar question and $f_t(q)$ its frequency during interval $t$. Although its individual semantic novelty may be near zero, a sudden change
+\[
+\Delta f_t(q) = f_t(q) - f_{t-1}(q)
+\]
+may be significant. Likewise, if many participants fail at curriculum edge $u \to v$, define its observed failure rate as
+\[
+F(u, v) = \frac{\mathrm{failures}(u \to v)}{\mathrm{attempts}(u \to v)}.
+\]
+A high $F(u, v)$ suggests that the dependency is misstated, the teaching material is inadequate, or an intermediate concept is missing. The aggregate behavior of non-escalated conversations therefore still modifies the system, even when no single conversation in the aggregate is escalated on its own.
+
+\subsection{The central safety constraint}
+
+Let $V$ be the event that a submission contains a genuinely valuable residual, and $D$ the event that the system discards or indefinitely delays it. The most important error is
+\[
+\Pr(D \mid V),
+\]
+the false-suppression rate. This quantity cannot be measured directly, because $V$ is normally unknown for discarded submissions; a submission that was never escalated leaves no record of whether it deserved to be. The bound must therefore be estimated rather than computed, through delayed audits, random sampling of non-escalations, and successfully appealed decisions, giving an empirical estimate
+\[
+\widehat{\Pr}(D \mid V)
+\]
+in place of the unobservable population quantity. The exploration reserve $A_x$ introduced above serves two purposes under this reading: it discovers unfamiliar ideas, and it supplies the audited sample from which $\widehat{\Pr}(D \mid V)$ can be estimated at all.
+
+With this correction, the design problem can be stated as a single constrained optimization:
+\[
+\begin{aligned}
+\text{minimize} \quad & \mathbb{E}[\text{human attention consumed}] \\
+\text{subject to} \quad & \lambda\,\Pr(E)\,\mathbb{E}[C \mid E] < A, \\
+& \widehat{\Pr}(D \mid V) \leq \varepsilon, \\
+& A_x \geq \xi A, \\
+& \text{provenance, appeal, and audit constraints.}
+\end{aligned}
+\]
+This formulation captures the paper's central claim: the attention compiler is not maximizing rejection, and it is not even maximizing predicted novelty. It is trying to maintain a stable conversational channel under finite capacity while bounding an epistemic loss that it can only ever estimate, not observe directly. Compression of repeated intellectual labor and preservation of unrecognized value are therefore not separate goals to be balanced after the fact; they are two constraints on the same optimization, enforced by the same audited exploration budget.
+
+\section{Conclusion: Access Through Transformation}
+
+Universal access and finite attention need not be treated as mutually exclusive. The device allows everyone to enter the outer conversation while requiring messages to acquire greater precision as they approach scarce attention.
+
+Its purpose is not simply to shield a thinker from repetitive questions. It externalizes previously performed reasoning, creates adaptive routes through prerequisite knowledge, gives immature ideas an opportunity to develop, and preserves the unresolved remainder for human judgment.
+
+The system's most important operation is therefore calibrated escalation. It does not merely rank messages by their apparent quality. Through subtle conversational feedback, it estimates how much an interlocutor understands, identifies the distance between the submitted idea and the recipient's intellectual frontier, and selects interventions that both teach and diagnose. Direct attention is reserved for the point at which continued interaction is likely to produce a genuinely joint result rather than another repetition of work already completed.
+
+The governing principle can be expressed succinctly:
+
+\begin{quote}
+Every person may enter, every idea may begin in its native form, and every message must become more intelligible as it approaches the frontier of another person's attention.
+\end{quote}
+
+The success of such a system would depend not on how many messages it prevents from reaching the center, but on whether the messages that do arrive have become more surprising, precise, consequential, and genuinely answerable.
+
+\begin{thebibliography}{9}
+
+\bibitem{corbett1994}
+Corbett, A.~T. and Anderson, J.~R. (1994). Knowledge tracing: Modeling the acquisition of procedural knowledge. \textit{User Modeling and User-Adapted Interaction}, 4(4), 253--278.
+
+\bibitem{geifman2017}
+Geifman, Y. and El-Yaniv, R. (2017). Selective classification for deep neural networks. In \textit{Advances in Neural Information Processing Systems 30 (NeurIPS 2017)}, 4878--4887.
+
+\bibitem{kleinrock1975}
+Kleinrock, L. (1975). \textit{Queueing Systems, Volume 1: Theory}. Wiley-Interscience, New York.
+
+\bibitem{markou2003a}
+Markou, M. and Singh, S. (2003). Novelty detection: a review---part 1: statistical approaches. \textit{Signal Processing}, 83(12), 2481--2497.
+
+\bibitem{markou2003b}
+Markou, M. and Singh, S. (2003). Novelty detection: a review---part 2: neural network based approaches. \textit{Signal Processing}, 83(12), 2499--2521.
+
+\bibitem{settles2009}
+Settles, B. (2009). \textit{Active Learning Literature Survey}. Computer Sciences Technical Report 1648, University of Wisconsin--Madison.
+
+\end{thebibliography}
+
+\end{document}

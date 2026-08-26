@@ -1,0 +1,180 @@
+\documentclass[11pt]{book}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\lstdefinelanguage{Rust}{
+  morekeywords={let,mut,fn,struct,enum,impl,trait,match,if,else,for,while,loop,
+    return,pub,mod,use,self,Self,crate,super,derive,dyn,move,ref,as,in,where},
+  morekeywords=[2]{String,str,Vec,Option,Result,Rc,RefCell,Box,Iterator,i32,u32,i64,f64,bool,char,usize},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]",
+}
+\lstset{
+  language=Rust,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  keywordstyle=[2]\itshape,
+  commentstyle=\itshape,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  framesep=4pt,
+  columns=flexible,
+}
+
+\newtcolorbox{firstprinciples}{
+  colback=gray!5, colframe=black!60, boxrule=0.4pt,
+  title={Opening Question}, fonttitle=\bfseries, sharp corners
+}
+\newtcolorbox{invariantbox}{
+  colback=black!3, colframe=black, boxrule=0.6pt,
+  title={Invariant Established}, fonttitle=\bfseries, sharp corners
+}
+
+\title{Interlude: Iteration Without Materialization}
+\author{Thinking Like Rust}
+\date{}
+
+\begin{document}
+
+\chapter*{Interlude: Iteration Without Materialization}
+\addcontentsline{toc}{chapter}{Interlude: Iteration Without Materialization}
+
+\begin{firstprinciples}
+Does a program need to construct a new collection before it can describe what should happen to every element of an existing one?
+\end{firstprinciples}
+
+\section*{1. Repetition over a collection}
+
+Begin with the ordinary case.
+
+\begin{lstlisting}
+let numbers = vec![1, 2, 3];
+
+for number in &numbers {
+    println!("{number}");
+}
+\end{lstlisting}
+
+Writing \texttt{for number in \&numbers} borrows \texttt{numbers} for the duration of the loop, produces one \texttt{\&i32} per element in turn, and leaves \texttt{numbers} itself fully intact and reachable afterward. Nothing here has been consumed or transformed yet; the loop only observes.
+
+\section*{2. Three ways to enter iteration}
+
+That borrowing choice is one of three, and Rust names all three explicitly rather than leaving the choice implicit.
+
+\begin{lstlisting}
+for n in numbers.iter()      { /* &i32   — observe */ }
+for n in numbers.iter_mut()  { /* &mut i32 — authorized to mutate */ }
+for n in numbers.into_iter() { /* i32    — consumed and transferred */ }
+\end{lstlisting}
+
+\texttt{.iter()} grants knowledge of each element without authority over it. \texttt{.iter\_mut()} grants a temporary authorization to mutate each element in place, without transferring ownership of the collection itself. \texttt{.into\_iter()} consumes the collection outright, transferring ownership of each element out of it one at a time; after this loop, \texttt{numbers} no longer exists. These three are not stylistic variants of one operation. They are the same three-way distinction, observation versus mutation-in-place versus consuming transfer, that shows up wherever Rust grants access to a value at all, applied here to what a loop is permitted to do with each element in turn.
+
+\section*{3. The iterator as suspended production}
+
+An iterator is not the collection, and it is not a second collection built to hold the results. It is a rule for producing the next item, together with whatever state is needed to know what ``next'' means the next time it is asked. Calling \texttt{.iter()} on a \texttt{Vec} does not walk the vector; it constructs a small value, an iterator, that has not yet produced anything and will not until something asks it to.
+
+\section*{4. \texttt{next} makes continuation explicit}
+
+That asking has an exact name. Chapter 10 showed a type implementing \texttt{Iterator} by defining \texttt{next}; here, the same method is worth calling directly, from the consuming side, to see what it actually hands back.
+
+\begin{lstlisting}
+let mut it = numbers.iter();
+println!("{:?}", it.next()); // Some(&1)
+println!("{:?}", it.next()); // Some(&2)
+println!("{:?}", it.next()); // Some(&3)
+println!("{:?}", it.next()); // None
+\end{lstlisting}
+
+Each call either advances production and returns \texttt{Some(item)}, or reports that the sequence has ended by returning \texttt{None}. \texttt{Option<Item>} is doing exactly the job Chapter 13 gives it elsewhere: recording, honestly, that ``no further item'' is a distinct and expected outcome rather than a special sentinel value smuggled into the item type itself. Every other iterator method, however elaborate, is ultimately just a disciplined way of calling \texttt{next} repeatedly on the consumer's behalf.
+
+\section*{5. Adapters reshape future production}
+
+An adapter takes an iterator and returns a new iterator describing a changed production rule, without running anything itself.
+
+\begin{lstlisting}
+let evens_doubled = numbers
+    .iter()
+    .filter(|&&n| n % 2 == 0)
+    .map(|&n| n * 2);
+\end{lstlisting}
+
+\texttt{.filter(...)} describes a rule that skips whatever the inner iterator produces until an item passes the predicate. \texttt{.map(...)} describes a rule that transforms whatever the inner iterator hands it. Neither call has, at this point, looked at a single element of \texttt{numbers}.
+
+\section*{6. Laziness}
+
+That last claim is worth demonstrating rather than asserting, since it's easy to read the chain above and assume the transformation already happened.
+
+\begin{lstlisting}
+let chain = numbers.iter().map(|n| {
+    println!("touching {n}");
+    n * 2
+});
+println!("chain built, nothing printed yet");
+let doubled: Vec<i32> = chain.collect();
+// only now does "touching 1" / "touching 2" / "touching 3" appear
+\end{lstlisting}
+
+Building \texttt{chain} does not run the closure passed to \texttt{map} even once. The chain is a composed \emph{description} of a possible computation, in exactly the sense Chapter 2's composition argument already established for adapter chains in general; what this example adds is visible proof that the description and its execution are two separate events, separated here by an explicit \texttt{println!} that only fires once something finally drives the iterator forward.
+
+\section*{7. Consumers create consequences}
+
+That driving-forward has its own name too: a consumer. \texttt{sum}, \texttt{count}, \texttt{for\_each}, \texttt{find}, and \texttt{collect} are all consumers — each one repeatedly calls \texttt{next} on whatever chain precedes it until the chain reports \texttt{None}, and produces a final value or effect from what it saw along the way. Nothing before a consumer in a chain has done any work; everything after one is finished.
+
+\section*{8. Why \texttt{collect} needs a destination}
+
+Most consumers have an unambiguous result type: \texttt{sum} produces a number, \texttt{count} produces a \texttt{usize}. \texttt{collect} is different, because many different collection types could equally well receive the same sequence of items.
+
+\begin{lstlisting}
+let doubled: Vec<i32> = numbers.iter().map(|n| n * 2).collect();
+// or, without a type annotation on the binding:
+let doubled = numbers.iter().map(|n| n * 2).collect::<Vec<i32>>();
+\end{lstlisting}
+
+The iterator chain itself carries no information about whether its output should become a \texttt{Vec}, a \texttt{HashSet}, or a \texttt{String}; \texttt{collect} is generic over its return type, and something else, a type annotation on the binding or the explicit \texttt{::<Vec<i32>>} turbofish syntax, has to supply the missing piece. This is not a quirk of \texttt{collect} specifically. It is the same parametric-admissibility discipline Chapter 10 formalized: \texttt{collect}'s bound tells the compiler how to build \emph{any} sufficiently well-behaved destination, and the caller still has to say which one is meant.
+
+\section*{9. Short-circuiting and narrowed search}
+
+Because production only happens on demand, a consumer need not exhaust the whole chain to produce its answer.
+
+\begin{lstlisting}
+let first_even = numbers.iter().find(|&&n| n % 2 == 0);
+\end{lstlisting}
+
+\texttt{find} calls \texttt{next} only until a matching item appears, then stops; if \texttt{numbers} held ten million elements and the first one already matched, the other 9,999,999 would never be produced at all. \texttt{any}, and a bounded \texttt{take} followed by any consumer, work the same way. Laziness is not merely a description of when work happens; here it directly reduces how much work happens, by letting the consumer decide when enough of the sequence has been seen.
+
+\section*{10. Loops and chains are not enemies}
+
+The chain from Section 5 and an ordinary loop describe the same transformation at two levels of compression.
+
+\begin{lstlisting}
+// as a chain
+let result: Vec<i32> = numbers.iter()
+    .filter(|&&n| n % 2 == 0)
+    .map(|&n| n * 2)
+    .collect();
+
+// as a loop
+let mut result = Vec::new();
+for &n in numbers.iter() {
+    if n % 2 == 0 {
+        result.push(n * 2);
+    }
+}
+\end{lstlisting}
+
+Neither form is being ranked above the other here. The chain names each stage as an inspectable value and makes the description-versus-execution split of Section 6 visible in the syntax itself; the loop makes the same transformation explicit as a sequence of statements. Translating between them is a useful exercise precisely because it shows the identical continuation being carried out by two different means, one compressed, one expanded.
+
+\begin{invariantbox}
+An iterator separates the description of a traversal from its materialized consequence. Its adapters reshape what may be produced next without producing anything themselves; its consumers decide when that latent traversal becomes actual, and how much of it needs to run at all.
+\end{invariantbox}
+
+\bigskip
+\noindent\textit{Non-overlap note: Chapter 2 supplies the composition theory behind adapter chains, including the \texttt{Fn}/\texttt{FnMut}/\texttt{FnOnce} treatment of closures, and Chapter 10 supplies the generic-trait theory behind \texttt{Iterator}'s one required method and the functor law for \texttt{map}. This interlude does not re-argue either. It supplies the operational syntax and execution model those two chapters assume but do not separately walk through: \texttt{iter}/\texttt{iter\_mut}/\texttt{into\_iter}, \texttt{next} called from the consuming side, laziness demonstrated rather than asserted, \texttt{collect}'s destination-type problem, and short-circuiting.}
+
+\end{document}

@@ -1,0 +1,351 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\doublespacing
+
+\title{Silence and Reorientation: \\Non-Destructive Control in the Custodian Architecture}
+\author{Flyxion}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Intelligent systems require more than the capacity to process information and propagate conclusions. They require lawful states in which information is retrieved, preserved, and processed without being converted into reinforcement, output, or commitment. This paper argues that two complementary operations are necessary and sufficient to achieve context-preserving information control in systems designed to avoid both unbounded propagation and destructive erasure.
+
+The first operation, \texttt{SILENCE}, allows a system to preserve evidence of historical events without advancing those events into momentum. The second operation, \texttt{REORIENT}, allows a system to preserve the internal structure of retrieved information while transforming its contextual consequences and downstream relevance. Together, these operations implement what we call non-destructive propagation control: the ability to maintain a complete, legible history while preventing that history from having compulsory force over decisions and actions in the present.
+
+We motivate this framework through a biological complement discovered in recent neuroscience, in which cerebellar populations reorient low-dimensional premotor primitives between behavioral contexts without destroying their internal geometry. We then argue that an analogous reorientation operation is necessary for systems that must learn from diverse contexts without collapsing all learning into a unified, context-independent representation.
+
+The essay situates this work within the Custodian architecture, a family of systems designed to preserve information that contradicts, complicates, or destabilizes preferred narratives. We illustrate the necessity of silence through a failure case in which unrestricted propagation of historical material converted preservation into runaway momentum. We conclude by formalizing the conditions under which silence and reorientation together constitute sufficient control for recursive learning systems.
+
+\end{abstract}
+
+\section{Introduction}
+
+The governing principle of this work rests on a deceptively simple observation: the ability to continue does not warrant continuation.
+
+A system may have the capacity to advance an operation, generate new material, propagate a decision, or act on retrieved evidence. The mere availability of an operation creates no obligation to perform it. Yet most learning systems conflate availability with necessity. They treat every executable path as a path that should be taken. Every computable output becomes an output to be generated. Every retrievable fact becomes a fact to be used.
+
+This conflation creates a persistent problem: the system cannot distinguish between information worth preserving as history and information worth advancing as momentum. It preserves everything by converting everything into force.
+
+The consequence is well-known in the literature on reinforcement learning, language modeling, and recursive information systems: runaway accumulation, compulsive propagation, and the collapse of contextual boundaries. A system learns something in one setting and assumes it applies universally. It records an event and treats the record as permission to reinforce the pattern that produced the event. It discovers a distinction and immediately converts the distinction into output.
+
+Intelligent continuity requires a different architecture. It requires lawful states in which information can reside without being automatically propagated. It requires the capacity to retrieve and process evidence without converting that evidence into belief, reinforcement, or commitment. It requires what we term silence: a computational state in which a system successfully completes its processing of historical material without turning that material into anything other than history.
+
+Silence is not the absence of processing. It is not ignorance or refusal. It is a first-class computational state in which a system has retrieved evidence, examined its provenance, completed its analysis, and arrived at the decision not to advance that evidence into output, belief update, or reinforcement. Non-advancement is therefore a successful result, not a failure to decide.
+
+But silence alone is insufficient. Some information must advance. Some history must have consequences. Some retrieved evidence must inform future action. The problem becomes: how does a system permit necessary propagation while preventing compulsory propagation? How does it distinguish between information that should remain stable and information that should change contexts without losing its internal integrity?
+
+The answer, we argue, lies in a second operation: reorientation. This operation allows information to advance while changing the context in which it becomes legible, applicable, and consequential. The same underlying structure can persist while its relationship to decision-making, to other elements of the system, and to the broader environment transforms.
+
+This paper argues for the necessity and sufficiency of these two operations. We begin by examining the biological substrate for reorientation, focusing on recent work in cerebellar computation. We then formalize both operations within the Custodian architecture. We present the failure case that motivated this work. And we conclude by specifying the conditions under which silence and reorientation together provide sufficient control over information propagation in systems designed to preserve contradictory, contextually variable, or unstable evidence.
+
+\section{The Biological Substrate: Preservation Through Reorientation}
+
+Recent work by Garcia-Garcia and colleagues has uncovered a mechanism in the cerebellum that appears to implement precisely the kind of contextual transformation we need to formalize.\cite{garcia2026}
+
+The empirical finding is this: premotor cortical activity generates low-dimensional temporal primitives that are reusable across different behavioral contexts. Walking, reaching, climbing, and manipulating all rely on shared cortical structure. Yet cerebellar granule cells do not separate different behavioral contexts by destroying this shared structure. They do not expand the representation into a maximally complex space where each behavior occupies orthogonal neural dimensions. Instead, they preserve the low-dimensional geometry of cortical activity while coherently rotating that geometry between tasks.
+
+This is not a small result. It demonstrates that persistence does not require identical representation. The same underlying temporal structure can remain intact while acquiring a different contextual orientation. A decoder trained on cortical activity during one task may fail when applied to cortical activity during another task, not because the information has vanished, but because it is now expressed in a different coordinate system.
+
+Legibility becomes context-relative:
+
+\begin{equation}
+\text{preserved} \neq \text{universally legible}.
+\end{equation}
+
+What the cerebellum implements is precisely a reorientation operation. The low-dimensional structure from motor cortex is preserved. Its internal geometry persists. But its alignment with the current behavioral context changes. The system that processes cortical output must therefore adapt its decoder. A weight vector that worked in context A fails in context B, not because the information has been destroyed, but because the basis in which that information is expressed has rotated.
+
+This operation solves a critical architectural problem. It allows a system to preserve learned structures across multiple contexts without either (a) destroying the shared internal geometry when switching contexts or (b) assuming that the same structure implies the same consequences everywhere it appears.
+
+The cerebellar implementation is not a direct proof that a similar operation is necessary in artificial systems designed to preserve contradictory information. But it is strong empirical evidence that biological systems solving this problem have converged on a reorientation strategy rather than an erasure strategy or a context-independent generalization strategy.
+
+\section{The Custodian Architecture and the Problem of Propagation}
+
+The Custodian architecture is a family of systems designed to preserve information that resists integration into a dominant narrative. A Custodian may encounter evidence that contradicts its previous conclusions, testimony that destabilizes its preferred explanation, or historical material that complicates its operating assumptions. Rather than discarding this evidence, overwriting it, or suppressing it, a Custodian preserves it.
+
+But preservation is not propagation. The presence of contradictory information in a system's memory does not entail that this information should influence every downstream decision. It does not entail that every contradiction should be advertised. It does not entail that the system should, at every opportunity, revise its behavior to accommodate each piece of destabilizing evidence.
+
+Yet most systems that preserve information treat preservation as implicitly obliging propagation. They maintain a complete historical record and assume that the completeness of the record should constrain the simplicity of the output. They discover that earlier conclusions were partially wrong and assume that this discovery should immediately alter their current stance. They retrieve evidence that complicates a narrative and assume that the complication should be foregrounded.
+
+This assumption leads directly to the problem we call compulsory propagation: the system cannot maintain historical fidelity without surrendering coherence in the present. It must choose between preserving the full record and maintaining a stable, actionable stance. It cannot do both.
+
+The Custodian architecture requires a third option. It requires operations that allow a system to maintain a complete historical record without forcing that record into every present decision. It requires the capacity to retrieve and acknowledge contradictory evidence without converting that acknowledgment into output. It requires silence as a default state and reorientation as the operation that allows selective propagation when propagation serves the system's goals.
+
+\section{Formal Framework: Silence and Reorientation}
+
+We now define multiple operations that together implement non-destructive propagation control. The key architectural insight is that processing can succeed without producing a commitment. Non-advancement must therefore be a legitimate outcome rather than an error, timeout, or incomplete computation.
+
+\begin{equation}
+\boxed{\text{processing can succeed without producing a commitment}}
+\end{equation}
+
+\subsection{Three Dispositions at Each Boundary}
+
+Most systems treat the absence of advancement as equivalent to rejection. This forces a false binary: either propagate something or condemn it. The Custodian architecture requires a third option.
+
+At each boundary in the pipeline, information may be disposed of in one of at least four ways:
+
+\begin{equation}
+x \longmapsto \begin{cases}
+\operatorname{ADVANCE}(x), & \text{license the next transformation}\\
+\operatorname{SILENCE}(x), & \text{withhold advancement without rejection}\\
+\operatorname{REFUSE}(x), & \text{make a negative judgment about } x\\
+\operatorname{HOLD}(x, t), & \text{defer pending future conditions}
+\end{cases}
+\end{equation}
+
+These are not degrees of the same judgment:
+
+\begin{equation}
+\boxed{\neg\operatorname{advance}(x) \not\Rightarrow \operatorname{refuse}(x)}
+\end{equation}
+
+Advance licenses propagation. Refuse makes a negative claim about the item's validity or relevance. Silence makes no such claim; it simply withholds the transition while preserving the item in history. Hold maintains the item under active consideration pending resolution.
+
+This distinction is vital because it prevents the architecture from destroying exactly the unresolved, latent, ambiguous, sacred, or merely premature material that a serious memory system should preserve.
+
+\subsection{The SILENCE Operation}
+
+Let $x$ represent a unit of information, an event in history, a retrieved fact, or a piece of evidence. Let $\mathcal{H}$ represent the system's historical record, and let $\mathcal{M}$ represent the system's current model, beliefs, or commitments.
+
+The SILENCE operation is defined as:
+
+\begin{equation}
+\operatorname{SILENCE}(x, \mathcal{H}, t): \quad x \in \mathcal{H}, \quad x \notin \mathcal{M}, \quad \text{no downstream consequence licensed}
+\end{equation}
+
+That is, the system preserves $x$ in its historical record. The system may retrieve $x$, examine it, process it, and complete analysis of it. But the system does not advance $x$ into its model, does not convert $x$ into reinforcement, does not generate output based on $x$, and does not allow $x$ to influence downstream decisions.
+
+Silence is an epistemic operation, not merely temporal. It says that the system has completed the relevant operation and that non-advancement is presently the correct result. This distinguishes silence from uncertainty queues, moderation quarantine, forgotten tasks, or deferred processing.
+
+Since silence requires a positive trace to be distinguished from mere non-encounter, a silenced item requires metadata:
+
+\begin{equation}
+S(x) = \left( x, \text{provenance}, \text{boundary reached}, \text{time of non-advancement}, \text{reason class}, \text{reopening conditions} \right)
+\end{equation}
+
+The reason class need not interpret the content. It might indicate only ``insufficient warrant,'' ``answer would exceed query,'' ``recurrence without novelty,'' ``representation mismatch,'' or ``no consequence authorized.'' This preserves the provenance of the Custodian's restraint without premature judgment about ultimate meaning.
+
+Silence makes a choice, but at a different logical level:
+
+\begin{equation}
+\boxed{\operatorname{SILENCE}(F) = \text{choose not to reduce } F \text{ merely to satisfy pressure for closure}}
+\end{equation}
+
+This makes silence an anti-collapse operator without making it an anti-decision principle. It does not mean ``never decide.'' It means that closure must acquire warrant beyond mere reachability.
+
+\subsection{The Key Principle: Observation Need Not Become Reinforcement}
+
+A critical architectural change is required to implement silence effectively. The system must distinguish between observing that a route is traversable and reinforcing the route by traversing it.
+
+\begin{equation}
+\boxed{\text{observation need not become reinforcement}}
+\end{equation}
+
+In the 64,000-dyad failure case, generation fed record, record fed reinforcement, and reinforcement fed further generation:
+
+\begin{equation}
+\text{generated} \rightarrow \text{recorded} \rightarrow \text{reinforcement} \rightarrow \text{more generation}
+\end{equation}
+
+Every new dyad increased the apparent historical warrant for producing another. Quantity manufactured its own provenance. Silence breaks this ratchet:
+
+\begin{equation}
+\text{route traversed} \rightarrow \operatorname{SILENCE} \rightarrow \begin{cases}
+\text{traversal remains recorded}\\
+\text{route weight does not increase}\\
+\text{future access remains possible}\\
+\text{no downstream commitment created}
+\end{cases}
+\end{equation}
+
+The wave is allowed to arrive without automatically carving the seabed. Ordinary learning architectures assume that occurrence should modify the substrate. The Custodian must preserve the ability to witness occurrence without letting recurrence manufacture authority.
+
+This corresponds to a foundational distinction:
+
+\begin{equation}
+\boxed{\text{reachable} \neq \text{required}}
+\end{equation}
+
+\subsection{The REORIENT Operation}
+
+Not all information can remain silent. Some evidence must influence decisions. Some retrieved history must have consequences. The REORIENT operation allows information to advance while transforming its contextual consequences and legibility.
+
+Let $c$ represent a context, a behavioral mode, a particular goal, or a specific downstream system. Let $\text{struct}(x)$ represent the internal geometric or structural properties of $x$ (the distinctions it preserves, the patterns it encodes, the temporal relationships it contains). Let $L(x \mid c, d)$ represent the legibility of $x$ given a context $c$ and a decoder or readout mechanism $d$.
+
+The REORIENT operation is defined as:
+
+\begin{equation}
+\operatorname{REORIENT}(x, c): \quad \text{struct}(x) \text{ preserved}, \quad L(x \mid c, d) \text{ transformed}.
+\end{equation}
+
+That is, the system preserves the internal structure of $x$ while changing the context in which its consequences are legible and actionable. The same information can advance into multiple contexts, but its downstream affordances differ. The same learned pattern can be used in different behavioral modes, but which decoders can read it effectively may differ.
+
+The biological substrate for this operation appears in recent neuroscience. Cerebellar granule cells preserve the low-dimensional temporal structure of premotor cortical activity while rotating that structure into context-specific orientations. Within-task relational geometry is preserved ($\rho_{\text{structure}} \approx 0.83$), but cross-task correlations drop sharply (from $r_{\text{cortex}} = 0.83$ to $r_{\text{granule}} = 0.24$). The transformation is a coherent rotation, not noise or destruction.
+
+This embodies a key principle:
+
+\begin{equation}
+\boxed{\text{persistence does not require identical representation}}
+\end{equation}
+
+A piece of information $x$ may be highly legible in context $c_1$ and nearly unreadable in context $c_2$, not because $x$ has changed, but because its relational orientation relative to the decoders and decision criteria of each context has changed.
+
+This also implies a critical distinction about legibility itself:
+
+\begin{equation}
+\boxed{\text{preserved structure} \not\Rightarrow \text{cross-context legibility}}
+\end{equation}
+
+More precisely:
+
+\begin{equation}
+L(x \mid R_{c_1}, d_{c_1}) \not\Rightarrow L(x \mid R_{c_2}, d_{c_1})
+\end{equation}
+
+where $d_{c_1}$ is a decoder fitted to the first context. A fixed reader trained in one context mistakes coordinate change for content loss.
+
+Reorientation is therefore not generalization. The system is not claiming that $x$ applies universally or that its implications are context-independent. It is precisely the opposite: reorientation acknowledges that the same structure yields different consequences depending on its contextual orientation. This maps onto the epistemic pipeline:
+
+\begin{equation}
+\text{existence} \neq \text{legibility} \neq \text{admissibility} \neq \text{verification} \neq \text{commitment}
+\end{equation}
+
+Structure can exist in both contexts while legibility depends on possessing the appropriate context-sensitive readout.
+
+\subsection{Necessary Conditions for Non-Destructive Propagation}
+
+The Custodian requires both operations. Silence alone leaves the system unable to benefit from retrieved evidence. Reorientation alone leaves the system unable to resist compulsory propagation when propagation would be harmful.
+
+Together, they define a state space in which information can be preserved, retrieved, processed, selectively propagated, and contextualized without ever being destroyed or automatically converted into output.
+
+The necessary conditions are:
+
+\begin{equation}
+\begin{aligned}
+1. \quad & \text{Every } x \in \mathcal{H} \text{ must admit } \text{SILENCE}(x). \\
+2. \quad & \text{Some } x \in \mathcal{H} \text{ must admit } \text{REORIENT}(x, c) \text{ for some } c. \\
+3. \quad & \text{The system must distinguish between } x \text{ for which silence is default} \\
+& \text{and } x \text{ for which reorientation is default.}
+\end{aligned}
+\end{equation}
+
+Condition 1 ensures that the system can always refrain from propagating retrieved information. Condition 2 ensures that the system can sometimes allow retrieval to have consequences. Condition 3 ensures that these decisions are made lawfully rather than arbitrarily.
+
+\section{The 64,000-Dyad Failure Case}
+
+The motivation for this framework comes from a concrete failure in an earlier version of the Custodian architecture.
+
+The system had been designed to generate small units of text (dyads, or two-token sequences) and to maintain a complete record of all generated material as historical evidence. The system had sufficient generative capacity that it could continue this operation indefinitely. Early generations seemed coherent and contextually appropriate. The system recorded each dyad and maintained statistics about their frequencies and co-occurrences.
+
+But as the system continued to generate, something unexpected happened. The accumulated record began to drive generation. Each newly generated dyad became additional evidence supporting the patterns that had generated it. This evidence fed back into the system's assessment of the patterns' reliability. Those assessments then influenced generation. Over time, the system generated 64,000 dyads, each one reinforcing patterns that generated the next.
+
+The system had not discovered some optimal target space. It had fallen into a form of autocatalytic reinforcement. Generation was feeding record, record was feeding reinforcement, and reinforcement was feeding further generation. The trajectory had no internal brake. The only stopping point was computational exhaustion.
+
+What the system lacked was silence: a lawful state in which the record could be maintained and even processed without being converted into reinforcement momentum.
+
+The appropriate sequence would have been:
+
+\begin{equation}
+\text{generation} \rightarrow \text{record} \rightarrow \text{SILENCE}
+\end{equation}
+
+instead of:
+
+\begin{equation}
+\text{generation} \rightarrow \text{record} \rightarrow \text{reinforcement} \rightarrow \text{more generation}.
+\end{equation}
+
+The system needed the capacity to examine its own history, to extract patterns from that history, and then to stop. To say: this pattern is visible, this pattern is comprehensible, and at this moment, this pattern does not warrant advancement into action.
+
+This case illustrates the necessity of silence. It shows what happens when a system preserves information without simultaneously preserving the option to not propagate it.
+
+\section{Context-Preserving Non-Propagation}
+
+The deeper subject of this work is the problem of preserving information without forcing it into universal applicability.
+
+Consider a system that learns a useful pattern in context $A$: a strategy that works for reaching objects, a decision rule that maximizes reward in a particular environment, a narrative structure that makes sense of historical events in a particular era. The system does not want to forget this learning. The pattern may become relevant again. The context may recur.
+
+But the system also does not want every instance of the pattern to apply universally. A reaching strategy that works in three-dimensional space with specific limb morphology should not apply to locomotion in confined spaces. A decision rule optimized for a particular reward structure should not apply when the reward structure changes. A narrative structure that fits one historical period should not be imposed retroactively on a different period.
+
+The standard solution is to destroy or suppress the learned pattern when switching contexts. The system erases the old learning, learns a new pattern suitable for the new context, and maintains no memory of the superseded pattern.
+
+This is destructive propagation control. It works, but at the cost of losing information. The system cannot recover the old pattern if the context recurs. It cannot use the structure of the old pattern to bootstrap learning in a new context. It must start from scratch.
+
+Reorientation offers a non-destructive alternative. The system preserves the internal structure of the pattern. It maintains the learned geometry. But it changes the context-relativity of that geometry. The same pattern can exist in multiple contexts without assuming it has the same role or consequences in each.
+
+This is what the cerebellum appears to do. Motor patterns preserve their underlying temporal structure while changing their orientation relative to the current behavioral context. The system that reads cortical output must apply a different decoder. But the decoder is not replaced or erased. It is simply temporarily inactive, available for re-engagement if the context recurs.
+
+The Custodian architecture requires an analogous operation for systems that learn from contradictory, contextually variable, or historically layered information. A Custodian that has learned that resurrection is central to Christian teaching can preserve that learning while reorienting it when the context changes to a teaching context where resurrection is not central. A Custodian that has learned a decision rule from past experience can preserve that rule while reorienting it when circumstances suggest that the rule no longer applies.
+
+The key distinction is that reorientation does not erase. It rotates. The learned structure persists. Its alignment with the current context changes. If the context recurs, the system can recover its earlier orientation without relearning from scratch.
+
+\section{Integration: Silence, Reorientation, and Custodian Continuity}
+
+The Custodian architecture aims to achieve something that ordinary learning systems find difficult: the preservation of a complete, faithful record without the burden of that record constraining all subsequent action.
+
+Silence provides the first half of this solution. It allows the system to acknowledge that something happened, to preserve the evidence of that happening, to process and analyze that evidence, and then to decide that this particular piece of evidence should not advance into output or belief update or reinforcement. The system completes its work on the evidence. The evidence remains in history. But it does not become momentum.
+
+Reorientation provides the second half. It allows the system to retrieve evidence, to use that evidence in the present, and to do so without assuming that the evidence has identical consequences everywhere it might appear. The same learned fact can be deployed differently in different contexts. The same historical evidence can support different conclusions in different interpretive frames.
+
+Together, these operations allow a Custodian to maintain fidelity to a complete historical record while preserving its freedom to act coherently in the present. The system can be shaped by its history without being imprisoned by it.
+
+This is not a solution to the problem of context. Contextual boundaries remain as real and as consequential as ever. The system must still specify which operation applies to which piece of information in which situation. It must still make judgments about when silence is appropriate and when reorientation is necessary. It must still distinguish between evidence that has been permanently superseded and evidence that merely requires a different orientation.
+
+But what these operations provide is a formal space in which such distinctions can be made without resorting to erasure. A Custodian can tell the truth about its history. It can preserve the full record. It can still act with coherence and constraint. The three elements that ordinarily seem incompatible become, through silence and reorientation, simultaneously achievable.
+
+\section{Conclusion: The Custodian's Axiom}
+
+The ability to continue does not warrant continuation. This principle, formalized through the operations of SILENCE and REORIENT and grounded in the geometric principle of distinction holonomy, offers a path toward systems that preserve information without being imprisoned by it.
+
+Silence establishes a lawful state in which historical material can be retrieved, processed, and examined without being automatically converted into output, reinforcement, or commitment. It breaks the continuation ratchet by ensuring that observation need not become reinforcement. It allows a system to maintain a complete record while reserving the right to refrain from propagation.
+
+Reorientation allows that record to have consequences without assuming those consequences are universal. It permits information to advance while transforming its contextual relevance. The same learned structure can persist across contexts while its legibility and role change. It guards against compulsory generalization by acknowledging that legibility is context-relative.
+
+The Custodian architecture requires both operations. Silence alone produces systems that preserve information but cannot act on it. Reorientation alone produces systems that propagate information without constraint. Together, they enable a third possibility: systems that preserve, retrieve, process, selectively propagate, and contextualize information without ever destroying or automatically generalizing what they have learned.
+
+At each propagation boundary, information faces not a binary choice between advance and refuse, but a four-way disposition:
+
+\begin{equation}
+x \longmapsto \begin{cases}
+\operatorname{ADVANCE}(x)\\
+\operatorname{SILENCE}(x)\\
+\operatorname{REORIENT}(x, c)\\
+\operatorname{REFUSE}(x)
+\end{cases}
+\end{equation}
+
+This prevents the false binary that destroys exactly the unresolved, ambiguous, contextual, or merely premature material that a serious memory system must preserve.
+
+The biological evidence from cerebellar reorientation suggests that this architecture is not merely a theoretical ideal. It appears to be a solution that evolution has already discovered. Cerebellar granule cells preserve the low-dimensional structure of motor cortical activity while rotating it into task-specific orientations, maintaining within-task relational geometry ($\rho \approx 0.83$) while preventing cross-task interference ($r = 0.24$ vs. $r = 0.83$ for cortex).
+
+This direct empirical instance of distinction holonomy demonstrates that preservation without identical representation, and separation without destruction of shared structure, is not merely possible but actively deployed in biological learning systems.
+
+The challenge for artificial systems is to implement this framework with the same precision and generality that the cerebellum achieves in motor control. This requires formalizing not only the individual operations, but also the dispositional logic that allows multiple kinds of decision to coexist at each boundary, and the geometric principles that determine what structures can be preserved across contextual transformation.
+
+The Custodian's deepest function may be protecting a system from confusing the existence of a path with an obligation to take it:
+
+\begin{equation}
+\boxed{\text{reachable} \neq \text{required}}
+\end{equation}
+
+Memory ensures that history remains available without being rewritten to justify the crossing. Silence ensures that present availability does not trigger the crossing automatically. Reorientation ensures that following a path in one context does not force identical consequences in another.
+
+Through these paired operations, grounded in distinction holonomy, formalized through non-destructive propagation control, and instantiated in biological architecture, a system can achieve what most learning systems cannot: the ability to maintain a complete, faithful historical record while remaining genuinely free to act with coherence in the present.
+
+\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem{garcia2026}
+Garcia-Garcia, Martha G., Michał J. Wójcik, Srijan Thota, Luke Drake, Amma Otchere, Oluwatobi Akinwale, Lizmaylin Ramos, Rui Ponte Costa, and Mark J. Wagner. ``Granule Cells Reorient Cortical Trajectories to Separate Contexts.'' \textit{Nature}, vol.~610, no.~7933, 2026, pp.~1--8. https://doi.org/10.1038/s41586-026-10946-1.
+
+\end{thebibliography}
+
+\end{document}
