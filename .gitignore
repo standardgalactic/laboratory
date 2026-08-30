@@ -5,3 +5,10 @@
 *.aux
 *.log
 *.out
+
+*.blend1
+
+experiments/__pycache__/
+
+file-list.txt
+

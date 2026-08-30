@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Flyxion Headless Experiments</title>
+  <style>
+    :root {
+      --background: #070a0f;
+      --panel: #0d131c;
+      --line: #243243;
+      --text: #e7edf2;
+      --muted: #91a0ad;
+      --cyan: #59d9ff;
+      --amber: #ff8a3d;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--background); }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% -10%, #123047 0, transparent 32rem),
+        radial-gradient(circle at 90% 5%, #39180e 0, transparent 28rem),
+        var(--background);
+      font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      min-height: 100vh;
+    }
+
+    header, main, footer {
+      width: min(1540px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    header { padding: 72px 0 34px; }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--cyan);
+      font-size: .78rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font: 500 clamp(2.4rem, 7vw, 6.4rem)/.94 Georgia, serif;
+      letter-spacing: -.055em;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 14px;
+      color: var(--muted);
+      background: rgba(13, 19, 28, .8);
+      font: inherit;
+      font-size: .76rem;
+      cursor: pointer;
+    }
+
+    button:hover, button[aria-pressed="true"] {
+      color: var(--background);
+      border-color: var(--cyan);
+      background: var(--cyan);
+    }
+
+    .count {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    figure {
+      min-width: 0;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    figure:hover {
+      border-color: #486176;
+      transform: translateY(-2px);
+    }
+
+    figure[hidden] { display: none; }
+
+    figure a {
+      display: block;
+      background: #030507;
+      cursor: zoom-in;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+
+    figcaption {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+      padding: 16px 17px 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font: 500 1.05rem/1.25 Georgia, serif;
+    }
+
+    .description {
+      margin: 0;
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.5;
+    }
+
+    .tag {
+      color: var(--amber);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    dialog {
+      width: min(96vw, 1400px);
+      max-width: none;
+      padding: 0;
+      border: 1px solid #405469;
+      border-radius: 4px;
+      color: var(--text);
+      background: #030507;
+    }
+
+    dialog::backdrop { background: rgba(0, 0, 0, .88); }
+
+    dialog img {
+      display: block;
+      width: 100%;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+
+    .close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+      color: white;
+      background: rgba(0, 0, 0, .78);
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      font-size: .72rem;
+    }
+
+    @media (max-width: 760px) {
+      header { padding-top: 42px; }
+      .gallery { grid-template-columns: 1fr; }
+      figcaption { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Flyxion · Procedural research objects</p>
+    <h1>Headless Blender Experiments</h1>
+    <p class="intro">Sixteen reproducible scenes translating structural questions into inspectable geometry. Select a repository to isolate its two experiments, or open any render at full resolution.</p>
+    <nav class="controls" aria-label="Filter experiments">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="calculus">calculus</button>
+      <button type="button" data-filter="tartan">TARTAN</button>
+      <button type="button" data-filter="hydra">HYDRA</button>
+      <button type="button" data-filter="autogenerative">autogenerative-dynamics</button>
+      <button type="button" data-filter="cliodynamics">cliodynamics</button>
+      <button type="button" data-filter="spherepop">spherepop</button>
+      <button type="button" data-filter="chloroplasts">Chloroplasts</button>
+      <button type="button" data-filter="alphabet">alphabet</button>
+    </nav>
+  </header>
+
+  <main>
+    <p class="count" aria-live="polite"><span id="visible-count">16</span> experiments visible</p>
+    <section class="gallery" aria-label="Experiment renders">
+      <figure data-repository="calculus">
+        <a href="output/calculus_orthodromes.png"><img src="output/calculus_orthodromes.png" alt="Orthodromic rings around a spherical body" loading="lazy"></a>
+        <figcaption><div><h2>Orthodromes and Libration</h2><p class="description">Intersecting spherical frames with an orbital libration envelope.</p></div><span class="tag">calculus</span></figcaption>
+      </figure>
+      <figure data-repository="calculus">
+        <a href="output/calculus_spherical_voronoi.png"><img src="output/calculus_spherical_voronoi.png" alt="Weighted hubs connected across a globe" loading="lazy"></a>
+        <figcaption><div><h2>Spherical Service Network</h2><p class="description">Weighted service hubs inducing a secondary spherical network.</p></div><span class="tag">calculus</span></figcaption>
+      </figure>
+
+      <figure data-repository="tartan">
+        <a href="output/tartan_constraint_closure.png"><img src="output/tartan_constraint_closure.png" alt="Tiled field converging toward a repaired center" loading="lazy"></a>
+        <figcaption><div><h2>Constraint Closure</h2><p class="description">A local obstruction reconciled into a globally coherent state.</p></div><span class="tag">TARTAN</span></figcaption>
+      </figure>
+      <figure data-repository="tartan">
+        <a href="output/tartan_annotated_fracture.png"><img src="output/tartan_annotated_fracture.png" alt="A fracture trajectory crossing a tiled field" loading="lazy"></a>
+        <figcaption><div><h2>Annotated Fracture</h2><p class="description">Trajectory-aware tiling responding to a structured perturbation.</p></div><span class="tag">TARTAN</span></figcaption>
+      </figure>
+
+      <figure data-repository="hydra">
+        <a href="output/hydra_phase_locking.png"><img src="output/hydra_phase_locking.png" alt="Three families of spiraling persona trajectories" loading="lazy"></a>
+        <figcaption><div><h2>Partial Phase Locking</h2><p class="description">Persona trajectories converging locally while coupling globally.</p></div><span class="tag">HYDRA</span></figcaption>
+      </figure>
+      <figure data-repository="hydra">
+        <a href="output/hydra_recursive_veiling.png"><img src="output/hydra_recursive_veiling.png" alt="A signal passing through translucent nested shells" loading="lazy"></a>
+        <figcaption><div><h2>Recursive Veiling</h2><p class="description">Signal recoverability measured across nested visibility thresholds.</p></div><span class="tag">HYDRA</span></figcaption>
+      </figure>
+
+      <figure data-repository="autogenerative">
+        <a href="output/autogenerative_repair.png"><img src="output/autogenerative_repair.png" alt="Recursive branches repairing a missing region" loading="lazy"></a>
+        <figcaption><div><h2>Recursive Repair</h2><p class="description">Generated growth rerouting around a deleted region.</p></div><span class="tag">autogenerative</span></figcaption>
+      </figure>
+      <figure data-repository="autogenerative">
+        <a href="output/autogenerative_worldlines.png"><img src="output/autogenerative_worldlines.png" alt="Candidate worldlines passing constraint regions" loading="lazy"></a>
+        <figcaption><div><h2>Worldline Selection</h2><p class="description">Candidate histories accepted or rejected by spatial constraints.</p></div><span class="tag">autogenerative</span></figcaption>
+      </figure>
+
+      <figure data-repository="cliodynamics">
+        <a href="output/cliodynamics_aliasing.png"><img src="output/cliodynamics_aliasing.png" alt="Two states sharing one projection before divergent actions" loading="lazy"></a>
+        <figcaption><div><h2>Consequential Aliasing</h2><p class="description">One apparent view concealing states that require different actions.</p></div><span class="tag">cliodynamics</span></figcaption>
+      </figure>
+      <figure data-repository="cliodynamics">
+        <a href="output/cliodynamics_recoverability.png"><img src="output/cliodynamics_recoverability.png" alt="Participants connected to different retained events" loading="lazy"></a>
+        <figcaption><div><h2>Indexed Recoverability</h2><p class="description">System retention compared with participant-specific access.</p></div><span class="tag">cliodynamics</span></figcaption>
+      </figure>
+
+      <figure data-repository="spherepop">
+        <a href="output/spherepop_logic.png"><img src="output/spherepop_logic.png" alt="Four Boolean cases passing through Spherepop operations" loading="lazy"></a>
+        <figcaption><div><h2>Primitive Logic</h2><p class="description">Bind, Refuse, and Pop executing the four AND input cases.</p></div><span class="tag">spherepop</span></figcaption>
+      </figure>
+      <figure data-repository="spherepop">
+        <a href="output/spherepop_deferred_closure.png"><img src="output/spherepop_deferred_closure.png" alt="A token spiraling through nested scopes" loading="lazy"></a>
+        <figcaption><div><h2>Deferred Closure</h2><p class="description">A pending token crossing nested scopes before Collapse.</p></div><span class="tag">spherepop</span></figcaption>
+      </figure>
+
+      <figure data-repository="chloroplasts">
+        <a href="output/chloroplast_light_capture.png"><img src="output/chloroplast_light_capture.png" alt="Light rays entering stacked chloroplast membranes" loading="lazy"></a>
+        <figcaption><div><h2>Light Capture</h2><p class="description">Incidence angle and membrane stacking shaping absorbed paths.</p></div><span class="tag">Chloroplasts</span></figcaption>
+      </figure>
+      <figure data-repository="chloroplasts">
+        <a href="output/chloroplast_proton_gradient.png"><img src="output/chloroplast_proton_gradient.png" alt="Particles descending through rotary membrane channels" loading="lazy"></a>
+        <figcaption><div><h2>Proton Gradient</h2><p class="description">Stored potential routed through rotary transport channels.</p></div><span class="tag">Chloroplasts</span></figcaption>
+      </figure>
+
+      <figure data-repository="alphabet">
+        <a href="output/alphabet_fibered_dsl.png"><img src="output/alphabet_fibered_dsl.png" alt="Domain-specific fibers rising above a shared language base" loading="lazy"></a>
+        <figcaption><div><h2>Fibered DSL Transport</h2><p class="description">Local domain transport above a shared linguistic base.</p></div><span class="tag">alphabet</span></figcaption>
+      </figure>
+      <figure data-repository="alphabet">
+        <a href="output/alphabet_semantic_holonomy.png"><img src="output/alphabet_semantic_holonomy.png" alt="A semantic loop returning with a residual displacement" loading="lazy"></a>
+        <figcaption><div><h2>Semantic Holonomy</h2><p class="description">Meaning transported around a DSL loop and returned with residue.</p></div><span class="tag">alphabet</span></figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer>Generated headlessly in Blender · deterministic source scenes retained alongside each render.</footer>
+
+  <dialog id="viewer" aria-label="Full-resolution render">
+    <button class="close" type="button" aria-label="Close full-resolution view">Close</button>
+    <img src="" alt="">
+  </dialog>
+
+  <script>
+    const figures = [...document.querySelectorAll('figure[data-repository]')];
+    const filters = [...document.querySelectorAll('[data-filter]')];
+    const count = document.querySelector('#visible-count');
+    const dialog = document.querySelector('#viewer');
+    const dialogImage = dialog.querySelector('img');
+
+    for (const button of filters) {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        for (const control of filters) control.setAttribute('aria-pressed', String(control === button));
+        for (const figure of figures) figure.hidden = filter !== 'all' && figure.dataset.repository !== filter;
+        count.textContent = String(figures.filter(figure => !figure.hidden).length);
+      });
+    }
+
+    for (const link of document.querySelectorAll('figure a')) {
+      link.addEventListener('click', event => {
+        if (!dialog.showModal) return;
+        event.preventDefault();
+        const thumbnail = link.querySelector('img');
+        dialogImage.src = link.href;
+        dialogImage.alt = thumbnail.alt;
+        dialog.showModal();
+      });
+    }
+
+    dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  </script>
+</body>
+</html>
