@@ -1,5 +1,7 @@
 # laboratory
 
+[Projects](https://github.com/standardgalactic/laboratory/blob/main/projects/README.md)
+
 [Continuation Geometry](https://github.com/standardgalactic/laboratory/blob/main/continuation-geometry/README.md)
 
 ![](newline.png)

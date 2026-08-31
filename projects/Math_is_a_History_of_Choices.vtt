@@ -1,0 +1,2540 @@
+WEBVTT
+
+00:00.000 --> 00:05.300
+So what if I told you that 2 plus 2 doesn't actually equal 4?
+
+00:06.100 --> 00:08.420
+Well, I mean, you probably get some very confused looks.
+
+00:08.620 --> 00:09.400
+Right, exactly.
+
+00:09.640 --> 00:16.440
+But what if saying 2 plus 2 equals 4 is, like, completely ignoring the most fundamental part of mathematics,
+
+00:16.780 --> 00:18.900
+which is, you know, how you actually got there?
+
+00:19.180 --> 00:20.820
+Oh, I see where you're going with this.
+
+00:20.900 --> 00:24.020
+Yeah, because we're basically taught to treat math like an x-ray.
+
+00:24.500 --> 00:28.940
+You know, you look at the image, you see the broken bone, and the doctor just points and says, there it is.
+
+00:28.940 --> 00:32.500
+Right, it's treated as this collection of cold, hard facts.
+
+00:32.600 --> 00:32.940
+Exactly.
+
+00:33.360 --> 00:36.220
+Objects that just, like, exist in the universe.
+
+00:36.520 --> 00:39.120
+We think of them as just waiting for us to point at them.
+
+00:39.220 --> 00:40.140
+2 plus 2 is 4.
+
+00:40.520 --> 00:41.920
+A triangle has three sides.
+
+00:42.380 --> 00:46.120
+It's clean, it's binary, and honestly, it's really comforting.
+
+00:46.540 --> 00:47.020
+It is.
+
+00:47.140 --> 00:49.740
+I mean, it gives us this sense of static permanence.
+
+00:49.880 --> 00:53.960
+Like, mathematical truths are just these axiomatic laws floating in the void, you know,
+
+00:54.300 --> 00:56.760
+completely independent of anything humans actually do.
+
+00:56.760 --> 01:01.440
+But for this deep dive, we are going to, like, completely tear that x-ray down.
+
+01:02.660 --> 01:09.860
+Because the stack of sources we're looking at today suggests that math isn't a collection of static objects at all.
+
+01:09.960 --> 01:11.860
+No, it's something entirely different.
+
+01:11.960 --> 01:12.100
+Yeah.
+
+01:12.320 --> 01:15.580
+What if math is actually a recorded history of choices?
+
+01:16.360 --> 01:24.320
+And what if the exact order in which things happen is fundamentally more important than whatever final answer you get at the end?
+
+01:24.320 --> 01:26.560
+I mean, that is just a philosophical earthquake.
+
+01:26.700 --> 01:32.680
+It's a total inversion of how we think about knowledge and logic and, well, reality itself.
+
+01:32.820 --> 01:33.400
+It really is.
+
+01:33.640 --> 01:38.160
+And our sources today are dense, they're weird, and they're just absolutely fascinating.
+
+01:38.600 --> 01:45.340
+So first we have these visual guides for what, at first glance, looks like a super simple mobile puzzle game called Sphere Pop.
+
+01:45.540 --> 01:47.260
+Right, with the little color bubbles.
+
+01:47.260 --> 01:47.960
+Yeah, exactly.
+
+01:48.300 --> 01:54.160
+But alongside that game, we have this extensive suite of documents detailing an entire educational framework.
+
+01:54.360 --> 01:55.980
+It's called the Sproul Curriculum.
+
+01:56.120 --> 01:57.080
+Which is quite the rabbit hole.
+
+01:57.400 --> 01:57.880
+Oh, completely.
+
+01:58.100 --> 02:01.580
+It includes actual children booklets, specifically the very first one.
+
+02:01.680 --> 02:04.760
+So Sproul 0001 and 02.
+
+02:05.640 --> 02:12.240
+And binding all of this together is a massive 50-plus page academic monograph.
+
+02:12.500 --> 02:14.400
+By an independent researcher named Flyxion, right?
+
+02:14.400 --> 02:16.240
+Yep, published in August 2026.
+
+02:16.400 --> 02:23.420
+And this monograph explains the deeply complex, like, architectural theory that's operating underneath these colorful little children's books.
+
+02:23.480 --> 02:26.020
+And we should clarify, this is definitely not a standard teacher syllabus.
+
+02:26.460 --> 02:31.700
+Flyxion as Monograph outlines how this curriculum uses a formal system, they call it the Sphere Pop Calculus,
+
+02:32.180 --> 02:36.860
+to basically shift the entire focus of learning from what is to what happened.
+
+02:36.860 --> 02:37.880
+Which is wild.
+
+02:38.020 --> 02:47.140
+So our mission for this deep dive is to explore how a simple game of popping digital bubbles can, like, scale up into this revolutionary philosophy of epistemology.
+
+02:47.260 --> 02:50.640
+Which is really just a fancy academic word for, you know, how we know what we know.
+
+02:51.100 --> 02:51.580
+Exactly.
+
+02:51.580 --> 02:58.240
+So whether you're listening because you want, like, a totally new framework for problem solving at your job,
+
+02:58.420 --> 03:03.580
+or you're just insanely curious about how we construct reality from scratch, stick around.
+
+03:03.980 --> 03:07.320
+You're going to walk away with some really profound tools for thinking today.
+
+03:07.540 --> 03:08.000
+Absolutely.
+
+03:08.580 --> 03:10.140
+So, okay, let's unpack this.
+
+03:10.400 --> 03:12.640
+I want to start by just looking at this game, Sphere Pop.
+
+03:12.640 --> 03:19.960
+Because when I first saw the visual guide, I honestly thought someone had sent us a manual for, like, a Candy Crush ripoff.
+
+03:20.040 --> 03:20.740
+Oh, for sure.
+
+03:20.840 --> 03:22.660
+The aesthetic is very deceptive.
+
+03:22.740 --> 03:32.860
+I mean, it uses these bright primary colors, rounded shapes, and, you know, the mechanics seem designed for this purely tactile, dopamine-driven experience.
+
+03:33.100 --> 03:33.940
+Yeah, it really does.
+
+03:34.020 --> 03:36.740
+And the instructions are based on super simple arithmetic.
+
+03:37.180 --> 03:40.920
+You start with an expression on your screen made of numbers, mathematical operations, and parentheses.
+
+03:41.280 --> 03:41.640
+Right.
+
+03:41.640 --> 03:43.200
+So the guide gives a basic example.
+
+03:43.380 --> 03:50.640
+It's open parenthesis, 4 plus 1, close parenthesis, and then right next to it, open parenthesis, 3 minus 1, close parenthesis.
+
+03:51.260 --> 03:55.340
+So mathematically, you're just looking at 4 plus 1 multiplied by 3 minus 1.
+
+03:55.440 --> 03:55.780
+Exactly.
+
+03:56.220 --> 04:01.880
+And the single governing rule of the game is that you can only interact with things that are enclosed in parentheses.
+
+04:02.320 --> 04:03.880
+Which is a clever constraint.
+
+04:03.880 --> 04:14.200
+Yeah, so on your turn, you tap a pop, a set of parentheses, by solving whatever localized equation is inside it.
+
+04:14.580 --> 04:18.440
+You literally just replace the bubble with the result of that specific calculation.
+
+04:18.440 --> 04:20.220
+So if you tap the 4 plus 1.
+
+04:20.520 --> 04:20.740
+Right.
+
+04:20.800 --> 04:25.340
+If I tap the first set, the 4 plus 1, it collapses into a 5, so now my whole board changes.
+
+04:25.440 --> 04:28.060
+Now it reads 5, and then in parentheses, 3 minus 1.
+
+04:28.140 --> 04:28.340
+Okay.
+
+04:28.500 --> 04:28.920
+Makes sense.
+
+04:28.920 --> 04:31.000
+And then on my next turn, I pop the second set.
+
+04:31.520 --> 04:33.460
+The 3 minus 1 collapses into a 2.
+
+04:33.700 --> 04:35.800
+So now my board is just 5, parenthesis 2.
+
+04:36.120 --> 04:42.180
+And then I make one final pop, multiply them together, and I'm left with a single sphere holding the number 10.
+
+04:42.180 --> 04:45.900
+And the game is just over when there are no parentheses left to pop, right?
+
+04:45.900 --> 04:46.460
+I got it.
+
+04:46.880 --> 04:49.380
+And the guide outlines, like, a few ways to play.
+
+04:49.640 --> 04:55.040
+You can compete for the highest final value, or race against the clock to collapse this massive equation.
+
+04:55.240 --> 05:01.980
+Or you can play dynamically, where you're trying to strategically choose which parentheses to pop, so you hit a specific target number.
+
+05:02.240 --> 05:03.800
+You know, it sounds really satisfying.
+
+05:04.220 --> 05:04.660
+It is.
+
+05:04.820 --> 05:07.360
+To me, playing it feels like digital bubble wrap.
+
+05:07.360 --> 05:14.580
+You take this mussy, kind of anxiety-inducing string of data, and you just methodically reduce it.
+
+05:15.240 --> 05:15.820
+Pop, pop, pop.
+
+05:15.860 --> 05:17.260
+Just narrowing down the noise.
+
+05:17.380 --> 05:17.540
+Yeah.
+
+05:17.720 --> 05:26.040
+It feels like an incredibly clever way to trick, like, a third grader into practicing their order of operations without them ever realizing they're doing math homework.
+
+05:26.380 --> 05:26.940
+Which it is.
+
+05:26.980 --> 05:28.760
+It's an elegant way to teach arithmetic.
+
+05:29.280 --> 05:35.740
+But looking at it as just a math game completely misses the actual architecture running underneath it.
+
+05:35.760 --> 05:36.300
+Oh, totally.
+
+05:36.300 --> 05:44.120
+Yeah, to see what the player's really doing, we have to transition to the second document in our sources, which is the Boolean synthesis schematic.
+
+05:44.460 --> 05:50.020
+Right, which looks like someone took a literal motherboard blueprint and, like, drew it with crayons.
+
+05:50.120 --> 05:51.480
+That's a perfect description, yeah.
+
+05:51.680 --> 05:53.780
+Because the game is actually a Trojan horse.
+
+05:54.120 --> 05:55.740
+It isn't just about arithmetic at all.
+
+05:55.820 --> 05:58.880
+It's a foundational engine for teaching logic gates.
+
+05:58.980 --> 05:59.420
+Wait, really?
+
+05:59.860 --> 06:00.840
+Like computer logic?
+
+06:00.840 --> 06:01.440
+Exactly.
+
+06:01.960 --> 06:08.060
+The mechanics of tapping those colorful bubbles are built on four highly specific mathematical primitives.
+
+06:08.920 --> 06:10.880
+Okay, I'm looking at this schematic right now.
+
+06:11.060 --> 06:11.360
+Uh-uh.
+
+06:11.580 --> 06:16.620
+Walk me through these four primitives, because this is where the math started to feel like a completely different language to me.
+
+06:16.740 --> 06:17.000
+Sure.
+
+06:17.000 --> 06:27.220
+So the first primitive is POP, and it's denoted formally by the letter P. The definition they use here is, quote, expose a value without alteration.
+
+06:27.620 --> 06:27.860
+Okay.
+
+06:27.860 --> 06:35.300
+So in a digital logic sense, it basically takes an incoming signal, let's call it X, and simply outputs X.
+
+06:35.480 --> 06:38.680
+So it just passes the information along, no changes at all.
+
+06:38.760 --> 06:39.120
+Exactly.
+
+06:39.520 --> 06:47.720
+Then the second primitive is refuse, denoted by R, and this operation inverts a value, so it takes that signal X and outputs not X.
+
+06:47.900 --> 06:48.300
+Got it.
+
+06:48.320 --> 06:50.700
+So if the input is a 1, it spits out a 0.
+
+06:51.320 --> 06:54.040
+If a statement is true, refuse turns it false.
+
+06:54.160 --> 06:54.320
+Right.
+
+06:54.380 --> 06:55.400
+It's a direct inversion.
+
+06:55.400 --> 07:01.440
+The third is by and D, denoted by B. Now, this operation requires two values to exist simultaneously.
+
+07:01.600 --> 07:05.140
+It takes an X and a Y and outputs a coupled state, so X, A, and D, Y.
+
+07:05.220 --> 07:07.880
+Okay, so they're yoked together. You basically can't have one without the other.
+
+07:08.360 --> 07:08.760
+Precisely.
+
+07:09.180 --> 07:12.580
+And the final primitive is collapse E, denoted by C.
+
+07:13.420 --> 07:18.260
+This commits the Boolean result, permanently locking the state into a 0 or a 1.
+
+07:18.380 --> 07:20.080
+It effectively closes the action.
+
+07:20.240 --> 07:21.900
+Okay, so let me make sure I have this.
+
+07:21.900 --> 07:26.340
+We have P, R, B, and C. Pop, refuse, bind, collapse.
+
+07:26.660 --> 07:27.080
+That's it.
+
+07:27.220 --> 07:30.800
+Okay, I'm following the definitions, but I have to, you know, push back here a little bit.
+
+07:30.880 --> 07:31.060
+Yeah.
+
+07:31.220 --> 07:38.140
+You're telling me these four highly abstract moves are secretly running inside a game where I'm just adding four in one.
+
+07:38.500 --> 07:42.060
+Like, why do these specific four operations matter so much?
+
+07:42.060 --> 07:45.600
+Because if you have those four operations, you don't just have a math game.
+
+07:45.700 --> 07:48.260
+You literally have the ability to construct a computer.
+
+07:48.740 --> 07:48.840
+Wow.
+
+07:49.100 --> 07:54.900
+Yeah, the synthesis document demonstrates how these specific primitives can build standard computing logic gates.
+
+07:55.200 --> 07:59.420
+For example, if you want to build a buffer gate, you just string together a pop and a collapse.
+
+07:59.600 --> 07:59.840
+Oh.
+
+07:59.960 --> 08:03.380
+And if you want a not gate, you string together a refuse and a collapse.
+
+08:03.780 --> 08:04.340
+Okay, hold on.
+
+08:04.400 --> 08:05.520
+You're losing me just a little bit.
+
+08:05.520 --> 08:16.280
+I understand that they map to logic gates, sure, but the document has this massive bold section at the bottom claiming that just two of these, refuse and bind, are functionally complete.
+
+08:17.180 --> 08:19.220
+What does that actually mean, like mechanically?
+
+08:19.380 --> 08:19.560
+Right.
+
+08:19.640 --> 08:21.600
+So functional completeness is a big deal.
+
+08:21.600 --> 08:27.960
+It basically means we can build the entire digital architecture of the modern world using literally nothing but those two actions.
+
+08:28.120 --> 08:29.120
+Wait, just two actions?
+
+08:29.260 --> 08:29.520
+Yes.
+
+08:29.920 --> 08:31.040
+Let's look at the mechanics.
+
+08:31.040 --> 08:40.900
+If you only have the power to invert a value, which is refuse, and the power to require two values to be true at the same time, which is bind, you can build what's called a NAND gate.
+
+08:41.320 --> 08:42.960
+NAND stands for not and D.
+
+08:43.180 --> 08:44.200
+Okay, let's trace that.
+
+08:44.560 --> 08:47.480
+How do I build a NAND gate out of just those two moves?
+
+08:47.540 --> 08:49.420
+Okay, so you take two inputs, X and Y.
+
+08:49.580 --> 08:50.980
+First, you use the bind primitive.
+
+08:51.340 --> 08:54.800
+This says I am checking if both X and DY are true.
+
+08:55.080 --> 08:55.260
+Right.
+
+08:55.280 --> 08:58.920
+Then you immediately apply the refuse primitive to that result, which inverts it.
+
+08:58.920 --> 09:02.280
+So the final output is true unless both X and Y are true.
+
+09:02.780 --> 09:05.140
+That specific combination is a NAND gate.
+
+09:05.260 --> 09:06.780
+Okay, I follow the logic there.
+
+09:06.920 --> 09:08.740
+But why is a NAND gate so special?
+
+09:09.080 --> 09:13.680
+Because in computer science, the NAND gate is like the universal building block.
+
+09:13.900 --> 09:23.280
+If you wire enough NAND gates together in different configurations, you can create an OR gate, an XOR gate, a basic memory cell, an arithmetic logic unit.
+
+09:23.380 --> 09:24.740
+And eventually a whole CPU.
+
+09:24.740 --> 09:25.400
+Exactly.
+
+09:25.840 --> 09:27.760
+Eventually a central processing unit.
+
+09:28.300 --> 09:38.320
+Every smartphone, every supercomputer, every piece of digital infrastructure on Earth operates on logic that can be entirely derived from the simple ability to bind and refuse.
+
+09:38.540 --> 09:39.940
+That is just staggering.
+
+09:39.940 --> 09:44.920
+So like, a kid playing sphere pop thinks they're just calculating that 3 minus 1 is 2.
+
+09:45.620 --> 09:58.620
+But the rules determining how they're allowed to tap the screen and how those parentheses behave are secretly hardwiring their brain to understand the exact foundational logic required to build a Turing complete computer processor.
+
+09:58.800 --> 09:59.360
+It is, yeah.
+
+09:59.440 --> 10:03.460
+It's hardcore Boolean logic disguised in primary colors and playful game mechanics.
+
+10:03.540 --> 10:06.600
+Which brings us to the massive glaring question of this deep dive.
+
+10:06.600 --> 10:14.640
+If we're talking about Turing complete logic gates and Boolean primitives, how on earth does this translate into a picture book for a literal 5-year-old?
+
+10:14.900 --> 10:22.060
+Well, to answer that, we have to actually open Flickshaneer's monograph and examine the architecture of the Sproul curriculum itself.
+
+10:22.160 --> 10:22.940
+Okay, let's do it.
+
+10:22.960 --> 10:24.840
+Because this monograph is really intimidating.
+
+10:25.080 --> 10:27.640
+I mean, it's a highly formal academic paper.
+
+10:27.940 --> 10:34.140
+It reads more like a blueprint for an operating system than like a lesson plan for a kindergarten class.
+
+10:34.380 --> 10:35.280
+It really does.
+
+10:35.280 --> 10:42.640
+So Flickshaneer's document maps out a 40-booklet progression, and it's divided into seven distinct cycles.
+
+10:42.980 --> 10:47.280
+And every single booklet is heavily constrained by what they call the three-layer architecture.
+
+10:48.120 --> 10:50.020
+All right, let's define those layers for everyone listening.
+
+10:50.380 --> 10:51.420
+What is the foundation?
+
+10:51.940 --> 10:54.160
+Okay, so layer one is historical construction.
+
+10:54.620 --> 10:55.960
+This is the sphere pop layer.
+
+10:56.500 --> 10:59.120
+It deals entirely with those primitives we just discussed.
+
+10:59.380 --> 11:01.640
+Pop, refuse, bind, collapse.
+
+11:02.060 --> 11:04.420
+At this layer, math isn't about numbers at all.
+
+11:04.420 --> 11:09.820
+It is about how a reality comes to exist in the first place through a sequence of events and choices.
+
+11:10.080 --> 11:11.720
+Okay, so the foundation isn't counting.
+
+11:11.840 --> 11:12.780
+It's tracking events.
+
+11:13.320 --> 11:13.720
+Got it.
+
+11:13.880 --> 11:14.780
+What's the second layer?
+
+11:15.200 --> 11:17.440
+Layer two is recovered structure.
+
+11:18.040 --> 11:21.760
+Now, this is the ordinary everyday mathematics that you and I would recognize.
+
+11:22.000 --> 11:25.440
+You know, counting, addition, subtraction, sets, functions.
+
+11:25.660 --> 11:26.500
+Standard school stuff.
+
+11:26.500 --> 11:26.940
+Right.
+
+11:27.320 --> 11:32.200
+But crucially, the curriculum doesn't introduce these things as pre-existing facts.
+
+11:32.420 --> 11:37.320
+It introduces them as tools that you can use to summarize the history that was built down in layer one.
+
+11:37.460 --> 11:37.840
+Oh, wow.
+
+11:38.220 --> 11:43.920
+So all the math I spent, you know, 12 years learning in school is basically just sitting in their middle layer.
+
+11:44.120 --> 11:44.780
+Pretty much, yeah.
+
+11:45.040 --> 11:47.320
+And then layer three sits on top of all that.
+
+11:47.580 --> 11:49.040
+This is epistemic transformation.
+
+11:49.040 --> 11:53.200
+And this layer deals with what you do when your mathematical map breaks.
+
+11:53.440 --> 11:56.160
+It's essentially the layer of troubleshooting reality.
+
+11:56.600 --> 12:01.480
+Like what to do when the math gives you an answer that just doesn't match the real world.
+
+12:01.800 --> 12:02.320
+Precisely.
+
+12:02.620 --> 12:07.100
+Now, if there is a central thesis to Flyxion's entire monograph like
+
+12:07.100 --> 12:10.240
+The Absolute Hill This Researcher Is Willing to Die On,
+
+12:10.560 --> 12:14.960
+it is the vital distinction between illustrating a theory and embodying a theory.
+
+12:14.960 --> 12:19.700
+Okay, we really need to linger on this because the preface gets incredibly intense about this distinction.
+
+12:20.620 --> 12:24.220
+Why is Flyxion so, I don't know, angry about illustration?
+
+12:25.000 --> 12:31.020
+Because, in their view, most modern education uses theory merely as a source of illustrations.
+
+12:31.640 --> 12:33.960
+Think about a standard science textbook, right?
+
+12:34.240 --> 12:38.800
+If the book wants to teach gravity, it shows a cartoon of an apple falling on Isaac Newton's head.
+
+12:38.860 --> 12:39.060
+Right.
+
+12:39.220 --> 12:43.300
+If a math book wants to teach logic, it draws a picture of a circuit board.
+
+12:43.300 --> 12:47.200
+But the underlying theory is just providing flavor text.
+
+12:47.700 --> 12:52.420
+If you stripped all the pictures away, the child is still just memorizing the same static equation.
+
+12:52.720 --> 12:56.460
+So the theory is essentially just clipart slapped onto rote memorization.
+
+12:56.740 --> 12:57.100
+Exactly.
+
+12:57.240 --> 12:58.480
+It's pedagogical decoration.
+
+12:59.100 --> 13:02.240
+The sprawl curriculum, however, absolutely refuses to illustrate.
+
+13:02.760 --> 13:04.420
+It demands embodiment.
+
+13:04.820 --> 13:05.620
+Meaning what, exactly?
+
+13:05.620 --> 13:15.000
+Meaning the sequence of tasks a child performs in the booklets must be a literal structural instance of the math itself being constructed in their minds.
+
+13:15.360 --> 13:18.340
+Okay, I want to try an analogy here to make sure I'm grasping the scale of this.
+
+13:19.780 --> 13:23.980
+Illustration is like building a modern house, but you want it to look like a medieval castle.
+
+13:23.980 --> 13:31.760
+So you frame it out with cheap two-by-fours, put up some drywall, and then you just glue some faux stone plastic siding to the outside.
+
+13:32.180 --> 13:35.240
+You know, maybe hang a fake plastic sword in the hallway.
+
+13:35.840 --> 13:36.600
+It looks like a castle.
+
+13:36.800 --> 13:38.960
+But underneath, it's just a cheap modern frame.
+
+13:39.720 --> 13:45.400
+Embodiment, on the other hand, is forcing the builders to go to the quarry, cut 12th century stone blocks,
+
+13:45.720 --> 13:51.900
+and actually use medieval masonry techniques to build load-bearing walls from the ground up without power tools.
+
+13:51.900 --> 13:55.080
+That analogy hits the nail right on the head.
+
+13:55.680 --> 14:01.320
+If a storm hits the modern house and rips off that faux stone siding, the house still stands,
+
+14:01.700 --> 14:03.680
+because the castle part was just an illusion.
+
+14:04.140 --> 14:07.980
+But in an embodied structure, the castle is the structure.
+
+14:08.380 --> 14:08.480
+Wow.
+
+14:08.780 --> 14:14.160
+Yeah, and Flyxion provides a very specific, rigid example of how this constraint dictates the curriculum.
+
+14:14.700 --> 14:20.440
+They state that a child cannot learn the concept of collapse, which, remember, is evaluating a final result.
+
+14:20.440 --> 14:22.420
+They can't learn that in booklet number four.
+
+14:22.840 --> 14:23.520
+Wait, why not?
+
+14:23.640 --> 14:23.820
+Yeah.
+
+14:23.920 --> 14:27.260
+Is collapse just too complicated for a kindergartner to understand?
+
+14:27.460 --> 14:28.180
+Not at all.
+
+14:28.360 --> 14:31.660
+A child can easily understand the idea of finishing a puzzle.
+
+14:32.460 --> 14:37.980
+But formally, mathematically, nothing in the child's constructed experience up to booklet four
+
+14:37.980 --> 14:44.360
+has yet distinguished between a rule for observing something and the history of the thing being observed.
+
+14:44.640 --> 14:44.960
+Oh.
+
+14:44.960 --> 14:52.080
+Yeah, because the child hasn't built that architectural wall yet, the concept of collapse literally cannot exist on the page.
+
+14:52.620 --> 14:53.320
+That's insane.
+
+14:53.420 --> 14:59.380
+So the authors literally cannot put the lesson on the page because the mathematical universe they are building inside the child's mind
+
+14:59.380 --> 15:01.940
+hasn't invented that law of physics yet.
+
+15:02.040 --> 15:02.220
+Right.
+
+15:02.300 --> 15:03.500
+The universe doesn't support it.
+
+15:03.500 --> 15:03.980
+Exactly.
+
+15:03.980 --> 15:08.660
+The ordering of the Sproul booklets is not based on what is easiest for a teacher to explain.
+
+15:09.040 --> 15:16.320
+It is based on the exact, uncompromising order that mathematical logic imposes on what is allowed to be stated before something else.
+
+15:16.400 --> 15:19.500
+Which leads directly into the slogan of the entire series.
+
+15:19.720 --> 15:24.180
+It's printed right in the visual guide, and I honestly want it tattooed on my arm.
+
+15:24.220 --> 15:25.060
+It's a great slogan.
+
+15:25.340 --> 15:25.780
+It is.
+
+15:25.940 --> 15:29.260
+The slogan is, don't erase what you learned, learn what made it true.
+
+15:29.260 --> 15:34.060
+And that phrase summarizes their formal principle of monotonic learning.
+
+15:34.940 --> 15:37.740
+It is a strict structural mandate for the authors.
+
+15:38.700 --> 15:48.040
+If a booklet makes a claim in cycle one, a later booklet in cycle seven is never, ever allowed to say that the earlier claim was false.
+
+15:48.200 --> 15:52.980
+Which is honestly the most deeply frustrating part of traditional education.
+
+15:52.980 --> 15:59.440
+I remember sitting in like third grade, and the teacher said, you cannot subtract a bigger number from a smaller number.
+
+15:59.600 --> 16:01.540
+You can't do three minus five.
+
+16:02.140 --> 16:03.620
+It's impossible.
+
+16:04.040 --> 16:05.180
+We all learn that, yeah.
+
+16:05.260 --> 16:05.460
+Right.
+
+16:05.560 --> 16:06.760
+I internalize that rule.
+
+16:06.880 --> 16:07.100
+Yeah.
+
+16:07.240 --> 16:11.620
+Then I get to middle school, and the new teacher says, actually, you can, it's negative two.
+
+16:11.860 --> 16:13.800
+What you learn in elementary school is a lie.
+
+16:14.100 --> 16:14.860
+Oh, exactly.
+
+16:14.880 --> 16:15.500
+Or in chemistry.
+
+16:15.740 --> 16:15.900
+Yeah.
+
+16:15.920 --> 16:19.720
+They teach you, atoms are like little solar systems with electrons on neat little racetracks.
+
+16:19.720 --> 16:23.700
+Then you get to high school physics, and they say, actually, that was a gross oversimplification.
+
+16:24.040 --> 16:25.180
+They were probability clouds.
+
+16:25.780 --> 16:30.460
+You spend half your academic life frantically unlearning the convenient lies they told you in the previous grade.
+
+16:30.700 --> 16:34.780
+And from an epistemic standpoint, that creates profound distrust in the learner.
+
+16:35.480 --> 16:43.080
+The student subconsciously starts to assume that whatever they are currently being taught is probably just another placeholder lie just waiting to be overwritten by the next teacher.
+
+16:43.300 --> 16:43.480
+Yeah.
+
+16:44.060 --> 16:45.960
+Monotonic learning prevents that trauma.
+
+16:45.960 --> 16:51.800
+If a child learns a truth in Sproul A01, that truth remains solid rock forever.
+
+16:52.580 --> 16:58.980
+A later booklet might reveal that the earlier truth was specific to a narrow set of rules, and now we are expanding the rules.
+
+16:59.220 --> 17:02.660
+But it never, ever erases the foundational truth.
+
+17:03.140 --> 17:05.660
+It just treats the learner's mind with such profound respect.
+
+17:06.220 --> 17:06.760
+I love that.
+
+17:06.840 --> 17:10.620
+So I want to see exactly how this embodiment works in practice.
+
+17:10.940 --> 17:14.600
+Let's open the very first books a child sees in cycle one.
+
+17:14.600 --> 17:17.880
+And this is the pre-math layer, the literal beginning of existence.
+
+17:18.360 --> 17:19.560
+Let's look at Sproul 00.
+
+17:19.780 --> 17:19.920
+Okay.
+
+17:20.040 --> 17:22.340
+So the title of Sproul 00 is A Difference.
+
+17:22.480 --> 17:25.120
+And the subtitle printed underneath is A Book Before the Beginning.
+
+17:25.440 --> 17:30.780
+I noticed in the monograph that Flyxion is very proud of the fact that this booklet contains absolutely zero arithmetic.
+
+17:31.300 --> 17:32.060
+There are no numbers.
+
+17:32.320 --> 17:33.720
+It doesn't even use the word pop.
+
+17:33.880 --> 17:40.380
+Its singular goal is to force the child to practice the one cognitive act that sits underneath all logic.
+
+17:40.380 --> 17:47.180
+Right, which is individuation, the act of noticing that a specific thing can be told apart from the background noise of the universe.
+
+17:47.400 --> 17:49.680
+Let's walk through the imagery because it is so stark.
+
+17:50.200 --> 17:51.800
+Page two is mostly empty space.
+
+17:51.960 --> 17:55.340
+There is just a single, small, solid black dot right in the center.
+
+17:55.900 --> 17:57.800
+The text simply says, here is something.
+
+17:57.980 --> 17:58.600
+You turn the page.
+
+17:59.020 --> 18:01.060
+Page three shows a small orange triangle.
+
+18:01.580 --> 18:03.080
+The text says, here is something else.
+
+18:03.260 --> 18:05.200
+It establishes presence, very basic.
+
+18:05.400 --> 18:09.280
+But then it rapidly expands the parameter of what something is allowed to be.
+
+18:09.280 --> 18:11.240
+Right, page four isn't a geometric shape.
+
+18:11.440 --> 18:15.140
+It's a line drawing of two hands clapping with little vibration lines.
+
+18:15.620 --> 18:17.740
+The text says, a loud clap is something.
+
+18:18.400 --> 18:20.740
+Page five is just three faint rippling rings.
+
+18:21.100 --> 18:22.600
+A quiet sound is something too.
+
+18:23.080 --> 18:24.600
+Page six has no object at all.
+
+18:24.680 --> 18:29.080
+It's just a soft gray shadow cast onto the ground by something off page.
+
+18:29.540 --> 18:31.180
+A shadow is something too.
+
+18:31.620 --> 18:35.480
+And then page seven is just a massive, violent, chaotic scribble of ink.
+
+18:35.840 --> 18:37.880
+A big, complicated scribble is something.
+
+18:37.880 --> 18:39.980
+And then the book synthesizes the whole concept.
+
+18:40.160 --> 18:42.200
+It displays all these disparate items in a row.
+
+18:42.300 --> 18:44.980
+The dot, the triangle, the clap, the shadow, the scribble.
+
+18:45.100 --> 18:46.520
+They're all scaled to the same size.
+
+18:46.820 --> 18:49.620
+And the text reads, something does not mean big.
+
+18:49.740 --> 18:50.920
+Something does not mean loud.
+
+18:51.080 --> 18:52.360
+Something does not mean round.
+
+18:52.980 --> 18:55.220
+Something just means, here it is.
+
+18:55.280 --> 18:56.980
+Something just means, here it is.
+
+18:57.280 --> 18:58.320
+That is incredibly powerful.
+
+18:58.640 --> 19:03.800
+It strips away all the attributes we usually use to define objects and just leaves the pure fact of existence.
+
+19:03.800 --> 19:09.220
+It is deeply ontological, but once they establish existence, they immediately introduce complication.
+
+19:09.580 --> 19:12.340
+The next page shows two small black dots.
+
+19:12.720 --> 19:15.560
+They are visually identical, placed side by side.
+
+19:16.080 --> 19:18.040
+The text says, they look alike.
+
+19:18.580 --> 19:19.560
+You turn the page.
+
+19:19.960 --> 19:24.560
+It's the same two identical dots, but now they are placed on opposite far corners of the page.
+
+19:24.720 --> 19:27.180
+And the book asks a question, are they the same?
+
+19:27.180 --> 19:30.680
+And here's where I got genuinely confused when I was reading the source materials.
+
+19:31.740 --> 19:33.220
+The book doesn't answer the question.
+
+19:33.860 --> 19:36.560
+There is no turn the page to find out.
+
+19:36.660 --> 19:38.280
+There's no answer key at the back.
+
+19:38.460 --> 19:43.860
+It just leaves this massive philosophical question hanging in the air for a five-year-old.
+
+19:44.360 --> 19:45.700
+Why would you do that?
+
+19:46.020 --> 19:48.480
+Because answering it would violate the architecture.
+
+19:48.700 --> 19:48.920
+Really?
+
+19:49.100 --> 19:49.400
+Yes.
+
+19:49.680 --> 19:54.520
+The monograph lists intentional constraint number four from the curriculum's house style, which states,
+
+19:54.520 --> 19:59.020
+an unresolved formal question must not be given a resolved illustration.
+
+19:59.880 --> 20:04.360
+The note for grown-ups printed in the back of the booklet explicitly warns parents and teachers
+
+20:04.360 --> 20:06.220
+not to answer the question for the child.
+
+20:06.440 --> 20:08.580
+So they want the kid to just be slightly confused.
+
+20:08.880 --> 20:12.480
+The cognitive friction of sitting with the unknown is the entire point of the lesson.
+
+20:12.800 --> 20:15.160
+And the book does it again on the very next page.
+
+20:15.840 --> 20:22.120
+It draws a big circle around a busy cluster of items, a dot, a triangle, a scribble, all grouped
+
+20:22.120 --> 20:23.280
+together inside this boundary.
+
+20:23.280 --> 20:27.320
+The text asks, can many things be treated as one?
+
+20:28.060 --> 20:33.200
+The next page shows the exact same image, but places a giant question mark over it.
+
+20:33.780 --> 20:38.120
+The text reads, sometimes, but what do we mean by one?
+
+20:38.600 --> 20:42.720
+And if we connect this back to the mathematical primitives we discussed earlier, we can see
+
+20:42.720 --> 20:44.860
+exactly why the book refuses to answer.
+
+20:44.980 --> 20:45.820
+Oh, the primitives.
+
+20:45.940 --> 20:46.780
+How does that connect?
+
+20:46.780 --> 20:52.180
+Well, asking, can many things be treated as one, is poking at the fundamental difference
+
+20:52.180 --> 20:57.360
+between coupling things together, which is the bind primitive, and permanently evaluating
+
+20:57.360 --> 21:00.140
+them into a single output, which is the collapse primitive.
+
+21:00.440 --> 21:00.740
+Ooh.
+
+21:01.140 --> 21:01.440
+Yeah.
+
+21:01.560 --> 21:05.700
+If the authors gave the child an answer right now, before the concepts of bind and collapse
+
+21:05.700 --> 21:09.780
+have been formally built in the child's mind, they would be skipping a step in the construction
+
+21:09.780 --> 21:10.460
+of reality.
+
+21:10.620 --> 21:13.640
+They would be gluing the faux stone siding onto the house.
+
+21:13.640 --> 21:14.200
+Exactly.
+
+21:14.820 --> 21:18.080
+The foundation just isn't ready to bear the weight of that answer yet.
+
+21:18.540 --> 21:19.160
+Okay, I see you now.
+
+21:19.560 --> 21:25.940
+So, Sproul 00 ends by displaying three clean, plain shapes on a page.
+
+21:26.400 --> 21:28.100
+A circle, a triangle, and a square.
+
+21:28.720 --> 21:31.160
+The final text says, here are three things, something could happen.
+
+21:31.640 --> 21:34.200
+And that cliffhanger leads us directly into Sproul 01.
+
+21:34.500 --> 21:34.740
+Right.
+
+21:34.860 --> 21:38.480
+And Sproul 01 is titled, Something Happened, The First Pop.
+
+21:38.480 --> 21:40.540
+We open on those same three shapes.
+
+21:40.700 --> 21:42.300
+The text says, there are three ways to go.
+
+21:42.440 --> 21:45.760
+You turn the page, and a little cartoon hand is hovering over the shapes.
+
+21:46.040 --> 21:46.540
+Choose one.
+
+21:47.180 --> 21:51.860
+Next page, the square is now drawn in a thick, bold, black line, while the circle and the
+
+21:51.860 --> 21:54.860
+triangle have faded into these faint, ghostly gray outlines.
+
+21:55.140 --> 21:57.760
+The text declares, you chose the square.
+
+21:58.480 --> 22:00.240
+And then it drops the vocabulary word.
+
+22:00.600 --> 22:01.500
+That choice is a pop.
+
+22:01.660 --> 22:03.440
+This is a monumental transition.
+
+22:03.440 --> 22:07.880
+We have moved from merely observing the fact that things are different, to an agent taking
+
+22:07.880 --> 22:10.120
+an action that permanently alters the state of the board.
+
+22:10.420 --> 22:13.860
+The monograph is incredibly pedantic about the formal definition here, by the way.
+
+22:14.100 --> 22:14.480
+How so?
+
+22:14.740 --> 22:16.660
+Well, a pop is not the square itself.
+
+22:16.740 --> 22:17.960
+It is not the ink on the page.
+
+22:18.160 --> 22:19.960
+A pop is the invisible verb.
+
+22:20.320 --> 22:23.580
+It is the act of choosing one path from a set of available paths.
+
+22:23.920 --> 22:26.100
+It is the destruction of alternative possibilities.
+
+22:26.680 --> 22:30.420
+The adult note at the back of Sproul 01 points this out.
+
+22:30.480 --> 22:32.900
+It says, before the choice, there were three ways to go.
+
+22:33.640 --> 22:38.000
+After it, one history exists, and the other two ways of going stayed unchosen.
+
+22:38.820 --> 22:43.920
+This is where the curriculum introduces my absolute favorite visual device, the ledger
+
+22:43.920 --> 22:44.140
+strip.
+
+22:44.300 --> 22:45.040
+Ah, yes.
+
+22:45.280 --> 22:47.900
+The ledger strip is the engine of the entire curriculum.
+
+22:48.300 --> 22:52.060
+It looks like a single horizontal line cut out of a lined notebook.
+
+22:52.680 --> 22:57.780
+After the child pops the square, a tiny drawing of a square appears inside this ledger strip
+
+22:57.780 --> 22:58.980
+at the bottom of the page.
+
+22:59.060 --> 23:01.200
+The text says, now we have a history.
+
+23:01.200 --> 23:03.140
+Then the book resets the experiment.
+
+23:03.580 --> 23:04.260
+Fresh page.
+
+23:04.700 --> 23:05.780
+Three clean shapes again.
+
+23:06.000 --> 23:06.580
+Let's try again.
+
+23:06.640 --> 23:07.620
+This time, choose the triangle.
+
+23:07.940 --> 23:10.580
+We get the bold triangle and the faded circle and square.
+
+23:11.020 --> 23:14.720
+But now, we look down at the bottom of the page and we see two ledger strips stacked on
+
+23:14.720 --> 23:15.360
+top of each other.
+
+23:15.520 --> 23:17.160
+The top strip has a square inside it.
+
+23:17.360 --> 23:18.600
+The bottom strip has a triangle.
+
+23:18.920 --> 23:20.640
+The text says, now there are two histories.
+
+23:20.640 --> 23:23.520
+What is happening mechanically here is profound.
+
+23:24.200 --> 23:28.240
+The book is showing the child that you can start with the exact same initial conditions,
+
+23:28.660 --> 23:34.100
+but end up with completely different, equally legitimate realities based entirely on the
+
+23:34.100 --> 23:35.340
+history of choices that were made.
+
+23:35.700 --> 23:41.560
+And this leads to an absolute aha moment at the end of Sproul 01.
+
+23:41.560 --> 23:47.240
+The book finally introduces the concept of counting, but it does it in a way that feels
+
+23:47.240 --> 23:49.520
+completely alien to how I learned numbers.
+
+23:49.840 --> 23:50.420
+How so?
+
+23:50.620 --> 23:55.060
+Well, it shows a ledger strip containing two items, first a circle, then a filled triangle.
+
+23:55.440 --> 23:57.580
+The book asks, how many pops happened?
+
+23:57.980 --> 24:00.600
+And the text provides the answer, two pops happened.
+
+24:00.720 --> 24:01.040
+Right.
+
+24:01.160 --> 24:05.400
+This is the exact moment the Sproul curriculum divorces itself from traditional mathematics.
+
+24:05.400 --> 24:06.700
+So what does this all mean?
+
+24:06.840 --> 24:10.960
+Like, why does the curriculum refuse to just draw three apples on a page and tell the kid
+
+24:10.960 --> 24:12.380
+to point at them and say, one, two, three?
+
+24:12.780 --> 24:16.220
+Why are they defining counting as measuring the length of a history of choices?
+
+24:16.800 --> 24:22.320
+Because if you just point at three apples on a page, you are reinforcing the x-ray model
+
+24:22.320 --> 24:22.940
+of math.
+
+24:23.520 --> 24:29.200
+You are teaching the child that threeness is a magical, invisible property that lives inside
+
+24:29.200 --> 24:32.340
+the apples completely independent of the human observing them.
+
+24:32.600 --> 24:33.800
+Which is how we all learn it.
+
+24:33.880 --> 24:34.100
+Right.
+
+24:34.100 --> 24:38.800
+But the sphere pop calculus operates on the premise that existence is historical, not
+
+24:38.800 --> 24:39.480
+axiomatic.
+
+24:40.280 --> 24:42.600
+A number isn't a property floating in space.
+
+24:43.200 --> 24:46.620
+A number is a strict accounting of committed choices.
+
+24:46.920 --> 24:49.480
+You aren't counting things, you're counting events.
+
+24:49.600 --> 24:50.320
+Yes, exactly.
+
+24:50.760 --> 24:54.280
+If you write a history out in mathematical notation, it looks like a sequence.
+
+24:54.540 --> 24:59.160
+History H equals event one, followed by event two, all the way to event N.
+
+24:59.700 --> 25:01.800
+The child is pounding the length of that sequence.
+
+25:01.800 --> 25:07.180
+The monograph explicitly states that they do not want the child to generalize what two means
+
+25:07.180 --> 25:07.500
+yet.
+
+25:07.760 --> 25:10.260
+They don't want them thinking about two dogs or two cars.
+
+25:10.460 --> 25:14.600
+They want the child locked into the understanding that two is the number of times a decision
+
+25:14.600 --> 25:15.100
+was made.
+
+25:15.100 --> 25:19.480
+Which sets the stage perfectly for the central conflict of Sproul 02.
+
+25:19.480 --> 25:22.480
+The title is, What Happened First?
+
+25:22.480 --> 25:27.020
+And this is the booklet where the philosophical implications just hit you like a freight train.
+
+25:27.020 --> 25:31.740
+Let's walk through the central experiment of Sproul 02, because it proves exactly why counting
+
+25:31.740 --> 25:32.980
+events is so crucial.
+
+25:32.980 --> 25:34.760
+Okay, we start with a clean page.
+
+25:35.300 --> 25:37.420
+We pop a circle, it becomes solid.
+
+25:37.780 --> 25:42.460
+Then we make a second pop, choosing a triangle, and we place it next to the circle.
+
+25:42.820 --> 25:47.680
+So the final image is a plain circle on the left and a plain triangle on the right.
+
+25:48.220 --> 25:50.920
+The text says, here is what we have now.
+
+25:50.920 --> 25:52.880
+Okay, so that is history number one.
+
+25:53.060 --> 25:53.180
+Right.
+
+25:53.720 --> 25:56.620
+Then the book runs the simulation again, clean page.
+
+25:57.280 --> 26:00.740
+But this time, we pop the triangle first, it becomes solid.
+
+26:01.000 --> 26:02.620
+Then we pop the circle next to it.
+
+26:03.080 --> 26:06.340
+The book arranges the final shapes so they match the first picture perfectly.
+
+26:06.760 --> 26:09.240
+A circle on the left, a triangle on the right.
+
+26:09.360 --> 26:10.380
+And that's history number two.
+
+26:10.660 --> 26:14.760
+The book places the two final pictures side by side on the page.
+
+26:14.960 --> 26:17.120
+They're visually identical in every single way.
+
+26:17.120 --> 26:19.180
+The text asks, are these the same?
+
+26:19.520 --> 26:21.000
+And the book answers its own question.
+
+26:21.360 --> 26:23.080
+Yes, they look exactly the same.
+
+26:23.320 --> 26:25.920
+But then it introduces the epistemic friction.
+
+26:26.380 --> 26:26.620
+Yes.
+
+26:27.120 --> 26:31.940
+It puts a giant question mark over the identical pictures and asks, but which happened first?
+
+26:32.280 --> 26:33.280
+The picture doesn't say.
+
+26:33.840 --> 26:36.680
+Then it directs the child's attention down to the ledger strips.
+
+26:37.020 --> 26:40.260
+The first ledger strip reads, circle, then triangle.
+
+26:40.640 --> 26:43.980
+The second ledger strip reads, triangle, then circle.
+
+26:44.620 --> 26:46.580
+The text delivers the final lesson.
+
+26:47.180 --> 26:48.180
+The history remembers.
+
+26:48.800 --> 26:51.420
+Even when the picture doesn't, same things, different history.
+
+26:51.960 --> 26:55.460
+This is the formal introduction of what Flyxion calls historical identity.
+
+26:56.220 --> 27:00.760
+It establishes a foundational truth that honestly, many adults struggle to grasp.
+
+27:01.520 --> 27:06.880
+Two identical looking outcomes are fundamentally not the same thing if the histories that generated
+
+27:06.880 --> 27:07.500
+them are different.
+
+27:07.820 --> 27:10.040
+I mean, think about how this applies to real world logic.
+
+27:10.180 --> 27:10.400
+Right.
+
+27:10.620 --> 27:14.580
+Imagine you were looking at two people who both have exactly $1 million sitting in their
+
+27:14.580 --> 27:15.060
+bank accounts.
+
+27:15.060 --> 27:19.680
+The picture, the final collapsed state of their finances, is identical.
+
+27:20.180 --> 27:26.300
+But if person A won the lottery yesterday and person B saved 10% of their paycheck from
+
+27:26.300 --> 27:30.080
+a blue-collar job for 40 years, those are not the same million dollars.
+
+27:30.080 --> 27:36.200
+The history behind the money changes the fundamental nature of the reality you are interacting with.
+
+27:36.640 --> 27:40.520
+If you treat them as identical just because the final number is the same, you are going to make
+
+27:40.520 --> 27:42.240
+terrible assumptions about those two people.
+
+27:42.240 --> 27:45.220
+That is the exact trap the curriculum is trying to avoid.
+
+27:45.860 --> 27:48.820
+A picture, or a final collapsed state, is just a summary.
+
+27:49.440 --> 27:53.620
+And a summary, by its very mathematical definition, must discard information.
+
+27:54.260 --> 27:56.840
+By erasing the timeline, it loses the truth.
+
+27:57.320 --> 28:02.340
+The curriculum is hardwiring the child to understand that you can never fully trust a final picture.
+
+28:02.560 --> 28:07.820
+In the monograph, Flyxion explicitly ties this lesson back to the collapse primitive we talked
+
+28:07.820 --> 28:08.860
+about with the logic gates.
+
+28:08.860 --> 28:12.420
+Yes, the formal concept of permanently evaluating a state.
+
+28:12.880 --> 28:17.160
+Flyxion explains that the child is learning that they have a choice in how they observe the world.
+
+28:17.740 --> 28:22.480
+You can apply a collapse rule to look at the picture, which means you choose to ignore the ledger
+
+28:22.480 --> 28:24.200
+and just look at the final shapes.
+
+28:24.940 --> 28:27.600
+Under that specific rule, the two histories are equal.
+
+28:27.900 --> 28:28.100
+Right.
+
+28:28.220 --> 28:33.560
+Or, you can apply a collapse rule to look at the sequence, which means you read the ledger.
+
+28:34.320 --> 28:36.940
+Under that rule, the two histories are completely unequal.
+
+28:36.940 --> 28:38.940
+And here is the kicker.
+
+28:39.880 --> 28:43.540
+Flyxion insists that neither rule is more correct than the other.
+
+28:43.960 --> 28:45.380
+They just answer different questions.
+
+28:45.860 --> 28:47.980
+It builds incredible cognitive flexibility.
+
+28:48.180 --> 28:51.240
+The child learns that equality is not a universal truth.
+
+28:51.940 --> 28:56.780
+Equality is entirely dependent on which collapse rule you decide to apply to the data.
+
+28:57.020 --> 28:57.900
+It is brilliant.
+
+28:58.360 --> 29:00.280
+So, we've spent a lot of time in cycle one.
+
+29:00.280 --> 29:06.140
+We understand that math is a recorded history of choices and that the ledger is more important than the picture.
+
+29:06.560 --> 29:07.700
+But how does this scale?
+
+29:08.080 --> 29:12.520
+Wait, if a number is just a history of choices, how on earth do you do basic addition?
+
+29:12.820 --> 29:13.880
+Ah, I see where you're going.
+
+29:14.020 --> 29:18.160
+Like, if I have two apples and I add three apples, where are the choices in that?
+
+29:18.480 --> 29:20.980
+Does this whole system just break down when we hit basic arithmetic?
+
+29:21.400 --> 29:23.520
+Let's look at the middle cycles, cycles two through three.
+
+29:23.520 --> 29:25.500
+Well, the system doesn't break down.
+
+29:25.620 --> 29:27.720
+It redefines the operations entirely.
+
+29:28.560 --> 29:34.220
+In these middle cycles, we transition from the historical construction layer into the recovered structure layer.
+
+29:34.500 --> 29:39.440
+We are finally building the math you recognize, but we are building it exclusively out of pops and ledgers.
+
+29:39.880 --> 29:42.900
+To answer your question about addition, we have to look at cycle three.
+
+29:43.260 --> 29:46.140
+But before we hit arithmetic, we have to talk about cycle two, right?
+
+29:46.180 --> 29:46.360
+Yeah.
+
+29:46.400 --> 29:47.940
+Because cycle two sets up the boundaries.
+
+29:48.100 --> 29:50.580
+It's called rules, making little worlds.
+
+29:50.580 --> 29:51.260
+Yes.
+
+29:51.840 --> 29:55.300
+Cycle two introduces the mathematical concept of admissibility.
+
+29:56.160 --> 29:58.580
+What is allowed to exist in a specific space?
+
+29:59.220 --> 30:01.860
+In Sproul 11, they introduce the box.
+
+30:02.200 --> 30:04.920
+The child pops various shapes and colors into existence.
+
+30:05.180 --> 30:07.920
+Some of them are allowed inside the box, and some of them bounce off.
+
+30:08.160 --> 30:13.520
+But the genius of Sproul 12, the rule of the box, is that it doesn't give the child the rule up front.
+
+30:14.000 --> 30:19.340
+The child has to forensically discover the membership rule after the fact by looking at what made it inside.
+
+30:19.340 --> 30:25.660
+Exactly. The child might notice that a red circle and a red square are in the box, but a blue circle is outside.
+
+30:26.160 --> 30:29.660
+They have to deduce that the rule is only red things.
+
+30:30.160 --> 30:39.280
+It establishes that a mathematical space, what mathematicians call a domain or an omega, is defined by its governing rule, not just by listing the objects inside it.
+
+30:39.360 --> 30:42.040
+Which is exactly how we discover rules in real life.
+
+30:42.500 --> 30:46.480
+You start a new job, nobody hands you a comprehensive list of office politics.
+
+30:46.560 --> 30:47.300
+No, they don't.
+
+30:47.300 --> 30:53.300
+You just observe that when Dave speaks up in a meeting, he gets praised, but when Sarah speaks up, she gets ignored.
+
+30:53.780 --> 30:59.140
+You observe the outcomes, and you reverse engineer the invisible rule of that specific box.
+
+30:59.420 --> 31:02.600
+And that reverse engineering is exactly what Cycle 3 applies to addition.
+
+31:02.900 --> 31:05.400
+Cycle 3 is called paths, arithmetic as movement.
+
+31:05.840 --> 31:07.260
+Okay, let's tackle my Apple problem.
+
+31:07.620 --> 31:09.080
+How does Sproul handle plus 1?
+
+31:09.080 --> 31:15.560
+In Sproul 16, which is titled Take a Step, plus 1 and minus 1 are not introduced as static amounts.
+
+31:16.060 --> 31:18.420
+They are introduced as transitions between states.
+
+31:18.840 --> 31:21.580
+They are pop events that occur on a number line history.
+
+31:21.920 --> 31:25.540
+So arithmetic isn't about combining piles of static objects.
+
+31:25.720 --> 31:27.080
+It is about taking a journey.
+
+31:27.640 --> 31:28.780
+Addition is a path.
+
+31:28.780 --> 31:29.340
+Exactly.
+
+31:30.120 --> 31:32.380
+Sproul 17 is called Many Ways to 5.
+
+31:32.880 --> 31:38.340
+It visually demonstrates that the number 5 can be reached by a history of taking 4 steps and adding 1,
+
+31:38.460 --> 31:43.240
+or taking 3 steps and adding 2, or taking 7 steps and walking backward 2 steps.
+
+31:43.340 --> 31:45.880
+Oh, this is a direct echo of Sproul 02.
+
+31:46.720 --> 31:48.880
+Different histories leading to the identical picture.
+
+31:49.540 --> 31:52.980
+Different arithmetic paths leading to the identical collapse value of 5.
+
+31:52.980 --> 31:58.760
+The path to the result becomes the actual object being studied, rather than just memorizing the result.
+
+31:59.040 --> 32:03.580
+And that focus on the process sets up the most conceptually ambitious part of the middle cycles.
+
+32:03.840 --> 32:07.240
+Cycle 4, which is titled Machines, Functions, and Composition.
+
+32:07.520 --> 32:10.720
+Functions are basically introduced as machines that transform pops.
+
+32:11.240 --> 32:17.040
+In Sproul 21, the number machine, a child puts a 2 into a slot, the machine rumbles, and a 4 pops out.
+
+32:17.220 --> 32:21.660
+The child's job is to figure out what mathematical rule the machine used to change the input.
+
+32:21.660 --> 32:31.400
+But the absolute standout of Cycle 4, the booklet that Flyxion dedicates an enormous amount of space to in the monograph, is Sproul 24.
+
+32:32.120 --> 32:35.660
+It is titled Machines That Forget and What We Can Get Back.
+
+32:36.540 --> 32:39.400
+I read the summary of this in the source material, and I have to ask,
+
+32:40.160 --> 32:44.460
+are they seriously teaching 5-year-olds about entropy and information theory?
+
+32:44.540 --> 32:46.300
+Because that feels absurdly advanced.
+
+32:46.460 --> 32:48.820
+They absolutely are, and they are doing it seamlessly.
+
+32:48.820 --> 32:53.780
+Flyxion notes that originally this topic was going to be split across two separate booklets.
+
+32:54.340 --> 32:58.380
+But the authors realize that the concept of a machine losing information doesn't matter,
+
+32:58.800 --> 33:01.460
+unless you also ask whether that information can be recovered.
+
+33:01.800 --> 33:02.860
+They have to be taught together.
+
+33:02.980 --> 33:05.980
+Okay, walk me through the mechanics of this forgetful machine in the book.
+
+33:06.160 --> 33:07.740
+The book presents a coloring puzzle.
+
+33:08.080 --> 33:09.780
+The child is introduced to a new machine.
+
+33:10.280 --> 33:14.340
+If you feed a red ball into the machine, it paints it purple and spits it out.
+
+33:14.480 --> 33:15.020
+Spible enough.
+
+33:15.020 --> 33:19.980
+But if you feed a blue ball into the same machine, it also paints it purple and spits it out.
+
+33:20.440 --> 33:22.800
+Mathematically, this is known as a many-to-one function.
+
+33:23.320 --> 33:26.500
+Two distinct inputs lead to the exact same output.
+
+33:27.000 --> 33:31.080
+The machine intentionally destroys the distinction between red and blue.
+
+33:31.440 --> 33:32.760
+It loses information.
+
+33:32.760 --> 33:36.780
+And the booklet immediately pivots the child's focus.
+
+33:37.280 --> 33:44.440
+Instead of asking, what color does the machine make, the text points to a purple ball sitting in the output tray and asks,
+
+33:44.700 --> 33:49.220
+if the machine spits out purple, can you ever know for sure what color you put in?
+
+33:49.920 --> 33:50.780
+And the answer is no.
+
+33:51.480 --> 33:53.540
+Because it could have been red, or it could have been blue.
+
+33:54.280 --> 33:57.080
+The history has been permanently erased by the machine's rule.
+
+33:57.400 --> 34:00.240
+You cannot deterministically recover the original input.
+
+34:00.240 --> 34:07.800
+It is a profound lesson on the irreversibility of certain processes, completely disguised as a puzzle about paint colors.
+
+34:08.280 --> 34:10.800
+Thinking about this as a learner, it is just so refreshing.
+
+34:11.200 --> 34:15.140
+Instead of agonizing over memorizing a multiplication table through brute force,
+
+34:15.520 --> 34:20.240
+you are literally being taught how to reverse engineer a system to see if its history is recoverable.
+
+34:20.440 --> 34:21.340
+You aren't a calculator.
+
+34:21.540 --> 34:22.680
+You're a mathematical detective.
+
+34:22.920 --> 34:27.640
+It shifts the burden of math from rote memorization to forensic investigation.
+
+34:27.640 --> 34:36.580
+But all of this, all of this beautiful, rigid, logical structure about ledgers and boxes and forgetful machines
+
+34:36.580 --> 34:40.340
+is really just setting the stage for the climax of the curriculum.
+
+34:40.680 --> 34:45.660
+Because Cycle 6 is where Sproul decides to intentionally break the universe it just spent years building.
+
+34:45.840 --> 34:48.000
+Cycle 6 is titled Broken Maps.
+
+34:48.000 --> 34:53.680
+And this brings us to the third and final layer of Flyxion's architecture, the epistemic layer.
+
+34:54.120 --> 34:58.880
+This section is heavily drawn from a referenced essay called Beyond Prediction Error.
+
+34:59.360 --> 35:05.720
+I want to talk about Sproul 29 because reading the description of this booklet felt like an act of pedagogical rebellion.
+
+35:06.400 --> 35:12.320
+The book deliberately presents the child with a puzzle where every single available multiple choice answer is wrong.
+
+35:12.440 --> 35:15.980
+It violently violates the unstated social contract of textbook learning.
+
+35:15.980 --> 35:19.340
+Every student is conditioned to believe that if they are handed a multiple choice question,
+
+35:19.540 --> 35:23.460
+the correct answer must be one of the options provided by the authority figure.
+
+35:23.780 --> 35:26.700
+But in real life, outside of a classroom, that is almost never true.
+
+35:27.380 --> 35:31.600
+Sometimes the spreadsheet is corrupted, the data is bad, and none of the options work.
+
+35:32.480 --> 35:36.120
+Sproul 29 forces the child to confront the panic of a broken reality.
+
+35:36.840 --> 35:40.360
+And then Sproul 30 swoops in to teach them how to fix it.
+
+35:40.560 --> 35:42.120
+It's called Make a New Answer.
+
+35:42.120 --> 35:49.740
+It literally instructs the child to take a pencil, draw a bigger box on the page, and enlarge the space of allowed possibilities.
+
+35:50.320 --> 35:53.760
+This raises a vital question for the underlying formal calculus.
+
+35:54.260 --> 36:00.580
+When the map breaks, how do we mathematically categorize the different ways it failed and the different tools we can use to fix it?
+
+36:00.860 --> 36:06.480
+The monograph introduces four specific epistemic operators for this task, U, Q, P, and A.
+
+36:06.480 --> 36:10.660
+Okay, we need to dive deep into these mechanics because this is the core of the epistemic layer.
+
+36:11.020 --> 36:13.820
+Walk me through a scenario where a child has to use these operators.
+
+36:14.040 --> 36:15.200
+Let's start with U and Q.
+
+36:15.500 --> 36:22.520
+Let's imagine a child is trying to solve a puzzle where they have to guess which shape is hidden inside a box based on a few clues.
+
+36:23.360 --> 36:25.240
+U stands for revising a commitment.
+
+36:26.020 --> 36:29.960
+Let's say the child guesses triangle, but the book reveals they are wrong.
+
+36:29.960 --> 36:39.620
+Applying the U operator means the child simply drops their guess of triangle, looks at the remaining options on the page, say, a circle and a square, and guesses again.
+
+36:39.900 --> 36:43.260
+They are just updating their choice within the existing unbroken map.
+
+36:43.880 --> 36:46.240
+Okay, so they just made a bad guess, so the guess again.
+
+36:46.380 --> 36:46.660
+Simple.
+
+36:47.060 --> 36:48.000
+What about Q?
+
+36:48.360 --> 36:50.560
+Q stands for seeking different evidence.
+
+36:50.920 --> 36:53.620
+The child realizes that guessing randomly isn't working.
+
+36:53.820 --> 36:54.620
+They need more data.
+
+36:54.620 --> 37:01.820
+So applying the Q operator means the child actively looks for a new clue on the page that they missed, maybe a shadow that hints at a round edge.
+
+37:02.200 --> 37:05.640
+They haven't changed the map, but they are changing how they interact with the evidence.
+
+37:06.040 --> 37:08.020
+Okay, those two make intuitive sense.
+
+37:08.220 --> 37:09.700
+You guess again, or you look closer.
+
+37:10.220 --> 37:14.700
+But the next two operators, P and A, are where the curriculum takes off the training wheels.
+
+37:15.420 --> 37:19.640
+Let's talk about P, reweighting, and A, admissibility revision.
+
+37:19.640 --> 37:30.960
+Flyxion spends an entire chapter, chapter 6, getting incredibly excited about how these operators create what they call the three-fold non-equivalence.
+
+37:31.160 --> 37:33.580
+Yes, this is the crown jewel of cycle 6.
+
+37:34.140 --> 37:42.380
+The curriculum teaches the child that seeing a crossed-out shape on a piece of paper can mean three entirely different things, both mathematically and philosophically.
+
+37:42.800 --> 37:47.560
+And knowing the difference between those three marks is the absolute key to critical thinking.
+
+37:47.740 --> 37:49.320
+Let's trace this mechanically.
+
+37:49.640 --> 37:51.860
+Walk us through the three different ways to cross out a shape.
+
+37:51.860 --> 37:54.580
+The first type of crossing out is zero-weighting.
+
+37:54.800 --> 37:55.980
+This utilizes operator P.
+
+37:56.420 --> 37:59.760
+You see a shape on the page, and the child writes a weight of zero next to it.
+
+38:00.440 --> 38:04.860
+This translates to, I have considered this option, but based on my current evidence, I do not trust it.
+
+38:05.200 --> 38:09.880
+The option is still technically on the map, it just has zero influence on the decision right now.
+
+38:10.000 --> 38:10.820
+So it's sidelined.
+
+38:10.900 --> 38:13.160
+It's sitting on the bench, but it's still on the team roster.
+
+38:13.520 --> 38:13.960
+Exactly.
+
+38:14.600 --> 38:16.580
+The second type of crossing out is refusal.
+
+38:16.580 --> 38:22.140
+This calls all the way back to the R primitive from the sphere-pop logic gates we discussed at the beginning.
+
+38:22.640 --> 38:25.960
+You see a shape struck through with a specific historical mark beside it.
+
+38:26.340 --> 38:30.420
+This translates to, I have tested this, and I have documented it as a hard no.
+
+38:30.640 --> 38:31.400
+It is refused.
+
+38:31.860 --> 38:35.860
+But crucially, it remains permanently inscribed in the historical ledger.
+
+38:35.860 --> 38:41.040
+You can always point to that mark and say, we definitely tried that path, and it definitively failed.
+
+38:41.540 --> 38:43.300
+It is part of the permanent historical record.
+
+38:43.460 --> 38:46.600
+You don't erase it because the failure itself is valuable data.
+
+38:46.760 --> 38:47.020
+Yes.
+
+38:47.360 --> 38:53.660
+And the third type of crossing out is domain revision, specifically called compraction, denoted mathematically as A-.
+
+38:53.660 --> 39:02.480
+This is when a shape is not just crossed out, but the actual boundary line drawn around the options is erased and redrawn smaller, completely excluding the shape.
+
+39:02.740 --> 39:06.560
+This translates to, this shape is no longer a candidate at all.
+
+39:06.680 --> 39:07.420
+It was an illusion.
+
+39:07.700 --> 39:10.380
+It does not exist in our space of possible realities.
+
+39:10.380 --> 39:19.760
+Here's where it gets really interesting, because distinguishing between those three specific operations is vital for surviving the real world.
+
+39:20.340 --> 39:22.480
+Let's try to map this to a real-life failure.
+
+39:23.080 --> 39:25.800
+Let's talk about using a GPS navigation system.
+
+39:25.960 --> 39:27.380
+A classic machine failure.
+
+39:27.620 --> 39:28.240
+Let's play it out.
+
+39:28.860 --> 39:38.000
+Let's say your GPS calculates a route for you, and the blue line on the screen tells you to turn right, drive down a ramp, and merge directly into a deep lake.
+
+39:38.000 --> 39:41.200
+The map has produced a profound mismatch with reality.
+
+39:41.340 --> 39:42.060
+How do you handle it?
+
+39:42.200 --> 39:42.340
+Right.
+
+39:42.540 --> 39:48.760
+So if you apply the first option, zero-weighting, you look at the route into the lake, and you say, I don't trust that route right now.
+
+39:49.060 --> 39:50.600
+So you tap recalculate.
+
+39:51.060 --> 39:56.920
+But because you haven't changed the underlying map, the GPS still thinks the lake is a valid geographic destination.
+
+39:57.320 --> 40:05.340
+It just zero-weights that specific ramp and calculates the second fastest route, which probably just drives you into the other side of the exact same lake.
+
+40:05.340 --> 40:09.100
+Because the lake itself is still considered a valid road by the system's logic.
+
+40:09.300 --> 40:12.840
+You only change the weight of the path, not the reality of the destination.
+
+40:13.260 --> 40:13.760
+That's exactly.
+
+40:14.360 --> 40:16.780
+Okay, so what if you use the second option, refusal?
+
+40:17.420 --> 40:22.420
+You drive to the edge of the lake, you see the water, and you put up a physical barricade that says road closed.
+
+40:23.100 --> 40:24.660
+You have documented the failure.
+
+40:25.080 --> 40:27.300
+The history remembers that this path doesn't work.
+
+40:28.060 --> 40:32.720
+But the GPS database still fundamentally categorizes that space as a road.
+
+40:32.840 --> 40:34.220
+You've just placed a block on it.
+
+40:34.220 --> 40:34.520
+Right.
+
+40:34.640 --> 40:40.180
+But what you actually need to do to fix the broken reality is the third option, domain revision.
+
+40:40.680 --> 40:56.440
+You need to contact the software engineers who built the GPS, tell them this geographic coordinate is a body of water, not asphalt, and force them to redraw the fundamental boundaries of the map so that the lake is completely subtracted from the domain of drivable surfaces.
+
+40:56.440 --> 40:58.980
+That is a flawless translation of the formal types.
+
+40:59.320 --> 41:00.800
+Zero weighting changes no domains.
+
+41:01.000 --> 41:02.160
+It just shifts attention.
+
+41:02.480 --> 41:06.000
+Refusal changes a status within an append-only historical ledger.
+
+41:06.380 --> 41:09.800
+But domain revision literally subtracts the option from reality itself.
+
+41:09.800 --> 41:14.660
+And Flyxion insists in the monograph that you absolutely cannot treat these as the same thing.
+
+41:14.660 --> 41:27.920
+If a curriculum teaches a child to use one single generic X mark for all three of those scenarios, they are actively, which is an epistemic mistake we see full-grown adults make in the real world every single day.
+
+41:27.920 --> 41:43.840
+We constantly mistake our personal refusal of an idea with the actual non-existence of that idea, or, on a systemic level, we try to zero weight a broken policy by just ignoring it, when what we actually need to do is a domain revision and rewrite the rules of the system entirely.
+
+41:44.880 --> 41:48.320
+Sproul forces a 10-year-old to mathematically understand the difference.
+
+41:48.320 --> 41:55.840
+It is an unbelievable tool for critical thinking in a world that is currently overflowing with bad information and broken maps.
+
+41:56.200 --> 42:04.160
+But what I find incredibly compelling, perhaps more than the curriculum itself, is that this rigid, brilliant structure wasn't born perfectly formed.
+
+42:04.560 --> 42:07.700
+The creators actually made massive mistakes while they were writing it.
+
+42:07.840 --> 42:08.120
+Yes.
+
+42:08.680 --> 42:11.660
+This brings us to Part V of the monograph, which is my favorite section.
+
+42:11.900 --> 42:15.140
+It's titled The Correction History as Monotonic Continuation.
+
+42:15.360 --> 42:18.100
+The authors document their own drafting errors.
+
+42:18.100 --> 42:22.660
+They literally use their own curriculum's epistemic philosophy to grade their own homework.
+
+42:23.120 --> 42:25.700
+It is a beautiful metal layer to the research.
+
+42:26.300 --> 42:34.800
+They transparently outline three specific episodes of failure during the drafting process and analyze how they fix them using their own operators.
+
+42:35.120 --> 42:36.400
+Let's look at episode one.
+
+42:36.940 --> 42:41.660
+They call it the vocabulary collision, and this was a structural disaster for them early on.
+
+42:41.660 --> 42:47.440
+It was a fundamental error in how they define their absolute most basic primitive, the pop.
+
+42:47.440 --> 42:53.760
+In their early working drafts, they defined a pop as exposing a distinction without evaluating it.
+
+42:54.020 --> 42:57.840
+They thought they were keeping the concept gentle and simple for the kindergartners.
+
+42:57.840 --> 43:06.020
+But when they took that draft and checked it against the canonical mathematical sphere pop specification, they realized they had completely botched the math.
+
+43:06.640 --> 43:09.280
+The official, formal definition of a pop is commitment.
+
+43:10.000 --> 43:14.800
+The act of choosing a specific option and permanently removing the others from what remains possible.
+
+43:15.220 --> 43:19.500
+Exposing a distinction and committing to a choice are two entirely different mathematical operations.
+
+43:19.500 --> 43:21.300
+So how did they resolve the mismatch?
+
+43:21.380 --> 43:23.360
+Did they just tweak the wording in the margins?
+
+43:23.820 --> 43:24.140
+No.
+
+43:24.680 --> 43:32.940
+They had already spent weeks writing and illustrating a complete 16-page draft of Sproul 01 based on that incorrect definition.
+
+43:33.200 --> 43:35.500
+And they had to throw the entire thing in the garbage.
+
+43:36.060 --> 43:39.400
+They realized that their error wasn't a case of monotonic learning.
+
+43:39.900 --> 43:42.940
+They weren't just refining a partial truth into a better truth.
+
+43:43.180 --> 43:46.920
+It was a constitutive revision of a completely false premise.
+
+43:46.920 --> 43:51.180
+In the vocabulary of Cycle 6 we just learned, Episode 1 was an A-.
+
+43:51.700 --> 43:56.820
+It was a domain revision, the map was broken, and they had to scrap it and redraw the boundaries.
+
+43:57.520 --> 44:06.480
+This failure actually led directly to the creation of Sproul 00, which now handles the exposing a distinction concept without ever using the word pop,
+
+44:06.880 --> 44:10.820
+allowing a completely rewritten Sproul 01 to focus purely on the act of commitment.
+
+44:11.040 --> 44:13.480
+It is fascinating to watch them apply their own medicine.
+
+44:13.720 --> 44:13.920
+Right.
+
+44:13.920 --> 44:16.640
+But then we get to Episode 2, which they call Three Refinements.
+
+44:16.920 --> 44:20.100
+This is an example of where monotonic learning actually works properly.
+
+44:20.240 --> 44:23.060
+Give us an example of how they refined the text without breaking the map.
+
+44:23.280 --> 44:26.920
+Originally, the opening line of Sproul 01 was written as,
+
+44:27.480 --> 44:28.540
+Three things could happen.
+
+44:29.280 --> 44:33.640
+But upon review, they realized that phrasing was formally imprecise.
+
+44:34.260 --> 44:37.160
+Unchosen shapes sitting on a page are not events yet.
+
+44:37.700 --> 44:39.160
+Mathematically, they are continuations.
+
+44:39.160 --> 44:40.980
+So they changed the text to read.
+
+44:41.580 --> 44:42.980
+There are three ways to go.
+
+44:43.360 --> 44:45.620
+And that is a perfect example of monotonic learning.
+
+44:45.880 --> 44:47.860
+They didn't have to erase what was true.
+
+44:48.140 --> 44:50.280
+It was still true that there were three options on the page.
+
+44:50.340 --> 44:53.540
+They just narrowed the precision of the language to better match the math.
+
+44:53.800 --> 44:55.220
+They didn't have to throw the booklet away.
+
+44:55.480 --> 44:56.780
+They just sharpened the focus.
+
+44:56.780 --> 44:59.040
+And finally, we have Episode 3, titled,
+
+44:59.560 --> 45:02.060
+Gaps Found by Checking, Not by Assumption.
+
+45:03.060 --> 45:05.940
+This is where the concept of embodiment proved its worth.
+
+45:06.600 --> 45:11.520
+When the authors forced themselves to mathematically prove every single page of the children's books
+
+45:11.520 --> 45:13.740
+against the formal formulas in the monograph,
+
+45:14.060 --> 45:16.580
+they found massive holes in their own theory.
+
+45:16.740 --> 45:16.880
+Hmm.
+
+45:16.880 --> 45:17.280
+Yeah.
+
+45:17.420 --> 45:21.340
+For example, in Sproul 01, they drew an illustration showing two different histories
+
+45:21.340 --> 45:23.240
+branching off from the same starting shapes.
+
+45:23.740 --> 45:26.820
+But when they looked at the formal math in Chapter 4 of the monograph,
+
+45:27.860 --> 45:30.360
+the math didn't actually have a rule for branching yet.
+
+45:30.880 --> 45:34.980
+The formulas only supported a single, linear sequence of events.
+
+45:35.540 --> 45:40.740
+So the visual of the children's book was writing checks that the formal mathematical theory couldn't cash.
+
+45:41.180 --> 45:43.140
+The illustration was ahead of the physics.
+
+45:43.240 --> 45:43.680
+Exactly.
+
+45:43.680 --> 45:46.480
+Because the curriculum was strictly embodied,
+
+45:47.100 --> 45:48.820
+they weren't allowed to just wave their hands and say,
+
+45:48.940 --> 45:50.920
+oh, the kids will understand what the picture means.
+
+45:51.840 --> 45:57.860
+The gaps in their academic theory literally revealed themselves as physical impossibilities on the page.
+
+45:58.680 --> 46:02.740
+The authors were forced to go back to the drawing board and invent a formal branch rule
+
+46:02.740 --> 46:06.940
+and a formal replay definition just so the underlying math would catch up
+
+46:06.940 --> 46:08.920
+to what the children's books were demanding to be true.
+
+46:09.220 --> 46:10.900
+Flyxion makes a vital point here.
+
+46:10.900 --> 46:14.120
+An illustrated curriculum would never have caught this error.
+
+46:14.540 --> 46:17.600
+If you are just drawing pretty pictures to go along with a theory,
+
+46:18.100 --> 46:21.400
+you never actually test the load-bearing capacity of the theory itself.
+
+46:21.800 --> 46:23.980
+You just assume the drywall will hold up the roof.
+
+46:24.400 --> 46:29.500
+But because every single page of Sproul had to perfectly map to a formal mathematical definition,
+
+46:30.080 --> 46:33.020
+the embodiment process forced the errors to the surface.
+
+46:33.440 --> 46:35.780
+The curriculum corrected its own creators.
+
+46:35.780 --> 46:37.900
+It is the ultimate proof of concept.
+
+46:38.280 --> 46:43.280
+The curriculum works because the agonizing act of writing it proved the curriculum's own thesis.
+
+46:43.780 --> 46:46.520
+We have journeyed a remarkably long way today.
+
+46:46.680 --> 46:47.520
+We really have.
+
+46:47.900 --> 46:53.420
+We started by looking at what seemed like a simple, colorful mobile game of popping parentheses on a screen.
+
+46:53.820 --> 46:57.880
+We dug underneath that to find the foundational primitives of all digital logic.
+
+46:58.240 --> 47:00.620
+Pop, refuse, bind, and collapse.
+
+47:00.620 --> 47:05.620
+We explored how a curriculum uses those primitives to force children to track the history of their choices,
+
+47:06.140 --> 47:09.600
+proving that counting is about measuring events, not axiomatic objects.
+
+47:09.900 --> 47:14.380
+We saw how that historical foundation scales up into building domains,
+
+47:15.000 --> 47:18.000
+mapping arithmetic as a journey rather than a static pile,
+
+47:18.440 --> 47:22.780
+and grappling with the profound reality of information loss in forgetful machines.
+
+47:22.780 --> 47:28.680
+And finally, we climbed all the way up into an epistemic framework for fixing broken realities,
+
+47:29.240 --> 47:33.240
+learning the crucial, life-altering difference between zero-weighting a bad option,
+
+47:33.640 --> 47:36.820
+refusing an idea, and erasing a broken map entirely.
+
+47:37.600 --> 47:42.960
+You, the listener, now have a formidable shortcut to being well-informed about the architecture of knowledge itself.
+
+47:43.500 --> 47:47.840
+The next time you face an intractable problem at work or a misunderstanding in a relationship,
+
+47:47.840 --> 47:50.880
+or you're just trying to decipher the bias in a news article,
+
+47:51.380 --> 47:54.200
+ask yourself, am I looking at the full history of choices,
+
+47:54.480 --> 47:56.700
+or am I just looking at the collapsed final picture?
+
+47:56.900 --> 47:59.900
+Because as Sproul02 so elegantly teaches us,
+
+47:59.960 --> 48:02.360
+the final picture doesn't always tell you what happened first.
+
+48:02.680 --> 48:03.840
+Only the history remembers.
+
+48:04.220 --> 48:08.920
+Which leaves us with one final, lingering thought for you to mull over as you go about your day.
+
+48:09.980 --> 48:13.520
+If a final picture cannot tell you the history that created it,
+
+48:13.520 --> 48:19.620
+and if we, as humans, interact almost exclusively with final pictures in our daily lives,
+
+48:20.120 --> 48:22.580
+you know, we read the finished news headlines, we buy the finished products,
+
+48:22.760 --> 48:25.420
+we judge the finalized personalities of the people we meet,
+
+48:25.420 --> 48:30.860
+how many completely different, incredibly complex histories are we blindly treating as identical?
+
+48:31.360 --> 48:34.480
+And what happens to our reality when we assume the wrong one?
+
+48:34.940 --> 48:37.020
+That is the real danger of trusting the X-ray.
+
+48:37.180 --> 48:39.820
+Until next time, keep digging beneath the picture.
+

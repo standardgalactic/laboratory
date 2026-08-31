@@ -1,0 +1,234 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{natbib}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{titling}
+\usepackage{microtype}
+\setlength{\droptitle}{-2em}
+
+\title{\textbf{Beyond Prediction Error: Warrant, Repair, and Refusal in Predictive Architectures}}
+\author{Flyxion\\ \textit{Independent Researcher}}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Predictive coding organizes perception and inference around a recurring cycle of prediction, comparison, error, precision weighting, and model update. A separate framework, built from admissibility, warrant, and repair, organizes inference around a structurally similar cycle: commitment, witness, mismatch, warrant, and an outcome drawn from repair, refusal, or continuation. The two architectures are frequently mistaken for restatements of one another. This essay shows that they are not. Precision weighting, however small, is a transformation over a fixed space of hypotheses; constitutive refusal is a transformation of that space. The distinction is proved rather than asserted: no operator that acts only by reweighting can, by reweighting alone, instantiate the operator that removes an element from the admissibility space. The broader claim that follows is that inference within a space is not equivalent to revision of the space, and that a predictive architecture requires additional structure, of a kind this essay makes explicit, in order to represent the latter.
+\end{abstract}
+
+\newpage
+
+\section{Introduction}
+
+Predictive coding treats the brain as an inference engine that continually predicts the causes of sensory signal and revises those predictions when they fail, rather than as a passive receiver that assembles percepts bottom-up \citep{raoballard1999,friston2010}. This picture, and its extension into active inference, has also been read alongside accounts of computational boundaries that treat the Markov blanket as a statistical screen between internal and external states.\footnote{See especially the treatment of Friston's Markov blanket in Flyxion, \emph{Boundaries Are Computational Objects}, and the formal argument against representing refusal as ordinary free-energy minimization in Flyxion, \emph{Throwing the Game}.} The present essay does not revisit that boundary question directly; it isolates a narrower and, it will argue, prior one, concerning what kind of object a system's inference is permitted to revise.
+
+A separate framework, built from admissibility, warrant, and repair, organizes inference around a cycle that looks, at first glance, like a restatement of predictive coding in different words: commitment in place of prediction, mismatch in place of error, warrant in place of precision. The resemblance is close enough that the two are routinely treated as notational variants of one another, and close enough that a reader familiar with one can plausibly suspect the other of relabeling it. This essay takes the resemblance seriously rather than dismissing it, and then shows precisely where it stops holding.
+
+The argument proceeds in stages. Section 2 states the correspondence in full. Section 3 identifies where it genuinely holds, without qualification. Section 4 introduces three typed operators that make the disagreement precise rather than rhetorical. Section 5 works a single running example through all three operators before any proof is attempted, so that the formalism in Section 6 has an intuition to attach to. Section 6 proves the central result: that reweighting, however extreme, cannot instantiate constitutive refusal. Section 7 asks what a predictive architecture would need to add in order to represent the operation the proof shows it lacks. Section 8 situates the result against Bayesian structure learning and model selection, where a similar-looking distinction already exists in a different guise. Section 9 answers the three objections most likely to be raised against the whole approach. Section 10 concludes.
+
+\section{The Correspondence}
+
+At its coarsest level of description, predictive coding runs a five-stage pipeline:
+\[
+\text{prediction} \rightarrow \text{comparison} \rightarrow \text{error} \rightarrow \text{precision weighting} \rightarrow \text{model update}.
+\]
+An admissibility and repair framework runs a structurally parallel pipeline:
+\[
+\text{commitment} \rightarrow \text{witness} \rightarrow \text{mismatch} \rightarrow \text{warrant} \rightarrow \{\text{repair}, \text{refusal}, \text{continuation}\}.
+\]
+The correspondence holds stage by stage. Prediction and commitment both fix an expectation against which subsequent input will be checked. Comparison and witness both register the checking event itself. Error and mismatch both name the discrepancy. Precision weighting and warrant both gate how much the discrepancy is entitled to do. Model update and $\{\text{repair}, \text{refusal}, \text{continuation}\}$ both name the outcome. The two architectures are analogous, not identical, and the remainder of this essay is concerned with exactly where the analogy breaks.
+
+\section{Where They Agree}
+
+The agreement is real and worth stating plainly before it is complicated. Both architectures reject the picture of perception or inference as passive transduction: neither treats incoming signal as simply received and stacked into higher representations. Both are hierarchical, with lower-level discrepancies constrained by higher-level expectations and higher-level expectations answerable to lower-level discrepancies \citep{friston2010,clark2013}. This extends to a precursor already present in Helmholtz's account of perception as a form of unconscious inference \citep{helmholtz1867}.
+
+Both architectures also extend naturally from passive updating to action. Active inference's move from revising the model to fit the world, to acting on the world so that it fits the model, is already a reconstruction move in the framework's own vocabulary. Epistemic action under active inference provides an instance of the operator $Q$, introduced below, which changes the evidential state available to inference; walking over to inspect an ambiguous object is one case of it. This branch of the correspondence holds without needing $Q$ to carry any more theoretical weight than that.
+
+\section{Three Operators, Typed}
+
+The disagreement begins with what precision weighting can and cannot change, and the clearest way to see it is to make the relevant operators' types explicit rather than argue about them informally.
+
+Let $\Omega$ denote a space of admissible hypotheses or continuations, let $\mathcal{X}$ denote observations, let $\mathcal{E}$ denote evidential states, and let $\mathfrak{D}$ denote a class or family of admissibility spaces, of which $\Omega$ is one member. Three operators can then be distinguished:
+\[
+U : \mathcal{X} \times \Omega \rightarrow \Omega, \qquad
+Q : \mathcal{X} \times \Omega \rightarrow \mathcal{E}, \qquad
+A : \mathfrak{D} \rightarrow \mathfrak{D}, \quad \Omega \mapsto \Omega'.
+\]
+$U$ revises or selects a commitment within the current admissibility space: its output remains a point of $\Omega$. $Q$ changes the evidential state available to inference: its output lands in $\mathcal{E}$, and nothing in $Q$'s type guarantees that $\Omega$ stays fixed. $A$ changes the admissibility space itself, mapping one member of $\mathfrak{D}$ to another.
+
+This typing does real work against an objection worth stating directly. A predictive-processing reader could point out that epistemic action, in practice, often does more than sample evidence within an already-fixed hypothesis space: opening a machine, running an experiment, or encountering an unprecedented phenomenon can enlarge the effective space of live hypotheses, not merely narrow the evidence bearing on the existing ones. That objection is correct, and the typed formulation absorbs it rather than resisting it. Evidence produced by $Q$ can trigger admissibility revision through the chain
+\[
+Q \longrightarrow e' \longrightarrow M \longrightarrow A,
+\]
+a mismatch $M$ arising from new evidence $e'$ in turn licensing a change of $\Omega$, without $Q$ and $A$ collapsing into the same operation. Discovery can \emph{cause} domain revision without \emph{being} domain revision, in the same sense that a witnessed event can cause a repair without the witnessing and the repairing being the same act. What licenses the transition from $M$ into $A$, rather than into $U$ or further $Q$, belongs to the theory of warrant and is not reconstructed here; this essay requires only that the transition is possible, $M \rightsquigarrow A$, not that it is mechanical, $M \Rightarrow A$.
+
+$A$ itself should not be read as synonymous with deletion. A hypothesis space can be wrong by being too large, too small, or wrongly partitioned, so $A$ admits at least a contraction case and an extension case:
+\[
+A_R^-(\Omega) = \Omega \setminus R \quad \text{(refusal)}, \qquad
+A_S^+(\Omega) = \Omega \cup S \quad \text{(admission)}.
+\]
+The three operators are now differentiated by what they act on, which is a harder distinction to dispute than differentiating them by name alone:
+\[
+\boxed{
+\begin{aligned}
+U &: \text{change position within the space} \\
+Q &: \text{change evidence about the space} \\
+A &: \text{change the space itself.}
+\end{aligned}}
+\]
+
+One further possibility should be flagged and deliberately left undeveloped. If $A$ is itself governed by some transition regime $\Gamma$ specifying which admissibility revisions are available, one can ask about $\Gamma \mapsto \Gamma'$: a change not to the space, but to the rules by which the space is permitted to change. This is meta-admissibility. It is real, but incorporating it into the present essay's machinery would introduce an unmotivated regress. It is named here only so that $A$ is not mistaken for the final possible level of revision.
+
+\section{A Worked Example: Fog, Confidence, and Refusal}
+
+Before the formal proof, it is worth running a single scenario through all four operators, so that the distinctions of the preceding section have a concrete referent rather than only a typed one.
+
+Suppose someone is walking through a house at night and notices an unfamiliar shape on the floor. The room's admissibility space $\Omega$ contains the ordinary contents of that house: furniture, a dropped bag, a pet, a shadow cast by a passing car. $U$ is exercised as the hypothesis narrows within that space: something is there, then probably an animal, then probably the backpack left there earlier. Nothing about this sequence changes what could, in principle, be on the floor; it changes only which member of that fixed set is currently favored.
+
+$Q$ is exercised when the observer walks closer or turns on a light rather than continuing to guess from across the room. This changes the evidential state $e \in \mathcal{E}$ available to the inference without, by itself, committing to any revision of $\Omega$. It may simply confirm the backpack hypothesis already favored by $U$. But it may also produce evidence that none of the antecedently available hypotheses can absorb, in which case it feeds the chain $Q \rightarrow e' \rightarrow M \rightarrow A$ introduced above rather than terminating in an ordinary update.
+
+$P$ is exercised continuously throughout, independently of $U$ and $Q$: the same visual discrepancy is discounted heavily in near-darkness and trusted fully once the light is on. This is precision weighting in the ordinary predictive-coding sense, $\varepsilon \mapsto \pi \varepsilon$, and it can shift from near zero to near one without ever changing what the discrepancy is evidence \emph{about}. The observer's confidence in the shape's visibility and the observer's belief about the shape's identity are separate variables, and $P$ governs only the former.
+
+$A$ is exercised only if the light reveals something the room's admissible inventory cannot accommodate at all: not an unusually large bag, not an unfamiliar pet, but something the observer has no antecedent category for, such that continuing to search among furniture, bags, and pets is no longer a live way of resolving the mismatch. At that point the warranted response is not a better guess within $\Omega$, and not more evidence about members of $\Omega$; it is the recognition that $\Omega$ itself needs to be extended, $A_S^+(\Omega) = \Omega \cup S$, before ordinary inference can proceed again. A structurally identical case licenses the contraction direction: if the observer later learns that the backpack hypothesis was ruled out in advance, for instance because the backpack was verifiably left in another building that night, the correct response is not to lower confidence in that hypothesis while leaving it available, but to remove it from the admissible set entirely, $A_R^-(\Omega) = \Omega \setminus \{\text{backpack}\}$, since no future evidence about the floor could legitimately restore it without evidence overturning the alibi itself.
+
+The example is deliberately mundane. Its purpose is only to show that $U$, $Q$, $P$, and $A$ are already separable in an ordinary case, prior to any appeal to refusal in a normative or institutional sense; the proof in the next section shows that the separation between $P$ and $A$ specifically is not merely typical but necessary.
+
+\section{Reweighting Cannot Instantiate Refusal}
+
+With the types fixed, the central proposition of this essay becomes a matter of tracking domains rather than values.
+
+Let $W_\Omega = \{w \mid w : \Omega \rightarrow \mathbb{R}_{\geq 0}\}$ be the space of weight functions over $\Omega$. A pure reweighting operator has type
+\[
+P : W_\Omega \rightarrow W_\Omega.
+\]
+Every element of its codomain is, by that type, a function with domain $\Omega$. This holds even in the limiting case $P(w)(r) = 0$ for every $r \in R \subseteq \Omega$: the equality $\operatorname{dom}(P(w)) = \Omega$ still holds, because $P$'s codomain was never anything but $W_\Omega$ to begin with. Refusal has a different type entirely:
+\[
+A_R^- : \mathfrak{D} \rightarrow \mathfrak{D}, \qquad A_R^-(\Omega) = \Omega \setminus R.
+\]
+Weights subsequently defined on the revised space satisfy $\operatorname{dom}(w') = \Omega \setminus R$, not $\Omega$.
+
+\begin{quote}
+\textbf{Proposition (Reweighting–Refusal Non-Equivalence).} No $P : W_\Omega \rightarrow W_\Omega$ can, by reweighting alone, instantiate $A_R^-$. $P$ preserves the domain of its arguments; $A_R^-$ changes it. $\blacksquare$
+\end{quote}
+
+This is a stronger result than one resting on $\pi > 0$ versus $\pi = 0$, because it does not depend on the weight ever reaching exactly zero. Zero is a value assigned to an element that remains in the domain. Refusal changes whether there is an element there at all to which any value, including zero, could be assigned. The qualification should travel with the proposition wherever it is cited: the result does not show that predictive architectures are incapable in principle of implementing refusal. It shows only that reweighting by itself does not supply the operation, since nothing rules out augmenting such an architecture with something of type $A$.
+
+The Boolean case is not the only way to realize $A$, and it is worth showing a second construction so that the first is not mistaken for load-bearing. Suppose instead that admissibility is represented by a constraint set $C$ over a hypothesis universe $\mathcal{H}$, with $\Omega_C = \{h \in \mathcal{H} : h \models C\}$. Admissibility revision can then take the form $C \mapsto C'$, with $\Omega_C$ becoming $\Omega_{C'}$ automatically. The particular representation of $A$ is therefore not fixed by the argument; what is fixed is that some representation of it, distinct from any $P$, is required.
+
+If a given predictive architecture is later shown to already contain an operation of this kind, whether phrased as changing hypothesis membership, model class, constraint structure, or state-space organization, this does not refute the present argument. It reclassifies that operation as an implementation of $A$, strengthening the taxonomy rather than defeating it. The distinction is architectural and testable rather than terminological: an architecture equipped only with operations that revise states, acquire evidence, or reweight alternatives while preserving the domain lacks $A$ in the sense defined here, and can be shown to lack it by exhibiting no such operation among its parts.
+
+The result these four sections now support is broader than refusal specifically:
+\[
+\boxed{\text{Inference within a space is not equivalent to revision of the space.}}
+\]
+Reweighting and refusal are the minimal, provable instance of that larger distinction, not the whole of it.
+
+\section{What Predictive Coding Would Have to Add}
+
+The preceding result establishes a non-equivalence, not yet a criticism. A predictive architecture need not contain every possible operation in order to be useful, and nothing in the reweighting–refusal proposition shows predictive coding to be internally inconsistent. The question is narrower: what additional structure would be required if a predictive architecture were asked to represent not merely inference within a hypothesis space, but revision of that space itself?
+
+A predictive system equipped with $U$, $Q$, and $P$ can do a great deal. It can revise which hypothesis is favored, seek evidence that discriminates among hypotheses, and alter the inferential influence assigned to discrepancies. None of these operations, however, has the type of $A$. None by itself says that a previously available continuation has ceased to be admissible, that a previously unavailable continuation has become admissible, or that the organization of the admissibility space itself must be replaced.
+
+This identifies the additional requirement without prescribing a particular implementation. A predictive architecture capable of constitutive admissibility revision requires some state or operator whose variation changes membership in the space over which subsequent inference is performed. One concrete representation introduces a commitment variable
+\[
+c : \mathcal{H} \rightarrow \{0,1\}, \qquad \Omega_c = \{h \in \mathcal{H} \mid c(h) = 1\}.
+\]
+Ordinary reweighting, $w(h) \mapsto w'(h)$, need not change $c(h)$. Constitutive refusal instead changes $c(r) : 1 \mapsto 0$, while admission changes $c(s) : 0 \mapsto 1$, and the admissible space updates automatically, $\Omega_c \mapsto \Omega_{c'}$. As shown above, this Boolean form is only one realization; the constraint-set form $C \mapsto C'$ is another, and others (grammars, transition relations, state-space structures) are available in principle. The essential requirement is the existence of \emph{some} operation whose semantic consequence is a change in what subsequent inference ranges over, not any particular one of these representations.
+
+The architectural difference can be summarized as follows:
+\[
+\text{error correction} \;\neq\; \text{evidence acquisition} \;\neq\; \text{domain revision}.
+\]
+A system may possess all three. Possession of the first two does not entail possession of the third.
+
+This is where the comparison with predictive coding becomes useful rather than merely terminological. Precision-weighted prediction error provides a powerful account of differential influence within an inferential architecture. Active inference adds ways of changing sensory encounters through action. Neither fact establishes an operator of type $A$. If a particular predictive architecture is also shown to change model membership, hypothesis support, state-space structure, or admissibility constraints, then it has acquired precisely the additional machinery relevant here, and the disagreement is no longer over whether domain revision exists but over how it is represented and what licenses it.
+
+\[
+\boxed{
+\begin{aligned}
+U &: \text{revise within the space} \\
+Q &: \text{change the evidence} \\
+P &: \text{change inferential influence} \\
+A &: \text{revise the space.}
+\end{aligned}}
+\]
+The reweighting–refusal proposition proves that the last operation cannot be obtained from $P$ merely by choosing an extreme weight. The broader architecture shows why that fact matters. Some mismatches are disagreements over where within a space the system should settle. Some indicate that more evidence is required. Some concern the reliability assigned to the discrepancy itself. And some, if warranted, concern the space in which all of those operations were being performed.
+
+\begin{center}
+\fbox{\parbox{0.85\linewidth}{\centering A system can be wrong about a hypothesis, and it can be wrong about what its hypotheses are allowed to be.}}
+\end{center}
+
+\section{Related Work: Structure Learning and Model Selection}
+
+The distinction argued for here has a visible analogue in Bayesian structure learning, and it is worth stating the relation explicitly rather than leaving it to be discovered as an objection. Nonparametric Bayesian models such as the Chinese Restaurant Process and the Indian Buffet Process treat the number of latent categories itself as a random variable, so that the effective hypothesis space is not fixed in advance but grows as data are observed \citep{aldous1985,griffiths2011}. Rational-analysis accounts of cognition have used exactly this move to explain how a learner can entertain categories it did not previously represent \citep{andersonrational1991,tenenbaum2011}. At first glance, this looks like an existing implementation of $A$ within the predictive-processing tradition, arrived at independently of the present argument.
+
+The relation is real but narrower than it first appears. In a Chinese Restaurant Process, the rule by which the space of categories may grow, governed by the concentration parameter and the exchangeability structure of the process, is itself fixed at the outset and known in advance; what is not fixed is only which realization of that rule occurs. This is domain growth drawn from a prior over growth, not domain revision triggered by a witnessed mismatch that the model's designer did not anticipate. In the terms of Section 4, the process specifies $\mathfrak{D}$ and a probability distribution over transitions within it before any data arrive; it does not by itself specify the warrant condition under which a particular transition becomes obligatory rather than merely available. A predictive architecture built on such a process is closer to possessing $A$ than one built on reweighting alone, and this essay's taxonomy classifies it accordingly, but the warrant question, what licenses treating a particular discrepancy as evidence that growth should occur now, is not answered by the process itself. Bayesian model selection between fixed candidate model families \citep{mackay2003} faces a related limitation: it compares marginal likelihoods across an already-enumerated set of models, which is a sophisticated instance of $U$ operating one level up, over models rather than parameters, rather than an instance of $A$ in the sense used here, since the set of candidate models being compared is not itself revised by the comparison.
+
+\section{Objections and Replies}
+
+Three objections are likely enough to be worth answering directly rather than leaving to a reviewer.
+
+\textit{First}, that Section 8 already shows this reduces to existing structure-learning machinery once the vocabulary is stripped away. The reply given there stands: growth drawn from a prior fixed in advance is not the same operation as growth licensed by a warrant condition external to that prior, even when the two produce the same observable transition in a given instance. An architecture that can only draw from a predetermined menu of possible enlargements does not yet possess a general $A$; it possesses a particularly rich $P$ operating one level up, over which enlargement occurs rather than whether inference occurs.
+
+\textit{Second}, that defining $A$ as an operator on $\mathfrak{D}$, a space of admissibility spaces, invites an infinite regress: if $\Omega$ can be wrong, why not $\mathfrak{D}$, and if $\mathfrak{D}$ can be wrong, why not whatever contains it. The meta-admissibility remark in Section 4 already grants that a further level, $\Gamma \mapsto \Gamma'$, is coherent. This is not the same as a vicious regress. Each level answers a different question: $\Omega$ is the space of live hypotheses, $\mathfrak{D}$ is what counts as a fixable admissibility space, and $\Gamma$ is what counts as a fixable rule for changing $\mathfrak{D}$. A system can operate correctly at one level while remaining silent about the next, in the same way a claim in first-order logic does not need a theory of second-order quantification to be well-formed. The present essay needs only $U$, $Q$, $P$, and $A$; it does not need to close off the possibility of further levels in order to say something true about these four.
+
+\textit{Third}, that active inference already contains everything needed here, since its generative models can in principle be extended, reparameterized, or replaced. This is not disputed. The claim under Section 7 was never that active inference is incapable of representing $A$, only that precision weighting, taken on its own, does not supply it. An active-inference architecture that also revises its generative model's structure in response to mismatch, rather than only its parameters, has acquired an implementation of $A$, and the present taxonomy says so directly rather than treating this as a counterexample. The disagreement this essay identifies is with a narrower claim, that precision-weighted error alone is sufficient for the full range of revision predictive systems are asked to perform, not with predictive processing as a research program.
+
+\section{Conclusion: Error Within a Space, Error About a Space}
+
+The comparison developed here began from a genuine correspondence. Predictive coding and the admissibility and repair framework both organize inference around expectation, discrepancy, differential response to discrepancy, and subsequent revision. Precision weighting provides a principled way to vary the inferential force of prediction errors, and active inference extends mismatch reduction into action and evidence acquisition. Nothing in the preceding argument requires denying those correspondences.
+
+The divergence appears only when the object of revision changes. A weight can change while its domain remains fixed. A belief can change while the alternatives among which it is selected remain fixed. An epistemic action can change the evidence available to the system. None of these operations is, merely by virtue of performing its own function, a revision of the admissibility space itself.
+
+The Reweighting–Refusal Non-Equivalence proposition isolates the minimal case. For $P : W_\Omega \rightarrow W_\Omega$, even assigning zero weight to every member of $R \subseteq \Omega$ leaves the domain $\Omega$ intact; constitutive refusal instead changes the space, $A_R^-(\Omega) = \Omega \setminus R$. The difference is not between large and small influence. It is between transformation over a domain and transformation of the domain. The same distinction generalizes beyond refusal: admission may enlarge the space, repartitioning may reorganize it, and altered constraints may induce a different space altogether, as in $C \mapsto C'$ with $\Omega_C = \{h \in \mathcal{H} \mid h \models C\}$ becoming $\Omega_{C'}$. The Boolean membership construction of the preceding section is therefore only one concrete realization of the more general operator $A$.
+
+This also specifies what would count as evidence that a particular predictive-processing architecture already possesses the relevant machinery. If such a model contains an operation that genuinely alters hypothesis membership, model class, constraint structure, state-space organization, or some equivalent determinant of the inferential domain, the present argument does not require denying that operation; it classifies the operation as an implementation of $A$. Conversely, if all available operations merely revise states, acquire evidence, or reweight alternatives while preserving the inferential domain, the architecture lacks $A$ in the sense defined here. The distinction is therefore architectural and testable rather than terminological, and discovery of a $c$-like mechanism in an existing model would reclassify that mechanism rather than immunize the present thesis against it.
+
+This is also where the argument meets the broader question of computational boundaries. A boundary does not merely determine what information crosses it; in sufficiently structured systems, it may participate in determining what counts as a possible state, transition, continuation, or reconstruction on either side.\footnote{See Flyxion, \emph{Boundaries Are Computational Objects}, for the three-way comparison of Markov blankets, bioelectric boundaries, and admissibility boundaries from which that broader question is developed.} The present result approaches that problem from the dynamics of mismatch: before asking how an error propagates across a boundary, one may first have to ask whether the error concerns a state within the current space or the constitution of that space itself.
+
+The essay's contribution can be stated without claiming a replacement for predictive coding:
+\[
+\boxed{\text{Inference within a space is not equivalent to revision of the space.}}
+\]
+Predictive coding makes the first problem unusually clear. The admissibility framework isolates the second. The distinction matters because mismatch alone does not determine its remedy:
+\[
+\text{mismatch detected} \;\not\Rightarrow\; \text{mismatch repairable by ordinary updating.}
+\]
+Sometimes the system should revise what it believes. Sometimes it should seek different evidence. Sometimes it should alter how strongly evidence is trusted. And sometimes, if warranted, it must revise the space in which believing, seeking, and weighting were being performed.
+
+A system can therefore be wrong in at least two fundamentally different senses: it can occupy the wrong position in its space of possibilities, or it can be operating with the wrong space of possibilities.
+
+The first is an error for inference to correct.
+
+The second is an error about what inference is permitted to be.
+
+\newpage
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+
+\bibitem[Aldous(1985)]{aldous1985} Aldous, D.\ J.\ (1985). Exchangeability and related topics. In \'Ecole d'\'Et\'e de Probabilit\'es de Saint-Flour XIII, \textit{Lecture Notes in Mathematics}, 1117, 1--198.
+
+\bibitem[Anderson(1991)]{andersonrational1991} Anderson, J.\ R.\ (1991). The adaptive nature of human categorization. \textit{Psychological Review}, 98(3), 409--429.
+
+\bibitem[Clark(2013)]{clark2013} Clark, A.\ (2013). Whatever next? Predictive brains, situated agents, and the future of cognitive science. \textit{Behavioral and Brain Sciences}, 36(3), 181--204.
+
+\bibitem[Friston(2010)]{friston2010} Friston, K.\ (2010). The free-energy principle: a unified brain theory? \textit{Nature Reviews Neuroscience}, 11(2), 127--138.
+
+\bibitem[Griffiths \& Ghahramani(2011)]{griffiths2011} Griffiths, T.\ L., \& Ghahramani, Z.\ (2011). The Indian buffet process: an introduction and review. \textit{Journal of Machine Learning Research}, 12, 1185--1224.
+
+\bibitem[Helmholtz(1867)]{helmholtz1867} Helmholtz, H.\ von (1867). \textit{Handbuch der physiologischen Optik}. Leipzig: Voss.
+
+\bibitem[MacKay(2003)]{mackay2003} MacKay, D.\ J.\ C.\ (2003). \textit{Information Theory, Inference, and Learning Algorithms}. Cambridge University Press.
+
+\bibitem[Rao \& Ballard(1999)]{raoballard1999} Rao, R.\ P.\ N., \& Ballard, D.\ H.\ (1999). Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects. \textit{Nature Neuroscience}, 2(1), 79--87.
+
+\bibitem[Tenenbaum et al.(2011)]{tenenbaum2011} Tenenbaum, J.\ B., Kemp, C., Griffiths, T.\ L., \& Goodman, N.\ D.\ (2011). How to grow a mind: statistics, structure, and abstraction. \textit{Science}, 331(6022), 1279--1285.
+
+\end{thebibliography}
+
+\end{document}
+

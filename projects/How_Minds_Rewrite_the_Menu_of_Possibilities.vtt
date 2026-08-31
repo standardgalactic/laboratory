@@ -1,0 +1,2231 @@
+WEBVTT
+
+00:00.000 --> 00:03.280
+Imagine you're sitting at your kitchen table.
+
+00:03.460 --> 00:03.660
+Right.
+
+00:03.800 --> 00:09.720
+It's late, the house is completely quiet, and you are trying to solve a jigsaw puzzle.
+
+00:10.760 --> 00:11.520
+You know the feeling.
+
+00:11.640 --> 00:12.400
+Oh, absolutely.
+
+00:13.020 --> 00:14.420
+The late night puzzle grind.
+
+00:14.480 --> 00:15.080
+Yeah, exactly.
+
+00:15.200 --> 00:16.400
+You've been at this for hours.
+
+00:16.520 --> 00:18.680
+You have the edges all neatly snapped together.
+
+00:19.100 --> 00:24.500
+You know, you've got that satisfying, undeniable border done, and now you're working on the interior.
+
+00:24.740 --> 00:25.400
+The hard part.
+
+00:25.520 --> 00:26.400
+Right, the hard part.
+
+00:26.660 --> 00:29.120
+But you're hitting a massive wall.
+
+00:29.120 --> 00:33.920
+I mean, no matter how you arrange the pieces in front of you, they just do not fit.
+
+00:34.160 --> 00:34.440
+Right, yeah.
+
+00:34.660 --> 00:36.240
+You try turning them 90 degrees.
+
+00:36.580 --> 00:41.800
+You try forcing them just a little bit, seeing if maybe the cardboard is just warped.
+
+00:42.020 --> 00:47.640
+You even take a step back and check your work, rubbing your eyes, starting to doubt your own vision.
+
+00:47.960 --> 00:49.320
+You think you're just looking at it wrong.
+
+00:49.500 --> 00:49.900
+Exactly.
+
+00:50.340 --> 00:51.900
+You walk over to the wall switch.
+
+00:52.100 --> 00:55.380
+You turn on the blinding overhead light just to gather more visibility.
+
+00:55.380 --> 01:00.420
+And you're standing there telling yourself, you know, I must be making a mistake in how
+
+01:00.420 --> 01:01.960
+I'm perceiving these shapes.
+
+01:02.160 --> 01:04.300
+I'm just predicting the pattern wrong.
+
+01:04.420 --> 01:05.800
+Which is a logical conclusion.
+
+01:06.140 --> 01:06.600
+It is.
+
+01:06.860 --> 01:10.740
+But what if the problem isn't how you are solving the puzzle?
+
+01:11.300 --> 01:16.160
+What if the problem is that someone, while you were out of the room, slipped a handful
+
+01:16.160 --> 01:19.380
+of pieces from a totally different game into your box?
+
+01:19.820 --> 01:20.560
+Wow, yeah.
+
+01:20.780 --> 01:25.800
+I mean, you could spend an entire lifetime tweeting your strategy, you know, adjusting
+
+01:25.800 --> 01:29.760
+your vision, second guessing your logic, and you would never ever solve it because those
+
+01:29.760 --> 01:31.500
+pieces shouldn't be on the table in the first place.
+
+01:31.640 --> 01:33.440
+They don't belong to the reality of the puzzle.
+
+01:33.440 --> 01:40.500
+That distinction between a mistake in your strategy and a fundamental contamination of your
+
+01:40.500 --> 01:43.800
+game board, that's really the heart of what we're exploring today.
+
+01:43.800 --> 01:44.280
+Right.
+
+01:44.400 --> 01:49.360
+We're looking at the critical difference between making an error within the rules of
+
+01:49.360 --> 01:54.500
+a system and realizing that the boundaries of the system itself are just completely wrong.
+
+01:54.600 --> 01:54.820
+Yeah.
+
+01:55.300 --> 02:00.720
+And I mean, when you zoom out to a world characterized by absolute information overload, understanding
+
+02:00.720 --> 02:05.280
+how we revise our beliefs and understanding the hidden machinery we use to rewrite our entire
+
+02:05.280 --> 02:09.720
+menu of possibilities, it becomes just as vital as the actual beliefs we hold.
+
+02:10.020 --> 02:10.780
+It really does.
+
+02:10.780 --> 02:16.120
+So today's deep dive is basically going to act as our microscope for this problem.
+
+02:16.800 --> 02:22.960
+Our mission today is to explore an incredibly thought-provoking paper from August, 2026.
+
+02:23.180 --> 02:25.740
+It's by an independent researcher known as Flyxion.
+
+02:26.100 --> 02:27.580
+It's a fascinating piece of work.
+
+02:27.660 --> 02:28.260
+It really is.
+
+02:28.300 --> 02:34.840
+The paper is titled Beyond Prediction Error, Warrant, Repair, and Refusal in Predictive Architectures.
+
+02:34.840 --> 02:41.420
+And I'll be honest, it is dense, it's mathematical, and frankly, it's a fascinating look into the
+
+02:41.420 --> 02:43.980
+cognitive architecture of complex systems.
+
+02:44.440 --> 02:44.700
+Right.
+
+02:44.860 --> 02:49.500
+And when we say complex systems here, we're talking about human brains, advanced artificial
+
+02:49.500 --> 02:50.180
+intelligence.
+
+02:50.360 --> 02:54.760
+Basically, any information processing system that has to figure out what is real and what
+
+02:54.760 --> 02:55.700
+is just noise.
+
+02:55.840 --> 02:56.200
+Exactly.
+
+02:56.200 --> 02:58.180
+So we're going to track a core theme today.
+
+02:58.560 --> 03:03.460
+When these systems encounter a glaring error, do they simply tweak the probabilities of what
+
+03:03.460 --> 03:04.700
+they already believe to be true?
+
+03:05.020 --> 03:09.380
+Or, you know, do they possess a fundamentally different, completely separate mechanism to
+
+03:09.380 --> 03:12.220
+just scrap and rewrite their entire menu of possibilities?
+
+03:12.740 --> 03:16.900
+And to really set the stage for why this is such a disruptive question, we have to look
+
+03:16.900 --> 03:19.880
+at the reigning paradigm in cognitive science and AI right now.
+
+03:19.980 --> 03:20.200
+Right.
+
+03:20.280 --> 03:21.360
+The establishment view.
+
+03:21.360 --> 03:28.400
+Because for decades, the dominant framework has been something called predictive coding.
+
+03:28.940 --> 03:32.660
+It essentially views the brain as a relentless prediction machine.
+
+03:33.160 --> 03:33.220
+Okay.
+
+03:33.760 --> 03:38.460
+And Flyxion is stepping into this incredibly well-established arena and suggesting that we
+
+03:38.460 --> 03:41.600
+might be conflating two completely different types of learning.
+
+03:41.980 --> 03:48.540
+If that argument holds up, I mean, the implications for how we understand human stubbornness, scientific
+
+03:48.540 --> 03:52.420
+breakthroughs, artificial reasoning, it's profound.
+
+03:52.640 --> 03:52.780
+Yeah.
+
+03:52.860 --> 03:53.820
+It's a massive shift.
+
+03:54.040 --> 03:54.120
+Yeah.
+
+03:54.200 --> 03:58.680
+So I want to make sure you, listening to this, are fully grounded in that reigning paradigm
+
+03:58.680 --> 03:59.900
+before we start tearing it apart.
+
+03:59.940 --> 04:00.340
+Good idea.
+
+04:00.560 --> 04:00.700
+Right.
+
+04:00.760 --> 04:06.240
+Because to really understand how a mind changes, we first need to examine how we currently think
+
+04:06.240 --> 04:06.700
+it works.
+
+04:06.960 --> 04:09.040
+Let's do a deep dive into predictive coding 101.
+
+04:09.300 --> 04:09.480
+Sure.
+
+04:09.760 --> 04:12.440
+Let's wind the clock back slightly to understand the philosophical shift.
+
+04:12.860 --> 04:17.760
+So historically, the intuitive way to think about perception was as a bottom-up process.
+
+04:17.760 --> 04:19.620
+Meaning starting from the raw data.
+
+04:20.000 --> 04:22.000
+It was viewed as passive transduction.
+
+04:22.360 --> 04:27.420
+So light bounces off a coffee cup, it hits your retina, the signal travels up your optic
+
+04:27.420 --> 04:32.320
+nerve to the visual cortex, and your brain kind of pieces together those raw pixels into
+
+04:32.320 --> 04:33.240
+the image of a cup.
+
+04:33.320 --> 04:34.680
+Like a camera taking a picture.
+
+04:34.800 --> 04:35.820
+Exactly like a camera.
+
+04:36.280 --> 04:41.880
+But predictive coding, which was championed by researchers like Rajesh Rao and Dana Ballard
+
+04:41.880 --> 04:48.040
+in the late 90s, and then massively expanded by Carl Fristen, it flips that entire sequence
+
+04:48.040 --> 04:48.600
+on its head.
+
+04:48.900 --> 04:49.060
+Okay.
+
+04:49.160 --> 04:49.620
+How so?
+
+04:49.900 --> 04:52.700
+It argues the brain is a top-down inference engine.
+
+04:53.160 --> 04:57.080
+Meaning the brain isn't just waiting for the picture to arrive, it's already painting it.
+
+04:57.140 --> 04:57.400
+Yes.
+
+04:57.760 --> 05:02.800
+It is continually predicting the causes of the sensory signals before the signals even arrive.
+
+05:02.800 --> 05:07.040
+Your brain generates a model of a coffee cup and projects it downward.
+
+05:07.540 --> 05:12.140
+The incoming sensory data from your eyes is really just there to check the brain's work.
+
+05:12.340 --> 05:16.620
+That is, I mean, it's like your brain is always one step ahead, essentially hallucinating
+
+05:16.620 --> 05:21.240
+reality, and then just using your eyes and ears to proofread the hallucination.
+
+05:21.440 --> 05:22.600
+That's a really good way to put it.
+
+05:22.600 --> 05:25.160
+And if there's a typo, it fixes it.
+
+05:25.720 --> 05:30.640
+But I guess my question is, why would biology evolve to do it backward like that?
+
+05:31.100 --> 05:35.800
+It seems like it would take way more energy to guess reality than to just, you know, look
+
+05:35.800 --> 05:36.180
+at it.
+
+05:36.400 --> 05:39.060
+It actually solves a massive efficiency problem.
+
+05:39.420 --> 05:42.180
+The world is just incredibly noisy and ambiguous.
+
+05:43.020 --> 05:47.400
+I mean, if your brain had to process every single photon of light in every sound wave from
+
+05:47.400 --> 05:49.880
+scratch, every single millisecond...
+
+05:49.880 --> 05:50.700
+To just freeze up.
+
+05:50.700 --> 05:51.080
+Exactly.
+
+05:51.460 --> 05:53.700
+You'd be paralyzed by computational overload.
+
+05:54.560 --> 05:59.540
+So by predicting what's going to happen next, based on past experience, the brain only
+
+05:59.540 --> 06:02.600
+has to process the differences between its guess and reality.
+
+06:02.840 --> 06:03.500
+Okay, I see.
+
+06:03.640 --> 06:05.060
+It only processes surprises.
+
+06:05.280 --> 06:06.340
+Okay, that makes a lot of sense.
+
+06:06.420 --> 06:09.580
+It's saving bandwidth by only caring about the unexpected stuff.
+
+06:09.940 --> 06:13.080
+So how does this actually work mechanically, like in the theory?
+
+06:13.260 --> 06:18.520
+Well, the formalization of predictive coding outlines a very specific, continuous, five-stage
+
+06:18.520 --> 06:18.940
+pipeline.
+
+06:19.040 --> 06:19.980
+Okay, five stages.
+
+06:19.980 --> 06:20.300
+Right.
+
+06:20.480 --> 06:21.380
+The first stage is prediction.
+
+06:21.760 --> 06:24.740
+The system generates a top-down expectation of what is about to happen.
+
+06:24.860 --> 06:26.520
+The second stage is comparison.
+
+06:27.520 --> 06:32.520
+The system receives the actual incoming sensory data and compares it to the prediction.
+
+06:32.760 --> 06:34.380
+So hallucination meets reality.
+
+06:34.720 --> 06:35.160
+Exactly.
+
+06:35.740 --> 06:37.240
+Then the third stage is error.
+
+06:37.920 --> 06:43.200
+If there's a discrepancy, if the hallucination doesn't match the raw data, an error signal is
+
+06:43.200 --> 06:43.640
+generated.
+
+06:43.640 --> 06:47.780
+Okay, so if I predict my coffee cup is full, but I pick it up and it's light and empty,
+
+06:47.780 --> 06:50.480
+that massive surprise is the error signal.
+
+06:50.600 --> 06:50.800
+Yes.
+
+06:51.000 --> 06:54.280
+But then we hit the fourth stage, which is incredibly crucial.
+
+06:54.600 --> 06:56.060
+This is precision weighting.
+
+06:56.460 --> 06:57.600
+Precision weighting.
+
+06:57.600 --> 06:57.880
+Right.
+
+06:58.000 --> 07:01.140
+The brain doesn't just blindly accept every single error signal.
+
+07:01.420 --> 07:04.240
+It evaluates how much it should trust that error.
+
+07:04.360 --> 07:05.000
+Oh, interesting.
+
+07:05.460 --> 07:05.660
+Yeah.
+
+07:05.740 --> 07:07.440
+Like, is the environment dark and noisy?
+
+07:07.860 --> 07:08.500
+Are you tired?
+
+07:09.500 --> 07:14.440
+If the data is unreliable, the system assigns a low precision weight to the error, effectively
+
+07:14.440 --> 07:15.160
+ignoring it.
+
+07:15.320 --> 07:18.780
+If the data is clear and reliable, it assigns a high precision weight.
+
+07:18.780 --> 07:19.160
+I see.
+
+07:19.220 --> 07:21.480
+It's like a, it's a volume knob for the surprise.
+
+07:22.160 --> 07:22.640
+Exactly.
+
+07:22.800 --> 07:23.600
+A volume knob.
+
+07:23.880 --> 07:27.280
+And that leads to the final fifth stage, which is model update.
+
+07:28.320 --> 07:33.940
+Based on that weighted error signal, the system adjusts its internal model so it can make a
+
+07:33.940 --> 07:36.420
+better, more accurate prediction the next time around.
+
+07:36.420 --> 07:37.280
+So that's the loop.
+
+07:37.540 --> 07:41.400
+Prediction, comparison, error, precision weighting, and model update.
+
+07:41.800 --> 07:42.580
+That's the loop.
+
+07:42.720 --> 07:45.420
+It is an elegant, incredibly robust framework.
+
+07:45.480 --> 07:46.160
+It is elegant.
+
+07:46.160 --> 07:51.400
+But then we introduce Flyxion's challenger framework, because in the paper, Flyxion
+
+07:51.400 --> 07:57.160
+introduces a model built on the concepts of admissibility and repair, and it operates
+
+07:57.160 --> 07:59.060
+on what looks like a totally parallel track.
+
+07:59.580 --> 08:01.680
+Let me walk through the pipeline Flyxion outlines.
+
+08:02.040 --> 08:03.940
+So first, the system makes a commitment.
+
+08:04.360 --> 08:05.540
+Second, it encounters a witness.
+
+08:06.300 --> 08:07.800
+Third, there is a mismatch.
+
+08:08.120 --> 08:08.960
+Fourth, there is a warrant.
+
+08:09.540 --> 08:13.760
+And fifth, an outcome drawn from a set of options repair, refusal, or continuation.
+
+08:13.760 --> 08:18.580
+And looking at those two pipelines side by side, that is exactly where the academic friction
+
+08:18.580 --> 08:19.960
+in this paper begins.
+
+08:20.120 --> 08:23.320
+Well, let me play the skeptic for a moment here, because I have to admit, when I read
+
+08:23.320 --> 08:27.020
+those two pipelines in the source material, I felt like I was just reading a thesaurus.
+
+08:27.240 --> 08:27.700
+Oh, for sure.
+
+08:27.920 --> 08:30.600
+I mean, prediction sounds exactly like commitment.
+
+08:31.640 --> 08:33.820
+Comparison is just another word for observing a witness.
+
+08:34.560 --> 08:37.000
+And an error sounds identically like a mismatch.
+
+08:37.200 --> 08:38.800
+They map onto each other very closely.
+
+08:38.800 --> 08:39.240
+Right.
+
+08:39.580 --> 08:44.220
+Even the fourth step precision weighting versus warrant, it just sounds like two different
+
+08:44.220 --> 08:49.000
+groups of scientists trying to describe the exact same process of deciding if a discrepancy
+
+08:49.000 --> 08:49.380
+matters.
+
+08:50.160 --> 08:53.380
+Are we sure this isn't just like a turf war over vocabulary?
+
+08:53.740 --> 08:55.800
+That skepticism is entirely warranted.
+
+08:56.460 --> 08:57.140
+No pun intended.
+
+08:57.240 --> 08:57.500
+Right.
+
+08:57.840 --> 09:00.460
+Flyxion actually anticipates that exact reaction.
+
+09:00.580 --> 09:00.840
+Right.
+
+09:01.240 --> 09:04.120
+The resemblance between the two frameworks is undeniable.
+
+09:04.120 --> 09:09.600
+And the paper goes out of its way to establish that there is a massive amount of genuine foundational
+
+09:09.600 --> 09:13.040
+agreement between them before it ever introduces the divergence.
+
+09:13.460 --> 09:16.180
+OK, I think we need to map out where they agree first, then.
+
+09:16.280 --> 09:19.540
+It'll help clarify what is actually at stake when they finally disagree.
+
+09:19.740 --> 09:20.480
+Yeah, let's do that.
+
+09:20.560 --> 09:25.920
+So the foundational agreement is that both frameworks entirely reject that old, passive,
+
+09:26.280 --> 09:27.680
+bottom-up model of perception.
+
+09:28.080 --> 09:28.360
+Right.
+
+09:28.420 --> 09:31.760
+They both agree the system is doing active, top-down work.
+
+09:32.100 --> 09:32.460
+Yes.
+
+09:32.460 --> 09:36.480
+Furthermore, both models are deeply hierarchical.
+
+09:36.700 --> 09:37.680
+What does that mean in practice?
+
+09:37.940 --> 09:38.940
+Like, hierarchical?
+
+09:39.080 --> 09:42.500
+It means the brain isn't just making one big guess about the world.
+
+09:43.140 --> 09:45.160
+It's a nested structure of guesses.
+
+09:45.400 --> 09:45.560
+Correct.
+
+09:46.180 --> 09:49.260
+Lower-level visual circuits are predicting the angles of lines.
+
+09:49.980 --> 09:53.540
+Mid-level circuits are predicting shapes based on those lines.
+
+09:54.100 --> 09:57.800
+High-level circuits are predicting a coffee cup based on those shapes.
+
+09:57.880 --> 09:58.440
+Oh, I see.
+
+09:58.440 --> 10:04.800
+So in both predictive coding and Flyxion's admissibility framework, lower-level sensory discrepancies
+
+10:04.800 --> 10:07.100
+are constrained by higher-level expectations.
+
+10:07.620 --> 10:12.400
+This is actually a lineage of thought that traces all the way back to the 19th century physicist
+
+10:12.400 --> 10:13.800
+Hermann von Helmholtz.
+
+10:13.900 --> 10:14.680
+Oh, wow.
+
+10:14.680 --> 10:14.940
+Yeah.
+
+10:15.120 --> 10:18.420
+He first proposed the idea of perception as unconscious inference.
+
+10:18.600 --> 10:21.900
+Okay, so they share the Helmholtz DNA, a hierarchy of guessing and checking.
+
+10:22.020 --> 10:22.340
+They do.
+
+10:22.540 --> 10:26.620
+And they also seamlessly handle a concept known as active inference.
+
+10:26.740 --> 10:29.540
+Oh, I want to pause on active inference because it's a huge concept.
+
+10:30.140 --> 10:33.180
+This is the idea that you don't just sit there changing your mind to fit the world.
+
+10:33.240 --> 10:37.120
+You actually move your body to change the world to fit your mind.
+
+10:37.120 --> 10:39.180
+That is the absolute essence of it, yeah.
+
+10:39.660 --> 10:45.080
+If your internal model is strongly predicting that you are in a warm room, but your sensory
+
+10:45.080 --> 10:48.100
+data says you are cold, you have a mismatch.
+
+10:48.280 --> 10:48.540
+Right.
+
+10:48.780 --> 10:53.460
+Now, you can resolve that by updating your model to accept that the room is actually cold.
+
+10:53.960 --> 10:55.960
+Or you can perform active inference.
+
+10:56.400 --> 10:59.240
+You get up, you walk across the room, and you turn up the thermostat.
+
+10:59.560 --> 11:04.560
+So you change the physical environment so the incoming sensory data aligns with your original
+
+11:04.560 --> 11:05.500
+prediction of warmth.
+
+11:05.500 --> 11:06.060
+Exactly.
+
+11:07.060 --> 11:12.920
+And both predictive coding and Flyxion agree that this kind of physical intervention in
+
+11:12.920 --> 11:17.980
+the world is a core, legitimate way that systems minimize error.
+
+11:18.120 --> 11:20.280
+Okay, so they are standing on the same foundation.
+
+11:20.560 --> 11:22.060
+They both believe in top-down guessing.
+
+11:22.320 --> 11:24.020
+They both believe in a hierarchy of circuits.
+
+11:24.300 --> 11:27.400
+And they both believe in taking physical action to fix errors.
+
+11:27.660 --> 11:29.240
+Yes, they absolutely do.
+
+11:29.460 --> 11:35.220
+But that cozy resemblance shatters when we ask one specific, almost dangerous question about
+
+11:35.220 --> 11:36.340
+how these systems function.
+
+11:36.440 --> 11:40.580
+The question of what the system is actually allowed to revise, meaning, you know, when an
+
+11:40.580 --> 11:45.120
+error happens and a change needs to be made, what parts of the internal machinery are open
+
+11:45.120 --> 11:45.640
+for editing?
+
+11:46.000 --> 11:47.200
+That is the dividing line.
+
+11:47.200 --> 11:52.100
+The frameworks are not identical because they have fundamentally different answers to that
+
+11:52.100 --> 11:52.840
+exact question.
+
+11:53.560 --> 11:56.640
+And to see the difference, plain English isn't really going to cut it.
+
+11:57.660 --> 12:02.560
+We have to look under the hood at the specific mathematical operators that drive the inference.
+
+12:02.760 --> 12:08.560
+We have to move from like the philosophy of perception into the hard mechanics of how a system defines its
+
+12:08.560 --> 12:09.160
+own reality.
+
+12:09.880 --> 12:11.140
+Let's pull out the blueprints, then.
+
+12:11.400 --> 12:13.200
+Let's draw the boundaries of belief.
+
+12:13.940 --> 12:18.300
+To map this out, Flyxion introduces a taxonomy of mathematical operators.
+
+12:18.840 --> 12:21.360
+First, we have to define the playing field itself.
+
+12:21.540 --> 12:22.300
+Right, the space.
+
+12:22.460 --> 12:27.320
+The paper uses the Greek letter omega to represent the space of admissible hypotheses.
+
+12:28.020 --> 12:33.080
+For you listening, think of omega as the current menu of things the system believes are even possible.
+
+12:33.200 --> 12:35.040
+It's the absolute sandbox of reality.
+
+12:35.040 --> 12:38.460
+If something isn't in omega, the system cannot think about it.
+
+12:38.460 --> 12:41.020
+Omega is your universe of live options.
+
+12:41.620 --> 12:45.580
+And Flyxion defines three distinct mathematical operators that interact with this space.
+
+12:45.720 --> 12:46.600
+Okay, let's go through them.
+
+12:46.840 --> 12:50.940
+The first is operator U. This represents a change of position within the space.
+
+12:51.720 --> 12:57.200
+Mathematically, it is typed as a function that takes an observation and the current space
+
+12:57.200 --> 13:00.120
+and maps to a new point within that same space.
+
+13:00.180 --> 13:03.860
+Okay, let's translate that into a physical scenario so I don't lose the thread here.
+
+13:03.860 --> 13:05.100
+Let's use a restaurant.
+
+13:05.100 --> 13:10.760
+Okay, operator U is me sitting at a table looking at the physical menu and deciding to change
+
+13:10.760 --> 13:12.900
+my order from a burger to a salad.
+
+13:13.320 --> 13:13.600
+Right.
+
+13:13.600 --> 13:17.880
+I am just shifting my commitment between items that are already printed on the page.
+
+13:17.960 --> 13:19.060
+I haven't changed the restaurant.
+
+13:19.220 --> 13:20.480
+I've just changed my selection.
+
+13:20.480 --> 13:21.780
+That captures it perfectly.
+
+13:22.320 --> 13:25.040
+Operator U is inference within the given rules.
+
+13:25.600 --> 13:27.600
+Now, the second operator is operator Q.
+
+13:27.800 --> 13:28.280
+Q, correct.
+
+13:28.640 --> 13:31.140
+This represents a change in the evidential state.
+
+13:32.240 --> 13:36.680
+Mathematically, it maps observations in the space to a new set of evidence.
+
+13:37.040 --> 13:39.740
+This relates to that active inference we just discussed.
+
+13:40.220 --> 13:43.760
+It is the system going out into the world and actively gathering new data.
+
+13:43.760 --> 13:49.560
+Now, sticking with the restaurant, is operator Q me calling the waiter over and asking,
+
+13:49.960 --> 13:51.260
+hey, how is the salad made?
+
+13:51.320 --> 13:52.480
+Is the dressing on the side?
+
+13:53.020 --> 13:56.940
+I am gathering more evidence about the items on the menu to help me make my you decision.
+
+13:57.140 --> 13:57.280
+Yes.
+
+13:57.400 --> 14:02.520
+But the menu itself, my omega, is still exactly the same piece of laminated paper.
+
+14:02.660 --> 14:03.780
+That's a great way to look at it.
+
+14:04.000 --> 14:09.660
+Operator Q changes the pool of evidence, which informs your selection, but it does not change
+
+14:09.660 --> 14:11.120
+the menu of possibilities.
+
+14:11.120 --> 14:13.740
+Now, this brings us to the critical divergence.
+
+14:14.420 --> 14:16.460
+The third operator is operator A.
+
+14:17.060 --> 14:20.460
+This operator is fundamentally mathematically different from the other two.
+
+14:20.680 --> 14:21.420
+Okay, operator A.
+
+14:21.420 --> 14:26.540
+Operator A maps a class of admissibility spaces to a new class of admissibility spaces.
+
+14:26.900 --> 14:30.140
+It takes omega and maps it to a new omega prime.
+
+14:30.240 --> 14:32.120
+So it maps a space to a space.
+
+14:32.160 --> 14:32.640
+Exactly.
+
+14:33.200 --> 14:35.320
+It changes the actual boundaries of the menu itself.
+
+14:35.680 --> 14:38.540
+It extends the menu by adding concepts that didn't exist,
+
+14:38.540 --> 14:42.060
+or it contracts the menu by completely eliminating concepts.
+
+14:42.380 --> 14:46.140
+Okay, so if U is picking a burger and Q is asking about the salad,
+
+14:46.800 --> 14:51.520
+operator A is the restaurant manager marching over to my table with a thick black sharpie,
+
+14:52.140 --> 14:55.220
+crossing out the burger completely so nobody can ever order it again,
+
+14:55.340 --> 15:01.400
+or suddenly pulling a secret menu out of his apron with items that literally did not exist
+
+15:01.400 --> 15:03.780
+in my universe of choices five minutes ago.
+
+15:03.780 --> 15:08.080
+Let's run with that analogy because it highlights the core mechanical difference perfectly.
+
+15:08.760 --> 15:13.800
+The manager crossing out the item alters what is allowed to exist in your reality.
+
+15:14.380 --> 15:19.620
+You can no longer exercise operator U to select the burger because the burger is no longer in omega.
+
+15:19.800 --> 15:20.620
+It's just gone.
+
+15:20.720 --> 15:21.160
+It's gone.
+
+15:21.340 --> 15:21.460
+Yeah.
+
+15:21.660 --> 15:26.760
+Now, this is where we have to be incredibly careful because cognitive scientists often blur these lines.
+
+15:26.760 --> 15:31.620
+We need to clarify the relationship between gathering evidence and changing the space.
+
+15:32.560 --> 15:37.140
+Discovering new evidence, which is operator Q, can cause a revision of the space, which is operator A.
+
+15:37.340 --> 15:37.620
+Okay.
+
+15:37.720 --> 15:38.920
+But they are not the same action.
+
+15:39.620 --> 15:41.360
+Uh, I'm not sure I follow.
+
+15:41.760 --> 15:44.160
+If the waiter tells me the burger is made of literal poison,
+
+15:44.640 --> 15:48.800
+that evidence causes me to never order it again, doesn't the evidence change the space?
+
+15:48.940 --> 15:51.260
+It's a question of mechanism versus catalyst.
+
+15:51.560 --> 15:51.760
+Yeah.
+
+15:52.040 --> 15:53.620
+Think about it on a scientific scale.
+
+15:53.840 --> 15:54.140
+Okay.
+
+15:54.140 --> 15:57.840
+Imagine a physicist running an experiment in a particle collider.
+
+15:58.860 --> 16:02.040
+Running the machine and gathering the data is operator Q.
+
+16:02.320 --> 16:02.580
+Right.
+
+16:02.780 --> 16:10.260
+But suppose the experiment reveals a logic-defying anomaly that completely breaks the known laws of physics.
+
+16:10.380 --> 16:11.380
+Oh, wow.
+
+16:11.780 --> 16:14.480
+That new evidence creates a massive mismatch.
+
+16:14.860 --> 16:23.040
+That mismatch acts as a warrant, which then causes the global scientific community to rewrite the standard model of physics.
+
+16:23.040 --> 16:26.480
+They are forced to expand their space of admissible hypotheses.
+
+16:27.020 --> 16:30.460
+That rewrite the actual paradigm shift is operator A.
+
+16:30.640 --> 16:31.240
+Ah, I see.
+
+16:31.320 --> 16:33.760
+So the act of reading the dials on the machine is Q.
+
+16:34.080 --> 16:37.440
+The act of tearing up the old textbook and printing a new one is A.
+
+16:37.580 --> 16:38.000
+Precisely.
+
+16:38.700 --> 16:45.000
+Flyxion's central point is that the act of discovering evidence is not the same mechanical operation as the act of revising the domain.
+
+16:45.100 --> 16:45.320
+Right.
+
+16:45.320 --> 16:52.540
+Just because your system is capable of gathering data doesn't automatically mean it has the architectural machinery to rewrite its own underlying laws.
+
+16:52.540 --> 16:54.580
+That is a razor-sharp distinction.
+
+16:54.800 --> 17:02.140
+I mean, it's the difference between seeing an anomaly and actually possessing the internal mechanism to rewire your brain to accept it.
+
+17:02.280 --> 17:02.560
+Exactly.
+
+17:02.780 --> 17:09.560
+But, you know, as much as I like the restaurant and physics analogies, formal math typings like U, Q, and A can still feel a bit slippery.
+
+17:11.040 --> 17:14.520
+I want to ground this in a scenario that everyone listening has experienced.
+
+17:14.600 --> 17:14.840
+Sure.
+
+17:15.100 --> 17:19.720
+Flyxion uses a brilliant example to show all these operators functioning in real time.
+
+17:20.180 --> 17:21.900
+Let's walk through the darkroom scenario.
+
+17:22.140 --> 17:24.260
+It is a perfect test case for these mechanics.
+
+17:24.440 --> 17:27.660
+So imagine you are walking through your house late at night.
+
+17:28.000 --> 17:28.740
+The lights are off.
+
+17:28.840 --> 17:30.780
+Maybe you're just going to the kitchen for a glass of water.
+
+17:31.380 --> 17:35.760
+As you cross the living room, you spot a dark, unfamiliar shape on the floor.
+
+17:36.140 --> 17:42.000
+Now, in this moment, your admissible space, your omega, consists of normal things that belong in a house.
+
+17:42.260 --> 17:42.300
+Right.
+
+17:42.300 --> 17:47.800
+Could be a piece of furniture, a dropped bag, the family dog, or just a weird cast shadow.
+
+17:48.000 --> 17:52.460
+So in that split second, your brain starts exercising operator U.
+
+17:52.880 --> 17:57.360
+You are rapidly cycling through hypotheses within that fixed space.
+
+17:57.720 --> 17:59.200
+You think, probably just the dog.
+
+17:59.380 --> 17:59.520
+Yeah.
+
+17:59.660 --> 18:01.640
+No, wait, the shape is too boxy and it's not moving.
+
+18:01.680 --> 18:02.500
+It's probably my backpack.
+
+18:02.760 --> 18:03.060
+Okay.
+
+18:03.440 --> 18:08.440
+You are shifting your commitment, but you haven't changed what could, in principle, be on the floor.
+
+18:08.740 --> 18:11.780
+You were just poggling between options on the existing menu.
+
+18:11.780 --> 18:12.020
+Right.
+
+18:12.160 --> 18:14.520
+I haven't added alien spacecraft to the list.
+
+18:14.640 --> 18:16.180
+Then I exercise operator Q.
+
+18:16.380 --> 18:18.540
+I don't just stand there in the dark guessing forever.
+
+18:18.840 --> 18:21.820
+I physically step closer or I reach out and flip on a lamp.
+
+18:22.080 --> 18:25.340
+I am actively changing the evidential state available to my inference.
+
+18:25.780 --> 18:27.400
+I am acquiring new data.
+
+18:27.580 --> 18:27.800
+Yes.
+
+18:28.340 --> 18:37.560
+Now, alongside your guessing, your U, and your light switching, your Q, we have to introduce the predictive coding concept of precision weighting, which we will call P.
+
+18:37.560 --> 18:38.740
+The volume knob.
+
+18:38.940 --> 18:39.740
+The volume knob.
+
+18:41.040 --> 18:43.920
+Throughout this entire scenario, P has been running in the background.
+
+18:44.880 --> 18:49.980
+When you are standing in the pitch black, you naturally discount the reliability of your vision.
+
+18:50.440 --> 18:58.140
+You know your eyes play tricks in the dark, so your brain assigns a very low precision weight to the visual discrepancy on the floor.
+
+18:58.340 --> 19:00.840
+It's turning down the volume on the error signal.
+
+19:00.840 --> 19:01.380
+Exactly.
+
+19:01.900 --> 19:06.400
+But the moment you flip on the lamp, your precision weighting radically shifts.
+
+19:06.960 --> 19:08.560
+The room is flooded with light.
+
+19:09.260 --> 19:11.680
+You now trust your visual data fully.
+
+19:11.840 --> 19:14.840
+My confidence in my eyesight shoots from near zero to near 100%.
+
+19:15.640 --> 19:17.140
+And notice something critical here.
+
+19:17.320 --> 19:22.940
+This shift in your confidence happens entirely separately from your belief about what the object actually is.
+
+19:22.980 --> 19:23.500
+Oh, that's true.
+
+19:23.500 --> 19:30.420
+Your confidence in the visibility of the shape is an independent mathematical variable from your guess about the identity of the shape.
+
+19:31.040 --> 19:34.680
+Precision weighting, P, only governs how much you trust the signal.
+
+19:34.780 --> 19:38.160
+Okay, let me pause you right there because this is where my brain starts to really push back.
+
+19:38.200 --> 19:38.840
+Okay, let's hear it.
+
+19:39.020 --> 19:44.760
+Let's say I turn on the light and I instantly see that the shape on the floor is just a weirdly folded blanket.
+
+19:44.760 --> 19:52.900
+But more importantly, the moment I see the blanket, I suddenly remember with absolute crystalline certainty that I left my backpack in my car.
+
+19:53.320 --> 19:53.420
+Right.
+
+19:54.020 --> 19:55.100
+I locked the trunk.
+
+19:55.220 --> 19:56.420
+I have the keys in my pocket.
+
+19:57.100 --> 20:02.600
+Therefore, my confidence in the backpack hypothesis drops to absolute zero.
+
+20:02.920 --> 20:10.120
+If I lower the mathematical weight of a belief to zero, isn't that the exact same thing as operator A deleting it from the menu?
+
+20:10.660 --> 20:12.480
+I mean, if the probability is zero, it's dead.
+
+20:12.540 --> 20:13.140
+It's removed.
+
+20:13.140 --> 20:18.100
+This is the exact trap that predictive coding theorists fall into.
+
+20:18.600 --> 20:22.020
+And honestly, it is the primary reason Flyxion wrote this paper.
+
+20:22.320 --> 20:25.360
+It is highly intuitive to think that zero probability equals deletion.
+
+20:25.660 --> 20:31.260
+But the core revelation of the admissibility framework is that dropping confidence to zero is definitively not operator A.
+
+20:31.360 --> 20:33.100
+I am genuinely confused by that.
+
+20:33.180 --> 20:36.160
+I mean, if my belief in the backpack is at zero, how is it not deleted?
+
+20:36.460 --> 20:40.860
+Because zero is merely a value assigned to an element that still remains inside the domain.
+
+20:40.860 --> 20:50.840
+If you assign a zero probability to the backpack being on the living room floor, the concept of the backpack is still on your menu of possibilities for that room.
+
+20:51.180 --> 20:53.920
+You just aren't selecting it tonight, given the current evidence.
+
+20:54.040 --> 20:54.160
+Okay.
+
+20:54.160 --> 20:56.400
+Then what would operator A look like in this room?
+
+20:56.480 --> 20:57.200
+Like, what's the difference?
+
+20:57.620 --> 21:04.040
+Operator A happens if when you turn on the light, the thing sitting on your rug is something so utterly alien.
+
+21:04.040 --> 21:12.260
+Let's say it's a glowing, floating, gelatinous orb of purple plasma, that you have absolutely no antecedent category for it.
+
+21:12.540 --> 21:12.640
+Right.
+
+21:12.900 --> 21:16.500
+You cannot just shift probabilities among dog, blanket, and furniture.
+
+21:17.040 --> 21:19.660
+Your current omega is entirely insufficient.
+
+21:20.180 --> 21:21.800
+You are forced into a state of admission.
+
+21:22.480 --> 21:28.180
+You have to structurally extend the boundaries of your reality to include floating plasma orbs.
+
+21:28.460 --> 21:30.060
+That is expanding the space.
+
+21:30.280 --> 21:30.580
+Whoa.
+
+21:30.980 --> 21:32.640
+Okay, that is a very visceral difference.
+
+21:32.900 --> 21:36.300
+Adding a plasma orb is definitely fundamentally different than realizing it's a blanket.
+
+21:36.460 --> 21:37.900
+But what about contracting the space?
+
+21:38.080 --> 21:39.580
+What does it look like to shrink omega?
+
+21:39.860 --> 21:41.140
+That is called refusal.
+
+21:41.940 --> 21:43.000
+Let's go back to the backpack.
+
+21:43.400 --> 21:43.620
+Hmm.
+
+21:43.620 --> 21:53.340
+When you definitively remember leaving the backpack in your locked car, the mathematically warranted response isn't just to lower the probability of it being on the rug to zero.
+
+21:53.440 --> 21:53.620
+Right.
+
+21:53.620 --> 22:03.380
+The warranted response is to entirely remove backpack from the admissible set of hypotheses for that specific room at that specific time.
+
+22:03.780 --> 22:12.760
+Because no amount of future visual evidence about the floor could legitimately restore it, short of your car being broken into and the bag teleported into your house.
+
+22:12.940 --> 22:13.080
+Yeah.
+
+22:13.360 --> 22:15.060
+Refusal contracts the space.
+
+22:15.120 --> 22:17.380
+It says, do not even evaluate this as a possibility.
+
+22:17.380 --> 22:25.520
+So the difference between a zero probability belief and a deleted belief, I mean, that might sound to some listeners like purely philosophical semantics.
+
+22:25.720 --> 22:28.600
+But the source material doesn't just argue this philosophically.
+
+22:28.740 --> 22:32.560
+Flyxion actually proves it is a hard mathematical non-equivalence.
+
+22:32.700 --> 22:32.900
+Yes.
+
+22:32.900 --> 22:36.460
+If we look at the core proof in the paper, it shows that these are two different shapes of math.
+
+22:36.560 --> 22:39.940
+Let's talk about the math of re-weighting versus the math of refusal.
+
+22:40.240 --> 22:42.080
+The proof really is the anchor of the paper.
+
+22:42.980 --> 22:45.100
+Let's look at precision re-weighting first.
+
+22:45.900 --> 22:56.720
+When a system uses operator P to change a probability, its mathematical type is a function mapping the space of weight functions over omega back to the space of weight functions over omega.
+
+22:57.000 --> 22:57.300
+Okay.
+
+22:57.300 --> 23:01.380
+In the notation, it's W sub-omega mapping to W sub-omega.
+
+23:01.380 --> 23:02.060
+Okay.
+
+23:02.240 --> 23:07.940
+For those of us who aren't mathematicians, what does it mean to map a weight back to a weight?
+
+23:08.120 --> 23:15.280
+It means that whatever numbers you plug into the equation, the output you get is just another set of numbers plotted on the exact same graph.
+
+23:15.620 --> 23:17.200
+The playing field never changes.
+
+23:17.480 --> 23:17.840
+Ah.
+
+23:18.020 --> 23:25.740
+Even in the extreme edge case, the absolute limit where the weight of a hypothesis is pushed exactly to zero, the equality of the domain holds.
+
+23:26.380 --> 23:31.100
+As Flyxion writes, zero is a value assigned to an element that remains in the domain.
+
+23:31.800 --> 23:32.980
+The graph didn't shrink.
+
+23:33.280 --> 23:35.120
+A point on the graph just hit the x-axis.
+
+23:35.340 --> 23:38.060
+Let me try to build an analogy here to see if I'm grasping this.
+
+23:38.420 --> 23:42.560
+Think of your domain, your omega, as all the channels programmed into a television set.
+
+23:42.840 --> 23:46.260
+Precision weighting operator P is the volume button on the remote control.
+
+23:46.260 --> 23:49.600
+You can turn the volume of channel 4 down to 50%.
+
+23:49.600 --> 23:51.220
+You can turn it down to 10%.
+
+23:51.220 --> 23:54.340
+You can even hit mute, turning the volume to absolute zero.
+
+23:54.700 --> 23:57.240
+But a muted channel is still a channel.
+
+23:57.460 --> 23:59.280
+It's still programmed into the television.
+
+23:59.480 --> 24:00.560
+Let's push that analogy.
+
+24:01.220 --> 24:03.580
+If you hit the channel up button, what happens?
+
+24:03.680 --> 24:05.420
+You still scroll past channel 4.
+
+24:05.560 --> 24:07.840
+It's silent, but the screen turns to it.
+
+24:07.960 --> 24:09.680
+It still exists in the sequence.
+
+24:09.680 --> 24:10.240
+Exactly.
+
+24:10.660 --> 24:14.920
+Now let's look at the mathematical type for operator A, specifically the refusal function.
+
+24:15.300 --> 24:17.460
+It has a totally different architecture.
+
+24:17.700 --> 24:20.500
+It maps a class of spaces to a new space.
+
+24:20.960 --> 24:22.960
+The notation is demapping to D.
+
+24:23.580 --> 24:28.820
+It changes the domain itself from omega to omega minus a refused set R.
+
+24:28.820 --> 24:34.320
+So in the television analogy, operator A is you going into the deep system settings of the TV,
+
+24:34.560 --> 24:38.380
+selecting channel 4, and permanently deleting it from the TV's internal memory.
+
+24:38.800 --> 24:38.980
+Right.
+
+24:39.100 --> 24:40.360
+It doesn't just have zero volume.
+
+24:40.500 --> 24:43.100
+It ceases to exist as a navigable destination.
+
+24:43.560 --> 24:46.880
+If you hit channel up, it skips from channel 3 straight to channel 5.
+
+24:47.200 --> 24:49.380
+That is precisely the mechanical difference.
+
+24:49.760 --> 24:52.860
+And this brings us to the entire thesis of Flyxion's paper.
+
+24:52.860 --> 25:00.760
+Inference within a space is fundamentally, mathematically, and architecturally not equivalent to revision of the space.
+
+25:00.940 --> 25:01.340
+Wow.
+
+25:01.480 --> 25:08.120
+A system that only possesses volume knobs, no matter how sophisticated those volume knobs are, cannot delete a channel.
+
+25:08.640 --> 25:10.520
+Re-weighting cannot achieve refusal.
+
+25:11.040 --> 25:15.320
+That is a staggering realization if you are designing an artificial intelligence.
+
+25:15.320 --> 25:24.160
+If precision weighting cannot delete the channel, what extra cognitive machinery does a predictive system need to actually change its mind's boundaries?
+
+25:24.400 --> 25:28.500
+Like, how do we upgrade a predictive architecture to handle true domain revision?
+
+25:28.920 --> 25:33.100
+Well, it's important to state clearly that Flyxion is not trying to tear down predictive coding entirely.
+
+25:33.540 --> 25:39.000
+The paper explicitly states that predictive coding is internally consistent and incredibly powerful.
+
+25:39.300 --> 25:40.260
+It just has a blind spot.
+
+25:40.520 --> 25:42.120
+The issue is that it is incomplete.
+
+25:42.120 --> 25:45.400
+Flyxion is pointing out a missing gear in the engine.
+
+25:46.300 --> 25:51.180
+Error correction is not the same as evidence acquisition, and neither of them is the same as domain revision.
+
+25:51.820 --> 25:57.720
+Just because a system is capable of the first two doesn't mean it possesses the structural capacity for the third.
+
+25:58.100 --> 25:59.940
+So what does this missing gear look like?
+
+26:00.100 --> 26:02.040
+How do you implement operator A?
+
+26:02.040 --> 26:11.880
+To genuinely revise its space, a system needs a state or an operator whose direct semantic consequence is a change in membership.
+
+26:12.140 --> 26:12.820
+Membership, okay.
+
+26:12.940 --> 26:21.500
+It needs a mechanism that decides what hypotheses are allowed to be in the pool before the inference and the volume knobs even begin their work.
+
+26:21.960 --> 26:25.400
+The paper outlines two concrete examples of how this could be coded.
+
+26:25.540 --> 26:28.460
+Let's walk through them because I really want to understand how you would actually build this.
+
+26:28.460 --> 26:31.580
+The simplest implementation is a Boolean commitment variable.
+
+26:31.660 --> 26:32.060
+Boolean.
+
+26:32.380 --> 26:32.600
+Right.
+
+26:33.280 --> 26:39.120
+Imagine a master switchboard inside the system where every possible hypothesis has a physical switch.
+
+26:39.460 --> 26:43.460
+If the switch is flipped to one, the hypothesis is allowed into the admissible space.
+
+26:43.740 --> 26:47.760
+If the switch is flipped to zero, the hypothesis is constitutively refused.
+
+26:48.160 --> 26:53.860
+It is explicitly excluded from the pool of items that the inference engine is even allowed to look at.
+
+26:53.860 --> 26:56.060
+It's the bouncer at the door of the nightclub.
+
+26:56.180 --> 27:00.500
+If you're not on the VIP list, you don't even get inside to be evaluated by the bartender.
+
+27:00.800 --> 27:03.280
+You don't have a zero probability of getting a drink.
+
+27:03.460 --> 27:04.220
+You aren't in the building.
+
+27:04.580 --> 27:05.980
+That's the Boolean form exactly.
+
+27:06.600 --> 27:09.240
+Now, the second implementation is slightly more dynamic.
+
+27:09.460 --> 27:11.060
+It's called a constraint set form.
+
+27:11.700 --> 27:18.680
+Instead of a manual switch for every single hypothesis, the system possesses a set of overarching rules or constraints.
+
+27:18.680 --> 27:25.940
+The admissibility space is defined automatically as any hypothesis that successfully satisfies those rules.
+
+27:26.160 --> 27:29.120
+So if you change the rules, the space automatically changes.
+
+27:29.440 --> 27:29.620
+Right.
+
+27:30.200 --> 27:33.260
+Operator A acts by changing the constraint set.
+
+27:33.780 --> 27:40.360
+When the fundamental law is governing the space shift, the system automatically re-filters what hypotheses can exist.
+
+27:40.360 --> 27:49.020
+Okay, bringing this back to reality, let's say I am trying to understand my own stubborn human brain, especially when I'm, like, locked in a disagreement with someone.
+
+27:49.120 --> 27:49.980
+Yeah, that happens a lot.
+
+27:50.220 --> 27:50.520
+Right.
+
+27:50.640 --> 27:52.800
+How do I know what kind of error I'm making?
+
+27:53.080 --> 27:57.420
+How do I know if I'm dealing with an error of evidence or an error of the space itself?
+
+27:57.840 --> 28:02.380
+Flyxion actually offers a brilliant four-part diagnostic tool for this.
+
+28:02.380 --> 28:11.260
+First, when a system or a human encounters a mismatch between expectation and reality, there are four ways to resolve it.
+
+28:11.300 --> 28:12.120
+Okay, lay them out.
+
+28:12.300 --> 28:16.360
+First, some mismatches just mean you need to settle elsewhere in your current menu.
+
+28:16.700 --> 28:17.780
+That S operator U.
+
+28:18.280 --> 28:22.180
+You guessed wrong, so you take another guess within your existing worldview.
+
+28:22.320 --> 28:24.700
+Like, it's not the dog on the floor, it's the backpack.
+
+28:24.700 --> 28:25.180
+Exactly.
+
+28:25.780 --> 28:30.060
+Second, some mismatches mean you just need more data, that S operator Q.
+
+28:30.360 --> 28:33.880
+You go read another book, you run another lab test, you turn on the living room light.
+
+28:33.920 --> 28:34.100
+Right.
+
+28:34.480 --> 28:39.220
+Third, some mismatches mean you need to adjust your trust in the data, that S operator P.
+
+28:39.500 --> 28:44.980
+You realize your eyes are tired or the sensor is faulty, so you lower the precision weight of the error signal.
+
+28:45.260 --> 28:49.240
+But none of those fundamentally change who I am or what I believe is possible.
+
+28:49.620 --> 28:50.020
+Exactly.
+
+28:50.540 --> 28:52.400
+And that leads to the fourth diagnostic.
+
+28:52.400 --> 28:58.300
+Some mismatches, if they are severe and warranted, require changing the menu itself.
+
+28:58.920 --> 29:00.340
+That is, operator A.
+
+29:01.600 --> 29:07.100
+The discrepancy isn't just noise, and it cannot be resolved by picking a different item on the menu.
+
+29:07.540 --> 29:10.700
+The mismatch is fundamentally telling you that your menu is wrong.
+
+29:11.220 --> 29:12.580
+Your categories are insufficient.
+
+29:13.040 --> 29:14.500
+Your boundaries are misplaced.
+
+29:14.860 --> 29:16.000
+I love that diagnostic.
+
+29:16.200 --> 29:16.920
+It's so clear.
+
+29:17.080 --> 29:18.860
+But, you know, I know how academia works.
+
+29:18.860 --> 29:25.220
+Whenever a bold architectural distinction like this is proposed, the establishment immediately sharpens their lives.
+
+29:25.360 --> 29:25.980
+Oh, without fail.
+
+29:26.180 --> 29:29.700
+They will look at these new operators and claim, we already have math that does this.
+
+29:29.800 --> 29:31.360
+We don't need your new Greek symbols.
+
+29:32.220 --> 29:34.400
+Flyxion anticipates these counter arguments.
+
+29:34.840 --> 29:38.300
+Let's address the critics, because this is where the theory really gets stress tested.
+
+29:38.300 --> 29:42.380
+Yes, and the most sophisticated pushback comes from the realm of Bayesian probability.
+
+29:43.300 --> 29:45.820
+It's what the paper refers to as the Bayesian objection.
+
+29:46.220 --> 29:46.540
+Right.
+
+29:47.060 --> 29:49.560
+The paper brings up Bayesian structure learning.
+
+29:50.140 --> 29:59.600
+Specifically, it mentions models with amazing, slightly confusing names, like the Chinese restaurant process and the Indian buffet process.
+
+29:59.600 --> 30:05.300
+Now, to a casual listener, these sound like lunch plans, but they are actually highly complex algorithms.
+
+30:05.640 --> 30:06.140
+They are, yeah.
+
+30:06.260 --> 30:10.680
+I want to make sure we actually explain how these work before we let Flyxion tear them down.
+
+30:10.900 --> 30:13.640
+Can you explain what a Chinese restaurant process is doing?
+
+30:13.860 --> 30:16.600
+Let's break it down, because it is an ingenious piece of math.
+
+30:17.220 --> 30:23.080
+The Chinese restaurant process is a non-parametric Bayesian model used in machine learning.
+
+30:23.080 --> 30:30.720
+It models how a system can cluster data into categories when it doesn't know in advance how many categories there should be.
+
+30:31.320 --> 30:33.760
+So imagine a restaurant with an infinite number of tables.
+
+30:33.980 --> 30:34.660
+Right, infinite tables.
+
+30:34.860 --> 30:35.720
+Customer walks in.
+
+30:36.040 --> 30:37.840
+This customer represents a new piece of data.
+
+30:38.080 --> 30:39.180
+They sit at the first table.
+
+30:39.640 --> 30:40.940
+Now, a second customer walks in.
+
+30:41.340 --> 30:46.340
+They can either sit at the first table with the first customer, or they can choose to sit at a brand new empty table.
+
+30:46.560 --> 30:51.720
+The probability of them sitting at an occupied table is proportional to how many people are already sitting there.
+
+30:51.720 --> 30:53.720
+So the crowded tables attract more people.
+
+30:53.860 --> 30:55.820
+It's like a popularity contest for data.
+
+30:56.020 --> 30:56.460
+Exactly.
+
+30:57.040 --> 31:03.240
+But there is always a calculated non-zero probability that a customer will decide to start a new table.
+
+31:03.900 --> 31:13.400
+As more and more customers enter, as the system processes more and more data, it naturally forms clusters at different tables, and it continuously opens new tables as needed.
+
+31:13.400 --> 31:21.920
+So the critic looks at this algorithm and says to Flyxion, look, the system is growing its latent categories as new data arrives.
+
+31:22.020 --> 31:23.060
+It's adding new tables.
+
+31:23.260 --> 31:25.860
+Doesn't this already do exactly what operator A does?
+
+31:25.920 --> 31:27.420
+It's expanding the space.
+
+31:27.420 --> 31:33.380
+It is a formidable objection, because at first glance, opening a new table looks exactly like domain revision.
+
+31:33.620 --> 31:36.820
+But Flyxion's rebuttal exposes a fatal flaw in the comparison.
+
+31:37.800 --> 31:44.880
+The Chinese restaurant process models domain growth, yes, but that growth is drawn from a prior overgrowth that was fixed in advance by the programmer.
+
+31:45.240 --> 31:47.660
+What does a prior overgrowth mean in plain English?
+
+31:48.020 --> 31:56.260
+It means the mathematical rule that dictates exactly how and when a new table could be opened was already baked into the system's code from the very beginning.
+
+31:56.260 --> 32:00.640
+The system is just pulling from a predetermined menu of possible enlargements.
+
+32:01.120 --> 32:05.500
+It fundamentally lacks the warrant condition that defines true domain revision.
+
+32:05.820 --> 32:08.560
+The warrant being a genuine, unpredicted surprise.
+
+32:08.880 --> 32:09.140
+Yes.
+
+32:09.700 --> 32:15.780
+In the Chinese restaurant process, the system is not rewriting its boundaries in response to an unthinkable anomaly.
+
+32:16.340 --> 32:23.260
+It is just executing a highly sophisticated version of precision weighting operator P operating one metal level up.
+
+32:23.460 --> 32:24.640
+Ah, I see.
+
+32:24.640 --> 32:28.960
+It is assigning probabilities to different pre-programmed rules of enlargement.
+
+32:30.000 --> 32:36.960
+True operator A requires the system to face a mismatch that falls entirely outside of all pre-programmed priors,
+
+32:37.420 --> 32:42.700
+and to respond by genuinely creating a boundary condition that its designer never anticipated.
+
+32:43.280 --> 32:45.180
+Let me see if I can translate that back to the restaurant.
+
+32:45.300 --> 32:47.340
+It's like having a physical menu that says at the bottom,
+
+32:47.460 --> 32:50.380
+if you don't like anything here, tell the chef and he will make you a surprise meal.
+
+32:50.380 --> 32:55.820
+When the chef makes the surprise meal, the boundaries of the menu didn't actually change.
+
+32:56.320 --> 32:58.800
+The rule for the surprise was already printed on the paper.
+
+32:58.900 --> 32:59.340
+Exactly.
+
+32:59.560 --> 33:05.260
+True operator A would be if the customer got so frustrated with the food that they walked into the kitchen,
+
+33:05.600 --> 33:09.500
+fired the chef, tore down the walls, and turned the restaurant into a shoe store.
+
+33:09.500 --> 33:11.880
+That captures the spirit of it perfectly.
+
+33:12.080 --> 33:12.220
+Yeah.
+
+33:12.500 --> 33:15.280
+The Bayesian models have the surprise rule printed on the menu.
+
+33:15.420 --> 33:15.600
+Right.
+
+33:15.880 --> 33:18.980
+True domain revision is changing the fundamental nature of the establishment.
+
+33:19.240 --> 33:22.320
+I think that dismantles the Bayesian objection beautifully,
+
+33:22.600 --> 33:27.020
+but there is a second objection that feels much more philosophically dangerous.
+
+33:27.540 --> 33:28.880
+The infinite regress objection.
+
+33:28.880 --> 33:29.320
+Yes.
+
+33:29.520 --> 33:33.000
+The critic says, okay, you have this concept of meta-admissibility.
+
+33:33.880 --> 33:39.360
+If the space of beliefs, omega, can be wrong, and it requires operator A to fix it,
+
+33:39.460 --> 33:42.000
+well, operator A is governed by its own set of rules.
+
+33:42.380 --> 33:43.920
+The paper calls these rules D.
+
+33:44.280 --> 33:45.460
+What if D is wrong?
+
+33:45.660 --> 33:48.520
+Ah, the classic turtles all the way down problem.
+
+33:49.200 --> 33:49.680
+Exactly.
+
+33:49.900 --> 33:52.060
+If the rules for changing the space can be wrong,
+
+33:52.540 --> 33:55.740
+don't you need another higher operator to fix those rules?
+
+33:55.740 --> 33:58.000
+And another operator to fix that one.
+
+33:58.520 --> 34:02.700
+Doesn't this whole framework collapse under an infinite loop of meta-revisions?
+
+34:03.580 --> 34:06.100
+It is a trap that trips up a lot of cognitive theories.
+
+34:06.420 --> 34:09.700
+But Flyxion resolves it using a concept from formal logic.
+
+34:10.520 --> 34:12.780
+Acknowledging that there is a higher level of rules,
+
+34:13.360 --> 34:17.200
+what the paper formally writes as gamma mapping to gamma prime,
+
+34:17.460 --> 34:19.880
+is not the same as a vicious regress.
+
+34:20.140 --> 34:21.140
+I'm not a logician.
+
+34:21.240 --> 34:22.180
+Why doesn't it go up forever?
+
+34:22.180 --> 34:27.220
+Because a system can operate perfectly, logically, and completely at one level
+
+34:27.220 --> 34:30.300
+while remaining entirely silent on the next level up.
+
+34:30.900 --> 34:35.520
+You do not need a grand, unified theory of everything to have a functional theory of something.
+
+34:35.920 --> 34:36.180
+Right.
+
+34:36.620 --> 34:38.440
+Flyxion compares it to first-order logic.
+
+34:38.920 --> 34:42.420
+You can build perfectly sound mathematical arguments using first-order logic
+
+34:42.420 --> 34:46.180
+without ever needing to invoke the complex machinery of second-order quantification.
+
+34:46.920 --> 34:49.600
+So you don't need to explain how the laws of the universe change,
+
+34:49.600 --> 34:53.520
+nor to explain how a human changes their mind about a shadow in a dark room.
+
+34:53.840 --> 34:54.100
+Right.
+
+34:54.540 --> 34:59.340
+The paper only needs U, Q, P, and A to be distinct operators.
+
+34:59.780 --> 35:02.900
+It does not need to solve the absolute foundation of reality
+
+35:02.900 --> 35:07.000
+to prove that those four mechanics are mathematically different from each other.
+
+35:07.360 --> 35:10.640
+They function distinctly at their designated level of the hierarchy.
+
+35:10.640 --> 35:15.520
+It's like saying you don't need to understand quantum mechanics to successfully play a game of baseball.
+
+35:15.760 --> 35:19.880
+The rules of baseball operate just fine at their own level of reality.
+
+35:19.960 --> 35:20.440
+Exactly.
+
+35:21.060 --> 35:23.560
+Now there is one final caveat we should address.
+
+35:24.800 --> 35:29.360
+The most loyal defenders of predictive coding will point out that in the real world,
+
+35:29.760 --> 35:33.060
+generative models can sometimes be replaced or extended in practice.
+
+35:33.520 --> 35:35.300
+They will say, look at this AI we built.
+
+35:35.520 --> 35:36.740
+It adapted its structure.
+
+35:37.040 --> 35:38.560
+And what is Flyxion's response to that?
+
+35:38.560 --> 35:41.840
+The response is essentially, I completely agree with you.
+
+35:41.920 --> 35:42.440
+Wait, really?
+
+35:42.640 --> 35:42.820
+Yeah.
+
+35:43.240 --> 35:46.300
+Flyxion is not claiming that active inference or predictive systems
+
+35:46.300 --> 35:49.080
+are literally incapable of structural adaptation.
+
+35:49.780 --> 35:55.260
+The argument is that if a generative model does replace its structure in response to a mismatch,
+
+35:55.540 --> 35:58.460
+it has simply acquired an implementation of operator A.
+
+35:58.560 --> 35:59.140
+Oh, I see.
+
+35:59.360 --> 36:02.540
+It did not achieve that revision using only precision weighting.
+
+36:03.200 --> 36:05.720
+It had to add a new tool to its toolbox.
+
+36:05.720 --> 36:09.900
+Flyxion has taxonomy is categorizing that tool.
+
+36:10.240 --> 36:12.100
+It is not disputing its existence.
+
+36:12.880 --> 36:18.380
+The plea is simply for researchers to acknowledge that a saw is functionally different from a hammer,
+
+36:18.720 --> 36:20.620
+even if you keep them both in the same toolbox.
+
+36:20.840 --> 36:25.160
+You can't just call every tool a hammer just because you bought them all at the predictive coding hardware store.
+
+36:25.160 --> 36:30.140
+If you're using a saw to cut the boundaries of the space, you have to admit you are using a saw.
+
+36:30.380 --> 36:32.520
+That is the absolute crux of the debate.
+
+36:32.720 --> 36:36.220
+This has been a deeply theoretical, mathematically heavy exploration,
+
+36:36.500 --> 36:41.080
+but I want to make sure we tie this directly back to the listeners' daily intellectual life.
+
+36:41.400 --> 36:46.480
+We've gone through the topologies, the operators, the dark rooms, the infinite tables at the Chinese restaurant.
+
+36:46.480 --> 36:52.760
+If you are listening to this on your commute or while doing the dishes, what is the ultimate takeaway?
+
+36:53.200 --> 36:59.480
+The profound takeaway is that there are two entirely distinct ways a system and a human being can be wrong.
+
+36:59.860 --> 37:03.500
+You can occupy the wrong position in your space of possibilities.
+
+37:03.500 --> 37:08.620
+That is an ordinary error, and it is what standard inference and learning are designed to correct.
+
+37:09.040 --> 37:13.020
+Or you can be operating with the wrong space of possibilities entirely.
+
+37:13.340 --> 37:17.620
+That is an error about what inference is even permitted to evaluate.
+
+37:17.880 --> 37:20.140
+The wrong position versus the wrong space.
+
+37:20.360 --> 37:25.200
+It is such a clean, powerful distinction, and it is incredibly applicable.
+
+37:25.400 --> 37:30.740
+If you are listening to this, I really encourage you to apply this diagnostic to your own life this week.
+
+37:30.740 --> 37:33.980
+Think about an intractable mismatch you were facing.
+
+37:34.420 --> 37:38.720
+Maybe it is a stubborn problem at work that you have been grinding on for months.
+
+37:39.120 --> 37:43.320
+Maybe it is a recurring argument in a relationship that you just cannot seem to resolve,
+
+37:43.420 --> 37:45.940
+no matter how much you talk it out or gather new evidence.
+
+37:45.980 --> 37:47.280
+Right. More data doesn't help.
+
+37:47.360 --> 37:51.720
+Exactly. Ask yourself, am I just trying to turn down the precision weight of this error?
+
+37:51.960 --> 37:54.500
+Am I just shifting my guesses around on the existing menu?
+
+37:54.740 --> 37:58.460
+Or do I need to fundamentally refuse the boundaries of the problem I have constructed?
+
+37:58.460 --> 38:03.120
+It requires a profound, almost uncomfortable level of self-awareness
+
+38:03.120 --> 38:06.600
+to recognize when you do not need more evidence,
+
+38:06.960 --> 38:11.960
+but rather need to completely rewrite the rules of what you consider admissible.
+
+38:12.180 --> 38:12.460
+Yeah.
+
+38:12.700 --> 38:14.960
+Are you arguing over which puzzle piece fits
+
+38:14.960 --> 38:17.780
+when you should be asking if the piece even belongs in the box?
+
+38:18.120 --> 38:19.560
+The piece is from the wrong game.
+
+38:19.740 --> 38:21.740
+It brings us right back to the kitchen table.
+
+38:22.000 --> 38:23.820
+But before we wrap up this deep dive,
+
+38:23.920 --> 38:27.040
+there is one final lingering question I want to leave you with.
+
+38:27.040 --> 38:31.240
+It is inspired by a tiny footnote buried in the Solst material,
+
+38:31.740 --> 38:36.100
+specifically a reference to another work titled Boundaries Are Computational Objects.
+
+38:36.140 --> 38:37.140
+That's a great paper, too.
+
+38:37.520 --> 38:41.700
+Right. Because Flickarian hints that this framework isn't just about abstract cognitive thought.
+
+38:42.200 --> 38:45.680
+If boundaries aren't just passive statistical screens, if they're active,
+
+38:46.180 --> 38:49.980
+computational objects constantly deciding what is admissible and what is refused.
+
+38:49.980 --> 38:52.700
+What does this mean for the physical world?
+
+38:53.360 --> 38:57.180
+It expands the scope of the theory into biology, sociology, and beyond.
+
+38:57.680 --> 39:01.120
+Right. What does this mean for the biological boundaries of our cells?
+
+39:01.580 --> 39:04.380
+What about the social boundaries of our human networks?
+
+39:04.540 --> 39:09.220
+Are the physical membranes of our cells running this exact same hidden machinery of refusal,
+
+39:09.880 --> 39:12.740
+calculating what molecules are allowed to exist within them
+
+39:12.740 --> 39:16.140
+and what is fundamentally deleted from their biological reality?
+
+39:16.140 --> 39:17.200
+It's wild to think about.
+
+39:17.520 --> 39:22.820
+Are algorithms, our social media feeds, our societies constantly running Operator A in the background?
+
+39:22.940 --> 39:23.900
+It makes you wonder.
+
+39:24.300 --> 39:28.000
+As you go through your day looking at the choices and the possibilities in front of you,
+
+39:28.380 --> 39:32.900
+what unseen items has your own cognitive architecture actively refused?
+
+39:33.580 --> 39:35.860
+What realities are you completely blind to
+
+39:35.860 --> 39:40.060
+simply because your brain's boundary mechanisms never even let them on the menu?
+
+39:40.060 --> 39:44.580
+It's a staggering thought. It challenges us to look not just at what we see,
+
+39:44.760 --> 39:48.720
+but at the hidden mechanisms that determine what we are even capable of seeing.
+
+39:49.020 --> 39:52.520
+A puzzle where you can't even see the pieces your brain has actively rejected,
+
+39:52.720 --> 39:54.980
+that is something to mull over as you stare at the table.
+
+39:55.980 --> 39:58.500
+Until next time, thanks for taking this deep dive with us.
+
