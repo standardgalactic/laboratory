@@ -1,10 +1,11 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-09-01T11:33:18+00:00",
+  "schema_version": 2,
+  "generated_at": "2026-09-01T11:46:58+00:00",
   "scope": {
     "scanned_directories": [
       ".",
-      "source"
+      "source",
+      "sproll-curriculum-bundle"
     ],
     "deferred_directories": [
       "continuation-geometry",
@@ -12,12 +13,16 @@
       "projects",
       "working"
     ],
-    "recursive": false
+    "recursive_directories": [
+      "sproll-curriculum-bundle"
+    ]
   },
   "papers": [
     {
       "id": "address-before-operator",
       "title": "Address Before Operator: From the Typewriter Carriage to Vim's Grammar",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "address-before-operator.tex",
       "source_candidates": [
         "address-before-operator.tex"
@@ -37,6 +42,8 @@
     {
       "id": "attention-compiler",
       "title": "The Attention Compiler and the Thin-Walled Archive: Content Routing, Bubbles, and the Triage of Novel Ideas",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [
         "source/attention-compiler-extended.tex",
@@ -60,6 +67,8 @@
     {
       "id": "borrowed-intuition",
       "title": "Borrowed Intuition: Compression Without Experience",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "borrowed-intuition.tex",
       "source_candidates": [
         "borrowed-intuition.tex"
@@ -82,6 +91,8 @@
     {
       "id": "consensus-without-independence",
       "title": "Consensus Without Independence: Sycophancy, Context Reification, and Positive Feedback in Persona Ensembles",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [
         "consensus-without-independence.tex",
@@ -104,6 +115,8 @@
     {
       "id": "crinkle-cut-supercube",
       "title": "The Crinkle-Cut Supercube: Constraint-Directed Infolding, Hidden Surface Area: and the Geometry of Emergent Boundaries",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/crinkle-cut-supercube.tex",
       "source_candidates": [
         "source/crinkle-cut-supercube.tex"
@@ -123,6 +136,8 @@
     {
       "id": "deployment-native-ternary-learning",
       "title": "Deployment-Native Ternary Learning: Reproducible Training, Executable Model Streams: and Continuously Curated Synthetic Corpora",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "deployment_native_ternary_learning.tex",
       "source_candidates": [
         "deployment_native_ternary_learning.tex"
@@ -142,6 +157,8 @@
     {
       "id": "depth-before-derivation",
       "title": "Depth Before Derivation",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "depth_before_derivation.pdf",
@@ -161,6 +178,8 @@
     {
       "id": "distinction-and-continuation",
       "title": "Distinction And Continuation",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "distinction-and-continuation.pdf",
@@ -180,6 +199,8 @@
     {
       "id": "emotional-differentiation",
       "title": "Emotional Differentiation: Categorization, Prediction, and the Formation of Conscious Feeling",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/emotional-differentiation.tex",
       "source_candidates": [
         "source/emotional-differentiation.tex"
@@ -199,6 +220,8 @@
     {
       "id": "interaction-residue",
       "title": "Interaction Residue",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "Interaction_Residue.pdf",
@@ -218,6 +241,8 @@
     {
       "id": "latency-of-evidence",
       "title": "The Latency of Evidence: Why Facts Can Exist Before a System Becomes Capable of Knowing Them",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [
         "latency-of-evidence.tex",
@@ -240,6 +265,8 @@
     {
       "id": "monotonic-learning-plan",
       "title": "The Monotonic Learning Series: Programmed Texts in Distinction, Repair, and Continuation: Full Series Plan --- Detailed Edition",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/monotonic-learning-plan.tex",
       "source_candidates": [
         "source/monotonic-learning-plan.tex"
@@ -259,6 +286,8 @@
     {
       "id": "operator-residue",
       "title": "The Operational Residue: The Noncommutativity of Preservation and Action",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/operator-residue.tex",
       "source_candidates": [
         "source/operator-residue.tex"
@@ -278,6 +307,8 @@
     {
       "id": "relativistic-longevity",
       "title": "A Relativistic Theory of Longevity",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/relativistic-longevity.tex",
       "source_candidates": [
         "source/relativistic-longevity.tex"
@@ -297,6 +328,8 @@
     {
       "id": "relativistic-persistence",
       "title": "Relativistic Persistence",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "source/Relativistic_Persistence.pdf",
@@ -316,6 +349,8 @@
     {
       "id": "representational-simplicity",
       "title": "Representational Simplicity: Sufficient Projection, Obstruction-Sensitive Routing, and Repair Under Finite Attention",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/representational-simplicity.tex",
       "source_candidates": [
         "source/representational-simplicity.tex"
@@ -333,8 +368,535 @@
       "recovery_blockers": []
     },
     {
+      "id": "sproll-curriculum-bundle/essay/beyond-prediction-error",
+      "title": "Beyond Prediction Error: Warrant, Repair, and Refusal in Predictive Architectures",
+      "collection": "sproll-curriculum",
+      "track": "essay",
+      "source_path": "sproll-curriculum-bundle/essay/beyond-prediction-error.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/essay/beyond-prediction-error.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/essay/beyond-prediction-error.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/essay/beyond-prediction-error.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 10,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/monograph/sproll-monograph",
+      "title": "The Sproll Curriculum: Methodology, Mathematics, and the Complete Plan for a Forty-Booklet Introduction to Mathematics via the Spherepop Calculus",
+      "collection": "sproll-curriculum",
+      "track": "monograph",
+      "source_path": "sproll-curriculum-bundle/monograph/sproll-monograph.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/monograph/sproll-monograph.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/monograph/sproll-monograph.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/monograph/sproll-monograph.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 63,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-00-a-difference",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 00 A Difference",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-00-a-difference.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-00-a-difference.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-00-a-difference.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-00-a-difference.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-01-something-happened",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 01 Something Happened",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-01-something-happened.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-01-something-happened.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-01-something-happened.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-01-something-happened.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 02 What Happened First",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 03 Play It Again",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 04 Not This Way",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-05-together",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 05 Together",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-05-together.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-05-together.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-05-together.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-05-together.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 06 Look Through A Rule",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 07 Same Picture Different Story",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 08 When Are They Equal",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 09 Parts With A Past",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world",
+      "title": "Sproll Curriculum Bundle/Primary Track/Sproll 10 Four Moves Make A World",
+      "collection": "sproll-curriculum",
+      "track": "primary-track",
+      "source_path": "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/superseded/sproll-01-one-pop",
+      "title": "Sproll Curriculum Bundle/Superseded/Sproll 01 One Pop",
+      "collection": "sproll-curriculum",
+      "track": "superseded",
+      "source_path": "sproll-curriculum-bundle/superseded/sproll-01-one-pop.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/superseded/sproll-01-one-pop.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/superseded/sproll-01-one-pop.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/superseded/sproll-01-one-pop.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 16,
+      "page_count_source": "pdfinfo",
+      "revision_status": "superseded",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-00-workbook",
+      "title": "Sproll 00: A Difference: a first workbook in the Sproll Curriculum",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-00-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-00-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-00-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-00-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-01-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 01 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-01-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-01-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-01-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-01-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-02-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 02 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-02-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-02-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-02-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-02-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-03-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 03 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-03-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-03-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-03-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-03-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-04-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 04 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-04-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-04-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-04-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-04-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-05-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 05 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-05-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-05-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-05-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-05-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-06-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 06 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-06-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-06-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-06-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-06-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-07-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 07 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-07-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-07-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-07-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-07-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-08-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 08 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-08-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-08-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-08-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-08-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-09-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 09 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-09-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-09-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-09-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-09-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "sproll-curriculum-bundle/workbook-track/sproll-10-workbook",
+      "title": "Sproll Curriculum Bundle/Workbook Track/Sproll 10 Workbook",
+      "collection": "sproll-curriculum",
+      "track": "workbook-track",
+      "source_path": "sproll-curriculum-bundle/workbook-track/sproll-10-workbook.tex",
+      "source_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-10-workbook.tex"
+      ],
+      "output_path": "sproll-curriculum-bundle/workbook-track/sproll-10-workbook.pdf",
+      "output_candidates": [
+        "sproll-curriculum-bundle/workbook-track/sproll-10-workbook.pdf"
+      ],
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 15,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
       "id": "sufficiency-under-compression",
       "title": "Sufficiency Under Compression: Exact Decoding, Admissible Projection, and Operational Coupling in Clio and Hydra",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/sufficiency-under-compression.tex",
       "source_candidates": [
         "source/sufficiency-under-compression.tex"
@@ -354,6 +916,8 @@
     {
       "id": "the-architecture-of-feeling",
       "title": "The Architecture Of Feeling",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "source/The_Architecture_of_Feeling.pdf",
@@ -373,6 +937,8 @@
     {
       "id": "the-attention-compiler",
       "title": "The Attention Compiler",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": null,
@@ -395,6 +961,8 @@
     {
       "id": "verifiable-ml-deployment-architecture",
       "title": "Verifiable Ml Deployment Architecture",
+      "collection": "laboratory",
+      "track": null,
       "source_path": null,
       "source_candidates": [],
       "output_path": "Verifiable_ML_Deployment_Architecture.pdf",
@@ -414,6 +982,8 @@
     {
       "id": "why-no-one-talks-backwards",
       "title": "Why No One Talks Backwards:: Developmental Exploration, Reachability, and the Absence of: Temporal Reversal as a Grammatical Operation",
+      "collection": "laboratory",
+      "track": null,
       "source_path": "source/why-no-one-talks-backwards.tex",
       "source_candidates": [
         "source/why-no-one-talks-backwards.tex"
