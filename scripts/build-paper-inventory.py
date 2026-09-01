@@ -48,8 +48,12 @@ def latex_title(path: Path) -> str | None:
     if not match:
         return None
     title = re.sub(r"\\(?:textbf|emph)\{([^{}]*)\}", r"\1", match.group(1))
+    title = re.sub(r"\\vspace\*?\{[^{}]*\}", "", title)
     title = title.replace("\\\\", ": ")
+    title = re.sub(r"\[[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:em|ex|pt|in|cm|mm)\]", "", title)
     title = re.sub(r"\\[A-Za-z]+\*?(?:\[[^]]*\])?", "", title)
+    title = re.sub(r"\s*,\s*:", ":", title)
+    title = re.sub(r"\s+([,;:])", r"\1", title)
     return re.sub(r"\s+", " ", title.replace("{", "").replace("}", "")).strip() or None
 
 
