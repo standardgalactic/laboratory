@@ -41,6 +41,9 @@ jobs:
       - name: Verify paper inventory is current
         run: python3 scripts/build-paper-inventory.py --check
 
+      - name: Audit citations for broken references
+        run: python3 scripts/audit-citations.py --check
+
       - name: Verify experiment gallery is current
         run: python3 scripts/build-gallery.py --check
 
