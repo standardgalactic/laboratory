@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "experiments": [
+    {
+      "id": "calculus_orthodromes",
+      "repository": "calculus",
+      "filter": "calculus",
+      "title": "Orthodromes and Libration",
+      "alt": "Orthodromic rings around a spherical body",
+      "description": "Intersecting spherical frames with an orbital libration envelope.",
+      "question": "How do orthodromic frames intersect a libration envelope?",
+      "related": []
+    },
+    {
+      "id": "calculus_spherical_voronoi",
+      "repository": "calculus",
+      "filter": "calculus",
+      "title": "Spherical Service Network",
+      "alt": "Weighted hubs connected across a globe",
+      "description": "Weighted service hubs inducing a secondary spherical network.",
+      "question": "How do weighted service hubs induce a secondary spherical network?",
+      "related": []
+    },
+    {
+      "id": "tartan_constraint_closure",
+      "repository": "TARTAN",
+      "filter": "tartan",
+      "title": "Constraint Closure",
+      "alt": "Tiled field converging toward a repaired center",
+      "description": "A local obstruction reconciled into a globally coherent state.",
+      "question": "Can a locally plausible obstruction be reconciled into global closure?",
+      "related": [
+        {"label": "Chapter: TARTAN tiling", "path": "processing/distinction-and-continuation/chapters/ch08-tartan-tiling.tex"}
+      ]
+    },
+    {
+      "id": "tartan_annotated_fracture",
+      "repository": "TARTAN",
+      "filter": "tartan",
+      "title": "Annotated Fracture",
+      "alt": "A fracture trajectory crossing a tiled field",
+      "description": "Trajectory-aware tiling responding to a structured perturbation.",
+      "question": "How does trajectory-conditioned tiling respond to an annotated fracture?",
+      "related": [
+        {"label": "Chapter: TARTAN tiling", "path": "processing/distinction-and-continuation/chapters/ch08-tartan-tiling.tex"}
+      ]
+    },
+    {
+      "id": "hydra_phase_locking",
+      "repository": "HYDRA",
+      "filter": "hydra",
+      "title": "Partial Phase Locking",
+      "alt": "Three families of spiraling persona trajectories",
+      "description": "Persona trajectories converging locally while coupling globally.",
+      "question": "Which trajectories converge within a persona and which couple across personas?",
+      "related": []
+    },
+    {
+      "id": "hydra_recursive_veiling",
+      "repository": "HYDRA",
+      "filter": "hydra",
+      "title": "Recursive Veiling",
+      "alt": "A signal passing through translucent nested shells",
+      "description": "Signal recoverability measured across nested visibility thresholds.",
+      "question": "Which parts of a signal remain recoverable through nested veils?",
+      "related": []
+    },
+    {
+      "id": "autogenerative_repair",
+      "repository": "autogenerative-dynamics",
+      "filter": "autogenerative",
+      "title": "Recursive Repair",
+      "alt": "Recursive branches repairing a missing region",
+      "description": "Generated growth rerouting around a deleted region.",
+      "question": "How does recursive growth route around a deleted region?",
+      "related": []
+    },
+    {
+      "id": "autogenerative_worldlines",
+      "repository": "autogenerative-dynamics",
+      "filter": "autogenerative",
+      "title": "Worldline Selection",
+      "alt": "Candidate worldlines passing constraint regions",
+      "description": "Candidate histories accepted or rejected by spatial constraints.",
+      "question": "Which candidate histories survive spatial constraints?",
+      "related": []
+    },
+    {
+      "id": "cliodynamics_aliasing",
+      "repository": "cliodynamics",
+      "filter": "cliodynamics",
+      "title": "Consequential Aliasing",
+      "alt": "Two states sharing one projection before divergent actions",
+      "description": "One apparent view concealing states that require different actions.",
+      "question": "When does one projection hide states requiring different continuations?",
+      "related": []
+    },
+    {
+      "id": "cliodynamics_recoverability",
+      "repository": "cliodynamics",
+      "filter": "cliodynamics",
+      "title": "Indexed Recoverability",
+      "alt": "Participants connected to different retained events",
+      "description": "System retention compared with participant-specific access.",
+      "question": "Which retained events remain recoverable to each participant?",
+      "related": []
+    },
+    {
+      "id": "spherepop_logic",
+      "repository": "spherepop",
+      "filter": "spherepop",
+      "title": "Primitive Logic",
+      "alt": "Four Boolean cases passing through Spherepop operations",
+      "description": "Bind, Refuse, and Pop executing the four AND input cases.",
+      "question": "How do Bind, Refuse, and Pop execute the four Boolean input cases?",
+      "related": [
+        {"label": "Working draft: Spherepop OS", "path": "working/spherepop-os.tex"},
+        {"label": "Chapter: Spherepop", "path": "processing/distinction-and-continuation/chapters/ch07-spherepop.tex"}
+      ]
+    },
+    {
+      "id": "spherepop_deferred_closure",
+      "repository": "spherepop",
+      "filter": "spherepop",
+      "title": "Deferred Closure",
+      "alt": "A token spiraling through nested scopes",
+      "description": "A pending token crossing nested scopes before Collapse.",
+      "question": "How does a pending token cross scopes before Collapse?",
+      "related": [
+        {"label": "Working draft: Spherepop OS", "path": "working/spherepop-os.tex"},
+        {"label": "Chapter: Spherepop", "path": "processing/distinction-and-continuation/chapters/ch07-spherepop.tex"}
+      ]
+    },
+    {
+      "id": "chloroplast_light_capture",
+      "repository": "Chloroplasts",
+      "filter": "chloroplasts",
+      "title": "Light Capture",
+      "alt": "Light rays entering stacked chloroplast membranes",
+      "description": "Incidence angle and membrane stacking shaping absorbed paths.",
+      "question": "How do incidence angle and membrane stacking alter light paths?",
+      "related": []
+    },
+    {
+      "id": "chloroplast_proton_gradient",
+      "repository": "Chloroplasts",
+      "filter": "chloroplasts",
+      "title": "Proton Gradient",
+      "alt": "Particles descending through rotary membrane channels",
+      "description": "Stored potential routed through rotary transport channels.",
+      "question": "How does a stored gradient route through rotary transport?",
+      "related": []
+    },
+    {
+      "id": "alphabet_fibered_dsl",
+      "repository": "alphabet",
+      "filter": "alphabet",
+      "title": "Fibered DSL Transport",
+      "alt": "Domain-specific fibers rising above a shared language base",
+      "description": "Local domain transport above a shared linguistic base.",
+      "question": "Where can local DSL transport proceed, and where is it obstructed?",
+      "related": []
+    },
+    {
+      "id": "alphabet_semantic_holonomy",
+      "repository": "alphabet",
+      "filter": "alphabet",
+      "title": "Semantic Holonomy",
+      "alt": "A semantic loop returning with a residual displacement",
+      "description": "Meaning transported around a DSL loop and returned with residue.",
+      "question": "What residual remains after semantic transport around a DSL loop?",
+      "related": []
+    }
+  ]
+}

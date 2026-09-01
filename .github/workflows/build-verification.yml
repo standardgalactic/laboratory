@@ -1,0 +1,167 @@
+name: Build verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: build-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  inventory-and-links:
+    name: Inventory, gallery, and link consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-pillow
+
+      - name: Install Python dependencies
+        run: pip install Pillow
+
+      - name: Install pdfinfo
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Verify paper inventory is current
+        run: python3 scripts/build-paper-inventory.py --check
+
+      - name: Verify experiment gallery is current
+        run: python3 scripts/build-gallery.py --check
+
+      - name: Validate local links, redirects, and artifact integrity
+        run: python3 scripts/validate-links.py
+
+      - name: Validate HTML well-formedness
+        run: |
+          python3 - <<'PY'
+          import html.parser
+          import sys
+          from pathlib import Path
+
+          failures = []
+          for path in [Path("index.html"), Path("experiments/index.html")]:
+              if not path.exists():
+                  failures.append(f"{path}: missing")
+                  continue
+              parser = html.parser.HTMLParser()
+              try:
+                  parser.feed(path.read_text(encoding="utf-8"))
+                  parser.close()
+              except Exception as exc:  # noqa: BLE001
+                  failures.append(f"{path}: {exc}")
+
+          if failures:
+              for failure in failures:
+                  print(f"html check: {failure}", file=sys.stderr)
+              sys.exit(1)
+          print("html check: root and gallery pages are well-formed")
+          PY
+
+      - name: Report unexpectedly small or empty PDF artifacts
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          data = json.loads(Path("inventory/papers.json").read_text(encoding="utf-8"))
+          tiny = []
+          for paper in data.get("papers", []):
+              output = paper.get("output_path")
+              if not output:
+                  continue
+              path = Path(output)
+              if path.exists() and path.stat().st_size < 2048:
+                  tiny.append((paper["id"], path, path.stat().st_size))
+
+          if tiny:
+              for paper_id, path, size in tiny:
+                  print(f"::warning::{paper_id}: {path} is only {size} bytes", file=sys.stderr)
+          else:
+              print("pdf size check: no unexpectedly tiny PDF artifacts")
+          PY
+
+  latex-build:
+    name: Compile changed manuscripts
+    runs-on: ubuntu-latest
+    needs: inventory-and-links
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine changed manuscripts
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="origin/${{ github.event.pull_request.base.ref }}"
+            git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.ref }}"
+          else
+            base="HEAD~1"
+          fi
+          files="$(git diff --name-only --diff-filter=ACMR "$base"...HEAD -- '*.tex' || true)"
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Install TeX Live
+        if: steps.changed.outputs.files != ''
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended \
+            texlive-fonts-extra texlive-luatex texlive-xetex texlive-science latexmk
+
+      - name: Compile each changed manuscript and fail on undefined references or citations
+        if: steps.changed.outputs.files != ''
+        run: |
+          set -euo pipefail
+          status=0
+          while IFS= read -r tex; do
+            [ -z "$tex" ] && continue
+            engine="pdflatex"
+            if grep -Eq '\\usepackage(\[[^]]*\])?\{fontspec\}' "$tex"; then
+              engine="lualatex"
+            fi
+            dir="$(dirname "$tex")"
+            base="$(basename "$tex" .tex)"
+            echo "::group::Compiling $tex with $engine"
+            if ! (cd "$dir" && latexmk -interaction=nonstopmode -halt-on-error "-$engine" "$base.tex"); then
+              echo "::error file=$tex::latexmk failed to compile"
+              status=1
+            fi
+            log="$dir/$base.log"
+            if [ -f "$log" ]; then
+              if grep -q "LaTeX Warning: Reference .* undefined" "$log"; then
+                echo "::error file=$tex::undefined reference detected"
+                status=1
+              fi
+              if grep -Eq "LaTeX Warning: Citation .* undefined|Package natbib Warning:.*undefined" "$log"; then
+                echo "::error file=$tex::undefined citation detected"
+                status=1
+              fi
+            fi
+            echo "::endgroup::"
+          done <<< "${{ steps.changed.outputs.files }}"
+          exit "$status"
+
+      - name: No changed manuscripts
+        if: steps.changed.outputs.files == ''
+        run: echo "No .tex files changed; skipping LaTeX compilation."

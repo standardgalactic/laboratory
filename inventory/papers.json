@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "generated_at": "2026-09-01T11:46:58+00:00",
+  "schema_version": 3,
+  "generated_at": "2026-09-01T12:10:06+00:00",
   "scope": {
     "scanned_directories": [
       ".",
@@ -31,6 +31,9 @@
       "output_candidates": [
         "address-before-operator.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 7,
@@ -44,24 +47,27 @@
       "title": "The Attention Compiler and the Thin-Walled Archive: Content Routing, Bubbles, and the Triage of Novel Ideas",
       "collection": "laboratory",
       "track": null,
-      "source_path": null,
+      "source_path": "source/attention-compiler-extended.tex",
       "source_candidates": [
         "source/attention-compiler-extended.tex",
         "source/attention-compiler.tex"
       ],
-      "output_path": null,
+      "output_path": "source/attention-compiler-extended.pdf",
       "output_candidates": [
         "source/attention-compiler-extended.pdf",
         "source/attention-compiler.pdf"
       ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": null,
-      "page_count_source": "ambiguous-or-missing-output",
-      "revision_status": "duplicate-review",
+      "canonical_source_path": "source/attention-compiler-extended.tex",
+      "canonical_output_path": "source/attention-compiler-extended.pdf",
+      "editorial_note": "attention-compiler-extended.tex (24pp, 2026-08-30) supersedes attention-compiler.tex (15pp, 2026-08-29): it develops the same argument in explicit dialogue with Monica Anderson's thin-walled-rooms and Bubble City work. The shorter draft is retained on disk for provenance but is not the manuscript of record.",
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 24,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": [
-        "duplicate-family-requires-canonical-review"
+        "duplicate-family-resolved-by-editorial-override"
       ]
     },
     {
@@ -73,27 +79,27 @@
       "source_candidates": [
         "borrowed-intuition.tex"
       ],
-      "output_path": null,
+      "output_path": "borrowed-intuition.pdf",
       "output_candidates": [
-        "Borrowed_Intuition.pdf",
         "borrowed-intuition.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
-      "page_count": null,
-      "page_count_source": "ambiguous-or-missing-output",
-      "revision_status": "duplicate-review",
+      "page_count": 48,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
       "revision_status_source": "derived",
-      "recovery_blockers": [
-        "duplicate-family-requires-canonical-review"
-      ]
+      "recovery_blockers": []
     },
     {
       "id": "consensus-without-independence",
       "title": "Consensus Without Independence: Sycophancy, Context Reification, and Positive Feedback in Persona Ensembles",
       "collection": "laboratory",
       "track": null,
-      "source_path": null,
+      "source_path": "consensus-without-independence.tex",
       "source_candidates": [
         "consensus-without-independence.tex",
         "source/consensus-without-independence.tex"
@@ -102,14 +108,17 @@
       "output_candidates": [
         "consensus-without-independence.pdf"
       ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
+      "canonical_source_path": "consensus-without-independence.tex",
+      "canonical_output_path": null,
+      "editorial_note": "consensus-without-independence.tex and source/consensus-without-independence.tex are byte-identical. The root copy is canonical because it is co-located with the only built output, consensus-without-independence.pdf; the source/ copy is retained for provenance pending a decision to consolidate the repository under source/.",
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
       "page_count": 10,
       "page_count_source": "pdfinfo",
-      "revision_status": "duplicate-review",
+      "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": [
-        "duplicate-family-requires-canonical-review"
+        "duplicate-family-resolved-by-editorial-override"
       ]
     },
     {
@@ -125,6 +134,9 @@
       "output_candidates": [
         "source/crinkle-cut-supercube.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "pdflatex",
       "build_engine_source": "inferred-from-preamble",
       "page_count": 84,
@@ -146,6 +158,9 @@
       "output_candidates": [
         "deployment_native_ternary_learning.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 13,
@@ -165,6 +180,9 @@
       "output_candidates": [
         "depth_before_derivation.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": null,
       "build_engine_source": "ambiguous-or-missing-source",
       "page_count": 9,
@@ -186,6 +204,9 @@
       "output_candidates": [
         "distinction-and-continuation.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": null,
       "build_engine_source": "ambiguous-or-missing-source",
       "page_count": 177,
@@ -209,6 +230,9 @@
       "output_candidates": [
         "source/emotional-differentiation.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "pdflatex",
       "build_engine_source": "inferred-from-preamble",
       "page_count": 23,
@@ -218,32 +242,11 @@
       "recovery_blockers": []
     },
     {
-      "id": "interaction-residue",
-      "title": "Interaction Residue",
-      "collection": "laboratory",
-      "track": null,
-      "source_path": null,
-      "source_candidates": [],
-      "output_path": "Interaction_Residue.pdf",
-      "output_candidates": [
-        "Interaction_Residue.pdf"
-      ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": 15,
-      "page_count_source": "pdfinfo",
-      "revision_status": "recovery-blocked",
-      "revision_status_source": "derived",
-      "recovery_blockers": [
-        "editable-source-missing"
-      ]
-    },
-    {
       "id": "latency-of-evidence",
       "title": "The Latency of Evidence: Why Facts Can Exist Before a System Becomes Capable of Knowing Them",
       "collection": "laboratory",
       "track": null,
-      "source_path": null,
+      "source_path": "latency-of-evidence.tex",
       "source_candidates": [
         "latency-of-evidence.tex",
         "source/latency-of-evidence.tex"
@@ -252,14 +255,17 @@
       "output_candidates": [
         "latency-of-evidence.pdf"
       ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
+      "canonical_source_path": "latency-of-evidence.tex",
+      "canonical_output_path": null,
+      "editorial_note": "latency-of-evidence.tex and source/latency-of-evidence.tex are byte-identical. The root copy is canonical because it is co-located with the only built output, latency-of-evidence.pdf; the source/ copy is retained for provenance pending a decision to consolidate the repository under source/.",
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
       "page_count": 11,
       "page_count_source": "pdfinfo",
-      "revision_status": "duplicate-review",
+      "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": [
-        "duplicate-family-requires-canonical-review"
+        "duplicate-family-resolved-by-editorial-override"
       ]
     },
     {
@@ -275,6 +281,9 @@
       "output_candidates": [
         "source/monotonic-learning-plan.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 10,
@@ -296,6 +305,9 @@
       "output_candidates": [
         "source/operator-residue.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 32,
@@ -317,6 +329,9 @@
       "output_candidates": [
         "source/relativistic-longevity.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "pdflatex",
       "build_engine_source": "inferred-from-preamble",
       "page_count": 21,
@@ -324,27 +339,6 @@
       "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": []
-    },
-    {
-      "id": "relativistic-persistence",
-      "title": "Relativistic Persistence",
-      "collection": "laboratory",
-      "track": null,
-      "source_path": null,
-      "source_candidates": [],
-      "output_path": "source/Relativistic_Persistence.pdf",
-      "output_candidates": [
-        "source/Relativistic_Persistence.pdf"
-      ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": 15,
-      "page_count_source": "pdfinfo",
-      "revision_status": "recovery-blocked",
-      "revision_status_source": "derived",
-      "recovery_blockers": [
-        "editable-source-missing"
-      ]
     },
     {
       "id": "representational-simplicity",
@@ -359,6 +353,9 @@
       "output_candidates": [
         "source/representational-simplicity.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 264,
@@ -380,6 +377,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/essay/beyond-prediction-error.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 10,
@@ -401,6 +401,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/monograph/sproll-monograph.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 63,
@@ -422,6 +425,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-00-a-difference.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -443,6 +449,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-01-something-happened.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -464,6 +473,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-02-what-happened-first.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -485,6 +497,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-03-play-it-again.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -506,6 +521,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-04-not-this-way.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -527,6 +545,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-05-together.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -548,6 +569,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-06-look-through-a-rule.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -569,6 +593,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-07-same-picture-different-story.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -590,6 +617,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-08-when-are-they-equal.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -611,6 +641,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-09-parts-with-a-past.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -632,6 +665,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/primary-track/sproll-10-four-moves-make-a-world.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -653,6 +689,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/superseded/sproll-01-one-pop.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 16,
@@ -674,6 +713,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-00-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -695,6 +737,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-01-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -716,6 +761,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-02-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -737,6 +785,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-03-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -758,6 +809,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-04-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -779,6 +833,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-05-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -800,6 +857,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-06-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -821,6 +881,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-07-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -842,6 +905,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-08-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -863,6 +929,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-09-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -884,6 +953,9 @@
       "output_candidates": [
         "sproll-curriculum-bundle/workbook-track/sproll-10-workbook.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -905,6 +977,9 @@
       "output_candidates": [
         "source/sufficiency-under-compression.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
       "page_count": 15,
@@ -912,72 +987,6 @@
       "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": []
-    },
-    {
-      "id": "the-architecture-of-feeling",
-      "title": "The Architecture Of Feeling",
-      "collection": "laboratory",
-      "track": null,
-      "source_path": null,
-      "source_candidates": [],
-      "output_path": "source/The_Architecture_of_Feeling.pdf",
-      "output_candidates": [
-        "source/The_Architecture_of_Feeling.pdf"
-      ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": 15,
-      "page_count_source": "pdfinfo",
-      "revision_status": "recovery-blocked",
-      "revision_status_source": "derived",
-      "recovery_blockers": [
-        "editable-source-missing"
-      ]
-    },
-    {
-      "id": "the-attention-compiler",
-      "title": "The Attention Compiler",
-      "collection": "laboratory",
-      "track": null,
-      "source_path": null,
-      "source_candidates": [],
-      "output_path": null,
-      "output_candidates": [
-        "source/The_Attention_Compiler-draft.pdf",
-        "source/The_Attention_Compiler-notes.pdf",
-        "source/The_Attention_Compiler.pdf"
-      ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": null,
-      "page_count_source": "ambiguous-or-missing-output",
-      "revision_status": "recovery-blocked",
-      "revision_status_source": "derived",
-      "recovery_blockers": [
-        "editable-source-missing",
-        "duplicate-family-requires-canonical-review"
-      ]
-    },
-    {
-      "id": "verifiable-ml-deployment-architecture",
-      "title": "Verifiable Ml Deployment Architecture",
-      "collection": "laboratory",
-      "track": null,
-      "source_path": null,
-      "source_candidates": [],
-      "output_path": "Verifiable_ML_Deployment_Architecture.pdf",
-      "output_candidates": [
-        "Verifiable_ML_Deployment_Architecture.pdf"
-      ],
-      "build_engine": null,
-      "build_engine_source": "ambiguous-or-missing-source",
-      "page_count": 15,
-      "page_count_source": "pdfinfo",
-      "revision_status": "recovery-blocked",
-      "revision_status_source": "derived",
-      "recovery_blockers": [
-        "editable-source-missing"
-      ]
     },
     {
       "id": "why-no-one-talks-backwards",
@@ -992,6 +1001,9 @@
       "output_candidates": [
         "source/why-no-one-talks-backwards.pdf"
       ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
       "build_engine": "pdflatex",
       "build_engine_source": "inferred-from-preamble",
       "page_count": 13,
@@ -999,6 +1011,48 @@
       "revision_status": "published",
       "revision_status_source": "derived",
       "recovery_blockers": []
+    }
+  ],
+  "companion_assets": [
+    {
+      "path": "Borrowed_Intuition.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "Interaction_Residue.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "Verifiable_ML_Deployment_Architecture.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "source/Relativistic_Persistence.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "source/The_Architecture_of_Feeling.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "source/The_Attention_Compiler-draft.pdf",
+      "linked_paper_id": "attention-compiler",
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "source/The_Attention_Compiler-notes.pdf",
+      "linked_paper_id": "attention-compiler",
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "source/The_Attention_Compiler.pdf",
+      "linked_paper_id": "attention-compiler",
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
     }
   ]
 }

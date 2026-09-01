@@ -8,6 +8,29 @@ identifier. No external assets or add-ons are required.
 bash render_all.sh output
 ```
 
+`render_all.sh` renders every scene and then regenerates `index.html` by
+calling `../scripts/build-gallery.py`. **`index.html` is generated output;
+do not edit it directly.** Captions, structural questions, and related-paper
+links live in `metadata.json`; add an entry there for any new experiment
+script, then regenerate:
+
+```bash
+python3 ../scripts/build-gallery.py
+```
+
+The generator also writes efficient JPEG thumbnails to `output/thumbs/`
+(requires Pillow: `pip install Pillow`) while the full-resolution PNG stays
+reachable behind each thumbnail. Validate consistency between scripts,
+rendered outputs, thumbnails, metadata, and `index.html` without writing
+anything &mdash; suitable for CI:
+
+```bash
+python3 ../scripts/build-gallery.py --check
+```
+
+The check fails on orphaned scripts or outputs, missing thumbnails, broken
+related-paper links, or a stale `index.html`.
+
 Render one experiment with:
 
 ```bash

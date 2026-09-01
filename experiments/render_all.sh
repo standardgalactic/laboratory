@@ -10,3 +10,5 @@ for script in "$root"/experiments/*.py; do
 done
 
 printf 'Sixteen experiment renders written to %s\n' "$output"
+
+python3 "$(dirname "$root")/scripts/build-gallery.py"

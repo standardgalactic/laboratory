@@ -17,13 +17,33 @@ import shutil
 import subprocess
 from pathlib import Path
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 SCANNED_DIRECTORIES = [".", "source", "sproll-curriculum-bundle"]
 DEFERRED_DIRECTORIES = ["continuation-geometry", "processing", "projects", "working"]
 SOURCE_SUFFIXES = {".tex"}
 OUTPUT_SUFFIXES = {".pdf"}
 VARIANT_SUFFIX = re.compile(r"(?:[-_](?:draft|notes|extended|revised|final)|\s*\(\d+\))$", re.I)
 TITLE_RE = re.compile(r"\\title(?:\[[^]]*\])?\{((?:[^{}]|\{[^{}]*\})*)\}", re.S)
+
+
+def is_companion_asset(path: Path) -> bool:
+    """Detect the repository's companion-asset naming convention.
+
+    Canonical LaTeX manuscripts and their built PDFs use lowercase,
+    hyphenated (or underscored) basenames, e.g. `attention-compiler.tex`,
+    `deployment_native_ternary_learning.pdf`. Slide decks, narrated audio,
+    and other auxiliary presentation assets instead use TitleCase basenames
+    with underscores, e.g. `The_Attention_Compiler.pdf`,
+    `Borrowed_Intuition.pdf`. When more than one such asset shares a title,
+    an additional `-word` suffix distinguishes them (e.g.
+    `The_Attention_Compiler-notes.pdf`, `The_Attention_Compiler-draft.pdf`)
+    rather than indicating a competing manuscript revision. A companion
+    asset is not a build output of a paper and must never be folded into
+    that paper's duplicate-family detection; it also does not necessarily
+    correspond to any single paper in this inventory.
+    """
+    stem = path.stem
+    return "_" in stem and any(char.isupper() for char in stem)
 
 
 def rel(path: Path, root: Path) -> str:
@@ -122,17 +142,66 @@ def load_manual_statuses(path: Path) -> dict[str, str]:
     }
 
 
+def load_canonical_overrides(path: Path) -> dict[str, dict]:
+    """Load human-reviewed canonical picks for duplicate families.
+
+    A duplicate family (multiple sources or multiple outputs sharing a
+    normalized basename) cannot be resolved automatically: it requires a
+    person to read the candidates and decide which is the manuscript of
+    record. Once decided, set `canonical_source_path` and/or
+    `canonical_output_path` on that paper's entry in papers.json (each must
+    be one of the recorded candidates) and add an `editorial_note`
+    explaining the decision. These survive regeneration; every candidate
+    remains listed for provenance.
+    """
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    overrides = {}
+    for item in data.get("papers", []):
+        picked = {
+            key: item[key]
+            for key in ("canonical_source_path", "canonical_output_path", "editorial_note")
+            if item.get(key)
+        }
+        if picked:
+            overrides[item["id"]] = picked
+    return overrides
+
+
+def load_companion_links(path: Path) -> dict[str, str]:
+    """Preserve manually assigned linked_paper_id values across regeneration."""
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return {
+        item["path"]: item["linked_paper_id"]
+        for item in data.get("companion_assets", [])
+        if item.get("linked_paper_id")
+    }
+
+
 def discover(root: Path, output_json: Path) -> dict:
     candidates: list[Path] = []
+    companion_assets: list[Path] = []
     for directory in SCANNED_DIRECTORIES:
         base = root if directory == "." else root / directory
         if not base.is_dir():
             continue
         iterator = base.rglob("*") if directory == "sproll-curriculum-bundle" else base.iterdir()
-        candidates.extend(
-            path for path in iterator
-            if path.is_file() and path.suffix.lower() in SOURCE_SUFFIXES | OUTPUT_SUFFIXES
-        )
+        for path in iterator:
+            if not path.is_file() or path.suffix.lower() not in SOURCE_SUFFIXES | OUTPUT_SUFFIXES:
+                continue
+            if path.suffix.lower() in OUTPUT_SUFFIXES and is_companion_asset(path):
+                companion_assets.append(path)
+            else:
+                candidates.append(path)
 
     families: dict[str, dict[str, list[Path]]] = {}
     for path in sorted(candidates):
@@ -140,26 +209,44 @@ def discover(root: Path, output_json: Path) -> dict:
         bucket["sources" if path.suffix.lower() in SOURCE_SUFFIXES else "outputs"].append(path)
 
     manual_statuses = load_manual_statuses(output_json)
+    canonical_overrides = load_canonical_overrides(output_json)
+    companion_links = load_companion_links(output_json)
     papers = []
     for key, paths in sorted(families.items()):
         sources = sorted(paths["sources"])
         outputs = sorted(paths["outputs"])
+        override = canonical_overrides.get(key, {})
+
         canonical_source = sources[0] if len(sources) == 1 else None
+        if override.get("canonical_source_path"):
+            picked = root / override["canonical_source_path"]
+            if picked in sources:
+                canonical_source = picked
+
         canonical_output = outputs[0] if len(outputs) == 1 else None
+        if override.get("canonical_output_path"):
+            picked = root / override["canonical_output_path"]
+            if picked in outputs:
+                canonical_output = picked
+
         representative = canonical_source or canonical_output
         collection, track = provenance(representative, root)
+        resolved_by_override = bool(override.get("canonical_source_path") or override.get("canonical_output_path"))
         blockers = []
         if outputs and not sources:
             blockers.append("editable-source-missing")
         if sources and not outputs:
             blockers.append("output-pdf-missing")
-        if len(sources) > 1 or len(outputs) > 1:
+        if (len(sources) > 1 or len(outputs) > 1) and not resolved_by_override:
             blockers.append("duplicate-family-requires-canonical-review")
+        elif (len(sources) > 1 or len(outputs) > 1) and resolved_by_override:
+            blockers.append("duplicate-family-resolved-by-editorial-override")
 
         engine, engine_source = engine_for(canonical_source) if canonical_source else (None, "ambiguous-or-missing-source")
         pages, pages_source = page_count(canonical_output) if canonical_output else (None, "ambiguous-or-missing-output")
         derived_status = (
             "superseded" if collection == "sproll-curriculum" and track == "superseded" else
+            "published" if resolved_by_override and canonical_source and canonical_output else
             "recovery-blocked" if outputs and not sources else
             "duplicate-review" if len(sources) > 1 or len(outputs) > 1 else
             "published" if sources and outputs else
@@ -175,6 +262,9 @@ def discover(root: Path, output_json: Path) -> dict:
             "source_candidates": [rel(path, root) for path in sources],
             "output_path": rel(canonical_output, root) if canonical_output else None,
             "output_candidates": [rel(path, root) for path in outputs],
+            "canonical_source_path": override.get("canonical_source_path"),
+            "canonical_output_path": override.get("canonical_output_path"),
+            "editorial_note": override.get("editorial_note"),
             "build_engine": engine,
             "build_engine_source": engine_source,
             "page_count": pages,
@@ -193,6 +283,16 @@ def discover(root: Path, output_json: Path) -> dict:
             "recursive_directories": ["sproll-curriculum-bundle"],
         },
         "papers": papers,
+        "companion_assets": [
+            {
+                "path": rel(path, root),
+                "linked_paper_id": companion_links.get(rel(path, root)),
+                "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other "
+                        "auxiliary asset, not a manuscript build output. Set linked_paper_id "
+                        "manually in papers.json's companion_assets to associate it with a paper.",
+            }
+            for path in sorted(companion_assets)
+        ],
     }
 
 
@@ -222,7 +322,21 @@ def markdown(data: dict) -> str:
         blockers = ", ".join(paper["recovery_blockers"]) or "—"
         location = paper["collection"] + (f" / {paper['track']}" if paper["track"] else "")
         lines.append(f"| {paper['title']} | {location} | {source} | {output} | {paper['build_engine'] or '—'} | {paper['page_count'] if paper['page_count'] is not None else '—'} | {paper['revision_status']} | {blockers} |")
-    lines.extend(["", "## Provenance rules", "", "Engine values are inferred from the LaTeX preamble in this first slice. Page counts are measured with `pdfinfo`. A family with multiple source or output candidates remains unresolved; the generator records every candidate and does not select a canonical file.", ""])
+    lines.extend(["", "## Provenance rules", "", "Engine values are inferred from the LaTeX preamble in this first slice. Page counts are measured with `pdfinfo`. A family with multiple source or output candidates remains unresolved unless a human has recorded a `canonical_source_path`/`canonical_output_path` override in `inventory/papers.json`; the generator always records every candidate for provenance.", ""])
+    companion_assets = data.get("companion_assets", [])
+    if companion_assets:
+        lines.extend([
+            "## Companion assets", "",
+            "These files follow the repository's `TitleCase_With_Underscores` naming convention for "
+            "slide decks, narrated audio companions, and other presentation assets. They are not "
+            "manuscript build outputs and are excluded from duplicate-family detection above. "
+            "`linked_paper_id` is set manually in `inventory/papers.json` when an asset is confirmed "
+            "to accompany a specific paper.", "",
+            "| Asset | Linked paper |", "|---|---|",
+        ])
+        for asset in companion_assets:
+            lines.append(f"| `{asset['path']}` | {asset['linked_paper_id'] or '—'} |")
+        lines.append("")
     return "\n".join(lines)
 
 

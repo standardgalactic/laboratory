@@ -79,74 +79,72 @@
       cursor: pointer;
     }
 
-    button:hover, button[aria-pressed="true"] {
+    button[aria-pressed="true"] {
       color: var(--background);
-      border-color: var(--cyan);
       background: var(--cyan);
+      border-color: var(--cyan);
     }
 
     .count {
-      margin: 0 0 16px;
+      margin: 28px 0 18px;
       color: var(--muted);
       font-size: .78rem;
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 22px;
+      padding-bottom: 40px;
     }
 
     figure {
-      min-width: 0;
       margin: 0;
-      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 3px;
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      transition: border-color .2s ease, transform .2s ease;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--panel);
     }
 
-    figure:hover {
-      border-color: #486176;
-      transform: translateY(-2px);
-    }
-
-    figure[hidden] { display: none; }
-
-    figure a {
-      display: block;
-      background: #030507;
-      cursor: zoom-in;
-    }
+    figure a { display: block; }
 
     figure img {
       display: block;
       width: 100%;
-      aspect-ratio: 1;
-      object-fit: contain;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
     }
 
     figcaption {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: end;
-      padding: 16px 17px 18px;
-      border-top: 1px solid var(--line);
+      gap: 10px;
+      align-items: start;
+      padding: 14px 16px 16px;
     }
 
     h2 {
       margin: 0 0 6px;
-      font: 500 1.05rem/1.25 Georgia, serif;
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     .description {
       margin: 0;
       color: var(--muted);
-      font-size: .72rem;
+      font-size: .82rem;
       line-height: 1.5;
     }
+
+    .links {
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: .72rem;
+    }
+
+    .links li { margin: 2px 0; }
+    .links a { color: var(--cyan); }
 
     .tag {
       color: var(--amber);
@@ -198,19 +196,19 @@
 </head>
 <body>
   <header>
-    <p class="eyebrow">Flyxion · Procedural research objects</p>
+    <p class="eyebrow">Flyxion &middot; Procedural research objects</p>
     <h1>Headless Blender Experiments</h1>
-    <p class="intro">Sixteen reproducible scenes translating structural questions into inspectable geometry. Select a repository to isolate its two experiments, or open any render at full resolution.</p>
+    <p class="intro">16 reproducible scenes translating structural questions into inspectable geometry. Select a repository to isolate its experiments, or open any render at full resolution.</p>
     <nav class="controls" aria-label="Filter experiments">
       <button type="button" data-filter="all" aria-pressed="true">All</button>
-      <button type="button" data-filter="calculus">calculus</button>
-      <button type="button" data-filter="tartan">TARTAN</button>
-      <button type="button" data-filter="hydra">HYDRA</button>
-      <button type="button" data-filter="autogenerative">autogenerative-dynamics</button>
-      <button type="button" data-filter="cliodynamics">cliodynamics</button>
-      <button type="button" data-filter="spherepop">spherepop</button>
-      <button type="button" data-filter="chloroplasts">Chloroplasts</button>
-      <button type="button" data-filter="alphabet">alphabet</button>
+      <button type="button" data-filter="calculus" aria-pressed="false">calculus</button>
+      <button type="button" data-filter="tartan" aria-pressed="false">TARTAN</button>
+      <button type="button" data-filter="hydra" aria-pressed="false">HYDRA</button>
+      <button type="button" data-filter="autogenerative" aria-pressed="false">autogenerative-dynamics</button>
+      <button type="button" data-filter="cliodynamics" aria-pressed="false">cliodynamics</button>
+      <button type="button" data-filter="spherepop" aria-pressed="false">spherepop</button>
+      <button type="button" data-filter="chloroplasts" aria-pressed="false">Chloroplasts</button>
+      <button type="button" data-filter="alphabet" aria-pressed="false">alphabet</button>
     </nav>
   </header>
 
@@ -218,80 +216,233 @@
     <p class="count" aria-live="polite"><span id="visible-count">16</span> experiments visible</p>
     <section class="gallery" aria-label="Experiment renders">
       <figure data-repository="calculus">
-        <a href="output/calculus_orthodromes.png"><img src="output/calculus_orthodromes.png" alt="Orthodromic rings around a spherical body" loading="lazy"></a>
-        <figcaption><div><h2>Orthodromes and Libration</h2><p class="description">Intersecting spherical frames with an orbital libration envelope.</p></div><span class="tag">calculus</span></figcaption>
+        <a class="full" href="output/calculus_orthodromes.png"><img src="output/thumbs/calculus_orthodromes.jpg" alt="Orthodromic rings around a spherical body" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Orthodromes and Libration</h2>
+            <p class="description">Intersecting spherical frames with an orbital libration envelope.</p>
+            <p class="description"><em>How do orthodromic frames intersect a libration envelope?</em></p>
+          </div>
+          <div>
+            <span class="tag">calculus</span>
+            <ul class="links"><li><a href="experiments/calculus_orthodromes.py">script</a></li><li><a href="output/calculus_orthodromes.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="calculus">
-        <a href="output/calculus_spherical_voronoi.png"><img src="output/calculus_spherical_voronoi.png" alt="Weighted hubs connected across a globe" loading="lazy"></a>
-        <figcaption><div><h2>Spherical Service Network</h2><p class="description">Weighted service hubs inducing a secondary spherical network.</p></div><span class="tag">calculus</span></figcaption>
+        <a class="full" href="output/calculus_spherical_voronoi.png"><img src="output/thumbs/calculus_spherical_voronoi.jpg" alt="Weighted hubs connected across a globe" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Spherical Service Network</h2>
+            <p class="description">Weighted service hubs inducing a secondary spherical network.</p>
+            <p class="description"><em>How do weighted service hubs induce a secondary spherical network?</em></p>
+          </div>
+          <div>
+            <span class="tag">calculus</span>
+            <ul class="links"><li><a href="experiments/calculus_spherical_voronoi.py">script</a></li><li><a href="output/calculus_spherical_voronoi.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="tartan">
-        <a href="output/tartan_constraint_closure.png"><img src="output/tartan_constraint_closure.png" alt="Tiled field converging toward a repaired center" loading="lazy"></a>
-        <figcaption><div><h2>Constraint Closure</h2><p class="description">A local obstruction reconciled into a globally coherent state.</p></div><span class="tag">TARTAN</span></figcaption>
+        <a class="full" href="output/tartan_constraint_closure.png"><img src="output/thumbs/tartan_constraint_closure.jpg" alt="Tiled field converging toward a repaired center" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Constraint Closure</h2>
+            <p class="description">A local obstruction reconciled into a globally coherent state.</p>
+            <p class="description"><em>Can a locally plausible obstruction be reconciled into global closure?</em></p>
+          </div>
+          <div>
+            <span class="tag">TARTAN</span>
+            <ul class="links"><li><a href="experiments/tartan_constraint_closure.py">script</a></li><li><a href="output/tartan_constraint_closure.blend">.blend</a></li><li><a href="../processing/distinction-and-continuation/chapters/ch08-tartan-tiling.tex">Chapter: TARTAN tiling</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="tartan">
-        <a href="output/tartan_annotated_fracture.png"><img src="output/tartan_annotated_fracture.png" alt="A fracture trajectory crossing a tiled field" loading="lazy"></a>
-        <figcaption><div><h2>Annotated Fracture</h2><p class="description">Trajectory-aware tiling responding to a structured perturbation.</p></div><span class="tag">TARTAN</span></figcaption>
+        <a class="full" href="output/tartan_annotated_fracture.png"><img src="output/thumbs/tartan_annotated_fracture.jpg" alt="A fracture trajectory crossing a tiled field" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Annotated Fracture</h2>
+            <p class="description">Trajectory-aware tiling responding to a structured perturbation.</p>
+            <p class="description"><em>How does trajectory-conditioned tiling respond to an annotated fracture?</em></p>
+          </div>
+          <div>
+            <span class="tag">TARTAN</span>
+            <ul class="links"><li><a href="experiments/tartan_annotated_fracture.py">script</a></li><li><a href="output/tartan_annotated_fracture.blend">.blend</a></li><li><a href="../processing/distinction-and-continuation/chapters/ch08-tartan-tiling.tex">Chapter: TARTAN tiling</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="hydra">
-        <a href="output/hydra_phase_locking.png"><img src="output/hydra_phase_locking.png" alt="Three families of spiraling persona trajectories" loading="lazy"></a>
-        <figcaption><div><h2>Partial Phase Locking</h2><p class="description">Persona trajectories converging locally while coupling globally.</p></div><span class="tag">HYDRA</span></figcaption>
+        <a class="full" href="output/hydra_phase_locking.png"><img src="output/thumbs/hydra_phase_locking.jpg" alt="Three families of spiraling persona trajectories" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Partial Phase Locking</h2>
+            <p class="description">Persona trajectories converging locally while coupling globally.</p>
+            <p class="description"><em>Which trajectories converge within a persona and which couple across personas?</em></p>
+          </div>
+          <div>
+            <span class="tag">HYDRA</span>
+            <ul class="links"><li><a href="experiments/hydra_phase_locking.py">script</a></li><li><a href="output/hydra_phase_locking.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="hydra">
-        <a href="output/hydra_recursive_veiling.png"><img src="output/hydra_recursive_veiling.png" alt="A signal passing through translucent nested shells" loading="lazy"></a>
-        <figcaption><div><h2>Recursive Veiling</h2><p class="description">Signal recoverability measured across nested visibility thresholds.</p></div><span class="tag">HYDRA</span></figcaption>
+        <a class="full" href="output/hydra_recursive_veiling.png"><img src="output/thumbs/hydra_recursive_veiling.jpg" alt="A signal passing through translucent nested shells" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Recursive Veiling</h2>
+            <p class="description">Signal recoverability measured across nested visibility thresholds.</p>
+            <p class="description"><em>Which parts of a signal remain recoverable through nested veils?</em></p>
+          </div>
+          <div>
+            <span class="tag">HYDRA</span>
+            <ul class="links"><li><a href="experiments/hydra_recursive_veiling.py">script</a></li><li><a href="output/hydra_recursive_veiling.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="autogenerative">
-        <a href="output/autogenerative_repair.png"><img src="output/autogenerative_repair.png" alt="Recursive branches repairing a missing region" loading="lazy"></a>
-        <figcaption><div><h2>Recursive Repair</h2><p class="description">Generated growth rerouting around a deleted region.</p></div><span class="tag">autogenerative</span></figcaption>
+        <a class="full" href="output/autogenerative_repair.png"><img src="output/thumbs/autogenerative_repair.jpg" alt="Recursive branches repairing a missing region" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Recursive Repair</h2>
+            <p class="description">Generated growth rerouting around a deleted region.</p>
+            <p class="description"><em>How does recursive growth route around a deleted region?</em></p>
+          </div>
+          <div>
+            <span class="tag">autogenerative-dynamics</span>
+            <ul class="links"><li><a href="experiments/autogenerative_repair.py">script</a></li><li><a href="output/autogenerative_repair.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="autogenerative">
-        <a href="output/autogenerative_worldlines.png"><img src="output/autogenerative_worldlines.png" alt="Candidate worldlines passing constraint regions" loading="lazy"></a>
-        <figcaption><div><h2>Worldline Selection</h2><p class="description">Candidate histories accepted or rejected by spatial constraints.</p></div><span class="tag">autogenerative</span></figcaption>
+        <a class="full" href="output/autogenerative_worldlines.png"><img src="output/thumbs/autogenerative_worldlines.jpg" alt="Candidate worldlines passing constraint regions" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Worldline Selection</h2>
+            <p class="description">Candidate histories accepted or rejected by spatial constraints.</p>
+            <p class="description"><em>Which candidate histories survive spatial constraints?</em></p>
+          </div>
+          <div>
+            <span class="tag">autogenerative-dynamics</span>
+            <ul class="links"><li><a href="experiments/autogenerative_worldlines.py">script</a></li><li><a href="output/autogenerative_worldlines.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="cliodynamics">
-        <a href="output/cliodynamics_aliasing.png"><img src="output/cliodynamics_aliasing.png" alt="Two states sharing one projection before divergent actions" loading="lazy"></a>
-        <figcaption><div><h2>Consequential Aliasing</h2><p class="description">One apparent view concealing states that require different actions.</p></div><span class="tag">cliodynamics</span></figcaption>
+        <a class="full" href="output/cliodynamics_aliasing.png"><img src="output/thumbs/cliodynamics_aliasing.jpg" alt="Two states sharing one projection before divergent actions" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Consequential Aliasing</h2>
+            <p class="description">One apparent view concealing states that require different actions.</p>
+            <p class="description"><em>When does one projection hide states requiring different continuations?</em></p>
+          </div>
+          <div>
+            <span class="tag">cliodynamics</span>
+            <ul class="links"><li><a href="experiments/cliodynamics_aliasing.py">script</a></li><li><a href="output/cliodynamics_aliasing.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="cliodynamics">
-        <a href="output/cliodynamics_recoverability.png"><img src="output/cliodynamics_recoverability.png" alt="Participants connected to different retained events" loading="lazy"></a>
-        <figcaption><div><h2>Indexed Recoverability</h2><p class="description">System retention compared with participant-specific access.</p></div><span class="tag">cliodynamics</span></figcaption>
+        <a class="full" href="output/cliodynamics_recoverability.png"><img src="output/thumbs/cliodynamics_recoverability.jpg" alt="Participants connected to different retained events" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Indexed Recoverability</h2>
+            <p class="description">System retention compared with participant-specific access.</p>
+            <p class="description"><em>Which retained events remain recoverable to each participant?</em></p>
+          </div>
+          <div>
+            <span class="tag">cliodynamics</span>
+            <ul class="links"><li><a href="experiments/cliodynamics_recoverability.py">script</a></li><li><a href="output/cliodynamics_recoverability.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="spherepop">
-        <a href="output/spherepop_logic.png"><img src="output/spherepop_logic.png" alt="Four Boolean cases passing through Spherepop operations" loading="lazy"></a>
-        <figcaption><div><h2>Primitive Logic</h2><p class="description">Bind, Refuse, and Pop executing the four AND input cases.</p></div><span class="tag">spherepop</span></figcaption>
+        <a class="full" href="output/spherepop_logic.png"><img src="output/thumbs/spherepop_logic.jpg" alt="Four Boolean cases passing through Spherepop operations" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Primitive Logic</h2>
+            <p class="description">Bind, Refuse, and Pop executing the four AND input cases.</p>
+            <p class="description"><em>How do Bind, Refuse, and Pop execute the four Boolean input cases?</em></p>
+          </div>
+          <div>
+            <span class="tag">spherepop</span>
+            <ul class="links"><li><a href="experiments/spherepop_logic.py">script</a></li><li><a href="output/spherepop_logic.blend">.blend</a></li><li><a href="../working/spherepop-os.tex">Working draft: Spherepop OS</a></li><li><a href="../processing/distinction-and-continuation/chapters/ch07-spherepop.tex">Chapter: Spherepop</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="spherepop">
-        <a href="output/spherepop_deferred_closure.png"><img src="output/spherepop_deferred_closure.png" alt="A token spiraling through nested scopes" loading="lazy"></a>
-        <figcaption><div><h2>Deferred Closure</h2><p class="description">A pending token crossing nested scopes before Collapse.</p></div><span class="tag">spherepop</span></figcaption>
+        <a class="full" href="output/spherepop_deferred_closure.png"><img src="output/thumbs/spherepop_deferred_closure.jpg" alt="A token spiraling through nested scopes" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Deferred Closure</h2>
+            <p class="description">A pending token crossing nested scopes before Collapse.</p>
+            <p class="description"><em>How does a pending token cross scopes before Collapse?</em></p>
+          </div>
+          <div>
+            <span class="tag">spherepop</span>
+            <ul class="links"><li><a href="experiments/spherepop_deferred_closure.py">script</a></li><li><a href="output/spherepop_deferred_closure.blend">.blend</a></li><li><a href="../working/spherepop-os.tex">Working draft: Spherepop OS</a></li><li><a href="../processing/distinction-and-continuation/chapters/ch07-spherepop.tex">Chapter: Spherepop</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="chloroplasts">
-        <a href="output/chloroplast_light_capture.png"><img src="output/chloroplast_light_capture.png" alt="Light rays entering stacked chloroplast membranes" loading="lazy"></a>
-        <figcaption><div><h2>Light Capture</h2><p class="description">Incidence angle and membrane stacking shaping absorbed paths.</p></div><span class="tag">Chloroplasts</span></figcaption>
+        <a class="full" href="output/chloroplast_light_capture.png"><img src="output/thumbs/chloroplast_light_capture.jpg" alt="Light rays entering stacked chloroplast membranes" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Light Capture</h2>
+            <p class="description">Incidence angle and membrane stacking shaping absorbed paths.</p>
+            <p class="description"><em>How do incidence angle and membrane stacking alter light paths?</em></p>
+          </div>
+          <div>
+            <span class="tag">Chloroplasts</span>
+            <ul class="links"><li><a href="experiments/chloroplast_light_capture.py">script</a></li><li><a href="output/chloroplast_light_capture.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="chloroplasts">
-        <a href="output/chloroplast_proton_gradient.png"><img src="output/chloroplast_proton_gradient.png" alt="Particles descending through rotary membrane channels" loading="lazy"></a>
-        <figcaption><div><h2>Proton Gradient</h2><p class="description">Stored potential routed through rotary transport channels.</p></div><span class="tag">Chloroplasts</span></figcaption>
+        <a class="full" href="output/chloroplast_proton_gradient.png"><img src="output/thumbs/chloroplast_proton_gradient.jpg" alt="Particles descending through rotary membrane channels" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Proton Gradient</h2>
+            <p class="description">Stored potential routed through rotary transport channels.</p>
+            <p class="description"><em>How does a stored gradient route through rotary transport?</em></p>
+          </div>
+          <div>
+            <span class="tag">Chloroplasts</span>
+            <ul class="links"><li><a href="experiments/chloroplast_proton_gradient.py">script</a></li><li><a href="output/chloroplast_proton_gradient.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
-
       <figure data-repository="alphabet">
-        <a href="output/alphabet_fibered_dsl.png"><img src="output/alphabet_fibered_dsl.png" alt="Domain-specific fibers rising above a shared language base" loading="lazy"></a>
-        <figcaption><div><h2>Fibered DSL Transport</h2><p class="description">Local domain transport above a shared linguistic base.</p></div><span class="tag">alphabet</span></figcaption>
+        <a class="full" href="output/alphabet_fibered_dsl.png"><img src="output/thumbs/alphabet_fibered_dsl.jpg" alt="Domain-specific fibers rising above a shared language base" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Fibered DSL Transport</h2>
+            <p class="description">Local domain transport above a shared linguistic base.</p>
+            <p class="description"><em>Where can local DSL transport proceed, and where is it obstructed?</em></p>
+          </div>
+          <div>
+            <span class="tag">alphabet</span>
+            <ul class="links"><li><a href="experiments/alphabet_fibered_dsl.py">script</a></li><li><a href="output/alphabet_fibered_dsl.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
       <figure data-repository="alphabet">
-        <a href="output/alphabet_semantic_holonomy.png"><img src="output/alphabet_semantic_holonomy.png" alt="A semantic loop returning with a residual displacement" loading="lazy"></a>
-        <figcaption><div><h2>Semantic Holonomy</h2><p class="description">Meaning transported around a DSL loop and returned with residue.</p></div><span class="tag">alphabet</span></figcaption>
+        <a class="full" href="output/alphabet_semantic_holonomy.png"><img src="output/thumbs/alphabet_semantic_holonomy.jpg" alt="A semantic loop returning with a residual displacement" loading="lazy"></a>
+        <figcaption>
+          <div>
+            <h2>Semantic Holonomy</h2>
+            <p class="description">Meaning transported around a DSL loop and returned with residue.</p>
+            <p class="description"><em>What residual remains after semantic transport around a DSL loop?</em></p>
+          </div>
+          <div>
+            <span class="tag">alphabet</span>
+            <ul class="links"><li><a href="experiments/alphabet_semantic_holonomy.py">script</a></li><li><a href="output/alphabet_semantic_holonomy.blend">.blend</a></li></ul>
+          </div>
+        </figcaption>
       </figure>
     </section>
   </main>
 
-  <footer>Generated headlessly in Blender · deterministic source scenes retained alongside each render.</footer>
+  <footer>Generated headlessly in Blender &middot; deterministic source scenes retained alongside each render &middot; page generated by scripts/build-gallery.py, do not edit directly.</footer>
 
   <dialog id="viewer" aria-label="Full-resolution render">
     <button class="close" type="button" aria-label="Close full-resolution view">Close</button>
@@ -314,7 +465,7 @@
       });
     }
 
-    for (const link of document.querySelectorAll('figure a')) {
+    for (const link of document.querySelectorAll('figure a.full')) {
       link.addEventListener('click', event => {
         if (!dialog.showModal) return;
         event.preventDefault();
