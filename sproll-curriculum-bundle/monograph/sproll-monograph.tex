@@ -1,0 +1,438 @@
+\documentclass[11pt,twoside]{book}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{microtype}
+\emergencystretch=3em
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{natbib}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+
+\title{\textbf{The Sproll Curriculum}\\[0.3em]\Large Methodology, Mathematics, and the Complete Plan for a Forty-Booklet Introduction to Mathematics via the Spherepop Calculus}
+\author{Flyxion\\ \textit{Independent Researcher}}
+\date{August 2026}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\begin{center}
+\textbf{Abstract}
+\end{center}
+\noindent This monograph documents the design, formal foundations, and complete forty-booklet plan of the Sproll Curriculum, a children's mathematics curriculum built directly on the four primitive operations of the Spherepop calculus (Pop, Refuse, Bind, Collapse) and on the epistemic operator distinction (U, Q, P, A) developed in \emph{Beyond Prediction Error: Warrant, Repair, and Refusal in Predictive Architectures}. The central claim is architectural rather than merely pedagogical: a curriculum can embody a formal theory in its construction order rather than merely illustrating the theory afterward, so that a child's progression through the booklets reproduces, at each stage, exactly the operations the underlying calculus admits at that stage and no others. The curriculum is published in two parallel tracks at every stage of the sequence, a Primary Track and a Workbook Track, discussed in Chapter 3; both follow the identical forty-topic order and differ only in depth and reading level, never in content or sequencing. Part I states the methodology, the three-layer architecture (historical construction, ordinary mathematics, epistemic transformation), and the two-track publication model that keeps this embodiment principled rather than decorative. Part II gives the formal mathematics underlying the curriculum, including a proof that reweighting cannot instantiate refusal and a precise statement of the three-way distinction between zero-weighting, documented inadmissibility, and constitutive domain revision. Part III specifies the Sproll house style as a reproducible format, with reference implementations from the Primary Track annotated line by line against the formalism they encode. Part IV gives the complete, renumbered forty-booklet plan across seven cycles, applicable to both tracks identically. Part V discusses what was learned from several rounds of correcting the curriculum's own vocabulary and scope against moving specifications, and treats that correction history itself as an instance of the monotonic-continuation principle the curriculum teaches.
+\vspace{1em}
+
+\tableofcontents
+
+\chapter*{Preface: Why a Curriculum Should Embody a Theory}
+\addcontentsline{toc}{chapter}{Preface: Why a Curriculum Should Embody a Theory}
+
+Most curricula that draw on a research program treat the program as a source of illustrations. A physics-flavored arithmetic unit borrows a falling-ball example; a computer-science-flavored logic unit borrows a circuit diagram. The underlying formalism supplies color, not structure: a child could, in principle, learn exactly the same mathematical content with the illustrations removed.
+
+The Sproll Curriculum is built on a different premise. Each booklet's content is fixed by what the Spherepop calculus and the admissibility-and-repair framework jointly permit to be taught at that stage, not by which topic happens to come next in a conventional scope-and-sequence chart. A child who has only encountered Pop cannot yet be taught Collapse, not because Collapse is harder, but because nothing in the child's constructed experience yet distinguishes an observation rule from the history it observes. The ordering is not pedagogical convenience; it is the same ordering the formalism itself imposes on what can be stated before what.
+
+This principle is orthogonal to reading level, which is why the curriculum is published in two tracks rather than one. A reader not yet ready for extended prose still needs the same ordering respected; a reader ready for worked examples and written exercises needs it respected too. Depth of exposition is a separate axis from the ordering constraint, so the two tracks share every topic, every sequence position, and every formal dependency, and differ only in how much is said about each one.
+
+This monograph exists to make that claim checkable rather than merely asserted. Part II proves the central formal results the curriculum depends on. Part III shows, booklet by booklet, exactly which formal move each page encodes. Part IV extends this discipline to all forty booklets before most of them are drafted, so that later drafting, in either track, is a matter of executing a specification rather than improvising one.
+
+\mainmatter
+
+\part{Methodology}
+
+\chapter{The Central Claim}
+
+\section{Embodiment versus Illustration}
+
+A curriculum illustrates a theory when the theory could be removed without changing what the learner is asked to do. A curriculum embodies a theory when the learner's sequence of tasks \emph{is} an instance of the theory's own construction order. The distinction matters because an illustrated curriculum can drift arbitrarily far from the theory it was inspired by without anything in the curriculum registering the drift, whereas an embodied curriculum cannot introduce a concept out of order without producing a page that makes no sense on its own terms.
+
+The clearest test of embodiment is negative: can a booklet be swapped for a different one covering superficially similar content without the surrounding sequence breaking? In an illustrated curriculum, usually yes. In the Sproll Curriculum, the test should generally fail. Sproll 06 (Look Through a Rule) cannot be replaced by an earlier introduction to arithmetic evaluation, because arithmetic evaluation \emph{is} a Collapse rule, and nothing prior to Sproll 06 has yet given the child a rule-relative notion of observation to generalize from.
+
+\section{The Pedagogical Principle}
+
+The curriculum's guiding sentence is stated once, deliberately, without formal vocabulary:
+
+\begin{quote}
+Mathematics is the study of what can happen, what cannot happen, what follows from what, and how those possibilities change when the rules change.
+\end{quote}
+
+Read against the formalism developed in Part II, each clause of this sentence names one operator family. ``What can happen'' names the admissibility space $\Omega$ itself. ``What cannot happen'' names Refuse and the contraction case $A_R^-$. ``What follows from what'' names Bind and the historical-replay machinery of Pop-sequences. ``How those possibilities change when the rules change'' names $A$, admissibility revision, in both its Spherepop-historical sense (a new admissible continuation is introduced or excluded) and its epistemic sense (the space an inferring agent revises when reweighting cannot resolve a mismatch). The sentence is chosen so that a child, a parent, and a formal reader can each recognize a true statement in it at their own level of engagement, without any one reading being a simplification of the others in the sense of leaving something out that the more sophisticated reading needs.
+
+\section{Monotonic Learning as a Construction Principle}
+
+The corpus-wide principle of monotonic continuation is applied here not as a theme but as a literal constraint on drafting: a later booklet must never announce that an earlier booklet's claim was false. It may only reveal that the earlier claim was a Collapse under a particular rule, or a true statement relative to an admissibility structure that a later booklet enlarges or repartitions. This constraint was tested directly during drafting, twice, when the curriculum's own working definition of Pop had to be corrected against an external canonical specification (documented in Part V); in both cases the correction took the form of narrowing what had been claimed, not reversing it, which is offered as a working demonstration that the constraint is satisfiable in practice and not merely aspirational.
+
+The series slogan follows directly:
+
+\begin{quote}
+Don't erase what you learned. Learn what made it true.
+\end{quote}
+
+\chapter{The Three-Layer Architecture}
+
+The curriculum deliberately keeps three mathematical languages distinct rather than merging them into a single notation prematurely.
+
+\section{The Spherepop Layer: Historical Construction}
+
+The first layer is historical construction: Pop, Refuse, Bind, Collapse, replay, and historical identity. This layer answers the question of how a mathematical object comes to exist at all. Under the canonical specification, nothing exists by assumption; objects, relations, and identities exist only if introduced by an event, and two things are the same only if they share an event history, a fact discovered under Collapse rather than assumed in advance. Cycle I of the curriculum (Sprolls 00 through 10) is devoted almost entirely to this layer.
+
+\section{The Ordinary Mathematics Layer: Recovered Structure}
+
+The second layer is the mathematics a parent or teacher would recognize by name: counting, arithmetic, sets, relations, functions, information, probability, logic, graphs, and elementary state spaces. None of this is introduced as a primitive fact. Each piece is recovered as a useful Collapse rule or derived structure over histories already constructed in the first layer. Addition, for instance, is not asserted; it is observed as the result of a specific counting rule applied to a Bind of two Pop-constructed quantities. This layer occupies Cycles II through VII.
+
+\section{The Epistemic Layer: Transformation Under Mismatch}
+
+The third layer, introduced only once the first two are well established, concerns what an agent operating inside a constructed mathematical world does when that world produces a mismatch: revise a commitment ($U$), seek different evidence ($Q$), change how much a discrepancy is trusted ($P$), or revise the admissible space itself ($A$). This layer is developed formally in \emph{Beyond Prediction Error} and is not treated as a restatement of the Spherepop layer; Part II states explicitly why the two are not forced into a one-to-one correspondence. Cycle VI (Broken Maps) is where this layer becomes explicit content for the child, though its first informal appearance, in the form of Refuse's own documented-but-not-removed semantics, occurs as early as Sproll 04.
+
+\section{Why the Layers Stay Separate}
+
+A curriculum that collapsed these three layers into one vocabulary early would purchase simplicity at the cost of an ambiguity the calculus itself does not have. Spherepop's Refuse documents inadmissibility without removing an option from what remains historically possible; the epistemic layer's $A^-$ constitutively removes an option from the live admissibility space. These are different operations with different formal types, established in Part II as the Reweighting--Refusal Non-Equivalence proposition's three-way generalization. A curriculum that taught a single crossed-out mark for both would teach a false equivalence before the child had any chance to discover the true distinction. Keeping the layers separate is therefore not caution; it is the condition under which Cycle VI's central lesson, three crossed-out shapes meaning three different things, can be taught truthfully at all.
+
+\chapter{The Sproll Format as a Reproducible Constraint}
+
+\section{Two Tracks, One Sequence}
+
+The curriculum is published twice at every point in the forty-topic sequence: once as a Primary Track booklet and once as a Workbook Track booklet. The two tracks are not different curricula that happen to cover similar ground; they are two depths of the same specification. A Primary Track booklet enacts its topic's operator in as few pages as the topic allows, with minimal or no exposition, relying on illustration and repetition rather than explanation. A Workbook Track booklet enacts the same operator, in the same position in the same sequence, but adds worked examples, everyday grounding analogies, boxed procedures, and written exercises, addressed directly to a reader capable of following extended prose. Neither track states a target age anywhere on the page; the tracks are distinguished by depth, not by an announced reading level.
+
+Because both tracks answer to the same Part IV specification, a claim proven or flagged against one track's booklet applies to the other track's booklet at the same sequence position by construction, unless a track-specific note says otherwise. Part III's annotations, drawn from the Primary Track, are read this way: a Workbook Track booklet at the same number is expected to satisfy the same formal correspondences, stated at greater length.
+
+\section{Constraints, Not Preferences}
+
+Every formatting choice in the Sproll house style is stated as a constraint that the first booklets in each track satisfy and that later booklets in that track inherit, rather than as a stylistic preference chosen once and then applied loosely. The constraints below were established by the Primary Track's Sprolls 00 and 01 and refined across two correction passes; the Workbook Track satisfies constraints 1 through 4 in the same form, with constraint 5 (backmatter addressed to an adult reader) supplemented in the Workbook Track by exposition addressed directly to the child reader, since a Workbook Track reader is assumed able to receive some of that content firsthand rather than only through a parent or teacher.
+
+\begin{enumerate}
+\item No formal notation (Pop, Refuse, Bind, Collapse as capitalized primitive names; $U$, $Q$, $P$, $A$ as symbols) appears on a child-facing page before the concept it names has already been enacted, without naming it, at least once.
+\item Nothing is ever calculated in a booklet before Collapse has been introduced as a named concept (Sproll 06); prior booklets may construct, choose, order, replay, and relate, but never evaluate.
+\item A booklet's closing page states an unresolved question generated by that booklet's own content, and the following booklet's opening page answers, or begins to answer, exactly that question and no other.
+\item An illustration accompanying a formal claim about identity or equivalence between two constructed objects must not visually resolve that claim unless the surrounding text explicitly resolves it; an unresolved formal question must not be given a resolved illustration.
+\item Every booklet carries a backmatter page, addressed to an adult reader, that states the booklet's formal content explicitly, including any claim whose scope is narrower than a first draft might have implied.
+\end{enumerate}
+
+Constraint 4 was added only after a drafting error violated it: an early version of Sproll 00 illustrated ``can many things be treated as one'' by visually collapsing a composed scene into a single mark, which asserted, in the illustration if not the text, exactly the identification between coupling and equality that Bind and Collapse are built to keep distinct. The correction is documented in Part V and is retained here as the reason constraint 4 exists, rather than presenting the constraint as though it had been anticipated from the outset.
+
+\section{The Recurring Devices}
+
+Two visual devices recur across every booklet drafted so far and are treated as part of the house style rather than as local choices: the ledger strip, a small rectangular frame containing one committed history's entries in order, used whenever a booklet needs to show that order or content of a history is itself the object under discussion; and the faded-versus-bold rendering of a set of unlabeled candidate shapes, used whenever a booklet needs to show a Pop occurring, with faded shapes indicating unchosen continuations that remain historically present rather than deleted. A third device, introduced in Sproll 01's second drafting pass, distinguishes an entirely new field of candidate shapes from a return to an already-seen field by rendering the new field's shapes filled rather than outlined; this device has not yet been tested against a case where a booklet needs to distinguish more than two fields, and Part V flags this as an open question for Cycle II.
+
+\part{Formal Mathematics}
+
+\chapter{The Spherepop Layer, Formally}
+
+\section{Histories, Continuations, and Status}
+
+\begin{definition}[History]
+A history $H$ is a finite sequence of primitive events drawn from
+\[
+\{\mathrm{Pop}, \ \mathrm{Refuse}, \ \mathrm{Bind}, \ \mathrm{Collapse}\},
+\]
+each applied to one or more labels drawn from a countable label set $\mathrm{Labels}$. The empty history is written $\varepsilon$.
+\end{definition}
+
+\begin{definition}[Continuation set]
+$\mathrm{Cont}(H) \subseteq \mathrm{Labels}$ is the set of labels introduced or referenced by any event in $H$. $\mathrm{Cont}(\varepsilon) = \emptyset$, and for any event $e$ appended to $H$, $\mathrm{Cont}(H \cdot e) \supseteq \mathrm{Cont}(H)$: continuation sets never shrink. This monotonicity is not a simplifying assumption; it is the formal content of the calculus's foundational claim that existence is historical rather than axiomatic. Nothing is ever removed from $\mathrm{Cont}$, because removing a label from $\mathrm{Cont}$ would mean erasing the fact that the label was ever introduced, and no event type provides for that.
+\end{definition}
+
+\begin{definition}[Status]
+$\sigma_H : \mathrm{Cont}(H) \rightarrow \{\mathrm{open}, \mathrm{committed}, \mathrm{refused}\}$ assigns each referenced label its current status under $H$. A label not yet targeted by Pop or Refuse is open by default.
+\end{definition}
+
+\begin{definition}[Open set]
+$O(H) = \{x \in \mathrm{Cont}(H) : \sigma_H(x) = \mathrm{open}\}$ is the set of labels available for a subsequent Pop.
+\end{definition}
+
+\begin{definition}[The four primitives, typed]
+\[
+\mathrm{Pop}(a) : H \mapsto H', \quad \mathrm{Cont}(H') = \mathrm{Cont}(H), \quad \sigma_{H'}(a) = \mathrm{committed}, \quad a \in O(H)
+\]
+\[
+\mathrm{Refuse}(r) : H \mapsto H', \quad \mathrm{Cont}(H') = \mathrm{Cont}(H), \quad \sigma_{H'}(r) = \mathrm{refused}, \quad r \in O(H)
+\]
+\[
+\mathrm{Bind}(x,y) : H \mapsto H', \quad \mathrm{Cont}(H') = \mathrm{Cont}(H) \cup \{\langle x,y \rangle\}, \quad \text{no status change to } x, y
+\]
+\[
+\mathrm{Collapse}_\rho : H \mapsto v \in V_\rho, \quad v = \rho(H)
+\]
+where $\rho$ is an observation rule and $V_\rho$ is that rule's value space (its quotient of the space of histories).
+\end{definition}
+
+\begin{proposition}[Pop and Refuse are not inverse operations, nor is either deletion]
+For any $a \in O(H)$: $a \in \mathrm{Cont}(\mathrm{Pop}(a)(H))$ and $a \in \mathrm{Cont}(\mathrm{Refuse}(a)(H))$. Neither operation removes $a$ from $\mathrm{Cont}$; they differ only in which value $\sigma_{H'}(a)$ takes. Consequently a claim of the form ``$a$ is inadmissible under $H$'' is always a claim about $\sigma_H(a)$, never a claim that $a \notin \mathrm{Cont}(H)$.
+\end{proposition}
+
+This proposition is the exact formal content of the repository specification's remark that Refuse documents inadmissibility ``without removing it from what remains possible'': ``what remains possible'' denotes $\mathrm{Cont}(H)$, the append-only universe of referenced labels, not $O(H)$, the shrinking set of currently choosable ones.
+
+\section{Historical Identity}
+
+\begin{definition}[Historical identity]
+Two histories $H_1, H_2$ are declared equal under an observation rule $\rho$ exactly when $\mathrm{Collapse}_\rho(H_1) = \mathrm{Collapse}_\rho(H_2)$ in $V_\rho$. Equality is therefore always relative to $\rho$ and is discovered by computing both sides, never assumed from the syntactic form of $H_1$ and $H_2$.
+\end{definition}
+
+\begin{example}[Sproll 02's central case]
+Let $H_1 = \langle \mathrm{Pop}(\bigcirc), \mathrm{Pop}(\blacktriangle) \rangle$ and $H_2 = \langle \mathrm{Pop}(\blacktriangle), \mathrm{Pop}(\bigcirc) \rangle$. Under the observation rule $\rho_{\mathrm{pic}}$ that renders the committed set without regard to order,
+\[
+\mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_1) = \mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_2) = \{\bigcirc, \blacktriangle\}:
+\]
+the two histories are equal under $\rho_{\mathrm{pic}}$. Under the observation rule $\rho_{\mathrm{seq}}$ that renders the ordered tuple of committed events,
+\[
+\mathrm{Collapse}_{\rho_{\mathrm{seq}}}(H_1) = (\bigcirc, \blacktriangle) \ \neq \ (\blacktriangle, \bigcirc) = \mathrm{Collapse}_{\rho_{\mathrm{seq}}}(H_2):
+\]
+the same two histories are unequal under $\rho_{\mathrm{seq}}$. Neither judgment is more correct than the other; they are answers to different questions.
+\end{example}
+
+\section{Counting as History Length}
+
+\begin{definition}[Length]
+For a history $H = \langle e_1, \ldots, e_n \rangle$, $|H| = n$ counts the events in $H$, and $|H|_{\mathrm{Pop}}$ counts only the Pop events. Sproll 01 teaches the child to compute $|H|_{\mathrm{Pop}}$ for small histories by direct enumeration.
+\end{definition}
+
+This is stated narrowly on purpose. It licenses ``a history's length can be counted,'' not ``a number is a property of a history'' as a general metaphysical claim; the broader claim is deferred to a point in the curriculum (noted in Part IV, Cycle III) where the child has enough material to see ``two'' recur across genuinely different structures (two committed events, two bound components, two equivalence classes under a fixed $\rho$) and can be invited to notice the invariance rather than being told it.
+
+\chapter{The Epistemic Layer, Formally}
+
+This chapter restates, without rederiving in full, the apparatus of \emph{Beyond Prediction Error: Warrant, Repair, and Refusal in Predictive Architectures}, on which Cycle V and Cycle VI of the curriculum depend. Full proofs are given in that essay; they are restated here only where the Sproll Curriculum needs a specific instance of them.
+
+\begin{definition}[The epistemic operators]
+Let $\Omega$ be a space of admissible hypotheses or continuations, $\mathcal{X}$ observations, $\mathcal{E}$ evidential states, $\mathfrak{D}$ a class of admissibility spaces, and $W_\Omega = \{w : \Omega \rightarrow \mathbb{R}_{\geq 0}\}$.
+\[
+U : \mathcal{X} \times \Omega \rightarrow \Omega, \qquad
+Q : \mathcal{X} \times \Omega \rightarrow \mathcal{E}, \qquad
+P : W_\Omega \rightarrow W_\Omega, \qquad
+A : \mathfrak{D} \rightarrow \mathfrak{D}, \ \Omega \mapsto \Omega'.
+\]
+\end{definition}
+
+\begin{proposition}[Reweighting--Refusal Non-Equivalence]
+No $P : W_\Omega \rightarrow W_\Omega$ can, by reweighting alone, instantiate $A_R^-(\Omega) = \Omega \setminus R$. $P$ preserves the domain of its arguments; $A_R^-$ changes it.
+\end{proposition}
+
+This is the formal fact that Sproll 29 (Zero Isn't Gone) makes concrete for a child using $\Omega = \{\bullet, \blacktriangle, \blacksquare\}$ with $w(\blacktriangle) = 0$ against $\Omega' = \{\bullet, \blacksquare\}$.
+
+\chapter{The Three-Fold Non-Equivalence}
+
+The Sproll Curriculum requires a distinction the source essay does not itself need to draw, because the source essay has no occasion to discuss Spherepop's Refuse. Cycle I introduces Refuse well before Cycle VI introduces $A^-$, and the curriculum's own coherence depends on these being genuinely different operations rather than two names for one idea encountered at two different ages.
+
+\begin{theorem}[Three-Fold Non-Equivalence]
+Let $\pi \in W_\Omega$ with $\pi(r) = 0$ for some $r \in \Omega$; let $\mathrm{Refuse}(r)$ act on a history $H$ with $r \in O(H)$; let $A_R^-(\Omega) = \Omega \setminus \{r\}$. Then:
+\begin{enumerate}
+\item $r \in \mathrm{dom}(\pi)= \Omega$ after weighting: zero-weighting changes no domain.
+\item $r \in \mathrm{Cont}(\mathrm{Refuse}(r)(H))$ after refusal, with $\sigma_{H'}(r) = \mathrm{refused} \neq \sigma_H(r)$: refusal changes a status within a strictly append-only ledger, removing $r$ only from the derived open set $O(H)$, never from $\mathrm{Cont}(H)$.
+\item $r \notin A_R^-(\Omega)$ after contraction: $A^-$ changes the working set $\Omega$ itself by literal set-difference, with no built-in requirement that $r$'s prior membership remain recorded anywhere.
+\end{enumerate}
+No one of these three operations can be defined as a special case of either of the others without additional structure identifying their otherwise-distinct types: $P$ acts on $W_\Omega$ and preserves $\Omega$; $\mathrm{Refuse}$ acts on a history and preserves $\mathrm{Cont}(H)$ while only ever shrinking the derived set $O(H)$; $A^-$ acts directly on $\Omega$ as a set and is the only one of the three whose defining equation contains a set difference.
+\end{theorem}
+
+\begin{proof}
+By inspection of the three types given in the theorem statement, together with Proposition 5.2 (already establishing $P \not\Rightarrow A^-$) and the observation, from Definition 4.4 and Proposition 4.5, that $\mathrm{Refuse}$'s codomain is a history $H'$ with $\mathrm{Cont}(H') = \mathrm{Cont}(H)$, whereas $A^-$'s codomain is a set $\Omega'$ with $\Omega' \subsetneq \Omega$ whenever $R \neq \emptyset$. A function whose codomain always satisfies $\mathrm{Cont}(H') = \mathrm{Cont}(H)$ cannot be identical to one whose codomain satisfies $|\Omega'| < |\Omega|$ except by an external identification supplied on top of both definitions, which is precisely the ``additional structure'' the theorem excludes by hypothesis.
+\end{proof}
+
+\begin{corollary}[The child-facing form]
+Three crossed-out marks in Cycle VI can encode three different formal claims: a mark with a weight of zero still written beside it says ``considered, currently untrusted''; a mark struck through with a small history-mark beside it says ``considered, recorded as refused, still nameable''; a mark removed from a drawn boundary entirely, with the boundary redrawn smaller, says ``no longer a candidate at all.'' Sproll 29 and the trichotomy sproll planned for Cycle VI (see Part IV) are required to keep exactly these three renderings distinct and never substitute one for another.
+\end{corollary}
+
+\part{The Complete Forty-Booklet Plan}
+
+Each entry below states the booklet's number, title, content, and the specific formal apparatus from Part II it introduces or exercises. No new formal apparatus appears in this Part; every claim of the form ``introduces $X$'' points back to a definition, proposition, or theorem already stated. Two conventions are used throughout: a booklet ``inherits'' a primitive when it uses that primitive without introducing it, and a booklet's ``residue'' is the unresolved question its closing page leaves, which the next booklet's opening page must answer and no other, per house-style constraint 3 (Chapter 3).
+
+\chapter{Cycle I --- Pops: Things, Differences, and Counting (00--10)}
+
+Cycle I is the only cycle drawn primarily from Chapter 4. Its job is to construct the historical-construction layer from nothing, introducing exactly one new piece of formal apparatus per booklet.
+
+\begin{description}
+\item[Sproll 00 --- A Difference.] Establishes individuation as a pre-formal prerequisite, with no Pop vocabulary at all: something distinguished from its surroundings, two things that look alike, and whether many things can be treated as one. This last question is deliberately left open (house-style constraint 4), since answering it would prejudge the coupling/identification distinction that Bind and Collapse exist to draw. Residue: what does it mean for many things to be one?
+\item[Sproll 01 --- Something Happened.] Introduces $\mathrm{Pop}$ (Definition 4.4) as committed choice among unlabeled continuations, and $|H|_{\mathrm{Pop}}$ (Definition 4.7) via two genuine sequential Pop events in one growing history. Residue: two things happened, but does their order matter?
+\item[Sproll 02 --- What Happened First?] Introduces ordering and historical identity (Definition 4.6) experientially: two histories built in opposite orders can Collapse to the same picture under $\rho_{\mathrm{pic}}$ while remaining distinct as histories. No new primitive; exercises Pop and previews Collapse without naming it. Residue: if the picture can't say what happened first, how could we ever know?
+\item[Sproll 03 --- Play It Again.] Introduces deterministic replay: given a history, reconstruct its result by re-enacting the events in order. This is the curriculum's first intuition of proof, framed as ``don't tell me what happened, show me the history and let me play it again.'' Residue: if replay always reconstructs the same result, what happens when a choice is later found to be wrong?
+\item[Sproll 04 --- Not This Way.] Introduces $\mathrm{Refuse}$ (Definition 4.4, Proposition 4.5): a refused continuation remains in $\mathrm{Cont}(H)$, nameable and pointable-to, while leaving the open set $O(H)$. Refusal is taught explicitly as documentation, not disappearance.
+\item[Sproll 05 --- Together.] Introduces $\mathrm{Bind}$ (Definition 4.4): two Pops become dependent while retaining separate identities, taught as the difference between two things merely sitting near each other and two things whose fates are now coupled.
+\item[Sproll 06 --- Look Through a Rule.] Introduces $\mathrm{Collapse}_\rho$ (Definition 4.4) explicitly, by name, for the first time: one constructed history yields different legitimate observations under different rules $\rho$ (ignore position, ignore color, count only shape). This is also the first booklet in which anything is calculated, per house-style constraint 2.
+\item[Sproll 07 --- Same Picture, Different Story.] Returns formally to Sproll 02's residue using the now-available Collapse vocabulary: two histories built in different orders, shown to agree under $\rho_{\mathrm{pic}}$ and disagree under $\rho_{\mathrm{seq}}$ (Example 4.8), stated this time with the word Collapse attached to the observation.
+\item[Sproll 08 --- When Are They Equal?] Generalizes historical identity (Definition 4.6) beyond the two-history case: equality under a rule is discovered by computing both sides, never assumed from appearance, extending Sproll 00's unresolved ``are they the same'' question to its correct, rule-relative answer.
+\item[Sproll 09 --- Parts With a Past.] Introduces historical mereology: part-whole relations built through Bind and Pop sequences, replacing $x \in S$ with inspection of a constructed history, directly answering Sproll 00's ``can many things be treated as one'' residue via Bind-then-Collapse rather than mere visual grouping.
+\item[Sproll 10 --- Four Moves Make a World.] Consolidation booklet: a miniature mathematical universe built using only Pop, Refuse, Bind, and Collapse, with no new apparatus introduced. Closes Cycle I.
+\end{description}
+
+\chapter{Cycle II --- Rules: Making Little Worlds (11--15)}
+
+Cycle II moves from constructing individual histories to constructing admissibility spaces, laying the groundwork Cycle VI will later revise formally.
+
+\begin{description}
+\item[Sproll 11 --- The Box.] Introduces $\Omega$ informally: some Pops are inside a drawn boundary, others are not, with no membership rule yet stated.
+\item[Sproll 12 --- The Rule of the Box.] The child discovers a membership rule after the fact (red things, even numbers, things smaller than five), rather than being given one, establishing that $\Omega$ is defined by a rule rather than by enumeration.
+\item[Sproll 13 --- Yes, No, Maybe.] Introduces predicates and elementary Boolean reasoning: a rule can accept or refuse an object, connecting back to Sproll 04's Refuse at the level of a standing rule rather than a single event.
+\item[Sproll 14 --- Two Rules at Once.] Develops AND, OR, NOT via overlapping admissible worlds.
+\item[Sproll 15 --- Change the Rule.] The child changes the admissibility rule itself rather than seeking another answer under a fixed rule (``only even Pops,'' then ``multiples of three may enter too''), presenting $A$ (Chapter 5's admissibility revision) to a seven-year-old without naming it.
+\end{description}
+
+\chapter{Cycle III --- Paths: Arithmetic as Movement (16--20)}
+
+Cycle III shifts from collections to transformations, recovering elementary arithmetic as a Collapse rule over Pop-sequences rather than as an assumed fact.
+
+\begin{description}
+\item[Sproll 16 --- Take a Step.] Introduces $+1$ and $-1$ as transitions between states, i.e.\ as Pop events on a number-line history.
+\item[Sproll 17 --- Many Ways to Five.] Explores decomposition ($5 = 4+1 = 3+2 = 7-2$), making the path to a result, not merely the result, the object under discussion.
+\item[Sproll 18 --- The Same Place, Different Paths.] Applies historical identity (Definition 4.6) to arithmetic directly: different paths can terminate at the same collapsed value.
+\item[Sproll 19 --- Undo.] Introduces inverse operations as histories that, when appended, return a Collapse value to an earlier one, without erasing the original events (consistent with Definition 4.2's monotonicity).
+\item[Sproll 20 --- Loops.] Introduces repeated operations, cycles, and elementary modular arithmetic, teaching that identity of outcome does not imply identity of path.
+\end{description}
+
+\chapter{Cycle IV --- Machines: Functions and Composition (21--24)}
+
+Cycle IV introduces functions as machines transforming Pops, recovering the ordinary-mathematics notion of a function as a named, reusable Collapse-and-rebind pattern.
+
+\begin{description}
+\item[Sproll 21 --- The Number Machine.] Introduces functions as machines that transform Pops (e.g.\ $2 \rightarrow \square \rightarrow 4$), asking the child to discover the rule $\square$.
+\item[Sproll 22 --- Two Machines Together.] Introduces composition of machines.
+\item[Sproll 23 --- Machines That Undo Machines.] Introduces inverse machines, connecting to Sproll 19's Undo at the level of a named, reusable rule.
+\item[Sproll 24 --- Machines That Forget (and What We Can Get Back).] Merged booklet (see the renumbering rationale in the Preface to Part IV, below): introduces many-to-one machines and information loss (if red and blue both become purple, can the original be recovered?), then immediately reframes the question from ``what is the output'' to ``given the output, what can we know about the input,'' establishing recoverability as the natural completion of the forgetting question rather than a separate topic requiring its own booklet.
+\end{description}
+
+\emph{Renumbering note.} Sprolls 24's two halves were originally planned as separate booklets (Machines That Forget; Can We Get It Back). They are merged here as part of the six-slot compression documented in Chapter 3's numbering history, on the grounds that a forgetting-machine example is unfinished pedagogically until the recoverability question is asked of it, so splitting the two across a booklet boundary would have left Sproll 24's original ending without its point.
+
+\chapter{Cycle V --- Evidence: Mathematics Under Uncertainty (25--28)}
+
+Cycle V introduces the first genuinely epistemic content, using $U$ and $Q$ (Chapter 5) informally before naming them.
+
+\begin{description}
+\item[Sproll 25 --- I Don't Know Which Pop (and Some Guesses Are Better).] Merged booklet distinguishing uncertainty from absence and introducing elementary probability and weighting in the same booklet, since the second cannot be motivated without the first already being live.
+\item[Sproll 26 --- Look Again.] Introduces $Q$ (Definition 5.1) directly: a hidden object is uncertain, and the learner can act to obtain information, distinct from simply changing a hypothesis.
+\item[Sproll 27 --- How Much Should I Trust It?] Introduces noisy measurement, repeated observation, and averages, giving the child's first intuition of $P$ (Definition 5.1) without the symbol.
+\item[Sproll 28 --- The Foggy Room.] Consolidation booklet assembling $U$, $Q$, and $P$ explicitly: a child facing an uncertain object can guess ($U$), look ($Q$), or change how much they trust a clue ($P$), and the booklet's entire point is that these are three different actions, not three names for one action.
+\end{description}
+
+\chapter{Cycle VI --- Broken Maps (29--33)}
+
+Cycle VI is the series' distinctive heart, left fully intact through the renumbering (Chapter 3), and is the first place $A$ becomes explicit content rather than an unnamed experience.
+
+\begin{description}
+\item[Sproll 29 --- None of the Answers Work.] A puzzle in which every available answer is wrong, deliberately violating the assumption that a textbook's provided options always contain the correct one.
+\item[Sproll 30 --- Make a New Answer.] Introduces $A_S^+$ (Chapter 5): rather than choosing among the provided possibilities, the child enlarges $\Omega$.
+\item[Sproll 31 --- An Answer That Cannot Be Right.] Introduces $A_R^-$: evidence can make something inadmissible rather than merely unlikely.
+\item[Sproll 32 --- Zero Isn't Gone.] Gives the child-facing form of the Reweighting--Refusal Non-Equivalence proposition (Proposition 5.2) using $\Omega = \{\bullet, \blacktriangle, \blacksquare\}$ with $w(\blacktriangle) = 0$ against $\Omega' = \{\bullet, \blacksquare\}$, and is the natural site for the Three-Fold Non-Equivalence's child-facing corollary (Corollary 6.2, three crossed-out marks) once Refuse (Sproll 04) is far enough in the past to contrast against.
+\item[Sproll 33 --- Should We Change the Rules?] Introduces warrant: a surprising result does not automatically mean the rules are wrong, since it might instead indicate a miscalculation, a need for another observation, or noisy measurement. Teaches the elementary form of $M \rightsquigarrow A$ but $M \not\Rightarrow A$ (Chapter 5, following the source essay's own restraint on this point).
+\end{description}
+
+\chapter{Cycle VII --- Networks and the Geometry of Possibility (34--39)}
+
+Cycle VII, merged from the original Cycles VII and VIII under the renumbering, moves the curriculum into discrete mathematics and closes the series.
+
+\begin{description}
+\item[Sproll 34 --- Pops and Links.] Introduces graphs: vertices, edges, degree, adjacency, with Pops as vertices and Binds as edges.
+\item[Sproll 35 --- Cut One Link.] Introduces connectivity, bridges, redundancy, and failure.
+\item[Sproll 36 --- Where Can You Go From Here?] Turns graphs into state spaces and, per the renumbering, absorbs the original reachability content of ``Can You Get There'' directly into this booklet rather than treating reachability and state-space traversal as two separate topics.
+\item[Sproll 37 --- Dead Ends and Getting Home.] Merged booklet: introduces viable and nonviable regions and, in the same booklet, which transformations still permit return, since a nonviable region is defined exactly by the absence of a returning transformation and separating the two concepts across a booklet boundary would have required restating the definition twice.
+\item[Sproll 38 --- Change the World.] The child modifies nodes, edges, transition rules, and admissibility rules in turn and observes that these are different kinds of transformation, giving a discrete-mathematics restatement of the $U/Q/P/A$ distinction (Chapter 5) at the level of an entire constructed world rather than a single hypothesis.
+\item[Sproll 39 --- The Garden of Possible Things.] Capstone. The child receives a small Spherepop universe, built from all four primitives, in which some questions have answers, some require experiments, some have several answers, some cannot be answered from available evidence, some require changing the admissible possibilities, and some are deliberately left unresolved, per house-style constraint 4 applied one final time at the scale of the whole curriculum rather than a single page.
+\end{description}
+
+\part{Annotated Reference Implementations}
+
+Part III checks Part II's formalism against the Primary Track booklets drafted so far, page by page. Three purposes are served simultaneously. First, this is the discipline the remaining Primary Track booklets must satisfy before being considered complete, so the annotation format established here is itself part of the specification. Second, checking the formalism against real pages surfaces gaps in Part II that abstract review did not: two are found below and neither is cosmetic. Third, by Chapter 3's two-track principle, every correspondence and every gap identified here against a Primary Track booklet applies equally to the Workbook Track booklet at the same sequence position; the Workbook Track editions of Sprolls 00 through 03 are not separately annotated in this Part, since they encode the identical operator content at greater length rather than different content, but a future revision of this Part should add Workbook-Track-specific page references alongside the Primary Track ones given here, particularly where a Workbook Track booklet's added worked examples introduce their own real-world groundings not present in the Primary Track edition.
+
+\chapter{Sproll 00: A Difference}
+
+Sproll 00 requires no annotation against Chapter 4, and that absence is itself the correct result. Every page of Sproll 00 precedes Definition 4.1: there is no history, because there is no event, because Sproll 00 deliberately withholds Pop. ``Here is something'' and ``here is something else'' individuate without committing; nothing in the booklet corresponds to a term in $\mathrm{Labels}$ becoming part of some $\mathrm{Cont}(H)$, because no $H$ exists yet for anything to be a part of.
+
+The two questions left open on pages 11--14, ``are they the same'' and ``can many things be treated as one,'' anticipate Definition 4.6 (historical identity) and the Bind/Collapse distinction respectively, but neither page is given a formal answer, correctly, since answering either would require $\rho$ and $\mathrm{Collapse}_\rho$, both unavailable this early. The corrected page 14 (Chapter 3's constraint 4) is the one place this booklet could have smuggled in a premature answer and does not.
+
+\chapter{Sproll 01: Something Happened}
+
+\begin{description}
+\item[Pages 3--6.] ``There are three ways to go'' through ``that choice is a Pop'' instantiate $\mathrm{Pop}(a) : H \mapsto H'$ (Definition 4.4) with $a = \blacksquare$ and $H = \varepsilon$. This requires one addition to Definition 4.4 that Chapter 4 did not state explicitly: an initial condition $O(\varepsilon)$, the open set before any event has occurred. Chapter 4 defines $O(H)$ only in terms of $\sigma_H$ restricted to $\mathrm{Cont}(H)$, and $\mathrm{Cont}(\varepsilon) = \emptyset$ by Definition 4.2, so as stated $O(\varepsilon) = \emptyset$ and no first Pop is possible at all. The correct reading is that a field of candidates displayed before any Pop is a \emph{proposed} $\mathrm{Cont}$, supplied as an initial condition rather than derived from a prior event; Definition 4.2 should be amended to allow $\mathrm{Cont}(\varepsilon)$ to be a given finite set rather than always $\emptyset$.
+\item[Pages 7--9.] ``Then something happened'' / ``now we have a history'' render $H_1 = \langle \mathrm{Pop}(\blacksquare) \rangle$. The ledger-strip device introduced on page 9 is itself an implementation of an observation rule: it is $\mathrm{Collapse}_{\rho_{\mathrm{ledger}}}(H)$ for a $\rho_{\mathrm{ledger}}$ that renders committed events as an ordered list. This is the first use of Collapse in the series, occurring five booklets before Collapse is named in Sproll 06, which is correct under house-style constraint 1 (enact before naming) but was not previously identified as an instance of Collapse specifically; it should be flagged as such in Sproll 06's own backmatter when that booklet is revised, so the child's later formal vocabulary retroactively recognizes a device already familiar.
+\item[Pages 10--12.] ``Let's try again, the other way'' produces a second history, $H_2 = \langle \mathrm{Pop}(\blacktriangle) \rangle$, sharing the same candidate field $\{\bigcirc, \triangle, \square\}$ as $H_1$. This is a genuine gap in Chapter 4 as drafted, not a pedagogical simplification: Definition 4.1 models a single linear sequence, and nothing in Chapter 4 gives two histories a formal relationship to each other beyond both happening to draw from the same $\mathrm{Labels}$. The pedagogical content of pages 10--12, that $H_1$ and $H_2$ are alternative continuations from one shared choice point rather than two unrelated histories that coincidentally look similar, requires a structural rule beyond sequence, of exactly the kind already present elsewhere in the corpus: Spherepop OS's Branch rule, added there to give fork and speculative execution a shared-prefix relationship (Definition Branch, $\Gamma \vdash t \Rightarrow_e (t_p, t_c) : \mathrm{Branch}$). Chapter 4 should be amended to import Branch before this booklet can be said to have a complete formal backing, rather than an informally suggestive one.
+\item[Pages 13--15.] By contrast, the counting sequence does not have this gap. Page 13's field ($\bigcirc \triangle \square$, outline) and page 14's field ($\bullet \blacktriangle \blacksquare$, filled) are disjoint label sets, so $H_3 = \langle \mathrm{Pop}(\bigcirc), \mathrm{Pop}(\blacktriangle) \rangle$ is a single ordinary history under Definition 4.1 as stated, no Branch required, consistent with the two-line ledger on page 15 correctly showing one growing history rather than two. The distinction between pages 10--12 (branch) and 13--15 (single sequence) was not drawn explicitly during drafting and is recorded here so it is not lost.
+\end{description}
+
+\chapter{Sproll 02: What Happened First?}
+
+\begin{description}
+\item[Pages 3--9.] Two full histories are constructed, $H_1 = \langle \mathrm{Pop}(\bigcirc), \mathrm{Pop}(\triangle) \rangle$ and, after an explicit ``clean page'' reset rather than a branch from a shared choice point, $H_2 = \langle \mathrm{Pop}(\triangle), \mathrm{Pop}(\bigcirc) \rangle$. Because page 6's reset is framed as starting over rather than as an alternative continuation, this pair does \emph{not} require Branch: $H_1$ and $H_2$ are two independent histories, and the Branch gap identified in Sproll 01 does not recur here. Page 5's ``here is what we have now'' is $\mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_1)$; page 9's identical line is $\mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_2)$, both instances of Collapse used, again, well before the name is introduced.
+\item[Pages 10--12.] Instantiates the first half of Example 4.8 directly: $\mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_1) = \mathrm{Collapse}_{\rho_{\mathrm{pic}}}(H_2)$, confirmed on page 11, with page 12 stating in child-facing language exactly the limitation Example 4.8 states formally: a rule can fail to recover a fact a different rule would recover.
+\item[Pages 13--14.] Instantiates the second half of Example 4.8: the two ledger strips render $\mathrm{Collapse}_{\rho_{\mathrm{seq}}}(H_1) \neq \mathrm{Collapse}_{\rho_{\mathrm{seq}}}(H_2)$, and page 14's ``same things, different history'' is the child-facing statement of the Example's conclusion, word for word in spirit.
+\item[Page 15.] The handoff to Sproll 03 asks how a history could be trusted to reconstruct what happened, i.e.\ asks for replay. This surfaces the second gap: Chapter 4 contains no formal Definition of replay distinct from recomputing some $\mathrm{Collapse}_\rho(H)$. Sproll 03's entire content depends on replay being a specific, nameable operation, and Part II should be amended with a definition along the lines of $\mathrm{Replay}(H) = \mathrm{Collapse}_{\rho_{\mathrm{trace}}}(H)$ for a distinguished rule $\rho_{\mathrm{trace}}$ that reconstructs the full state reachable by re-enacting $H$'s events in order, together with a proposition that $\rho_{\mathrm{trace}}$ is deterministic, i.e.\ that replaying the same $H$ twice yields the same result. Without this, Sproll 03 is the one booklet among the first three whose formal backing does not yet exist anywhere in this monograph.
+\end{description}
+
+\chapter{Summary of Findings and Required Patches to Part II}
+
+Two amendments to Chapter 4 are required before Cycle I can be considered fully backed by Part II, both surfaced only by this page-by-page check and not by the abstract statement of the formalism in Part II itself:
+
+\begin{enumerate}
+\item Definition 4.2 needs an initial condition permitting $\mathrm{Cont}(\varepsilon)$ to be a supplied finite set rather than always empty, so that a first Pop has something to choose from.
+\item A Branch structural rule, of the kind already developed for Spherepop OS, needs to be imported to formally back Sproll 01's pages 10--12; without it, the ``two histories from one choice point'' reading is pedagogically clear but not yet formally licensed by anything stated in this monograph.
+\item A formal Definition of Replay is needed to back Sproll 03, currently only planned informally in Part IV's Cycle I entry.
+\end{enumerate}
+
+None of these three findings changes any conclusion already drawn in Part II or Part IV; each is a missing definition, not a wrong one. They are recorded here rather than silently patched into Chapter 4, so that the patch itself is traceable to the specific booklet that required it, consistent with the monotonic-continuation discipline the curriculum itself teaches: a gap found later narrows what was claimed, or adds what was missing, without erasing what came before.
+
+\part{The Correction History as Monotonic Continuation}
+
+Parts I through IV describe a curriculum built on a stable formal foundation. That description is accurate as of this writing, but it was not true throughout drafting, and the drafting record is worth preserving rather than smoothing over, because the record is itself a worked example of the principle the curriculum exists to teach a child. This Part treats three episodes from the drafting history as data, states what was learned from each, and closes with the amendments to Part II that Part III's findings require, presented as additions to the record rather than edits to it.
+
+\chapter{Three Episodes}
+
+\section{Episode One: The Vocabulary Collision}
+
+An early working draft of the curriculum's canonical vocabulary defined Pop as ``expose or present a distinction without evaluating it,'' chosen to keep Collapse's evaluative content out of the first several booklets. This definition was accepted, used to draft a complete sixteen-page reference implementation of Sproll 01, and only then checked against the actual canonical Spherepop specification, where Pop is defined as commitment: choosing a specific option and thereby removing it from what remains possible. The two definitions are not compatible; ``exposing a distinction'' and ``committing to one among several alternatives'' are different operations, and the corpus's own prior work (the Operator Representation Theorem's Pop-as-Selection, and an earlier essay's gloss of Forth's \texttt{push} as ``Pop (commitment)'') had already settled the question before this curriculum began. The working definition was not a live ambiguity resolved one way when it could have been resolved another; it was an error that contradicted material already on record.
+
+The correction required discarding the completed manuscript's central conceit rather than patching it: distinction-as-Pop was renamed distinction-as-prerequisite and given its own booklet, Sproll 00, with no Pop vocabulary in it at all, while Sproll 01 was rewritten from an object-first opening (``here is a Pop'') to an event-first opening (``three ways to go, choose one, that choice is a Pop''). This is the one episode in the drafting history that is not a clean instance of monotonic continuation: the old Sproll 01 was not narrowed or extended, it was withdrawn, because it rested on a definition later shown to be false rather than merely incomplete. The distinction matters for what follows. Monotonic continuation protects true-but-partial claims from being erased; it does not protect false claims from correction. Sproll 00's absorption of the withdrawn manuscript's usable material (the individuation content, stripped of Pop) is the monotonic move; discarding the Pop-as-property framing itself is not a case of monotonic continuation but of ordinary error correction, and the monograph should not claim otherwise.
+
+\section{Episode Two: Three Refinements}
+
+A second correction pass, applied after Sproll 00 and Sproll 01 were redrafted under the corrected vocabulary, made three changes: Sproll 00's page 14 was changed from a resolved answer (``yes, many things held as one'') to an open question, because the resolved version visually asserted an identification between coupling and equality that Bind and Collapse are specifically built to keep separate; Sproll 01's opening line was changed from ``three things could happen'' to ``there are three ways to go,'' because unchosen shapes are continuations, not events, and the original phrasing blurred that distinction; and Sproll 01's counting sequence was changed from two dots appearing to two genuine committed choices, because an appearing object is not necessarily a Pop, and the original version risked teaching a second, quieter version of Episode One's error.
+
+Unlike Episode One, all three of these are genuine instances of monotonic continuation. None involved a claim later shown to be false; each involved a claim that was true as far as it went but was stated with more confidence, or less precision, than it had earned. Page 14's resolved answer was not false, exactly; it was premature. The counting sequence's appearing dots were not wrong, exactly; they were underspecified in a way that happened to coincide with Episode One's actual error. Correcting precision without reversing content is the pattern the curriculum's slogan names, and Episode Two is offered as its clean case, in contrast to Episode One's dirty one.
+
+\section{Episode Three: Gaps Found by Checking, Not by Assumption}
+
+Part III's page-by-page annotation of the three drafted booklets against Part II's formalism surfaced three gaps: an unstated initial condition for $\mathrm{Cont}(\varepsilon)$, a missing structural rule (Branch) required by Sproll 01's branching pages, and a missing formal Definition of Replay required by Sproll 03's planned content. None of these were found by reviewing Part II in isolation; Part II read, on its own, as complete. They were found only by requiring every page of a real booklet to point to a specific definition or proposition rather than to a general area of the formalism, which is the discipline Chapter 3's constraint 5 (an explicit backmatter statement of formal content) was already informally practicing at the level of a single booklet, extended here to the level of the whole monograph.
+
+This is the clearest demonstration in the drafting history that embodiment (Chapter 1) is a stronger discipline than illustration, applied reflexively to the monograph's own writing process rather than to the curriculum's content. An illustrated relationship between a booklet and a formalism can be asserted without being checked, because nothing in an illustrated relationship forces the check to happen. An embodied relationship, one page correspondent to one definition, fails visibly and specifically when the correspondence does not hold, which is exactly what happened three times in Part III.
+
+\chapter{What the Correction History Demonstrates}
+
+Taken together, the three episodes support a claim stronger than ``the curriculum happened to change during drafting.'' They support the claim that the same operator distinctions the curriculum teaches a child, applied to its own drafting process, correctly classify what happened at each step. Episode One is $A^-$ at the level of the project itself: a constitutive revision of the admissible space of curriculum designs, made because a discrepancy (the repository specification) was warranted to override a working assumption rather than merely to be weighed against it. Episode Two is $U$ repeated three times: revision of a commitment within an admissibility space that did not itself need to change. Episode Three is closer to $Q$: an epistemic action (checking pages against definitions) that produced evidence Part II's abstract self-review could not have produced on its own, without yet forcing any particular repair.
+
+This reflexive correspondence was not planned in advance. It is reported here because it is true of the record as it stands, not because the drafting process was designed to demonstrate it. A monograph whose own writing history exhibits the distinctions its content teaches is stronger evidence for those distinctions being real than any amount of additional formal argument would be, precisely because this evidence was not constructed to make the point.
+
+\chapter{Amendments}
+
+Consistent with the finding in Chapter 4 that $\mathrm{Cont}(H)$ is append-only, and with Episode Two's demonstration that correction should narrow or add rather than erase, the following amendments are stated as new material rather than as edits to Chapter 4's original text. Chapter 4 above is left exactly as drafted; a reader consulting it should additionally consult this chapter.
+
+\begin{definition}[Amendment to Definition 4.2: initial condition]
+$\mathrm{Cont}(\varepsilon)$ need not be $\emptyset$. It may be supplied as any finite subset of $\mathrm{Labels}$, representing a field of candidates displayed before any event has occurred. All subsequent claims in Chapter 4 about $\mathrm{Cont}(H \cdot e) \supseteq \mathrm{Cont}(H)$ hold unchanged with this reading; only the base case is affected.
+\end{definition}
+
+\begin{definition}[Branch]
+Given a history $H$ with $O(H) \ni a, b$ for $a \neq b$, $\mathrm{Branch}(H) = (H_p, H_c)$ produces two histories, both extending $H$ as a shared prefix, such that $H_p$ and $H_c$ may subsequently be extended independently and share no further events. $\mathrm{Cont}(H_p)$ and $\mathrm{Cont}(H_c)$ each independently satisfy Definition 4.2's monotonicity from the point of branching onward.
+\end{definition}
+
+\begin{example}[Sproll 01, pages 10--12, formally]
+With $H = \varepsilon$ and $\mathrm{Cont}(\varepsilon) = \{\bigcirc, \triangle, \square\}$ (by the amended Definition 4.2), $\mathrm{Branch}(\varepsilon) = (H_p, H_c)$. Applying $\mathrm{Pop}(\square)$ to $H_p$ yields $H_1$; applying $\mathrm{Pop}(\triangle)$ to $H_c$ yields $H_2$. $H_1$ and $H_2$ are the two histories the booklet displays.
+\end{example}
+
+\begin{definition}[Replay]
+Let $\rho_{\mathrm{trace}}$ be the observation rule that reconstructs, from a history $H$, the full sequence of intermediate states produced by re-enacting each of $H$'s events in order, rather than only $H$'s final committed value. Then $\mathrm{Replay}(H) := \mathrm{Collapse}_{\rho_{\mathrm{trace}}}(H)$.
+\end{definition}
+
+\begin{proposition}[Replay determinism]
+For any history $H$, $\mathrm{Replay}(H)$ computed on two separate occasions yields identical results.
+\end{proposition}
+
+\begin{proof}
+$\mathrm{Collapse}_\rho$ is defined (Definition 4.4) as a function from histories to a value space; $\rho_{\mathrm{trace}}$, like any $\rho$, is a function, and functions return the same output on the same input on every occasion of evaluation. The proposition is therefore immediate from Collapse's own definition and states no fact beyond it; its purpose is to make explicit, as a nameable result, exactly the guarantee Sproll 03 asks a child to trust when it says ``show me the history and let me play it again.''
+\end{proof}
+
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+
+The Preface asked for a check on the claim that a curriculum can embody a theory rather than merely illustrate it: could a booklet be swapped for a superficially similar one without the surrounding sequence breaking. Part III supplies an unplanned second check on the same claim, applied to the monograph rather than to the curriculum: could a formal claim be swapped for a superficially similar one without the surrounding argument breaking. In both cases the answer was no, and in both cases the failure was specific and locatable rather than diffuse. That is what embodiment was supposed to guarantee, and the drafting record, gaps and corrections included, is offered as the evidence that it did.
+
+\end{document}
