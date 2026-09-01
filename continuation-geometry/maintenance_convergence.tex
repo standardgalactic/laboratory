@@ -140,8 +140,10 @@ The components are normalized so that
 G(t) + S(t) + M(t) = 1 \quad \text{for all } t \geq 0.
 \]
 Generative tasks correspond to the direct creation of goods or services.
-Supervisory tasks involve monitoring the operation of automated workflows.
-Maintenance tasks consist of repairing errors, cleaning outputs, correcting
+Supervisory tasks involve monitoring the operation of automated
+workflows---a residual category of labor in its own right
+\cite{zuboff1988}.  Maintenance tasks consist of repairing errors, cleaning
+outputs, correcting
 failures, and sustaining the operational infrastructure on which production
 depends.
 
@@ -198,7 +200,9 @@ $(0,0,1)$, the unique stable fixed point of Theorem~\ref{thm:convergence}.}
 
 Let $A_t$ denote an automation operator acting on the task distribution.
 We model the effect of automation as a continuous reduction in the
-generative component of labor.
+generative component of labor, formalizing the collapse of generative labor
+under technological substitution \cite{frey2017} and the consequent
+redistribution of occupational tasks \cite{acemoglu2019}.
 
 \begin{definition}[Automation Operator]
 The automation operator $A_t$ acts on $T_O$ according to the differential
@@ -305,7 +309,8 @@ of the claim that maintenance labor becomes asymptotically dominant.
 \subsection{The Janitorial Phase Transition}
 
 We now introduce a threshold model describing the structural reorganization
-of occupational composition.
+of occupational composition, extending prior treatments of automation
+thresholds as occupational phase transitions \cite{autor2015}.
 
 \begin{definition}[Janitorial Order Parameter]
 Define the order parameter
@@ -490,7 +495,7 @@ from generative culinary production to the maintenance of standardized food
 preparation systems.
 \end{lemma}
 
-Industrial kitchens replaced individual culinary expertise with assembly lines.
+Industrial kitchens replaced individual culinary expertise with assembly lines \cite{ritzer1993}.
 Workers increasingly monitor timers, replenish standardized ingredients, and
 clean equipment rather than compose recipes.  The creative and generative
 component of culinary labor migrated into the design of the system itself,
@@ -505,11 +510,11 @@ In early bureaucracies, clerks performed arithmetic and record keeping
 manually.  The introduction of calculators, spreadsheets, and database
 management systems transferred these generative functions to machines, leaving
 human workers responsible for oversight, correction, and the management of
-edge cases that automated systems could not handle.
+edge cases that automated systems could not handle \cite{autor2015}.
 
 Both lemmas exhibit the structure predicted by the model: automation absorbs
 the generative component of labor, supervision follows briefly, and
-maintenance dominates the long-run equilibrium.
+maintenance dominates the long-run equilibrium \cite{ritzer1993,autor2015}.
 
 %% =============================================================
 \section{Contemporary Corollaries}
@@ -534,14 +539,16 @@ maintenance task in the sense of Definition~1.
 As code generation, dependency management, and deployment pipelines become
 increasingly automated, the generative component of programming contracts.
 The programmer's central activity shifts toward debugging, infrastructure
-maintenance, and the correction of artifacts produced by automated systems.
+maintenance, and the correction of artifacts produced by automated systems, a
+shift already documented as debugging becomes the dominant mode of software
+production \cite{lientz1980,gray2019}.
 \end{corollary}
 
 \begin{corollary}[Construction and Design]
 Industrialized building systems, modular prefabrication, and algorithmic
 planning tools reduce the generative role of individual craftsmen and
 designers.  Human labor concentrates on inspection, coordination, and repair
-of automated construction and generative design processes.
+of automated construction and generative design processes \cite{bock2015}.
 \end{corollary}
 
 Each corollary instantiates the Maintenance Convergence Theorem within a
@@ -599,7 +606,9 @@ associated with greater maintenance intensity.
 
 \subsection{Scaling Behavior}
 
-Let $C$ denote a measure of technological system complexity.  The model
+Let $C$ denote a measure of technological system complexity, in the sense of
+a balance between functional segregation and integration proposed for
+biological neural systems \cite{tononi1994}.  The model
 suggests the scaling relation
 \[
 \mathcal{J} \sim \log C,
@@ -758,9 +767,11 @@ information.
 In statistical physics and theoretical biology this role is often formalized
 through the concept of a \emph{Markov blanket}, a set of nodes that separates
 the internal states of a system from its external environment while mediating
-all exchanges between them.  A cell membrane performs an analogous function:
+all exchanges between them \cite{friston2019}.  A cell membrane performs an analogous function:
 it does not generate the metabolic activity of the cell, but regulates and
-maintains the conditions under which that activity can occur.  The membrane
+maintains the conditions under which that activity can occur, in the manner
+of homeostatic regulation described for physiological systems generally
+\cite{cannon1932,ashby1952}.  The membrane
 removes waste, stabilizes chemical gradients, and protects internal processes
 from environmental disruption.  In this sense the membrane performs a
 custodial function at the boundary of biological production.
@@ -953,7 +964,9 @@ literal prediction.
 The model developed in this paper formalizes a structural tendency observable
 across the history of technological societies.  As productive systems become
 more autonomous, the remaining human role increasingly resembles infrastructure
-maintenance.  This tendency is not incidental but follows necessarily from the
+maintenance, echoing earlier accounts of workers repositioned toward
+monitoring and correcting automated processes rather than generating them
+directly \cite{zuboff1988}.  This tendency is not incidental but follows necessarily from the
 dynamics of the automation operator $A_t$: generative labor decays
 exponentially, supervisory labor collapses through system stabilization, and
 maintenance labor absorbs all residual task mass.
@@ -963,7 +976,9 @@ Maintenance Convergence framework inverts this picture.  In the automated
 economy the human worker becomes the stabilizing agent that prevents complex
 technological systems from collapsing into disorder.  The janitor provides the
 archetype of this role: janitorial labor is not generative in the classical
-sense, but preserves the functionality of systems that produce value elsewhere.
+sense, but preserves the functionality of systems that produce value elsewhere,
+a hidden infrastructural function documented across advanced economies
+\cite{star1999}.
 In this sense the janitor stands in the same relation to the automated economy
 as the cell membrane stands to metabolic production: not a source of output,
 but the structural condition for its continuity.
@@ -990,7 +1005,7 @@ takes up this question through a cultural case study.
 
 The custodial equilibrium derived in this paper also appears in contemporary
 cultural representation.  A particularly striking example is provided by the
-film \emph{Perfect Days} (2023), directed by Wim Wenders.  The film follows
+film \emph{Perfect Days} (2023), directed by Wim Wenders \cite{wenders2023}.  The film follows
 Hirayama, a public toilet cleaner in Tokyo whose life is organized around an
 extremely stable daily routine.  His work consists entirely of maintenance:
 cleaning shared public spaces, repairing small disturbances in the social
@@ -1041,8 +1056,9 @@ layer expands continuously as civilization becomes more complex.
 \emph{Perfect Days} introduces a different register of analysis.  Rather than
 presenting the janitorial role as a degraded residuum of generative work, the
 film portrays it as a \emph{stable experiential equilibrium}: a configuration
-of daily life that is internally coherent, reproducible, and meaningful.
-Hirayama does not aspire to escape the custodial role; he inhabits it with
+of daily life that is internally coherent, reproducible, and meaningful, in
+a manner consonant with accounts of optimal, self-rewarding engagement with
+a task \cite{csikszentmihalyi1990}.  Hirayama does not aspire to escape the custodial role; he inhabits it with
 care.  His satisfaction does not depend on the generative significance of his
 output but on the quality of his attention to the task at hand.
 
@@ -1079,7 +1095,8 @@ the human worker as a producer whose role is diminished by automation.
 presenting the custodial fixed point as a possible site of human flourishing
 rather than economic failure, the film raises the possibility that the
 convergence result is not a tragedy to be resisted but a transition to be
-navigated with care.
+navigated with care, echoing arguments that skilled, attentive maintenance
+work carries its own dignity and craft \cite{sennett2008,crawford2009}.
 
 This normative inversion does not depend on denying the mathematical
 structure of the model.  It depends instead on recognizing that the
@@ -1109,7 +1126,9 @@ societies, nearly every household already performs a localized form of
 custodial governance.  Individuals maintain their living environments by
 cleaning, organizing, repairing, and managing the small infrastructures
 that sustain daily life: appliances, food systems, documents, communication
-networks, and personal digital devices.  These activities correspond almost
+networks, and personal digital devices, an ordinary phenomenology of repair
+and upkeep that has itself become an object of scholarly attention
+\cite{graham2007}.  These activities correspond almost
 exactly to the maintenance category $M$ introduced in the task decomposition
 model.  In effect, the home already functions as a miniature custodial
 economy---a small-scale instantiation of the janitorial equilibrium $(0,0,1)$
@@ -1361,10 +1380,13 @@ maintenance state:
 \end{theorem}
 
 The traditional narrative of technological progress imagines a future in which
-machines perform labor while humans pursue creative or intellectual ends.  The
+machines perform labor while humans pursue creative or intellectual ends,
+a speculation with a long lineage stretching back to early forecasts of a
+leisure economy freed from want \cite{keynes1930}.  The
 present analysis suggests a more austere outcome.  As machines absorb
 responsibility for production, the human role converges to the maintenance of
-increasingly complex technological systems.  The progressive vision in which
+increasingly complex technological systems, a redistribution of employment
+toward custodial functions rather than its disappearance \cite{susskind2020}.  The progressive vision in which
 automation liberates human creativity is not refuted by this analysis; it is
 simply not what the model predicts in the limit.
 
@@ -1434,7 +1456,7 @@ effective description that survives repeated coarse-graining.
 \label{app:thermo}
 
 Technological systems generate entropy in the form of disorder, malfunction,
-and accumulation of errors and physical debris.  Let $E$ denote the
+and accumulation of errors and physical debris \cite{georgescuroegen1971}.  Let $E$ denote the
 operational entropy of a workplace and $P$ the productive throughput of its
 automated systems.  Entropy production satisfies
 \[
@@ -1456,7 +1478,7 @@ proportion.
 
 This result provides a thermodynamic foundation for the main convergence
 argument.  The janitor performs the physical removal of entropy produced by
-economic activity; the second law of thermodynamics guarantees that this role
+economic activity \cite{georgescuroegen1971}; the second law of thermodynamics guarantees that this role
 is never eliminated.
 
 %% =============================================================
@@ -1586,7 +1608,9 @@ constraint.
 \begin{proposition}
 The maintenance equilibrium $T^* = (0,0,1)$ is a stable node of the
 automation dynamics for all $\alpha, \gamma > 0$.  Trajectories approach
-$T^*$ exponentially at rates $e^{-\alpha t}$ and $e^{-\gamma t}$.
+$T^*$ exponentially at rates $e^{-\alpha t}$ and $e^{-\gamma t}$, consistent
+with the general principle that repair and recovery restore stability in
+industrial networks \cite{graham2007}.
 \end{proposition}
 
 Figure~\ref{fig:stability} depicts the phase portrait of the projected
@@ -1884,8 +1908,8 @@ Ashby, W.~R. (1952).
 \textit{Design for a Brain}.
 Chapman and Hall.
 
-\bibitem{tononi1998}
-Tononi, G., Sporns, O., \& Edelman, G.~M. (1998).
+\bibitem{tononi1994}
+Tononi, G., Sporns, O., \& Edelman, G.~M. (1994).
 A measure for brain complexity: relating functional segregation and integration
 in the nervous system.
 \textit{Proceedings of the National Academy of Sciences}, 91(11), 5033--5037.
@@ -1895,125 +1919,90 @@ Wenders, W. (Director). (2023).
 \textit{Perfect Days} [Film].
 Master of Art Production; Wenders Images.
 
-\bibitem{dejong2019}
-de Jong, F. (2019).
-Custodial identity and the phenomenology of routine maintenance.
-\textit{Journal of Labor and Everyday Life}, 3(1), 11--44.
-
 \bibitem{sennett2008}
 Sennett, R. (2008).
 \textit{The Craftsman}.
 Yale University Press.
 
-\bibitem{pettersen2021}
-Pettersen, H., \& Mori, K. (2021).
-Stable equilibria in experiential labor: Evidence from urban service work.
-\textit{Annals of Occupational Phenomenology}, 7(2), 88--127.
+\bibitem{crawford2009}
+Crawford, M.~B. (2009).
+\textit{Shop Class as Soulcraft: An Inquiry into the Value of Work}.
+Penguin Press.
 
-\bibitem{margolis1979}
-Margolis, J. (1979).
-On the dignity of maintenance work.
-\textit{Philosophy of Labor Quarterly}, 5(1), 1--28.
+\bibitem{csikszentmihalyi1990}
+Csikszentmihalyi, M. (1990).
+\textit{Flow: The Psychology of Optimal Experience}.
+Harper \& Row.
 
-\bibitem{alvarez1974}
-Alvarez, R. (1974).
-\textit{Custodial Dynamics in Late Automation Economies}.
-Journal of Industrial Abstraction, 12(3), 201--245.
+\bibitem{star1999}
+Star, S.~L. (1999).
+The ethnography of infrastructure.
+\textit{American Behavioral Scientist}, 43(3), 377--391.
 
-\bibitem{chen1991}
-Chen, Y., \& Morita, S. (1991).
-Maintenance regimes in post-industrial production systems.
-\textit{Annals of Socio-Technical Systems}, 8(1), 55--92.
+\bibitem{graham2007}
+Graham, S., \& Thrift, N. (2007).
+Out of order: Understanding repair and maintenance.
+\textit{Theory, Culture \& Society}, 24(3), 1--25.
 
-\bibitem{devereux1988}
-Devereux, P. (1988).
-Entropy and cleanliness in large-scale bureaucratic institutions.
-\textit{Review of Organizational Thermodynamics}, 2(4), 301--329.
+\bibitem{georgescuroegen1971}
+Georgescu-Roegen, N. (1971).
+\textit{The Entropy Law and the Economic Process}.
+Harvard University Press.
 
-\bibitem{erhardt2003}
-Erhardt, L. (2003).
-The hidden custodian: Infrastructure labor in advanced economies.
-\textit{Quarterly Journal of Invisible Work}, 19(2), 88--134.
+\bibitem{zuboff1988}
+Zuboff, S. (1988).
+\textit{In the Age of the Smart Machine: The Future of Work and Power}.
+Basic Books.
 
-\bibitem{fischer1999}
-Fischer, T., \& Alvarez, R. (1999).
-Technological substitution and the collapse of generative labor.
-\textit{Journal of Applied Socioeconomics}, 14(3), 211--249.
+\bibitem{frey2017}
+Frey, C.~B., \& Osborne, M.~A. (2017).
+The future of employment: How susceptible are jobs to computerisation?
+\textit{Technological Forecasting and Social Change}, 114, 254--280.
 
-\bibitem{garcia2015}
-Garcia, M. (2015).
-Automation and the redistribution of occupational tasks.
-\textit{Transactions of the Institute for Computational Labor Studies}, 27(1), 77--118.
+\bibitem{acemoglu2019}
+Acemoglu, D., \& Restrepo, P. (2019).
+Automation and new tasks: How technology displaces and reinstates labor.
+\textit{Journal of Economic Perspectives}, 33(2), 3--30.
 
-\bibitem{hartmann1983}
-Hartmann, J. (1983).
-Industrial kitchens and the standardization of culinary labor.
-\textit{Historical Studies in Mechanized Food Production}, 6(2), 145--173.
+\bibitem{autor2015}
+Autor, D.~H. (2015).
+Why are there still so many jobs? The history and future of workplace automation.
+\textit{Journal of Economic Perspectives}, 29(3), 3--30.
 
-\bibitem{iverson2007}
-Iverson, D. (2007).
-Supervision as residual labor.
-\textit{Journal of Organizational Residuals}, 11(4), 233--268.
+\bibitem{ritzer1993}
+Ritzer, G. (1993).
+\textit{The McDonaldization of Society}.
+Pine Forge Press.
 
-\bibitem{kim2018}
-Kim, S., \& Duarte, P. (2018).
-Algorithmic workflows and the maintenance economy.
-\textit{Computational Labor Review}, 9(3), 144--189.
+\bibitem{lientz1980}
+Lientz, B.~P., \& Swanson, E.~B. (1980).
+\textit{Software Maintenance Management: A Study of the Maintenance of Computer
+Application Software in 487 Data Processing Organizations}.
+Addison-Wesley.
 
-\bibitem{larsen1995}
-Larsen, H. (1995).
-Clerks, calculators, and the rise of monitoring labor.
-\textit{Journal of Administrative History}, 17(1), 44--71.
+\bibitem{gray2019}
+Gray, M.~L., \& Suri, S. (2019).
+\textit{Ghost Work: How to Stop Silicon Valley from Building a New Global
+Underclass}.
+Houghton Mifflin Harcourt.
 
-\bibitem{maldonado2002}
-Maldonado, F. (2002).
-Entropy production in technological systems.
-\textit{Annals of Economic Thermodynamics}, 4(1), 9--38.
+\bibitem{bock2015}
+Bock, T. (2015).
+The future of construction automation: Technological disruption and the
+upcoming ubiquity of robotics.
+\textit{Automation in Construction}, 59, 113--121.
 
-\bibitem{norton2011}
-Norton, J. (2011).
-The maintenance sector and the future of employment.
-\textit{Journal of Speculative Labor Economics}, 5(2), 101--136.
+\bibitem{susskind2020}
+Susskind, D. (2020).
+\textit{A World Without Work: Technology, Automation, and How We Should
+Respond}.
+Metropolitan Books.
 
-\bibitem{okada1998}
-Okada, T. (1998).
-Repair, recovery, and system stability in industrial networks.
-\textit{Systems Maintenance Quarterly}, 3(3), 67--112.
-
-\bibitem{petrov2019}
-Petrov, I., \& Sullivan, M. (2019).
-Debugging as the dominant mode of software production.
-\textit{Journal of Algorithmic Workflows}, 13(2), 59--94.
-
-\bibitem{ramirez2006}
-Ramirez, L. (2006).
-The janitor as infrastructure.
-\textit{Review of Maintenance Studies}, 22(4), 199--228.
-
-\bibitem{schneider1987}
-Schneider, B. (1987).
-Entropy removal and the economics of cleanliness.
-\textit{Journal of Institutional Hygiene}, 1(1), 1--24.
-
-\bibitem{tanaka2013}
-Tanaka, Y. (2013).
-Automation thresholds and occupational phase transitions.
-\textit{Annals of Socioeconomic Physics}, 15(3), 201--244.
-
-\bibitem{vasquez2020}
-Vasquez, R. (2020).
-The custodial limit of technological civilization.
-\textit{Journal of Long-Run Economic Satire}, 1(1), 1--42.
-
-\bibitem{walker1992}
-Walker, D., \& Singh, A. (1992).
-Maintenance labor in highly automated factories.
-\textit{Industrial Sociology Review}, 10(2), 72--105.
-
-\bibitem{zhang2017}
-Zhang, H. (2017).
-Cleaning the machine: Maintenance work in the digital economy.
-\textit{Transactions on Computational Society}, 7(4), 311--350.
+\bibitem{keynes1930}
+Keynes, J.~M. (1930).
+Economic possibilities for our grandchildren.
+In \textit{Essays in Persuasion} (1931).
+Macmillan.
 
 \end{thebibliography}
 
