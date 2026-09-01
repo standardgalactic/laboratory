@@ -157,7 +157,7 @@
 \begin{abstract}
 This treatise develops a mathematical architecture for many-to-one intellectual communication under finite recipient attention. The central problem is not merely to rank incoming messages, retrieve related documents, or suppress repetition. It is to transform a heterogeneous submission into a representation that preserves every distinction required by authorized downstream decisions, to assemble that representation with participant-specific, archive-specific, and recipient-specific context, to detect when the resulting local structures fail to form a coherent global state, and to allocate scarce human attention without making unfamiliarity itself a reason for suppression.
 
-The proposed architecture integrates three previously distinct frameworks. The Attention Compiler supplies the institutional and conversational problem: many participants submit questions, objections, conjectures, evidence, corrections, and partially formed ideas toward a recipient whose attention budget is finite. CLIO supplies a theory of admissibility-relative projection: a submission may be compressed only through a quotient sufficient for the full class of routing, explanation, testing, escalation, audit, and appeal operations the institution authorizes. HYDRA supplies a theory of structured assembly: the projected submission, participant-state estimate, prerequisite graph, archive neighborhood, provenance record, recipient model, and ambient relevance fields must glue into a coherent routing state before any disposition is treated as warranted.
+The proposed architecture integrates three previously distinct frameworks, building on earlier interface and protocol designs for structuring many-to-one and small-group conversation \cite{anderson2009dialog,anderson2011thinwalls,anderson2022bubblecity,brown2005worldcafe}. The Attention Compiler supplies the institutional and conversational problem: many participants submit questions, objections, conjectures, evidence, corrections, and partially formed ideas toward a recipient whose attention budget is finite. CLIO supplies a theory of admissibility-relative projection: a submission may be compressed only through a quotient sufficient for the full class of routing, explanation, testing, escalation, audit, and appeal operations the institution authorizes. HYDRA supplies a theory of structured assembly: the projected submission, participant-state estimate, prerequisite graph, archive neighborhood, provenance record, recipient model, and ambient relevance fields must glue into a coherent routing state before any disposition is treated as warranted.
 
 The resulting system is formalized as a context-indexed composite
 \[
@@ -818,7 +818,7 @@ The rest of this treatise develops those premises separately. Section 2 construc
 
 The phrase \emph{representational simplicity} does not refer merely to a small number of coordinates, a short description, a low-dimensional embedding, or a compressed storage format. A representation is simple only relative to a declared family of operations. Removing a coordinate is simplifying when every authorized operation is invariant under its removal. The same removal is destructive when at least one authorized operation distinguishes states that the representation identifies.
 
-Let \(X\) be a measurable state space of submissions and let \(\mathcal C\) be a space of conversational contexts. A context
+Let \(X\) be a measurable state space of submissions and let \(\mathcal C\) be a space of conversational contexts, equipped throughout with the usual apparatus of measure-theoretic probability \cite{billingsley1995,durrett2019}. A context
 \[
 c\in\mathcal C
 \]
@@ -853,6 +853,8 @@ f_{\alpha,c}(x)=f_{\alpha,c}(y)
 \]
 for every \(x,y\in X\) and every \(\alpha\in I_c\).
 \end{definition}
+
+This is the natural generalization of classical statistical sufficiency, in which a statistic is sufficient for a family of distributions when it preserves every distinction relevant to inference about the underlying parameter \cite{fisher1922,neyman1935,halmos1949,lehmann1998}.
 
 \begin{definition}[Contextual indistinguishability]
 For a fixed context \(c\), define
@@ -1664,7 +1666,7 @@ This proposition formalizes why compression alone cannot be the objective. Simpl
 
 \subsection{Information complexity and its limitations}
 
-When \(X\) and \(M_c\) are random variables with a specified joint distribution induced by \(P_c\) and \(q_c\), one candidate complexity measure is
+When \(X\) and \(M_c\) are random variables with a specified joint distribution induced by \(P_c\) and \(q_c\), one candidate complexity measure, using the standard information-theoretic apparatus of entropy and mutual information \cite{cover2006}, is
 \[
 \Comp_{\mathrm{MI}}(q_c)
 =
@@ -3074,7 +3076,7 @@ The resulting inclusion probability is
 
 The audit observes the raw submission, reconstructs the warranted disposition under enhanced review, and compares it with the projected disposition. This produces direct samples of within-fiber heterogeneity.
 
-For operation \(\alpha\), an unbiased Horvitz-Thompson estimator of pairwise collapse energy can be formed from sampled pairs:
+For operation \(\alpha\), an unbiased Horvitz-Thompson estimator \cite{horvitz1952} of pairwise collapse energy can be formed from sampled pairs:
 \[
 \widehat{\mathcal E}_{\alpha,c}
 =
@@ -3362,8 +3364,9 @@ P_t^i(d\theta)
 \theta_i(t)\in d\theta
 \middle|
 Y_{i,1:t}
-\right).
+\right),
 \]
+in the spirit of knowledge-tracing models that estimate latent mastery from a sequence of observed interactions \cite{corbett1994}.
 
 \begin{definition}[Operational participant model]
 An operational participant model is a posterior distribution over the least latent state required to choose authorized conversational interventions. It is not authorized to support unrelated classification of the participant.
@@ -3383,7 +3386,7 @@ be the intervention selected at time \(t\). Let
 \[
 o_{t+1}
 \]
-be the resulting observation. A controlled state-space model has transition kernel
+be the resulting observation. A controlled state-space model has transition kernel, in the manner of a partially observed Markov decision process solved by dynamic programming \cite{puterman1994,bertsekas2017},
 \[
 P
 \left(
@@ -3519,7 +3522,7 @@ represent the participant's commitment to proposition \(p\), where \(-1\) denote
 \[
 U_i(p,t)\in\{0,1\}
 \]
-represent whether the participant understands \(p\) sufficiently to state its content, consequences, and relevant alternatives.
+represent whether the participant understands \(p\) sufficiently to state its content, consequences, and relevant alternatives, a notion of demonstrated understanding as distinct from mere assent that draws on prior computational treatments of comprehension and autonomous cognition \cite{degyurky2014,anderson2022um1}.
 
 The system maintains separate posteriors
 \[
@@ -4110,7 +4113,7 @@ indicate that the system assigns \(u\) before \(v\). Let
 \[
 Y_v
 \]
-be performance on \(v\). The causal quantity of interest is
+be performance on \(v\). The causal quantity of interest, expressed in the do-notation of structural causal models \cite{pearl2009,hernan2020}, is
 \[
 \E[Y_v\mid\operatorname{do}(A_{uv}=0)]
 -
@@ -7077,7 +7080,7 @@ such that
 for every \(a\in A\).
 \end{definition}
 
-If \(\mathscr F\) is a sheaf, every pairwise-compatible family has a unique global gluing. In an implemented conversational system, however, the assigned structure may be only a presheaf, the overlap maps may be incomplete, or the local compatibility judgments may themselves be uncertain.
+If \(\mathscr F\) is a sheaf, every pairwise-compatible family has a unique global gluing, in the classical sense developed for sheaf theory and topos theory \cite{godement1958,maclane1992,curry2014}. In an implemented conversational system, however, the assigned structure may be only a presheaf, the overlap maps may be incomplete, or the local compatibility judgments may themselves be uncertain.
 
 \subsection{The sheaf condition}
 
@@ -9608,7 +9611,7 @@ almost surely, then
 \leq
 A_r.
 \]
-Strict inequality is required for positive recurrent stability under ordinary nondegenerate queueing assumptions.
+Strict inequality is required for positive recurrent stability under ordinary nondegenerate queueing assumptions \cite{kleinrock1975}.
 \end{theorem}
 
 \begin{proof}
@@ -9707,7 +9710,7 @@ It follows that obstruction detection before escalation is valuable even when th
 
 \subsection{Selective classification and abstention}
 
-Escalation can be formulated as a selective prediction problem. Let
+Escalation can be formulated as a selective prediction problem in the sense of statistical learning theory \cite{vapnik1998,geifman2017}. Let
 \[
 Y_{ir}\in\{0,1\}
 \]
@@ -9980,7 +9983,7 @@ i_j
 \]
 
 \begin{theorem}[Greedy guarantee under diminishing returns]
-Suppose \(F_r\) is nonnegative, monotone, and submodular with \(F_r(\varnothing)=0\). Let \(\mathcal{S}^{*}\) maximize \(F_r(\mathcal{S})\) over all sets satisfying \(|\mathcal{S}|\leq k\). Then the greedy set \(\mathcal{S}_k\) satisfies
+Suppose \(F_r\) is nonnegative, monotone, and submodular with \(F_r(\varnothing)=0\) \cite{nemhauser1978}. Let \(\mathcal{S}^{*}\) maximize \(F_r(\mathcal{S})\) over all sets satisfying \(|\mathcal{S}|\leq k\). Then the greedy set \(\mathcal{S}_k\) satisfies
 \[
 F_r(\mathcal{S}_k)
 \geq
@@ -11142,7 +11145,7 @@ be the stratum-specific suppressed-value prevalence, let
 \[
 \sigma_g^2=p_g(1-p_g),
 \]
-and let \(c_g^{A}\) be the cost of auditing one residual in the stratum. If \(n_g\) cases are audited from stratum \(g\), the approximate variance of the stratified estimator for the suppressed-value total is
+and let \(c_g^{A}\) be the cost of auditing one residual in the stratum. If \(n_g\) cases are audited from stratum \(g\), the approximate variance of the stratified estimator for the suppressed-value total, following classical stratified-sampling theory \cite{cochran1977}, is
 \[
 \Var(\widehat{T}_V)
 \approx
@@ -12164,7 +12167,7 @@ m(x)
 =
 \E[V_i\mid X_i=x,D_i=1]
 \]
-be an outcome model for value among suppressed residuals, and let \(\pi(x)\) be the audit inclusion probability. A doubly robust estimator for the mean suppressed value is
+be an outcome model for value among suppressed residuals, and let \(\pi(x)\) be the audit inclusion probability. A doubly robust estimator for the mean suppressed value, following the augmented inverse-probability-weighting construction developed for missing-data and causal-inference problems \cite{bang2005,robins1994}, is
 \[
 \widehat{\mu}_{\mathrm{DR}}
 =
@@ -12465,7 +12468,7 @@ G_i^{\mathrm{struct}}
 -
 c_i^{\Audit},
 \]
-where \(G_i^{\mathrm{case}}\) is the value of correcting the individual case, \(G_i^{\mathrm{struct}}\) is the value of repairing the shared mechanism, and \(c_i^{\Audit}\) is the audit cost. This resembles active learning, but the target is broader than predictive accuracy. The audit may revise the quotient space, the prerequisite topology, the coupling model, the recipient relation, or the meaning of an admissible residual.
+where \(G_i^{\mathrm{case}}\) is the value of correcting the individual case, \(G_i^{\mathrm{struct}}\) is the value of repairing the shared mechanism, and \(c_i^{\Audit}\) is the audit cost. This resembles active learning \cite{settles2009}, but the target is broader than predictive accuracy. The audit may revise the quotient space, the prerequisite topology, the coupling model, the recipient relation, or the meaning of an admissible residual.
 
 \begin{proposition}[Structural audit dominance]
 Suppose cases \(i\) and \(j\) have equal probabilities of individual decision error and equal individual correction values. If auditing \(i\) is expected to repair a shared failure affecting \(m>1\) future cases while auditing \(j\) affects only itself, and audit costs are equal, then
@@ -12746,7 +12749,7 @@ A finite-attention architecture cannot promise never to suppress value. It can p
 
 The preceding sections treated the residual \(r_i\) as the principal unit of analysis. That perspective is necessary but incomplete. A submission can possess negligible residual novelty when considered individually while participating in a collectively novel pattern when considered as one event in a population. Repeated questions, repeated prerequisite failures, independently rediscovered counterexamples, correlated representational collapses, and geographically or temporally concentrated appeals can reveal changes in the domain that no single message establishes.
 
-This distinction separates semantic novelty from distributional novelty. Semantic novelty concerns what remains after a particular submission has been reconstructed and compared with the archive. Distributional novelty concerns a change in the arrival process, dependency structure, failure topology, or joint configuration of many submissions. A familiar claim can therefore be semantically nonnovel and distributionally significant. Conversely, an individually unusual claim can be semantically novel while having no detectable population-level recurrence.
+This distinction separates semantic novelty from distributional novelty, echoing the standard division between statistical and neural-network-based approaches to novelty detection \cite{markou2003a,markou2003b}. Semantic novelty concerns what remains after a particular submission has been reconstructed and compared with the archive. Distributional novelty concerns a change in the arrival process, dependency structure, failure topology, or joint configuration of many submissions. A familiar claim can therefore be semantically nonnovel and distributionally significant. Conversely, an individually unusual claim can be semantically novel while having no detectable population-level recurrence.
 
 Let
 \[
@@ -12870,7 +12873,7 @@ for every divergence that separates the two count distributions. Thus neither fo
 
 \subsection{Recurrence as evidence under a point-process model}
 
-Fix a node \(v\) in the prerequisite or answer graph. Suppose submissions associated with \(v\) follow a Poisson process under the reference model:
+Fix a node \(v\) in the prerequisite or answer graph. Suppose submissions associated with \(v\) follow a Poisson process under the reference model \cite{daley2003}:
 \[
 N_v(t+\Delta)-N_v(t)
 \sim
@@ -15348,7 +15351,7 @@ R_r(Z)\leq R_r^{*}+\eps,
 \]
 where \(R_r^{*}\) is the minimum achievable routing risk under the available observations.
 
-More generally, an information-bottleneck objective is
+More generally, an information-bottleneck objective, in the sense introduced for compressing a signal while preserving relevant information \cite{tishby1999}, is
 \[
 \min_{p(z\mid x)}
 \left[
@@ -15435,7 +15438,7 @@ An economic gate can reduce arrival rate without being value-neutral.
 
 \subsection{Fairness criteria and incompatibility}
 
-Let \(G\in\{0,1\}\) denote a participant group, let \(V\in\{0,1\}\) denote true value, and let \(E\in\{0,1\}\) denote escalation. Several fairness conditions are plausible.
+Let \(G\in\{0,1\}\) denote a participant group, let \(V\in\{0,1\}\) denote true value, and let \(E\in\{0,1\}\) denote escalation. Several fairness conditions are plausible, and it is known that not all of them can be satisfied simultaneously except in degenerate cases \cite{kleinberg2017fairness,chouldechova2017}.
 
 Demographic parity requires
 \[
@@ -15682,7 +15685,7 @@ be the description length of the decision computation at state \(\sigma\), and l
 \[
 K(\mathcal{E})
 \]
-be the description length of an explanation. Suppose an explanation is strongly faithful when it permits exact reconstruction of the decision for every admissible perturbation in neighborhood \(U(\sigma)\).
+be the description length of an explanation, in the sense of Kolmogorov complexity \cite{li2019}. Suppose an explanation is strongly faithful when it permits exact reconstruction of the decision for every admissible perturbation in neighborhood \(U(\sigma)\).
 
 \begin{theorem}[Explanation compression limit]
 For a decision family whose restriction to \(U(\sigma)\) has Kolmogorov complexity \(K_U(D)\), every strongly faithful explanation \(\mathcal{E}\) from which that restriction is computable satisfies
@@ -17434,7 +17437,7 @@ f_j(x).
 Therefore every task output is unchanged by projection.
 \end{proof}
 
-This is the exact JPEG-like case generalized to an arbitrary declared function family. Outside finite exhaustively verifiable domains, establishing the premise is difficult. The theorem clarifies what must be proved rather than allowing the projection to certify itself.
+This is the exact JPEG-like case generalized to an arbitrary declared function family \cite{mitchell2002}. Outside finite exhaustively verifiable domains, establishing the premise is difficult. The theorem clarifies what must be proved rather than allowing the projection to certify itself.
 
 \subsection{A conditional obstruction theorem}
 
