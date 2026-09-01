@@ -1,0 +1,3275 @@
+WEBVTT
+
+00:00.000 --> 00:03.920
+Take a look at the device you're using to listen to this deep dive right now.
+
+00:03.960 --> 00:05.540
+Yeah, just whatever you have in front of you.
+
+00:05.620 --> 00:10.940
+Right, I mean it might be the phone in your hand, or maybe a laptop on your desk.
+
+00:11.020 --> 00:13.220
+Or even just a smart speaker sitting on your kitchen counter.
+
+00:13.440 --> 00:13.880
+Exactly.
+
+00:14.560 --> 00:19.200
+Whatever it is, I want you to consider a really strange possibility.
+
+00:19.360 --> 00:20.680
+A very strange one.
+
+00:20.740 --> 00:23.420
+Yeah, that device, along with the entire, you know,
+
+00:23.560 --> 00:25.860
+global infrastructure of the internet that feeds it,
+
+00:25.860 --> 00:30.380
+is basically lying to you about how reality fundamentally works.
+
+00:30.920 --> 00:35.500
+It is certainly operating under a massive planetary scale assumption, I'll say that.
+
+00:35.680 --> 00:35.860
+Right.
+
+00:35.920 --> 00:38.800
+An assumption so deeply embedded in our engineering
+
+00:38.800 --> 00:42.040
+that we don't even, like, teach it as a theory anymore.
+
+00:42.260 --> 00:44.980
+We just teach it as an absolute fact of nature.
+
+00:45.320 --> 00:46.580
+Okay, let's untack this.
+
+00:46.880 --> 00:51.900
+Because if you crack open that phone or laptop past the glass screen and the battery,
+
+00:52.680 --> 00:53.780
+you eventually get to the memory.
+
+00:53.780 --> 00:55.800
+Right, the hard drive, the RAM.
+
+00:56.060 --> 00:56.660
+Yeah, the RAM.
+
+00:57.300 --> 01:01.760
+And if I were to ask a computer engineer how my phone remembers a photo I took yesterday,
+
+01:02.440 --> 01:05.280
+they would give me a very physical explanation.
+
+01:05.540 --> 01:06.080
+Oh, absolutely.
+
+01:06.200 --> 01:07.020
+They'd point to the hardware.
+
+01:07.500 --> 01:12.580
+They would say, well, there's a grid of billions of microscopic capacitors,
+
+01:12.720 --> 01:15.460
+or magnetic domains, and to store your photo,
+
+01:15.700 --> 01:19.680
+we trapped a tiny electrical charge in a specific location.
+
+01:20.180 --> 01:23.740
+The emphasis there being entirely on that word, location.
+
+01:24.200 --> 01:25.700
+Right, the physical spot.
+
+01:25.700 --> 01:26.820
+The cordon, exactly.
+
+01:27.020 --> 01:30.300
+We view computer memory essentially like a massive parking garage.
+
+01:30.440 --> 01:31.160
+Okay, parking garage.
+
+01:31.340 --> 01:31.540
+Right.
+
+01:31.620 --> 01:36.300
+So if a car is parked in spot number 73, that signifies a logical one.
+
+01:36.700 --> 01:40.940
+And if spot 73 is empty, that signifies a logical zero.
+
+01:41.540 --> 01:42.740
+Which is incredibly comforting.
+
+01:42.860 --> 01:44.660
+Like, it makes total sense to our human brains.
+
+01:44.760 --> 01:46.120
+I put the thing in the box.
+
+01:46.140 --> 01:46.540
+Exactly.
+
+01:46.680 --> 01:49.380
+And to know if the thing is there, I just open the box and look inside.
+
+01:49.380 --> 01:50.400
+It's very intuitive.
+
+01:51.060 --> 01:56.580
+But today, we are diving into a stack of research that threatens to just completely dismantle that comfort.
+
+01:56.840 --> 01:58.100
+Completely upend it, really.
+
+01:58.360 --> 01:58.600
+Yeah.
+
+01:58.960 --> 02:07.380
+Our main source today is an incredibly dense, highly technical 2026 paper by an independent researcher named Flyxion.
+
+02:07.380 --> 02:09.160
+And the title alone is a lot.
+
+02:09.220 --> 02:09.900
+Oh, it really is.
+
+02:09.980 --> 02:10.220
+All right.
+
+02:10.340 --> 02:12.440
+It's titled, Momentum Before Position.
+
+02:13.180 --> 02:16.760
+Recoverable Distinction in a Physically Embedded NAND Gate.
+
+02:17.100 --> 02:17.440
+Yeah.
+
+02:17.840 --> 02:19.920
+That's a lot to digest.
+
+02:20.200 --> 02:20.620
+Seriously.
+
+02:20.620 --> 02:29.360
+But the mission of our discussion today is to extract the ultimate, you know, aha moment, hiding inside all those technical terms.
+
+02:29.420 --> 02:29.620
+Right.
+
+02:29.740 --> 02:31.260
+To find the core breakthrough.
+
+02:31.740 --> 02:42.400
+We are going to explore how treating computer memory, not like a parked car, but like a moving object, like a trajectory in flight, could completely revolutionize computing.
+
+02:42.800 --> 02:50.080
+Revolutionize the speed, the energy consumption, and honestly, our very definition of what it means for information to even exist.
+
+02:50.620 --> 02:52.860
+So for you listening, I want to set up a mental scenario.
+
+02:53.100 --> 02:57.360
+Imagine you have two very important files, maybe two physical keys.
+
+02:57.480 --> 02:57.720
+Okay.
+
+02:57.900 --> 02:58.780
+Two physical P's.
+
+02:58.820 --> 03:01.640
+And you need to ensure they never, ever get mixed up.
+
+03:02.060 --> 03:08.720
+The traditional human instinct and the instinct of basically every computer ever built is to put them in two different rooms and lock the doors.
+
+03:08.860 --> 03:09.080
+Right.
+
+03:09.160 --> 03:10.840
+You separate them by physical space.
+
+03:11.000 --> 03:11.420
+Exactly.
+
+03:11.560 --> 03:12.300
+You build a wall.
+
+03:12.760 --> 03:16.500
+But Flyxion's paper asks us to imagine a completely different method.
+
+03:16.500 --> 03:24.460
+What if, instead of using rooms, you kept those two keys separate by throwing them both high into the air at the exact same time?
+
+03:24.520 --> 03:25.980
+It sounds incredibly risky.
+
+03:26.280 --> 03:27.160
+It sounds crazy.
+
+03:27.320 --> 03:28.560
+Yeah, perhaps even chaotic.
+
+03:29.180 --> 03:33.500
+Because you no longer have a physical wall protecting the identity of those keys.
+
+03:33.500 --> 03:41.220
+But if you know their exact weight, and you know how hard they were thrown, and the precise trajectory they are taking through the air.
+
+03:41.240 --> 03:42.300
+A momentum, right?
+
+03:42.520 --> 03:44.960
+Then you can just wait and catch them at different moments.
+
+03:45.700 --> 03:54.080
+Their separation, their identity, is no longer secured by where they were sitting, but by how fast and in what direction they are moving.
+
+03:54.080 --> 03:57.120
+And this brings us to the central thesis of the paper.
+
+03:57.640 --> 04:02.900
+We aren't just talking about, you know, a clever engineering trick to make laptops run a little cooler.
+
+04:03.080 --> 04:03.260
+Right.
+
+04:03.360 --> 04:04.100
+This is way bigger.
+
+04:04.420 --> 04:07.340
+We are fundamentally questioning the physics of information.
+
+04:07.960 --> 04:12.820
+We are challenging what it actually means for a piece of data to survive a transformation.
+
+04:13.240 --> 04:19.360
+To really appreciate how wild this idea is, we first have to start by examining the illusion we've been living under.
+
+04:19.460 --> 04:20.680
+The convenient fiction.
+
+04:20.680 --> 04:24.700
+Right. The paper actually calls it the convenient fiction of traditional computing.
+
+04:25.120 --> 04:27.560
+The convenient fiction of the where, specifically.
+
+04:28.400 --> 04:38.280
+As we touched on with that parking garage analogy, standard computation relies entirely on the idea that logical identity is intrinsically, undeniably tied to a physical coordinate.
+
+04:38.700 --> 04:39.660
+A spot on a grid?
+
+04:40.060 --> 04:44.560
+Exactly. A bit is a zero or a one solely because of its position.
+
+04:44.900 --> 04:47.360
+We just act like the location is the information.
+
+04:47.700 --> 04:48.180
+We do.
+
+04:48.180 --> 04:58.480
+So if the charge leaks out of the capacitor or the magnetic flux gets flipped by, I don't know, a stray cosmic ray, we declare the data destroyed, lost forever.
+
+04:58.700 --> 05:04.140
+But Flyxion proposes that computation isn't actually about manipulating objects located somewhere.
+
+05:04.520 --> 05:06.680
+That's merely the primitive way we've been doing it.
+
+05:06.780 --> 05:09.020
+Wait, so if it's not about location, what is it about?
+
+05:09.020 --> 05:18.340
+True computation is about maintaining what the author calls recoverable distinctions within a physical system, regardless of where those distinctions currently reside in the hardware.
+
+05:18.540 --> 05:24.980
+See, I saw that phrase, recoverable distinction, constantly throughout these sources, and honestly, it trips me up a bit.
+
+05:25.080 --> 05:25.980
+It's a dense term.
+
+05:25.980 --> 05:28.380
+Yeah. Can we ground that in reality?
+
+05:28.760 --> 05:32.300
+How does a distinction survive if it's not sitting in a specific place?
+
+05:32.700 --> 05:35.800
+Well, think about the concept of recoverability itself.
+
+05:35.800 --> 05:50.020
+The paper argues that a distinction, let's say the difference between our two keys, or a zero and a one, survives as long as there is some admissible operation you can perform that will reconstruct that difference.
+
+05:50.220 --> 05:52.320
+Even if I can't see the difference right this second?
+
+05:52.820 --> 05:53.340
+Precisely.
+
+05:53.740 --> 05:57.920
+It doesn't matter if the distinction is invisible to you at this exact millisecond.
+
+05:58.360 --> 06:01.460
+What's fascinating here is that identity is not a static state.
+
+06:01.880 --> 06:03.300
+It's not a prominent label.
+
+06:03.380 --> 06:05.140
+Right. It's not a label glued to a particle.
+
+06:05.440 --> 06:09.760
+It is a relationship between a physical configuration and a reconstruction procedure.
+
+06:09.920 --> 06:12.160
+Okay, let me try an analogy here to see if I'm tracking this.
+
+06:12.180 --> 06:12.600
+Go for it.
+
+06:12.820 --> 06:13.960
+Let's say I'm watching a magician.
+
+06:14.360 --> 06:17.280
+They show me a silver coin, they close their hand, and then they open it.
+
+06:17.600 --> 06:18.540
+The coin is gone.
+
+06:18.740 --> 06:19.020
+Okay.
+
+06:19.320 --> 06:22.440
+If my reconstruction procedure is strictly limited to saying,
+
+06:22.440 --> 06:29.020
+I will only look at the palm of your hand, then I have to conclude the coin was annihilated from the universe.
+
+06:29.160 --> 06:31.820
+Right. Because it has no position you can currently measure.
+
+06:31.920 --> 06:35.140
+Exactly. My narrow measurement metric has declared it dead.
+
+06:35.220 --> 06:35.460
+Yes.
+
+06:35.460 --> 06:39.540
+But the coin's identity, its actual existence, was never lost.
+
+06:40.500 --> 06:45.840
+The magician just shifted its carrier from a position I could see to a trajectory I couldn't.
+
+06:46.140 --> 06:47.820
+Like maybe slipping it up a sleeve.
+
+06:47.880 --> 06:48.960
+That's a great way to put it.
+
+06:48.960 --> 06:54.860
+And because the magician possesses the specific procedure to produce it from behind my ear a second later,
+
+06:55.360 --> 06:58.540
+the distinction was fully recoverable the entire time.
+
+06:58.580 --> 06:59.440
+It was never gone.
+
+06:59.440 --> 07:04.020
+The coin didn't cease to exist just because I lacked the architecture to read its new state.
+
+07:04.600 --> 07:05.980
+That analogy holds up beautifully.
+
+07:06.400 --> 07:11.620
+When we look at a modern computer chip, our sensors are essentially doing exactly what you did with the magician.
+
+07:11.880 --> 07:13.340
+They're just staring at the empty palm.
+
+07:13.480 --> 07:13.780
+Yes.
+
+07:13.780 --> 07:20.120
+The sensors are built to solely ask, is there a charge in this specific microscopic box?
+
+07:20.420 --> 07:26.560
+If the charge has momentarily moved outside the box, the sensor reports an error, a data loss.
+
+07:27.120 --> 07:27.220
+Wow.
+
+07:27.340 --> 07:31.020
+But the paper points out that a bit of information is not identical to a location.
+
+07:31.560 --> 07:39.800
+A bit is identical to whatever broad class of physical configurations can be correctly sorted back into the right categories by a future operation.
+
+07:39.800 --> 07:44.840
+That feels like a profound life lesson, just hiding in the computer science paper.
+
+07:45.000 --> 07:45.820
+It really does.
+
+07:46.000 --> 07:55.480
+I mean, I want to ask you, the listener, to pause and think about how often you judge a skill or a habit or even a relationship as gone,
+
+07:55.780 --> 08:01.540
+simply because it isn't showing up in the one specific metric you're using to measure it today.
+
+08:01.700 --> 08:03.140
+We do that all the time.
+
+08:03.140 --> 08:06.980
+If we change the way we measure, we often find that things haven't vanished.
+
+08:07.360 --> 08:10.020
+They've just migrated to a different dimension of our lives.
+
+08:10.160 --> 08:11.900
+It is a profound shift in perspective.
+
+08:12.560 --> 08:20.800
+But, you know, in the realm of computing, this philosophical assumption that identity must equal position has huge physical consequences.
+
+08:20.960 --> 08:21.840
+Real world costs.
+
+08:22.060 --> 08:22.900
+Massive ones.
+
+08:23.220 --> 08:26.920
+It creates a systemic burden on how we design and power our machines.
+
+08:27.120 --> 08:32.080
+Which means we need to leave the realm of philosophy for a minute and step into a physical laboratory to test this out.
+
+08:32.080 --> 08:32.440
+Right.
+
+08:32.920 --> 08:33.720
+We need hardware.
+
+08:34.000 --> 08:37.780
+We need to see this convenient fiction break down in real time.
+
+08:38.620 --> 08:42.500
+The paper uses a very specific cutting edge device as its proving ground.
+
+08:42.760 --> 08:45.060
+It's called the Coupled Quantum Flux Parametron.
+
+08:45.160 --> 08:45.500
+Yes.
+
+08:45.720 --> 08:49.060
+Let's just call it the CQFP for short, because that is a mouthful.
+
+08:49.500 --> 08:50.520
+CQFT works.
+
+08:51.120 --> 08:55.980
+The research by Tang, Ray, and Crutchfield provides the physical foundation here.
+
+08:55.980 --> 09:02.780
+A CQFP is essentially a pair of inductively coupled Josephson Junction circuits.
+
+09:02.980 --> 09:03.280
+Okay.
+
+09:03.480 --> 09:05.840
+I am going to need you to slow way down there.
+
+09:05.880 --> 09:06.160
+I know.
+
+09:06.220 --> 09:06.960
+It's a lot of drugging.
+
+09:07.360 --> 09:10.040
+Inductively coupled Josephson Junction circuits.
+
+09:10.260 --> 09:12.780
+Let's translate that for those of us who don't wear lab coats to work.
+
+09:13.420 --> 09:14.240
+Fair enough.
+
+09:14.620 --> 09:16.480
+Let's start with the Josephson Junction.
+
+09:16.980 --> 09:21.020
+It's a foundational element of superconducting quantum computing.
+
+09:21.400 --> 09:21.720
+Okay.
+
+09:21.720 --> 09:27.860
+Imagine two pieces of superconducting metal cooled down to near absolute zero, so they have
+
+09:27.860 --> 09:29.660
+basically zero electrical resistance.
+
+09:30.000 --> 09:30.620
+Supercold metal.
+
+09:30.860 --> 09:31.200
+Got it.
+
+09:31.300 --> 09:36.380
+And you separate them by a microscopically thin layer of insulating material.
+
+09:36.860 --> 09:40.740
+Now, under the rules of classical physics, electrons shouldn't be able to cross that insulator.
+
+09:40.880 --> 09:41.280
+It's a wall.
+
+09:41.460 --> 09:41.640
+Right.
+
+09:41.800 --> 09:46.020
+But because of quantum mechanics, pairs of electrons can actually tunnel through that barrier.
+
+09:46.200 --> 09:46.480
+Oh.
+
+09:46.860 --> 09:48.400
+They ghost their way through the wall.
+
+09:48.480 --> 09:49.940
+In a manner of speaking, yeah, they do.
+
+09:49.940 --> 09:55.560
+So when you couple two of these circuits together, you create a system that can trap microscopic
+
+09:55.560 --> 09:57.200
+amounts of magnetic flux.
+
+09:57.640 --> 10:02.340
+And depending on how you tune the external magnetic fields around it, you can shape the
+
+10:02.340 --> 10:04.700
+potential energy landscape of this device.
+
+10:05.000 --> 10:05.520
+The landscape.
+
+10:06.180 --> 10:08.740
+The paper relies heavily on this idea of a landscape.
+
+10:09.380 --> 10:14.580
+It describes the CQFP as operating in a four-well potential landscape.
+
+10:14.720 --> 10:15.320
+Exactly.
+
+10:15.320 --> 10:20.840
+Sort of picturing, like, a warped sheet of plastic with four distinct dips or bowls molded
+
+10:20.840 --> 10:21.240
+into it.
+
+10:21.460 --> 10:24.160
+A physical landscape is really the best way to visualize this.
+
+10:24.500 --> 10:26.100
+Imagine a two-dimensional space.
+
+10:26.500 --> 10:30.560
+The state of our quantum device is like a little marble rolling around on this landscape.
+
+10:30.820 --> 10:31.040
+Okay.
+
+10:31.100 --> 10:31.840
+I can picture that.
+
+10:31.940 --> 10:36.880
+The four depressions, or wells, represent the four possible combinations of two input
+
+10:36.880 --> 10:37.240
+bits.
+
+10:37.660 --> 10:42.920
+So you have a well for 0, 0, a well for 10, a well for A1, and a well for 11.
+
+10:43.080 --> 10:48.120
+So if my computer wants to store A1, it forces the metaphorical marble to just sit at the
+
+10:48.120 --> 10:49.300
+bottom of the A1 bowl.
+
+10:49.680 --> 10:50.120
+Precisely.
+
+10:50.240 --> 10:53.200
+Or rather, that is how conventional computing wants to use it.
+
+10:53.220 --> 10:53.440
+Right.
+
+10:53.520 --> 10:54.020
+The old way.
+
+10:54.020 --> 10:58.700
+But the crucial detail about the CQFP is that its physical evolution is governed by something
+
+10:58.700 --> 11:00.980
+called underdamped Langevin equations.
+
+11:01.320 --> 11:05.660
+See, I promised myself I wouldn't let math terms slide by without a fight today.
+
+11:05.660 --> 11:07.580
+Underdamped Langevin equations.
+
+11:08.000 --> 11:08.960
+Break that down for me.
+
+11:09.220 --> 11:14.340
+A Langevin equation is just a way physicists model the motion of a particle when it's being
+
+11:14.340 --> 11:16.780
+subjected to random forces from its environment.
+
+11:17.000 --> 11:17.960
+Like getting bumped around.
+
+11:18.100 --> 11:18.480
+Yes.
+
+11:18.880 --> 11:23.100
+Think of a tiny pollen grain jittering around in a glass of water.
+
+11:23.560 --> 11:26.180
+It's constantly getting kicked by water molecules.
+
+11:26.380 --> 11:26.620
+Okay.
+
+11:26.820 --> 11:29.120
+That random kicking is thermal noise.
+
+11:29.740 --> 11:32.480
+The equation also accounts for friction or damping.
+
+11:32.860 --> 11:34.200
+So the resistance of the water.
+
+11:34.320 --> 11:34.800
+Exactly.
+
+11:34.800 --> 11:40.260
+Now, if a system is overdamped, it's like trying to swing a pendulum while it's submerged
+
+11:40.260 --> 11:41.060
+in thick honey.
+
+11:41.260 --> 11:42.340
+Oh, that sounds awful.
+
+11:42.480 --> 11:43.360
+It would just stop.
+
+11:43.480 --> 11:43.860
+Right.
+
+11:44.220 --> 11:46.840
+The moment you stop pushing it, it instantly stops moving.
+
+11:46.960 --> 11:48.160
+It has no meaningful inertia.
+
+11:48.520 --> 11:50.960
+But the CQFP is underdamped.
+
+11:51.140 --> 11:51.500
+Underdamped.
+
+11:51.580 --> 11:51.680
+Yeah.
+
+11:51.680 --> 11:53.140
+So it's swinging in the open air.
+
+11:53.260 --> 11:53.500
+Yes.
+
+11:53.560 --> 11:55.660
+If you push it, it keeps swinging for a while.
+
+11:56.000 --> 11:56.680
+It has momentum.
+
+11:56.680 --> 11:58.540
+And that is the secret ingredient here.
+
+11:58.720 --> 11:58.820
+Yeah.
+
+11:58.900 --> 12:02.980
+It means that the state of our device isn't just defined by its position in the landscape.
+
+12:03.360 --> 12:06.320
+You know, which bowl the marble is currently inside.
+
+12:06.740 --> 12:08.780
+It is equally defined by its momentum.
+
+12:09.140 --> 12:11.980
+How fast and in what direction the marble is rolling.
+
+12:11.980 --> 12:17.100
+If it's moving, it doesn't instantly stop just because you turn off the control field.
+
+12:17.100 --> 12:23.620
+Which transforms this weird, super-cooled metal circuit into the perfect arena for what
+
+12:23.620 --> 12:25.520
+Flyxion calls momentum computing.
+
+12:25.760 --> 12:26.280
+Exactly.
+
+12:26.600 --> 12:32.460
+We are about to try and use the motion of the marble, the transient dynamic itself, as
+
+12:32.460 --> 12:36.340
+a way to do math rather than just waiting for the marble to settle down at the bottom
+
+12:36.340 --> 12:36.800
+of a bowl.
+
+12:36.880 --> 12:41.400
+The ultimate goal here is to perform a logical operation called a NAND gate.
+
+12:41.520 --> 12:42.420
+A NAND gate.
+
+12:42.500 --> 12:42.840
+Yes.
+
+12:42.840 --> 12:46.860
+For anyone unfamiliar, a NAND gate is a universal logic gate.
+
+12:47.100 --> 12:50.980
+If you string enough of them together, you can build literally any computer processor
+
+12:50.980 --> 12:51.660
+in the world.
+
+12:51.860 --> 12:52.820
+It's the building block.
+
+12:53.000 --> 12:58.120
+But doing a NAND operation in this physical landscape requires some very specific choreography.
+
+12:58.640 --> 13:02.700
+You have to manipulate the shape of the bowls over time to map those four initial
+
+13:02.700 --> 13:05.080
+states to their correct final destinations.
+
+13:05.480 --> 13:08.160
+Let's actually map out that choreography because I think it helps.
+
+13:08.160 --> 13:10.420
+We start with our four bowls on the table.
+
+13:10.900 --> 13:14.100
+Zero, zero, zero, ten, zero, one, eleven.
+
+13:14.100 --> 13:20.040
+To complete a NAND gate's internal intermediate step, what the paper calls the erasure pair,
+
+13:20.560 --> 13:21.900
+what has to happen physically?
+
+13:22.260 --> 13:28.140
+Well, the truth table of a NAND gate dictates that two of these populations, the inputs
+
+13:28.140 --> 13:31.100
+zero, zero, and ten, must be forced together.
+
+13:31.480 --> 13:33.900
+They have to merge into a single well.
+
+13:34.160 --> 13:34.380
+Okay.
+
+13:34.440 --> 13:36.700
+Let's say we were merging them both into the ten bowl.
+
+13:36.700 --> 13:44.240
+Yes, but simultaneously, the other two populations, the inputs ura one and eleven, must not merge.
+
+13:44.360 --> 13:45.340
+They have to stay separated.
+
+13:45.500 --> 13:49.320
+They must remain distinct and apart from each other throughout the entire cycle.
+
+13:49.480 --> 13:52.860
+Okay, I want to flesh out an analogy here so we can really see the physical problem.
+
+13:52.920 --> 13:53.420
+Let's hear it.
+
+13:53.420 --> 13:58.200
+Imagine a massive concrete skate park with four deep bowls.
+
+13:58.360 --> 13:59.000
+Okay, four bowls.
+
+13:59.320 --> 14:01.920
+We have four skaters, one starting at the bottom of each bowl.
+
+14:02.420 --> 14:07.720
+To execute our logical operation, we have this giant earthquake machine that can warp and tilt
+
+14:07.720 --> 14:09.320
+the concrete of the entire park.
+
+14:09.420 --> 14:10.940
+The external magnetic field.
+
+14:11.060 --> 14:11.520
+Exactly.
+
+14:12.060 --> 14:16.320
+And by the end of our earthquake, the skater from bowl zero and the skater from bowl ten
+
+14:16.320 --> 14:18.720
+need to end up trapped in the exact same bowl.
+
+14:18.720 --> 14:23.340
+They must be physically combined, completely losing the distinction of where they started.
+
+14:23.740 --> 14:23.960
+Right.
+
+14:24.540 --> 14:31.620
+Meanwhile, the skater in bowl one and the skater in bowl eleven need to basically ride the
+
+14:31.620 --> 14:36.460
+earthquake, swap bowls with each other, and settle down without ever crashing into one another.
+
+14:36.720 --> 14:41.360
+And this physical mandate, forcing one pair of states to merge while desperately trying to
+
+14:41.360 --> 14:46.080
+keep another pair of states isolated, is exactly where traditional computing architectures
+
+14:46.080 --> 14:49.020
+hit a catastrophic physical brick wall.
+
+14:49.260 --> 14:52.680
+So let's look at how we currently solve this problem in our laptops today.
+
+14:52.980 --> 14:54.160
+The standard protocol.
+
+14:54.260 --> 14:57.540
+Yeah, the standard protocol is called controlled erasure, or CE.
+
+14:57.900 --> 15:00.660
+It's the dominant way we try to move these proverbial skaters.
+
+15:00.660 --> 15:05.500
+And according to Flyxion, it is fundamentally almost hilariously flawed.
+
+15:05.740 --> 15:06.300
+It really is.
+
+15:06.400 --> 15:09.980
+Because controlled erasure attempts to enforce logic using only position.
+
+15:10.320 --> 15:13.860
+It refuses to acknowledge momentum as anything other than a nuisance.
+
+15:14.000 --> 15:14.200
+Right.
+
+15:14.420 --> 15:15.280
+It hates the motion.
+
+15:15.280 --> 15:20.700
+So to execute the NAND gate, CE looks at the landscape and says, we need the zero, zero
+
+15:20.700 --> 15:22.080
+and ten states to merge.
+
+15:22.440 --> 15:26.460
+Therefore, we must physically lower the barrier between those two wells until they form one
+
+15:26.460 --> 15:27.320
+giant bowl.
+
+15:27.560 --> 15:28.780
+Okay, that makes sense on paper.
+
+15:29.080 --> 15:34.700
+The population sitting in the higher well slides down into the lower well, grinding against the
+
+15:34.700 --> 15:39.740
+environment to dissipate its kinetic energy as heat until the two populations are merged at
+
+15:39.740 --> 15:40.080
+the bottom.
+
+15:40.340 --> 15:42.840
+It sounds brute force, but logical.
+
+15:43.300 --> 15:44.800
+You lower the wall, they mix.
+
+15:44.800 --> 15:48.240
+It is logical until you consider the rest of the landscape.
+
+15:48.480 --> 15:48.920
+Uh-oh.
+
+15:49.100 --> 15:55.240
+At the exact same time, CE looks at the O1 and 11 states and says, we must keep these
+
+15:55.240 --> 15:55.860
+two separate.
+
+15:56.180 --> 16:02.200
+So we need to maintain a massive high barrier between their two wells to ensure thermal
+
+16:02.200 --> 16:05.740
+noise doesn't accidentally bounce one state over into the wrong bowl.
+
+16:05.740 --> 16:07.180
+Oh, let me guess the problem here.
+
+16:07.460 --> 16:09.660
+It's a single connected sheet of metal.
+
+16:09.860 --> 16:13.700
+You can't just lower one wall and raise another without warping the whole thing.
+
+16:13.740 --> 16:15.780
+You're touching on the exact core issue.
+
+16:15.860 --> 16:17.600
+They share the same potential copology.
+
+16:17.860 --> 16:17.980
+Right.
+
+16:18.320 --> 16:21.040
+The landscape is a continuous, unbroken surface.
+
+16:21.040 --> 16:25.460
+The barriers are mechanically linked by the underlying physics of the circuit.
+
+16:25.720 --> 16:27.920
+Here's where it gets really interesting for me.
+
+16:28.680 --> 16:30.320
+It feels like a terrible home renovation.
+
+16:30.520 --> 16:31.140
+How so?
+
+16:31.480 --> 16:36.020
+Imagine trying to knock down a wall in your house to create a nice, open concept living
+
+16:36.020 --> 16:36.300
+room.
+
+16:36.840 --> 16:42.260
+You take a sledgehammer to it, only to realize that the exact wall you are trying to destroy
+
+16:42.260 --> 16:46.280
+is the main load-bearing pillar holding up the roof over your kitchen.
+
+16:47.060 --> 16:48.680
+That is a fantastic analogy.
+
+16:49.160 --> 16:54.260
+Controlled erasure insists on keeping every piece of data strictly defined by its position,
+
+16:54.640 --> 16:55.100
+its room.
+
+16:55.860 --> 17:00.840
+But the architecture of reality literally will not allow you to tear down one wall without
+
+17:00.840 --> 17:03.000
+compromising the structural integrity of the other.
+
+17:03.540 --> 17:05.480
+That captures the dilemma perfectly.
+
+17:05.480 --> 17:08.760
+The paper details this horrific thermodynamic trade-off.
+
+17:08.760 --> 17:14.400
+If you try to save energy by reducing the driving force that merges the 0, 0, and 10 states,
+
+17:14.700 --> 17:18.700
+you inadvertently lower the storage barrier separating 0, 1, and 11.
+
+17:18.860 --> 17:20.620
+The wall holding up the kitchen sags.
+
+17:20.820 --> 17:21.200
+Exactly.
+
+17:21.500 --> 17:26.760
+And the moment that barrier drops, your fidelity is ruined because bits start accidentally flipping
+
+17:26.760 --> 17:28.580
+due to baseline thermal vibrations.
+
+17:29.120 --> 17:32.880
+You run the risk of your computer just guessing numbers randomly because the walls are too low.
+
+17:32.980 --> 17:33.260
+Yes.
+
+17:33.440 --> 17:37.280
+So you might think, well, I'll just push the system harder and faster to get it over with.
+
+17:37.320 --> 17:37.520
+Right.
+
+17:37.660 --> 17:38.300
+Speed it up.
+
+17:38.300 --> 17:43.940
+But if you try to operate the cycle faster, the populations gain kinetic energy, the marble
+
+17:43.940 --> 17:45.300
+starts rolling too fast.
+
+17:45.500 --> 17:49.940
+When it hits the barrier that's supposed to keep it safe, it has so much momentum that
+
+17:49.940 --> 17:53.160
+it just flies right over the top, escaping confinement entirely.
+
+17:53.540 --> 17:55.100
+You literally cannot win.
+
+17:55.480 --> 17:55.660
+Right.
+
+17:55.660 --> 17:59.360
+If you go slow to save energy, the walls melt and the data bleeds.
+
+17:59.820 --> 18:03.560
+If you go fast to keep the walls high, the data jumps over the walls anyway.
+
+18:03.560 --> 18:08.340
+The paper documents a statistic here that should terrify any hardware engineer.
+
+18:09.060 --> 18:13.720
+A displacement of just a few percent between the external control parameter you are applying
+
+18:13.720 --> 18:16.380
+and the true potential minimum of the device.
+
+18:16.600 --> 18:16.900
+Wait.
+
+18:17.120 --> 18:17.720
+A few percent?
+
+18:17.820 --> 18:18.120
+Yes.
+
+18:18.380 --> 18:22.260
+That tiny shift changes the escape rate by nine orders of magnitude.
+
+18:22.500 --> 18:22.760
+Wait.
+
+18:23.200 --> 18:24.460
+I need to fully process that.
+
+18:24.560 --> 18:24.740
+Yeah.
+
+18:24.740 --> 18:29.060
+You are saying that if the machine tuning is off by maybe two or three percent, the chance
+
+18:29.060 --> 18:32.240
+of the data escaping its bowl increases by a billion times?
+
+18:32.380 --> 18:32.640
+Yes.
+
+18:33.020 --> 18:37.120
+A billion fold increase in error from a microscopic calibration drift.
+
+18:37.200 --> 18:38.240
+That is insane.
+
+18:38.240 --> 18:43.660
+Because the probability of a state escaping over a barrier depends exponentially on the height
+
+18:43.660 --> 18:45.700
+of that barrier compared to the thermal energy.
+
+18:46.300 --> 18:51.820
+A protocol that identifies a bit's identity purely with positional confinement is dangerously
+
+18:51.820 --> 18:54.980
+sensitive to the exact physical shape of that confinement.
+
+18:55.220 --> 18:57.300
+This isn't just an abstract physics problem.
+
+18:57.620 --> 18:59.740
+Why should you, listening to this, care?
+
+19:00.380 --> 19:05.280
+Because this physical tension, this unwinnable fight against the load-bearing walls of the landscape
+
+19:05.280 --> 19:09.100
+is the reason your laptop gets burning hot when you render a video.
+
+19:09.300 --> 19:10.540
+It's the primary cause.
+
+19:10.780 --> 19:14.200
+It is the reason data centers consume the electricity of small cities.
+
+19:14.660 --> 19:17.900
+It is the fundamental energy drain in our infrastructure.
+
+19:18.660 --> 19:23.980
+And the paper notes that when you force controlled erasure to operate at a specific match duration,
+
+19:24.520 --> 19:27.640
+it suffers an untenable 13 percent error rate.
+
+19:27.640 --> 19:30.640
+13 percent of your logical operations simply failing.
+
+19:30.920 --> 19:34.060
+If your bank app guessed 13 percent of your transactions wrong,
+
+19:34.060 --> 19:35.920
+society would literally collapse.
+
+19:36.380 --> 19:38.800
+And even to get that atrocious error rate,
+
+19:39.240 --> 19:43.060
+the CE protocol consumes 53.6 kilobt of work.
+
+19:44.100 --> 19:46.740
+We will dive deep into what KBT means in a few minutes,
+
+19:46.820 --> 19:49.980
+but for context, it is a unit of thermodynamic energy cost.
+
+19:50.360 --> 19:55.680
+And 53.6 is a massive, incredibly wasteful number for a single operation.
+
+19:56.040 --> 19:57.740
+The conclusion is inescapable.
+
+19:58.140 --> 20:02.960
+Controlled erasure is fundamentally broken because it refuses to let go of its safety blanket.
+
+20:02.960 --> 20:08.120
+It demands that information must always reside in a specific, measurable position,
+
+20:08.320 --> 20:12.100
+forcing the physical landscape to perform contradictory actions simultaneously.
+
+20:12.400 --> 20:15.140
+Which finally brings us to the leap of faith, the alternative.
+
+20:15.860 --> 20:18.140
+Flyxion's erasure flip protocol, or EF.
+
+20:18.260 --> 20:18.780
+The solution.
+
+20:18.940 --> 20:19.120
+Yeah.
+
+20:19.380 --> 20:21.220
+If the walls of the house are structurally flawed,
+
+20:21.640 --> 20:24.000
+this new protocol proposes something bordering on madness.
+
+20:24.520 --> 20:27.840
+It decides to tear the walls down entirely and trust the motion of the bits.
+
+20:27.840 --> 20:31.820
+The erasure flip protocol doesn't try to solve the mechanical linkage of the barriers.
+
+20:32.100 --> 20:34.660
+It simply rejects the premise that you need a barrier at all.
+
+20:34.840 --> 20:35.140
+Wow.
+
+20:35.440 --> 20:38.300
+During EF, the wall separating the O1 and 11 wells,
+
+20:38.420 --> 20:40.440
+the two states that absolutely must remain distinct,
+
+20:40.540 --> 20:43.260
+is not just lowered carefully, it is eradicated completely.
+
+20:43.700 --> 20:44.460
+Removed entirely.
+
+20:45.160 --> 20:47.980
+But wait, if you delete the barrier between the two bowls,
+
+20:48.500 --> 20:51.680
+gravity and motion are just going to mush the two states together.
+
+20:51.900 --> 20:53.880
+The files are going to corrupt each other.
+
+20:54.060 --> 20:56.740
+That is the assumption you make if you only look at position.
+
+20:56.740 --> 20:57.260
+Okay.
+
+20:57.580 --> 21:01.660
+And it's true that for roughly half of the oscillation period,
+
+21:02.080 --> 21:06.100
+the two populations pass directly through one another in the center of the landscape.
+
+21:06.300 --> 21:06.820
+Right in the middle.
+
+21:07.100 --> 21:11.040
+If you take a snapshot of their position at that exact midpoint,
+
+21:11.520 --> 21:13.480
+they are entirely indistinguishable.
+
+21:14.060 --> 21:21.020
+Both the O1 state and the 11 state occupy the exact same spatial region of the flux coordinate.
+
+21:21.160 --> 21:22.700
+So it's a literal game of chicken.
+
+21:23.340 --> 21:25.080
+Imagine those two skaters we talked about.
+
+21:25.080 --> 21:28.480
+Instead of keeping them in separate walled-off bowls,
+
+21:29.000 --> 21:30.620
+you flatten the concrete between them.
+
+21:30.720 --> 21:31.500
+Just a flat surface.
+
+21:31.760 --> 21:35.220
+You point them directly at each other and let them skate forward at top speed.
+
+21:35.960 --> 21:38.780
+For a terrifying split second in the center of the park,
+
+21:38.960 --> 21:41.020
+they are occupying the exact same space.
+
+21:41.100 --> 21:41.520
+Exactly.
+
+21:41.800 --> 21:43.660
+But because they are moving in opposite directions,
+
+21:43.920 --> 21:45.420
+they pass right by each other,
+
+21:45.840 --> 21:47.020
+basically brushing shoulders,
+
+21:47.280 --> 21:49.520
+and continue perfectly into the opposite bowls.
+
+21:49.520 --> 21:52.940
+Your skater analogy highlights the core mechanism perfectly.
+
+21:53.660 --> 21:55.840
+While the states are indistinguishable by position,
+
+21:56.120 --> 21:59.040
+they remain flawlessly distinguishable by momentum.
+
+21:59.500 --> 22:01.340
+One is going left, one is going right.
+
+22:01.660 --> 22:03.320
+One skater is moving left to right,
+
+22:03.440 --> 22:04.820
+the other is moving right to left.
+
+22:05.420 --> 22:08.380
+The identity of the data, the truth of the bit, was never lost.
+
+22:08.520 --> 22:11.520
+It was just safely stored in the speed and direction of the state,
+
+22:11.660 --> 22:12.840
+rather than its location.
+
+22:13.020 --> 22:13.780
+That is brilliant.
+
+22:13.780 --> 22:17.480
+And the genius of the protocol is that the barrier is rapidly restored
+
+22:17.480 --> 22:21.540
+at the exact moment each population reaches its destination well.
+
+22:22.140 --> 22:24.740
+I want to dig into the math of how Flyxion proves this,
+
+22:25.060 --> 22:29.940
+because the paper uses a very elegant concept to describe this handoff.
+
+22:30.220 --> 22:32.080
+They call it the carrier transformation.
+
+22:32.560 --> 22:32.860
+Right.
+
+22:32.980 --> 22:36.400
+It relies on assigning statistical weights to different types of evidence.
+
+22:36.840 --> 22:40.980
+The paper defines WQ as the weight of the evidence carried by position,
+
+22:40.980 --> 22:44.220
+and WP as the weight of the evidence carried by momentum.
+
+22:44.880 --> 22:46.700
+So in a normal, boring hard drive,
+
+22:47.040 --> 22:51.000
+WQ is basically 100%, and WP is 0%.
+
+22:51.000 --> 22:54.700
+All the evidence of the bit's identity is found by checking its parking spot.
+
+22:55.040 --> 22:55.420
+Correct.
+
+22:55.660 --> 22:58.780
+But watch what happens dynamically during the erasure flip.
+
+22:59.480 --> 23:01.300
+As the bits approach the center,
+
+23:01.540 --> 23:04.120
+the distance between them and position shrinks to 0.
+
+23:04.980 --> 23:07.340
+Consequently, WQ drops to 0.
+
+23:07.440 --> 23:08.620
+Position tells us nothing.
+
+23:08.620 --> 23:13.020
+But simultaneously, the distance between them and momentum is at its absolute maximum.
+
+23:13.340 --> 23:15.280
+So WP rises to 1.
+
+23:15.460 --> 23:19.440
+The burden of identity seamlessly transfers from the location to the trajectory.
+
+23:19.820 --> 23:22.220
+It is a fluid, continuous handoff.
+
+23:22.980 --> 23:26.520
+EF doesn't destroy the distinction and magically rebuild it from scratch.
+
+23:26.960 --> 23:29.540
+It performs a continuous carrier transformation.
+
+23:30.180 --> 23:32.820
+The evidence flows from position into momentum,
+
+23:33.300 --> 23:36.920
+and smoothly back into position as they settle into their new wells.
+
+23:36.920 --> 23:39.740
+And the performance differences when you stop fighting the architecture
+
+23:39.740 --> 23:41.740
+and start using momentum are staggering.
+
+23:42.060 --> 23:45.120
+The paper states that at a matched work cost about 30 kilobt,
+
+23:45.820 --> 23:49.280
+the erasure flip protocol is six times faster than controlled erasure.
+
+23:49.520 --> 23:50.180
+Six times.
+
+23:50.260 --> 23:52.360
+And roughly two orders of magnitude more reliable.
+
+23:52.600 --> 23:55.080
+And if you choose to match them for speed instead,
+
+23:55.400 --> 23:57.980
+allowing them to complete the gate in the same amount of time,
+
+23:58.340 --> 24:02.560
+EF's error rate drops to 650,000 times lower than CE's,
+
+24:02.660 --> 24:04.860
+while using 3.6 times less energy.
+
+24:04.860 --> 24:07.080
+That is a complete paradigm shift.
+
+24:07.200 --> 24:07.760
+It really is.
+
+24:07.940 --> 24:10.560
+650,000 times fewer errors,
+
+24:10.880 --> 24:13.160
+just by letting the bits fly through the air
+
+24:13.160 --> 24:16.140
+instead of forcing them to drag their feet along the floor.
+
+24:16.400 --> 24:18.160
+If we connect this to the bigger picture,
+
+24:18.340 --> 24:20.840
+the author makes a deeply philosophical point here.
+
+24:21.920 --> 24:24.180
+Collapse under a coarse graining map,
+
+24:24.260 --> 24:27.100
+which is a mathematical way of saying looking only at position
+
+24:27.100 --> 24:29.040
+and willfully ignoring momentum,
+
+24:29.440 --> 24:32.140
+is merely a fact about the map.
+
+24:32.140 --> 24:34.340
+It is a failure of our human observation.
+
+24:34.720 --> 24:39.320
+It is not a physical fact about the underlying distinction being destroyed.
+
+24:39.560 --> 24:43.220
+It is a failure of observation, not a failure of physics.
+
+24:43.480 --> 24:46.240
+Let me repeat that because I want that to sink in for everyone listening.
+
+24:46.420 --> 24:46.540
+Yeah.
+
+24:46.880 --> 24:49.320
+It's a failure of observation, not a failure of physics.
+
+24:49.540 --> 24:49.740
+Yes.
+
+24:49.960 --> 24:53.700
+Just because our current computer architectures are only capable of looking at position
+
+24:53.700 --> 24:57.420
+doesn't mean the universe only uses position to store reality.
+
+24:57.420 --> 25:02.460
+We have been projecting a complex multidimensional reality down onto a single flat axis
+
+25:02.460 --> 25:06.560
+and then complaining when things seem to magically disappear or crash into each other.
+
+25:06.600 --> 25:09.940
+But wait, this brings up a massive universe-sized question.
+
+25:09.980 --> 25:10.780
+Okay, what is it?
+
+25:10.920 --> 25:15.320
+If these 01 and 11 bits pass through each other perfectly like ghosts,
+
+25:15.700 --> 25:17.960
+swapping places without ever losing their identity,
+
+25:18.500 --> 25:21.760
+why does this erasure flip gate still generate heat?
+
+25:22.060 --> 25:23.380
+Ah, thermodynamics.
+
+25:23.380 --> 25:26.360
+Yeah, where is the thermodynamic cost actually coming from?
+
+25:26.840 --> 25:31.100
+Because we know any computer, no matter how clever the protocol, still gets warm.
+
+25:31.440 --> 25:34.180
+To answer that, we have to look at the ledger of the universe.
+
+25:34.760 --> 25:37.480
+We have to discuss Rolf Landauer and his principle.
+
+25:37.640 --> 25:38.920
+Okay, let's hear about Landauer.
+
+25:39.140 --> 25:44.700
+In 1961, working at IBM, Landauer published a paper that changed thermodynamics forever.
+
+25:45.500 --> 25:48.940
+Before him, people vaguely thought that the act of computing doing math,
+
+25:49.340 --> 25:51.560
+moving numbers around inherently cost energy.
+
+25:51.560 --> 25:53.480
+Like it takes physical effort to do the math.
+
+25:53.860 --> 25:55.580
+Landauer proved that was false.
+
+25:56.040 --> 25:57.940
+Computation can theoretically be free.
+
+25:58.380 --> 25:59.740
+What costs energy is forgetting.
+
+26:00.340 --> 26:03.680
+Erasing information inherently unavoidably costs energy.
+
+26:03.900 --> 26:05.620
+The universe charges a tax on forgetting.
+
+26:05.720 --> 26:06.100
+Exactly.
+
+26:06.520 --> 26:11.360
+Landauer calculated an absolute thermodynamic lower bound to erase one bit of information.
+
+26:11.840 --> 26:14.380
+For this specific partial NAND gate we are analyzing,
+
+26:14.920 --> 26:18.760
+Landauer's bound the absolute minimum energy cost demanded by the laws of physics
+
+26:18.760 --> 26:21.140
+is Sintroin 347 kilobt.
+
+26:21.540 --> 26:24.300
+Let's define those variables so we aren't just throwing letters around.
+
+26:25.320 --> 26:25.760
+KBT.
+
+26:26.560 --> 26:30.980
+The K is the Boltzmann constant, and T is the absolute temperature of the environment.
+
+26:31.180 --> 26:35.660
+Think of it as the baseline thermal jitter of the room, the background static of the universe.
+
+26:35.660 --> 26:40.840
+So 0.347 times that background jitter is the unavoidable toll we have to pay.
+
+26:41.540 --> 26:44.560
+But Flyxion's paper strictly separates where this toll is collected.
+
+26:45.120 --> 26:50.620
+It forces us to distinguish between two concepts we usually mix up, erasure and migration.
+
+26:51.040 --> 26:54.240
+We use the word erasure far too casually in everyday life.
+
+26:54.700 --> 26:57.440
+Think about the 01 and 11 states in our erasure flip.
+
+26:57.960 --> 27:01.940
+They fly toward each other, pass through each other, and trade places.
+
+27:02.120 --> 27:02.560
+A swap.
+
+27:02.560 --> 27:04.680
+Mathematically, this is called a migration.
+
+27:05.020 --> 27:07.060
+It is a bijective, one-to-one mapping.
+
+27:07.580 --> 27:11.320
+Every possible input state has exactly one unique output state.
+
+27:11.520 --> 27:14.040
+The skater from the left goes right, the skater from the right goes left.
+
+27:14.260 --> 27:17.260
+If I look at the final positions, I can easily rewind the tape in my head
+
+27:17.260 --> 27:19.400
+and know exactly where each skater started.
+
+27:19.500 --> 27:22.200
+Because it's one-to-one, it loses no logical entropy.
+
+27:23.000 --> 27:27.800
+Therefore, thermodynamically, that swap is entirely free at the logical level.
+
+27:28.000 --> 27:32.000
+It doesn't contribute a single fraction of a joule to Landauer's minimum cost.
+
+27:32.000 --> 27:32.380
+Wait, wait.
+
+27:32.500 --> 27:36.420
+So the 01 and 11 flying at high speed across the physical landscape,
+
+27:36.620 --> 27:39.700
+physically trading places, costs zero logical energy.
+
+27:39.820 --> 27:40.140
+Zero.
+
+27:40.420 --> 27:43.900
+Then where does the 0.347 KBT tax come from?
+
+27:44.080 --> 27:46.760
+It comes entirely from the other half of the NAND gate.
+
+27:47.160 --> 27:50.900
+The 0, 0, and 10 inputs, remember our earthquake machine,
+
+27:51.400 --> 27:55.600
+both of those input populations must be forced into the exact same output well,
+
+27:55.920 --> 27:56.780
+and the 10 well.
+
+27:56.920 --> 27:57.120
+Ah.
+
+27:57.620 --> 28:00.820
+Two distinct skaters being forced to occupy one single bowl.
+
+28:00.820 --> 28:02.460
+That is a genuine erasure.
+
+28:02.800 --> 28:04.340
+It is a many-to-one collapse.
+
+28:04.660 --> 28:06.280
+Once they are merged at the bottom of that bowl,
+
+28:06.360 --> 28:08.160
+you can look at the final state all you want,
+
+28:08.240 --> 28:11.660
+but you can never know whether that skater started in the 0, 0 bowl or the 10 bowl.
+
+28:11.820 --> 28:12.760
+The history is gone.
+
+28:13.000 --> 28:14.560
+The history has been permanently destroyed.
+
+28:15.080 --> 28:19.440
+This destruction of history is where the 0.347 KBT cost originates.
+
+28:19.800 --> 28:23.000
+I would love to actually walk through the Shannon entropy calculation for that,
+
+28:23.080 --> 28:26.440
+because I think seeing the math makes it so much more real.
+
+28:26.780 --> 28:28.420
+The people breaks it down step by step.
+
+28:28.420 --> 28:29.680
+It's a beautiful calculation.
+
+28:29.940 --> 28:37.200
+Let's assume our four initial states, 0, 0, DIN, 0, 1, and 11, are all equally likely to occur.
+
+28:37.400 --> 28:37.660
+Okay.
+
+28:37.860 --> 28:40.920
+So you have four possible equiprobable states.
+
+28:41.420 --> 28:47.400
+In information theory, the Shannon entropy of four equiprobable states is exactly two bits of information.
+
+28:47.660 --> 28:49.060
+Let me check my old high school Mac.
+
+28:49.060 --> 28:52.820
+The formula is the base 2 logarithm of the number of states.
+
+28:52.960 --> 28:53.240
+Correct.
+
+28:53.700 --> 28:56.020
+Log base 2 of 4 is indeed 2.
+
+28:56.140 --> 28:56.320
+Okay.
+
+28:56.540 --> 28:56.980
+I'm with you.
+
+28:57.020 --> 28:58.300
+We start with two bits of entropy.
+
+28:58.620 --> 29:01.060
+Now look at the output probabilities after the gate finishes,
+
+29:01.360 --> 29:05.360
+because the 0, 0 state and the 10 state were both forced into the 10.
+
+29:05.400 --> 29:08.960
+Well, that final 10 state now holds half of the total probability.
+
+29:09.080 --> 29:09.260
+Right.
+
+29:09.380 --> 29:09.920
+Two out of four.
+
+29:10.060 --> 29:11.220
+Its probability is 12.
+
+29:11.220 --> 29:16.660
+The 0, 1, and 11 states, which just swapped places, each maintain a probability of 14.
+
+29:16.820 --> 29:21.540
+So we have three final states with probabilities of 50%, 25%, and 25%.
+
+29:21.540 --> 29:21.900
+Yes.
+
+29:22.140 --> 29:24.500
+We plug those into the full Shannon entropy formula,
+
+29:24.860 --> 29:29.320
+which is the negative sum of each probability multiplied by its base 2 logarithm.
+
+29:29.560 --> 29:30.440
+Let's do it slowly.
+
+29:31.240 --> 29:33.880
+Negative 1 half times the log of 1 half.
+
+29:34.140 --> 29:34.380
+Okay.
+
+29:34.580 --> 29:36.620
+Minus 1 quarter times the log of 1 quarter.
+
+29:37.360 --> 29:39.400
+Minus 1 quarter times the log of 1 quarter.
+
+29:39.400 --> 29:40.120
+Oh, and you do the math.
+
+29:40.240 --> 29:41.640
+Log of 1 half is negative 1.
+
+29:41.960 --> 29:43.440
+So the first term is 0.5.
+
+29:43.600 --> 29:43.840
+Right.
+
+29:44.000 --> 29:45.720
+The log of 1 quarter is negative 2.
+
+29:46.060 --> 29:48.180
+So the next terms are 0.5 and 0.5.
+
+29:48.320 --> 29:51.160
+Wait, 0.5 plus 0.5 plus 0.5 is 1.5.
+
+29:51.340 --> 29:53.800
+The final entropy is 1.5 bits.
+
+29:53.960 --> 29:55.260
+We started with two bits of entropy.
+
+29:55.540 --> 29:58.200
+The system finishes with 1.5 bits of entropy.
+
+29:58.660 --> 30:02.120
+We have mathematically lost exactly 0.5 bits of information.
+
+30:02.380 --> 30:05.580
+And if you take that 0.5 bits and multiply it by Landauer's formula,
+
+30:05.740 --> 30:08.420
+which is KDT times the natural log of 2.
+
+30:08.420 --> 30:11.640
+You land precisely on 0.347 kilobt.
+
+30:12.020 --> 30:13.720
+That is unbelievably satisfying.
+
+30:14.040 --> 30:17.800
+We can point to the exact mathematical origin of the heat our computers generate.
+
+30:18.220 --> 30:22.060
+It has absolutely nothing to do with the physical strain of moving the bits across the board.
+
+30:22.200 --> 30:23.880
+It is the crucial revelation of the paper.
+
+30:24.380 --> 30:26.800
+Physical motion does not imply logical dissipation.
+
+30:27.120 --> 30:28.620
+Only a many-to-one identification,
+
+30:28.940 --> 30:33.420
+the irreversible destruction of past distinctions requires minimum thermodynamic dissipation.
+
+30:34.240 --> 30:36.900
+That reframes my entire understanding of reality.
+
+30:36.900 --> 30:41.620
+An irreversible operation isn't defined by stuff moving around fast and causing friction.
+
+30:42.180 --> 30:46.980
+It's defined by the universe permanently losing the ability to tell two pasts apart.
+
+30:47.480 --> 30:48.880
+It is deeply profound.
+
+30:49.460 --> 30:52.500
+However, I need to bring this back to engineering reality for a moment
+
+30:52.500 --> 30:54.520
+and explain something called work decomposition.
+
+30:54.780 --> 30:55.300
+Oh, right.
+
+30:55.700 --> 30:59.960
+If we aren't careful, we might give the impression that this computer runs on zero energy.
+
+30:59.960 --> 31:06.240
+Right, because a few minutes ago we established that a razor flip still takes between 16 and 30 kilobt of energy to run,
+
+31:06.520 --> 31:10.700
+which is way, way higher than the absolute minimum of 0.347.
+
+31:11.240 --> 31:15.180
+Where is the rest of that energy going if the swap is logically free?
+
+31:15.440 --> 31:18.360
+Flyxion breaks the total work down into three distinct buckets.
+
+31:18.840 --> 31:25.300
+Bucket one is the minimum logical work, the 0.347 kilobt we just calculated, the tax on forgetting.
+
+31:25.460 --> 31:26.340
+Bucket one, got it.
+
+31:26.340 --> 31:29.660
+Bucket two is what we call excess work, or finite time dissipation.
+
+31:29.740 --> 31:30.440
+The speed tax.
+
+31:30.540 --> 31:36.860
+Essentially, in the abstract mathematical realm, moving a state from A to B is free if you do it infinitely slowly.
+
+31:37.100 --> 31:39.140
+But we want our computers to be fast.
+
+31:39.760 --> 31:40.240
+Exactly.
+
+31:41.040 --> 31:47.220
+Accelerating and decelerating a physical magnetic flux through a real superconducting circuit creates energetic ripples.
+
+31:47.220 --> 31:49.100
+It's akin to physical friction.
+
+31:49.540 --> 31:53.680
+That's where the jump from 0.347 up to 16 kilobt comes from.
+
+31:54.360 --> 31:57.740
+Running things in finite time costs excess energy.
+
+31:58.100 --> 31:58.680
+And booket three.
+
+31:59.020 --> 31:59.940
+Architectural work.
+
+32:00.460 --> 32:07.580
+This is the energy spent by the external controller, the massive clock driving the magnetic fields that warp the concrete skate park.
+
+32:08.140 --> 32:12.600
+We can't pretend the earthquake machine is magic and runs on zero electricity.
+
+32:12.600 --> 32:13.380
+Got it.
+
+32:13.460 --> 32:20.220
+So the math checks out, the thermodynamics are sound, and we are still vastly improving on the old controlled erasure method.
+
+32:20.620 --> 32:21.140
+Vastly.
+
+32:21.260 --> 32:27.200
+But before we get into the grueling realities of actually building this, my brain is buzzing from the philosophical implications here.
+
+32:27.880 --> 32:35.260
+The idea that a distinction can hide in a different dimension, like momentum, when its primary dimension position is collapsed.
+
+32:35.420 --> 32:36.520
+It's a beautiful concept.
+
+32:36.520 --> 32:43.060
+Flickshing pulls in examples from completely different fields of science to prove this isn't just a quirk of supercooled quantum circuits.
+
+32:43.500 --> 32:44.600
+It's a universal principle.
+
+32:44.780 --> 32:49.800
+The author synthesizes incredible, diverse research to establish what they call Principle 4.
+
+32:50.000 --> 32:50.660
+Principle 4.
+
+32:50.740 --> 32:59.460
+A distinction continues through time as long as its future evolution retains a recoverable dependence on its history, even if that history is invisible right now.
+
+32:59.700 --> 33:02.180
+Let's test this principle against the real world.
+
+33:02.180 --> 33:07.500
+The paper cites a 2026 study on soil moisture by Guh and colleagues.
+
+33:08.100 --> 33:10.720
+What on earth does dirt have to do with quantum computing?
+
+33:11.100 --> 33:15.820
+It has everything to do with how we improperly measure complex systems and collapse data.
+
+33:15.940 --> 33:16.200
+Okay.
+
+33:16.460 --> 33:19.960
+The Guh study analyzed how climate scientists measure drought conditions.
+
+33:20.220 --> 33:28.720
+The standard, easy method is to take an entire vertical core of soil and average the moisture content together into one single number.
+
+33:29.140 --> 33:30.380
+They apply a coarse graining map.
+
+33:30.380 --> 33:35.520
+They project a 3D reality down to a single point, just like reading only the position of our bits.
+
+33:35.740 --> 33:36.500
+You see the connection.
+
+33:36.920 --> 33:44.520
+The inherent problem is that a soil profile that is highly mixed, say, bone dry on the top layer, but rich and wet deep down,
+
+33:44.780 --> 33:51.340
+might have the exact same average moisture number as a profile that is slightly uniformly depleted across all layers.
+
+33:51.620 --> 33:56.600
+So if you just look at the spreadsheet, those two plots of land look completely identical.
+
+33:57.120 --> 33:59.760
+The distinction between them has been erased by the measurement.
+
+33:59.760 --> 34:03.740
+But their real world survival trajectories are completely divergent.
+
+34:03.780 --> 34:04.680
+Oh, because of the roots.
+
+34:04.940 --> 34:05.420
+Exactly.
+
+34:06.140 --> 34:12.780
+If a drought hits, plants with deep tap roots will easily survive in the mixed profile because they can reach the deep water.
+
+34:13.220 --> 34:16.740
+Those same plants will die in the uniformly depleted profile.
+
+34:16.900 --> 34:17.120
+Wow.
+
+34:17.120 --> 34:21.580
+The projection, the averaging distorted reality by destroying the vertical distinction.
+
+34:22.100 --> 34:26.660
+But the system's future evolution still depended on that hidden history.
+
+34:27.200 --> 34:32.220
+The identity of the soil was safe in its vertical structure, just like the bit was safe in its momentum.
+
+34:32.740 --> 34:33.260
+Okay.
+
+34:33.320 --> 34:35.120
+What about the rat hippocampus study?
+
+34:35.120 --> 34:37.720
+Galapur et al., also from 2026.
+
+34:37.720 --> 34:41.120
+This is one of the most fascinating neuroscience papers of the decade.
+
+34:41.860 --> 34:52.000
+They discovered that rats can map the exact same physical spatial environment, the same physical maze, but simultaneously hold entirely different goal states in their minds.
+
+34:52.000 --> 34:56.980
+Like, I'm running this maze looking for the cheese versus I'm running this exact same maze looking for the water drop.
+
+34:57.280 --> 34:57.480
+Right.
+
+34:57.720 --> 35:06.960
+And for a long time, we might assume that since the spatial sensory input is identical, the spatial map in the brain's neurons would either overwrite itself or get confused.
+
+35:07.280 --> 35:07.520
+Sure.
+
+35:07.660 --> 35:12.540
+But the brain actually maintains these distinct goals in an orthogonal neural dimension.
+
+35:12.880 --> 35:17.220
+It uses a totally different axis of the neural population's firing rates.
+
+35:17.400 --> 35:19.420
+What does orthogonal mean in a physical brain?
+
+35:19.420 --> 35:22.820
+It means it operates on an independent mathematical plane.
+
+35:23.660 --> 35:27.760
+Spatial overlap in the neurons doesn't necessitate mental overlap of the goals.
+
+35:28.340 --> 35:33.980
+The distinctions coexist perfectly by occupying separable dimensions of a shared state space.
+
+35:34.140 --> 35:44.140
+Just like position and momentum, they share the exact same physical superconducting circuit, but operate on independent orthogonal axes so they don't crash into each other.
+
+35:44.640 --> 35:45.460
+It's the same math.
+
+35:45.460 --> 35:46.080
+It is.
+
+35:46.200 --> 35:47.300
+Consider the third example.
+
+35:47.300 --> 35:51.460
+Electrical double layers in batteries, researched by Lye and team.
+
+35:51.640 --> 35:52.440
+Okay, batteries.
+
+35:52.640 --> 35:55.520
+They studied what happens during rapid battery modulation.
+
+35:56.220 --> 36:02.000
+When you quickly change the voltage applied to an interface, they found that the small water molecules orient themselves almost instantly.
+
+36:02.460 --> 36:05.160
+But the larger, heavier ions lag behind.
+
+36:05.160 --> 36:07.120
+The system gets out of sync with itself.
+
+36:07.120 --> 36:17.460
+It means that if you simply read the current control setting, the voltage you are actively applying right now, it does not tell you the true internal state of the battery.
+
+36:17.580 --> 36:18.340
+Because of the lag.
+
+36:18.340 --> 36:24.300
+Because the battery's history is actively being stored in the relaxation phase of those lagging ions.
+
+36:24.680 --> 36:35.940
+Two batteries with the exact same instantaneous voltage applied to them could possess totally different internal molecular organizations entirely based on what you were doing to them five milliseconds ago.
+
+36:35.940 --> 36:37.660
+History acts as identity.
+
+36:37.660 --> 36:42.900
+If you only read the present position, the current voltage, you lose the truth.
+
+36:43.080 --> 36:44.960
+And finally, the most striking analogy.
+
+36:45.900 --> 36:46.860
+Acoustic echoes.
+
+36:47.240 --> 36:48.500
+Studied by Olgin.
+
+36:48.500 --> 36:50.920
+I love this one because it's so relatable.
+
+36:51.540 --> 36:54.520
+Think about being on a Zoom call in an empty hardwood room.
+
+36:54.900 --> 36:57.360
+Your voice echoes off the walls and it sounds terrible.
+
+36:57.560 --> 36:57.800
+Right.
+
+36:57.960 --> 36:58.700
+Lots of reverb.
+
+36:59.060 --> 37:04.580
+We spend millions of dollars developing software to aggressively scrub those multi-path echoes out of the audio, right?
+
+37:04.800 --> 37:06.560
+We literally label it noise.
+
+37:06.920 --> 37:13.340
+We call it noise because our conventional communication architectures are built to read only the direct line of sight signal.
+
+37:13.560 --> 37:14.700
+Everything else is a nuisance.
+
+37:14.700 --> 37:25.100
+But Olgin's study demonstrated that if you actually design an architecture specifically to read those secondary bouncing echoes, they carry an astonishing amount of structural information.
+
+37:25.680 --> 37:32.540
+The study achieved 96% accuracy for identity recognition solely by analyzing the echoes.
+
+37:32.780 --> 37:38.800
+The echoes bounce off the walls, the desk, the person's face, and they carry a near-perfect 3D map of the environment.
+
+37:39.380 --> 37:44.020
+The channel we were discarding as garbage was actually carrying a higher dimensional identity.
+
+37:44.020 --> 37:44.460
+Exactly.
+
+37:44.700 --> 37:47.440
+It's the exact same story as the controlled erasure protocol.
+
+37:48.220 --> 37:51.960
+To the old computing method, kinetic energy momentum is just thermal noise.
+
+37:52.460 --> 37:56.580
+It's an error source that ruins the clean position of the bit, so we try to damp it out.
+
+37:56.660 --> 37:56.900
+Mm-hmm.
+
+37:57.300 --> 37:59.900
+But to erasure flip, momentum is the echo.
+
+38:00.240 --> 38:01.960
+It's the hidden channel carrying the truth.
+
+38:02.380 --> 38:03.820
+That is a wonderful synthesis.
+
+38:04.160 --> 38:10.040
+Noise is very often just high-density information that your current architecture is too primitive to read.
+
+38:10.040 --> 38:16.220
+Okay, if momentum is this ultimate secret weapon hiding in plain sight, why don't we use it for everything?
+
+38:16.800 --> 38:19.300
+Why isn't Apple rolling out the Momentum Mac tomorrow?
+
+38:19.300 --> 38:23.560
+Because trusting momentum requires an extreme level of precision.
+
+38:23.780 --> 38:26.560
+Momentum is not a durable long-term archive.
+
+38:27.060 --> 38:31.120
+It is a highly volatile transitional bearer of information.
+
+38:31.560 --> 38:33.620
+What does that volatility look like in practice?
+
+38:34.180 --> 38:37.720
+It means momentum only functions as a memory storage.
+
+38:37.720 --> 38:46.300
+If the external controller, the master clock running the computer processor, knows exactly when to relax the confinement and exactly when to reimpose it.
+
+38:46.700 --> 38:48.020
+The timing has to be perfect.
+
+38:48.180 --> 38:51.660
+The paper defines this as the admissibility capture window.
+
+38:52.120 --> 38:53.140
+So it all comes down to timing.
+
+38:53.580 --> 38:54.380
+Razor-thin timing.
+
+38:54.380 --> 39:00.400
+If the barrier separating our two bowls rises too early, the bit hasn't finished crossing the center valley.
+
+39:00.560 --> 39:03.580
+It gets stranded partway across, hitting the rising wall.
+
+39:03.680 --> 39:06.540
+It smacks into the concrete and falls back into the wrong bowl.
+
+39:06.880 --> 39:07.200
+Yes.
+
+39:07.480 --> 39:17.580
+And conversely, if the barrier rises too late, the population reaches the other side, hits the far wall of the new bowl, bounces, and begins drifting backward into the center again.
+
+39:17.840 --> 39:20.700
+I want to use another analogy here because this paints such a vivid picture.
+
+39:20.700 --> 39:25.120
+It means momentum computing is exactly like being a trapeze artist.
+
+39:25.400 --> 39:25.880
+I like that.
+
+39:26.120 --> 39:30.040
+The distinction, the data, the flyer has to let go of the safety of the bar.
+
+39:30.800 --> 39:34.180
+For a terrifying suspended second, they have no position.
+
+39:34.600 --> 39:35.780
+They are floating in midair.
+
+39:36.240 --> 39:45.280
+The entire protocol only works if the catcher, representing the external controller, swings in at the exact perfect millisecond they're supposed to.
+
+39:45.440 --> 39:49.900
+If the catcher is late by a fraction of a second, air resistance and gravity take over.
+
+39:49.900 --> 39:53.340
+The flyer loses momentum and the memory plummets.
+
+39:53.600 --> 39:55.160
+The memory isn't just the flyer.
+
+39:55.320 --> 39:56.640
+This is wild to think about.
+
+39:57.120 --> 40:00.700
+The memory is the relationship between the flyer and the timing of the catcher.
+
+40:01.260 --> 40:04.280
+The state description of the computer actually has to be enlarged.
+
+40:04.400 --> 40:04.840
+It does.
+
+40:05.020 --> 40:08.200
+It's no longer just a list of the positions and momentums of the bits.
+
+40:08.800 --> 40:12.620
+The state must dynamically include the phase of the external controller.
+
+40:12.780 --> 40:17.040
+The clock of the computer is elevated to become a structural part of the memory itself.
+
+40:17.040 --> 40:22.200
+The author describes this complex interplay through a mechanism called holonomic reading.
+
+40:22.700 --> 40:23.680
+Okay, that's a heavyweight term.
+
+40:24.280 --> 40:24.960
+Holonomic.
+
+40:25.420 --> 40:27.840
+I'm going to guess it has something to do with holograms.
+
+40:28.240 --> 40:30.740
+Actually, it's rooted in differential geometry.
+
+40:31.620 --> 40:37.600
+A holonomy describes what happens when you transport an object around a closed loop in a curved space.
+
+40:38.060 --> 40:45.100
+And when you finally return to your exact starting point, the object you transported has been fundamentally transformed.
+
+40:45.100 --> 40:46.680
+Okay, I'm trying to picture that.
+
+40:47.220 --> 40:49.920
+Think about standing on the Earth's equator facing north.
+
+40:50.580 --> 40:52.380
+You hold an arrow pointing straight ahead.
+
+40:53.000 --> 40:54.220
+You walk to the north pole.
+
+40:54.860 --> 40:58.400
+You sidestep to the right down a different line of longitude back to the equator.
+
+40:58.780 --> 41:00.960
+And then you sidestep back to your starting point.
+
+41:01.060 --> 41:01.380
+Okay.
+
+41:01.940 --> 41:03.380
+I've walked a triangle, basically.
+
+41:03.640 --> 41:04.800
+You have walked a closed loop.
+
+41:05.260 --> 41:08.500
+But because the Earth is curved, your arrow is now pointing east.
+
+41:08.500 --> 41:14.540
+Even though I never actively rotated the arrow myself, the journey through the curved space did the rotating.
+
+41:14.800 --> 41:15.320
+Precisely.
+
+41:15.820 --> 41:18.780
+The control cycle of our quantum gate is a closed loop.
+
+41:19.360 --> 41:25.380
+The external magnetic fields pulse out, warp the landscape, and return to their exact starting values.
+
+41:25.820 --> 41:26.560
+The loop closes.
+
+41:27.040 --> 41:30.960
+But the state of the bits inside the landscape has been transformed by the journey.
+
+41:31.360 --> 41:31.800
+Exactly.
+
+41:32.140 --> 41:35.200
+And here is where Flyxion's math is truly elegant.
+
+41:35.200 --> 41:42.340
+On the storage subspace, the 0, 1, and 11-bit swapping places, it operates as an invertible permutation.
+
+41:42.980 --> 41:44.900
+A true, pure holonomy.
+
+41:45.260 --> 41:47.200
+You can walk the loop backward and undo it.
+
+41:47.400 --> 41:49.580
+The two ghost cars swap parking spots.
+
+41:49.760 --> 41:53.140
+If I want, I can just run the protocol in reverse and swap them back.
+
+41:53.480 --> 42:00.380
+But on the erasure subspace, the 0 and 10 inputs merging into 10, it operates as a non-invertible quotient.
+
+42:00.480 --> 42:01.660
+Meaning you can't undo it.
+
+42:01.660 --> 42:05.840
+The control loop closes, but two distinct histories have been collapsed into one.
+
+42:06.200 --> 42:08.380
+You can never, ever walk that loop backward.
+
+42:09.100 --> 42:22.760
+The sheer genius of the erasure flip protocol is that it executes both of these actions, a reversible geometricalonomy and an irreversible thermodynamic quotient simultaneously on orthogonal subspaces using the exact same closed control loop.
+
+42:22.760 --> 42:25.100
+That is just, it's a mechanical symphony.
+
+42:25.400 --> 42:28.280
+It's breathtaking that humans can engineer something that complex.
+
+42:28.320 --> 42:29.220
+It is quite an achievement.
+
+42:29.500 --> 42:34.200
+But let's bring this soaring theoretical symphony back down to the harsh dirt of reality.
+
+42:34.580 --> 42:39.620
+Because proving that one single trapeze artist can execute one perfect catch is amazing.
+
+42:40.240 --> 42:44.420
+But can we string a billion trapeze artists together to build a functional laptop?
+
+42:44.420 --> 42:50.340
+This is where Flyxion draws a very harsh, scientifically necessary line in the sand.
+
+42:50.880 --> 42:54.920
+The paper states clearly, universality does not equal architecture.
+
+42:55.480 --> 42:56.980
+Break that distinction down for me.
+
+42:57.140 --> 43:00.960
+We establish that a NAND gate is computationally universal.
+
+43:01.380 --> 43:05.620
+If you have one, you can theoretically express any mathematical truth table.
+
+43:05.620 --> 43:14.860
+But an architecture requires that the physical, messy output of gate A is actually physically ready to be ingested as the input of gate B.
+
+43:15.080 --> 43:16.180
+Let's test an analogy.
+
+43:16.720 --> 43:19.320
+I can build a massive, perfectly engineered water slide.
+
+43:19.700 --> 43:22.420
+And I can build a second, identical water slide right next to it.
+
+43:22.760 --> 43:25.240
+Universality says I possess the components for a water park.
+
+43:25.340 --> 43:25.600
+Okay.
+
+43:25.840 --> 43:32.100
+But architecture points out that if the end of slide A dumps the rider out going 50 miles an hour backwards and completely disoriented,
+
+43:32.100 --> 43:35.600
+they are in no condition to immediately enter slide B.
+
+43:35.940 --> 43:37.860
+That is exactly the interface problem.
+
+43:38.220 --> 43:43.320
+Direct composition of these momentum gates requires that the non-equilibrium momentum distributions,
+
+43:43.900 --> 43:49.900
+the lingering thermal vibrations, the residual flux amplitude left behind by gate A.
+
+43:50.060 --> 43:51.180
+All the splashing water.
+
+43:51.380 --> 43:51.560
+Right.
+
+43:51.680 --> 43:58.780
+All of that chaotic aftermath must somehow fall perfectly into the razor-thin admissibility window of gate B.
+
+43:58.780 --> 44:04.120
+And if it doesn't, what if the rider is just splashing around chaotically at the end of the slide?
+
+44:04.580 --> 44:06.840
+Then you are forced to pay an interface cost.
+
+44:07.440 --> 44:13.040
+You have to insert a restoration operation between every single gate to calm the system down.
+
+44:13.740 --> 44:15.820
+Mathematically, the paper calls this GN.
+
+44:16.020 --> 44:16.260
+GN.
+
+44:16.700 --> 44:22.060
+The total thermodynamic work of your computer circuit isn't just the sum of the work of the individual gates.
+
+44:22.240 --> 44:26.660
+It is the sum of the gates plus the work of all those GN interface restorations.
+
+44:26.660 --> 44:32.740
+So if you have to spend immense time and energy completely re-equilibrating the bit,
+
+44:32.860 --> 44:36.700
+calming the skater down, centering them perfectly in the bowl so they don't crash the next gate
+
+44:36.700 --> 44:39.040
+after every single erasure flip cycle,
+
+44:39.200 --> 44:43.160
+you might hemorrhage all the speed and energy advantages you just fought so hard to gain.
+
+44:43.460 --> 44:43.980
+Exactly.
+
+44:44.400 --> 44:46.060
+The overhead ruins the efficiency.
+
+44:47.020 --> 44:51.940
+Furthermore, scaling up introduces a massive fan-out problem.
+
+44:52.100 --> 44:52.460
+Fan-out.
+
+44:52.460 --> 44:56.960
+In a real computer processor, often the output of one single gate
+
+44:56.960 --> 45:01.060
+needs to feed into two or three downstream gates simultaneously.
+
+45:01.420 --> 45:02.500
+You have to copy the data.
+
+45:02.700 --> 45:03.100
+You do.
+
+45:03.300 --> 45:08.740
+But how on earth do you reliably copy a highly transient flying momentum state?
+
+45:09.220 --> 45:13.300
+By the time a signal propagates from the output of gate A down a physical wire
+
+45:13.300 --> 45:15.420
+to the inputs of gates B and C,
+
+45:15.620 --> 45:19.660
+the delicate directional distinction that carried the identity through the first gate
+
+45:19.660 --> 45:21.640
+might have completely thermalized.
+
+45:21.640 --> 45:25.160
+It's like shouting a complex password down a long, echoing hallway.
+
+45:25.660 --> 45:31.140
+If the hallway is too long, the sharp consonants of the word just blur into a low hum of thermal noise
+
+45:31.140 --> 45:33.280
+before the person at the other end can hear it.
+
+45:33.400 --> 45:37.020
+Which means any practical, scalable architecture faces a brutal choice.
+
+45:37.560 --> 45:40.140
+Do we accept that momentum can only be used internally,
+
+45:40.440 --> 45:42.280
+hidden inside each individual gate,
+
+45:42.540 --> 45:47.040
+and then we painstakingly restore the bits to boring static positions at every boundary?
+
+45:47.240 --> 45:47.920
+That sounds slow.
+
+45:47.920 --> 45:53.440
+Or do we attempt the near-impossible task of routing non-equilibrium momentum states
+
+45:53.440 --> 45:54.800
+across the entire chip,
+
+45:55.160 --> 45:59.820
+which would require inventing an entirely new class of quantum interconnect wires?
+
+46:00.060 --> 46:03.420
+I want to relate this interface cost to something you, the listener,
+
+46:03.880 --> 46:05.640
+probably deal with every week at work.
+
+46:06.140 --> 46:09.620
+You know how annoying it is when you copy text from a messy web page
+
+46:09.620 --> 46:14.700
+and you paste it into a professional email and the formatting is completely broken?
+
+46:14.700 --> 46:17.400
+Oh, the fonts are huge, the background is gray.
+
+46:17.740 --> 46:18.580
+It's a disaster.
+
+46:18.740 --> 46:22.600
+You have to undo it, right-click, and select Paste as Plain Text
+
+46:22.600 --> 46:26.060
+to strip away all the junk so it matches your email's architecture.
+
+46:26.400 --> 46:30.000
+That momentary frustration is the human equivalent of the interface cost.
+
+46:30.100 --> 46:30.480
+Exactly.
+
+46:31.200 --> 46:35.020
+If these momentum gates require too much plain text formatting cleanup
+
+46:35.020 --> 46:37.280
+between every single logical jump,
+
+46:37.700 --> 46:39.380
+the computing revolution stalls out.
+
+46:39.380 --> 46:42.680
+The energy you spend painstakingly cleaning up the bits
+
+46:42.680 --> 46:46.640
+completely destroys the energy you save by letting them fly in the first place.
+
+46:47.020 --> 46:52.160
+Flyxion is remarkably, refreshingly, intellectually honest about this limitation.
+
+46:52.940 --> 46:57.160
+The paper clearly states that it has established a universal logical primitive
+
+46:57.160 --> 46:59.980
+at the level of a single isolated gate.
+
+47:00.140 --> 47:00.840
+Just one gate.
+
+47:01.200 --> 47:04.240
+It aggressively does not claim to have solved the interface terms
+
+47:04.240 --> 47:07.880
+for a scaled-up billion-gate architecture.
+
+47:07.880 --> 47:10.920
+Which is such a rare thing to read in a modern research paper.
+
+47:11.620 --> 47:14.300
+Usually a paper finds one minor efficiency tweak
+
+47:14.300 --> 47:17.360
+and claims it will cure all the world's diseases by Tuesday.
+
+47:17.520 --> 47:18.860
+That happens quite a lot, yes.
+
+47:19.140 --> 47:22.260
+But Flyxion actually dedicates the final section of the paper
+
+47:22.260 --> 47:25.100
+to laying out exactly, explicitly,
+
+47:25.620 --> 47:28.140
+how their own theory could be proven wrong in a lab.
+
+47:28.580 --> 47:30.800
+A self-destruct button for their own life's work.
+
+47:31.020 --> 47:35.260
+A theory this revolutionary must offer a mechanism for its own falsification.
+
+47:35.260 --> 47:38.700
+If you can't build a physical test that could potentially prove it wrong,
+
+47:38.840 --> 47:41.680
+it isn't science, it's just elegant philosophy.
+
+47:42.060 --> 47:43.220
+So how do we push the button?
+
+47:43.420 --> 47:46.040
+How do we prove momentum computing is a dead end?
+
+47:46.320 --> 47:50.240
+The paper explicitly separates simulated error from physical error.
+
+47:50.900 --> 47:53.400
+Currently, all these incredible performance numbers
+
+47:53.400 --> 47:56.680
+are modeled on a computer solving stochastic differential equations
+
+47:57.360 --> 48:00.460
+under highly idealized, pristine assumptions.
+
+48:00.820 --> 48:02.040
+The classic physics joke.
+
+48:02.040 --> 48:06.960
+Assume a perfectly spherical cow in a frictionless vacuum.
+
+48:07.460 --> 48:08.040
+Quite literally.
+
+48:08.420 --> 48:10.600
+Real hardware is incredibly messy.
+
+48:11.000 --> 48:13.500
+It has colored noise, which isn't perfectly random,
+
+48:13.780 --> 48:16.520
+but has correlations that can drive systems into resonance.
+
+48:16.980 --> 48:20.500
+It has crosstalk, where the magnetic field from one wire
+
+48:20.500 --> 48:23.080
+accidentally bleeds over and twitches a neighboring bit.
+
+48:23.420 --> 48:24.940
+It has fabrication disorder,
+
+48:25.080 --> 48:27.140
+meaning when you physically manufacture the chip,
+
+48:27.740 --> 48:29.860
+the bowls in the skate park aren't perfectly shaped.
+
+48:30.220 --> 48:31.420
+Some are slightly lopsided.
+
+48:31.420 --> 48:35.500
+So how do we specifically refute the mechanism of the erasure flip?
+
+48:35.900 --> 48:36.660
+Two main avenues.
+
+48:37.080 --> 48:38.900
+First, we look at the momentum correlation time.
+
+48:39.420 --> 48:42.440
+This is a measure of how fast the bit's momentum randomizes
+
+48:42.440 --> 48:45.080
+due to unavoidable interactions with the thermal environment.
+
+48:45.180 --> 48:46.260
+Right, the background jitter.
+
+48:46.600 --> 48:48.980
+If that correlation time is significantly shorter
+
+48:48.980 --> 48:50.680
+than the duration of the flip itself,
+
+48:51.220 --> 48:52.600
+the bit dies in midair.
+
+48:52.920 --> 48:55.200
+Meaning the air resistance in the room is too high,
+
+48:55.560 --> 48:57.800
+the trapeze artist is buffeted by a windstorm,
+
+48:57.800 --> 48:59.240
+they lose all their forward speed,
+
+48:59.400 --> 49:02.120
+and they just drop straight down into the concrete pit
+
+49:02.120 --> 49:04.380
+before the catcher can even extend their hands.
+
+49:04.520 --> 49:04.760
+Yes.
+
+49:05.240 --> 49:09.320
+If you put this protocol in a real physical dilution refrigerator
+
+49:09.320 --> 49:12.880
+and the thermal noise shakes the system so violently
+
+49:12.880 --> 49:16.840
+that the momentum randomizes before the barrier can be raised again,
+
+49:16.840 --> 49:18.800
+the entire mechanism fails.
+
+49:19.000 --> 49:19.760
+Okay, that's one way.
+
+49:19.840 --> 49:20.360
+What's the second?
+
+49:20.720 --> 49:23.340
+The second way to refute it is at the architecture level,
+
+49:23.440 --> 49:24.320
+as we just discussed.
+
+49:24.900 --> 49:28.020
+If an experimentalist proves that the interface costs,
+
+49:28.220 --> 49:29.440
+the GN restorations,
+
+49:29.900 --> 49:33.240
+grow exponentially faster than the per gate energy savings
+
+49:33.240 --> 49:34.640
+as you scale up the chip,
+
+49:35.080 --> 49:36.640
+the architecture is a dead end.
+
+49:36.980 --> 49:38.080
+But reading the paper,
+
+49:38.300 --> 49:41.240
+there is a third, even deeper physics reason it could fail,
+
+49:41.360 --> 49:41.820
+isn't there?
+
+49:41.980 --> 49:43.780
+Something about quantum back action.
+
+49:43.780 --> 49:47.700
+This is where we reach the absolute frontier of modern physics.
+
+49:48.280 --> 49:52.300
+The model inflictions paper uses classical underdamped Langevin dynamics.
+
+49:52.860 --> 49:56.400
+It treats the quantum plex parametron semi-classically during the flip itself.
+
+49:56.660 --> 49:59.440
+Which means it assumes the bit is large enough,
+
+49:59.640 --> 50:00.620
+or classical enough,
+
+50:00.800 --> 50:04.660
+that it possesses a simultaneously defined position and momentum,
+
+50:05.340 --> 50:08.700
+sort of like a real physical marble rolling in a bowl.
+
+50:08.980 --> 50:09.360
+Yes.
+
+50:09.980 --> 50:11.940
+But these are Josephson Junction elements.
+
+50:11.940 --> 50:14.160
+At their most fundamental core,
+
+50:14.700 --> 50:18.880
+they are quantum mechanical objects subject to Heisenberg's uncertainty principle.
+
+50:19.300 --> 50:19.740
+Oh, right.
+
+50:19.860 --> 50:22.320
+You can't know both position and momentum perfectly.
+
+50:22.480 --> 50:22.940
+Exactly.
+
+50:23.620 --> 50:27.420
+If quantum corrections become dominant during the middle of the flip,
+
+50:27.800 --> 50:31.600
+the classical phase space argument of ghost cars passing through each other
+
+50:31.600 --> 50:33.140
+might completely break down.
+
+50:33.460 --> 50:34.680
+To model that correctly,
+
+50:34.920 --> 50:36.900
+you wouldn't use Langevin equations.
+
+50:36.900 --> 50:43.220
+You'd need full Lindblad master equation simulations that account for quantum entanglement and decoherence.
+
+50:43.940 --> 50:44.640
+Let's translate that.
+
+50:44.720 --> 50:45.920
+Lindblad master equations.
+
+50:46.440 --> 50:48.380
+Basically, we have to account for quantum weirdness.
+
+50:48.460 --> 50:48.620
+Right.
+
+50:49.000 --> 50:50.020
+In quantum mechanics,
+
+50:50.220 --> 50:54.500
+the very act of a system interacting with its environment constitutes an observation.
+
+50:55.300 --> 50:59.080
+And observing a quantum system forces its wave function to collapse.
+
+50:59.240 --> 51:00.560
+And that's bad for the flip.
+
+51:00.560 --> 51:06.580
+The erasure flip protocol relies entirely on the momentum remaining pristine and unmeasured
+
+51:06.580 --> 51:08.860
+while the bits are in the center of the landscape.
+
+51:09.300 --> 51:14.720
+But if the surrounding environment inadvertently measures the quantum state through stray interactions,
+
+51:15.120 --> 51:16.800
+causing a wave function collapse,
+
+51:17.260 --> 51:20.520
+the delicate momentum distinction could be instantly destroyed.
+
+51:20.860 --> 51:23.060
+So if the quantum weirdness kicks in too hard,
+
+51:23.380 --> 51:25.280
+the trapeze artist doesn't just fall.
+
+51:25.600 --> 51:30.020
+They literally vanish in a puff of probability mid-swing.
+
+51:30.020 --> 51:31.380
+That is the risk.
+
+51:31.740 --> 51:34.960
+The author stresses that the ultimate, undeniable test of all this
+
+51:34.960 --> 51:39.060
+would require an incredibly difficult, perhaps Nobel-worthy experiment.
+
+51:39.660 --> 51:44.800
+A time-resolved tumographic reconstruction of the phase space distribution's mid-flip.
+
+51:45.080 --> 51:46.300
+Tumographic reconstruction.
+
+51:46.580 --> 51:48.560
+Like a CT scan, but for a quantum particle.
+
+51:49.020 --> 51:50.460
+Exactly like a CT scan.
+
+51:50.600 --> 51:54.840
+You would need to take a high-speed, multidimensional flash photograph of the trapeze artist
+
+51:54.840 --> 51:57.680
+while they are actively crossing paths in mid-air
+
+51:57.680 --> 51:59.880
+without disturbing them enough to ruin the trick.
+
+52:00.020 --> 52:03.740
+You have to physically prove that the total variation distance
+
+52:03.740 --> 52:07.700
+between the two momentum distributions is mathematically greater than zero
+
+52:07.700 --> 52:09.820
+at the exact millisecond.
+
+52:10.260 --> 52:12.460
+Their positional distributions perfectly overlap.
+
+52:12.460 --> 52:16.680
+You have to prove, beyond a shadow of a doubt with physical sensors,
+
+52:17.020 --> 52:20.640
+that they are wholly distinct in momentum at the exact moment
+
+52:20.640 --> 52:22.740
+they are utterly identical in position.
+
+52:22.740 --> 52:27.460
+Furthermore, they introduce the concept of Pareto frontiers for comparing protocols.
+
+52:28.200 --> 52:29.340
+What's a Pareto frontier?
+
+52:29.620 --> 52:35.340
+To prove erasure flip wrong comparatively, an experimentalist wouldn't just find a minor flaw.
+
+52:35.720 --> 52:38.420
+They would have to map the entire frontier of possibilities
+
+52:38.420 --> 52:41.720
+and prove that a position-only protocol, like controlled erasure,
+
+52:42.200 --> 52:47.100
+could somehow achieve lower error rates at lower thermodynamic work costs across the board,
+
+52:47.100 --> 52:50.640
+even when heavily optimized with advanced feedback control.
+
+52:50.820 --> 52:55.260
+The author is basically throwing down a massive scientifically rigorous gauntlet
+
+52:55.260 --> 52:56.620
+to the entire physics community.
+
+52:57.140 --> 52:59.260
+They are saying, don't just debate my math in a simulation.
+
+52:59.480 --> 53:00.020
+Build the chip.
+
+53:00.120 --> 53:01.080
+Put it in a real lab.
+
+53:01.440 --> 53:04.160
+If the thermal noise shakes the momentum away, I am wrong.
+
+53:04.360 --> 53:07.720
+If the quantum back action collapses the flip, I am wrong.
+
+53:07.820 --> 53:08.580
+Go prove it.
+
+53:08.580 --> 53:14.240
+It takes an immense amount of confidence to hand your critics the exact blueprints for your own destruction.
+
+53:14.480 --> 53:17.520
+It separates the ego of the researcher from the truth of the physics.
+
+53:18.140 --> 53:20.760
+It is the purest form of the scientific method.
+
+53:21.000 --> 53:21.740
+It really is.
+
+53:21.920 --> 53:24.460
+We have covered a truly staggering amount of ground today.
+
+53:24.680 --> 53:27.920
+Let's try to distill this incredible journey we've just been on.
+
+53:28.180 --> 53:34.780
+We began by realizing that the very foundation of our current computer age relies on a convenient fiction,
+
+53:34.780 --> 53:42.040
+the deeply held assumption that information must live in a specific physical coordinate, aware.
+
+53:42.420 --> 53:48.760
+We explored how that stubborn insistence forces us to build flawed, combative architectures like controlled erasure
+
+53:48.760 --> 53:52.540
+that waste immense amounts of power and generate massive errors
+
+53:52.540 --> 53:55.320
+because we are constantly fighting the physical landscape.
+
+53:55.620 --> 54:00.840
+We were trying to pull down the living room wall while simultaneously forcing it to hold up the kitchen roof.
+
+54:01.460 --> 54:03.860
+Then we took the leap of faith into the erasure flip protocol.
+
+54:03.860 --> 54:09.240
+We watched the walls get torn down entirely, trusting the transient dynamics of the system.
+
+54:09.440 --> 54:09.880
+The motion.
+
+54:10.060 --> 54:13.860
+We allowed distinct bits to become totally indistinguishable in position
+
+54:13.860 --> 54:17.340
+because we knew their true identity was safely encrypted in their momentum.
+
+54:17.900 --> 54:20.500
+The ghost cars playing a flawless game of chicken.
+
+54:20.580 --> 54:20.700
+Yeah.
+
+54:20.980 --> 54:22.920
+And we walked through the thermodynamic ledger.
+
+54:23.600 --> 54:27.800
+We proved mathematically that exchanging these states costs zero logical energy
+
+54:27.800 --> 54:33.220
+and that the universe's ultimate tax, the land hour limit of 0.347 kilobiti,
+
+54:33.380 --> 54:40.500
+is only levied against genuine erasure when two distinct paths are voluntarily squished into one indistinguishable future.
+
+54:41.040 --> 54:45.820
+We saw how this principle isn't just a quirk of circuits, but applies across the natural world,
+
+54:45.940 --> 54:50.520
+from measuring soil moisture profiles to the orthogonal goal states in rat brains
+
+54:50.520 --> 54:54.260
+to extracting identity from the acoustic echoes of an empty room.
+
+54:54.360 --> 54:54.540
+Right.
+
+54:54.680 --> 54:57.840
+A distinction survives as long as its future evolution remains recoverable.
+
+54:58.260 --> 55:01.260
+But we didn't shy away from the harsh reality of the trapeze act.
+
+55:01.260 --> 55:06.960
+We confronted the razor-thin timing required by the controller to make momentum computing a reality,
+
+55:07.460 --> 55:12.180
+the devastating interface costs of constantly pasting plain text between different gates,
+
+55:12.180 --> 55:17.700
+and the very real physical hurdles of thermal windstorms and quantum wave collapse
+
+55:17.700 --> 55:21.180
+that could still prove this entire theory wrong in a physical lab.
+
+55:21.180 --> 55:24.640
+It is a profound, paradigm-altering shift in perspective.
+
+55:25.480 --> 55:27.480
+As Flyxion states in the paper's conclusion,
+
+55:28.100 --> 55:32.220
+persistence is a property of the pairing between trajectories and architecture.
+
+55:33.340 --> 55:36.400
+Identity is not a static property of an isolated thing.
+
+55:36.600 --> 55:37.600
+And that single line,
+
+55:38.120 --> 55:41.700
+persistence is a property of the pairing between trajectories and architecture.
+
+55:42.180 --> 55:45.920
+Yeah, that leads me to a final, slightly provocative thought I want to leave you with today.
+
+55:46.500 --> 55:50.620
+If a computer bit's survival depends not on where it sits statically on a hard drive,
+
+55:50.760 --> 55:54.940
+but on whether the surrounding environment is perfectly tuned to catch its moving trajectory,
+
+55:55.780 --> 55:57.440
+what does this mean for human memory?
+
+55:57.860 --> 55:59.780
+That is a deeply compelling question.
+
+56:00.080 --> 56:01.240
+Think about your own life.
+
+56:01.980 --> 56:07.620
+Are our memories actually stored anywhere specific in the physical meat of our brains,
+
+56:08.000 --> 56:09.420
+like a book sitting on a shelf?
+
+56:09.600 --> 56:10.240
+Probably not.
+
+56:10.240 --> 56:12.960
+Or are they just dynamic trajectories?
+
+56:13.560 --> 56:15.280
+Continuous moving patterns of momentum,
+
+56:15.720 --> 56:19.200
+floating in the dark, waiting for the exact right sensory trigger.
+
+56:19.200 --> 56:21.860
+Maybe a specific smell of rain on asphalt.
+
+56:22.360 --> 56:25.200
+Or a few stray notes of an old song you haven't heard in a decade.
+
+56:25.900 --> 56:29.780
+Acting as the catcher, perfectly timed to grab that invisible trajectory
+
+56:29.780 --> 56:32.420
+and bring a memory you thought was lost forever,
+
+56:32.840 --> 56:34.400
+crashing back into vivid focus.
+
+56:34.400 --> 56:40.180
+If the brain routinely uses orthogonal dimensions to store overlapping goal states,
+
+56:40.300 --> 56:42.000
+as we saw in the rat hippocampus studies,
+
+56:42.220 --> 56:47.240
+it is entirely plausible that the human mind operates much more like an erasure flip protocol
+
+56:47.240 --> 56:49.340
+than a static positional hard drive.
+
+56:49.420 --> 56:53.500
+Which means we might be carrying so much more inside us than we could ever actively measure.
+
+56:53.960 --> 56:57.480
+We just need the right architecture, the right moment, to read the echo.
+
+56:57.620 --> 56:58.380
+Beautifully put.
+
+56:58.380 --> 57:01.140
+Thank you so much for joining us on this deep dive.
+
+57:01.660 --> 57:04.780
+Next time you lose your keys, or misplace a crucial file,
+
+57:05.100 --> 57:07.760
+or even feel like you've lost a part of yourself, remember?
+
+57:08.460 --> 57:09.360
+Maybe it's not gone.
+
+57:09.920 --> 57:11.360
+Maybe it just changed its coordinate,
+
+57:11.660 --> 57:13.760
+and you're simply looking for the wrong kind of evidence.
+
+57:14.320 --> 57:17.700
+Until next time, keep questioning where things really live.
+
+57:17.920 --> 57:19.260
+Remember the magician's coin.
+
+57:19.760 --> 57:23.320
+Sometimes what is truly saved isn't in the palm of the hand at all.
+
+57:23.400 --> 57:24.700
+You have to look at how it moves.
+
+57:24.700 --> 57:26.660
+We'll see you on the next deep dive.
+

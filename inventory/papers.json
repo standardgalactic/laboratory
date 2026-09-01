@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-09-01T12:10:06+00:00",
+  "generated_at": "2026-09-04T20:31:47+00:00",
   "scope": {
     "scanned_directories": [
       ".",
@@ -20,7 +20,7 @@
   "papers": [
     {
       "id": "address-before-operator",
-      "title": "Address Before Operator: From the Typewriter Carriage to Vim's Grammar",
+      "title": "Address Before Operator: How the Physical Line Became a Grammar",
       "collection": "laboratory",
       "track": null,
       "source_path": "address-before-operator.tex",
@@ -36,7 +36,7 @@
       "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
-      "page_count": 7,
+      "page_count": 9,
       "page_count_source": "pdfinfo",
       "revision_status": "published",
       "revision_status_source": "derived",
@@ -269,6 +269,30 @@
       ]
     },
     {
+      "id": "maintenance-convergence",
+      "title": "Maintenance Convergence",
+      "collection": "laboratory",
+      "track": null,
+      "source_path": null,
+      "source_candidates": [],
+      "output_path": "maintenance_convergence.pdf",
+      "output_candidates": [
+        "maintenance_convergence.pdf"
+      ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
+      "build_engine": null,
+      "build_engine_source": "ambiguous-or-missing-source",
+      "page_count": 39,
+      "page_count_source": "pdfinfo",
+      "revision_status": "recovery-blocked",
+      "revision_status_source": "derived",
+      "recovery_blockers": [
+        "editable-source-missing"
+      ]
+    },
+    {
       "id": "monotonic-learning-plan",
       "title": "The Monotonic Learning Series: Programmed Texts in Distinction, Repair, and Continuation: Full Series Plan --- Detailed Edition",
       "collection": "laboratory",
@@ -349,8 +373,9 @@
       "source_candidates": [
         "source/representational-simplicity.tex"
       ],
-      "output_path": "source/representational-simplicity.pdf",
+      "output_path": null,
       "output_candidates": [
+        "representational-simplicity.pdf",
         "source/representational-simplicity.pdf"
       ],
       "canonical_source_path": null,
@@ -358,11 +383,13 @@
       "editorial_note": null,
       "build_engine": "lualatex",
       "build_engine_source": "inferred-from-fontspec",
-      "page_count": 264,
-      "page_count_source": "pdfinfo",
-      "revision_status": "published",
+      "page_count": null,
+      "page_count_source": "ambiguous-or-missing-output",
+      "revision_status": "duplicate-review",
       "revision_status_source": "derived",
-      "recovery_blockers": []
+      "recovery_blockers": [
+        "duplicate-family-requires-canonical-review"
+      ]
     },
     {
       "id": "sproll-curriculum-bundle/essay/beyond-prediction-error",

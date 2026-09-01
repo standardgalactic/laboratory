@@ -1,0 +1,828 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{centernot}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{titling}
+
+\newtheorem{principle}{Principle}
+\newtheorem{proposition}{Proposition}
+
+\title{Momentum Before Position: Recoverable Distinction in a Physically-Embedded NAND Gate}
+\author{Flyxion \\ \small Independent Researcher}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A recent thermodynamic study of coupled quantum flux parametrons compares two ways of implementing a NAND operation in a four-well potential landscape. The first protocol, Controlled Erasure, treats the position of a particle in the potential as the sole carrier of logical identity, and pays an inherent cost for doing so: two subpopulations that must remain distinct are forced to share a landscape with a subpopulation that must be merged, and the barriers each requires are in tension. The second protocol, Erasure-Flip, allows one pair of logical states to become momentarily indistinguishable by position while remaining distinguishable by momentum, and reconstitutes the positional distinction afterward. In simulation, the result is a physically embedded partial NAND operation that is substantially faster and more reliable than the tested Controlled-Erasure implementation at comparable mean work. Part I of this essay reads the comparison qualitatively, as a physical instance of a general claim about persistence: that a distinction's survival does not require its continuous residence in one coordinate, only its recoverability under a specified transformation and a specified apparatus for reconstruction. Part II makes the same reading precise. It reconstructs the device's logical structure as a quotient of phase space, defines continuation as a future-indexed equivalence relation rather than a present-indexed one, rederives the paper's own thermodynamic bound from an explicit entropy calculation localized to the irreversible subspace, separates that irreducible logical cost from the finite-time and control costs the device also pays, and reads the closed control loop's action on the storage subspace as a holonomy and its action on the erasure subspace as a noninvertible quotient. The device is used throughout to sharpen the difference between genuine erasure and mere representational migration, and to note the one respect in which the momentum-based protocol's advantage is conditional rather than free.
+\end{abstract}
+
+\part*{Part I. The Physical Comparison}
+
+\section{Two ways to keep a bit}
+
+This essay argues, through a single physical case, for a general thesis about what computation actually requires: that computation is not fundamentally about manipulating bits located somewhere, but about maintaining recoverable distinctions within a physical system, wherever in that system they happen to currently reside. A logic gate is usually described as if the truth of a bit were a property of a place: a charge sits in one capacitor rather than another, a flux points one way rather than the other, and the bit is read by asking where the relevant physical quantity currently is. This is a convenient fiction. Nothing about computation requires that the identity of a state be tied to a single coordinate; it only requires that the identity be recoverable at the moment a measurement is taken. Tang, Ray, and Crutchfield's study of a coupled quantum flux parametron (CQFP) makes this distinction vivid by building two devices that disagree, in a precise and testable way, about which coordinate a bit is allowed to live in \cite{TangRayCrutchfield2026,RayBoydWimsattCrutchfield2021}.
+
+The CQFP is a pair of inductively coupled Josephson-junction circuits whose joint state occupies a four-well potential in a two-dimensional flux coordinate, a landscape whose form is itself derived from the underlying circuit equations of motion \cite{TangRayCrutchfield2025}. Each well is labeled by a pair of bits according to the sign of the two fluxes, and the system's motion is governed by an underdamped Langevin equation \cite{KalmykovCoffey2012}, meaning that both the position of the state in this landscape and its momentum are dynamically meaningful quantities. This is what makes the device a natural home for momentum computing, a paradigm in which the transient dynamics of the conjugate momentum, rather than residence near a metastable minimum, is treated as a computational resource in its own right \cite{RayBoydWimsattCrutchfield2021}; single-bit versions of the idea have already been demonstrated in a driven electromechanical cantilever \cite{DagoBellon2023} and proposed for a single quantum flux parametron implementing a reversible NOT gate \cite{RayCrutchfield2023}. The paper's target operation is a NAND gate, built by manipulating the potential landscape over time so that the four initial wells map, at the end of a cycle, onto the wells required by the truth table \cite{LewisPapadimitriou1998}.
+
+The first protocol, Controlled Erasure (CE), first proposed as a building block for thermodynamically robust superconducting computing \cite{PrattRayCrutchfield2025}, does this the way one would naively expect. CE and EF are both offered as alternatives to two other established low-dissipation strategies for superconducting logic: adiabatic superconductor logic, which relaxes slowly enough to stay near a local steady state throughout \cite{TakeuchiYamanashiYoshikawa2015}, and reversible fluxon logic, which routes topological solitons along one-dimensional paths \cite{WustmannOsborn2020}. Where those approaches trade speed for adiabaticity or restrict the logic to strictly reversible operations, CE and EF both remain within a single coupled parametron and allow at least part of the operation to be irreversible by design. Two of the four populations, occupying wells labeled 00 and 10, must be merged into a single well; the other two, labeled 01 and 11, must remain apart. CE achieves the merger by lowering the barrier between the 00 and 10 wells until they become one, letting the higher population fall into the lower well and dissipate its gained kinetic energy as heat, while the barrier separating 01 from 11 is held high enough that thermal escape between them is negligible. The entire operation is legible in position alone: at every moment, a well-defined answer exists to the question of which basin each subpopulation occupies, and the logical claim being enforced is that the surviving distinction is exactly the current positional separation.
+
+This assumption produces a structural cost. The barrier that must vanish to permit the 00/10 merger and the barrier that must persist to protect the 01/11 separation act on the same shared potential topology, and the paper shows this coupling directly: reducing the merger barrier to save work also reduces the margin available to the storage pair, degrading fidelity, while operating the whole cycle faster imparts kinetic energy to the storage population and increases its escape rate regardless of the nominal barrier height. The paper further documents a second-order version of the same problem: a displacement of only a few percent between the externally imposed control parameter and the true potential minimum can shift the effective escape rate by as much as nine orders of magnitude relative to the escape rate computed under the na\"ive assumption that the two coincide. A protocol that identifies logical identity with positional confinement is, in other words, exquisitely sensitive to exactly how well that confinement is actually being enforced, in a way that is not visible if one only inspects the intended barrier height.
+
+The second protocol, Erasure-Flip (EF), does not eliminate this tension so much as refuse its premise. During EF, the barrier separating the 01 and 11 wells is not merely lowered but removed, and the resulting quasi-harmonic potential is held only briefly, for roughly half an oscillation period. During this window the two populations pass through one another and are, for a time, indistinguishable by position: both occupy the same region of the flux coordinate. They remain distinguishable throughout, however, by momentum, since one population is moving toward the far well and the other away from it. The barrier is then restored at the moment each population has reached the well it was moving toward, at which point positional separation is recovered and the exchange is complete \cite{RayCrutchfield2023,TangRayCrutchfield2026}. Meanwhile the 00/10 pair is merged in the same cycle by an irreversible slide down a potential gradient, exactly as in CE. A single EF cycle therefore performs reversible logic in one logical subspace and irreversible logic in the other, simultaneously, in a way that has no CE analogue.
+
+The reported comparison is not close. At matched work cost of roughly 30 $k_BT$, EF is about six times faster than CE and roughly two orders of magnitude more reliable; at matched duration, CE's error rate rises to an untenable 13\%, more than 650{,}000 times EF's error rate at the same speed, while consuming 3.6 times more work. The paper is explicit that the underlying thermodynamic minimum for a partial NAND is $0.347\,k_BT$, and that both protocols remain one to two orders of magnitude above it; the achievement is a better point on the speed-work-fidelity tradeoff, not proximity to the Landauer bound \cite{Landauer1961,Likharev1982}. But the contrast between the two protocols is not a matter of tuning. It is a difference in what each protocol is willing to treat as the bearer of logical truth.
+
+\section{Distinction without residence}
+
+The vocabulary developed elsewhere in this program for talking about persistence begins from a simple observation: nothing survives transformation by staying literally unchanged. What survives, when anything does, is a distinction's recoverability, meaning the existence of some admissible operation that reconstructs the distinction from whatever the transformation has left behind, even when the distinction is not visible, pointwise, in the transformed state itself. On this view a bit is not identical to a location; a bit is identical to whatever equivalence class of physical configurations a given reconstruction procedure can correctly sort back into the categories that mattered before the transformation began.
+
+CE's design implicitly denies this generality. It builds a device in which the only sanctioned reconstruction procedure is "read the current well," and then discovers that this restriction has a price: any operation that must temporarily disturb positional confinement for one subpopulation risks corrupting the read for every subpopulation, because there is only one channel through which identity is allowed to be carried. The tension between the erasure pair and the storage pair is not a design flaw to be optimized away. It is the direct consequence of insisting that persistence and position coincide.
+
+EF's design generalizes the reconstruction procedure without abandoning the requirement that reconstruction actually happen. During the flip, the read that matters is not "which well," but "which direction of travel and from which starting well," a question phase space can still answer when the position coordinate alone cannot. The two populations occupying the same location at the midpoint of the flip are, in the position-only description, one population; in the fuller phase-space description, they are two populations executing different trajectories that will shortly re-separate.\footnote{The same formal problem appears in temporal representation learning: reducing a sign-language sequence to selected critical frames can discard meaning carried by the transitions between frames, even when the retained frames remain individually legible \cite{SunMengNgo2026}. This is another case in which a sequence is not recoverable from a sparse projection of its positions.} Nothing about their logical distinctness was ever lost. What changed is which coordinate was carrying it, and for how long.
+
+This licenses a distinction the paper itself draws but does not name in quite this way: between erasure and migration. The 00/10 merger in both protocols is a genuine erasure. Two initially distinct inputs are mapped onto a single final state by a dissipative process; once the operation is complete, no reconstruction available from the device's designated final logical state can determine whether the input was $00$ or $10$, so the distinction has been erased relative to the adopted device and readout boundary, rather than merely relocated within its accessible logical state. Microscopically, information about which input occurred may still persist in bath correlations or other degrees of freedom the device's own logical boundary does not track, but that possibility is a fact about a different, finer state description, not a qualification of the claim as stated at the boundary this essay uses throughout. The 01/11 exchange under EF is not erasure at all, despite the same word ordinarily being used loosely to describe barrier removal. It is a bijection: the map $01\leftrightarrow11$ that EF performs on the storage pair is one-to-one, and its being a bijection is exactly why nothing is lost, however the individual populations are labeled or relabeled along the way. The exchange is, more precisely, a migration of the distinction's carrier from position to momentum and back to position, timed so that the second position-based read remains a faithful, if permuted, record of the first. Calling both events by the same name obscures a difference that a phase-space description makes exact: one is a many-to-one collapse, and the other is a one-to-one, if temporarily hidden, correspondence.
+
+\begin{principle}
+A distinction's survival across a transformation is a question about the injectivity of the induced map on the states carrying it, not about whether those states remain confined to a single coordinate throughout.
+\end{principle}
+
+The general form of the claim, then, is that recoverability is a property of a pair, not of a state: a distinction and a specified reconstruction procedure together determine whether something has been lost. Loss in one projection, such as position, is not loss simpliciter unless it is also loss under every reconstruction procedure the surrounding apparatus is prepared to run. CE's cost structure is what happens when the apparatus refuses to prepare more than one such procedure. EF's advantage is what becomes available once a second procedure, keyed to momentum, is added to the toolkit and the control schedule is built to make use of it.
+
+\section{What the momentum carrier is not}
+
+The reading above should not be pushed further than the physics supports. Momentum, in this device, is not a durable archive; it is a transitional bearer whose usefulness depends entirely on a control schedule that knows, in advance, both when to relax the positional confinement and when to reimpose it. The paper's own account of EF's failure modes makes this concrete: if the barrier is lowered too gradually, a population may not gain enough kinetic energy to complete its transit and can be recaptured, at the moment the barrier rises again, in a random and possibly wrong well; if the barrier rises too early, a population that has not yet arrived is stranded partway across; if it rises too late, a population that has already arrived can drift back the way it came. Reliable recovery via momentum is therefore not a free alternative to reliable recovery via position. It is a differently shaped and equally exacting engineering problem whose capture window occupies only a bounded portion of the relevant oscillatory transit.
+
+\begin{principle}
+A carrier's capacity to preserve a distinction is never intrinsic to that carrier; it holds only relative to a receiving protocol built to interrogate it correctly, and lapses precisely where that protocol's admissible window ends.
+\end{principle}
+
+Part II gives this window a precise form.
+
+\section{Universality is not yet architecture}
+
+Establishing that EF implements a partial NAND settles universality in a precise but limited sense. NAND is functionally complete, so compositions of NAND operations can express any finite Boolean function \cite{LewisPapadimitriou1998}. Functional completeness, however, is a property of an abstract operation considered as a mapping between truth values, while a computing architecture must also provide a physical means of feeding one operation's output into another operation's input, and the paper's principal contribution is precisely about the physical embedding of logic rather than about the truth table considered on its own.
+
+Let $F$ denote the physically embedded EF operation on the full memory-state space $\Omega$, and let $\pi_{\mathrm{out}}$ select whichever output coordinate is interpreted as the NAND result. Logical universality amounts to the existence of the identity $\pi_{\mathrm{out}}\circ F(x,y) = \operatorname{NAND}(x,y)$. Architectural composability asks for something further. If $E$ is a procedure that embeds a Boolean input into a physical preparation and $R$ a procedure that reads a completed physical output back into a Boolean value, two gates can be chained without an intervening restoration step only if the output distribution produced by the first already lies inside the admissible input domain of the second,
+
+\[
+F\bigl(E(\Omega_{\mathrm{logic}})\bigr) \subseteq E(\Omega_{\mathrm{logic}}),
+\]
+
+or, more generally, only if some restoration map $G$ exists such that $G\circ F\circ E$ returns a state meeting the next gate's initialization requirements. Whatever cost, latency, and error $G$ introduces belongs to the architecture even though it never appears in an accounting of the isolated gate.
+
+A scalable momentum-based computer must therefore show more than repeated truth-table correctness at a single gate. It must show that the terminal momentum distribution, local equilibration, flux amplitude, timing phase, and residual correlations left behind by one gate constitute an acceptable initial condition for the next. If each gate first requires complete re-equilibration before its output becomes usable, part of the speed advantage gained from transient dynamics may be surrendered exactly at the boundary between gates. If it does not require re-equilibration, the logical interface between gates must instead be widened to specify which nonequilibrium distributions count as admissible inputs, which is itself new design work that a single-gate result does not supply.
+
+This yields an architectural continuation condition in the same spirit as the continuation relation introduced for a single gate. Let $\mathcal I_n$ be the set of physical states admissible as input to gate $n$, and $\mathcal O_n$ the distribution of states it actually produces within its stated tolerance. Direct composition of gate $n$ into gate $n+1$ requires $\mathcal O_n \subseteq \mathcal I_{n+1}$; where this inclusion fails, an interface operation $G_n$ is needed satisfying $G_n(\mathcal O_n)\subseteq\mathcal I_{n+1}$. The performance of a circuit of $N$ gates is then properly assessed by
+
+\[
+W_{\mathrm{circuit}} = \sum_{n=1}^N W(F_n) + \sum_{n=1}^{N-1} W(G_n),
+\]
+
+and analogously for total duration and accumulated error. The paper establishes the favorable properties of a single $F$ in isolation. It does not establish, and does not claim to establish, that the interface terms $G_n$ remain small once many such gates are chained together.
+
+Fan-out raises a related difficulty. Abstract Boolean logic allows one output to feed several downstream gates, but a physical state cannot generally be copied, distributed, or measured without some additional mechanism for doing so, and momentum in particular is a local and transient quantity: by the time a signal reaches a downstream device, the directional distinction that carried the state through the originating gate may already have thermalized. A practical architecture must decide, gate by gate, whether momentum is confined to the internal operation of each device, with position restored at every interface, or whether nonequilibrium momentum distributions can themselves be routed across gate boundaries, which would require an entirely different account of what a wire is.
+
+None of this weakens the paper's universality claim; it locates the claim correctly. EF establishes a universal logical primitive and demonstrates that a momentum-bearing implementation can outperform a metastable alternative at the level of a single gate. What remains open is closure under physical composition: a demonstration that admissible outputs remain admissible inputs once restoration, synchronization, routing, and error accumulation are all accounted for. Universality concerns what a gate can express. Architecture concerns whether its continuations can actually be received by whatever comes next.
+
+\part*{Part II. A Formal Treatment}
+
+Part I argued in prose that the CE/EF comparison is a physical instance of a general distinction between representation and recoverability. This part reconstructs the same argument with an explicit apparatus: a quotient describing what position-only readout can see, a future-indexed continuation relation describing what the full protocol can still recover, an accounting of how much of the total distinguishing evidence is carried by each coordinate at each moment, an entropy calculation that localizes the paper's thermodynamic bound to a single subspace, and a holonomy reading of the closed control loop. None of the formal content below is asserted as belonging to the original paper; it is a superstructure built on top of the paper's reported dynamics, using its own reported numbers as a check on internal consistency.
+
+\subsection{Logical distinction as a quotient of physical state}
+
+Let the full physical state of the coupled parametrons be $z=(q,p)\in\Gamma$, where $q=(\phi_1,\phi_2)$ is the flux position and $p$ its conjugate momentum. Ordinary metastable logic reads out only the sign of each flux coordinate, which amounts to a coarse-graining map
+
+\[
+\pi_q:\Gamma\to\{00,01,10,11\},
+\qquad
+\pi_q(q,p)=\bigl(\mathbf 1_{\phi_1>0},\,\mathbf 1_{\phi_2>0}\bigr).
+\]
+
+Two microstates are treated as logically equivalent under this readout whenever $\pi_q(z)=\pi_q(z')$. This coarse-graining is adequate at the start and end of a cycle, when each population sits localized in one well, but it is not adequate in the interior of the EF transition. If $z_{01}(t_\ast)$ and $z_{11}(t_\ast)$ denote representative trajectories from the two storage populations at the midpoint of the flip, their positions can coincide,
+
+\[
+\pi_q\bigl(z_{01}(t_\ast)\bigr)\approx\pi_q\bigl(z_{11}(t_\ast)\bigr),
+\]
+
+while their full states remain distinct,
+
+\[
+z_{01}(t_\ast)=(q_\ast,p_-),
+\qquad
+z_{11}(t_\ast)=(q_\ast,p_+),
+\qquad
+p_-\neq p_+
+\;\Longrightarrow\;
+z_{01}(t_\ast)\neq z_{11}(t_\ast).
+\]
+
+The apparent collapse is an artifact of a non-injective observation map, not a fact about the underlying dynamics:
+
+\[
+\pi_q(z_{01})=\pi_q(z_{11})
+\quad\centernot\Longrightarrow\quad
+z_{01}=z_{11}.
+\]
+
+This gives a sharp, checkable version of the claim animating Part I: collapse under a projection is not destruction of a distinction.
+
+\begin{principle}
+Collapse under a coarse-graining map is a fact about the injectivity of that map, not a fact about whether the distinction it obscures still exists in the underlying state.
+\end{principle}
+
+The question that actually settles the matter is not whether the currently privileged representation is injective at time $t_\ast$, but whether the full dynamics still permits the distinction to be recovered later. That is a claim about the future of $z$, not about its present appearance, and it motivates replacing the static equivalence $\sim_q$ with a dynamic one.
+
+The danger of coarse-graining in this sense is not confined to microscopic dynamics. A recent global analysis of multilayer soil moisture found that diagnosing drought from the mean moisture of an entire soil profile conflated mixed wet-dry profiles with simultaneous depletion across all layers \cite{GuEtAl2026}. Relative to a layer-preserving diagnosis, profile averaging overestimated the duration of vertically compound drought by approximately $128.3\%$ while underestimating its associated ecosystem losses by approximately $27.8\%$. The example is useful precisely because the projection does not merely discard detail; it distorts two different downstream judgments in opposite directions. Let the layered state be $s=(s_1,s_2,\ldots,s_n)$ and let the coarse observable be its weighted mean, $\bar s=\sum_i w_i s_i$. Distinct profiles can then share a fibre, $s\neq s'$ while $\bar s=\bar s'$, even though their available continuations differ: a profile in which one wet layer remains preserves a compensatory refuge unavailable to a uniformly depleted profile with the same mean. The projection erases precisely the cross-layer arrangement that determines whether that refuge exists. Position-only readout in the CQFP identifies phase-space states with different momenta in exactly the same structural way that profile averaging identifies soil states with different vertical distributions; in both cases $\pi(z)=\pi(z')$ fails to imply $K(\,\cdot\mid z)=K(\,\cdot\mid z')$, and a projection is adequate only relative to whichever consequences it is actually required to preserve.
+
+\subsection{Continuation as future recoverability}
+
+Let $\Phi_{t_1,t_0}$ denote the (stochastic) evolution induced by the control protocol, so that $z(t_1)=\Phi_{t_1,t_0}(z(t_0))$ along a given noise realization. Define the eventual logical readout obtained by running the remainder of the protocol from an intermediate state and then reading position at the final time,
+
+\[
+R = \pi_q\circ\Phi_{t_f,t_\ast}.
+\]
+
+Two populations that are positionally indistinguishable at $t_\ast$ can still be distinct in every sense that matters computationally, provided their eventual readouts differ:
+
+\[
+R\bigl(z_{01}(t_\ast)\bigr)\neq R\bigl(z_{11}(t_\ast)\bigr).
+\]
+
+For a correctly executed EF cycle this is exactly what happens: $R(z_{01}(t_\ast))=11$ and $R(z_{11}(t_\ast))=01$. This licenses a continuation relation defined relative to the future protocol rather than the present coordinate,
+
+\[
+z\equiv_R z'
+\quad\Longleftrightarrow\quad
+R(z)=R(z').
+\]
+
+The two central populations then satisfy $z_{01}\sim_q z_{11}$ (present colocation) while failing to satisfy $z_{01}\equiv_R z_{11}$ (continuation distinctness). They are colocated but not identified; their identities are encoded not in where they presently sit but in the different dispositions their trajectories carry under the remaining evolution. This yields a compact restatement of the "history as identity" thesis pursued elsewhere in this program:
+
+\[
+\operatorname{Id}_{t_\ast}(z)\;=\;\bigl[\Phi_{t_f,t_\ast}(z)\bigr]_R,
+\]
+
+the identity of a state at an intermediate time is the equivalence class, under the final readout, of the futures it remains capable of reaching. Once noise is restored this becomes a matter of degree rather than a sharp fact. Define the future-output kernel
+
+\[
+K(y\mid z,t_\ast) = \Pr\bigl(\pi_q(Z_{t_f})=y \mid Z_{t_\ast}=z\bigr),
+\]
+
+and measure the separability of two states' remaining futures by the total-variation distance between their kernels,
+
+\[
+D_{\mathrm{cont}}(z,z') = \frac12\sum_y \bigl|K(y\mid z,t_\ast)-K(y\mid z',t_\ast)\bigr|.
+\]
+
+$D_{\mathrm{cont}}$ is itself a total-variation distance, here between two output kernels rather than between two general distributions; the notation $D_{\mathrm{TV}}$ used later in this essay for the more general comparison and $D_{\mathrm{cont}}$ used here for this particular application to future-output kernels denote the same underlying quantity, distinguished only by which pair of distributions is being compared.
+
+$D_{\mathrm{cont}}=1$ means the two states' eventual outputs remain perfectly distinguishable; $D_{\mathrm{cont}}=0$ means their logical dispositions have already merged, whatever their current positions suggest. A successful EF cycle is exactly a protocol in which positional overlap at $t_\ast$ is large while $D_{\mathrm{cont}}$ stays close to one throughout. The reported logical error rates do not directly equal $1-D_{\mathrm{cont}}$, since an error rate compares a distribution with its designated target whereas total variation compares two complete distributions. They do, however, imply a useful lower bound. For two inputs $x$ and $x'$ with different intended outputs, define $\varepsilon_x = \Pr(Y\neq F(x)\mid X=x)$ and $\varepsilon_{x'} = \Pr(Y\neq F(x')\mid X=x')$. Their final-output distributions then satisfy
+
+\[
+D_{\mathrm{TV}}\bigl(P(Y\mid X=x),P(Y\mid X=x')\bigr) \ge 1-\varepsilon_x-\varepsilon_{x'}.
+\]
+
+Moreover, because the final output is generated from the intermediate physical state by the remainder of the protocol, the data-processing inequality gives
+
+\[
+D_{\mathrm{TV}}\bigl(P(Z_t\mid X=x),P(Z_t\mid X=x')\bigr) \ge D_{\mathrm{TV}}\bigl(P(Y\mid X=x),P(Y\mid X=x')\bigr).
+\]
+
+Low final error therefore supplies a quantitative lower bound on the distinguishability that must remain in the intermediate phase-space ensembles, even when their positional marginals overlap. This does not by itself identify momentum as the carrier; that stronger conclusion requires inspecting the phase-space distributions directly, which the reweighting argument below undertakes. It does show that the distinction cannot have been completely destroyed and subsequently recovered by an input-independent stochastic channel, since no such channel could produce the reported final separation from intermediate states that were already indistinguishable. The bound is informative precisely where the designated outputs are different. For the storage pair, the targets $01$ and $11$ are distinct, so low class-conditional error forces substantial intermediate separability. For the erasure pair, both designated outputs are $10$; the hypothesis of distinct target outputs fails, and no nontrivial lower bound follows from this argument. This difference is the erasure-versus-migration distinction restated in information-theoretic terms.
+
+\subsection{Reweighting the carriers of distinction}
+
+It is useful to track, moment by moment, how much of the total evidence distinguishing the 01 and 11 populations is currently carried by position versus by momentum. Let
+
+\[
+E(t) = w_q(t)\,D_q(t) + w_p(t)\,D_p(t),
+\]
+
+where $D_q$ and $D_p$ are separations in position and momentum space respectively (for instance Mahalanobis distances between the two populations' means, normalized by their respective covariances), and $w_q,w_p$ are the corresponding shares of the total distinguishing weight. In ordinary metastable storage, $w_q\approx1$ and $w_p\approx0$: essentially all of the distinguishing evidence sits in position, exactly as CE assumes. At the midpoint of an EF flip, the situation inverts: $D_q(t_\ast)\approx0$ while $D_p(t_\ast)\gg0$, and correspondingly $w_q\to0$, $w_p\to1$.
+
+Under this bookkeeping, EF is not a protocol that destroys a distinction and then rebuilds it from nothing. It performs a carrier transformation,
+
+\[
+(q\text{-distinction}) \;\longrightarrow\; (p\text{-distinction}) \;\longrightarrow\; (q\text{-distinction}),
+\]
+
+and provided the combined evidence never drops below some admissibility threshold $\theta$ for the duration of the protocol,
+
+\[
+E(t)\ge\theta \qquad \text{for all } t\in[t_0,t_f],
+\]
+
+the distinction survives throughout even though one of its two components does, briefly, fall to zero. This gives a precise sense in which reweighting differs from refusal. Reweighting changes which coordinate carries the load,
+
+\[
+(w_q,w_p): (1,0)\;\to\;(0,1)\;\to\;(1,0),
+\]
+
+while refusal collapses every available carrier at once,
+
+\[
+D_q\to0 \quad\text{and}\quad D_p\to0.
+\]
+
+EF performs the first operation on the storage pair and the second, deliberately, on the erasure pair. The device is therefore not merely tolerant of a temporary loss of positional information; it is built to distinguish, structurally, between a coordinate temporarily going quiet and the underlying distinction actually being erased, and it applies the two treatments to two different logical subspaces within a single cycle.
+
+\subsection{Orthogonal carriers and superposed distinctions}
+
+The EF protocol is not the only physical system in which multiple distinctions coexist by occupying separable dimensions of a common state space. Recent recordings from the rat hippocampus show that spatially similar experiences associated with different goals can be represented in largely orthogonal population dimensions \cite{GolipourEtAl2026}. The hippocampal CA1 population preserves an aligned spatial map while encoding goal configuration along a second axis, so the same physical environment can support distinct episodic states without requiring the underlying spatial representation to be replaced.
+
+Let $r\in\mathbb R^n$ denote a neural population state, decomposed as $r = U_s a + U_g b + \epsilon$, where the columns of $U_s$ span the spatial coding subspace, the columns of $U_g$ span the goal-state subspace, $a$ and $b$ give the corresponding coordinates, and $\epsilon$ is residual activity. Approximate orthogonality, $U_s^{\mathsf T}U_g\approx0$, means the spatial projection $\Pi_s r = U_sU_s^{\mathsf T}r$ can remain stable across two experiences even when their goal-state coordinates differ, $\Pi_s r_1\approx\Pi_s r_2$ while $\Pi_g r_1\neq\Pi_g r_2$. Equality under the spatial projection does not identify the complete population states, exactly as equality under $\pi_q$ at the midpoint of an EF flip does not identify two phase-space populations carrying opposed momenta. The resemblance is structural rather than physiological; the hippocampal system is not implementing an Erasure-Flip, and its orthogonal population dimension is not a mechanical momentum coordinate. What the two cases share is a method of avoiding interference: distinctions that would collide under one projection remain separable because the system provides another dimension along which their difference can be carried.
+
+The causal intervention reported alongside this result sharpens the comparison further. Silencing the thalamic nucleus reuniens reduced separation along the CA1 goal axis and weakened goal-biased pre-navigation sequences while substantially sparing spatial coding, which in the simplified decomposition acts approximately as $r = U_s a + U_g b \mapsto r' = U_s a + \alpha U_g b$ for some $0\le\alpha<1$. The intervention attenuates one distinction without equivalently destroying the other, a biological instance of selective continuation: preservation and failure need not apply globally to a system, because different distinctions can depend on different carriers and different supporting circuits.
+
+The example also corrects an overly simple version of representational migration as told so far. A system need not always transfer its entire identity from one carrier to another; it may instead preserve several partially independent distinctions simultaneously, letting one projection stay invariant while another reorganizes. EF has exactly this form at the logical level, since the erasure and storage subspaces undergo different transformations within one physical control cycle. The more general state is therefore better represented not by a single carrier but by a family of concurrently maintained distinctions, $\mathcal D(z) = \{D_1(z),D_2(z),\ldots,D_m(z)\}$, each with its own projection, continuation condition, and failure mode; a transformation preserves identity relative to $D_i$ when the future readout associated with that distinction remains recoverable, and it need not preserve every $D_j$ at the same time.
+
+\subsection{Selective irreversibility as a partitioned map}
+
+Partition the input space into an erasure subspace $\Omega_E=\{00,10\}$ and a storage subspace $\Omega_S=\{01,11\}$. The EF logical map is $F_{\mathrm{EF}}(x,y)=\bigl(\operatorname{NAND}(x,y),\,y\bigr)$, which sends
+
+\[
+00\mapsto10,\qquad 10\mapsto10,\qquad 01\mapsto11,\qquad 11\mapsto01.
+\]
+
+Restricted to $\Omega_E$ this map is many-to-one, $F_{\mathrm{EF}}\vert_{\Omega_E}:\{00,10\}\to\{10\}$; restricted to $\Omega_S$ it is a bijection, $F_{\mathrm{EF}}\vert_{\Omega_S}:01\leftrightarrow11$. The preimage multiplicity $m(y)=\bigl|F_{\mathrm{EF}}^{-1}(y)\bigr|$ takes the values $m(10)=2$, $m(01)=1$, $m(11)=1$, which localizes irreversibility exactly where the physical protocol locates it: the operation collapses one equivalence relation, $00\sim_F10$, while strictly preserving another, $01\not\sim_F11$.
+
+This licenses restating what an irreversible operation actually is. It is not usefully characterized as "a change that costs energy," since both the erasure pair and the storage pair undergo substantial physical change, including in the storage pair's case a full spatial exchange. It is better characterized as the introduction of a quotient, $\Omega\to\Omega/{\sim_F}$, under which some previously distinct histories are assigned the same admissible continuation and others are not. The irreducible thermodynamic cost, as the next subsection shows explicitly, tracks the quotient rather than the mere occurrence of motion; the actual finite-time work can additionally depend on how that motion is driven and dissipated.
+
+\subsection{Locating the thermodynamic bound}
+
+Assume the four two-bit inputs are equally likely, so the initial entropy is $H(X,Y)=\log_2 4 = 2$ bits, in the standard Shannon sense \cite{CoverThomas2006}. Under the EF output distribution, $P(10)=\tfrac12$ (from the merged erasure pair), $P(11)=\tfrac14$, and $P(01)=\tfrac14$ (from the bijectively exchanged storage pair). The output entropy is
+
+\[
+H(X',Y') = -\tfrac12\log_2\tfrac12 - \tfrac14\log_2\tfrac14 - \tfrac14\log_2\tfrac14 = \tfrac12+\tfrac12+\tfrac12 = \tfrac32 \text{ bits},
+\]
+
+so the logical entropy lost over the operation is $\Delta H = 2-\tfrac32 = \tfrac12$ bit. Landauer's principle \cite{Landauer1961} then gives a minimum work of
+
+\[
+W_{\min} = k_BT\ln2\,\Delta H = \tfrac12 k_BT\ln2 \approx 0.347\,k_BT,
+\]
+
+reproducing the paper's own reported bound for the partial NAND operation. The derivation shows exactly where that half-bit of lost entropy originates: the reversible exchange on $\{01,11\}$ contributes nothing to $\Delta H$, since it is a bijection and preserves the two-way split in the output distribution; every bit of entropy loss comes from identifying $00$ with $10$. In short,
+
+\[
+\text{motion}\;\not\Rightarrow\;\text{logical dissipation}, \qquad \text{many-to-one identification}\;\Rightarrow\;\text{minimum dissipation}.
+\]
+
+This is the thermodynamic mirror of the distinction drawn in Part I between erasure and migration: the storage pair's large spatial displacement is, from the standpoint of Landauer's bound, thermodynamically free, because no entropy is actually lost in a bijective exchange, however far the two populations travel to complete it. What costs the protocol its minimum unavoidable work is the single collapsed equivalence in the erasure pair, and nowhere else.
+
+\subsection{The work decomposition: logical, finite-time, and control cost}
+
+The clean localization of $\Delta H$ to the erasure subspace should not be read as saying that the erasure subspace is the sole source of dissipation, or that displacement in the storage subspace is thermodynamically free in any but the strict logical sense just established. The paper's own reported figures make the gap explicit: CE's average work of $53.6\,k_BT$ and EF's average work of $16.1$ to $30.2\,k_BT$, depending on speed, both sit one to two orders of magnitude above the $0.347\,k_BT$ Landauer minimum, and this excess is paid regardless of which subspace is doing the paying.
+
+A more careful accounting distinguishes the device-level work from the architectural energy required to realize it, in a way that does not double-count the controller's contribution. For the modeled device one may define
+
+\[
+W_{\mathrm{excess}} := W_{\mathrm{device}} - W_{\min} \ge 0, \qquad W_{\min} = k_BT\ln2\,\Delta H,
+\]
+
+so that, by construction, $W_{\mathrm{device}} = W_{\min} + W_{\mathrm{excess}}$, where $W_{\min}$ is the irreducible cost fixed by the entropy destroyed through many-to-one identification, computed above, and $W_{\mathrm{excess}}$ includes finite-time dissipation, imperfect energy recovery, and other costs internal to the modeled protocol, arising because the protocol runs at finite speed rather than quasistatically. At the architectural boundary the appropriate accounting is instead
+
+\[
+W_{\mathrm{arch}} = W_{\mathrm{device}} + W_{\mathrm{controller}}^{\mathrm{overhead}} + W_{\mathrm{readout}} + W_{\mathrm{interconnect}},
+\]
+
+where $W_{\mathrm{controller}}^{\mathrm{overhead}}$ is whatever additional dissipation the external apparatus incurs in generating and timing the driving fields, excluding the work already counted as transferred to the device under $W_{\mathrm{device}}$; without that exclusion, work delivered by the controller and overhead dissipated by the controller would be counted twice.
+
+This decomposition sharpens the reweighting argument of the preceding subsection rather than undoing it. It remains true that the storage pair's exchange is logically reversible and contributes nothing to $W_{\min}$. It is not true that the storage pair's motion is free of thermodynamic consequence in the finite-time regime the paper actually simulates, since accelerating and decelerating a population through the flattened potential still costs real work that is eventually dissipated as $W_{\mathrm{excess}}$. The paper's own comparison of a slow EF configuration, at $16.1\,k_BT$, against a fast one, at $30.2\,k_BT$, is on this reading a direct measurement of how $W_{\mathrm{excess}}$ grows as the protocol is compressed toward the edges of the timing window discussed below, with $W_{\min}$ held fixed throughout, since $W_{\min}$ is a lower bound fixed by the logical map rather than an empirically separable packet of energy. Logical reversibility and practical thermodynamic economy are therefore related but distinct properties \cite{Likharev1982,TakeuchiYamanashiYoshikawa2015}: a bijective quotient guarantees the absence of one term in this decomposition, not the absence of the rest.
+
+\subsection{The CE incompatibility as a constraint-intersection problem}
+
+CE's difficulty can be stated as the near-emptiness of an intersection of admissible-control sets. Let $\lambda$ denote the externally controlled landscape parameters. The storage pair requires an effective barrier at least as large as some minimum, $\Delta E_S(\lambda)\ge B_{\min}$, defining an admissible set $\mathcal A_S=\{\lambda:\Delta E_S(\lambda)\ge B_{\min}\}$; the erasure pair requires a barrier small enough to permit reliable merger within the protocol duration, $\Delta E_E(\lambda)\le B_{\max}$, defining $\mathcal A_E=\{\lambda:\Delta E_E(\lambda)\le B_{\max}\}$. An ideal CE schedule would remain inside $\mathcal A_{\mathrm{CE}}=\mathcal A_S\cap\mathcal A_E$ throughout. The coupled geometry of the shared potential, however, links the two barriers, approximately as $\Delta E_E(\lambda)\approx c\,\Delta E_S(\lambda)$ for some $c>1$, so that any move which lowers the erasure barrier also lowers the storage barrier. At demanding combinations of speed, work, and fidelity the feasible intersection becomes narrow or effectively empty, $\mathcal A_S\cap\mathcal A_E\approx\varnothing$, which is the constraint-level description of the paper's finding that CE has no way to simultaneously satisfy both requirements without an inherent tradeoff.
+
+CE's actual response, a saddle-node bifurcation accepting a large potential drop, produces dissipation weighted by the probability of the descending population, $\langle W\rangle_{\mathrm{CE}}\approx P(10)\,\Delta U_{05}$; for uniform inputs $P(10)=\tfrac14$, reproducing the paper's observation that the average work is roughly one quarter of the relevant potential difference $\Delta U_{05}$. EF's advantage is not a better point inside $\mathcal A_{\mathrm{CE}}$; it is a change in which constraint the protocol is required to satisfy. EF replaces the static requirement $\Delta E_S\ge B_{\min}$, which must hold at every instant, with a dynamic continuation requirement that need only hold in aggregate,
+
+\[
+D_{\mathrm{cont}}(01,11)\ge\theta,
+\]
+
+yielding an admissible set
+
+\[
+\mathcal A_{\mathrm{EF}} = \bigl\{\lambda(t): D_{\mathrm{cont}}(01,11)\ge\theta,\; F(00)=F(10)\bigr\}
+\]
+
+that is considerably larger than $\mathcal A_{\mathrm{CE}}$, because it no longer forbids the storage pair from passing through low-barrier, high-kinetic-energy configurations, so long as the continuation criterion is met by the time of the final readout. The gain reported in the paper is best understood as coming from this enlargement of the feasible protocol space, not from a more efficient search within the original, more restrictive one.
+
+\subsection{Timing as an admissibility window}
+
+Momentum-based continuation only functions within a bounded interval of time, and this interval can be estimated even in a simplified harmonic approximation of the flip. Near the flattened potential, the storage pair's motion approximately obeys $\ddot q + \omega^2 q = 0$, with solution $q(t) = q_0\cos(\omega t) + \frac{p_0}{m\omega}\sin(\omega t)$. After half a period, $t_{\mathrm{flip}}=\pi/\omega$, a population that began at $q_0$ with momentum $p_0$ reaches $q(t_{\mathrm{flip}})=-q_0$ with $p(t_{\mathrm{flip}})=-p_0$: the opposite side of the potential, moving in the reversed direction. The barrier must be restored close to this moment. Restoring it too early, $t_r < t_{\mathrm{flip}}-\delta_-$, strands some trajectories before they reach the target basin; restoring it too late, $t_r > t_{\mathrm{flip}}+\delta_+$, allows some trajectories that have already arrived to begin drifting back. The admissible capture interval is therefore a bounded window,
+
+\[
+\mathcal T_{\mathrm{adm}} = [\,t_{\mathrm{flip}}-\delta_-,\; t_{\mathrm{flip}}+\delta_+\,],
+\]
+
+and with noise this becomes a probabilistic requirement on the chosen restoration time,
+
+\[
+\Pr\bigl(\pi_q(Z_{t_f}) = F(\pi_q(Z_{t_0})) \mid t_r\bigr) \ge 1-\varepsilon.
+\]
+
+This is the precise content of the qualification raised at the end of Part I. The identity-preserving power of the protocol is relational, not intrinsic to momentum as a physical quantity:
+
+\[
+\text{momentum distinction} + \text{correct capture time} \;\longrightarrow\; \text{recovered positional distinction}.
+\]
+
+Momentum is informative about logical identity only inside a receiving protocol built to admit its continuation at the right moment; outside $\mathcal T_{\mathrm{adm}}$, the same momentum difference carries no more reconstructive power than an unmonitored positional difference would carry once its confining barrier had been removed and left unattended.
+
+\subsection{A holonomic reading}
+
+Let $\Lambda$ be the space of control parameters, comprising the external fluxes and the inductive coupling. In the language this reading borrows from differential geometry, $\Lambda$ serves as the base space and the logical state space $\{00,01,10,11\}$ as the fiber sitting over each point of it; a control loop acts as a connection transporting logical populations from one fiber to another as the base point traces the loop and returns. The fact that the fiber here is a discrete four-element set rather than a continuous vector space does not affect the holonomy concept itself, only the group of transformations available to describe it. A full gate cycle is a closed loop in this space, $\gamma:[0,1]\to\Lambda$ with $\gamma(0)=\gamma(1)$, since the potential returns to its original four-well form at the end of the protocol. What does not return to its starting configuration is the assignment of logical populations to wells: $\gamma(0)=\gamma(1)$, yet the induced logical map $F_\gamma$ is not the identity. On the storage subspace, $F_\gamma(01)=11$ and $F_\gamma(11)=01$; on the erasure subspace, both $00$ and $10$ are sent to $10$. The restriction of the closed control cycle to the storage subspace admits a holonomic reading in the ordinary sense, since holonomy is standardly an invertible transformation: transport of the storage populations around a closed loop in control-parameter space returns a nontrivial but invertible permutation of what was transported, exactly as parallel transport of a vector around a closed loop in a curved space can return a rotated vector even though the loop itself closes on itself. Its restriction to the erasure subspace is not a holonomy in this strict sense, since the induced map there is a noninvertible quotient rather than an automorphism. The complete EF operation therefore combines a reversible holonomy on one subspace with an irreversible identification on the other, under a single closed control cycle.
+
+Writing $P_\gamma$ for the induced transport operator, its restriction to the storage subspace is the swap matrix,
+
+\[
+P_\gamma\big\vert_{\Omega_S} = \begin{pmatrix}0&1\\1&0\end{pmatrix},
+\]
+
+an invertible, reversible holonomy, while its restriction to the erasure subspace is non-invertible,
+
+\[
+P_\gamma\big\vert_{\Omega_E} = \begin{pmatrix}1&1\\0&0\end{pmatrix}
+\]
+
+up to the choice of basis and output labeling. The full transport operator therefore decomposes as a direct sum of a reversible and an irreversible piece,
+
+\[
+P_\gamma = P_\gamma^{\mathrm{rev}} \oplus P_\gamma^{\mathrm{irr}},
+\]
+
+acting on complementary subspaces of the same underlying state space under the same closed control loop. This gives an exact mathematical reading of what the paper itself calls, in words, its hybrid reversible/irreversible logic: not two separate operations performed in sequence, but a single transport operator whose action is a genuine holonomy on one summand of the state space and a noninvertible quotient on the other.
+
+\subsection{The controller as part of the memory-bearing system}
+
+The account so far has located the preserved distinction in the momentum of the two storage populations. This is not quite complete. Momentum carries the distinction only because an external controller supplies a time-dependent potential that first produces the directed motion and later arrests it near the intended destination; the controller need not know which logical input was actually supplied, but it must track the temporal phase of the protocol precisely enough to distinguish a population still crossing the flattened region from one ready to be captured. Logical continuation is therefore distributed between the device's own state and a clocked control history, not carried by the device alone.
+
+Write the controlled stochastic dynamics as $dZ_t = b(Z_t,\lambda_t)\,dt + \sigma(Z_t,\lambda_t)\,dW_t$, where $\lambda_t$ is the externally imposed control schedule. The future-output kernel introduced earlier is then more completely written with an explicit dependence on the remaining control path,
+
+\[
+K_\lambda(y\mid z,t) = \Pr\Bigl(\pi_q(Z_{t_f})=y \;\Big|\; Z_t=z,\; \{\lambda_s\}_{s=t}^{t_f}\Bigr).
+\]
+
+Recoverability of a distinction is therefore conditional not only on the intermediate physical state but also on the future control path: the same state $z$ can carry different logical dispositions under two different continuations of the controller, $K_\lambda(y\mid z,t)\neq K_{\lambda'}(y\mid z,t)$. A pair of opposed momenta that would be cleanly captured under $\lambda$ can be randomized under $\lambda'$, with nothing about the physical state at time $t$ having changed at all. Identity cannot, on this accounting, be assigned to $z$ independently of the protocol standing ready to receive it.
+
+This motivates enlarging the state description to $\widetilde Z_t = (Z_t, C_t)$, where $C_t$ is the relevant controller state, comprising its clock phase, its current waveform segment, and whatever else is needed to determine the remaining control sequence. Continuation is Markovian only at this enlarged boundary, since knowledge of $Z_t$ alone need not determine the future driving; the Markov property here belongs to the pair $\widetilde Z_t$ rather than to the device alone, and $C_t$ need only carry enough information to fix the remaining schedule, which for a deterministic, open-loop controller reduces to the clock phase and current waveform segment already named. The appropriate continuation distance is correspondingly a distance over the enlarged pair,
+
+\[
+D_{\mathrm{cont}}\bigl((z,c),(z',c')\bigr) = \frac12\sum_y \bigl|K(y\mid z,c)-K(y\mid z',c')\bigr|.
+\]
+
+The point is conceptual as well as technical. Saying that the bit is stored in momentum risks the same localization error the momentum reading was introduced to correct: during the flip, the bit is not stored in momentum alone, but in the relation among momentum, control phase, potential geometry, and the later act of capture. Removing the controller while leaving the momenta themselves unchanged would destroy exactly the continuation that made those momenta logically meaningful in the first place.
+
+The energy boundary should be enlarged for the same reason. The paper accounts for work performed on the CQFP through changes in its potential parameters, but any physical controller must generate those changes with finite bandwidth and finite precision. Writing $W_{\mathrm{device}}$ for the work transferred to the modeled device, already decomposed above into $W_{\min}$ and $W_{\mathrm{excess}}$, and $W_{\mathrm{controller}}^{\mathrm{overhead}}$ for the additional dissipation required to generate, route, time, and stabilize the driving waveform beyond whatever work is already delivered to the device, the architectural cost is
+
+\[
+W_{\mathrm{arch}} = W_{\mathrm{device}} + W_{\mathrm{controller}}^{\mathrm{overhead}} + W_{\mathrm{readout}} + W_{\mathrm{interconnect}}.
+\]
+
+The paper's reported advantage establishes a reduction in $W_{\mathrm{device}}$ at favorable speed and fidelity. Whether that advantage survives at the architectural level depends on whether the added precision the momentum protocol demands causes the omitted terms to grow faster than $W_{\mathrm{device}}$ falls, a question the device-level simulation does not by itself answer. None of this reduces EF to computation performed by the controller; the controller supplies the same open-loop schedule regardless of the input, while the physical populations respond differently according to their initial conditions, so the input-dependent distinction still resides in the evolving device state. The more precise statement is that the device bears the difference while the controller supplies the conditions under which that difference remains recoverable. Continuation, on this view, belongs to their coupling rather than to either term alone.
+
+\subsection{Control values do not determine nonequilibrium states}
+
+The distinction between a control parameter and the physical state it produces is not peculiar to flux-parametron logic. Recent time-resolved measurements of electrical double layers under rapid potential modulation show that interfacial water and ions respond asynchronously: water first reorients and reorganizes its hydrogen-bond network, whereas cations approach the electrode, crowd, and partially dehydrate on a slower timescale \cite{LiEtAl2026EDL}. The resulting interfacial structure is path-dependent, and cyclic modulation can produce irreversible restructuring that classical equilibrium descriptions do not capture.
+
+This result supplies an instructive comparison with the distinction, drawn earlier for CE, between an externally imposed CQFP parameter and the effective potential minimum it actually produces. In both cases, the current value of a control variable fails to determine the current physical organization. If $\lambda_t$ is the imposed control value and $z_t$ the physical state, equilibrium reasoning assumes an approximately single-valued constitutive relation, $z_t\approx z_{\mathrm{eq}}(\lambda_t)$. Far from equilibrium, the physical state instead depends on the preceding control history,
+
+\[
+z_t = \mathcal F\bigl(\lambda_t; \{\lambda_s\}_{s<t}, z_0\bigr),
+\]
+
+so that two systems subjected to the same instantaneous control value can remain physically distinct, $\lambda_t=\lambda'_t \centernot\Longrightarrow z_t=z'_t$. A more explicit representation introduces an internal history variable $h_t$, with $z_t = z(\lambda_t,h_t)$ and $\dot h_t = G(h_t,\lambda_t)$, where $h_t$ records whatever slowly relaxing organization the equilibrium projection omits. In the electrical double layer this hidden organization includes ion crowding, hydration, and water orientation; in the momentum gate it includes the velocity distribution and its phase relative to the control cycle.
+
+The comparison strengthens the present argument without identifying the two systems. The electrical double layer does not perform a logical Erasure-Flip, and its hysteresis is not itself computational memory. It independently demonstrates, in an unrelated physical substrate, the insufficiency of the map $\lambda_t\mapsto z_t$ under rapid driving: a present control setting does not uniquely identify a nonequilibrium state, because the route by which the setting was reached remains physically active. This sharpens the meaning given earlier to history as identity. History need not survive as an explicit record of earlier coordinates; it may survive as a difference in relaxation phase, molecular organization, momentum, or some other internal variable that changes a system's subsequent response. The operational test is the same one used throughout this essay, applied here to two systems rather than to two populations within one system: whether they possess different conditional futures despite sharing a present observation, $K(y\mid z_t,h_t)\neq K(y\mid z_t,h'_t)$. When they do, agreement under the present projection is a temporary observational equivalence, not an identity.
+
+\subsection{When the discarded channel carries the identity}
+
+The distinction between noise and information is relative to a readout architecture, not intrinsic to a physical channel. A recent acoustic identification study makes this point in a setting where direct observation is unavailable \cite{Olgun2026}. In a non-line-of-sight environment, delayed multipath echoes are ordinarily treated as contamination to be suppressed; the study instead treats these secondary echoes as the principal carrier of identity-specific information generated by interactions among the subject, the emitted signal, and the surrounding room, reporting a mean identification accuracy of $96.17\%$ from a fusion of spectral and topological representations, albeit from a small cohort of ten subjects in a single room geometry.
+
+Schematically, let the measured signal be $y(t) = (h_{\mathrm{direct}}*x)(t) + (h_{\mathrm{env}}(u)*x)(t) + \eta(t)$, where $x$ is the emitted signal, $u$ is the identity-bearing subject, $h_{\mathrm{direct}}$ represents direct and early propagation, $h_{\mathrm{env}}(u)$ represents delayed subject-environment interactions, and $\eta$ is measurement noise. A conventional preprocessing operator suppresses the delayed component, $P_{\mathrm{clean}}y \approx h_{\mathrm{direct}}*x$, producing a cleaner signal that carries less information about $u$; selecting the secondary-echo interval instead yields $P_{\mathrm{echo}}y \approx h_{\mathrm{env}}(u)*x + \eta$, which can preserve exactly the distinction the cleaning operation removes.
+
+The example parallels the role of momentum in EF directly. Kinetic energy is an error source for CE because CE's readout architecture admits only metastable position; EF redesigns the protocol so that directed motion itself becomes an information-bearing resource. Multipath propagation is noise for an architecture seeking an undistorted direct signal but becomes evidence for an architecture designed to read environmentally mediated echoes. Neither momentum nor echo is intrinsically signal or noise; its status depends on whether the receiving transformation preserves a useful dependence on the originating distinction. This suggests an information-relative definition of relevance: for a candidate carrier $C$ and target distinction $X$, define $\mathcal R(C;X)=I(C;X)$, or, when only future action matters, $\mathcal R_F(C;X) = I\bigl(F(C);X\bigr)$. A component is disposable only when removing it leaves the relevant continuation unchanged, which is the conditional-independence claim $X\perp C\mid P_{\mathrm{kept}}(Z)$. When this claim fails, what looks like denoising is a form of irreversible quotienting: it identifies states whose discarded components still carried different admissible futures.
+
+\subsection{Robustness as the thickness of an admissible tube}
+
+The admissible capture interval $\mathcal T_{\mathrm{adm}}$ introduced above describes tolerance along one dimension of the protocol, timing. A more general robustness measure treats successful operation as occupying a tube of finite thickness around a nominal trajectory in the combined space of physical states and control schedules, which makes it possible to distinguish a protocol that succeeds only at one precisely tuned point from one that continues to succeed under bounded perturbation.
+
+Let $\gamma^\ast(t) = (z^\ast(t),\lambda^\ast(t))$ denote a nominal successful trajectory, and let $d$ be a metric on the combined state-control space. The radius-$r$ tube around $\gamma^\ast$ is
+
+\[
+\mathcal N_r(\gamma^\ast) = \Bigl\{\gamma : \sup_{t\in[t_0,t_f]} d\bigl(\gamma(t),\gamma^\ast(t)\bigr) \le r\Bigr\},
+\]
+
+and, given a tolerated logical error $\varepsilon$, the admissible robustness radius is
+
+\[
+r_{\mathrm{adm}}(\varepsilon) = \sup\Bigl\{r : \inf_{\gamma\in\mathcal N_r(\gamma^\ast)} \Pr\bigl(Y=F(X)\mid\gamma\bigr) \ge 1-\varepsilon\Bigr\}.
+\]
+
+A large $r_{\mathrm{adm}}$ means fabrication error, thermal perturbation, timing jitter, and waveform distortion can vary substantially without breaking the logical map; a small $r_{\mathrm{adm}}$ means the reported operation is correct but structurally thin, its admissible continuation confined to a narrow neighborhood of the nominal protocol.
+
+This gives a natural reading of the paper's own finding that a coordinate displacement of only a few percent can shift an inferred escape rate by as much as nine orders of magnitude: the map from physical parameters to reliability is nowhere near uniformly well conditioned. If $\theta$ is a fabrication or control parameter and $\varepsilon(\theta)$ the resulting logical error rate, a local condition number
+
+\[
+\kappa_\varepsilon(\theta) = \left|\frac{\theta}{\varepsilon(\theta)}\frac{d\varepsilon}{d\theta}\right|
+\]
+
+captures how much relative uncertainty in the physical parameter is amplified into relative uncertainty in the predicted error. A large $\kappa_\varepsilon$ means that reporting an intended barrier height without its associated condition number can conceal exactly the practical fragility the paper's own escape-rate analysis uncovers.
+
+The same question should be asked of EF, and the paper's low simulated error rate does not by itself answer it. EF may achieve an exceptionally low error at its nominal operating point while remaining highly sensitive to timing or waveform perturbations of its own, distinct from CE's sensitivity to barrier-height displacement. A decisive comparison would hold a perturbation class fixed and measure $\varepsilon_{\mathrm{CE}}(\delta)$ against $\varepsilon_{\mathrm{EF}}(\delta)$ over perturbations $\delta$ drawn from the same experimentally motivated distribution, asking not only which protocol has the lower error at $\delta=0$ but which maintains an admissible error over the larger region $\mu(\{\delta : \varepsilon(\delta)\le\varepsilon_{\max}\})$, where $\mu$ is a measure over fabrication and control uncertainty. An admissible state, on this reading, is not a point satisfying a collection of exact equalities but a region of finite thickness within which continuation remains recoverable; engineering maturity consists partly in thickening that region, and EF's contribution so far is to enlarge the space of protocols worth thickening, not yet a demonstration that its own successful trajectories occupy a wide corridor through that space rather than a narrow path.
+
+\subsection{Failure as the merger of future distributions}
+
+The distinction between representational overlap and genuine erasure supports a correspondingly more exact account of what counts as failure. A trajectory has not failed merely because it crosses a positional boundary, leaves a local equilibrium, or becomes momentarily difficult to classify by position. It fails only when its conditional distribution over admissible futures ceases to remain sufficiently concentrated on the designated output.
+
+For an initial logical state $x$ with intended output $F(x)$, define the trajectory-relative recovery probability $\rho_t(z;x) = K\bigl(F(x)\mid z,t\bigr)$, and say an intermediate state remains admissible for input $x$ at tolerance $\varepsilon$ whenever $\rho_t(z;x)\ge1-\varepsilon$. This defines a time-dependent admissible region
+
+\[
+\mathcal B_x^\varepsilon(t) = \bigl\{z : K(F(x)\mid z,t)\ge 1-\varepsilon\bigr\}.
+\]
+
+Unlike a metastable well, $\mathcal B_x^\varepsilon(t)$ need not be localized in position at all; during the EF flip it can form an elongated region in phase space organized around a bundle of correctly oriented trajectories. The storage population is free to leave its original positional basin without leaving $\mathcal B_x^\varepsilon(t)$. What looks, to a position-only observer, like a boundary violation is, under this future-indexed criterion, continued membership in a basin of recoverability that is simply moving rather than fixed.
+
+A logical error occurs precisely when stochastic evolution carries a trajectory outside this region, $Z_t\notin\mathcal B_x^\varepsilon(t)$, and the formulation distinguishes three mechanisms that share a single Boolean symptom but call for different remedies. A trajectory may suffer a capture failure, retaining the correct orientation throughout but missing the target basin at the moment the barrier rises. It may suffer a continuation merger, in which accumulated noise makes its future-output kernel indistinguishable from that of a competing logical state well before the barrier is restored. Or it may suffer a readout failure, in which the underlying phase-space continuation in fact remains distinct but the terminal coarse-grained measurement assigns it the wrong label. The distinction between the second of these and ordinary representational migration can be stated with the pairwise continuation distance already introduced,
+
+\[
+D_{x,x'}(t) = \frac12\sum_y \bigl|P(Y=y\mid X=x,Z_t) - P(Y=y\mid X=x',Z_t)\bigr|.
+\]
+
+Representational migration occurs when positional separation becomes small while $D_{x,x'}(t)$ remains large; genuine erasure occurs when both go to zero together, $D_q(t)\to0$ and $D_{x,x'}(t)\to0$. In the latter case the distinction is unavailable not merely to whatever observer is currently watching but to the future protocol itself, which is the criterion this essay has used throughout to separate the two words.
+
+The inadequacy of a single endpoint metric for settling this question is not peculiar to superconducting logic. Recent benchmarks of protein-ligand cofolding models find that geometric success of a predicted ligand pose does not correlate strongly with recovery of the correct kinase conformational state, while repeated inferences from the same model exhibit severe mode collapse and little diversity in the induced-fit motions they generate \cite{SunHeadGordon2026}. A prediction can therefore succeed under the projection "ligand located plausibly in the binding site" while failing under the richer criterion "joint complex occupies the appropriate induced conformational state." The methodological lesson transfers directly: terminal agreement in one observable, whether a coarse-grained flux well or a docked ligand geometry, does not by itself establish preservation of the state distinctions on which later composition or biological response actually depends.
+
+This also indicates what an experimental confirmation of the whole picture would actually need to show. Final truth-table accuracy is necessary but cannot reveal when during the protocol a distinction became fragile or which variable was carrying it at the time. What would be needed instead is a time-resolved measurement, or a validated dynamical reconstruction, of the evolving phase-space distributions and their conditional arrival probabilities. The strongest such demonstration would show, within a single run, that the storage pair's positional distributions substantially overlap, that their momentum distributions remain separable throughout the same interval, and that their conditional final-output distributions remain concentrated on different target wells despite the positional overlap. An experiment meeting all three conditions at once would establish more than correct NAND behavior; it would directly observe the difference between disappearing from a projection and disappearing from the dynamics, turning the interpretive claim of this essay into a measured physical fact.
+
+\subsection{The general continuation principle}
+
+The preceding subsections can be summarized in a single criterion, stated generally enough to apply beyond this device. Let $X$ be an initial distinction, $Z_t$ the evolving physical state carrying it, and $Y$ the eventual admitted output. A distinction continues through an intermediate time $t$ whenever the evolving state retains a recoverable dependence on $X$ under the remaining dynamics, even if that dependence is invisible in whichever representation happens to be privileged at $t$:
+
+\begin{principle}
+A distinction continues through time $t$ whenever the future evolution of $Z_t$ retains an admissible, recoverable dependence on the history that produced $X$, even if that dependence has vanished from the currently privileged representation of $Z_t$.
+\end{principle}
+
+The principle as stated is silent on what admission should do when the continuation kernel fails to warrant a unique output. It need not be forced into a singleton. For a tolerated error level $\alpha$, a set-valued admission rule can instead be defined as
+
+\[
+\mathcal Y_\alpha(z) = \bigl\{y : p_y(z)>\alpha\bigr\},
+\]
+
+where $p_y(z)$ is a calibrated measure of support for continuation into output $y$ \cite{FuEtAl2026}. A singleton set licenses definite classification; a larger set preserves unresolved alternatives rather than forcing a premature choice among them; an empty set indicates that the state falls outside the calibrated admission rule altogether. This distinguishes uncertainty-preserving admission from premature many-to-one collapse, a distinction the CQFP itself elides by design: its final wells are built to make $\mathcal Y_\alpha(z)$ a singleton at $t_f$, but during the interior of the protocol, particularly near the midpoint of an EF flip, a set-valued description would more faithfully represent what the available evidence actually warrants than a forced coarse-grained label would.
+
+The CQFP is a clean physical example of this principle because it cleanly separates three notions ordinarily run together: present observability (whether the current representation happens to be injective), physical distinguishability (whether the full state is in fact different), and future recoverability (whether a specified later procedure will, in fact, tell the difference). Position temporarily loses the first of these for the storage pair at the midpoint of an EF cycle. The full phase space never loses the second. And the completed protocol is, precisely, a demonstration of the third: a warranted claim, checkable against the paper's own simulated error rates, that recoverability was never actually in doubt, only temporarily inconvenient to observe.
+
+\part*{Part III. Objections, Falsifiability, and Formal Propositions}
+
+The formal apparatus built in Part II gives the essay's claims a precise enough shape that they can be attacked precisely, and a thesis worth defending should be able to say what would refute it. This part takes up seven objections a careful reader might raise, states what a physical implementation would need to show to falsify the central mechanism or its architectural extension, and restates the essay's main formal claims as explicit propositions with stated conditions rather than as prose asides.
+
+\section{Objections and responses}
+
+\subsection{Momentum is only position read early}
+
+A critic might note that momentum is, mathematically, nothing more than the derivative of position, $\dot q(t) = \lim_{\epsilon\to0}[q(t+\epsilon)-q(t)]/\epsilon$, and conclude that momentum-based computing is secretly position-based computing with a shorter memory rather than a genuinely different carrier. The relevant difference is not that EF performs an explicit momentum measurement at the midpoint; it does not. The difference is that the state needed to predict subsequent evolution under underdamped dynamics is $(q,p)$ rather than $q$ alone. Two ensembles can have nearly identical positional marginals while possessing different conditional transition probabilities, because their momentum marginals differ, and that difference is available to the dynamics even though nothing in the protocol reads it out directly. Writing $\mu_t^{01}$ and $\mu_t^{11}$ for the two phase-space ensembles generated by the storage inputs, the operative claim at $t_\ast$ is that
+
+\[
+D_{\mathrm{TV}}\bigl((\pi_q)_\#\mu_{t_\ast}^{01},\,(\pi_q)_\#\mu_{t_\ast}^{11}\bigr) \approx 0,
+\]
+
+while $D_{\mathrm{TV}}\bigl(\mu_{t_\ast}^{01},\mu_{t_\ast}^{11}\bigr)>0$ and, more specifically, $D_{\mathrm{TV}}\bigl((\pi_p)_\#\mu_{t_\ast}^{01},\,(\pi_p)_\#\mu_{t_\ast}^{11}\bigr)>0$. Momentum is therefore not position observed more quickly; it is part of the instantaneous state required by the underdamped dynamics to determine what happens next, even though the protocol later converts its effect into a positional output rather than measuring it directly along the way.
+
+\subsection{Simulated error is not measured error}
+
+A skeptical experimentalist might point out that the paper's reported error rates come from numerically integrating a stochastic differential equation under idealized assumptions, and that real hardware would add fabrication disorder, calibration drift, non-white noise, crosstalk, and finite measurement bandwidth, none of which the simulation includes. This is correct and should be stated rather than argued around. It is useful to distinguish three error regimes: a simulated error $\varepsilon_{\mathrm{sim}}$, computed under the model's ideal assumptions; a physical device error $\varepsilon_{\mathrm{phys}}$, measured on fabricated hardware; and an architectural error $\varepsilon_{\mathrm{arch}}$, incurred once multiple gates are composed and interface terms are included. The paper establishes $\varepsilon_{\mathrm{sim}}^{\mathrm{EF}}\ll\varepsilon_{\mathrm{sim}}^{\mathrm{CE}}$, which is a genuine result within the model, but it does not by itself establish $\varepsilon_{\mathrm{phys}}^{\mathrm{EF}}\ll\varepsilon_{\mathrm{phys}}^{\mathrm{CE}}$, still less that the ordering survives once the interface terms of Part I's architectural discussion are included. A rigorous comparison would parameterize a perturbation vector $\delta=(\delta_{\mathrm{fab}},\delta_{\mathrm{temp}},\delta_{\mathrm{timing}},\delta_{\mathrm{noise}},\ldots)$, evaluate the error surfaces $\varepsilon_{\mathrm{CE}}(\delta)$ and $\varepsilon_{\mathrm{EF}}(\delta)$ over the support of physically plausible uncertainty, and ask whether $\mathbb E[\varepsilon_{\mathrm{EF}}(\delta)] < \mathbb E[\varepsilon_{\mathrm{CE}}(\delta)]$ holds over that support. The paper establishes the ordering over its tested nominal parameter settings with the modeled thermal noise already included; it does not establish that the ordering persists under unmodeled fabrication variation, colored noise, calibration drift, waveform distortion, or readout error.
+
+\subsection{A tighter timing window may be no more robust}
+
+The paper's own CE analysis shows that a few percent displacement in a control parameter can shift an escape rate by nine orders of magnitude, and a critic might reasonably worry that EF trades this particular sensitivity for an even tighter timing requirement, making it less robust rather than more. This is exactly the right objection, and it is the reason the essay introduced a condition number $\kappa_\varepsilon(\theta)$ for CE's barrier-height sensitivity; the same quantity should, in principle, be computed for EF's sensitivity to timing jitter and waveform distortion, and the paper does not provide it. A rigorous comparison would fix a perturbation class $\mathcal P$, such as uniform timing jitter $\tau\in[-\Delta t,\Delta t]$ or barrier-height uncertainty $\Delta U\in[-\Delta E,\Delta E]$, and compute the worst-case sensitivity magnitude
+\[
+S_P(\mathcal P) = \sup_{\delta\in\mathcal P}\bigl\|\nabla_\delta\log\varepsilon_P(\delta)\bigr\|, \qquad P\in\{\mathrm{CE},\mathrm{EF}\},
+\]
+for each protocol over that class; whichever value is larger identifies the more fragile protocol for that class of perturbation. A worst-case magnitude is preferable to a signed directional derivative here, since a protocol can be highly sensitive to a perturbation in either direction and a signed quantity could mask that by cancellation or sign convention. The paper does not provide $S_{\mathrm{EF}}(\mathcal P)$ for any perturbation class; it provides only the ingredients for $S_{\mathrm{CE}}(\mathcal P)$, implicitly, through the nine-order-of-magnitude escape-rate finding. Absent the comparison, the claim that EF is more robust should be read as qualified: EF is more robust at its nominal operating point, under the model's stated assumptions, not robust in some perturbation-independent sense.
+
+\subsection{The Landauer bound assumes uniform inputs}
+
+The $0.347\,k_BT$ bound derived earlier assumes the four two-bit inputs are equally likely, and a critic might object that NAND gates in composed circuits need not receive uniform or independent inputs, so the general distribution-dependent result should be stated explicitly rather than left as a special case. Let $p_{xy}=P(X=x,Y=y)$. For the partial NAND map $F(x,y)=\bigl(\operatorname{NAND}(x,y),y\bigr)$, the output distribution is
+
+\[
+P(10)=p_{00}+p_{10}, \qquad P(11)=p_{01}, \qquad P(01)=p_{11}.
+\]
+
+The logical entropy reduction is therefore
+
+\[
+\begin{aligned}
+\Delta H &= H(X,Y) - H(F(X,Y)) \\
+&= H(p_{00},p_{10},p_{01},p_{11}) - H(p_{00}+p_{10},\,p_{01},\,p_{11}) \\
+&= (p_{00}+p_{10})\,H_{\mathrm{bin}}\!\left(\frac{p_{10}}{p_{00}+p_{10}}\right) \\
+&= P(Y=0)\,H(X\mid Y=0).
+\end{aligned}
+\]
+
+This expression localizes the lost information exactly. When $Y=1$, the output distinguishes $X=0$ from $X=1$, since $01\mapsto11$ and $11\mapsto01$ are distinct; when $Y=0$, both values of $X$ produce the same output, since $00\mapsto10$ and $10\mapsto10$ coincide. Only uncertainty about $X$ conditional on $Y=0$ is erased, and nothing conditional on $Y=1$ is. Under uniform independent inputs, $P(Y=0)=\tfrac12$ and $H(X\mid Y=0)=1$, giving $\Delta H=\tfrac12$ bit and
+
+\[
+W_{\min} = \tfrac12 k_BT\ln2 \approx 0.347\,k_BT,
+\]
+
+recovering the figure derived earlier. The reported value is therefore the uniform-input specialization of
+
+\[
+W_{\min} = k_BT\ln2\cdot P(Y=0)\,H(X\mid Y=0),
+\]
+
+under the paper's own assumptions of equal local free energies and cyclic restoration of the physical potential. It is not, in general, proportional to the mutual information $I(X;Y)$ between the two input bits, since the erasure here is asymmetric in $X$ and $Y$: only the conditional uncertainty in $X$ given $Y=0$ is destroyed, not the joint dependence between the two variables as a whole.
+
+\subsection{Quantum measurement back-action}
+
+A quantum-aware reader might note that the CQFP is assembled from Josephson-junction elements whose microscopic description is quantum, while the operating regime studied in the paper is explicitly classical and modeled by underdamped Langevin dynamics. The relevant objection is therefore not that the authors overlooked measurement back-action within their stated model, but that quantum corrections might become important outside the parameter regime in which the classical approximation holds. This concerns a genuine limit of the semiclassical treatment rather than a flaw in the argument as given, because the protocol as described never measures momentum at the midpoint; it uses momentum as a carrier during the interval and only measures position at the end, which is a different act from projectively measuring the momentum itself. In a fully quantum description, the phase-space distribution $z=(q,p)$ becomes a Wigner function $W(q,p)$, and a rigorous quantum treatment would need to show that the function's support remains separated along the momentum direction during the flip without requiring an intervening projective measurement. The underdamped Langevin model implicitly assumes the flux degree of freedom is sufficiently macroscopic and classical for this separation to survive undisturbed; that assumption is testable in principle by comparing the semiclassical error-rate prediction against a full Lindblad master-equation simulation of the same device across a range of the relevant quantum parameter, such as the ratio of Josephson to charging energy, and reporting the discrepancy as a function of temperature relative to the quantum crossover scale. A systematic discrepancy between the classical Langevin prediction and a validated quantum open-system treatment, or between the classical prediction and experiment as the device approaches the quantum crossover, would identify the boundary beyond which the present phase-space account ceases to be quantitatively adequate.
+
+\subsection{Erasure versus migration is a labeling convention}
+
+A further objection holds that the split between the erasure pair $\{00,10\}$ and the storage pair $\{01,11\}$ is a matter of how the NAND truth table happens to be labeled, and that a different logical convention could just as well call a different pair the storage pair, making the erasure-versus-migration distinction a fact about notation rather than about the device. The premise is correct and the conclusion does not follow. Logical labeling is indeed conventional: the device's dynamics are fixed, and different conventions permute which wells are called which. What is not conventional is that, for whichever labeling is chosen, some pair is bijectively exchanged while some other pair is many-to-one collapsed, since this is a fact about the preimage structure of the map being computed rather than about its names. Define the degree of a logical map $F:\mathcal X\to\mathcal Y$ as $d(F)=\max_{y\in\mathcal Y}|F^{-1}(y)|$ and its compression ratio as $r(F)=|\mathcal X|/|\mathcal Y|$; for the NAND map, $d(F)=2$ and $r(F)=4/3$, since two of the four inputs collapse onto one output while the remaining two map bijectively onto two distinct outputs. Any two-input, one-output Boolean function necessarily identifies at least two inputs, although a physically embedded extension retaining additional output coordinates may preserve some distinctions that the selected Boolean output discards, and may or may not have a bijectively preserved remainder; EF's contribution is to show that a single closed control loop can implement both parts of this structure simultaneously, routing the collapse and the bijection through different physical mechanisms. The erasure-versus-migration distinction tracks the map's preimage multiplicity, a mathematical property of the function computed, and is invariant under whatever labeling convention is used to name the wells.
+
+\subsection{The storage-pair exchange is only a reversible permutation}
+
+A critic might grant the preimage-multiplicity argument but object that the storage-subspace transformation is merely a two-state permutation and is therefore logically reversible by definition, so calling it a migration of a distinction's carrier might seem to redescribe an elementary reversible operation in unnecessarily elaborate language. The objection is correct about the abstract map. Restricted to $\Omega_S=\{01,11\}$, EF implements the transposition $01\leftrightarrow11$, which is simply the nonidentity element of the permutation group $S_2$. It is worth being precise here that this is not a SWAP gate in the conventional two-wire sense, $(x,y)\mapsto(y,x)$, which would send $01\mapsto10$ and $10\mapsto01$; it is a reversible exchange of the two states within the storage sector alone, conditional on the second input bit being $1$.
+
+What matters is not the novelty of the abstract permutation but its physical realization. A permutation implemented by merely relabeling two fixed wells and a permutation implemented by transporting two physical populations through a region in which their positional marginals overlap are logically equivalent but physically different; the latter requires a non-positional variable to preserve their separability during the interval in which position no longer does so. The paper's distinctive result is therefore not that a reversible two-state permutation exists. It is that this permutation can be physically implemented through momentum-mediated transport while the same control cycle performs a many-to-one collapse on a complementary logical sector. The abstract permutation is familiar; the simultaneous physical embedding of reversible transport and irreversible identification, without the two interfering, is the result that requires explanation, and is exactly the constraint-intersection problem CE could not solve.
+
+\section{Falsifiability}
+
+A thesis built this precisely should be stated so that specific observations could refute it, not merely fail to confirm it. Two classes of observation would do so: those that would refute the core mechanism, and those that would refute its extension to a scalable architecture.
+
+\subsection{What would refute the mechanism}
+
+The paper makes two separable claims: a mechanistic claim that momentum preserves the storage-pair distinction during positional overlap, and a comparative claim that the resulting EF protocol occupies a better speed-work-error operating region than the tested CE protocols. An experiment could refute either claim without necessarily refuting the other, and the two kinds of refutation are treated separately below.
+
+The comparative claim would fail if experimentally measured CE operating points weakly dominated EF over the relevant range: that is, if for every tested EF configuration there existed a CE configuration with no greater work, no longer duration, and no larger error,
+\[
+W_{\mathrm{CE}} \le W_{\mathrm{EF}}, \qquad \tau_{\mathrm{CE}} \le \tau_{\mathrm{EF}}, \qquad \varepsilon_{\mathrm{CE}} \le \varepsilon_{\mathrm{EF}},
+\]
+with at least one strict inequality. Comparing Pareto frontiers this way is more informative than demanding an exact simultaneous match of work and speed, since it asks whether CE has any way at all to match or beat EF's tradeoff, not merely whether it happens to do so at one arbitrarily chosen operating point; failure of the reported EF advantage to survive contact with fabrication tolerance and control noise would show up as CE's frontier moving to dominate EF's once physical, rather than simulated, operating points are measured.
+
+The mechanistic claim is a separate and more specific matter, and admits its own, more mechanistic refutation: a demonstration that momentum itself relaxes too quickly to serve as a carrier. If the momentum correlation time $\tau_p$ induced by coupling to the environment is much shorter than the flip duration $\tau_{\mathrm{flip}}\approx\pi/\omega$, the momentum distinction would thermalize before the barrier could be restored, and a measurement establishing $\tau_p\ll\tau_{\mathrm{flip}}$ in the operating regime where CE remains competitive would undercut the mechanism directly, independently of whatever the comparative work-error tradeoff turns out to be. The most decisive refutation of the mechanism available in principle would be a direct time-resolved reconstruction of the phase-space distributions themselves. The decisive quantity is not a raw momentum separation compared against a threshold multiple of the thermal spread, since failure to reach any fixed multiple of a standard deviation does not by itself imply indistinguishability unless the momentum distributions are approximately Gaussian with comparable covariance; the decisive quantity is instead the Bayes-optimal classification error, equivalently the total-variation distance between the two momentum marginals themselves. If
+\[
+D_{\mathrm{TV}}\bigl((\pi_p)_\#\mu_{t_\ast}^{01},\,(\pi_p)_\#\mu_{t_\ast}^{11}\bigr) \approx 0,
+\]
+then momentum does not distinguish the populations at the moment the mechanism requires it to, regardless of how the raw variance of each marginal compares to the thermal scale. This criterion is deliberately demanding: it requires reconstructing the full momentum distributions, not merely their first moments, since a separation in means alone can be misleading when the two distributions substantially overlap; the total-variation distance between the complete marginals is the correct measure of distinguishability, and nothing weaker is offered here as a substitute. The same reconstruction showing the continuation distance $D_{\mathrm{cont}}(z_{01}(t_\ast),z_{11}(t_\ast))$ already below its tolerated floor at the midpoint would show that whatever recovery is observed at $t_f$ cannot be attributed to the mechanism this essay has described.
+
+\subsection{What would refute the architecture}
+
+Refuting the mechanism at the gate level would not by itself refute the weaker architectural claims of Part I, and those claims admit their own falsification conditions. If a cascaded EF architecture required an interface cost $\sum_n \langle W(G_n^{\mathrm{EF}})\rangle$ that grew faster, relative to the per-gate savings $N(\langle W(F_{\mathrm{CE}})\rangle - \langle W(F_{\mathrm{EF}})\rangle)$, than the corresponding CE interface cost, the composed advantage would disappear even if the isolated gate comparison still favored EF; concretely, the architecture is superior only while
+
+\[
+\sum_{n=1}^{N-1}\langle W(G_n^{\mathrm{EF}})\rangle \;<\; \sum_{n=1}^{N-1}\langle W(G_n^{\mathrm{CE}})\rangle \;+\; N\bigl(\langle W(F_{\mathrm{CE}})\rangle - \langle W(F_{\mathrm{EF}})\rangle\bigr),
+\]
+
+and a measurement of interface costs an order of magnitude larger for EF than for CE would refute the scalability claim without touching the single-gate result. A separate refutation of the work-error tradeoff itself would be a demonstration that some position-only protocol, tuned with feedback control the paper does not consider, achieves lower error at lower work than EF's reported configuration; this would show that the constraint-intersection problem diagnosed for CE is solvable by better engineering within the position-only paradigm rather than structural to it, without requiring momentum as a resource at all.
+
+\section{Formal propositions}
+
+The claims argued in prose through Part II can be restated as explicit propositions, each with a stated condition rather than left as an unqualified assertion. Doing so is not a change of content; it is a statement of exactly what would need to hold, and exactly what a future measurement would need to check.
+
+\begin{proposition}[Recovery criterion]
+Let $\mu_t^x=P(Z_t\in\cdot\mid X=x)$ and $\mu_t^{x'}=P(Z_t\in\cdot\mid X=x')$ be the intermediate state distributions associated with two inputs whose designated outputs are different, and let $K_{t_f,t}$ be the remaining stochastic channel from $Z_t$ to the final readout $Y$. If the two final class-conditional error rates are $\varepsilon_x$ and $\varepsilon_{x'}$, then
+\[
+D_{\mathrm{TV}}(\mu_t^x,\mu_t^{x'}) \ge D_{\mathrm{TV}}\bigl(\mu_t^xK_{t_f,t},\,\mu_t^{x'}K_{t_f,t}\bigr) \ge 1-\varepsilon_x-\varepsilon_{x'}.
+\]
+\end{proposition}
+
+The first inequality is the data-processing inequality applied to the channel $K_{t_f,t}$; the second follows from the triangle inequality once the two designated outputs are distinct, since a small total-variation distance between the resulting output distributions would then be incompatible with both class-conditional errors being small. Reliable final recovery therefore requires the intermediate ensembles to remain distinguishable in the full physical state space, even though their marginals under a particular projection, such as position alone, may coincide; this is a genuine consequence of data processing and the error bound, not a restatement of the informal claim it replaces, and it holds independently of how the two stochastic processes happen to be coupled.
+
+\begin{proposition}[Carrier transformation]
+Let $\mu_t^{01}$ and $\mu_t^{11}$ be the phase-space distributions generated by the two storage inputs, and let $(\pi_q)_\#$ and $(\pi_p)_\#$ denote the positional and momentum marginals. A momentum-mediated carrier transformation occurs over an interval containing $t_\ast$ when
+\[
+D_{\mathrm{TV}}\bigl((\pi_q)_\#\mu_{t_\ast}^{01},\,(\pi_q)_\#\mu_{t_\ast}^{11}\bigr) \approx 0, \qquad D_{\mathrm{TV}}\bigl((\pi_p)_\#\mu_{t_\ast}^{01},\,(\pi_p)_\#\mu_{t_\ast}^{11}\bigr) > 0,
+\]
+and the final output distributions satisfy $D_{\mathrm{TV}}\bigl(P(Y\mid01),P(Y\mid11)\bigr) \ge 1-\varepsilon_{01}-\varepsilon_{11}$.
+\end{proposition}
+
+Stating the proposition over pushforward measures rather than over representative microstates keeps the ensemble-level claim distinct from any claim about individual trajectories, and keeps the positional and momentum comparisons in the same units throughout. Establishing this proposition experimentally requires a time-resolved phase-space reconstruction of the two marginals at $t_\ast$; final truth-table accuracy alone establishes only the last inequality, which is the recovery criterion above applied to this specific pair of inputs, and says nothing by itself about which coordinate carried the distinction through the interior of the protocol.
+
+\begin{proposition}[Selective irreversibility]
+The map $F_{\mathrm{EF}}$ satisfies: $F_{\mathrm{EF}}\vert_{\Omega_E}$ is many-to-one, with $F_{\mathrm{EF}}(00)=F_{\mathrm{EF}}(10)=10$; $F_{\mathrm{EF}}\vert_{\Omega_S}$ is bijective, with $F_{\mathrm{EF}}(01)=11$ and $F_{\mathrm{EF}}(11)=01$; and the minimum work $W_{\min}=k_BT\ln2\cdot\Delta H$ depends only on the many-to-one part, where $\Delta H = P(Y=0)H(X\mid Y=0)$ as derived above.
+\end{proposition}
+
+An immediate consequence, not otherwise obvious from the paper's own presentation, is that a hypothetical protocol bijectively exchanging all four wells rather than only two would have a zero logical Landauer lower bound under equal initial and final local free energies, regardless of how far the populations travel; its actual finite-time work could nevertheless remain positive.
+
+\begin{proposition}[Logical lower bound]
+Under the equal-local-free-energy and cyclic-restoration assumptions used in the CQFP analysis, every physical implementation of the same logical map satisfies $\langle W_{\mathrm{device}}\rangle \ge k_BT\ln2\,\bigl[H(X,Y)-H(F(X,Y))\bigr]$, which for the partial NAND map becomes $\langle W_{\mathrm{device}}\rangle \ge k_BT\ln2\cdot P(Y=0)\,H(X\mid Y=0)$.
+\end{proposition}
+
+This is the general, distribution-dependent Landauer bound derived below, restated as an inequality on the actual device-level work rather than on the logical minimum alone. It is deliberately weaker than a finite-time scaling law: near-quasistatic driving more commonly yields excess-work results scaling as $1/\tau$ under specified linear-response conditions, while inertial or underdamped protocols can show other scalings depending on the dissipation tensor and control family, so no universal $\alpha\tau^{-2}$ bound on $W_{\mathrm{excess}}$ is established by the analysis in this essay; any such finite-time bound requires additional assumptions about the dynamics, the admissible control family, and the protocol duration that the present argument does not supply.
+
+\begin{proposition}[Local timing sensitivity]
+Suppose the error function $\varepsilon(t_r)$ is twice continuously differentiable near an interior strict minimum $t_{\mathrm{flip}}$, with $\varepsilon'(t_{\mathrm{flip}})=0$ and $\varepsilon''(t_{\mathrm{flip}})>0$. Then, locally,
+\[
+\varepsilon(t_r) = \varepsilon_{\min} + \tfrac12\varepsilon''(t_{\mathrm{flip}})(t_r-t_{\mathrm{flip}})^2 + o\bigl((t_r-t_{\mathrm{flip}})^2\bigr).
+\]
+\end{proposition}
+
+Quadratic degradation is therefore a testable local prediction only where the optimum is smooth and nondegenerate; asymmetric capture dynamics, protocol boundaries, or nonsmooth control schedules can violate these conditions, so the proposition is stated as a local expansion rather than as a global bound over the whole admissible window $\mathcal T_{\mathrm{adm}}$.
+
+\section{Conclusion}
+
+The comparison between Controlled Erasure and Erasure-Flip is a small, fully worked physical example of a claim that is otherwise easy to state only abstractly: that continuity of identity across a transformation does not require continuity of representation, only the existence of an apparatus able to reconstruct the earlier distinction from the later state. Part I gave this claim in prose. Part II gave it a coordinate system: a quotient map that explains why position alone can suggest a collapse that has not occurred; a future-indexed continuation relation that replaces the question "where is it now" with the question "what can still be recovered from it"; an explicit reweighting between position and momentum that distinguishes a distinction's carrier changing from a distinction being destroyed; a partitioned map whose preimage multiplicities localize irreversibility to exactly the subspace where the paper's own thermodynamic bound is paid; a constraint-intersection account of why CE's two requirements cannot be jointly satisfied without a structural tradeoff, and of what EF changes instead; a timing window that gives the paper's control-precision requirement its correct, bounded form; and a holonomy reading of the closed control loop that makes the paper's own description of its gate as "hybrid reversible/irreversible logic" into a statement about a single transport operator decomposing over two complementary subspaces of one state.
+
+None of this formal apparatus is required to appreciate the device; the physics stands on its own, and the paper's simulated numbers are convincing without any of the notation introduced here. What the formalism adds is portability. Stated as a claim about flux coordinates and Josephson junctions, the result is a fact about one superconducting circuit. Stated as a claim about quotients, continuation relations, and holonomy, it becomes a template that can be checked against other systems in which a privileged representation temporarily loses injectivity without the underlying dynamics losing anything at all, including the fully reversible primitives, such as the Fredkin and Toffoli gates, that the original paper itself proposes as the natural next test of the same momentum-computing resource \cite{FredkinToffoli1982,Toffoli1980}. The device also earns its own cautionary note, and the formal treatment sharpens rather than removes it. A distinction rescued by migrating its carrier is not thereby made safe; it is made dependent on a narrower, more precisely timed reconstruction procedure than the one it replaced, its recoverability holding only within an explicit admissibility window $\mathcal T_{\mathrm{adm}}$ and degrading outside it according to the resulting capture and escape dynamics. The work decomposition adds a further caution of the same kind: a bijective exchange being free of the irreducible Landauer cost is not the same as its being free of cost, and nothing in the device licenses treating $W_{\mathrm{excess}}$ or $W_{\mathrm{controller}}^{\mathrm{overhead}}$ as negligible simply because $W_{\min}$ has been accounted for. Momentum-based computing, on this reading, is not a way of escaping the requirement that persistence be actively maintained. It is a demonstration, made precise, of how much more can be preserved, at how much lower a cost, once maintenance is no longer restricted to a single channel.
+
+The device also resists a stronger conclusion it might seem to invite, namely that representation is dispensable and only trajectory matters. Neither position nor momentum carries logical identity intrinsically. Position carries it during ordinary metastable storage only because the surrounding apparatus is built to read wells; momentum carries it during the flip only because the controlled potential is arranged, for a bounded interval, to transport and recapture oppositely directed populations. What remains invariant across the cycle is not a privileged coordinate but the existence of some dynamically effective distinction that the remaining protocol can convert into a reliable final readout. Persistence, on this device's evidence, is not a property of trajectories considered apart from the architecture that receives them; it is a property of the pairing between the two.
+
+A related distinction appears at a much larger scale in recent work on directed cortical signal flow. Oh and colleagues report that the functional hierarchy of the human cortex is not fixed by anatomy alone: it becomes flatter during externally oriented processing and steeper during internally focused states \cite{OhEtAl2026}. The result does not identify neural hierarchy with the CQFP's momentum dynamics, but it supports the same architectural point at a different scale. A persistent substrate can admit different effective orders because hierarchy is partly a property of directed flow through the substrate rather than a static ordering of its locations. Just as the logical role of a CQFP coordinate changes with the phase of its control cycle, the functional role of a cortical region depends partly on the state-dependent pathways through which its signals are presently received.
+
+Part III exists because none of the preceding claims are worth much if they cannot be checked. Restating the reweighting argument, the erasure-migration distinction, and the timing constraint as explicit propositions with stated conditions does not add content beyond what Parts I and II already argue; it converts that content into a form a future experiment could confirm or refute, and states plainly, through the falsifiability conditions, what such an experiment would need to show in either direction. Each of these claims is falsifiable in the ordinary sense, and the mechanistic and comparative claims fail independently of one another. A future experiment that found CE's measured Pareto frontier weakly dominating EF's across the tested operating range, or that reconstructed the storage pair's momentum marginals at $t_\ast$ and found $D_{\mathrm{TV}}\bigl((\pi_p)_\#\mu_{t_\ast}^{01},(\pi_p)_\#\mu_{t_\ast}^{11}\bigr)\approx0$, or that showed the interface-cost inequality of Part III reversing the composed architectural advantage, would refute the comparative claim, the mechanism, or its architectural extension, respectively, exactly as stated here. The absence of such a refutation so far is not proof; it is evidence that the thesis has earned the same scrutiny the paper's own result gives to metastable computing, and no more than that. A thesis this specific about how a distinction persists deserves nothing less than an equally specific account of what its failure would look like.
+
+\begin{thebibliography}{99}
+
+\bibitem{TangRayCrutchfield2026}
+K.~W. Tang, K.~J. Ray, and J.~P. Crutchfield,
+``Momentum-driven reversible logic accelerates efficient irreversible
+universal computation,''
+\emph{npj Unconventional Computing}, vol.~3, article 48, 2026.
+\href{https://doi.org/10.1038/s44335-026-00095-z}
+{doi:10.1038/s44335-026-00095-z}.
+
+\bibitem{RayBoydWimsattCrutchfield2021}
+K.~J. Ray, A.~B. Boyd, G.~W. Wimsatt, and J.~P. Crutchfield,
+``Non-Markovian momentum computing: Thermodynamically efficient and
+computation universal,''
+\emph{Physical Review Research}, vol.~3, article 023164, 2021.
+\href{https://doi.org/10.1103/PhysRevResearch.3.023164}
+{doi:10.1103/PhysRevResearch.3.023164}.
+
+\bibitem{RayCrutchfield2023}
+K.~J. Ray and J.~P. Crutchfield,
+``Gigahertz sub-Landauer momentum computing,''
+\emph{Physical Review Applied}, vol.~19, article 014049, 2023.
+\href{https://doi.org/10.1103/PhysRevApplied.19.014049}
+{doi:10.1103/PhysRevApplied.19.014049}.
+
+\bibitem{PrattRayCrutchfield2025}
+C.~Z. Pratt, K.~J. Ray, and J.~P. Crutchfield,
+``Controlled erasure as a building block for universal thermodynamically
+robust superconducting computing,''
+\emph{Chaos}, vol.~35, article 043112, 2025.
+\href{https://doi.org/10.1063/5.0254819}
+{doi:10.1063/5.0254819}.
+
+\bibitem{TangRayCrutchfield2025}
+K.~W. Tang, K.~J. Ray, and J.~P. Crutchfield,
+``Nonequilibrium thermodynamics of a superconducting Szilard engine,''
+\emph{New Journal of Physics}, vol.~27, article 043011, 2025.
+\href{https://doi.org/10.1088/1367-2630/adc6bb}
+{doi:10.1088/1367-2630/adc6bb}.
+
+\bibitem{Landauer1961}
+R.~Landauer,
+``Irreversibility and heat generation in the computing process,''
+\emph{IBM Journal of Research and Development}, vol.~5,
+pp.~183--191, 1961.
+\href{https://doi.org/10.1147/rd.53.0183}
+{doi:10.1147/rd.53.0183}.
+
+\bibitem{Likharev1982}
+K.~K. Likharev,
+``Classical and quantum limitations on energy consumption in computation,''
+\emph{International Journal of Theoretical Physics}, vol.~21,
+pp.~311--326, 1982.
+\href{https://doi.org/10.1007/BF01857730}
+{doi:10.1007/BF01857730}.
+
+\bibitem{KalmykovCoffey2012}
+Y.~P. Kalmykov and W.~T. Coffey,
+\emph{The Langevin Equation: With Applications to Stochastic Problems in
+Physics, Chemistry and Electrical Engineering},
+World Scientific Series in Contemporary Chemical Physics, vol.~27.
+Singapore: World Scientific, 2012.
+
+\bibitem{DagoBellon2023}
+S.~Dago and L.~Bellon,
+``Logical and thermodynamical reversibility: Optimized experimental
+implementation of the NOT operation,''
+\emph{Physical Review E}, vol.~108, article L022101, 2023.
+\href{https://doi.org/10.1103/PhysRevE.108.L022101}
+{doi:10.1103/PhysRevE.108.L022101}.
+
+\bibitem{FredkinToffoli1982}
+E.~Fredkin and T.~Toffoli,
+``Conservative logic,''
+\emph{International Journal of Theoretical Physics}, vol.~21,
+pp.~219--253, 1982.
+\href{https://doi.org/10.1007/BF01857727}
+{doi:10.1007/BF01857727}.
+
+\bibitem{Toffoli1980}
+T.~Toffoli,
+``Reversible computing,''
+in \emph{Automata, Languages and Programming},
+J.~W. de Bakker and J. van Leeuwen, eds.,
+Lecture Notes in Computer Science, vol.~85,
+pp.~632--644.
+Berlin: Springer, 1980.
+\href{https://doi.org/10.1007/3-540-10003-2_104}
+{doi:10.1007/3-540-10003-2\_104}.
+
+\bibitem{CoverThomas2006}
+T.~M. Cover and J.~A. Thomas,
+\emph{Elements of Information Theory},
+2nd ed.
+Hoboken, NJ: Wiley-Interscience, 2006.
+
+\bibitem{LewisPapadimitriou1998}
+H.~R. Lewis and C.~H. Papadimitriou,
+\emph{Elements of the Theory of Computation},
+2nd ed.
+Upper Saddle River, NJ: Prentice Hall, 1998.
+
+\bibitem{TakeuchiYamanashiYoshikawa2015}
+N.~Takeuchi, Y.~Yamanashi, and N.~Yoshikawa,
+``Thermodynamic study of energy dissipation in adiabatic
+superconductor logic,''
+\emph{Physical Review Applied}, vol.~4, article 034007, 2015.
+\href{https://doi.org/10.1103/PhysRevApplied.4.034007}
+{doi:10.1103/PhysRevApplied.4.034007}.
+
+\bibitem{WustmannOsborn2020}
+W.~Wustmann and K.~D. Osborn,
+``Reversible fluxon logic: Topological particles allow ballistic gates
+along one-dimensional paths,''
+\emph{Physical Review B}, vol.~101, article 014516, 2020.
+\href{https://doi.org/10.1103/PhysRevB.101.014516}
+{doi:10.1103/PhysRevB.101.014516}.
+
+\bibitem{LiEtAl2026EDL}
+X.-Y.~Li, Y.-C.~Cai, Z.-D.~Meng, et al.,
+``Probing far-from-equilibrium dynamics of electrical double layers,''
+\emph{Nature}, 2026.
+\href{https://doi.org/10.1038/s41586-026-10986-7}
+{doi:10.1038/s41586-026-10986-7}.
+
+\bibitem{GuEtAl2026}
+X.~Gu, R.~Wang, D.~Chen, et al.,
+``Multilayer soil moisture depletion intensifies drought impacts on
+global ecosystems,''
+\emph{Nature Geoscience}, 2026.
+\href{https://doi.org/10.1038/s41561-026-02083-1}
+{doi:10.1038/s41561-026-02083-1}.
+
+\bibitem{OhEtAl2026}
+Y.~Oh, Y.~Ann, J.-J.~Lee, et al.,
+``State-dependent signal flow hierarchy in the human cerebral cortex,''
+\emph{Nature Neuroscience}, 2026.
+\href{https://doi.org/10.1038/s41593-026-02389-8}
+{doi:10.1038/s41593-026-02389-8}.
+
+\bibitem{SunMengNgo2026}
+F.~Sun, Z.~Meng, and H.~C. Ngo,
+``Language as labels for cross dataset generalization in sign language
+translation,''
+\emph{Scientific Reports}, 2026.
+\href{https://doi.org/10.1038/s41598-026-68386-w}
+{doi:10.1038/s41598-026-68386-w}.
+
+\bibitem{GolipourEtAl2026}
+Z.~Golipour, M.~Mozaffarilegha, S.-F.~Yen, C.~\"Ust\"uner, and
+H.~T. Ito,
+``Prefrontal--thalamic goal states organize spatially aligned
+hippocampal maps,''
+\emph{Nature Communications}, 2026.
+\href{https://doi.org/10.1038/s41467-026-77240-6}
+{doi:10.1038/s41467-026-77240-6}.
+
+\bibitem{Olgun2026}
+N.~Olgun,
+``Topological-spectral fusion of secondary acoustic echoes for identity
+recognition in non-line-of-sight environments,''
+\emph{Scientific Reports}, vol.~16, article 27404, 2026.
+\href{https://doi.org/10.1038/s41598-026-68944-2}
+{doi:10.1038/s41598-026-68944-2}.
+
+\bibitem{SunHeadGordon2026}
+K.~Sun and T.~Head-Gordon,
+``A curated benchmark for cofolding models on kinase conformational
+states,''
+\emph{npj Drug Discovery}, 2026.
+\href{https://doi.org/10.1038/s44386-026-00068-z}
+{doi:10.1038/s44386-026-00068-z}.
+
+\bibitem{FuEtAl2026}
+W.~Fu, Y.~Ye, G.~Yang, Y.~Wei, and L.~Zhang,
+``Risk-aware multiple-choice question answering with conformal
+P-values,''
+\emph{Scientific Reports}, vol.~16, article 27227, 2026.
+\href{https://doi.org/10.1038/s41598-026-66677-w}
+{doi:10.1038/s41598-026-66677-w}.
+
+\end{thebibliography}
+
+\end{document}
+

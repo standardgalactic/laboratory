@@ -1,0 +1,1343 @@
+WEBVTT
+
+00:00.000 --> 00:06.440
+Usually when we talk about getting a medical diagnosis, there's this expectation of absolute precision, right?
+
+00:06.520 --> 00:13.060
+Like you go to the doctor, you break your arm, the x-ray shows that jagged white line in the bone, and the doctor just points at it.
+
+00:13.100 --> 00:17.300
+Exactly. They say, there it is. It's an observable, physical thing.
+
+00:17.560 --> 00:21.540
+Right. It is a structural reality. The bone is broken or it is not broken.
+
+00:21.540 --> 00:34.560
+But when you step into the world of artificial intelligence, specifically how these massive language models supposedly, you know, remember or know things, well, that x-ray machine is completely useless.
+
+00:34.820 --> 00:38.540
+Yeah. We are suddenly looking at a diagnostic landscape that is entirely opaque.
+
+00:38.800 --> 00:45.080
+Completely opaque. Because think about it. If an AI gives you the right answer to a factual question on Tuesday, right?
+
+00:45.460 --> 00:51.120
+And then on Wednesday, it completely fabricates an answer to the exact same question, just phrased a little different.
+
+00:51.120 --> 00:52.620
+I mean, what actually happened there?
+
+00:52.860 --> 00:57.220
+Did the data get corrupted? Did the system somehow just forget?
+
+00:57.680 --> 01:05.280
+Yeah, that's the mystery. And today we are going to challenge the very foundational vocabulary we use to talk about AI memory.
+
+01:05.940 --> 01:16.360
+So welcome to the Deep Dive. Whether you are prepping for a big tech meeting or you're just, you know, insanely curious about how these artificial brains actually work, we've got something fascinating for you.
+
+01:16.360 --> 01:20.980
+We really do. We are looking at this incredibly dense, independent research paper by Flyxion.
+
+01:21.420 --> 01:28.160
+It's titled Access Before Storage, a continuation ontology reading of parametric factuality.
+
+01:28.280 --> 01:30.040
+A very academic title, I know.
+
+01:30.220 --> 01:30.400
+Yeah.
+
+01:30.520 --> 01:31.860
+But OK, let's unpack this.
+
+01:31.920 --> 01:32.100
+Yeah.
+
+01:32.180 --> 01:35.540
+Because the core mission today isn't just to gawk at what AI gets wrong.
+
+01:35.540 --> 01:44.340
+We're looking at why our deepest assumptions regarding how these models store information are fundamentally and perhaps even mathematically flawed.
+
+01:45.140 --> 01:49.140
+Right. Because the vocabulary we use dictates how we troubleshoot the systems we build.
+
+01:49.540 --> 01:55.100
+When developers or even just everyday end users, when they see an AI fail, they immediately reach for hardware metaphors.
+
+01:55.180 --> 01:58.220
+Oh, totally. Like, oh, it hallucinated. It must have a corrupted memory bank.
+
+01:58.220 --> 02:03.200
+Exactly. They say the model lost the fact or the data isn't stored correctly.
+
+02:03.580 --> 02:07.080
+But this paper argues those metaphors are not just imprecise.
+
+02:07.180 --> 02:12.560
+They're actually leading the entire field of AI research into a total blind alley.
+
+02:12.760 --> 02:15.540
+We all talk about AI hallucinating or forgetting facts.
+
+02:15.640 --> 02:21.320
+But if this paper is saying we're using the wrong metaphor entirely, I mean, if it's not a memory bank, what is it?
+
+02:21.720 --> 02:27.560
+Well, to understand the new theory, we first have to look at the massive tests that exposed the problem in the first place.
+
+02:27.560 --> 02:36.400
+The entire paper kind of revolves around an anomaly that was exposed by this massive testing framework called the Wiki Profile Benchmark.
+
+02:36.960 --> 02:41.700
+And the scale of that benchmark is what caught my eye immediately when I was reading through the source material.
+
+02:42.200 --> 02:47.040
+I mean, we're not talking about a few cherry-picked examples of ChatGPT getting confused on Twitter.
+
+02:47.360 --> 02:51.000
+No, not at all. They ran this across 13 different frontier models.
+
+02:51.200 --> 02:55.580
+They generated something like 4.5 million distinct responses.
+
+02:55.580 --> 02:57.460
+Wow. Four and a half million.
+
+02:57.560 --> 03:04.480
+Yeah. And they were testing this highly curated set of about two 150 facts derived directly from Wikipedia.
+
+03:04.920 --> 03:09.320
+And the architecture of the test itself is split across two very specific axes.
+
+03:09.780 --> 03:12.540
+You have encoding and you have knowing.
+
+03:13.180 --> 03:18.160
+Right. And looking at the methodology, the encoding axis tests whether the model can reproduce a fact
+
+03:18.160 --> 03:30.500
+when given a strongly primed source-like prompt, basically a prompt that mirrors the exact contextual neighborhood where that fact lived in the original training data.
+
+03:30.580 --> 03:33.220
+It's the most ideal condition possible for the AI.
+
+03:33.380 --> 03:37.320
+Yeah. And under those ideal conditions, the models pass with staggering consistency.
+
+03:37.320 --> 03:40.700
+We're talking 95% to 98% success rates.
+
+03:41.000 --> 03:41.060
+Yeah.
+
+03:41.100 --> 03:44.500
+So they demonstrably possess the capability to output the fact.
+
+03:44.580 --> 03:47.700
+They possess the capability under highly privileged constraints, yes.
+
+03:48.240 --> 03:52.900
+But the friction really arises when the benchmark shifts to the second axis, which is the knowing test.
+
+03:53.080 --> 03:54.580
+Right. And this is where it gets brutal.
+
+03:54.580 --> 03:58.080
+Exactly. Here, the environment becomes actively hostile to the model.
+
+03:58.180 --> 04:03.960
+The AI has to reproduce that exact same fact, but under four minimally supported, differently constructed questions.
+
+04:04.020 --> 04:05.460
+So no more spoon feeding the context.
+
+04:05.580 --> 04:10.060
+Well, right. Two of the questions target the subject of the fact and two target the object.
+
+04:10.580 --> 04:16.220
+But crucially, to pass this knowing test, the model cannot just get one right and pass.
+
+04:16.420 --> 04:19.080
+It must succeed on all four variations.
+
+04:19.080 --> 04:30.080
+All four. And the failure rate there is just shocking. I mean, between 25% to 33% of facts that were perfectly in code in the first test completely fail this second test.
+
+04:30.160 --> 04:31.720
+Which is a massive drop off.
+
+04:31.820 --> 04:41.520
+Huge. And even if you give the model what they call inference time compute, like allowing it to think and generate tokens before answering, 11% to 12% still fail entirely.
+
+04:41.960 --> 04:44.400
+But I have to pause on the architecture of that test for a second.
+
+04:44.480 --> 04:45.540
+Sure. What stands out to you?
+
+04:45.540 --> 04:56.160
+Well, reading through the methodology, the gap between a 98% success rate and a 33% failure rate, it feels, I don't know, somewhat manufactured by the logic of the test itself.
+
+04:56.280 --> 04:57.200
+Ah, I see where you're going.
+
+04:57.360 --> 04:59.420
+Right. Because you have this massive structural imbalance.
+
+04:59.980 --> 05:02.640
+The encoding test is basically an existential quantifier.
+
+05:02.780 --> 05:07.580
+It's just asking, does there exist at least one highly tailored prompt that gets you to the right answer?
+
+05:08.120 --> 05:10.560
+If the model gets just one open door, it passes.
+
+05:11.060 --> 05:14.040
+It just needs a single success to prove the capability.
+
+05:14.040 --> 05:18.560
+Exactly. But then the knowing test is a universal quantifier.
+
+05:19.120 --> 05:26.140
+It's demanding, do all four of these difficult, weirdly phrased prompts lead to the right answer?
+
+05:26.360 --> 05:29.200
+It cannot have any closed doors at all.
+
+05:29.280 --> 05:31.340
+So it's mathematically rigged to be harder.
+
+05:31.620 --> 05:37.580
+Right. If you compare a highly supportive existential test against a minimally supportive universal test,
+
+05:37.580 --> 05:43.360
+aren't you just mathematically guaranteeing a massive gap just by virtue of how you set up the rules?
+
+05:43.800 --> 05:47.560
+That is a very sharp critique of the benchmark's underlying logic.
+
+05:47.720 --> 05:49.460
+And honestly, it raises an important question.
+
+05:49.980 --> 05:52.580
+But Flyxion actually addresses this directly in the paper.
+
+05:53.140 --> 05:56.440
+He also concedes that a significant portion of this gap is definitional.
+
+05:56.660 --> 05:59.540
+It's driven purely by that quantifier structure you just described.
+
+05:59.540 --> 06:02.320
+Okay, so they admit it's a bit of an apples to oranges comparison.
+
+06:02.480 --> 06:05.260
+Yes. Comparing any to all is always going to yield a delta.
+
+06:05.680 --> 06:09.960
+But the argument here is that we shouldn't just discard the benchmark because of that logical asymmetry.
+
+06:10.440 --> 06:13.460
+Instead, we need to focus on the absolute size of the gap.
+
+06:13.900 --> 06:16.620
+And more importantly, exactly which facts fall into it.
+
+06:16.820 --> 06:21.620
+Because 30% is still a huge chunk of information to just disappear.
+
+06:21.620 --> 06:31.520
+Exactly. When the benchmark creators saw this 30% drop-off, their immediate reaction was to explain it using the exact hardware metaphors we mentioned earlier.
+
+06:32.220 --> 06:36.220
+They used terms like empty shelves and lost keys in their own reporting.
+
+06:36.600 --> 06:38.120
+Empty shelves. Wow.
+
+06:38.320 --> 06:41.780
+Yeah, they theorized that the fact is structurally present in the parameters,
+
+06:42.020 --> 06:47.000
+but the model just couldn't locate the key to unlock that specific door when asked in a weird way.
+
+06:47.100 --> 06:50.720
+Which brings us to the core philosophical target of this paper, right?
+
+06:50.720 --> 06:52.480
+The container ontology.
+
+06:53.040 --> 06:53.740
+That's the heart of it.
+
+06:53.880 --> 06:58.760
+Because our entire mental map of computing is just so deeply biased by the von Neumann architecture.
+
+06:59.200 --> 07:05.060
+We are so used to the idea of a central processing unit pulling discrete files from a physical hard drive.
+
+07:05.160 --> 07:07.320
+It's how every computer we've ever used works.
+
+07:07.540 --> 07:11.880
+Right. And it's incredibly difficult for us not to project that architecture onto a neural network.
+
+07:11.880 --> 07:18.200
+We assume a fact, like Paris is the capital of France, is a discrete addressable object.
+
+07:18.200 --> 07:23.360
+Like a box sitting in a specific multidimensional location inside the AI's parameters.
+
+07:23.860 --> 07:27.860
+And if you buy into that container idea, then a prompt is just a memory address.
+
+07:27.980 --> 07:31.500
+Exactly. A good prompt points directly to the shelf.
+
+07:31.900 --> 07:35.440
+A bad prompt is just a corrupted map that leads you to the wrong aisle.
+
+07:35.840 --> 07:38.060
+And that is the container ontology in a nutshell.
+
+07:38.580 --> 07:41.100
+It treats factual competence as a state of possession.
+
+07:41.720 --> 07:44.180
+The model either has the fact or it doesn't.
+
+07:44.180 --> 07:47.320
+But Flyxion points out a fatal flaw in this reasoning.
+
+07:47.940 --> 07:49.760
+We never actually see the container.
+
+07:50.460 --> 07:52.360
+Right. We can't look inside the black box.
+
+07:52.700 --> 07:57.780
+Exactly. When we run a benchmark, we are purely observing the model's behavioral output.
+
+07:58.240 --> 08:01.700
+We feed it a string of text, and we observe the string of text it returns.
+
+08:02.360 --> 08:05.840
+We do not have an x-ray machine that looks into the billions of parameters
+
+08:05.840 --> 08:10.240
+and verifies the existence of a discrete fact object sitting on a shelf.
+
+08:10.380 --> 08:11.900
+So the container is an illusion.
+
+08:11.900 --> 08:16.600
+It is an inference we project it onto the model to make its behavior intelligible to us.
+
+08:17.300 --> 08:20.480
+Flyxion argues that if we discard that container inference entirely
+
+08:20.480 --> 08:24.160
+and replace it with something called a residue and trajectory ontology,
+
+08:24.380 --> 08:28.860
+the erratic behavior of these models suddenly aligns perfectly with the underlying math.
+
+08:29.260 --> 08:30.660
+Okay. Residue and trajectory.
+
+08:31.120 --> 08:36.820
+So instead of thinking of the AI's brain as a giant warehouse full of boxes on shelves,
+
+08:37.340 --> 08:40.640
+we should think of it like a wilderness territory.
+
+08:40.640 --> 08:42.160
+I love this analogy.
+
+08:42.540 --> 08:47.620
+Yeah, because if the parameter space is a vast, dense, untouched wilderness,
+
+08:48.120 --> 08:53.720
+then the training text, all those trillions of tokens the AI reads, that's like foot traffic.
+
+08:54.060 --> 08:56.180
+Millions of hikers walking through the woods.
+
+08:56.460 --> 08:56.860
+Exactly.
+
+08:57.320 --> 09:00.240
+The fact isn't a treasure chest hidden somewhere in the woods.
+
+09:00.380 --> 09:02.340
+It's a reinforced hiking trail.
+
+09:02.820 --> 09:06.640
+It's literally built by the historical traffic of the training data.
+
+09:06.640 --> 09:13.260
+Generating an answer is just walking down a legally admissible path from wherever the tromp dropped you off.
+
+09:13.320 --> 09:16.800
+Which completely redefines what a fact actually is in the context of AI.
+
+09:17.060 --> 09:19.700
+Yeah, the parameters are just the dirt, the trampled dirt.
+
+09:19.840 --> 09:24.240
+Right. And a fact is a deeply grooved, highly reinforced trail in that dirt.
+
+09:24.360 --> 09:28.920
+It formed because that specific sequence of tokens was walked repeatedly during training.
+
+09:28.920 --> 09:33.520
+So when you prompt the model, you aren't sending a retrieval query to a database.
+
+09:33.960 --> 09:35.700
+You're just dropping a new hiker into the woods.
+
+09:36.080 --> 09:39.820
+Precisely. You take the prompt, drop it somewhere in this high-dimensional wilderness,
+
+09:40.220 --> 09:45.340
+and watch it walk down whatever path naturally unfolds in front of it based on the contours of the ground.
+
+09:45.740 --> 09:47.440
+Okay. This is clicking for me now.
+
+09:48.020 --> 09:51.800
+If you apply that wilderness analogy back to the wiki profile benchmark,
+
+09:52.300 --> 09:55.240
+that massive performance gap isn't a mystery at all.
+
+09:55.240 --> 09:57.960
+Not at all. Think about the encoding test.
+
+09:58.460 --> 10:03.440
+A strongly primed, source-like prompt doesn't open a door to a stored object.
+
+10:03.560 --> 10:08.240
+It just drops the hiker exactly at the trailhead of a heavily paved, highly trafficked road.
+
+10:08.540 --> 10:13.920
+Exactly. It simply reconstructs the exact conditions under which a specific trajectory
+
+10:13.920 --> 10:15.900
+was originally reinforced during training.
+
+10:16.480 --> 10:19.260
+Of course, the model succeeds 98% of the time.
+
+10:19.400 --> 10:20.740
+Because it's an easy walk.
+
+10:20.740 --> 10:27.320
+But that success only proves that one specific path exists from one specific starting coordinate.
+
+10:27.920 --> 10:32.340
+It absolutely does not prove the existence of a universal omnidirectional fact object.
+
+10:32.420 --> 10:35.620
+Right. And then the benchmark pivots to the knowing test.
+
+10:35.760 --> 10:39.280
+Right. Where it takes that same hiker and drops him in a dense thicket
+
+10:39.280 --> 10:43.120
+three miles off the main trail facing the wrong direction with zero signage.
+
+10:43.120 --> 10:48.420
+And when the model inevitably outputs a hallucination or fails to reach the destination,
+
+10:49.000 --> 10:51.820
+the container ontology observers throw up their hands and say,
+
+10:52.240 --> 10:55.060
+oh no, the shelf is empty, the fact has vanished.
+
+10:55.240 --> 10:56.560
+But there was never a shelf.
+
+10:56.740 --> 10:56.900
+Yeah.
+
+10:57.180 --> 11:01.280
+You just dropped the system in a location where no historical foot traffic
+
+11:01.280 --> 11:03.240
+had ever carved a path to the target.
+
+11:03.680 --> 11:04.680
+That makes so much sense.
+
+11:05.000 --> 11:05.780
+It really does.
+
+11:05.900 --> 11:09.160
+And this hiking trail theory, this trajectory framework,
+
+11:09.160 --> 11:15.020
+becomes incredibly predictive when we look at the specific glitches found in the benchmark data.
+
+11:15.220 --> 11:16.540
+Which brings us to the anomalies.
+
+11:16.700 --> 11:16.940
+Yes.
+
+11:17.460 --> 11:22.340
+The researchers identified two major conditions that almost guarantee a fact will fall into this gap,
+
+11:22.640 --> 11:27.140
+meaning it passes the easy encoding test, but fails the robust knowing test.
+
+11:27.640 --> 11:31.260
+Those conditions are reverse phrasing and low popularity in the training data.
+
+11:31.260 --> 11:35.520
+Okay, let's dig into reverse phrasing first, because the reversal curse is,
+
+11:35.840 --> 11:38.240
+honestly, it's one of the most frustrating things to deal with
+
+11:38.240 --> 11:41.520
+when you are actually building applications on top of these LLMs.
+
+11:41.680 --> 11:43.000
+It's a huge headache for developers.
+
+11:43.380 --> 11:43.620
+Yeah.
+
+11:43.880 --> 11:47.160
+The paper highlights this using a specific example with the band Oasis.
+
+11:48.040 --> 11:53.480
+Under a container theory, the fact the band whose first gig was at the boardwalk was Oasis,
+
+11:53.940 --> 11:57.180
+and the phrase Oasis played its first gig at the boardwalk,
+
+11:57.180 --> 12:01.860
+are the exact same logical object, subject, verb, object.
+
+12:02.200 --> 12:04.020
+Logically, yes, they are identical.
+
+12:04.220 --> 12:04.400
+Right.
+
+12:04.520 --> 12:07.000
+So if that relationship is stored in a discrete container,
+
+12:07.480 --> 12:10.760
+the model should be able to query it from either direction effortlessly.
+
+12:11.580 --> 12:16.380
+Under a storage ontology, failing the reverse question looks like the AI is having a stroke.
+
+12:16.960 --> 12:19.760
+The same fact is present and then mysteriously absent.
+
+12:20.160 --> 12:22.940
+But under our hiking trail theory, it makes perfect sense.
+
+12:23.660 --> 12:24.120
+Tell me why.
+
+12:24.120 --> 12:28.020
+Well, what's fascinating here is the mechanics of autoregressive training.
+
+12:28.420 --> 12:31.340
+We have to remember that these models aren't just broadly reading text.
+
+12:31.620 --> 12:34.980
+They are strictly bound by left-to-right causal masking.
+
+12:35.380 --> 12:38.380
+Meaning they only predict the next word based on the previous words.
+
+12:38.660 --> 12:39.080
+Exactly.
+
+12:39.360 --> 12:40.960
+They build directional continuations.
+
+12:41.500 --> 12:45.460
+And in natural English, we almost always introduce the familiar entity first.
+
+12:45.640 --> 12:50.400
+The training data is absolutely saturated with the forward sequence Oasis played at the boardwalk.
+
+12:50.400 --> 12:56.340
+So the gradient updates during training heavily bias the vector weights to support that forward transition.
+
+12:56.760 --> 12:56.880
+Right.
+
+12:57.200 --> 13:00.360
+The forward direction was walked and reinforced millions of times.
+
+13:00.580 --> 13:08.120
+But the reverse direction, the band whose first gig was at the boardwalk was Oasis, has almost no direct support.
+
+13:08.480 --> 13:09.760
+Syntactically, it's rare.
+
+13:09.960 --> 13:11.400
+It has to be assembled from scratch.
+
+13:11.540 --> 13:13.400
+They are not the same trajectory at all.
+
+13:13.540 --> 13:13.820
+Right.
+
+13:13.820 --> 13:16.240
+The forward path is a paved highway.
+
+13:16.780 --> 13:18.880
+The reverse path is untouched brush.
+
+13:19.320 --> 13:27.220
+So the model fails the reverse career because it literally lacks the vector weights, the trampled dirt, to support that specific directional transition.
+
+13:27.460 --> 13:30.640
+And that logic scales perfectly to the second anomaly too, right?
+
+13:30.700 --> 13:31.580
+The long tail effect.
+
+13:31.660 --> 13:31.920
+Yes.
+
+13:32.360 --> 13:35.680
+Similarly, low popularity facts leave a much thinner residue.
+
+13:36.240 --> 13:42.320
+If a fact is only mentioned a handful of times across trillions of tokens, it resides in a very sparse data manifold.
+
+13:42.320 --> 13:43.980
+The trail is incredibly faint.
+
+13:44.420 --> 13:46.260
+Like the grass is barely pressed down.
+
+13:46.600 --> 13:47.040
+Exactly.
+
+13:47.680 --> 13:52.180
+A minimally supportive prompt is far less likely to land on one of these faint paths.
+
+13:52.780 --> 13:55.300
+Even a slight deviation means you will never find it.
+
+13:55.660 --> 14:04.180
+But a strongly supportive prompt, which drops you right at the trailhead, can still navigate it because it places you directly on the few footprints that exist.
+
+14:04.540 --> 14:08.380
+That is profound for anyone relying on AI for research.
+
+14:08.380 --> 14:12.600
+The popularity of a fact isn't about whether it's stored or not.
+
+14:12.980 --> 14:17.280
+It's just a proxy for how many contextual entrances exist to that path.
+
+14:17.660 --> 14:18.000
+Precisely.
+
+14:18.400 --> 14:20.720
+Which naturally leads us to a massive question.
+
+14:21.300 --> 14:24.440
+What happens when the AI is given time to think before answering?
+
+14:24.740 --> 14:25.880
+Does that rebuild the path?
+
+14:25.880 --> 14:36.680
+Yeah, because we are seeing models now, like OpenAI's 01 series, that are explicitly designed to generate this internal chain of thought before they spit out a final answer.
+
+14:36.820 --> 14:39.060
+And the wiki profile researchers actually tested this.
+
+14:39.380 --> 14:45.440
+They allowed models to have inference time computation, giving them space to reason before answering the difficult knowing prompts.
+
+14:45.540 --> 14:46.100
+What did they find?
+
+14:46.100 --> 14:50.980
+They found that this intermediate computation recovered a huge fraction of the facts.
+
+14:51.540 --> 14:57.320
+Somewhere between 40 to 65 percent of the facts that failed direct recall suddenly became successes.
+
+14:58.020 --> 14:58.360
+Wow.
+
+14:58.700 --> 14:59.480
+Over half.
+
+14:59.880 --> 15:03.060
+And I'm guessing the original paper called this a recall mechanism, right?
+
+15:03.120 --> 15:05.300
+Because they're stuck in the container mindset.
+
+15:05.700 --> 15:06.160
+Exactly.
+
+15:06.380 --> 15:11.280
+They saw it as the model taking extra time to search the warehouse and find the lost key on the shelf.
+
+15:11.780 --> 15:14.640
+But Flyxion completely deconstructs this assumption.
+
+15:14.640 --> 15:20.460
+He breaks down why labeling this as a single recall mechanism is deeply ambiguous and misleading.
+
+15:20.880 --> 15:23.300
+Because it's actually doing different things behind the scenes.
+
+15:23.400 --> 15:23.580
+Right.
+
+15:23.840 --> 15:29.380
+The single category of recall with thinking likely contains three entirely different operations.
+
+15:29.780 --> 15:31.700
+The first one is what he calls repair.
+
+15:31.900 --> 15:32.140
+Okay.
+
+15:32.340 --> 15:32.660
+Repair.
+
+15:32.720 --> 15:33.320
+What does that look like?
+
+15:33.480 --> 15:39.400
+Repair is reconstructing the missing context to reconnect a poor prompt to an already reinforced trajectory.
+
+15:39.400 --> 15:47.240
+If a prompt drops the model slightly off the faint trail, the intermediate computation allows it to generate its own contextual stepping stones.
+
+15:47.740 --> 15:51.440
+It slowly steers its internal states back toward the paved highway.
+
+15:51.720 --> 15:51.960
+Okay.
+
+15:52.060 --> 15:59.240
+So if I use our analogy, repair is like bushwhacking your way until you find the main hiking trail again.
+
+15:59.360 --> 16:00.280
+Perfect way to put it.
+
+16:00.280 --> 16:02.560
+But then there's the second operation, which is reconstruction.
+
+16:03.280 --> 16:04.700
+And that sounds different.
+
+16:04.940 --> 16:05.600
+Very different.
+
+16:05.720 --> 16:11.520
+In reconstruction, the model derives the correct answer from completely different related propositions.
+
+16:11.800 --> 16:14.340
+It takes a totally different route to the same destination.
+
+16:14.620 --> 16:16.540
+So it never actually finds the original trail.
+
+16:16.720 --> 16:17.040
+Never.
+
+16:17.400 --> 16:23.520
+It uses secondary facts or deductive reasoning that just mathematically converges on the right output.
+
+16:23.960 --> 16:24.180
+Okay.
+
+16:24.220 --> 16:28.560
+So reconstruction is like calling an Uber to get to the same destination instead of walking the trail.
+
+16:28.620 --> 16:29.020
+Yes.
+
+16:29.020 --> 16:30.320
+But here's the catch.
+
+16:30.860 --> 16:33.240
+How do we know which one the AI is actually doing?
+
+16:34.060 --> 16:38.420
+If I'm just looking at the final answer, how do I know if it bushwhacked or called an Uber?
+
+16:38.860 --> 16:40.600
+That's the million dollar question.
+
+16:41.020 --> 16:46.060
+And Flyxion's point is that the behavioral evidence in the benchmark simply cannot distinguish between the two.
+
+16:46.900 --> 16:52.480
+Seeing the AI get the right answer after thinking does not prove it repaired, a stored fact.
+
+16:52.680 --> 16:55.940
+It might have just mathematically reconstructed it via a side door.
+
+16:55.940 --> 16:57.660
+The test is blind to the mechanism.
+
+16:57.660 --> 16:59.980
+And wait, you mentioned a third operation.
+
+17:00.300 --> 17:01.380
+Yes, local search.
+
+17:01.820 --> 17:09.040
+This happens because the benchmark proves that for autoregressive models, recognition is vastly easier than generation.
+
+17:09.300 --> 17:09.500
+Right.
+
+17:09.620 --> 17:12.260
+Evaluating options is easier than coming up with them from scratch.
+
+17:12.260 --> 17:12.680
+Exactly.
+
+17:13.080 --> 17:16.640
+So during local search, the model isn't bushwhacking or Ubering.
+
+17:16.880 --> 17:20.680
+It is generating an internal multiple choice test for itself.
+
+17:21.040 --> 17:30.500
+It hallucinates three or four highly probable candidate strings and then uses its internal discriminator capabilities to evaluate which one has the highest relative likelihood.
+
+17:30.500 --> 17:37.020
+Oh, wow. So it just makes up options A, D, C, and D, and then realizes B feels the most mathematically sound.
+
+17:37.300 --> 17:43.920
+Yes. And again, to the observer, all three of these, repair, reconstruction, and local search look identical.
+
+17:44.280 --> 17:46.960
+They all result in a correct final string of text.
+
+17:46.960 --> 17:51.660
+So the benchmark creators lump them all together and say, look, it recalled the fact from storage.
+
+17:52.380 --> 17:53.080
+But it didn't.
+
+17:53.580 --> 18:01.840
+This reliance on purely behavioral observation, just grading the final text, it leads to another massive flaw in how we judge AI, doesn't it?
+
+18:02.060 --> 18:02.820
+It really does.
+
+18:03.040 --> 18:08.960
+It leads to what we can call the sampling trap, which is a major critique of how we grade these AI failures.
+
+18:09.100 --> 18:09.980
+The sampling trap.
+
+18:10.340 --> 18:12.760
+Okay, how did the benchmark actually grade the questions?
+
+18:12.760 --> 18:16.380
+In the benchmark, each question is sampled eight times.
+
+18:16.960 --> 18:19.040
+They give the model an eight-attempt budget.
+
+18:19.740 --> 18:25.840
+If it fails to produce the exact correct string on all eight attempts, it is marked as completely inaccessible.
+
+18:26.320 --> 18:28.860
+Which, if you are testing a human, makes sense.
+
+18:29.360 --> 18:33.080
+If I ask you a trivia question eight times and you get it wrong eight times, you don't know it.
+
+18:33.260 --> 18:36.800
+Right. But an AI doesn't operate in true-false binaries.
+
+18:37.000 --> 18:39.640
+It operates on continuous probability distributions.
+
+18:39.640 --> 18:48.040
+Flyxion explains that by marking it inaccessible, the benchmark quietly converts a continuous probability into a binary pass-fail.
+
+18:48.180 --> 18:50.900
+So they're forcing a binary on a mathematical spectrum.
+
+18:51.160 --> 18:51.600
+Exactly.
+
+18:51.900 --> 18:57.360
+If the mathematical probability of outputting the correct answer for a specific prompt is small but non-zero,
+
+18:57.840 --> 19:01.020
+let's say the P of F given Q is much less than 1 Pozen.
+
+19:01.380 --> 19:02.540
+Maybe it's a 2% chance.
+
+19:03.040 --> 19:04.960
+Eight samples will frequently miss it.
+
+19:04.960 --> 19:10.940
+Because eight tries at a 2% chance still leaves you mathematically likely to fail all eight times.
+
+19:11.220 --> 19:11.740
+Exactly.
+
+19:12.120 --> 19:16.420
+But missing it doesn't mean the transition function assigns its zero weight.
+
+19:16.580 --> 19:18.700
+It is not excluded from the parameters.
+
+19:18.800 --> 19:20.100
+It is just weakly weighted.
+
+19:20.400 --> 19:24.020
+Here is where it gets really interesting for anyone building AI tools.
+
+19:24.020 --> 19:32.300
+Because treating a low probability path as a lost key groups together very different types of failures, right?
+
+19:32.500 --> 19:34.900
+It totally misdiagnoses the system.
+
+19:35.440 --> 19:39.020
+And to fix this, Flyxion outlines a new taxonomy of failure.
+
+19:39.600 --> 19:41.820
+Three distinct kinds of deficits.
+
+19:42.060 --> 19:43.420
+Okay, walk me through the three deficits.
+
+19:43.840 --> 19:45.500
+First is a structural deficit.
+
+19:45.860 --> 19:47.580
+This is genuine non-encoding.
+
+19:47.580 --> 19:53.260
+It means no admissible transition exists at all between the prompt and the answer anywhere in the parameters.
+
+19:53.660 --> 19:55.640
+So the true probability is essentially zero.
+
+19:55.820 --> 19:56.980
+The dirt was never walked on.
+
+19:57.060 --> 19:58.060
+No path exists.
+
+19:58.260 --> 19:58.460
+Right.
+
+19:58.720 --> 20:00.700
+No amount of prompting or thinking will get you there.
+
+20:00.880 --> 20:03.480
+But the second one is where the paradigm really shifts.
+
+20:03.960 --> 20:05.080
+The energetic deficit.
+
+20:05.320 --> 20:06.160
+Energetic deficit.
+
+20:06.300 --> 20:06.740
+What is that?
+
+20:06.920 --> 20:12.820
+This means the path does exist, but it's too computationally expensive to traverse without intermediate steps.
+
+20:13.160 --> 20:14.660
+The reversal curse is a great example.
+
+20:14.660 --> 20:22.860
+The model can theoretically output the reverse relationship, but it lacks the contextual runway to bridge the gap directly.
+
+20:23.500 --> 20:25.060
+It needs intermediate stepping stones.
+
+20:25.460 --> 20:30.520
+It needs computational energy-like chain-of-thought tokens to lower the activation barrier.
+
+20:30.760 --> 20:31.200
+Exactly.
+
+20:31.680 --> 20:33.080
+The knowledge isn't missing.
+
+20:33.520 --> 20:38.240
+The model is simply starved of the computational energy required to traverse the path.
+
+20:38.440 --> 20:40.640
+This connects so directly to daily use.
+
+20:40.640 --> 20:46.960
+If I'm using an AI and it fails my prompt, it might not lack the knowledge, which would be a structural deficit.
+
+20:47.640 --> 20:52.760
+I just might not be giving it the computational budget to traverse the path, which is an energetic deficit.
+
+20:53.020 --> 20:53.280
+Right.
+
+20:53.380 --> 20:54.640
+You don't need to teach it the fact.
+
+20:54.700 --> 20:56.060
+You need to let it reason out loud.
+
+20:56.200 --> 20:56.280
+Yeah.
+
+20:56.280 --> 20:58.720
+And that leads to the third mode, the kinetic deficit.
+
+20:58.780 --> 20:59.720
+Okay, kinetic deficit.
+
+20:59.720 --> 21:10.100
+This is when recovery is structurally possible and energetically feasible, but it's just too slow or requires more sampling budget than allowed by task constraints.
+
+21:10.340 --> 21:12.860
+Ah, like the 2% probability example.
+
+21:13.200 --> 21:13.740
+Exactly.
+
+21:13.940 --> 21:20.880
+If it needs 50 tries to hit that 2% chance, but your API limits it to one generation, it fails.
+
+21:20.880 --> 21:25.260
+But it's a failure of kinetic allowance, not structural knowledge.
+
+21:25.740 --> 21:28.740
+This completely reframes how we debug these systems.
+
+21:29.400 --> 21:38.400
+But to truly prove that this gap is about local pathways and not a broken database, the author actually translates this entire argument into a totally different language, don't they?
+
+21:38.460 --> 21:38.780
+They do.
+
+21:38.860 --> 21:40.360
+They move into high-level mathematics.
+
+21:41.040 --> 21:45.120
+Specifically, Section 10 of the paper uses topology and category theory.
+
+21:45.120 --> 21:51.060
+Okay, I want to reassure you listening right now, we are not going to get bogged down in impenetrable math jargon.
+
+21:51.320 --> 21:54.940
+But the map here is beautifully illustrative of the problem.
+
+21:55.100 --> 21:55.900
+It really is.
+
+21:56.280 --> 22:01.800
+Flyxion uses the concept of pre-sheaves and topology to explain the gap between encoding and knowing.
+
+22:02.080 --> 22:03.780
+All right, let's deconstruct the math gently.
+
+22:04.180 --> 22:05.480
+How do we visualize this?
+
+22:05.700 --> 22:09.760
+Think of the different possible prompts for a single fact as subsets covering a space.
+
+22:09.760 --> 22:16.760
+The encoding test, the easy one, basically asks if there is a successful answer over some single object in that space.
+
+22:17.080 --> 22:18.700
+It's an existential local claim.
+
+22:19.020 --> 22:21.580
+The paper calls it having one non-empty stock, right?
+
+22:22.020 --> 22:22.580
+Exactly.
+
+22:22.860 --> 22:24.980
+One localized point of success.
+
+22:25.640 --> 22:30.400
+But the knowing test asks for a global section over the whole cover.
+
+22:30.760 --> 22:35.540
+It demands that every stock must be non-empty and they must all be compatible with each other.
+
+22:36.040 --> 22:38.620
+Let me try a real-world analogy to translate this.
+
+22:38.620 --> 22:41.020
+It sounds exactly like having cell phone service.
+
+22:41.080 --> 22:41.820
+Oh, I like that.
+
+22:41.900 --> 22:42.420
+Let's hear it.
+
+22:42.520 --> 22:42.720
+Okay.
+
+22:42.900 --> 22:48.860
+The encoding test just asks if you have a signal while standing on one specific mountain peak.
+
+22:49.140 --> 22:52.280
+If you can make a call from that exact spot, you pass.
+
+22:52.520 --> 22:53.740
+You have a non-empty stock.
+
+22:54.020 --> 23:00.580
+But the knowing test asks if you have a continuous unbroken signal while driving your car across the entire state.
+
+23:00.840 --> 23:02.300
+That is the global section, yes.
+
+23:02.360 --> 23:02.520
+Right.
+
+23:02.680 --> 23:06.220
+And if you lose signal in a valley, it doesn't mean your phone is fundamentally broken.
+
+23:06.680 --> 23:07.820
+It's not a storage failure.
+
+23:07.820 --> 23:09.040
+The cell tower didn't vanish.
+
+23:09.420 --> 23:13.180
+It is just an ordinary failure of a local signal to extend globally.
+
+23:13.880 --> 23:16.020
+That analogy maps flawlessly to the mathematics.
+
+23:16.700 --> 23:23.140
+Dropping a call is exactly how a pre-sheaf can have non-empty stocks at isolated points, but no global section.
+
+23:23.340 --> 23:25.120
+There's nothing wrong with a mathematical object.
+
+23:25.320 --> 23:26.540
+It's just behaving locally.
+
+23:26.920 --> 23:29.240
+And Flyxion also touches on formal logic, right?
+
+23:29.500 --> 23:30.800
+The Curry-Howard correspondence.
+
+23:30.800 --> 23:32.760
+Yes, the typing judgment aspect.
+
+23:32.760 --> 23:41.680
+In formal logic, deriving an answer under a rich, source-like prompt is like solving an equation where you're handed most of the variables.
+
+23:42.080 --> 23:43.140
+It's an open term.
+
+23:43.580 --> 23:46.120
+It relies heavily on a favorable context.
+
+23:46.260 --> 23:48.500
+But the knowing test demands a closed term.
+
+23:48.500 --> 23:49.300
+Exactly.
+
+23:49.780 --> 23:52.880
+An answer that doesn't depend on a highly favorable context.
+
+23:53.180 --> 23:54.500
+It has to stand on its own.
+
+23:55.080 --> 23:58.500
+And logically, a local proof does not guarantee a global proof.
+
+23:58.760 --> 24:03.640
+Which leads to this crucial warning chain for anyone who relies on AI to produce facts.
+
+24:04.120 --> 24:07.120
+Because we conflate these mathematical realities all the time.
+
+24:07.220 --> 24:07.700
+We do.
+
+24:08.120 --> 24:11.760
+Flyxion details what he calls the short non-collapse chain.
+
+24:12.260 --> 24:15.340
+We must stop conflating four distinct operational states.
+
+24:15.640 --> 24:16.440
+Let's run through them.
+
+24:16.580 --> 24:17.080
+Step one.
+
+24:17.080 --> 24:21.840
+Step one is successful completion, meaning answering a prompt correctly once.
+
+24:22.240 --> 24:23.840
+But that does not entail step two.
+
+24:24.100 --> 24:25.400
+Which is a stored proposition.
+
+24:26.100 --> 24:29.660
+Just because it answered correctly doesn't mean there's a discrete fact sitting in a box.
+
+24:29.880 --> 24:31.520
+It just means a path was walked.
+
+24:32.100 --> 24:33.380
+And that doesn't entail step three.
+
+24:33.700 --> 24:33.980
+Right.
+
+24:34.820 --> 24:36.720
+Step three is robust knowledge.
+
+24:37.360 --> 24:40.900
+Being reachable from unprivileged random starting points.
+
+24:41.460 --> 24:46.460
+A stored path might exist, but it might be inaccessible due to energetic deficits.
+
+24:46.460 --> 24:46.920
+Yeah.
+
+24:47.080 --> 24:51.120
+And even if it has robust knowledge, it does not entail step four.
+
+24:51.120 --> 24:52.960
+Step four is warranted commitment.
+
+24:53.760 --> 24:57.040
+A claim the system stands behind independent of the questioner framing.
+
+24:57.040 --> 24:59.920
+And language models cannot make warranted commitments.
+
+24:59.920 --> 25:01.620
+They just simulate continuations.
+
+25:01.620 --> 25:03.580
+So what does this all mean for the listener?
+
+25:03.580 --> 25:12.060
+Just because an AI spits out a fact under a perfectly engineered, heavily primed prompt, it does not mean the system has robust knowledge of that fact.
+
+25:12.060 --> 25:15.060
+And it certainly doesn't mean it will defend it under cross-examination.
+
+25:15.060 --> 25:22.300
+If we connect this to the bigger picture, we have to stop treating a momentary factual output from an LLM as a verified database query.
+
+25:22.900 --> 25:25.060
+Factual competence is not a state the model possesses.
+
+25:25.740 --> 25:26.840
+It's an active property.
+
+25:27.020 --> 25:31.760
+It's a real-time performance of whether historically formed distinctions can be carried forward into outputs.
+
+25:31.760 --> 25:32.360
+Exactly.
+
+25:32.880 --> 25:35.520
+But this leads to the ultimate paradox of the paper.
+
+25:36.080 --> 25:41.240
+We spent this whole time analyzing behavioral tests, just talking to the model and grading its answers.
+
+25:41.500 --> 25:41.760
+Right.
+
+25:42.140 --> 25:45.960
+And as we established, behavior can't prove if it bushwhacked or took an Uber.
+
+25:45.960 --> 25:53.880
+So if behavioral tests can never truly prove whether a fact is stored or just reconstructed, how will we ever know for sure?
+
+25:54.440 --> 25:57.060
+That is the final blow Felixion delivers.
+
+25:57.780 --> 26:03.080
+Throughout this deep dive, we've looked at behavior, but the paper outlines what actual proof would look like.
+
+26:03.560 --> 26:04.960
+We need an interventionist program.
+
+26:05.720 --> 26:06.580
+Meaning what exactly?
+
+26:06.580 --> 26:16.520
+Instead of varying the prompt on the outside, what if we directly perturbed or suppressed the internal representations, the actual neural activations inside the model while it was running?
+
+26:16.880 --> 26:18.360
+Like digital neurosurgery.
+
+26:18.440 --> 26:18.800
+Yes.
+
+26:19.240 --> 26:30.400
+If we could turn off a specific cluster of parameters and watch a fact selectively disappear across all conditions and then turn it back on and watch the fact instantly recover globally.
+
+26:30.600 --> 26:34.540
+Only then could we separate genuine repair from mathematical reconstruction.
+
+26:34.540 --> 26:36.760
+We would be mapping the literal paths.
+
+26:37.160 --> 26:40.300
+We would finally replace philosophical inference with empirical measurement.
+
+26:40.680 --> 26:43.260
+I want to leave you, the listener, with this thought to mull over.
+
+26:43.880 --> 26:49.940
+The future of understanding AI isn't going to look like psychology, where we just ask it questions and grade the answers.
+
+26:50.480 --> 26:56.000
+It's going to look like digital neuroscience, mapping the literal high-dimensional paths of its artificial brain.
+
+26:56.400 --> 26:57.960
+We have to find the hiking trails.
+
+26:57.960 --> 27:04.640
+Until we have those maps, remember that every answer an AI gives you is just a fragile path through a vast wilderness.
+
+27:05.320 --> 27:07.080
+Thank you for joining us on this deep dive.
+
+27:07.440 --> 27:10.620
+Keep exploring the trails of your own knowledge, and we'll see you next time.
+
