@@ -8,15 +8,16 @@ The inventory scans repository-root manuscripts, direct children of `source/`, a
 
 ## Status summary
 
-- `published`: 38
-- `recovery-blocked`: 2
+- `duplicate-review`: 1
+- `published`: 37
+- `recovery-blocked`: 3
 - `superseded`: 1
 
 ## Build matrix
 
 | Paper | Collection / track | Source | Output | Engine | Pages | Status | Blockers |
 |---|---|---|---|---|---:|---|---|
-| Address Before Operator: From the Typewriter Carriage to Vim's Grammar | laboratory | `address-before-operator.tex` | `address-before-operator.pdf` | lualatex | 7 | published | — |
+| Address Before Operator: How the Physical Line Became a Grammar | laboratory | `address-before-operator.tex` | `address-before-operator.pdf` | lualatex | 9 | published | — |
 | The Attention Compiler and the Thin-Walled Archive: Content Routing, Bubbles, and the Triage of Novel Ideas | laboratory | `source/attention-compiler-extended.tex` | `source/attention-compiler-extended.pdf` | lualatex | 24 | published | duplicate-family-resolved-by-editorial-override |
 | Borrowed Intuition: Compression Without Experience | laboratory | `borrowed-intuition.tex` | `borrowed-intuition.pdf` | lualatex | 48 | published | — |
 | Consensus Without Independence: Sycophancy, Context Reification, and Positive Feedback in Persona Ensembles | laboratory | `consensus-without-independence.tex` | `consensus-without-independence.pdf` | lualatex | 10 | published | duplicate-family-resolved-by-editorial-override |
@@ -26,10 +27,11 @@ The inventory scans repository-root manuscripts, direct children of `source/`, a
 | Distinction And Continuation | laboratory | — | `distinction-and-continuation.pdf` | — | 177 | recovery-blocked | editable-source-missing |
 | Emotional Differentiation: Categorization, Prediction, and the Formation of Conscious Feeling | laboratory | `source/emotional-differentiation.tex` | `source/emotional-differentiation.pdf` | pdflatex | 23 | published | — |
 | The Latency of Evidence: Why Facts Can Exist Before a System Becomes Capable of Knowing Them | laboratory | `latency-of-evidence.tex` | `latency-of-evidence.pdf` | lualatex | 11 | published | duplicate-family-resolved-by-editorial-override |
+| Maintenance Convergence | laboratory | — | `maintenance_convergence.pdf` | — | 39 | recovery-blocked | editable-source-missing |
 | The Monotonic Learning Series: Programmed Texts in Distinction, Repair, and Continuation: Full Series Plan --- Detailed Edition | laboratory | `source/monotonic-learning-plan.tex` | `source/monotonic-learning-plan.pdf` | lualatex | 10 | published | — |
 | The Operational Residue: The Noncommutativity of Preservation and Action | laboratory | `source/operator-residue.tex` | `source/operator-residue.pdf` | lualatex | 32 | published | — |
 | A Relativistic Theory of Longevity | laboratory | `source/relativistic-longevity.tex` | `source/relativistic-longevity.pdf` | pdflatex | 21 | published | — |
-| Representational Simplicity: Sufficient Projection, Obstruction-Sensitive Routing, and Repair Under Finite Attention | laboratory | `source/representational-simplicity.tex` | `source/representational-simplicity.pdf` | lualatex | 264 | published | — |
+| Representational Simplicity: Sufficient Projection, Obstruction-Sensitive Routing, and Repair Under Finite Attention | laboratory | `source/representational-simplicity.tex` | `representational-simplicity.pdf`<br>`source/representational-simplicity.pdf` | lualatex | — | duplicate-review | duplicate-family-requires-canonical-review |
 | Beyond Prediction Error: Warrant, Repair, and Refusal in Predictive Architectures | sproll-curriculum / essay | `sproll-curriculum-bundle/essay/beyond-prediction-error.tex` | `sproll-curriculum-bundle/essay/beyond-prediction-error.pdf` | lualatex | 10 | published | — |
 | The Sproll Curriculum: Methodology, Mathematics, and the Complete Plan for a Forty-Booklet Introduction to Mathematics via the Spherepop Calculus | sproll-curriculum / monograph | `sproll-curriculum-bundle/monograph/sproll-monograph.tex` | `sproll-curriculum-bundle/monograph/sproll-monograph.pdf` | lualatex | 63 | published | — |
 | Sproll Curriculum Bundle/Primary Track/Sproll 00 A Difference | sproll-curriculum / primary-track | `sproll-curriculum-bundle/primary-track/sproll-00-a-difference.tex` | `sproll-curriculum-bundle/primary-track/sproll-00-a-difference.pdf` | lualatex | 16 | published | — |
