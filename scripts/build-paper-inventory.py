@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build the first laboratory paper inventory slice.
 
-The scanner intentionally covers only root-level files and direct children of
-source/. Other directories are reported as deferred rather than silently
-ignored. Existing manual revision statuses in inventory/papers.json survive
-regeneration.
+The scanner covers root-level files, direct children of source/, and the
+structured Sproll curriculum bundle. Other directories are reported as
+deferred rather than silently ignored. Existing manual revision statuses in
+inventory/papers.json survive regeneration.
 """
 
 from __future__ import annotations
@@ -17,8 +17,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-SCHEMA_VERSION = 1
-SCANNED_DIRECTORIES = [".", "source"]
+SCHEMA_VERSION = 2
+SCANNED_DIRECTORIES = [".", "source", "sproll-curriculum-bundle"]
 DEFERRED_DIRECTORIES = ["continuation-geometry", "processing", "projects", "working"]
 SOURCE_SUFFIXES = {".tex"}
 OUTPUT_SUFFIXES = {".pdf"}
@@ -37,6 +37,23 @@ def family_key(path: Path) -> str:
         if reduced == stem:
             return re.sub(r"-+", "-", stem).strip("-")
         stem = reduced
+
+
+def identity_key(path: Path, root: Path) -> str:
+    """Keep structured curriculum tracks distinct from global paper families."""
+    relative = path.relative_to(root)
+    if relative.parts[0] == "sproll-curriculum-bundle":
+        return relative.with_suffix("").as_posix()
+    return family_key(path)
+
+
+def provenance(path: Path | None, root: Path) -> tuple[str | None, str | None]:
+    if path is None:
+        return "laboratory", None
+    relative = path.relative_to(root)
+    if relative.parts[0] != "sproll-curriculum-bundle":
+        return "laboratory", None
+    return "sproll-curriculum", relative.parts[1] if len(relative.parts) > 2 else None
 
 
 def latex_title(path: Path) -> str | None:
@@ -111,14 +128,15 @@ def discover(root: Path, output_json: Path) -> dict:
         base = root if directory == "." else root / directory
         if not base.is_dir():
             continue
+        iterator = base.rglob("*") if directory == "sproll-curriculum-bundle" else base.iterdir()
         candidates.extend(
-            path for path in base.iterdir()
+            path for path in iterator
             if path.is_file() and path.suffix.lower() in SOURCE_SUFFIXES | OUTPUT_SUFFIXES
         )
 
     families: dict[str, dict[str, list[Path]]] = {}
     for path in sorted(candidates):
-        bucket = families.setdefault(family_key(path), {"sources": [], "outputs": []})
+        bucket = families.setdefault(identity_key(path, root), {"sources": [], "outputs": []})
         bucket["sources" if path.suffix.lower() in SOURCE_SUFFIXES else "outputs"].append(path)
 
     manual_statuses = load_manual_statuses(output_json)
@@ -128,6 +146,8 @@ def discover(root: Path, output_json: Path) -> dict:
         outputs = sorted(paths["outputs"])
         canonical_source = sources[0] if len(sources) == 1 else None
         canonical_output = outputs[0] if len(outputs) == 1 else None
+        representative = canonical_source or canonical_output
+        collection, track = provenance(representative, root)
         blockers = []
         if outputs and not sources:
             blockers.append("editable-source-missing")
@@ -139,6 +159,7 @@ def discover(root: Path, output_json: Path) -> dict:
         engine, engine_source = engine_for(canonical_source) if canonical_source else (None, "ambiguous-or-missing-source")
         pages, pages_source = page_count(canonical_output) if canonical_output else (None, "ambiguous-or-missing-output")
         derived_status = (
+            "superseded" if collection == "sproll-curriculum" and track == "superseded" else
             "recovery-blocked" if outputs and not sources else
             "duplicate-review" if len(sources) > 1 or len(outputs) > 1 else
             "published" if sources and outputs else
@@ -148,6 +169,8 @@ def discover(root: Path, output_json: Path) -> dict:
         papers.append({
             "id": key,
             "title": display_title(key, sources),
+            "collection": collection,
+            "track": track,
             "source_path": rel(canonical_source, root) if canonical_source else None,
             "source_candidates": [rel(path, root) for path in sources],
             "output_path": rel(canonical_output, root) if canonical_output else None,
@@ -167,7 +190,7 @@ def discover(root: Path, output_json: Path) -> dict:
         "scope": {
             "scanned_directories": SCANNED_DIRECTORIES,
             "deferred_directories": DEFERRED_DIRECTORIES,
-            "recursive": False,
+            "recursive_directories": ["sproll-curriculum-bundle"],
         },
         "papers": papers,
     }
@@ -182,12 +205,13 @@ def markdown(data: dict) -> str:
         "# Laboratory paper inventory", "",
         "This file is generated from `inventory/papers.json`. Run `python3 scripts/build-paper-inventory.py` to refresh both files.", "",
         "## Scope", "",
-        "The first slice scans only repository-root manuscripts and direct children of `source/`. "
+        "The inventory scans repository-root manuscripts, direct children of `source/`, and the "
+        "structured `sproll-curriculum-bundle/`. "
         "The following directories remain deliberately deferred: " + ", ".join(f"`{item}/`" for item in data["scope"]["deferred_directories"]) + ".", "",
         "## Status summary", "",
     ]
     lines.extend(f"- `{name}`: {count}" for name, count in sorted(counts.items()))
-    lines.extend(["", "## Build matrix", "", "| Paper | Source | Output | Engine | Pages | Status | Blockers |", "|---|---|---|---|---:|---|---|"])
+    lines.extend(["", "## Build matrix", "", "| Paper | Collection / track | Source | Output | Engine | Pages | Status | Blockers |", "|---|---|---|---|---|---:|---|---|"])
     for paper in data["papers"]:
         source = paper["source_path"] or "<br>".join(f"`{p}`" for p in paper["source_candidates"]) or "—"
         output = paper["output_path"] or "<br>".join(f"`{p}`" for p in paper["output_candidates"]) or "—"
@@ -196,7 +220,8 @@ def markdown(data: dict) -> str:
         if paper["output_path"]:
             output = f"`{output}`"
         blockers = ", ".join(paper["recovery_blockers"]) or "—"
-        lines.append(f"| {paper['title']} | {source} | {output} | {paper['build_engine'] or '—'} | {paper['page_count'] if paper['page_count'] is not None else '—'} | {paper['revision_status']} | {blockers} |")
+        location = paper["collection"] + (f" / {paper['track']}" if paper["track"] else "")
+        lines.append(f"| {paper['title']} | {location} | {source} | {output} | {paper['build_engine'] or '—'} | {paper['page_count'] if paper['page_count'] is not None else '—'} | {paper['revision_status']} | {blockers} |")
     lines.extend(["", "## Provenance rules", "", "Engine values are inferred from the LaTeX preamble in this first slice. Page counts are measured with `pdfinfo`. A family with multiple source or output candidates remains unresolved; the generator records every candidate and does not select a canonical file.", ""])
     return "\n".join(lines)
 
