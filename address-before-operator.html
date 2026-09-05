@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Address Before Operator</title>
+<style>
+:root{--bg:#0B0D0C;--panel:#101312;--rule:#262B28;--ink:#DCE0DE;--dim:#7C8683;--addr:#7FB0C4;--cmd:#D9A15B;--cursor:#B3654A;--ok:#8FB39A;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--mono:"IBM Plex Mono","SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.5;padding:26px 16px 60px}.wrap{max-width:760px;margin:auto}h1{font-weight:400;font-size:1.55rem;margin:0 0 6px}.premise{color:var(--dim);font-size:.96rem;max-width:60ch;margin:0 0 22px}.premise em{color:var(--ink);font-style:normal}.field{background:var(--panel);border:1px solid var(--rule);padding:14px;margin-bottom:16px}.field h2{font:500 .74rem var(--mono);color:var(--dim);letter-spacing:.03em;margin:0 0 10px}.buffer{font: .86rem var(--mono)}.line{display:flex;gap:10px;padding:2px 0}.num{color:var(--dim);width:1.6em;text-align:right;flex:none}.line.removed .text{color:var(--dim);text-decoration:line-through;text-decoration-color:var(--cmd)}.chips,.runrow{display:flex;gap:8px;flex-wrap:wrap}.runrow{margin-top:12px}button{font: .76rem var(--mono);background:transparent;color:var(--ink);border:1px solid var(--rule);padding:8px 12px;cursor:pointer}button:hover{border-color:var(--dim)}button.active{border-color:var(--cmd);color:var(--cmd)}button:focus-visible{outline:2px solid var(--cmd);outline-offset:2px}#runBtn{border-color:var(--ok);color:var(--ok)}.stage{display:flex;gap:16px;flex-wrap:wrap}.console{flex:1 1 320px;min-width:280px}.console h3{font:500 .78rem var(--mono);margin:0 0 8px}.cursorNote{font: .72rem var(--mono);color:var(--cursor);margin-bottom:8px;min-height:1.2em}.cmdline{font:1.1rem var(--mono);min-height:1.6em;padding:8px 10px;background:#0D0F0E;border:1px solid var(--rule);margin-bottom:8px}.tok{padding:1px 2px;opacity:0;transition:opacity .3s}.tok.shown{opacity:1}.addr{color:var(--addr)}.cmd{color:var(--cmd)}.roleline{font: .68rem var(--mono);color:var(--dim);display:flex;gap:2px}.roleline span{opacity:0;transition:opacity .3s}.roleline span.shown{opacity:1}.result{margin-top:10px}.verdict{margin-top:18px;padding-top:14px;border-top:1px solid var(--rule);font: .82rem var(--mono);color:var(--dim);opacity:0;transition:opacity .4s}.verdict.shown{opacity:1;color:var(--ok)}.legend{display:flex;gap:16px;flex-wrap:wrap;font: .72rem var(--mono);color:var(--dim);margin-top:10px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.a .dot{background:var(--addr)}.c .dot{background:var(--cmd)}.u .dot{background:var(--cursor)}
+</style></head>
+<body><main class="wrap">
+<h1>Address before operator</h1>
+<p class="premise">Both consoles delete the same lines from the same buffer. Ed types the address first, then the command. Vim’s cursor already sits on the address—because the screen is already showing it—so what gets typed is the command first, then only <em>how far</em> from there. Same two roles, inverted order, identical result.</p>
+<section class="field"><h2>Source buffer</h2><div class="buffer" id="sourceBuffer"></div><div class="legend"><span class="a"><span class="dot"></span>address</span><span class="c"><span class="dot"></span>command / operator</span><span class="u"><span class="dot"></span>cursor, already on screen</span></div></section>
+<section class="field"><h2>Choose what to delete</h2><div class="chips"><button data-scenario="line3">line 3</button><button data-scenario="range24">lines 2–4</button><button data-scenario="toend">line 3 to end</button><button data-scenario="all">everything</button></div><div class="runrow"><button id="runBtn">Run both</button></div></section>
+<div class="stage"><section class="console"><h3>ed</h3><div class="cursorNote">&nbsp;</div><div class="cmdline" id="edLine"></div><div class="roleline" id="edRoles"></div><div class="result buffer" id="edResult"></div></section><section class="console"><h3>vim — normal mode</h3><div class="cursorNote" id="vimCursorNote">cursor already here — nothing typed yet</div><div class="cmdline" id="vimLine"></div><div class="roleline" id="vimRoles"></div><div class="result buffer" id="vimResult"></div></section></div>
+<div class="verdict" id="verdict">identical result — different order</div>
+</main>
+<script>
+(function(){
+const source=['Address before operator,','ed types the target first:','range, then command.','Vim waits for the screen','to already show it,','then names the action.','Same grammar, sorted differently.'];
+const scenarios={
+line3:{range:[3,3],edAddr:'3',edLabel:'line 3',cursor:3,motion:'d',motionLabel:'current line (dd)'},
+range24:{range:[2,4],edAddr:'2,4',edLabel:'lines 2–4',cursor:2,motion:'2j',motionLabel:'down 2 lines'},
+toend:{range:[3,7],edAddr:'3,$',edLabel:'line 3 to end',cursor:3,motion:'G',motionLabel:'to last line'},
+all:{range:[1,7],edAddr:'%',edLabel:'whole buffer',cursor:1,motion:'G',motionLabel:'from top to last line'}};
+let current='line3',epoch=0;
+const byId=id=>document.getElementById(id);
+function render(el,lines,removed){el.innerHTML='';lines.forEach((text,i)=>{const n=i+1,row=document.createElement('div');row.className='line'+(removed&&n>=removed[0]&&n<=removed[1]?' removed':'');row.innerHTML='<span class="num">'+n+'</span><span class="text">'+text+'</span>';el.appendChild(row)})}
+function clearResults(){['edLine','edRoles','vimLine','vimRoles','edResult','vimResult'].forEach(id=>byId(id).innerHTML='');byId('verdict').classList.remove('shown')}
+function setScenario(key){epoch++;current=key;document.querySelectorAll('[data-scenario]').forEach(b=>b.classList.toggle('active',b.dataset.scenario===key));const s=scenarios[key];render(byId('sourceBuffer'),source,s.range);clearResults();byId('vimCursorNote').textContent='cursor already at line '+s.cursor+' — nothing typed yet'}
+function typeTokens(el,tokens,run){el.innerHTML='';tokens.forEach((t,i)=>{const span=document.createElement('span');span.className='tok '+t.cls;span.textContent=t.text;el.appendChild(span);setTimeout(()=>{if(run===epoch)span.classList.add('shown')},i*260)});return tokens.length*260}
+function labels(el,parts,run){el.innerHTML='';parts.forEach(p=>{const span=document.createElement('span');span.className=p.cls;span.textContent=p.text;el.appendChild(span)});setTimeout(()=>{if(run===epoch)el.querySelectorAll('span').forEach(s=>s.classList.add('shown'))},10)}
+function deleted(range){return source.filter((_,i)=>i+1<range[0]||i+1>range[1])}
+document.querySelectorAll('[data-scenario]').forEach(b=>b.onclick=()=>setScenario(b.dataset.scenario));
+byId('runBtn').onclick=()=>{epoch++;const run=epoch,s=scenarios[current];clearResults();const edDelay=typeTokens(byId('edLine'),[{text:s.edAddr,cls:'addr'},{text:'d',cls:'cmd'}],run);labels(byId('edRoles'),[{text:s.edLabel+'  ',cls:'addr'},{text:'delete',cls:'cmd'}],run);const vimDelay=typeTokens(byId('vimLine'),[{text:'d',cls:'cmd'},{text:s.motion,cls:'addr'}],run);labels(byId('vimRoles'),[{text:'delete  ',cls:'cmd'},{text:s.motionLabel,cls:'addr'}],run);setTimeout(()=>{if(run!==epoch)return;const result=deleted(s.range);render(byId('edResult'),result);render(byId('vimResult'),result);byId('verdict').classList.add('shown')},Math.max(edDelay,vimDelay)+250)};
+setScenario('line3');
+})();
+</script></body></html>
