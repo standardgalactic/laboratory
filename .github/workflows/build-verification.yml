@@ -47,6 +47,9 @@ jobs:
       - name: Verify experiment gallery is current
         run: python3 scripts/build-gallery.py --check
 
+      - name: Test gallery validation
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+
       - name: Validate local links, redirects, and artifact integrity
         run: python3 scripts/validate-links.py
 
