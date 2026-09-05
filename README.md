@@ -10,6 +10,8 @@
 
 [Distinction and Continuation](https://standardgalactic.github.io/laboratory/distinction-and-continuation.pdf)
 
+[Distinction Holonomy](https://standardgalactic.github.io/laboratory/distinction-holonomy.html) — *Interactive Experiment*
+
 ![](nonexistant.png)
 
 [Borrowed Intuition](https://standardgalactic.github.io/laboratory/borrowed-intuition.pdf)
