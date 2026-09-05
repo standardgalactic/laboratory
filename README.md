@@ -1,8 +1,18 @@
 # laboratory
 
+[Degeneracy Before Collapse](https://standardgalactic.github.io/laboratory/degeneracy-before-collapse.pdf)
+
+[Dangerous Sounding Speech](https://standardgalactic.github.io/laboratory/dangerous-sounding-speech.pdf)
+
+[Chemical Identity Is Not Causation](https://standardgalactic.github.io/laboratory/chemical-identity-is-not-causation.pdf)
+
+---
+
 [Projects](https://github.com/standardgalactic/laboratory/blob/main/projects/README.md)
 
 [Continuation Geometry](https://github.com/standardgalactic/laboratory/blob/main/continuation-geometry/README.md)
+
+[Ensemble Before Selection](https://standardgalactic.github.io/laboratory/working/ensemble-before-selection.pdf)
 
 ![](newline.png)
 

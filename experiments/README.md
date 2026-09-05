@@ -28,8 +28,10 @@ anything &mdash; suitable for CI:
 python3 ../scripts/build-gallery.py --check
 ```
 
-The check fails on orphaned scripts or outputs, missing thumbnails, broken
-related-paper links, or a stale `index.html`.
+The check fails on malformed or duplicate metadata, unknown gallery filters,
+orphaned scripts, renders, `.blend` files, or thumbnails, missing or invalid
+thumbnails, broken related-paper links, or a stale `index.html`. It does not
+launch Blender, so it is safe to run during an ordinary site build.
 
 Render one experiment with:
 

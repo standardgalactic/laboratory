@@ -1,0 +1,467 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{mathrsfs}
+
+\title{\textbf{Degeneracy Before Collapse: A Falsifiable Horizonless Alternative to Black Hole Formation}}
+\author{Flyxion \\ \textit{Independent Researcher}}
+\date{September 2026}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{conjecture}{Conjecture}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Degenerate Torus Remnant (DTR) hypothesis proposes that sufficiently angular-momentum-rich degenerate matter, collapsing under its own gravity, can settle into a horizonless, ultracompact, rotating equilibrium rather than continuing on to form an event horizon. The object's material boundary sits a small proper distance outside where a Kerr horizon of the same mass and spin would otherwise form, and its high compactness is supported primarily by pressure anisotropy of the kind already known (Bowers--Liang 1974) to let self-gravitating matter exceed the isotropic Buchdahl bound without violating the null energy condition. This essay states the relevant singularity theorem precisely, derives its underlying focusing result from the Raychaudhuri equation, gives the metric and stress-energy content of the DTR as an explicit, checkable specification rather than an unsolved ansatz, identifies dynamical stability -- not just static existence -- as the central open problem the hypothesis must answer, derives the gravitational-wave echo delay and transfer function this object would produce, states a bounded, population-level falsification criterion built on the existing exotic-compact-object echo research program, and gives the Hawking evaporation timescale in full, correcting a common order-of-magnitude confusion between the end of star formation and the far longer timescale on which compact remnants actually return their mass-energy to the universe.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The standard general-relativistic account of gravitational collapse ends in a singularity. This is a theorem under specific, checkable hypotheses, and for ordinary matter collapsing past the point where any known form of degeneracy pressure can hold it up, those hypotheses are met and the conclusion follows. The question this essay asks is narrower than "can singularities be avoided in general": it is whether a specific, structurally motivated configuration -- rapidly rotating degenerate matter settling into a toroidal, donut-like shape rather than a point -- can halt collapse \emph{before} a horizon forms at all, producing an object that is not a black hole but is close enough to one, from the outside, to require dedicated observation to tell apart.
+
+Because no horizon ever forms on this hypothesis, the object's boundary remains a genuine, causally connected material surface throughout its history. That single feature is what makes the hypothesis testable at all: a structure behind an event horizon cannot, by the horizon's own definition, send any causal signal to an external observer, so no exterior measurement could ever confirm or rule out a claim about one. A horizonless surface has no such restriction -- it can support incident radiation and partially reflect it, which is exactly what gravitational-wave echo searches are built to detect. The remainder of this essay develops the Degenerate Torus Remnant (DTR) on that basis: the theorem-level statement of what a horizonless equilibrium must and must not require (Section 3), the object's definition and the honest accounting of what in it is established physics versus postulate (Section 4), its terminal-evaporation behavior on cosmological timescales (Section 5), an admissibility-theoretic reading of the horizon as a recoverability boundary (Section 6), and a falsification criterion stated in a form specific enough to be met or refused (Section 7). Four appendices carry the technical weight: a derivation of the focusing theorem behind Section 3 (Appendix A), a full specification -- not a solved model -- of the DTR metric, stress-energy, and stability problem (Appendix B), the echo transfer function and a statistical exclusion criterion (Appendix C), and the complete evaporation derivation with numerical values (Appendix D).
+
+\section{The Standard Collapse Sequence}
+
+\subsection{Degeneracy pressure and its known limits}
+
+A zero-temperature Fermi gas resists compression because the Pauli exclusion principle forces additional particles into higher momentum states, giving a degeneracy pressure $P \propto n^{5/3}$ (non-relativistic) or $P \propto n^{4/3}$ (ultrarelativistic), with $n$ the number density. Electron degeneracy pressure supports white dwarfs up to the Chandrasekhar mass $M_{Ch}\approx 1.4\,M_\odot$; past that, collapse to a neutron star is favored. Neutron degeneracy pressure supports neutron stars up to the Tolman--Oppenheimer--Volkoff (TOV) limit, estimated at roughly $2$--$2.5\,M_\odot$ depending on the nuclear equation of state, past which no known static, isotropic equilibrium exists and continued collapse is the standard expectation.
+
+\subsection{Compactness and the Buchdahl bound}
+
+\begin{theorem}[Buchdahl 1959 \cite{buchdahl1959}]
+For a static, spherically symmetric star with isotropic pressure and non-negative, monotonically non-increasing density, the compactness is bounded by
+\begin{equation}
+\mathcal{C} \equiv \frac{2GM}{Rc^2} \leq \frac{8}{9}.
+\end{equation}
+\end{theorem}
+This bound is equation-of-state independent; no isotropic perfect fluid, however exotic its pressure-density relation, can be packed more tightly than $\mathcal{C}=8/9$ while remaining static and singularity-free at its own center. Reaching black-hole-like compactness ($\mathcal{C}\to 1$) with an isotropic fluid is therefore not merely difficult but provably impossible.
+
+\begin{theorem}[Bowers \& Liang 1974 \cite{bowersliang1974}]
+If the isotropy assumption is dropped -- i.e., if radial and tangential pressures $P_r \neq P_\perp$ are allowed to differ -- the Buchdahl bound no longer applies, and static configurations with $\mathcal{C}$ arbitrarily close to $1$ can in principle be constructed, without any of the pressure or energy-density components becoming negative and without violating the null or weak energy conditions, provided the anisotropy $P_\perp - P_r$ grows appropriately toward the center.
+\end{theorem}
+This is the essential, non-exotic mechanism this essay leans on: pressure anisotropy, not energy-condition violation, is what current literature already identifies as sufficient to reach very high compactness with ordinary matter. It is a real, established result, not a novel proposal of this essay. What is genuinely open is whether the \emph{last} increment of compactness, taking $\mathcal{C}$ from "very close to 1" to "indistinguishable from a black hole to all present observational precision," can also be reached without some additional exotic ingredient; reviews of exotic compact objects (ECOs) generally note that models approaching this limit tend to require either extreme anisotropy, non-standard equations of state, or, in some constructions, near-horizon violation of the null energy condition \cite{cardosopani2019}. This essay takes no position on which of those is realized in general, and states the DTR model's own required exoticity explicitly in Section 4.2 -- including the fact, made precise there, that the regime in which the hypothesis is observationally testable is exactly the regime in which that exoticity becomes hardest to avoid.
+
+\section{The Singularity Theorem and Two Distinct Escape Routes}
+
+\begin{theorem}[Penrose 1965 \cite{penrose1965}, informal but accurate statement]
+Let $(M,g)$ be a globally hyperbolic spacetime with a non-compact Cauchy surface, containing a closed trapped surface $T$. If the null convergence condition (equivalently, the null energy condition, $T_{\mu\nu}k^\mu k^\nu \geq 0$ for all null $k^\mu$) holds on and to the future of $T$, then $(M,g)$ is future null geodesically incomplete.
+\end{theorem}
+Two points of precision matter here. First, the theorem's conclusion is future null geodesic incompleteness -- a statement about the failure of geodesics to extend indefinitely -- not directly a claim that curvature or density diverges at a point or ring; that stronger, more specific picture is supplied by particular exact solutions (Schwarzschild, Kerr) and is not part of the theorem itself. Second, the relevant hypothesis is the null energy condition (equivalently the null convergence condition), not the strong energy condition; the two coincide for many simple matter models but are logically distinct conditions, and the theorem as stated needs the null one. Appendix~\ref{app:raychaudhuri} derives the focusing result the theorem rests on directly from the Raychaudhuri equation, so that the escape routes below can be read off a proof rather than asserted.
+
+Because the theorem is conditional on three separable hypotheses -- global hyperbolicity, existence of a closed trapped surface, and the null energy condition holding on its future -- there are, correspondingly, (at least) two structurally different ways a physical model can avoid its conclusion, and they are not interchangeable:
+
+\begin{enumerate}[label=(\Alph*)]
+\item \textbf{The interior route.} Allow the trapped surface (hence the horizon) to form as usual, and violate the null energy condition somewhere within it. This is the route taken by gravastars \cite{mazurmottola2004}, which retain a horizon or a surface arbitrarily close to one and are therefore genuinely causally sealed off in the ordinary sense: nothing behind a gravastar's near-horizon surface can be probed by exterior echoes. Fuzzballs \cite{mathur2005} are a structurally different case within the same route: rather than a classical stress tensor violating the NEC in the ordinary sense, the classical spacetime description near the would-be singularity is replaced by a horizon-scale quantum microstate structure, and whether such a structure is causally sealed in the same way a classical horizon is remains a live question in that literature rather than something this essay can assume either way.
+\item \textbf{The horizonless route.} Prevent the closed trapped surface from forming at all. The star or remnant never actually collapses inside its own Schwarzschild radius; it settles into a static or stationary equilibrium at some $\mathcal{C} < 1$, however close. This is the route taken by boson stars, most ECO models, and the Degenerate Torus Remnant developed here. Because no horizon exists, the object's boundary can, in principle, both support incident radiation and re-emit or reflect part of it, which is exactly what makes gravitational-wave echoes a meaningful test: the signal is sourced at a genuine, causally connected material surface, not smuggled out of a causally sealed region.
+\end{enumerate}
+
+The remainder of this essay commits fully to route B, both because it is the only route under which the echo test of Section 7 is causally coherent, and because it is the route for which the non-exotic Bowers--Liang mechanism of Section 2.2 provides a concrete, non-exotic starting point.
+
+\section{The Degenerate Torus Remnant (DTR)}
+
+\subsection{Definition}
+
+\begin{definition}[Degenerate Torus Remnant]
+A DTR is a stationary, axisymmetric, rotating configuration of degenerate matter with material boundary at areal radius $r_0$ satisfying
+\begin{equation}
+r_0 = r_+(1+\epsilon), \qquad 0 < \epsilon \ll 1,
+\end{equation}
+where $r_+$ is the radius the Kerr horizon of the same mass $M$ and dimensionless spin $\chi \equiv cJ/(GM^2)$ would have, supported against further collapse by a pressure anisotropy $P_\perp(r,\theta) - P_r(r,\theta)$ that grows toward the rotation axis and equatorial plane in the manner of the Bowers--Liang mechanism, concentrated preferentially in an equatorial torus by the same centrifugal reorganization that produces the donut-shaped structure of a synestia \cite{lockstewart2017} in giant-impact planet formation. The synestia comparison is offered here strictly as a \emph{morphological} analogy -- both are rotating bodies whose equilibrium shape becomes toroidal once rotation is fast enough relative to self-gravity -- and not as a claim of shared physical mechanism, energy scale, or governing equation of state; the two systems differ by many orders of magnitude in density, temperature, and the physics providing pressure support.
+\end{definition}
+
+\subsection{What is, and is not, exotic here}
+
+The compactness required of a DTR ($\mathcal{C}$ close to but strictly less than $1$) is, per Bowers--Liang, achievable with ordinary matter and anisotropic pressure alone, without energy-condition violation, provided $\epsilon$ is not taken to zero. This essay does \emph{not} claim that rotation or magnetic tension by themselves generate negative energy density or pressure below $-\rho c^2$: ordinary electromagnetic stress-energy satisfies the null energy condition, and no mechanism proposed here relies on it doing otherwise. What the model does require, and states plainly as a postulate rather than a derived consequence of known physics, is a supra-nuclear equation of state at the relevant densities capable of sustaining the anisotropy profile needed for the specific $\epsilon$ the model is fit to; no laboratory or astrophysical measurement presently constrains matter at these densities well enough to confirm or exclude this. If, and only if, a population of remnants requires $\epsilon \to 0$ to match observed masses and spins as closely as observed black hole candidates do, the model would additionally need the further exotic ingredient discussed in Section 3 (route A).
+
+This last point is sharper than it may first appear, and is worth stating on its own. The gravitational-wave echo delay derived in Appendix~\ref{app:echo} grows only logarithmically as $\epsilon\to0$ ($\Delta t \sim (2r_+/c)|\ln\epsilon|$), which means the observationally accessible regime -- large enough $|\ln\epsilon|$ to be distinguishable from a prompt Kerr ringdown, but not so large that the echo train decays below detector sensitivity before it arrives -- is generically a regime of small $\epsilon$. But small $\epsilon$ is precisely the regime in which reaching black-hole-like compactness without any energy-condition violation becomes hardest to guarantee, per the discussion above and in Section 2.2. The exoticity caveat of this section and the echo program of Section 7 are therefore not two independent limitations of the hypothesis; they are two faces of the same limit, and any complete version of DTR must state, for the specific $\epsilon$ range it targets, whether that range still admits a Bowers--Liang-type non-exotic solution or requires the further exotic ingredient.
+
+\subsection{Open technical program}
+
+The metric and stress-energy content of a DTR are not solved for in this essay. A complete model requires, at minimum:
+\begin{itemize}
+\item An explicit stationary, axisymmetric metric $ds^2 = -e^{2\Phi}dt^2 + e^{2\Lambda}dr^2 + r^2 d\theta^2 + W^2(d\phi-\omega\, dt)^2$ with $\Phi,\Lambda,W,\omega$ solved as functions of $(r,\theta)$ from the Einstein field equations sourced by the chosen anisotropic stress-energy, not merely written down as an ansatz.
+\item Verification of stress-energy conservation, $\nabla_\mu T^{\mu\nu} = 0$, for the resulting solution.
+\item Matching across the (timelike, since $r_0 > r_+$) boundary surface to an exterior that is Kerr to within $O(\epsilon)$, using standard timelike junction conditions.
+\item An explicit check for closed timelike curves, ergoregion instabilities \cite{cardosopani2019}, and other causal or dynamical pathologies known to afflict rotating ECOs generically.
+\item A demonstration that the resulting equilibrium is dynamically stable, or at minimum long-lived compared to any relevant observation window -- a static solution that decays on a short dynamical timescale is a transient configuration during collapse, not the terminal state the hypothesis proposes it to be.
+\end{itemize}
+Appendix~\ref{app:toroidal} turns each item on this list into an explicit, named specification -- unknown functions, a closure relation, a residual operator whose smallness would constitute an admissible numerical solution, checkable definitions of regularity, horizonlessness, and toroidality, and, critically, the linear stability problem posed as an eigenvalue problem rather than left unaddressed -- so that what remains open is a well-posed numerical target rather than an unspecified promise. Of these, the stability requirement is the one this essay considers the most consequential open question: existence of a static solution to the field equations is necessary but not sufficient for DTR to be a physically relevant terminal state of collapse, and Appendix~\ref{app:toroidal} states this as sharply as the existence problem itself.
+
+\section{Terminal Evaporation}
+
+Whatever the ultimate status of near-horizon structure, the far future of any sufficiently compact remnant -- black hole or DTR alike, since both have exteriors approximating Kerr -- is governed by Hawking radiation, an exterior semiclassical effect fixed by the surface gravity at $r_+$ \cite{hawking1975}. For a Schwarzschild black hole of mass $M$, $T_H = \hbar c^3/(8\pi G M k_B)$, and treating the horizon as a blackbody emitter gives an evaporation time, exact for a single massless emitted species (the species-dependent greybody prefactor is discussed in \cite{page1976,page1976rotating,macgibbon1991}),
+\begin{equation}
+t_{ev} = \frac{5120\,\pi\, G^2 M^3}{\hbar c^4}.
+\label{eq:tev}
+\end{equation}
+Computed directly from Eq.~\eqref{eq:tev}, $t_{ev} \approx 2.1\times10^{67}$ years for $M=1\,M_\odot$ and, since $t_{ev}\propto M^3$, $t_{ev}\approx 2.1\times10^{70}$ years for $M=10\,M_\odot$. For the most massive black holes known ($M\sim 10^{10}\,M_\odot$), $t_{ev}$ reaches roughly $2.1\times10^{97}$ years. Appendix~\ref{app:evaporation} gives the full derivation with every constant retained, and a numerical table.
+
+Trillions of years ($10^{12}$--$10^{14}$ yr) marks the end of star formation, not black hole evaporation, in the standard staged chronology of the far future \cite{adamslaughlin1997}. A solar-mass compact object's Hawking temperature ($\sim6\times10^{-8}$ K) is presently far below the cosmic microwave background temperature (2.725 K), so it is a net absorber, not emitter; net emission begins only once cosmic expansion cools the background below the object's own Hawking temperature, and the genuinely rapid final flash -- as $T_H \propto M^{-1}$ climbs while the remnant shrinks -- occupies only the last instant of the timescale above, not the whole of it.
+
+\section{An Admissibility Reading}
+
+No-hair constrains the stationary \emph{exterior} fields of a black hole; it says nothing about whether information about infalling matter is or is not recoverable from the interior in principle. Whether that information is genuinely lost, or merely scrambled and returned (in however encoded a form) in the outgoing Hawking radiation, is precisely the content of the black hole information paradox, which remains actively studied and is not resolved by asserting either answer. The honest contrast this essay can draw is therefore between two \emph{recoverability postures}, not between a "structured DTR" and an "informationless standard hole": on the DTR hypothesis, the object's material content stays causally connected to the exterior throughout its history because no horizon ever forms, so no version of the information paradox arises for it at all; on the standard black hole hypothesis, the same content crosses a genuine horizon and its ultimate recoverability is the open question the paradox names. This is a real, structurally interesting difference in kind between the two hypotheses -- but it is a difference about which recoverability problem an object does or does not have, not a claim that one interior is richer than the other.
+
+\section{Falsifiability, Stated as a Bounded Criterion}
+
+A horizonless remnant with a genuine material boundary at $r_0=r_+(1+\epsilon)$, and non-zero reflectivity $\mathcal{R}(\omega)$ at that boundary, generically produces a train of late-time gravitational-wave echoes following a post-merger ringdown, delayed relative to the main burst by approximately the light-crossing time between the photon sphere and $r_0$,
+\begin{equation}
+\Delta t \sim \frac{2 r_+}{c}\ln\!\left(\frac{1}{\epsilon}\right),
+\end{equation}
+repeating at multiples of $\Delta t$ with amplitude decaying according to $|\mathcal{R}(\omega)|$ at each reflection \cite{cardosopani2016,cardosopani2017}. This is the existing, model-independent ECO echo formula; it does not by itself distinguish a DTR from any other horizonless ECO. As stated, $\chi_{crit}$, $\epsilon$, and $\mathcal{R}$ are left free, so any non-detection can always be accommodated by shrinking $\mathcal{R}$ further, which makes the criterion unfalsifiable in practice even though it is falsifiable in form.
+
+\begin{corollary}[Falsification criterion, bounded form]
+A specific, testable version of the DTR hypothesis must commit, in advance of comparison with data, to a bounded region
+\begin{equation}
+\chi > \chi_{crit}, \qquad \epsilon \in [\epsilon_1,\epsilon_2], \qquad |\mathcal{R}(\omega)| \geq R_{\min} > 0
+\end{equation}
+for some population of merger remnants (e.g., those formed from progenitors above a stated total angular momentum), together with the corresponding $\Delta t$ range and a minimum echo strain amplitude derivable from $R_{\min}$ and the progenitor merger's peak strain. Systematic non-detection of echoes within that committed region, at a stated detector sensitivity, falsifies that specific, parameterized version of the hypothesis. An uncommitted version -- one that adjusts $R_{\min}$ downward after every null result -- is not falsified by non-detection, but neither is it a scientific claim in the sense intended here; it constrains the model's parameter space without ever closing it.
+\end{corollary}
+
+$\chi_{crit}$, $\epsilon_1$, and $\epsilon_2$ cannot presently be derived from first principles, because doing so requires the supra-nuclear equation of state flagged as an open postulate in Section 4.2, and per that section's closing remark, any range narrow enough to be observationally interesting is also a range in which the non-exotic Bowers--Liang mechanism is most strained. Appendix~\ref{app:echo} derives the echo delay and transfer function in full, exhibits exactly why an unconstrained reflectivity is unfalsifiable ($\mathcal{R}_s\to0$ reproduces Kerr identically), ties a candidate reflectivity model to the torus's own vibrational spectrum rather than leaving it phenomenological, and gives the population-level statistical statement (a posterior-mass exclusion criterion and a Bayes factor) that turns "no echoes yet" into an actual, quantifiable exclusion rather than a qualitative one -- with the caveat, stated there explicitly, that any such statistic tests a specific choice of closure and reflectivity model, not the DTR hypothesis as an unparameterized whole. What this essay can honestly claim at present is the \emph{form} that commitment must take, together with named numbers still missing, and the fact that current null echo searches \cite{cardosopani2019} already place real pressure on any such committed region, independent of what is eventually found for $r < r_0$.
+
+\section{Conclusion}
+
+Placing a proposed non-singular structure behind a genuine event horizon and then claiming an exterior test of it is a category error no amount of technical elaboration can repair; the hypothesis developed here is built to avoid that error from the outset by giving up the horizon entirely. What remains is a smaller, more defensible claim: that a rotating, degenerate remnant can, in principle, be supported at compactness arbitrarily close to that of a black hole by ordinary anisotropic pressure -- a mechanism already established in the literature, not invented for this essay -- and that the specific, testable version of this claim inherits both a genuine observational program (gravitational-wave echoes) and a genuine unsolved problem (dynamical stability of the proposed equilibrium) that existence of a static solution alone does not answer. Stating a hypothesis's burden of proof narrowly enough to actually be carried, or actually be refused, is the point of this essay; Appendices A through D carry that burden as far as it can presently be carried without a supra-nuclear equation of state that does not yet exist on solid empirical footing.
+
+\appendix
+
+\section{Raychaudhuri Focusing and the Precise Escape from Penrose}
+\label{app:raychaudhuri}
+
+This appendix derives the focusing result underlying the theorem stated in Section 3, so that the escape routes there are read off a proof rather than asserted.
+
+\subsection{Setup}
+
+Let $k^\mu$ be the tangent to an affinely parameterized, hypersurface-orthogonal null geodesic congruence, $k^\mu k_\mu = 0$, $k^\nu\nabla_\nu k^\mu = 0$, with affine parameter $\lambda$. Let $h_{\mu\nu} = g_{\mu\nu} + k_\mu l_\nu + k_\nu l_\mu$ be the metric induced on the two-dimensional screen space orthogonal to $k^\mu$ and an auxiliary null vector $l^\mu$ normalized by $k^\mu l_\mu = -1$. Decompose $B_{\mu\nu} \equiv \nabla_\nu k_\mu$ restricted to the screen space into expansion, shear, and twist,
+\begin{equation}
+\theta = h^{\mu\nu}B_{\mu\nu}, \qquad \sigma_{\mu\nu} = B_{(\mu\nu)} - \tfrac12\theta h_{\mu\nu}, \qquad \omega_{\mu\nu} = B_{[\mu\nu]}.
+\end{equation}
+Hypersurface-orthogonality of the congruence sets $\omega_{\mu\nu}=0$ identically.
+
+\subsection{The focusing inequality}
+
+The Raychaudhuri equation for a null congruence is \cite{raychaudhuri1955,wald1984}
+\begin{equation}
+\frac{d\theta}{d\lambda} = -\frac12\theta^2 - \sigma_{\mu\nu}\sigma^{\mu\nu} + \omega_{\mu\nu}\omega^{\mu\nu} - R_{\mu\nu}k^\mu k^\nu.
+\end{equation}
+With $\omega_{\mu\nu}=0$ and $\sigma_{\mu\nu}\sigma^{\mu\nu}\geq0$ (a sum of squares), and imposing the null convergence condition $R_{\mu\nu}k^\mu k^\nu \geq 0$ (equivalent, via the Einstein equation, to the null energy condition $T_{\mu\nu}k^\mu k^\nu\geq0$),
+\begin{equation}
+\frac{d\theta}{d\lambda} \leq -\frac12\theta^2.
+\end{equation}
+For an initially converging congruence, $\theta(0)=\theta_0<0$, this Riccati-type inequality integrates (via $d(1/\theta)/d\lambda \geq 1/2$) to
+\begin{equation}
+\frac{1}{\theta(\lambda)} \geq \frac{1}{\theta_0} + \frac{\lambda}{2}.
+\end{equation}
+Since $\theta_0<0$, the right-hand side reaches zero from below at $\lambda = 2/|\theta_0|$, forcing $\theta\to-\infty$ (a conjugate point) at or before that affine parameter.
+
+\begin{proposition}[Finite-affine-parameter focusing]
+\label{prop:focusing}
+Let $k^\mu$ generate a hypersurface-orthogonal null congruence with initial expansion $\theta_0<0$. If the null convergence condition $R_{\mu\nu}k^\mu k^\nu\geq0$ holds along the congruence, a conjugate point develops within affine parameter
+\begin{equation}
+\lambda_{foc} \leq \frac{2}{|\theta_0|}.
+\end{equation}
+\end{proposition}
+
+\subsection{From a conjugate point to geodesic incompleteness}
+
+Proposition~\ref{prop:focusing} is a local, geometric statement: it says a conjugate point forms, not that the geodesic ends there. The remaining step in the full theorem is global. If the spacetime is globally hyperbolic with a non-compact Cauchy surface $\Sigma$, the boundary of the future of the trapped surface $T$, $\dot J^+(T)$, is generated by null geodesics that either extend forever without conjugate points or leave the boundary at the first conjugate point encountered; a null geodesic on $\dot J^+(T)$ cannot be extended as a boundary generator past a conjugate point without ceasing to be achronal, since past that point a timelike shortcut into $J^+(T)$ becomes available. Non-compactness of $\Sigma$ together with the trapped surface's compactness forces $\dot J^+(T)$ itself to be compact if all its generators were future-complete and conjugate-point-free -- which contradicts the non-compact Cauchy surface hypothesis via a standard covering argument \cite{hawkingellis1973}. Since Proposition~\ref{prop:focusing} guarantees every generator does encounter a conjugate point within finite affine parameter, at least one generator must leave $\dot J^+(T)$ at that point, and doing so is only consistent with global hyperbolicity if that generator is future-incomplete: it cannot be extended as a complete geodesic of the spacetime beyond the point where it stops generating the boundary. This is the achronal-boundary argument that converts the local Proposition~\ref{prop:focusing} into the global conclusion of future null geodesic incompleteness; the fully general version, extending the trapped-surface premise to submanifolds of arbitrary co-dimension, is given in \cite{gallowaysenovilla2010}.
+
+\subsection{The escape map}
+
+Writing $\mathcal{T}$ for "a closed trapped surface exists," $\mathcal{C}$ for "the null convergence condition holds to the future of $\mathcal{T}$," and $\mathcal{G}$ for the remaining global hypotheses (global hyperbolicity, non-compact Cauchy surface), the theorem has the form $\mathcal{T}\wedge\mathcal{C}\wedge\mathcal{G} \Rightarrow \neg(\text{null completeness})$, equivalently
+\begin{equation}
+\text{null completeness} \;\Longrightarrow\; \neg\mathcal{T} \;\lor\; \neg\mathcal{C} \;\lor\; \neg\mathcal{G}.
+\end{equation}
+Every singularity-avoidance proposal is a choice of which disjunct to make true:
+\begin{itemize}
+\item \textbf{Reject $\mathcal{T}$.} No closed trapped surface ever forms; the object stays horizonless at all times. This is the route the Degenerate Torus Remnant of this essay takes.
+\item \textbf{Reject $\mathcal{C}$.} A trapped surface forms, but the null energy condition fails somewhere to its future. Gravastars take this route with an explicit classical stress tensor; a semiclassical evaporating horizon also technically falls here, since the outgoing Hawking flux is a NEC-violating quantum effect.
+\item \textbf{Reject $\mathcal{G}$, or reject the classical framework needed to state $\mathcal{G}$ at all.} Fuzzballs are better described this way: the classical geometric description the theorem is stated in terms of is replaced by a horizon-scale quantum microstate structure, so the theorem's hypotheses are not so much violated as rendered inapplicable.
+\end{itemize}
+This appendix proves only that the focusing theorem no longer compels geodesic incompleteness once one of $\mathcal{T},\mathcal{C},\mathcal{G}$ is dropped. It does not prove that any specific horizonless equilibrium -- including the one proposed in Section 4 -- actually exists as a solution of the field equations, still less that it is dynamically stable; those are the separate, unsolved problems addressed as a specification in Appendix~\ref{app:toroidal}.
+
+\section{Toroidal Equilibrium: A Specification for Future Numerical Work}
+\label{app:toroidal}
+
+This appendix specifies the metric, stress-energy content, and stability problem of the DTR in checkable form, and is explicit throughout about the boundary between what is an identity, what is an adopted constitutive assumption, and what is left as a numerical or analytical target.
+
+\subsection{Metric and horizonlessness}
+
+Use quasi-cylindrical coordinates $(t,\varpi,z,\phi)$ and the stationary, axisymmetric metric
+\begin{equation}
+ds^2 = -N^2 dt^2 + A^2\left(d\varpi^2+dz^2\right) + B^2\varpi^2\left(d\phi-\omega\,dt\right)^2,
+\end{equation}
+with unknown functions $N,A,B,\omega$ of $(\varpi,z)$, $N,A,B>0$. Horizonlessness is defined, checkably, by
+\begin{equation}
+N_{\min} \equiv \inf_{\varpi,z} N(\varpi,z) > 0;
+\end{equation}
+a Killing horizon would require $N\to0$ somewhere, so this single condition is both necessary and sufficient for "no horizon" within this ansatz.
+
+\subsection{Matter content and closure}
+
+Model the torus as an anisotropic fluid occupying $\mathcal{T} = \{(\varpi,z): (\varpi-R_0)^2+z^2\leq a^2\}$, $R_0>a>0$, with comoving stress-energy $T_{\hat\mu\hat\nu} = \mathrm{diag}(\rho c^2, P_\varpi, P_z, P_\phi)$. As written this has more unknowns ($\rho,P_\varpi,P_z,P_\phi,\Omega$, plus the four metric functions) than equations, so a closure relation must be adopted explicitly rather than left implicit. An exploratory, non-unique choice is a polytropic anisotropic closure,
+\begin{equation}
+P_i = K_i \rho^\gamma, \qquad K_i = K(1+\alpha_i), \qquad i\in\{\varpi,z,\phi\},
+\end{equation}
+with $K,\gamma,\alpha_\varpi,\alpha_z,\alpha_\phi$ free constitutive parameters standing in for the unknown supra-nuclear equation of state; this is a postulate, not a derivation, and is labeled as such throughout.
+
+\begin{proposition}[Directional null energy criterion]
+\label{prop:nec}
+For a null vector $k^{\hat\mu}=(1,n_\varpi,n_z,n_\phi)$ with $n_\varpi^2+n_z^2+n_\phi^2=1$ in the comoving orthonormal frame,
+\begin{equation}
+T_{\hat\mu\hat\nu}k^{\hat\mu}k^{\hat\nu} = \rho c^2 + P_\varpi n_\varpi^2 + P_z n_z^2 + P_\phi n_\phi^2,
+\end{equation}
+so the null energy condition holds for every null direction if and only if $\rho c^2 + P_i \geq 0$ for each $i\in\{\varpi,z,\phi\}$.
+\end{proposition}
+As emphasized in Section 4.2, the horizonless model does not need to violate Proposition~\ref{prop:nec}; the Bowers--Liang mechanism reaches high compactness with $\rho c^2+P_i\geq0$ throughout, provided $\epsilon$ is not taken to zero.
+
+\subsection{Field equations as a residual, not a solved system}
+
+Equilibrium requires $\nabla_\mu T^{\mu\nu}=0$ together with $G_{\mu\nu} = (8\pi G/c^4)T_{\mu\nu}$. Rather than presenting the fully expanded Einstein tensor for this ansatz as though it had already been solved, define the residual operator
+\begin{equation}
+\mathcal{E}[g,T] \equiv G[g] - \frac{8\pi G}{c^4}T,
+\end{equation}
+and state the admissibility criterion a numerical solution must meet:
+\begin{equation}
+\|\mathcal{E}[g,T]\|_{L^2(\Sigma)} < \varepsilon_{num}
+\end{equation}
+on a spatial slice $\Sigma$, for some numerical tolerance $\varepsilon_{num}$. This converts the open problem into a specification for a future numerical relativity computation rather than a claim already discharged.
+
+For matter on circular orbits, $u^\mu = u^t(1,0,0,\Omega)$ with normalization $u^t = \left[N^2 - B^2\varpi^2(\Omega-\omega)^2\right]^{-1/2}$; timelike motion of the rotating fluid therefore requires
+\begin{equation}
+B^2\varpi^2(\Omega-\omega)^2 < N^2,
+\end{equation}
+i.e., the torus's rotation cannot outrun its own local light cone. This is a genuine, checkable local admissibility condition on any candidate solution, independent of the closure relation chosen.
+
+\subsection{Regularity, horizonlessness, and toroidality as checkable conditions}
+
+A "regular horizonless torus" is given a precise meaning by three conditions: bounded curvature invariants,
+\begin{equation}
+R<\infty, \qquad R_{\mu\nu}R^{\mu\nu}<\infty, \qquad R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}<\infty,
+\end{equation}
+positive lapse everywhere ($N_{\min}>0$, as above), and an off-axis density maximum,
+\begin{equation}
+\rho(0,0)=0, \qquad \operatorname*{arg\,max}_{\varpi,z}\rho(\varpi,z) = (R_0,0), \quad R_0>0,
+\end{equation}
+the last of which encodes toroidality itself rather than assuming it.
+
+\subsection{Global charges and matching}
+
+Define the Komar mass and angular momentum from the timelike and axial Killing vectors $t^\mu,\phi^\mu$ via surface integrals at spatial infinity \cite{komar1959},
+\begin{equation}
+M_K = -\frac{1}{8\pi G}\int_{S_\infty}\nabla^\mu t^\nu\, dS_{\mu\nu}, \qquad J = \frac{1}{16\pi G}\int_{S_\infty}\nabla^\mu \phi^\nu\, dS_{\mu\nu},
+\end{equation}
+and the dimensionless spin $\chi = cJ/(GM_K^2)$ used throughout the main text. Matching is performed across a timelike surface $\Sigma_0$ at $\varpi,z$ corresponding to $r_0=r_+(1+\epsilon)$ -- not at the would-be horizon itself -- requiring continuity of the induced metric, $[h_{ab}]_{\Sigma_0}=0$. If the extrinsic curvature is also continuous, $[K_{ab}]_{\Sigma_0}=0$, the matching is smooth with no surface layer; if not, the jump defines a physical surface stress via the Israel junction condition \cite{israel1966,poisson2004},
+\begin{equation}
+S_{ab} = -\frac{c^4}{8\pi G}\left([K_{ab}] - h_{ab}[K]\right),
+\end{equation}
+which must then itself be checked against the energy conditions and interpreted physically (e.g., as a crust or a boundary layer of the degenerate torus) rather than left as a bookkeeping artifact. This check is not merely formal: a matching that produces a surface layer with $S_{ab}$ violating the null energy condition would reintroduce, at the boundary rather than in the bulk, exactly the exoticity Section 4.2 argues the bulk solution can avoid. A complete DTR construction must therefore verify $\rho_{surf}c^2 + P_{surf,i}\geq 0$ for the Israel surface stress itself, not only for the bulk stress-energy of Proposition~\ref{prop:nec}; a smooth junction ($[K_{ab}]=0$) sidesteps this concern entirely and should be preferred where the closure relation permits it.
+
+\subsection{Linear stability}
+
+Existence of a static solution to the equations above is necessary but not sufficient for the DTR to be the physical terminal state of collapse; a solution that decays on a dynamical timescale is a transient stage passed through during collapse, not an endpoint of it, however good its static properties. Posing this properly requires treating the family $g_{\mu\nu}(\chi,\lambda), T_{\mu\nu}(\chi,\lambda)$ of Section~\ref{app:toroidal_openproblem} as a background and linearizing: writing $g_{\mu\nu}\to g_{\mu\nu}+\delta g_{\mu\nu}e^{i\omega t}$, $T_{\mu\nu}\to T_{\mu\nu}+\delta T_{\mu\nu}e^{i\omega t}$ and substituting into the linearized Einstein and conservation equations yields a generalized eigenvalue problem for the complex frequency $\omega$,
+\begin{equation}
+\mathcal{L}[\delta g,\delta T] = \omega^2\,\mathcal{M}[\delta g,\delta T]
+\end{equation}
+for linear differential operators $\mathcal{L},\mathcal{M}$ determined by the background solution and the closure relation of Section~\ref{app:toroidal}.2. A mode with $\mathrm{Im}(\omega)>0$ grows in time and signals a genuine instability of the background; a mode with $\mathrm{Im}(\omega)\leq0$ is stable or marginally stable. Rotating, self-gravitating fluid configurations of this general kind are known, in the neutron-star context, to admit both stabilizing and destabilizing mode families depending on the equation of state and rotation profile \cite{stergioulas2003,friedmanstergioulas2013}, and rotating horizonless ECOs specifically are known to be susceptible to ergoregion instabilities when an ergoregion is present without a horizon to absorb the growing mode \cite{cardosopani2019}. Neither of these facts is established or refuted for the DTR closure of Section~\ref{app:toroidal}.2 in this essay.
+
+\begin{conjecture}[Physical relevance criterion]
+A DTR solution $\left(g_{\mu\nu}(\chi,\lambda),T_{\mu\nu}(\chi,\lambda)\right)$ is a physically relevant candidate terminal state of collapse only if every unstable mode, if any exist, has growth timescale $\tau_{grow} = 1/\mathrm{Im}(\omega)$ long compared to the light-crossing time of the object and, separately, long compared to the gravitational-wave observation window over which the echo criterion of Appendix~\ref{app:echo} is to be applied. A solution violating this criterion is a transient, not a terminal state, regardless of whether it solves $\mathcal{E}[g,T]=0$ exactly.
+\end{conjecture}
+
+This essay does not solve the eigenvalue problem above for any specific closure; doing so is a necessary further step before the existence claim of Section~\ref{app:toroidal_openproblem} can be read as a claim about a physically realized object rather than a mathematically admissible one.
+
+\subsection{Statement of the open problem}
+\label{app:toroidal_openproblem}
+
+The Degenerate Torus Remnant conjecture of Section 4 is precisely the claim that there exists a family of regular, dynamically stable (in the sense of the preceding subsection) solutions
+\begin{equation}
+\mathscr{S} = \left\{g_{\mu\nu}(\chi,\lambda),\, T_{\mu\nu}(\chi,\lambda)\right\}
+\end{equation}
+satisfying all of the above -- $N_{\min}>0$, bounded curvature invariants, off-axis density maximum, $\|\mathcal{E}[g,T]\|_{L^2(\Sigma)}<\varepsilon_{num}$, timelike matching with an admissible surface stress, and no unstable mode faster than the criterion above -- whose exterior multipole moments approach those of Kerr as a compactness parameter $\lambda\to0$ (equivalently $\epsilon\to0$). No such family is exhibited in this essay. What has been supplied here is a well-posed target for constructing one, of the same general kind numerical relativity already constructs for ordinary rotating neutron stars \cite{stergioulas2003,friedmanstergioulas2013}, adapted here to an anisotropic, horizonless, toroidal configuration rather than a spheroidal isotropic one -- and, unlike the neutron-star case, one whose stability is presently an entirely open question rather than a well-studied one.
+
+\section{Echo Transfer Function and a Falsifiability Program}
+\label{app:echo}
+
+This appendix derives the echo delay in full, introduces a non-arbitrary reflectivity model, and states the population-level statistic needed to convert non-detection into an actual exclusion. It works in the non-rotating (Schwarzschild, $\chi\to0$) limit throughout for analytic tractability; the rotating ($\chi>0$) case replaces $r_s$ and the photon-sphere radius with their Kerr equivalents plus $\chi$-dependent corrections, which are not derived here.
+
+\subsection{Exact delay, then the small-$\epsilon$ limit}
+
+Let $r_s = 2GM/c^2$ and place the material surface at $r_0 = r_s(1+\epsilon)$, $0<\epsilon\ll1$. The Schwarzschild tortoise coordinate is $r_* = r + r_s\ln\left|r/r_s - 1\right|$. Evaluating at the photon sphere $r_{ph}=\tfrac32 r_s$ and at $r_0$,
+\begin{align}
+r_*(r_{ph}) &= \tfrac32 r_s + r_s\ln\left(\tfrac12\right), \\
+r_*(r_0) &= r_s(1+\epsilon) + r_s\ln\epsilon.
+\end{align}
+The cavity length $L = r_*(r_{ph}) - r_*(r_0)$ is, retaining all terms before any limit is taken,
+\begin{equation}
+L = r_s\left[\tfrac12 - \epsilon - \ln(2\epsilon)\right],
+\end{equation}
+and the round-trip echo delay is
+\begin{equation}
+\Delta t_{echo} = \frac{2L}{c} = \frac{2r_s}{c}\left[\tfrac12-\epsilon-\ln(2\epsilon)\right] \;\xrightarrow{\epsilon\to0}\; \frac{2r_s}{c}\left|\ln\epsilon\right| + O\!\left(\frac{r_s}{c}\right).
+\end{equation}
+Retaining the exact bracketed expression, rather than only the asymptotic $|\ln\epsilon|$ form, is what makes the logarithmic approximation a derived limit rather than an imported one.
+
+\subsection{A non-arbitrary reflectivity model}
+
+Rather than leaving the surface reflectivity $\mathcal{R}_s(\omega)$ fully phenomenological, adopt a resonant parameterization
+\begin{equation}
+\mathcal{R}_s(\omega) = R_0\exp\left[-\left(\frac{\omega-\omega_0}{\Gamma}\right)^2\right]e^{i\phi(\omega)},
+\end{equation}
+with peak reflectivity $R_0$, resonant frequency $\omega_0$, and bandwidth $\Gamma$, and tie $\omega_0$ to the torus's own fundamental acoustic/rotational mode by the scaling relation
+\begin{equation}
+\omega_0^2 \sim \frac{c_s^2}{a^2} + m^2\Omega^2, \qquad c_s^2 = \frac{\partial P}{\partial \rho},
+\end{equation}
+labeled explicitly as a scaling relation, not a derived mode frequency. This connects the phenomenological reflectivity to the interior equation of state postulated in Appendix~\ref{app:toroidal}, rather than leaving it a free dial with no physical referent. It remains, nonetheless, a postulated closure of the same kind as the polytropic relation in Appendix~\ref{app:toroidal}.2: labeling it as a scaling relation does not make it derivable from first principles, and a Bayes factor computed from it (Section~\ref{app:echo_stats} below) is correspondingly a test of this specific parameterized model, not of the DTR hypothesis in an unparameterized, closure-independent sense.
+
+\subsection{Transfer function and why an unconstrained model is unfalsifiable}
+
+With $\mathcal{R}_b(\omega),\mathcal{T}_b(\omega)$ the reflection/transmission coefficients of the exterior curvature (photon-sphere) potential barrier, the frequency-domain strain is \cite{cardosoetal2016echoes,marketal2017}
+\begin{equation}
+\tilde h(\omega) = \tilde h_{BH}(\omega) + \frac{\mathcal{T}_b^2(\omega)\,\mathcal{R}_s(\omega)\,e^{2i\omega L/c}}{1-\mathcal{R}_b(\omega)\mathcal{R}_s(\omega)e^{2i\omega L/c}}\,\tilde h_{seed}(\omega),
+\end{equation}
+which expands as a geometric series of successive echoes,
+\begin{equation}
+\tilde h_{echo} = \mathcal{T}_b^2\sum_{n=1}^\infty \mathcal{R}_s^n \mathcal{R}_b^{\,n-1} e^{2in\omega L/c}\,\tilde h_{seed}, \qquad A_n(\omega)\propto |\mathcal{T}_b(\omega)|^2|\mathcal{R}_s(\omega)|^n|\mathcal{R}_b(\omega)|^{n-1}.
+\end{equation}
+As $\mathcal{R}_s\to0$, every echo amplitude vanishes and the signal becomes identical to a Kerr ringdown: the model is trivially unfalsifiable if $\mathcal{R}_s$ is left free to shrink after every null result, a concern sharpened by explicit loudness/detectability estimates for ECO echoes \cite{maggioetal2019,micchietal2021}. Any falsification claim for DTR must therefore fix a floor $R_{\min}$ before comparison with data, not after.
+
+\subsection{A bounded, and therefore testable, parameter region}
+
+\begin{equation}
+\Theta_{DTR} = \left\{\chi,\epsilon,\mathcal{R}_s : \chi\geq\chi_{crit},\ \epsilon_-\leq\epsilon\leq\epsilon_+,\ |\mathcal{R}_s(\omega)|\geq R_{\min}\right\}.
+\end{equation}
+A specific, falsifiable version of the DTR hypothesis for a stated remnant population must predict, in advance,
+\begin{equation}
+\chi\geq\chi_{crit} \;\Longrightarrow\; \Delta t\in[\Delta t_-,\Delta t_+], \quad \omega_{peak}\in[\omega_-,\omega_+], \quad A_1/A_{RD}\geq \eta_{\min},
+\end{equation}
+with $\eta_{\min}>0$ strictly bounded away from zero. This essay does not presently supply numerical values for $\chi_{crit},\epsilon_\pm,R_{\min},\eta_{\min}$, because doing so requires the supra-nuclear equation of state left as a postulate in Appendix~\ref{app:toroidal}, compounded by the closure-dependence of the reflectivity model noted in Section~\ref{app:echo}.2. What is supplied is the correct \emph{form} such a prediction must take -- named, bounded intervals and a strictly positive amplitude floor -- so that this appendix should be read as a falsifiability program, not yet an achieved falsification criterion.
+
+\subsection{Turning non-detection into an exclusion statement}
+\label{app:echo_stats}
+
+With detector noise power spectral density $S_n(f)$, the noise-weighted inner product is \cite{veitchetal2015}
+\begin{equation}
+(a|b) = 4\,\mathrm{Re}\int_{f_{\min}}^{f_{\max}} \frac{\tilde a(f)\tilde b^*(f)}{S_n(f)}\, df,
+\end{equation}
+giving a Gaussian likelihood $\log p(d|\theta) = -\tfrac12(d-h_\theta \,|\, d-h_\theta) + C$ for data $d$ and model parameters $\theta=(\chi,\epsilon,\mathcal{R}_s,\dots)$. For independent merger observations $d_1,\dots,d_N$, the posterior is $p(\theta|d_1,\dots,d_N)\propto \pi(\theta)\prod_i p(d_i|\theta)$.
+
+\begin{definition}[Population-level exclusion]
+The DTR hypothesis, restricted to $\Theta_{DTR}$, is excluded at credibility $1-\alpha$ against a data set $d_1,\dots,d_N$ when
+\begin{equation}
+\int_{\Theta_{DTR}} p(\theta \mid d_1,\dots,d_N)\, d\theta < \alpha.
+\end{equation}
+\end{definition}
+A model comparison against Kerr can equivalently be reported as a Bayes factor,
+\begin{equation}
+\mathcal{B}_{DTR,Kerr} = \frac{\int_{\Theta_{DTR}} p(d|\theta)\pi(\theta)\, d\theta}{p(d|\mathrm{Kerr})}.
+\end{equation}
+This converts the qualitative claim "continued non-detection would count against the hypothesis" into an actual, computable statistical proposition, once $\Theta_{DTR}$ is numerically specified -- with the standing caveat, stated in Section~\ref{app:echo}.2 and repeated here for emphasis, that $\mathcal{B}_{DTR,Kerr}$ so computed compares Kerr to \emph{this particular} closure-and-reflectivity model, not to the DTR hypothesis independent of any choice of microphysics. A different closure or reflectivity model consistent with the same Section 4 definition would in general yield a different $\Theta_{DTR}$ and a different Bayes factor; no single computation of this kind closes the DTR hypothesis as such, only the specific parameterized instance under test.
+
+\section{Evaporation: Full Derivation and Numerical Table}
+\label{app:evaporation}
+
+Substituting the Stefan--Boltzmann constant $\sigma = \pi^2k_B^4/(60\hbar^3c^2)$, the Schwarzschild horizon area $A=16\pi G^2M^2/c^4$, and the Hawking temperature $T_H = \hbar c^3/(8\pi GMk_B)$ into the blackbody luminosity $L=\sigma A T_H^4$ gives, after the $k_B$ and $\pi$ powers cancel,
+\begin{equation}
+L = \frac{\hbar c^6}{15360\,\pi\, G^2 M^2}.
+\end{equation}
+Using $L = -c^2\,dM/dt$,
+\begin{equation}
+\frac{dM}{dt} = -\frac{\hbar c^4}{15360\,\pi\, G^2 M^2},
+\end{equation}
+and integrating $M^2\,dM = -\left[\hbar c^4/(15360\pi G^2)\right]dt$ from $M_0$ at $t=0$ to $M=0$ at $t=t_{ev}$ gives
+\begin{equation}
+t_{ev} = \frac{5120\,\pi\, G^2 M_0^3}{\hbar c^4},
+\end{equation}
+matching Eq.~\eqref{eq:tev} of Section 5 exactly, with every constant retained rather than only the $M^3$ scaling. Table~\ref{tab:evap} gives numerical values computed directly from this expression.
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Mass & $t_{ev}$ (years) \\
+\midrule
+$1\,M_\odot$ & $2.10\times10^{67}$ \\
+$10\,M_\odot$ & $2.10\times10^{70}$ \\
+$10^6\,M_\odot$ & $2.10\times10^{85}$ \\
+$10^{10}\,M_\odot$ & $2.10\times10^{97}$ \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Hawking evaporation timescale by mass, computed directly from $t_{ev}=5120\pi G^2M_0^3/(\hbar c^4)$.}
+\label{tab:evap}
+\end{center}
+
+\begin{thebibliography}{99}
+
+\bibitem{buchdahl1959} H. A. Buchdahl, ``General Relativistic Fluid Spheres,'' \textit{Phys. Rev.} \textbf{116}, 1027 (1959).
+
+\bibitem{bowersliang1974} R. L. Bowers and E. P. T. Liang, ``Anisotropic Spheres in General Relativity,'' \textit{Astrophys. J.} \textbf{188}, 657 (1974).
+
+\bibitem{penrose1965} R. Penrose, ``Gravitational Collapse and Space-Time Singularities,'' \textit{Phys. Rev. Lett.} \textbf{14}, 57 (1965).
+
+\bibitem{mazurmottola2004} P. O. Mazur and E. Mottola, ``Gravitational Condensate Stars: An Alternative to Black Holes,'' arXiv:gr-qc/0109035 (2004).
+
+\bibitem{mathur2005} S. D. Mathur, ``The Fuzzball Proposal for Black Holes: An Elementary Review,'' \textit{Fortsch. Phys.} \textbf{53}, 793 (2005), arXiv:hep-th/0502050.
+
+\bibitem{lockstewart2017} S. J. Lock and S. T. Stewart, ``The Structure of Terrestrial Bodies: Impact Heating, Corotation Limits, and Synestias,'' \textit{J. Geophys. Res. Planets} \textbf{122}, 950 (2017).
+
+\bibitem{hawking1975} S. W. Hawking, ``Particle Creation by Black Holes,'' \textit{Commun. Math. Phys.} \textbf{43}, 199 (1975).
+
+\bibitem{page1976} D. N. Page, ``Particle Emission Rates from a Black Hole: Massless Particles from an Uncharged, Nonrotating Hole,'' \textit{Phys. Rev. D} \textbf{13}, 198 (1976).
+
+\bibitem{cardosopani2016} V. Cardoso, E. Franzin, and P. Pani, ``Is the Gravitational-Wave Ringdown a Probe of the Event Horizon?,'' \textit{Phys. Rev. Lett.} \textbf{116}, 171101 (2016), arXiv:1602.07309.
+
+\bibitem{cardosopani2017} V. Cardoso and P. Pani, ``Tests for the Existence of Black Holes Through Gravitational Wave Echoes,'' \textit{Nat. Astron.} \textbf{1}, 586 (2017), arXiv:1709.01525.
+
+\bibitem{cardosopani2019} V. Cardoso and P. Pani, ``Testing the Nature of Dark Compact Objects: A Status Report,'' \textit{Living Rev. Rel.} \textbf{22}, 4 (2019), arXiv:1904.05363.
+
+\bibitem{raychaudhuri1955} A. Raychaudhuri, ``Relativistic Cosmology. I,'' \textit{Phys. Rev.} \textbf{98}, 1123 (1955).
+
+\bibitem{hawkingellis1973} S. W. Hawking and G. F. R. Ellis, \textit{The Large Scale Structure of Space-Time} (Cambridge University Press, 1973).
+
+\bibitem{wald1984} R. M. Wald, \textit{General Relativity} (University of Chicago Press, 1984).
+
+\bibitem{gallowaysenovilla2010} G. J. Galloway and J. M. M. Senovilla, ``Singularity Theorems Based on Trapped Submanifolds of Arbitrary Co-Dimension,'' \textit{Class. Quantum Grav.} \textbf{27}, 152002 (2010), arXiv:1005.1249.
+
+\bibitem{komar1959} A. Komar, ``Covariant Conservation Laws in General Relativity,'' \textit{Phys. Rev.} \textbf{113}, 934 (1959).
+
+\bibitem{israel1966} W. Israel, ``Singular Hypersurfaces and Thin Shells in General Relativity,'' \textit{Nuovo Cimento B} \textbf{44}, 1 (1966); erratum \textbf{48}, 463 (1967).
+
+\bibitem{poisson2004} E. Poisson, \textit{A Relativist's Toolkit: The Mathematics of Black-Hole Mechanics} (Cambridge University Press, 2004).
+
+\bibitem{stergioulas2003} N. Stergioulas, ``Rotating Stars in Relativity,'' \textit{Living Rev. Relativ.} \textbf{6}, 3 (2003), arXiv:gr-qc/0302034.
+
+\bibitem{friedmanstergioulas2013} J. L. Friedman and N. Stergioulas, \textit{Rotating Relativistic Stars} (Cambridge University Press, 2013).
+
+\bibitem{cardosoetal2016echoes} V. Cardoso, S. Hopper, C. F. B. Macedo, C. Palenzuela, and P. Pani, ``Echoes of ECOs: Gravitational-Wave Signatures of Exotic Compact Objects and of Quantum Corrections at the Horizon Scale,'' \textit{Phys. Rev. D} \textbf{94}, 084031 (2016), arXiv:1608.08637.
+
+\bibitem{marketal2017} Z. Mark, A. Zimmerman, S. M. Du, and Y. Chen, ``A Recipe for Echoes from Exotic Compact Objects,'' \textit{Phys. Rev. D} \textbf{96}, 084002 (2017), arXiv:1706.06155.
+
+\bibitem{maggioetal2019} E. Maggio, P. Pani, and V. Ferrari, ``Exotic Compact Objects and How to Quench Their Ergoregion Instability,'' \textit{Phys. Rev. D} \textbf{96}, 104047 (2017), arXiv:1703.03696.
+
+\bibitem{micchietal2021} R. Micchi, N. Afshordi, and C. Chirenti, ``How Loud Are Echoes from Exotic Compact Objects?,'' \textit{Phys. Rev. D} \textbf{103}, 044028 (2021), arXiv:2010.14578.
+
+\bibitem{veitchetal2015} J. Veitch et al., ``Parameter Estimation for Compact Binaries with Ground-Based Gravitational-Wave Observations Using the LALInference Software Library,'' \textit{Phys. Rev. D} \textbf{91}, 042003 (2015), arXiv:1409.7215.
+
+\bibitem{page1976rotating} D. N. Page, ``Particle Emission Rates from a Black Hole. II. Massless Particles from a Rotating Hole,'' \textit{Phys. Rev. D} \textbf{14}, 3260 (1976).
+
+\bibitem{macgibbon1991} J. H. MacGibbon, ``Quark- and Gluon-Jet Emission from Primordial Black Holes: The Instantaneous Spectra,'' \textit{Phys. Rev. D} \textbf{44}, 376 (1991).
+
+\bibitem{adamslaughlin1997} F. C. Adams and G. Laughlin, ``A Dying Universe: The Long-Term Fate and Evolution of Astrophysical Objects,'' \textit{Rev. Mod. Phys.} \textbf{69}, 337 (1997), arXiv:astro-ph/9701131.
+
+\end{thebibliography}
+
+\end{document}

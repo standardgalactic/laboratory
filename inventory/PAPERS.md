@@ -9,7 +9,7 @@ The inventory scans repository-root manuscripts, direct children of `source/`, a
 ## Status summary
 
 - `duplicate-review`: 1
-- `published`: 37
+- `published`: 40
 - `recovery-blocked`: 3
 - `superseded`: 1
 
@@ -20,8 +20,11 @@ The inventory scans repository-root manuscripts, direct children of `source/`, a
 | Address Before Operator: How the Physical Line Became a Grammar | laboratory | `address-before-operator.tex` | `address-before-operator.pdf` | lualatex | 9 | published | — |
 | The Attention Compiler and the Thin-Walled Archive: Content Routing, Bubbles, and the Triage of Novel Ideas | laboratory | `source/attention-compiler-extended.tex` | `source/attention-compiler-extended.pdf` | lualatex | 24 | published | duplicate-family-resolved-by-editorial-override |
 | Borrowed Intuition: Compression Without Experience | laboratory | `borrowed-intuition.tex` | `borrowed-intuition.pdf` | lualatex | 48 | published | — |
+| Chemical Identity Is Not Causation: Molecules, Context, and the False Grammar of Bodily Explanation | laboratory | `chemical-identity-is-not-causation.tex` | `chemical-identity-is-not-causation.pdf` | lualatex | 36 | published | — |
 | Consensus Without Independence: Sycophancy, Context Reification, and Positive Feedback in Persona Ensembles | laboratory | `consensus-without-independence.tex` | `consensus-without-independence.pdf` | lualatex | 10 | published | duplicate-family-resolved-by-editorial-override |
 | The Crinkle-Cut Supercube: Constraint-Directed Infolding, Hidden Surface Area: and the Geometry of Emergent Boundaries | laboratory | `source/crinkle-cut-supercube.tex` | `source/crinkle-cut-supercube.pdf` | pdflatex | 84 | published | — |
+| Dangerous-Sounding Speech:: Semantic Proximity and the Inversion of Safety | laboratory | `dangerous-sounding-speech.tex` | `dangerous-sounding-speech.pdf` | pdflatex | 8 | published | — |
+| Degeneracy Before Collapse: A Falsifiable Horizonless Alternative to Black Hole Formation | laboratory | `degeneracy-before-collapse.tex` | `degeneracy-before-collapse.pdf` | lualatex | 17 | published | — |
 | Deployment-Native Ternary Learning: Reproducible Training, Executable Model Streams: and Continuously Curated Synthetic Corpora | laboratory | `deployment_native_ternary_learning.tex` | `deployment_native_ternary_learning.pdf` | lualatex | 13 | published | — |
 | Depth Before Derivation | laboratory | — | `depth_before_derivation.pdf` | — | 9 | recovery-blocked | editable-source-missing |
 | Distinction And Continuation | laboratory | — | `distinction-and-continuation.pdf` | — | 177 | recovery-blocked | editable-source-missing |
@@ -70,8 +73,11 @@ These files follow the repository's `TitleCase_With_Underscores` naming conventi
 
 | Asset | Linked paper |
 |---|---|
+| `Beyond_Folk_Chemistry.pdf` | — |
 | `Borrowed_Intuition.pdf` | — |
+| `Degenerate_Torus_Remnants.pdf` | — |
 | `Interaction_Residue.pdf` | — |
+| `The_Safety_Inversion.pdf` | — |
 | `Verifiable_ML_Deployment_Architecture.pdf` | — |
 | `source/Relativistic_Persistence.pdf` | — |
 | `source/The_Architecture_of_Feeling.pdf` | — |

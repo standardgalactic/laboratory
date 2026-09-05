@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-09-04T20:31:47+00:00",
+  "generated_at": "2026-09-12T23:51:32+00:00",
   "scope": {
     "scanned_directories": [
       ".",
@@ -95,6 +95,30 @@
       "recovery_blockers": []
     },
     {
+      "id": "chemical-identity-is-not-causation",
+      "title": "Chemical Identity Is Not Causation: Molecules, Context, and the False Grammar of Bodily Explanation",
+      "collection": "laboratory",
+      "track": null,
+      "source_path": "chemical-identity-is-not-causation.tex",
+      "source_candidates": [
+        "chemical-identity-is-not-causation.tex"
+      ],
+      "output_path": "chemical-identity-is-not-causation.pdf",
+      "output_candidates": [
+        "chemical-identity-is-not-causation.pdf"
+      ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 36,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
       "id": "consensus-without-independence",
       "title": "Consensus Without Independence: Sycophancy, Context Reification, and Positive Feedback in Persona Ensembles",
       "collection": "laboratory",
@@ -140,6 +164,54 @@
       "build_engine": "pdflatex",
       "build_engine_source": "inferred-from-preamble",
       "page_count": 84,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "dangerous-sounding-speech",
+      "title": "Dangerous-Sounding Speech:: Semantic Proximity and the Inversion of Safety",
+      "collection": "laboratory",
+      "track": null,
+      "source_path": "dangerous-sounding-speech.tex",
+      "source_candidates": [
+        "dangerous-sounding-speech.tex"
+      ],
+      "output_path": "dangerous-sounding-speech.pdf",
+      "output_candidates": [
+        "dangerous-sounding-speech.pdf"
+      ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
+      "build_engine": "pdflatex",
+      "build_engine_source": "inferred-from-preamble",
+      "page_count": 8,
+      "page_count_source": "pdfinfo",
+      "revision_status": "published",
+      "revision_status_source": "derived",
+      "recovery_blockers": []
+    },
+    {
+      "id": "degeneracy-before-collapse",
+      "title": "Degeneracy Before Collapse: A Falsifiable Horizonless Alternative to Black Hole Formation",
+      "collection": "laboratory",
+      "track": null,
+      "source_path": "degeneracy-before-collapse.tex",
+      "source_candidates": [
+        "degeneracy-before-collapse.tex"
+      ],
+      "output_path": "degeneracy-before-collapse.pdf",
+      "output_candidates": [
+        "degeneracy-before-collapse.pdf"
+      ],
+      "canonical_source_path": null,
+      "canonical_output_path": null,
+      "editorial_note": null,
+      "build_engine": "lualatex",
+      "build_engine_source": "inferred-from-fontspec",
+      "page_count": 17,
       "page_count_source": "pdfinfo",
       "revision_status": "published",
       "revision_status_source": "derived",
@@ -1042,12 +1114,27 @@
   ],
   "companion_assets": [
     {
+      "path": "Beyond_Folk_Chemistry.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
       "path": "Borrowed_Intuition.pdf",
       "linked_paper_id": null,
       "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
     },
     {
+      "path": "Degenerate_Torus_Remnants.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
       "path": "Interaction_Residue.pdf",
+      "linked_paper_id": null,
+      "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
+    },
+    {
+      "path": "The_Safety_Inversion.pdf",
       "linked_paper_id": null,
       "note": "TitleCase_With_Underscores basename: presentation/slide-deck or other auxiliary asset, not a manuscript build output. Set linked_paper_id manually in papers.json's companion_assets to associate it with a paper."
     },
