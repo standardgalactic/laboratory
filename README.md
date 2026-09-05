@@ -4,6 +4,8 @@
 
 [Continuation Geometry](https://github.com/standardgalactic/laboratory/blob/main/continuation-geometry/README.md)
 
+[Ensemble Before Selection](https://standardgalactic.github.io/laboratory/working/ensemble-before-selection.pdf)
+
 ![](newline.png)
 
 [Depth Before Derivation](https://standardgalactic.github.io/laboratory/depth_before_derivation.pdf)

@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -30,6 +31,8 @@ THUMBS_DIR = OUTPUT_DIR / "thumbs"
 METADATA_PATH = EXPERIMENTS_DIR / "metadata.json"
 INDEX_PATH = EXPERIMENTS_DIR / "index.html"
 THUMB_MAX_SIDE = 640
+REQUIRED_FIELDS = ("id", "repository", "filter", "title", "alt", "description", "question")
+ID_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
 
 try:
     from PIL import Image
@@ -37,9 +40,62 @@ except ImportError:  # pragma: no cover - degraded mode without Pillow.
     Image = None
 
 
-def load_metadata() -> list[dict]:
-    data = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
-    return data["experiments"]
+def load_metadata() -> tuple[list[dict], list[str]]:
+    try:
+        data = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [], [f"cannot read {METADATA_PATH.relative_to(ROOT)}: {exc}"]
+    if not isinstance(data, dict) or data.get("schema_version") != 1:
+        return [], ["metadata.json must be an object with schema_version 1"]
+    entries = data.get("experiments")
+    if not isinstance(entries, list):
+        return [], ["metadata.json field 'experiments' must be a list"]
+    return entries, validate_metadata(entries)
+
+
+def validate_metadata(entries: list[dict]) -> list[str]:
+    problems: list[str] = []
+    seen: set[str] = set()
+    allowed_filters = {name for name, _ in FILTERS_ORDER if name != "all"}
+
+    for position, entry in enumerate(entries, start=1):
+        if not isinstance(entry, dict):
+            problems.append(f"metadata entry {position} must be an object")
+            continue
+        label = entry.get("id", f"at position {position}")
+        missing = [
+            field
+            for field in REQUIRED_FIELDS
+            if not isinstance(entry.get(field), str) or not entry[field].strip()
+        ]
+        if missing:
+            problems.append(f"metadata entry '{label}' has missing or invalid fields: {', '.join(missing)}")
+        eid = entry.get("id")
+        if isinstance(eid, str):
+            if not ID_RE.fullmatch(eid):
+                problems.append(f"metadata entry id '{eid}' must use lowercase snake_case")
+            if eid in seen:
+                problems.append(f"duplicate metadata entry id: '{eid}'")
+            seen.add(eid)
+        filt = entry.get("filter")
+        if isinstance(filt, str) and filt not in allowed_filters:
+            problems.append(f"metadata entry '{label}' uses unknown filter: '{filt}'")
+        related = entry.get("related", [])
+        if not isinstance(related, list):
+            problems.append(f"metadata entry '{label}' field 'related' must be a list")
+            continue
+        for link in related:
+            valid_link = isinstance(link, dict) and all(
+                isinstance(link.get(key), str) and link[key].strip()
+                for key in ("label", "path")
+            )
+            if not valid_link:
+                problems.append(f"metadata entry '{label}' has an invalid related link")
+                continue
+            path = Path(link["path"])
+            if path.is_absolute() or ".." in path.parts:
+                problems.append(f"metadata entry '{label}' related path must stay inside the repository: {link['path']}")
+    return problems
 
 
 def discover_scripts() -> dict[str, Path]:
@@ -54,9 +110,10 @@ def discover_outputs() -> tuple[dict[str, Path], dict[str, Path]]:
 
 def cross_check(entries: list[dict], scripts: dict, pngs: dict, blends: dict) -> list[str]:
     problems = []
-    entry_ids = {e["id"] for e in entries}
+    valid_entries = [e for e in entries if isinstance(e, dict) and isinstance(e.get("id"), str)]
+    entry_ids = {e["id"] for e in valid_entries}
 
-    for entry in entries:
+    for entry in valid_entries:
         eid = entry["id"]
         if eid not in scripts:
             problems.append(f"metadata entry '{eid}' has no matching script in experiments/experiments/")
@@ -92,7 +149,18 @@ def ensure_thumbnails(entries: list[dict], pngs: dict, check_only: bool) -> list
     if not check_only:
         THUMBS_DIR.mkdir(parents=True, exist_ok=True)
 
+    entry_ids = {
+        entry["id"]
+        for entry in entries
+        if isinstance(entry, dict) and isinstance(entry.get("id"), str)
+    }
+    for thumb in sorted(THUMBS_DIR.glob("*.jpg")):
+        if thumb.stem not in entry_ids:
+            problems.append(f"orphaned thumbnail with no metadata entry: experiments/output/thumbs/{thumb.name}")
+
     for entry in entries:
+        if not isinstance(entry, dict) or not isinstance(entry.get("id"), str):
+            continue
         eid = entry["id"]
         src = pngs.get(eid)
         if src is None:
@@ -101,6 +169,15 @@ def ensure_thumbnails(entries: list[dict], pngs: dict, check_only: bool) -> list
         if check_only:
             if not thumb.exists():
                 problems.append(f"missing thumbnail for '{eid}': experiments/output/thumbs/{eid}.jpg")
+                continue
+            try:
+                with Image.open(thumb) as im:
+                    im.verify()
+                with Image.open(thumb) as im:
+                    if max(im.size) > THUMB_MAX_SIDE:
+                        problems.append(f"thumbnail for '{eid}' exceeds {THUMB_MAX_SIDE}px: {im.size[0]}x{im.size[1]}")
+            except (OSError, ValueError) as exc:
+                problems.append(f"invalid thumbnail for '{eid}': {exc}")
             continue
         if thumb.exists() and thumb.stat().st_mtime >= src.stat().st_mtime:
             continue
@@ -383,11 +460,15 @@ def render_figure(entry: dict, has_thumb: bool) -> str:
     thumb_src = f"output/thumbs/{eid}.jpg" if has_thumb else f"output/{eid}.png"
     links = [
         ("script", f"experiments/{eid}.py"),
+        ("metadata", "metadata.json"),
         (".blend", f"output/{eid}.blend"),
     ]
     for rel_link in entry.get("related", []):
         links.append((html.escape(rel_link["label"]), "../" + rel_link["path"]))
-    links_html = "".join(f'<li><a href="{href}">{label}</a></li>' for label, href in links)
+    links_html = "".join(
+        f'<li><a href="{html.escape(href, quote=True)}">{label}</a></li>'
+        for label, href in links
+    )
     return f"""      <figure data-repository="{entry['filter']}">
         <a class="full" href="output/{eid}.png"><img src="{thumb_src}" alt="{html.escape(entry['alt'])}" loading="lazy"></a>
         <figcaption>
@@ -422,11 +503,15 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="validate consistency without writing files")
     args = parser.parse_args()
 
-    entries = load_metadata()
+    entries, problems = load_metadata()
+    if problems:
+        for problem in problems:
+            print(f"gallery {'check' if args.check else 'build'}: {problem}", file=sys.stderr)
+        return 1
     scripts = discover_scripts()
     pngs, blends = discover_outputs()
 
-    problems = cross_check(entries, scripts, pngs, blends)
+    problems += cross_check(entries, scripts, pngs, blends)
     problems += ensure_thumbnails(entries, pngs, check_only=args.check)
 
     if args.check:
