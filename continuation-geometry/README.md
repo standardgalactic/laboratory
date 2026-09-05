@@ -1,5 +1,7 @@
 # Continuation Geometry
 
+- [Selection Among Futures](https://standardgalactic.github.io/laboratory/continuation-geometry/admissibility-boundary.html) — *Interactive Admissibility Boundary*
+
 - [Access Before Storage](https://standardgalactic.github.io/laboratory/continuation-geometry/access-before-storage.pdf)
 
 - [Before We Ban the Gene, Ban the Lawn](https://standardgalactic.github.io/laboratory/continuation-geometry/before-we-ban-the-gene-ban-the-lawn.pdf)
