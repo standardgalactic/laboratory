@@ -16,6 +16,8 @@
 
 [Address Before Operator](https://standardgalactic.github.io/laboratory/address-before-operator.pdf)
 
+* [Interactive ed/vim Grammar Comparator](https://standardgalactic.github.io/laboratory/address-before-operator.html)
+
 [Deployment-Native Ternary Learning](https://standardgalactic.github.io/laboratory/deployment_native_ternary_learning.pdf)
 
 ![](nonexistant.png)
