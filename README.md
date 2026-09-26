@@ -1,5 +1,9 @@
 # laboratory
 
+[Status at Zero Inspection Cost](https://standardgalactic.github.io/laboratory/filenames-berm.pdf)
+
+[Open Threads Ledger](https://github.com/standardgalactic/laboratory/blob/main/reports/README.md) — *Report*
+
 [Degeneracy Before Collapse](https://standardgalactic.github.io/laboratory/degeneracy-before-collapse.pdf)
 
 [Dangerous Sounding Speech](https://standardgalactic.github.io/laboratory/dangerous-sounding-speech.pdf)

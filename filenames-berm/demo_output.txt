@@ -1,0 +1,49 @@
+$ berm board demo
+OPEN  (problem posed, approach not fixed: propose or attempt)
+    Derive the RSVP Entropy Field S
+    Structural Semantics Falsification Protocol
+TODO  (task specified: execute it)
+    RSVP SpherePOP Interface Table
+EXPERIMENT  (claim is testable: run the test, record the result)
+    Gaussian Wormhole Simulations
+VERIFY  (result exists, unchecked: check it, do not build on it)
+    Restricted RDR Conjecture
+EXTEND  (result checked: build on it)
+    Build Proof of Concept Reknotting Model
+    Persistent World State and History Distinction
+SYNTHESIZE  (parts exist: combine them)
+    Cross Framework Admissibility Equivalences
+REVIEW  (draft complete: critique it, do not rewrite it)
+    Repair Theory Quantification
+META  (about the corpus itself: inspect other files)
+    Identify Accidental Principles Already Practiced But Not Articulated
+BLOCKED  (waiting on a dependency: resolve that first)
+    Apply Reknotting Model to S Star
+    MEM8 Empirical Validation
+ARCHIVE  (settled: read only)
+    Early Plenum Notes
+
+$ berm next demo
+EXPERIMENT Gaussian Wormhole Simulations
+EXTEND     Build Proof of Concept Reknotting Model
+EXTEND     Persistent World State and History Distinction
+META       Identify Accidental Principles Already Practiced But Not Articulated
+OPEN       Derive the RSVP Entropy Field S
+VERIFY     Structural Semantics Falsification Protocol   (name says OPEN)
+REVIEW     Repair Theory Quantification
+SYNTHESIZE Cross Framework Admissibility Equivalences
+TODO       RSVP SpherePOP Interface Table
+VERIFY     Restricted RDR Conjecture
+UNBLOCK    Apply Reknotting Model to S Star   (every dependency satisfied)
+(12 of 13 files opened)
+
+$ berm check demo
+STALE: OPEN - Structural Semantics Falsification Protocol.md (body says VERIFY)
+
+$ berm history demo
+2026-09-08  Build Proof of Concept Reknotting Model: OPEN -> EXPERIMENT  (demo)
+2026-09-15  Build Proof of Concept Reknotting Model: EXPERIMENT -> VERIFY  (demo)
+2026-09-22  Build Proof of Concept Reknotting Model: VERIFY -> EXTEND  (demo)
+
+$ berm audit demo
+SELF-PROMOTION: Build Proof of Concept Reknotting Model: VERIFY -> EXTEND by demo on 2026-09-22

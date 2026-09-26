@@ -1,0 +1,6 @@
+#!/bin/sh
+# Install as .git/hooks/pre-commit (and, on git >= 2.24, also as
+# .git/hooks/pre-merge-commit) so a split name/header cannot be committed.
+# Set BERM to the path of berm.py if it is not beside the repository.
+BERM="${BERM:-$(git rev-parse --show-toplevel)/berm.py}"
+exec python3 "$BERM" check --staged "$(git rev-parse --show-toplevel)"
