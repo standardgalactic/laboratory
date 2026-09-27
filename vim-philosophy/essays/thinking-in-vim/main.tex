@@ -1,0 +1,112 @@
+\documentclass[11pt]{book}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+
+\usepackage[margin=1.25in]{geometry}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
+    pdfauthor={Flyxion},
+    pdftitle={Thinking in Vim: A Structural Reference to Modal Editing}
+}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{longtable}
+\definecolor{codebg}{RGB}{245,245,245}
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{codebg},
+    breaklines=true,
+    columns=fullflexible,
+    frame=single,
+    framesep=4pt,
+    xleftmargin=4pt,
+    xrightmargin=4pt
+}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+\title{\Huge Thinking in Vim\\[0.3em]\Large A Structural Reference to Modal Editing}
+\author{Flyxion\\[0.2em]\normalsize Independent Researcher}
+\date{2026}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\input{chapters/preface}
+
+\tableofcontents
+
+\mainmatter
+
+\part{Foundations}
+\input{chapters/ch01}
+\input{chapters/ch02}
+\input{chapters/ch03}
+
+\part{The Grammar of Editing}
+\input{chapters/ch04}
+\input{chapters/ch05}
+\input{chapters/ch06}
+
+\part{Transformations}
+\input{chapters/ch07}
+\input{chapters/ch08}
+\input{chapters/ch09}
+
+\part{State}
+\input{chapters/ch10}
+\input{chapters/ch11}
+\input{chapters/ch12}
+
+\part{Ex}
+\input{chapters/ch13}
+\input{chapters/ch14}
+\input{chapters/ch15}
+
+\part{Automation}
+\input{chapters/ch16}
+\input{chapters/ch17}
+
+\part{Unix Integration}
+\input{chapters/ch18}
+\input{chapters/ch19}
+\input{chapters/ch20}
+
+\part{Reference}
+\input{chapters/part8-intro}
+
+\appendix
+\input{chapters/appendix-a}
+\input{chapters/appendix-b}
+\input{chapters/appendix-c}
+\input{chapters/appendix-d}
+\input{chapters/appendix-e}
+\input{chapters/appendix-f}
+\input{chapters/appendix-g}
+\input{chapters/appendix-h}
+\input{chapters/appendix-i}
+\input{chapters/appendix-j}
+
+\end{document}

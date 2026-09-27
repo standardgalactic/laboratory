@@ -1,0 +1,1 @@
+Compare two versions of an essay or section. Identify conceptual additions, deletions, terminological changes, structural changes, unresolved regressions, and improvements. Do not merely summarize both files.

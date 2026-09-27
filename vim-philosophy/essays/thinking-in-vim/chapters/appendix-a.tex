@@ -1,0 +1,226 @@
+\chapter{Every Normal-Mode Command}
+\label{app:normal}
+
+Organized by category, matching the order these commands were introduced throughout Parts II and III. Within each category, commands are listed roughly in the order a reader would find most natural to learn them, not alphabetically. A count prefix (\texttt{[count]}) is omitted from the Command column wherever it applies generally, per the grammar established in Chapter~\ref{ch:language}.
+
+\section{Character and Line Movement}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{h} & Move left one character & \ref{ch:coordinates} \\
+\texttt{l} & Move right one character & \ref{ch:coordinates} \\
+\texttt{j} & Move down one line & \ref{ch:coordinates} \\
+\texttt{k} & Move up one line & \ref{ch:coordinates} \\
+\texttt{0} & First column of current line & \ref{ch:coordinates} \\
+\texttt{\^{}} & First non-blank character of current line & \ref{ch:coordinates} \\
+\texttt{\$} & Last character of current line & \ref{ch:coordinates} \\
+\texttt{gg} & First line of buffer & \ref{ch:coordinates} \\
+\texttt{G} & Last line of buffer (or line \texttt{[count]}) & \ref{ch:coordinates} \\
+\texttt{+} / \texttt{return} & First non-blank of next line & \ref{ch:coordinates} \\
+\texttt{-} & First non-blank of previous line & \ref{ch:coordinates} \\
+\end{longtable}
+
+\section{Word, Sentence, and Paragraph Movement}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{w} & Beginning of next word & \ref{ch:coordinates} \\
+\texttt{W} & Beginning of next WORD (whitespace-delimited) & \ref{ch:coordinates} \\
+\texttt{b} & Beginning of previous word & \ref{ch:coordinates} \\
+\texttt{B} & Beginning of previous WORD & \ref{ch:coordinates} \\
+\texttt{e} & End of current/next word & \ref{ch:coordinates} \\
+\texttt{E} & End of current/next WORD & \ref{ch:coordinates} \\
+\texttt{ge} & End of previous word & \ref{ch:coordinates} \\
+\texttt{gE} & End of previous WORD & \ref{ch:coordinates} \\
+\texttt{(} & Beginning of current/previous sentence & \ref{ch:coordinates} \\
+\texttt{)} & Beginning of next sentence & \ref{ch:coordinates} \\
+\texttt{\{} & Beginning of current/previous paragraph & \ref{ch:coordinates} \\
+\texttt{\}} & Beginning of next paragraph & \ref{ch:coordinates} \\
+\texttt{[[} & Beginning of current/previous section & \ref{ch:coordinates} \\
+\texttt{]]} & Beginning of next section & \ref{ch:coordinates} \\
+\end{longtable}
+
+\section{Search and Character-Find Movement}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{/pattern} & Search forward & \ref{ch:coordinates} \\
+\texttt{?pattern} & Search backward & \ref{ch:coordinates} \\
+\texttt{n} & Repeat search, same direction & \ref{ch:coordinates} \\
+\texttt{N} & Repeat search, opposite direction & \ref{ch:coordinates} \\
+\texttt{f}\textit{char} & Find \textit{char} forward on line, land on it & \ref{ch:coordinates} \\
+\texttt{F}\textit{char} & Find \textit{char} backward on line, land on it & \ref{ch:coordinates} \\
+\texttt{t}\textit{char} & Find \textit{char} forward, land before it & \ref{ch:coordinates} \\
+\texttt{T}\textit{char} & Find \textit{char} backward, land after it & \ref{ch:coordinates} \\
+\texttt{;} & Repeat last \texttt{f}/\texttt{F}/\texttt{t}/\texttt{T} & \ref{ch:language} \\
+\texttt{,} & Repeat last \texttt{f}/\texttt{F}/\texttt{t}/\texttt{T}, reversed & \ref{ch:language} \\
+\end{longtable}
+
+\section{Screen and Absolute Position}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{H} & Top line of screen & \ref{ch:coordinates} \\
+\texttt{M} & Middle line of screen & \ref{ch:coordinates} \\
+\texttt{L} & Bottom line of screen & \ref{ch:coordinates} \\
+\texttt{[count]G} & Go to line \texttt{[count]} & \ref{ch:coordinates} \\
+\texttt{[count]\textbar} & Go to column \texttt{[count]} of current line & \ref{ch:coordinates} \\
+\texttt{\textquotesingle}\textit{mark} & Go to line of \textit{mark} & \ref{ch:marks} \\
+\texttt{\`{}}\textit{mark} & Go to exact position of \textit{mark} & \ref{ch:marks} \\
+\texttt{\`{}\`{}} & Toggle to position before last jump & \ref{ch:marks} \\
+\end{longtable}
+
+\section{Operators}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{d}\{motion/object\} & Delete & \ref{ch:operators} \\
+\texttt{c}\{motion/object\} & Change (delete, enter Insert) & \ref{ch:operators} \\
+\texttt{y}\{motion/object\} & Yank & \ref{ch:operators} \\
+\texttt{gU}\{motion/object\} & Uppercase & \ref{ch:operators} \\
+\texttt{gu}\{motion/object\} & Lowercase & \ref{ch:operators} \\
+\texttt{g\textasciitilde}\{motion/object\} & Toggle case & \ref{ch:operators} \\
+\texttt{>}\{motion/object\} & Indent right one shift width & \ref{ch:operators} \\
+\texttt{<}\{motion/object\} & Indent left one shift width & \ref{ch:operators} \\
+\texttt{=}\{motion/object\} & Auto-indent (filetype rules) & \ref{ch:operators} \\
+\texttt{!}\{motion/object\} & Filter through shell command & \ref{ch:operators} \\
+\texttt{gq}\{motion/object\} & Format (wrap to \texttt{textwidth}) & \ref{ch:operators} \\
+\texttt{gw}\{motion/object\} & Format, preserving cursor position & \ref{ch:operators} \\
+\texttt{dd}, \texttt{cc}, \texttt{yy}, \texttt{>>}, \texttt{<<}, \texttt{guu}, \texttt{gUU} & Doubled form: operate on current line & \ref{ch:operators} \\
+\end{longtable}
+
+\section{Inserting and Replacing}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{i} & Insert before cursor & \ref{ch:insert} \\
+\texttt{a} & Insert (append) after cursor & \ref{ch:insert} \\
+\texttt{I} & Insert at first non-blank of line & \ref{ch:insert} \\
+\texttt{A} & Append at end of line & \ref{ch:insert} \\
+\texttt{o} & Open new line below, insert & \ref{ch:insert} \\
+\texttt{O} & Open new line above, insert & \ref{ch:insert} \\
+\texttt{R} & Enter Replace mode & \ref{ch:insert} \\
+\texttt{gR} & Enter Virtual Replace mode & \ref{ch:insert} \\
+\texttt{r}\textit{char} & Replace one character with \textit{char} & \ref{ch:insert} \\
+\texttt{s} & Substitute character (delete + Insert) & \ref{ch:insert} \\
+\texttt{S} & Substitute line (delete content + Insert) & \ref{ch:insert} \\
+\texttt{J} & Join next line, one space & \ref{ch:operators} \\
+\texttt{gJ} & Join next line, no space & \ref{ch:operators} \\
+\end{longtable}
+
+\section{Deletion and Change Shorthand}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{x} & Delete character under cursor & \ref{ch:operators} \\
+\texttt{X} & Delete character before cursor & \ref{ch:operators} \\
+\texttt{D} & Delete to end of line (\texttt{d\$}) & \ref{ch:operators} \\
+\texttt{C} & Change to end of line (\texttt{c\$}) & \ref{ch:operators} \\
+\texttt{Y} & Yank current line (\texttt{yy}) & \ref{ch:operators} \\
+\end{longtable}
+
+\section{Put, Undo, and Repeat}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{p} & Put after cursor/line & \ref{ch:registers} \\
+\texttt{P} & Put before cursor/line & \ref{ch:registers} \\
+\texttt{u} & Undo & \ref{ch:undo} \\
+\texttt{Ctrl-r} & Redo & \ref{ch:undo} \\
+\texttt{U} & Undo all changes to current line (toggle) & \ref{ch:undo} \\
+\texttt{g-} & Step backward through undo history by time & \ref{ch:undo} \\
+\texttt{g+} & Step forward through undo history by time & \ref{ch:undo} \\
+\texttt{.} & Repeat last change & \ref{ch:language} \\
+\end{longtable}
+
+\section{Marks and Registers}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{m}\textit{letter} & Set mark \textit{letter} & \ref{ch:marks} \\
+\texttt{"}\textit{reg} & Prefix: address register \textit{reg} for next op & \ref{ch:registers} \\
+\texttt{g;} & Previous position in change list & \ref{ch:marks} \\
+\texttt{g,} & Next position in change list & \ref{ch:marks} \\
+\texttt{Ctrl-o} & Older position in jump list & \ref{ch:marks} \\
+\texttt{Ctrl-i} & Newer position in jump list & \ref{ch:marks} \\
+\texttt{Ctrl-\textasciicircum} & Switch to alternate file & \ref{ch:marks} \\
+\end{longtable}
+
+\section{Macros}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{q}\textit{letter} & Begin/end recording macro into register \textit{letter} & \ref{ch:macros} \\
+\texttt{@}\textit{letter} & Play macro from register \textit{letter} & \ref{ch:macros} \\
+\texttt{@@} & Repeat most recently played macro & \ref{ch:macros} \\
+\end{longtable}
+
+\section{Visual Mode}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{v} & Enter character-wise Visual mode & \ref{ch:ontology} \\
+\texttt{V} & Enter line-wise Visual mode & \ref{ch:ontology} \\
+\texttt{Ctrl-v} & Enter block-wise Visual mode & \ref{ch:regions} \\
+\texttt{gv} & Reselect last Visual selection & \ref{ch:regions} \\
+\texttt{o} & (in Visual mode) Swap cursor to other end of selection & \ref{ch:regions} \\
+\end{longtable}
+
+\section{Windows and Tabs}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{Ctrl-w s} & Split window horizontally & \ref{ch:buffers} \\
+\texttt{Ctrl-w v} & Split window vertically & \ref{ch:buffers} \\
+\texttt{Ctrl-w} \textit{h/j/k/l} & Move to window in that direction & \ref{ch:buffers} \\
+\texttt{Ctrl-w w} & Cycle to next window & \ref{ch:buffers} \\
+\texttt{Ctrl-w c} & Close current window & \ref{ch:buffers} \\
+\texttt{Ctrl-w =} & Equalize window sizes & \ref{ch:buffers} \\
+\texttt{Ctrl-w r} & Rotate windows & \ref{ch:buffers} \\
+\texttt{Ctrl-w x} & Exchange window with next & \ref{ch:buffers} \\
+\texttt{gt} & Next tab & \ref{ch:buffers} \\
+\texttt{gT} & Previous tab & \ref{ch:buffers} \\
+\end{longtable}
+
+\section{Miscellaneous}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{Ctrl-a} & Increment number under/after cursor & \ref{ch:vimscript} \\
+\texttt{Ctrl-x} & Decrement number under/after cursor & \ref{ch:vimscript} \\
+\texttt{Ctrl-g} & Show file name and position status & \ref{ch:ontology} \\
+\texttt{Ctrl-k} \textit{code} & Insert digraph & \ref{ch:insert} \\
+\texttt{Ctrl-v} \textit{code} & Insert character literally by code point & \ref{ch:insert} \\
+\texttt{Ctrl-n} & (Insert mode) Keyword completion, next & \ref{ch:insert} \\
+\texttt{Ctrl-p} & (Insert mode) Keyword completion, previous & \ref{ch:insert} \\
+\texttt{]s} / \texttt{[s} & Next/previous misspelled word (with \texttt{spell}) & \ref{ch:writing} \\
+\texttt{z=} & Suggest spelling corrections & \ref{ch:writing} \\
+\texttt{]c} / \texttt{[c} & Next/previous diff (in \texttt{vimdiff}) & \ref{ch:workflows} \\
+\texttt{do} / \texttt{dp} & Diff obtain / diff put & \ref{ch:workflows} \\
+\end{longtable}

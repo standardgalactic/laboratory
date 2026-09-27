@@ -1,0 +1,1 @@
+Canonical writing style rules.

@@ -1,0 +1,20 @@
+\chapter{Command-Line Arguments}
+\label{app:cli}
+
+Arguments to the \texttt{vim} command itself, invoked from the shell, as covered across Chapters~\ref{ch:installing}, \ref{ch:undo}, \ref{ch:buffers}, and \ref{ch:global}.
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Argument} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{vim} \textit{file} & Edit \textit{file} & \ref{ch:installing} \\
+\texttt{vim} \textit{file1 file2 ...} & Edit multiple files (populates the argument list) & \ref{ch:global} \\
+\texttt{-c} \textit{cmd} & Run Ex command \textit{cmd} after loading, before display & \ref{ch:global} \\
+\texttt{-r} \textit{file} & Recover \textit{file} from its swap file after a crash & \ref{ch:undo} \\
+\texttt{-R} & Open in read-only mode & \ref{app:cli} \\
+\texttt{-d} \textit{file1 file2} & Open in diff mode (equivalent to \texttt{vimdiff}) & \ref{ch:workflows} \\
+\texttt{-S} \textit{file} & Restore a saved session & \ref{ch:buffers} \\
+\texttt{--version} & Print version and compiled-in feature list & \ref{ch:installing} \\
+\end{longtable}
+
+Multiple \texttt{-c} arguments are executed in the order given, each a complete Ex command exactly as it would be typed after \texttt{:} in a running session, which is what makes \texttt{vim -c '\%s/old/new/g' -c 'wq' file.txt} a complete, non-interactive batch edit: the substitution runs, then the write-and-quit, with no editor session ever visibly opened.

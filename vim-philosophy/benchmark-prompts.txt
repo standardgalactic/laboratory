@@ -1,0 +1,808 @@
+Results will be stored in ollama-benchmark-20260804-204613
+
+==================================================
+Testing granite4.1:3b
+==================================================
+
+Test 1
+Prompt:
+Explain Rust ownership to an experienced C programmer.
+
+Time: 14.31 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test1.txt
+
+Test 2
+Prompt:
+Write a concise summary of general relativity in under 150 words.
+
+Time: 1.85 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test2.txt
+
+Test 3
+Prompt:
+Write a Python function that computes Fibonacci numbers using memoization.
+
+Time: 0.88 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test3.txt
+
+Test 4
+Prompt:
+Why are objects useful compressions of trajectories? Answer in three paragraphs.
+
+Time: 2.64 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test4.txt
+
+Test 5
+Prompt:
+Prove that the sum of the first n odd numbers equals n^2.
+
+Time: 3.94 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test5.txt
+
+Test 6
+Prompt:
+Describe the advantages and disadvantages of persistent data structures.
+
+Time: 6.01 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_3b_test6.txt
+
+==================================================
+Testing granite4.1:8b
+==================================================
+
+Test 1
+Prompt:
+Explain Rust ownership to an experienced C programmer.
+
+Time: 24.54 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test1.txt
+
+Test 2
+Prompt:
+Write a concise summary of general relativity in under 150 words.
+
+Time: 2.80 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test2.txt
+
+Test 3
+Prompt:
+Write a Python function that computes Fibonacci numbers using memoization.
+
+Time: 7.75 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test3.txt
+
+Test 4
+Prompt:
+Why are objects useful compressions of trajectories? Answer in three paragraphs.
+
+Time: 6.07 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test4.txt
+
+Test 5
+Prompt:
+Prove that the sum of the first n odd numbers equals n^2.
+
+Time: 7.96 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test5.txt
+
+Test 6
+Prompt:
+Describe the advantages and disadvantages of persistent data structures.
+
+Time: 11.00 seconds
+Saved to ollama-benchmark-20260804-204613/granite4.1_8b_test6.txt
+
+
+Benchmark complete.
+[1m 29.824s] bonobo@Memex:~/experiments$ ls
+check_benchmark.sh  ollama-benchmark-20260804-204613
+[0.003s] bonobo@Memex:~/experiments$ tree .
+.
+├── check_benchmark.sh
+└── ollama-benchmark-20260804-204613
+    ├── granite4.1_3b_test1.txt
+    ├── granite4.1_3b_test2.txt
+    ├── granite4.1_3b_test3.txt
+    ├── granite4.1_3b_test4.txt
+    ├── granite4.1_3b_test5.txt
+    ├── granite4.1_3b_test6.txt
+    ├── granite4.1_8b_test1.txt
+    ├── granite4.1_8b_test2.txt
+    ├── granite4.1_8b_test3.txt
+    ├── granite4.1_8b_test4.txt
+    ├── granite4.1_8b_test5.txt
+    └── granite4.1_8b_test6.txt
+
+2 directories, 13 files
+[0.011s] bonobo@Memex:~/experiments$ ls
+check_benchmark.sh  ollama-benchmark-20260804-204613
+[0.005s] bonobo@Memex:~/experiments$ cd ollama-benchmark-20260804-204613/
+[0.002s] bonobo@Memex:~/experiments/ollama-benchmark-20260804-204613$ cat *
+Certainly! For an experienced C programmer, understanding Rust's concept
+of ownership might initially seem daunting because it introduces a new
+paradigm for managing memory and resource lifetimes that differs
+significantly from the manual memory management approach in C. Here’s a
+breakdown to help bridge this gap:
+
+### 1. **Basic Concept of Ownership**
+
+In Rust, every value has a variable (or *owner*) that determines where the
+data can be accessed from and when it will be dropped. When you create a
+new resource (like allocating memory on the heap), ownership rules decide
+who is responsible for deallocating that resource when it’s no longer
+needed.
+
+### 2. **Single Owner Rule**
+
+Each value in Rust has a single owner, which means there can only be one
+variable pointing to its data at any given time. This design ensures that
+resources are not leaked because the compiler guarantees that every piece
+of memory is managed by exactly one owner, and thus, it will eventually be
+dropped when the owner goes out of scope.
+
+### 3. **Move Semantics**
+
+When you assign a value (like moving a `String` or any complex type) to
+another variable, ownership is transferred. The original variable no
+longer owns this data because Rust knows that both variables don’t need to
+share ownership over the same resource simultaneously. This means after
+the move, the original variable can no longer access the data.
+
+### 4. **Lifetime Annotations**
+
+Rust’s borrow checker uses *lifetimes* to ensure references are valid for
+as long as they’re needed. Lifetimes are a way of indicating that a
+reference (borrow) will outlive certain scopes or variables it borrows
+from. This is similar to how pointers in C need careful management to
+avoid dangling pointers, but Rust does this automatically and safely
+through its ownership rules.
+
+### 5. **Drop Trait**
+
+Rust ensures resources are deallocated at the appropriate time by using a
+special trait called `Drop`. When a variable goes out of scope (or when
+you explicitly drop it), if that variable owns the data, Rust will
+automatically call the `drop` method on that data to clean up any
+resources associated with it.
+
+### 6. **No Garbage Collector**
+
+Unlike some languages, Rust does not use a garbage collector for memory
+management. This means there’s no risk of memory leaks or "orphaned"
+objects lingering in memory because Rust guarantees that every owned value
+will be dropped eventually when its owner goes out of scope or is
+explicitly dropped.
+
+### 7. **Why It Matters**
+
+For C programmers, the primary benefit of Rust’s ownership model is safety
+and predictability regarding memory management. In C, managing pointers
+manually (allocating with `malloc` and deallocating with `free`) can lead
+to errors such as double free, use after free, or dangling pointer
+dereferences. Rust eliminates these risks by enforcing rules at compile
+time.
+
+### 8. **Example**
+
+Consider a simple example in C:
+
+```c
+int *ptr = malloc(sizeof(int));
+*ptr = 5;
+```
+
+In Rust, this would be handled like so:
+
+```rust
+let ptr = Box::new(5); // `Box` allocates on the heap and automatically
+drops when it goes out of scope.
+```
+
+Here, `Box` is a smart pointer that takes ownership of the integer value.
+When `ptr` (or whatever name you give to the `Box`) goes out of scope,
+Rust will automatically deallocate the memory.
+
+### Conclusion
+
+Rust’s ownership model is designed to provide safety and efficiency by
+making resource management explicit and straightforward. For C programmers
+used to manual memory management, embracing these concepts initially might
+seem restrictive or unfamiliar but ultimately leads to more reliable and
+maintainable code without the overhead of garbage collection. The key
+takeaway is that Rust shifts the responsibility of managing resources from
+the developer (as in C) to the compiler through strict ownership rules,
+ensuring that resources are always properly allocated and deallocated.
+
+
+------------------------------------------------------------
+Elapsed: 14.31 seconds
+------------------------------------------------------------
+General relativity, formulated by Albert Einstein (1915), describes
+gravity not as a force but as a curvature of spacetime caused by mass and
+energy. According to this theory, massive objects like stars and planets
+warp the fabric of spacetime around them, affecting the motion of other
+objects nearby. This curvature is what we perceive as gravitational
+attraction. Key predictions include time dilation (time runs slower in
+stronger gravitational fields), light bending (gravity can bend light
+paths), and black holes (regions where gravity is so intense that not even
+light escapes). General relativity has been confirmed by numerous
+experiments and observations, such as the precise orbit of Mercury,
+gravitational lensing of distant stars, and the detection of gravitational
+waves from colliding black holes. It serves as the foundation for modern
+cosmology, explaining phenomena like the expansion of the universe and the
+existence of dark matter through its implications on large-scale cosmic
+structures.
+
+
+------------------------------------------------------------
+Elapsed: 1.85 seconds
+------------------------------------------------------------
+Here's how you can implement it:
+
+```python
+def fibonacci(n, memo={}):
+    if n in memo:
+        return memo[n]
+    elif n <= 2:
+        result = 1
+    else:
+        result = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
+    memo[n] = result
+    return result
+```
+
+
+------------------------------------------------------------
+Elapsed: 0.88 seconds
+------------------------------------------------------------
+Objects serve as useful compressions of trajectories because they
+encapsulate essential information about the state and dynamics of a system
+at specific points in time. By representing an object, we capture not only
+its current position but also attributes such as velocity or acceleration
+that describe how it has moved over time. This compression allows us to
+distill complex temporal behaviors into manageable forms that can be
+easily analyzed or manipulated without retaining every intricate detail of
+the entire trajectory.
+
+Moreover, using objects as compressions enables more efficient data
+storage and processing. Instead of maintaining extensive datasets that
+track every incremental change in position or state throughout a
+trajectory, objects allow for a compact representation that retains
+critical features relevant to the system's dynamics. This efficiency is
+particularly beneficial in fields like computer graphics, robotics, and
+simulation, where large volumes of data are generated and processed
+rapidly. By reducing redundancy and focusing on key characteristics,
+objects facilitate quicker computations and decision-making processes.
+
+Finally, objects provide a structured way to represent trajectories across
+different dimensions or contexts, making them versatile tools for various
+applications. They can be easily integrated into algorithms that require
+prediction, analysis, or comparison of motion patterns over time. This
+adaptability allows scientists, engineers, and data analysts to leverage
+these compressed representations in simulations, predictive modeling, and
+real-time control systems without losing the ability to reconstruct the
+full trajectory when necessary. Thus, objects effectively bridge the gap
+between high-level understanding and detailed representation of dynamic
+processes.
+
+
+------------------------------------------------------------
+Elapsed: 2.64 seconds
+------------------------------------------------------------
+To prove that the sum of the first \( n \) odd numbers equals \( n^2 \),
+we can use mathematical induction.
+
+### Base Case:
+First, let's verify the statement for \( n = 1 \).
+
+The first odd number is \( 1 \). According to the statement, its sum
+should be equal to \( 1^2 \):
+\[ 1 = 1^2 \]
+This base case holds true.
+
+### Inductive Step:
+Now assume that the statement is true for some arbitrary positive integer
+\( k \), i.e., the sum of the first \( k \) odd numbers is \( k^2 \). We
+need to show that the statement holds for \( k + 1 \).
+
+The sum of the first \( k \) odd numbers can be expressed as:
+\[ 1 + 3 + 5 + \ldots + (2k - 1) = k^2 \]
+
+We want to prove that adding the next odd number, which is \( (2(k+1) - 1)
+= (2k + 1) \), will result in:
+\[ 1 + 3 + 5 + \ldots + (2k - 1) + (2(k+1) - 1) = (k + 1)^2 \]
+
+Using the induction hypothesis, we substitute \( k^2 \) for the sum of the
+first \( k \) odd numbers:
+\[ k^2 + (2k + 1) \]
+
+Now, expand and simplify the right-hand side to show it equals \( (k+1)^2
+\):
+\[ (k+1)^2 = k^2 + 2k + 1 \]
+
+Since both expressions are identical:
+\[ k^2 + (2k + 1) = k^2 + 2k + 1 \]
+
+Thus, by induction, the statement holds for \( k + 1 \).
+
+### Conclusion:
+By mathematical induction, we have shown that the sum of the first \( n \)
+odd numbers is indeed equal to \( n^2 \).
+
+
+------------------------------------------------------------
+Elapsed: 3.94 seconds
+------------------------------------------------------------
+**Persistent Data Structures: Overview**
+
+Persistent data structures are a type of data structure designed to
+preserve (or "persist") previous versions or states after modifications
+are made. This means that any changes to the data do not overwrite
+existing data; instead, they create new versions while maintaining access
+to the older ones. This characteristic is particularly useful in scenarios
+where historical data integrity, undo/redo functionality, and concurrency
+control are essential.
+
+**Advantages of Persistent Data Structures**
+
+1. **Historical Integrity:** Since persistent structures preserve previous
+states, they inherently support version control. This is invaluable in
+applications like source code management systems (e.g., Git), where the
+ability to revert to any past state without losing information is crucial.
+
+2. **Concurrency and Multi-Versioning:** Persistent data structures
+naturally lend themselves to concurrent access and updates. They simplify
+the implementation of multi-version concurrency control mechanisms,
+allowing multiple threads or processes to work on different versions
+simultaneously without risking data corruption.
+
+3. **Undo/Redo Functionality:** The ability to revert changes is a direct
+consequence of preserving previous states. This feature is widely
+appreciated in user interfaces (e.g., text editors) for its simplicity and
+intuitiveness.
+
+4. **Immutability:** Many persistent structures are immutable, meaning
+once created, they cannot be changed. Immutability can lead to safer
+memory management and reduced side effects, making reasoning about program
+behavior easier and potentially improving performance through
+optimizations like memoization or caching of expensive operations.
+
+5. **Simplified Debugging:** The clear separation between old and new
+versions makes debugging and testing more straightforward. Developers can
+easily roll back changes or compare states across different points in
+time.
+
+**Disadvantages of Persistent Data Structures**
+
+1. **Increased Space Complexity:** Because persistent data structures
+retain previous versions, they often require additional space to store
+these copies. This can lead to higher memory consumption compared to their
+non-persistent counterparts, which overwrite data upon modification.
+
+2. **Complexity in Design and Implementation:** Implementing a persistent
+structure correctly requires careful design to ensure that all
+modifications create new versions without losing access to older ones.
+This complexity can increase the time and effort needed for development
+and maintenance.
+
+3. **Performance Overhead:** Accessing or modifying specific elements,
+especially deep within the structure, might require traversing multiple
+layers of saved states, leading to potential performance bottlenecks.
+Operations that involve frequent updates or queries may be slower than in
+non-persistent structures due to these overheads.
+
+4. **Limited Flexibility for Some Use Cases:** In applications where only
+a single current state is needed (e.g., certain real-time systems), the
+need to maintain historical versions might introduce unnecessary
+complexity without providing clear benefits, making persistent structures
+less desirable.
+
+5. **Potential for Memory Leaks:** If not properly managed, the
+accumulation of many old versions can lead to memory leaks or excessive
+fragmentation, as each new version may require additional space even if it
+doesn't contribute significantly to current operations.
+
+**Conclusion**
+
+Persistent data structures offer significant advantages in terms of
+historical integrity, concurrency support, and ease of undo/redo
+functionality. However, they come with trade-offs such as increased memory
+usage, implementation complexity, and potential performance issues. The
+choice between using persistent or non-persistent data structures should
+be guided by the specific requirements and constraints of the application
+at hand, balancing these pros and cons accordingly.
+
+
+------------------------------------------------------------
+Elapsed: 6.01 seconds
+------------------------------------------------------------
+Certainly! Explaining Rust's ownership system to an experienced C
+programmer involves highlighting the key differences and benefits that
+Rust introduces, particularly in terms of memory safety and concurrency
+without a garbage collector.
+
+### 1. **Core Concept: Ownership, Borrowing, and Lifetimes**
+
+**Ownership**: In Rust, each value has a variable that’s called its
+*owner*. There can only be one owner at a time. When the owner goes out of
+scope, the value will automatically be dropped (its resources freed). This
+eliminates manual memory management and prevents common errors like
+double-free or use-after-free.
+
+**Borrowing**: Rust allows you to borrow values immutably (`&T`) or
+mutably (`&mut T`). Immutable borrows allow multiple references but no
+mutation; mutable borrows allow one exclusive reference, preventing data
+races at compile time. This ensures that data cannot be concurrently
+modified unexpectedly.
+
+**Lifetimes**: Borrowed references must be valid for the scope in which
+they are used. Rust’s type checker enforces these rules through
+*lifetimes*, ensuring that references do not outlive the data they point
+to.
+
+### 2. **Comparison with C**
+
+| Feature          | C                         | Rust
+    |
+|------------------|---------------------------|---------------------------|------------------|---------------------------|------------------------------|
+| Memory Management| Manual (malloc/free)      | Automatic via ownership
+  |
+| Data Races       | Possible, requires manual synchronization (mutexes,
+etc.) | Prevented at compile time through borrowing rules |
+| Error Handling   | Returns error codes or relies on exceptions | Uses
+`Result` and `Option` for explicit error handling |
+| Performance      | High, but requires careful coding to avoid bugs |
+High, with safety guarantees built-in |
+
+### 3. **Key Features of Rust’s Ownership System**
+
+- **Drop Guarantees**: The `Drop` trait allows custom cleanup code to run
+when a value goes out of scope, ensuring resources are released
+predictably.
+
+- **No Data Races**: By enforcing exclusive mutable access or shared
+immutable access through the borrowing rules, Rust guarantees at compile
+time that data races cannot occur.
+
+- **Zero-Cost Abstractions**: Many abstractions (like iterators) have no
+runtime overhead compared to raw loops or manual management in C.
+
+### 4. **Example: Function Ownership**
+
+```rust
+fn main() {
+    let s = String::from("hello"); // `s` is now the owner of a String
+
+    takes_ownership(s); // `s`'s value moves into the function; it can no
+longer be used here
+
+    println!("inside main {}", s); // ❌ This will not compile - `s` does
+not exist
+}
+
+fn takes_ownership(some_string: String) {
+    println!("inside takes_ownership {}", some_string);
+} // `some_string` goes out of scope and `drop` is called, freeing memory
+```
+
+### 5. **Example: Borrowing**
+
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    print_length(&s); // Pass a reference to `s`
+}
+
+fn print_length(some_string: &String) { // Immutable borrow
+    println!("Length of the string is {}", some_string.len());
+}
+```
+
+### 6. **Mutable Borrowing**
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s); // Mutable borrow
+
+    println!("{}", s); // `s` can now be used after mutation
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world"); // Modifies the mutable reference
+}
+```
+
+### 7. **When Ownership Transfers**
+
+Ownership transfers in several key situations:
+
+- Function arguments (unless explicitly borrowing).
+- Returning values from functions.
+- Assigning a variable to another (`let x = y;`).
+
+Understanding these rules helps avoid common pitfalls and makes your Rust
+code both safe and efficient.
+
+### Conclusion
+
+Rust's ownership system provides a robust framework for managing memory
+and preventing data races, all enforced at compile time. For an
+experienced C programmer, the transition involves embracing these new
+concepts to write safer, concurrent code without sacrificing performance.
+The learning curve is steep but rewarding, as it enables you to build
+highly reliable systems with fewer bugs related to memory management.
+
+
+------------------------------------------------------------
+Elapsed: 24.54 seconds
+------------------------------------------------------------
+General Relativity, proposed by Albert Einstein in 1915, revolutionizes
+our understanding of gravity. It posits that massive objects cause
+spacetime to curve, and this curvature is what we perceive as
+gravitational attraction. Unlike Newton's law of universal gravitation,
+which treats gravity as a force acting at a distance, General Relativity
+describes gravity as the effect of curved spacetime on the motion of
+objects. The theory predicts phenomena such as the bending of light around
+massive bodies (gravitational lensing), time dilation near massive
+objects, and the existence of black holes—regions where spacetime
+curvature becomes extreme. Confirmations include the observed orbit of
+Mercury, the deflection of starlight by the Sun during a solar eclipse,
+and the recent detection of gravitational waves from colliding black
+holes, validating Einstein's framework as a cornerstone of modern physics.
+
+
+------------------------------------------------------------
+Elapsed: 2.80 seconds
+------------------------------------------------------------
+Certainly! Below is a Python function that computes Fibonacci numbers
+using memoization. Memoization is an optimization technique used to speed
+up computer programs by storing the results of expensive function calls
+and returning the cached result when the same inputs occur again.
+
+```python
+def fibonacci(n, memo=None):
+    if memo is None:
+        memo = {}
+
+    # Base cases: return n for 0 or 1
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+
+    # Check if the result is already computed and stored in memo
+    if n not in memo:
+        # Recursive computation with memoization
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
+
+    # Return the stored result for n
+    return memo[n]
+
+# Example usage:
+if __name__ == "__main__":
+    print(fibonacci(10))  # Output: 55
+```
+
+### Explanation:
+
+- **Function Definition**: `fibonacci(n, memo=None)` takes an integer `n`
+and an optional dictionary `memo`.
+
+- **Initialization of Memoization Dictionary**: If `memo` is not provided
+(i.e., it's `None`), a new empty dictionary is initialized to store
+previously computed Fibonacci numbers.
+
+- **Base Cases**: The function directly returns `0` for `n = 0` and `1`
+for `n = 1`, which are the first two Fibonacci numbers by definition.
+
+- **Memoization Check**: Before performing any recursive calls, it checks
+if the result for `n` is already in the `memo` dictionary. If not, it
+proceeds to compute it.
+
+- **Recursive Computation with Memoization**: The function recursively
+computes the Fibonacci number for `n - 1` and `n - 2`, storing the sum of
+these two values in `memo[n]`. This prevents redundant calculations for
+overlapping subproblems, significantly improving efficiency.
+
+- **Return Cached Result**: Finally, it returns the value stored in
+`memo[n]`, which is the Fibonacci number for `n`.
+
+### Example Usage:
+
+The example usage demonstrates how to call the function with an argument
+of `10`, which computes and prints the 10th Fibonacci number (considering
+the sequence starts from `0`).
+
+This implementation efficiently calculates Fibonacci numbers, especially
+for large values of `n`, by avoiding redundant calculations through
+memoization.
+
+
+------------------------------------------------------------
+Elapsed: 7.75 seconds
+------------------------------------------------------------
+Objects serve as practical and efficient representations of complex
+trajectories due to their ability to encapsulate essential features and
+behaviors within a compact form. In many dynamic systems, such as those
+found in physics, biology, or economics, the paths taken by entities over
+time can be exceedingly intricate and data-intensive if described in full
+detail. By abstracting these paths into objects—entities that embody
+certain properties and functions—we can significantly reduce the
+computational burden while retaining the critical aspects of the
+trajectory's evolution. This abstraction allows for easier manipulation,
+analysis, and prediction of system behaviors without needing to track
+every minute change along the path.
+
+Furthermore, objects provide a layer of semantic richness that direct
+mathematical descriptions often lack. When trajectories are compressed
+into objects, they can inherit attributes and methods that reflect the
+underlying dynamics more intuitively. For instance, in a simulated
+environment, an object representing a moving particle might include
+properties such as velocity, acceleration, and collision response, which
+directly influence how the object moves through space over time. This not
+only simplifies coding and simulation logic but also makes the model more
+accessible to users who may be less familiar with complex differential
+equations or numerical solvers. The object-oriented approach thus bridges
+the gap between abstract mathematical formulations and practical
+computational implementations.
+
+Lastly, objects enhance reusability and scalability across different
+contexts and applications. Once an object representing a trajectory is
+developed and validated within one domain—say, modeling the orbit of
+planets in celestial mechanics—it can often be repurposed or adapted for
+other scenarios with minimal modification. This is particularly
+advantageous in interdisciplinary research where similar dynamical
+principles apply across diverse fields. Moreover, objects facilitate
+modular design, allowing developers to isolate and update specific
+components (e.g., altering an object's behavior without affecting the
+broader system). Consequently, the use of objects as compressed
+representations of trajectories not only streamlines computational
+processes but also fosters innovation by enabling flexible and efficient
+problem-solving strategies.
+
+
+------------------------------------------------------------
+Elapsed: 6.07 seconds
+------------------------------------------------------------
+To prove that the sum of the first \( n \) odd numbers equals \( n^2 \),
+we can use mathematical induction.
+
+**Base Case:**
+For \( n = 1 \):
+The first odd number is \( 1 \).
+\[
+\text{Sum of the first } 1 \text{ odd number} = 1
+\]
+And \( 1^2 = 1 \).
+Thus, the statement holds for \( n = 1 \).
+
+**Inductive Step:**
+Assume the statement is true for some arbitrary positive integer \( k \).
+That is, assume:
+\[
+1 + 3 + 5 + \cdots + (2k-1) = k^2
+\]
+We need to show that the statement holds for \( k+1 \), i.e.,
+\[
+1 + 3 + 5 + \cdots + (2k-1) + (2(k+1)-1) = (k+1)^2
+\]
+
+Starting from our inductive hypothesis:
+\[
+1 + 3 + 5 + \cdots + (2k-1) = k^2
+\]
+Add the next odd number \( 2(k+1)-1 \) to both sides:
+\[
+k^2 + (2(k+1)-1)
+\]
+Simplify the right-hand side:
+\[
+k^2 + (2k + 2 - 1) = k^2 + 2k + 1
+\]
+Notice that:
+\[
+k^2 + 2k + 1 = (k + 1)^2
+\]
+Thus,
+\[
+1 + 3 + 5 + \cdots + (2k-1) + (2(k+1)-1) = (k + 1)^2
+\]
+This completes the inductive step.
+
+By the principle of mathematical induction, the sum of the first \( n \)
+odd numbers equals \( n^2 \) for all positive integers \( n \).
+
+\[
+\boxed{n^2}
+\]
+
+
+------------------------------------------------------------
+Elapsed: 7.96 seconds
+------------------------------------------------------------
+Persistent data structures are those that preserve previous versions of
+themselves when modified, allowing access to historical states without
+duplicating the entire structure each time an update occurs. This concept
+is particularly useful in functional programming, concurrency control,
+versioning, and scenarios where immutability or rollback capabilities are
+beneficial. Below are the advantages and disadvantages of using persistent
+data structures:
+
+### Advantages
+
+1. **Immutability**: Persistent data structures are inherently immutable
+because modifications create new versions rather than altering existing
+ones. This property is highly desirable in concurrent environments as it
+eliminates the need for locks to protect shared data, reducing contention
+and simplifying reasoning about program behavior.
+
+2. **Version Control and History Tracking**: Since each modification
+results in a new version of the structure while retaining access to
+previous versions, persistent data structures facilitate easy
+implementation of undo/redo functionalities, tracking changes over time,
+and maintaining history logs without significant overhead.
+
+3. **Safety in Concurrent Environments**: The immutability characteristic
+makes persistent data structures safe for concurrent use—multiple threads
+can operate on different versions or the same version without fear of
+interfering with each other's operations, leading to more robust
+multithreaded applications.
+
+4. **Functional Programming Compatibility**: Persistent data structures
+align well with functional programming paradigms where functions are
+expected to be pure (i.e., they do not cause side effects). They support
+the creation of new data based on existing data without modifying it,
+promoting code that is easier to reason about and debug.
+
+5. **Space Efficiency for Certain Use Cases**: Despite creating new
+versions upon modification, persistent data structures can be more
+space-efficient than naive copying of entire data structures when updates
+are frequent but the size of individual versions remains relatively small
+or when sharing unchanged parts between versions (structural sharing).
+
+### Disadvantages
+
+1. **Memory Overhead**: Each modification potentially requires allocating
+additional memory for the new version(s) of the data structure, which can
+lead to increased memory consumption over time, especially in scenarios
+with frequent updates.
+
+2. **Performance Degradation**: Operations such as insertion, deletion, or
+update might be slower than their mutable counterparts due to the overhead
+of creating and managing multiple versions. The performance impact is
+particularly noticeable in structures that do not efficiently share
+unchanged parts between versions (e.g., without structural sharing).
+
+3. **Complexity in Implementation**: Designing and implementing efficient
+persistent data structures can be more complex compared to traditional
+mutable ones, especially when aiming for optimal space efficiency through
+techniques like structural sharing or path copying.
+
+4. **Garbage Collection Pressure**: The accumulation of old versions that
+are no longer referenced (but still accessible) can increase the pressure
+on garbage collectors, potentially leading to higher latency in memory
+management and longer pause times in applications that heavily rely on
+persistent data structures.
+
+5. **Limited Suitability for Certain Applications**: For applications
+where write operations dominate and where performance is critical, or
+where state changes are frequent and the entire history does not need to
+be retained (e.g., real-time systems with strict latency requirements),
+mutable data structures might offer a more straightforward and efficient
+solution despite their side effects.
+
+In summary, persistent data structures offer significant benefits in terms
+of immutability, safety, and ease of versioning, making them ideal for
+specific scenarios such as functional programming, concurrent
+applications, and those requiring historical tracking. However, they come
+with trade-offs related to memory usage, performance, implementation
+complexity, and potentially increased garbage collection overhead, which
+must be carefully considered based on the application's requirements.
+
+
+------------------------------------------------------------
+Elapsed: 11.00 seconds
+------------------------------------------------------------

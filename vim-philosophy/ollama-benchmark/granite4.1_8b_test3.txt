@@ -1,0 +1,67 @@
+Certainly! Below is a Python function that computes Fibonacci numbers using[5D[K
+using memoization. Memoization is an optimization technique used to speed u[1D[K
+up computer programs by storing the results of expensive function calls and[3D[K
+and returning the cached result when the same inputs occur again.
+
+```python
+def fibonacci(n, memo=None):
+    if memo is None:
+        memo = {}
+    
+    # Base cases: return n for 0 or 1
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    
+    # Check if the result is already computed and stored in memo
+    if n not in memo:
+        # Recursive computation with memoization
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
+    
+    # Return the stored result for n
+    return memo[n]
+
+# Example usage:
+if __name__ == "__main__":
+    print(fibonacci(10))  # Output: 55
+```
+
+### Explanation:
+
+- **Function Definition**: `fibonacci(n, memo=None)` takes an integer `n` a[1D[K
+and an optional dictionary `memo`.
+  
+- **Initialization of Memoization Dictionary**: If `memo` is not provided ([1D[K
+(i.e., it's `None`), a new empty dictionary is initialized to store previou[7D[K
+previously computed Fibonacci numbers.
+
+- **Base Cases**: The function directly returns `0` for `n = 0` and `1` for[3D[K
+for `n = 1`, which are the first two Fibonacci numbers by definition.
+  
+- **Memoization Check**: Before performing any recursive calls, it checks i[1D[K
+if the result for `n` is already in the `memo` dictionary. If not, it proce[5D[K
+proceeds to compute it.
+
+- **Recursive Computation with Memoization**: The function recursively comp[4D[K
+computes the Fibonacci number for `n - 1` and `n - 2`, storing the sum of t[1D[K
+these two values in `memo[n]`. This prevents redundant calculations for ove[3D[K
+overlapping subproblems, significantly improving efficiency.
+
+- **Return Cached Result**: Finally, it returns the value stored in `memo[n[7D[K
+`memo[n]`, which is the Fibonacci number for `n`.
+
+### Example Usage:
+
+The example usage demonstrates how to call the function with an argument of[2D[K
+of `10`, which computes and prints the 10th Fibonacci number (considering t[1D[K
+the sequence starts from `0`).
+
+This implementation efficiently calculates Fibonacci numbers, especially fo[2D[K
+for large values of `n`, by avoiding redundant calculations through memoiza[7D[K
+memoization.
+
+
+------------------------------------------------------------
+Elapsed: 7.75 seconds
+------------------------------------------------------------

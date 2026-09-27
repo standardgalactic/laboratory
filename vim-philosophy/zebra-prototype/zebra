@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+ new|init|status|next|run|classify|analyze|outline|research|draft|review|revise|proof|publish|export|history|config)
+   exec "$ROOT/commands/$cmd" "$@"
+   ;;
+ help|-h|--help)
+   cat <<EOF
+Zebra
+
+Usage:
+  zebra new NAME
+  zebra status
+  zebra next
+  zebra classify
+  zebra analyze
+  zebra outline
+  zebra research
+  zebra draft
+  zebra review
+  zebra revise
+  zebra proof
+  zebra publish
+  zebra export
+EOF
+   ;;
+ *)
+   echo "Unknown command: $cmd"
+   exit 1
+esac

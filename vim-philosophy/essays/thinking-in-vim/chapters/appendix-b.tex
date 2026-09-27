@@ -1,0 +1,128 @@
+\chapter{Every Ex Command}
+\label{app:ex}
+
+Every Ex command covered in this book, in the form typed on the command line (a leading \texttt{:} is implied throughout and omitted from the table for brevity). Ranges, where a command accepts one, follow the syntax of Chapter~\ref{ch:ex} and are omitted from the Command column unless a specific range usage is idiomatic enough to be worth showing directly.
+
+\section{File and Session Management}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{w} & Write buffer & \ref{ch:installing} \\
+\texttt{w} \textit{file} & Write buffer to \textit{file} & \ref{ch:installing} \\
+\texttt{wq} / \texttt{x} & Write and quit & \ref{ch:installing} \\
+\texttt{q} & Quit & \ref{ch:installing} \\
+\texttt{q!} & Quit, discarding changes & \ref{ch:installing} \\
+\texttt{e} \textit{file} & Edit \textit{file} & \ref{ch:ontology} \\
+\texttt{e!} & Reload current file, discarding changes & \ref{ch:installing} \\
+\texttt{r} \textit{file} & Read \textit{file} in after current line & \ref{ch:insert} \\
+\texttt{mksession} \textit{file} & Save window/tab/buffer arrangement & \ref{ch:buffers} \\
+\texttt{source} \textit{file} (\texttt{:so}) & Execute commands in \textit{file} & \ref{ch:installing} \\
+\end{longtable}
+
+\section{Buffers, Windows, and Tabs}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{ls} / \texttt{buffers} & List all buffers & \ref{ch:buffers} \\
+\texttt{b}\textit{n} & Switch to buffer \textit{n} & \ref{ch:buffers} \\
+\texttt{b}\textit{name} & Switch to buffer matching \textit{name} & \ref{ch:buffers} \\
+\texttt{bnext} (\texttt{:bn}) & Next buffer & \ref{ch:buffers} \\
+\texttt{bprevious} (\texttt{:bp}) & Previous buffer & \ref{ch:buffers} \\
+\texttt{bd} & Delete (unload) buffer & \ref{ch:buffers} \\
+\texttt{split} (\texttt{:sp}) & Split window horizontally & \ref{ch:buffers} \\
+\texttt{vsplit} (\texttt{:vsp}) & Split window vertically & \ref{ch:buffers} \\
+\texttt{tabnew} & Open new tab & \ref{ch:buffers} \\
+\texttt{tabclose} & Close current tab & \ref{ch:buffers} \\
+\texttt{tabonly} & Close all tabs but current & \ref{ch:buffers} \\
+\texttt{args} \textit{glob} & Set the argument list & \ref{ch:global} \\
+\end{longtable}
+
+\section{Substitution and Pattern Commands}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{s/pat/rep/[flags]} & Substitute on current line & \ref{ch:substitution} \\
+\texttt{\%s/pat/rep/[flags]} & Substitute across whole buffer & \ref{ch:substitution} \\
+\texttt{\&} & Repeat last \texttt{:s} & \ref{ch:substitution} \\
+\texttt{g/pat/cmd} & Run \textit{cmd} on every matching line & \ref{ch:global} \\
+\texttt{v/pat/cmd} (\texttt{:g!}) & Run \textit{cmd} on every non-matching line & \ref{ch:global} \\
+\end{longtable}
+
+\section{Execution and Automation}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{normal} \textit{keys} & Execute Normal-mode keystrokes literally & \ref{ch:global} \\
+\texttt{execute} \textit{expr} & Evaluate expression, run result as Ex command & \ref{ch:global} \\
+\texttt{argdo} \textit{cmd} & Run \textit{cmd} on every file in argument list & \ref{ch:global} \\
+\texttt{bufdo} \textit{cmd} & Run \textit{cmd} on every open buffer & \ref{ch:global} \\
+\texttt{windo} \textit{cmd} & Run \textit{cmd} on every open window & \ref{ch:global} \\
+\texttt{call} \textit{Func()} & Call a Vimscript function & \ref{ch:vimscript} \\
+\texttt{let} \textit{var} \texttt{=} \textit{val} & Assign a variable or register & \ref{ch:vimscript} \\
+\texttt{if}/\texttt{elseif}/\texttt{else}/\texttt{endif} & Conditional block & \ref{ch:vimscript} \\
+\texttt{while}/\texttt{endwhile} & Loop block & \ref{ch:vimscript} \\
+\texttt{function!}/\texttt{endfunction} & Define a function & \ref{ch:vimscript} \\
+\texttt{autocmd} \textit{event pattern cmd} & Bind \textit{cmd} to an event & \ref{ch:vimscript} \\
+\texttt{augroup} \textit{name} & Group related autocommands & \ref{ch:vimscript} \\
+\end{longtable}
+
+\section{Shell Interaction}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{!}\textit{cmd} & Run shell command, show output & \ref{ch:shell} \\
+\texttt{r !}\textit{cmd} & Insert command output into buffer & \ref{ch:shell} \\
+\texttt{\%!}\textit{cmd} & Filter whole buffer through \textit{cmd} & \ref{ch:shell} \\
+\texttt{w !}\textit{cmd} & Send buffer to \textit{cmd} as stdin & \ref{ch:shell} \\
+\texttt{cd} \textit{dir} & Change working directory & \ref{ch:shell} \\
+\texttt{sh} & Start an interactive sub-shell & \ref{ch:shell} \\
+\end{longtable}
+
+\section{Build, Search, and Quickfix}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{make} & Run build command, populate quickfix list & \ref{ch:workflows} \\
+\texttt{grep} \textit{pattern} & Search externally, populate quickfix list & \ref{ch:workflows} \\
+\texttt{vimgrep} \textit{pattern files} & Search with Vim's own regex engine & \ref{ch:workflows} \\
+\texttt{copen} & Open quickfix window & \ref{ch:workflows} \\
+\texttt{cnext} / \texttt{cprevious} & Next/previous quickfix entry & \ref{ch:workflows} \\
+\end{longtable}
+
+\section{History and Inspection}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{history} (\texttt{:his}) & Show command-line history & \ref{ch:ex} \\
+\texttt{jumps} & Show the jump list & \ref{ch:marks} \\
+\texttt{undolist} & Show undo-tree branch points & \ref{ch:undo} \\
+\texttt{undo} \textit{n} & Jump to undo-tree state \textit{n} & \ref{ch:undo} \\
+\texttt{digraphs} & Show the digraph table & \ref{ch:insert} \\
+\texttt{help} \textit{topic} (\texttt{:h}) & Open help for \textit{topic} & \ref{ch:ontology} \\
+\end{longtable}
+
+\section{Options}
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Command} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{set} \textit{option} & Enable a boolean option & \ref{ch:installing} \\
+\texttt{set no}\textit{option} & Disable a boolean option & \ref{ch:installing} \\
+\texttt{set} \textit{option}\texttt{=}\textit{value} & Set a value option & \ref{ch:installing} \\
+\texttt{set all} & Print all current option values & \ref{app:options} \\
+\end{longtable}

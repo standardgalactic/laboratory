@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+${EDITOR:-vi} "$(dirname "$0")/../config/default.conf"

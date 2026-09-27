@@ -1,0 +1,17 @@
+\chapter{Historical Evolution of Vim}
+\label{app:history}
+
+A compact timeline complementing the fuller historical discussion in Chapter~\ref{ch:different}.
+
+\begin{longtable}{@{}l p{9.5cm}@{}}
+\textbf{Era} & \textbf{Development} \\
+\hline
+\endhead
+Early 1970s & \texttt{ed}, a line editor, establishes the command language later inherited by \texttt{ex} and, through it, Vim's own Ex mode: line addressing, \texttt{:s}, \texttt{:g}, and range syntax all trace to this era. \\
+Late 1970s & Bill Joy writes \texttt{vi}, adding a full-screen, character-addressable visual mode atop \texttt{ex}'s existing line-oriented command language, establishing the dual nature (visual editing plus an underlying line-oriented Ex language) that Vim still exhibits. \\
+1988 & Bram Moolenaar begins Vim ("Vi IMitation," later reinterpreted as "Vi IMproved") for the Amiga, as a vi-compatible clone. \\
+1990s onward & Vim adds multi-level undo, syntax highlighting, split windows, Vimscript, and a large ecosystem of built-in and pluggable extensions, while preserving vi's command grammar essentially intact. \\
+2014 & Neovim forks from Vim, preserving the same operator-motion-text-object grammar while modernizing the implementation: a different plugin architecture, first-class Lua scripting alongside Vimscript, and a design oriented toward embedding the editor in other tools. \\
+\end{longtable}
+
+The through-line worth emphasizing, restated from Chapter~\ref{ch:different}: the operator-motion grammar covered throughout Part II, the register model of Chapter~\ref{ch:registers}, and the Ex language of Part V have remained substantially stable across every era in this table. A command learned from this book will continue to work, unmodified, regardless of which specific era's implementation a reader happens to be running.

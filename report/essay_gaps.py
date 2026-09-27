@@ -273,7 +273,9 @@ def main():
                 print(f'skip {p}: {e}', file=sys.stderr)
                 continue
             if r['words'] >= a.min_words:
-                r['repo'] = os.path.basename(root)
+                parts = root.split(os.sep)
+                owner = parts[-2] if len(parts) > 2 and parts[-3] == 'sources' else 'standardgalactic'
+                r['repo'] = os.path.basename(root) if owner == 'standardgalactic' else f'{owner}/{os.path.basename(root)}'
                 results.append(r)
 
     results.sort(key=lambda r: -r['score'])

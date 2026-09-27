@@ -13,6 +13,13 @@ R.sort(key=lambda r: -r['score'])
 for r in R:
     r['title'] = r['title'].strip() or r['path'].rsplit('/', 1)[-1]
 
+WHY = {'date': 'it has the most recent edit', 'draft number': 'it has the highest draft number among drafts committed together',
+       'development': 'it is clearly the most developed of drafts committed together',
+       'citations/length': 'the drafts share a date and number, and it is the most developed', 'override': 'it was chosen by hand'}
+import time
+def day(m):
+    return time.strftime('%Y-%m-%d', time.gmtime(m)) if m else 'unknown date'
+
 KINDS = [('uncited_claims', 'Uncited claims'), ('uncited_works', 'Named works without a citation'),
          ('markers', 'Unfinished markers'), ('unproved', 'Statements without a proof'),
          ('stub_sections', 'Short sections')]
@@ -83,8 +90,8 @@ w(r"""\documentclass[11pt]{article}
 """)
 
 w(r"\begin{abstract}" + "\n" + esc(
-    f"A static scan of {len(R)} LaTeX documents ({words:,} words) drawn from {len(by_repo)} public "
-    f"repositories identifies places where the writing asserts empirical results without citation, "
+    f"A static scan of {len(R)} essays ({words:,} words), each represented by its most recent draft, "
+    f"drawn from {len(by_repo)} public repositories, identifies places where the writing asserts empirical results without citation, "
     f"names prior work without citing it, states formal results without proof, or leaves sections "
     f"skeletal. The median document carries {med:.2f} citations per thousand words, and {len(nocite)} "
     f"documents longer than 1,500 words cite nothing. The report ranks documents by gap density and "
@@ -102,7 +109,14 @@ w(esc("Most of these documents are active projects that were published as they w
 w(r"\section{Method}" + "\n")
 w(esc("A document is any .tex file containing a document class declaration. Files it pulls in with input "
       "or include commands are expanded in place, so chapter-based monographs are scanned as one document. "
-      "Byte-identical copies are counted once; different drafts of the same essay are counted separately. "
+      "Only the most recent draft of each essay is scanned. Drafts are grouped when their paths match once "
+      "draft and version markers are removed (draft-01/, draft 03, -v2, (3)) or when they share a title. The "
+      "draft kept is the one whose content was edited last according to the repository history, following "
+      "moves and exact copies back to the edit that produced them. When drafts were committed together, the "
+      "highest draft number wins unless another draft is clearly more developed (half again as large, counting "
+      "each citation as forty words), since references tend to be added in the last version. "
+      f"{sum(len(r.get('superseded', [])) for r in R)} earlier drafts were set aside this way; each is listed "
+      "with the essay it belongs to. "
       "Documents under 800 words are skipped. Six kinds of gap are flagged:") + "\n")
 w(r"\begin{description}[leftmargin=1em,style=nextline]")
 defs = [
@@ -125,7 +139,7 @@ w(esc("The gap score is the weighted number of flags per thousand words (uncited
 
 w(r"\section{Summary}" + "\n")
 w(r"\begin{center}\begin{tabular}{lr}\toprule")
-for label, val in [("Documents scanned", f"{len(R):,}"), ("Words", f"{words:,}"),
+for label, val in [("Essays (latest drafts only)", f"{len(R):,}"), ("Earlier drafts set aside", f"{sum(len(r.get('superseded', [])) for r in R):,}"), ("Words", f"{words:,}"),
                    ("Median citations per 1,000 words", f"{med:.2f}"),
                    ("Documents over 1,500 words with no citations", f"{len(nocite):,}"),
                    ("Uncited claims", f"{tot['uncited_claims']:,}"),
@@ -169,6 +183,10 @@ for i, r in enumerate(R[:DETAIL], 1):
     if r['unused_bib']:
         bits.append(f"{len(r['unused_bib'])} never cited")
     w(esc(', '.join(bits) + '.') + "\n")
+    if r.get('superseded'):
+        w(esc(f"Latest of {len(r['superseded']) + 1} drafts, last edited {day(r.get('mtime'))}; kept because "
+              f"{WHY.get(r.get('kept_by'), 'it is the most recent')}."
+              + (" An earlier draft looks more developed, so this pick should be checked." if r.get('review') else "")) + "\n")
     if r['cites'] == 0 and r['words'] > 1500:
         w(r"\textbf{No citations.} " + esc("The document cites nothing; a reference pass is the first task.") + "\n")
     elif r.get('bib_note'):
@@ -184,6 +202,13 @@ for i, r in enumerate(R[:DETAIL], 1):
             w(r"\item \loc{" + esc(f"{f}:{ln}").replace('/', r'/\allowbreak{}') + "} " + esc(text))
         if len(items) > PER_KIND[k]:
             w(r"\item[] {\color{muted}\small " + esc(f"and {len(items) - PER_KIND[k]} more") + "}")
+        w(r"\end{itemize}")
+    if r.get('superseded'):
+        w(r"\paragraph{Earlier drafts set aside (" + str(len(r['superseded'])) + ")}")
+        w(r"\begin{itemize}")
+        for x in r['superseded']:
+            w(r"\item \loc{" + esc(x['repo'] + '/' + x['path']).replace('/', r'/\allowbreak{}') + "} "
+              + esc(f"edited {day(x['mtime'])}, {x['words']:,} words, {x['cites']} citations"))
         w(r"\end{itemize}")
     if r['missing_keys']:
         keys = r['missing_keys']

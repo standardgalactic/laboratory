@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "Project: $(basename "$PWD")"
+ls -1 *.md 2>/dev/null || true

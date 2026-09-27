@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+source "$(dirname "$0")/../lib/common.sh"; load_config; run_prompt analyze 02-analysis.md

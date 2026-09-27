@@ -1,0 +1,34 @@
+\chapter{Shell Commands}
+\label{ch:shell}
+
+Chapter~\ref{ch:operators} introduced \texttt{!} as an operator that sends spanned text to an external command and replaces it with that command's output, previewing a theme this chapter now develops fully: Vim does not treat the shell as something outside itself to be escaped to occasionally, but as a resource woven throughout its own command language. Part VII is where this book's plugin-free, Unix-native scope pays off most directly, and this chapter is its foundation.
+
+\section{Executing a Command}
+
+\texttt{:!}\textit{command} runs \textit{command} in a shell and displays its output, without touching the buffer at all. \texttt{:! ls} lists the current directory's contents; \texttt{:!!} repeats the most recently executed shell command. This is the simplest point of contact between Vim and the shell, useful whenever a quick check (does this file exist, what does this directory contain, did that background process finish) is needed without leaving the editor or losing the current buffer's state.
+
+\section{Reading Command Output Into the Buffer}
+
+\texttt{:r !}\textit{command} runs \textit{command} and inserts its output into the buffer after the current line, exactly as \texttt{:r} \textit{filename} (from Chapter~\ref{ch:insert}) reads a file's contents, except that the source is a command's output rather than a file's. \texttt{:r !ls} inserts a directory listing directly into the buffer at the cursor, a genuinely common move when drafting a document that needs to enumerate files, or when bootstrapping a data file from some external source's output rather than typing that data by hand.
+
+\section{Filtering the Buffer Through a Command}
+
+\texttt{:\%!}\textit{command} pipes the entire buffer through \textit{command} and replaces the buffer's contents with that command's output; \texttt{:'<,'>!}\textit{command}, following a Visual selection per the range syntax of Chapter~\ref{ch:ex}, does the same for only the selected lines. \texttt{:\%!sort} sorts every line in the buffer; \texttt{:'<,'>!column -t}, applied to a selection of whitespace-separated data, reformats it into aligned columns. This is the Ex-command form of the same operation the Normal-mode \texttt{!} operator from Chapter~\ref{ch:operators} performs against a motion or text object; \texttt{!\}sort}, from that chapter, and \texttt{:.,'a!sort}, expressed as an Ex range, accomplish comparable ends through the two different surfaces of Vim's grammar already unified in Chapter~\ref{ch:ex}.
+
+The distinction between \texttt{:r !} and \texttt{:\%!} is worth holding onto precisely: the former adds a command's output to the buffer without removing anything, while the latter replaces buffer content with a command's output, using the existing content as that command's input. \texttt{:r !ls} and \texttt{:\%!sort} are doing structurally different things even though both involve a shell command and a colon, and conflating them is a common early mistake.
+
+\section{Sending the Buffer to a Command}
+
+\texttt{:w !}\textit{command} sends the current buffer's content to \textit{command} as standard input, displaying whatever that command prints in response, without modifying the buffer itself, distinct from \texttt{:\%!}, which does modify it. \texttt{:w !python3} runs the current buffer's content through a Python interpreter and shows the result, a fast way to test a short script without saving it to a file first; \texttt{:w !grep pattern} shows which lines of the current, unsaved buffer would match a pattern, without needing to save first and run \texttt{grep} against the file from a separate shell.
+
+\section{Working Directory and Sub-Shells}
+
+\texttt{:cd} \textit{directory} changes Vim's own working directory, which affects how relative paths in subsequent commands, including all the shell-interaction commands covered in this chapter, are resolved. \texttt{:sh} starts an interactive sub-shell, suspending Vim and dropping into an ordinary shell prompt within the same terminal; \texttt{Ctrl-d} (or \texttt{exit}) from that sub-shell returns control to Vim exactly where it was left, buffers and all. This is a coarser tool than the command-specific forms above, useful when a genuinely open-ended shell session is needed rather than a single command's output, and it is worth knowing as an option precisely because it means a reader is never truly boxed into Vim's own command surface; the full shell is always one command away.
+
+\section{A Note on Workflow}
+
+The commands in this chapter make it possible to accomplish quite a lot without ever leaving Vim, and a reader newly introduced to them may be tempted to route everything through \texttt{:!}, \texttt{:r !}, and \texttt{:\%!} on principle. This is worth resisting where a more direct alternative already exists elsewhere in this book, and worth embracing where it genuinely does not. Selecting text with the mouse and copying it through a terminal emulator's own clipboard handling, rather than through Vim's registers, remains the more convenient path for moving text into an entirely different application outside the terminal altogether, as already noted in Chapter~\ref{ch:shell}'s predecessor material in Chapter~\ref{ch:registers}; the commands covered here are at their best when the task is fundamentally about transforming a buffer's content using an external tool's capability, not when it is about moving text between applications that have perfectly good clipboard integration of their own.
+
+\section{Shell Integration as a Pipeline Stage}
+
+It is worth closing this chapter by naming explicitly what the four core commands above have in common, since it is easy to see them as four unrelated features rather than one coherent capability. \texttt{:!}, \texttt{:r !}, \texttt{:\%!}, and \texttt{:w !} are, respectively: run a command and discard the buffer's relationship to it entirely; bring a command's output in; send the buffer out, replacing it with the result; and send the buffer out, without replacing it. Between them, every direction of the relationship between "the buffer" and "an external process" is covered, in and out, with and without modifying the buffer as a side effect. Vim, in this light, is not an island that occasionally makes an exception to talk to the shell; for the duration of any of these four commands, it is one stage in a pipeline, receiving input from an upstream process or sending output to a downstream one, with a human editor positioned at exactly the point in that pipeline where judgment or manual correction is most needed. The chapters that follow, on development workflows and on writing, are largely an exploration of what becomes possible once that framing is taken seriously.

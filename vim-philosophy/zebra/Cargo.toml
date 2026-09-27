@@ -1,0 +1,26 @@
+[package]
+name = "zebra"
+version = "0.1.0"
+edition = "2021"
+description = "Zebra: an event-sourced graph engine for reproducible document generation"
+authors = ["Flyxion"]
+
+[[bin]]
+name = "zebra"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "=4.4.18", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+toml = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
+anyhow = "1"
+walkdir = "2"
+indexmap = "=2.2.6"
+
+[profile.release]
+opt-level = 2

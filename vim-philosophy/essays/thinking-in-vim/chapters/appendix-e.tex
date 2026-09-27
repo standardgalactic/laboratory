@@ -1,0 +1,35 @@
+\chapter{Every Option}
+\label{app:options}
+
+Every option named in this book, set with \texttt{:set} per Chapter~\ref{ch:installing}'s syntax. Boolean options are toggled with \texttt{set} \textit{option} / \texttt{set no}\textit{option}; value options are set with \texttt{set} \textit{option}\texttt{=}\textit{value}.
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Option} & \textbf{Effect} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{nocompatible} & Disable classic-vi backward-compatibility behaviors & \ref{ch:installing} \\
+\texttt{syntax} & Enable syntax highlighting (\texttt{:syntax on}) & \ref{ch:installing} \\
+\texttt{number} & Display line numbers & \ref{ch:installing} \\
+\texttt{relativenumber} & Display line numbers relative to the cursor & \ref{app:options} \\
+\texttt{incsearch} & Show search matches while typing & \ref{ch:installing} \\
+\texttt{ignorecase} & Case-insensitive search by default & \ref{ch:installing} \\
+\texttt{smartcase} & Override \texttt{ignorecase} when pattern has uppercase & \ref{ch:installing} \\
+\texttt{hlsearch} & Highlight all search matches & \ref{app:options} \\
+\texttt{expandtab} & Insert spaces rather than literal tabs & \ref{ch:installing} \\
+\texttt{shiftwidth} & Width of one indent level & \ref{ch:installing} \\
+\texttt{softtabstop} & Width of a tab keystroke in Insert mode & \ref{ch:installing} \\
+\texttt{tabstop} & Display width of a literal tab character & \ref{app:options} \\
+\texttt{undofile} & Persist undo history to disk across sessions & \ref{ch:undo} \\
+\texttt{undodir} & Directory for persistent undo files & \ref{ch:undo} \\
+\texttt{textwidth} & Wrap width used by \texttt{gq}/\texttt{gw} and auto-wrap & \ref{ch:operators} \\
+\texttt{equalprg} & External program used by the \texttt{=} operator & \ref{ch:operators} \\
+\texttt{makeprg} & Build command run by \texttt{:make} & \ref{ch:workflows} \\
+\texttt{iskeyword} & Characters considered part of a "word" & \ref{ch:different} \\
+\texttt{spell} & Enable spell-checking & \ref{ch:writing} \\
+\texttt{wildmenu} & Visual, navigable command-line completion & \ref{ch:ex} \\
+\texttt{path} & Additional directories searched by \texttt{gf}/\texttt{:find} & \ref{app:options} \\
+\texttt{guioptions} & gVim interface elements (menu, toolbar) shown & \ref{ch:installing} \\
+\texttt{guifont} & gVim display font & \ref{ch:installing} \\
+\texttt{guicursor} & gVim cursor appearance and blink behavior & \ref{app:options} \\
+\texttt{shada} (formerly \texttt{viminfo}) & What session state persists across restarts & \ref{ch:marks} \\
+\end{longtable}

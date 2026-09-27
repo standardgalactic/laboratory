@@ -1,0 +1,1 @@
+Audit the supplied files for terminology drift. Build a table of canonical term, variants found, locations, semantic difference, and recommended normalization.

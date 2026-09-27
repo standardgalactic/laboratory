@@ -1,0 +1,36 @@
+\chapter{Inserting and Replacing}
+\label{ch:insert}
+
+Every operator covered in Chapter~\ref{ch:operators} removes, copies, or transforms text that already exists in the buffer. This chapter turns to the opposite case: adding new text, and the family of Normal-mode commands that transition into Insert mode (or one of its variants) at a specific, deliberately chosen point, each differing only in where that point is and what, if anything, is removed before typing begins.
+
+\section{Insert and Append}
+
+\texttt{i} enters Insert mode with the cursor unchanged, so that typed text appears before whatever character the cursor was on. \texttt{a} (append) enters Insert mode one character to the right, so that typed text appears after the character the cursor was on, which is the natural choice when adding text immediately following the current cursor position rather than immediately preceding it, and is also the only sensible option when the cursor is on the last character of a line and the intent is to continue typing past it. \texttt{I} and \texttt{A} are the line-relative extremes of the same pair: \texttt{I} inserts at the first non-blank character of the current line regardless of where the cursor happened to be, and \texttt{A} appends at the very end of the line. A reader who has internalized the coordinate systems of Chapter~\ref{ch:coordinates} may notice that \texttt{I} and \texttt{A} are, in effect, \texttt{\^{}i} and \texttt{\$a} respectively, expressed as dedicated single-key commands because moving to a line's edge before inserting text is common enough to deserve its own shorthand.
+
+\section{Opening Lines}
+
+\texttt{o} opens a new, empty line immediately below the current one and enters Insert mode on it; \texttt{O} does the same immediately above. Both commands respect the current line's indentation when the \texttt{autoindent} or filetype-specific indentation settings are active, carrying that indentation forward onto the new line automatically rather than leaving the reader to type it manually, which is a small detail but one that matters considerably when writing indentation-sensitive code.
+
+\section{Replace Mode}
+
+\texttt{R} enters Replace mode, a mode distinct from ordinary Insert mode in that each typed character overtypes the character currently under the cursor rather than pushing it rightward, continuing until \texttt{escape} returns to Normal mode. This is the direct keyboard analogue of the "overtype" or "insert versus overwrite" toggle familiar from many non-modal text editors, except that in Vim it is a genuine mode with its own identity rather than a global toggle affecting how Insert mode itself behaves. A single-character variant, \texttt{r}\textit{char}, replaces only the character under the cursor with \textit{char} and returns immediately to Normal mode without ever entering Replace mode at all, which makes it the more commonly used of the two for small, one-character corrections.
+
+\subsection{Virtual Replace}
+
+\texttt{gR} enters Virtual Replace mode, a variant of Replace mode aware of virtual columns, meaning it correctly overtypes through tab characters and multi-width characters by their visual column position on screen rather than their raw byte or character position in the buffer. This distinction rarely matters when working with plain, tab-free text, but becomes important when replacing text in a file that mixes tabs and spaces for indentation, where ordinary Replace mode's character-position overtyping can produce visually misaligned results that Virtual Replace mode avoids.
+
+\section{Substituting}
+
+\texttt{s} deletes the character under the cursor and enters Insert mode at that point, equivalent to \texttt{cl} (change one character) but shorter to type; \texttt{S} deletes the entire current line's content, preserving indentation, and enters Insert mode, equivalent to \texttt{cc} from the previous chapter. These are not new grammatical constructs so much as convenient, frequently used shorthand for operator-motion combinations already covered, included here because they are common enough in practice to be worth naming directly rather than leaving the reader to rediscover them as a special case of \texttt{c}.
+
+\section{Completion}
+
+While in Insert mode, \texttt{Ctrl-n} and \texttt{Ctrl-p} trigger keyword completion, searching the current buffer (and, depending on configuration, other open buffers, included files, and tag files) for words beginning with whatever has been typed so far, and presenting matches in a pop-up menu navigable with the same two keys. This is Vim's built-in completion mechanism, present without any plugin, and while considerably less sophisticated than the language-aware completion offered by modern editors with dedicated language servers, it is frequently sufficient for completing a variable name, a function name, or any other identifier that has already appeared elsewhere in the buffer, and it is worth knowing as a baseline capability before reaching for any external tooling.
+
+\section{Digraphs and Special Characters}
+
+\texttt{Ctrl-k} followed by a two-character digraph code inserts the corresponding special character: \texttt{Ctrl-k} \texttt{e'} inserts \texttt{\'{e}}, for instance, using a mnemonic two-letter code defined in Vim's digraph table (viewable with \texttt{:digraphs}) rather than requiring the reader to know or type a raw Unicode code point. For characters without a convenient digraph, \texttt{Ctrl-v} followed by a decimal, octal, hexadecimal, or Unicode code point inserts that exact character directly: \texttt{Ctrl-v u 00e9} inserts the same \texttt{\'{e}} by its Unicode code point. \texttt{Ctrl-v} additionally serves a second, more mundane purpose while inserting text: pressing it before any character that would otherwise carry a special meaning (a literal tab when \texttt{expandtab} would normally convert it to spaces, for instance) inserts that character's literal form instead, bypassing whatever special handling would otherwise apply.
+
+\section{Insert Mode Is Still Insert Mode}
+
+It is worth closing this chapter by noting what has not changed across every command covered here: \texttt{i}, \texttt{a}, \texttt{I}, \texttt{A}, \texttt{o}, \texttt{O}, and the insert-producing forms of \texttt{c} and \texttt{s} all lead to the same Insert mode, differing only in the cursor position and the state of the buffer at the moment that mode is entered. None of them constitute a separate typing mode with its own rules; once inside Insert mode, ordinary typing behaves identically regardless of which command was used to arrive there, and \texttt{escape} returns to Normal mode the same way from all of them. What this chapter has actually catalogued, in other words, is not eight different ways of typing text, but eight different ways of choosing where typing should begin, which is a considerably smaller thing to have learned than the length of this chapter might suggest, and is itself a small instance of the same economy of primitives this book has been arguing for since Chapter 1.

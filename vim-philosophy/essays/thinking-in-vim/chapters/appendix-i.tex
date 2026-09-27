@@ -1,0 +1,45 @@
+\chapter{vimrc Cookbook}
+\label{app:vimrc}
+
+Every vimrc line introduced across this book, collected into one place. This is not a single recommended configuration to copy wholesale; it is the complete set of individual settings this book has justified individually, in the chapter noted, for a reader to select from according to their own needs, following the incremental spirit of Chapter~\ref{ch:installing}'s original minimal vimrc.
+
+\begin{lstlisting}
+" Core sanity (Chapter 3)
+set nocompatible
+syntax on
+set number
+set incsearch
+set ignorecase
+set smartcase
+
+" Indentation (Chapter 3)
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
+" Undo persistence across sessions (Chapter 9)
+set undofile
+" set undodir=~/.vim/undodir    " optional: centralize undo files
+
+" Command-line completion (Chapter 13)
+set wildmenu
+
+" gVim interface, if applicable (Chapter 3)
+set guioptions-=m              " remove menu bar
+set guioptions-=T              " remove toolbar
+
+" Prose and writing (Chapter 20)
+" set spell                    " enable per-file with :set spell instead
+" set textwidth=80             " set per-filetype rather than globally
+
+" A custom mapping (Chapter 17)
+nnoremap <C-s> <C-a>h
+
+" An autocommand (Chapter 17)
+augroup PythonIndent
+    autocmd!
+    autocmd BufWritePre *.py normal! gg=G
+augroup END
+\end{lstlisting}
+
+The two options left commented out, \texttt{spell} and \texttt{textwidth}, are shown that way deliberately: both are more useful set per-file-type or invoked on demand than enabled globally for every buffer regardless of content, and a reader adapting this cookbook should treat every line here as a starting point for judgment rather than a fixed prescription, consistent with this book's general preference throughout for understanding a setting's effect over copying it uncritically.

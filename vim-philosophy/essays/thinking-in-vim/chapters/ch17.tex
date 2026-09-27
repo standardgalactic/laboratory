@@ -1,0 +1,70 @@
+\chapter{Vimscript}
+\label{ch:vimscript}
+
+A macro, per Chapter~\ref{ch:macros}, is a recorded sequence of Vim's own commands, useful precisely because it requires no vocabulary beyond what Parts II through V already cover. Vimscript is what a reader reaches for once a transformation's logic genuinely exceeds what a linear sequence of recorded keystrokes can express: conditional behavior, named and reusable procedures, and configuration that reacts to events rather than being invoked directly. This chapter is not a complete language reference; it covers the fraction of Vimscript that a reader of this book is most likely to need, and points toward \texttt{:help} for anything further, consistent with Chapter~\ref{ch:ontology}'s treatment of the help system as a self-sufficient resource in its own right.
+
+\section{Variables}
+
+\texttt{:let x = 5} assigns the value 5 to a variable named \texttt{x}, and \texttt{:echo x} displays it. Variable names are, by default, scoped to whatever context they are defined in (a script, a function), but an explicit prefix narrows or widens that scope deliberately: \texttt{g:} for a global variable, visible everywhere; \texttt{s:} for one local to the current script file; \texttt{b:} for one local to the current buffer, useful for state that should differ file by file rather than being shared across an entire session. The registers already covered in Chapter~\ref{ch:registers} are, from Vimscript's perspective, themselves a kind of variable, addressed with the \texttt{@} prefix rather than assigned a name: \texttt{:let @q = 'daw'} sets register \texttt{q}'s contents directly, exactly as seen in the previous chapter's treatment of constructing a macro without recording it.
+
+\section{Functions}
+
+\begin{lstlisting}
+function! DoubleIndent()
+    normal! >>
+    normal! >>
+endfunction
+\end{lstlisting}
+
+\texttt{function!} defines a function, with the trailing \texttt{!} permitting redefinition without error if a function of the same name already exists, generally desirable while iterating on a definition during a single editing session. \texttt{normal!} inside a function behaves like the \texttt{:normal} command from Chapter~\ref{ch:global}, executing Normal-mode keystrokes, with the \texttt{!} suppressing any user-defined mappings that might otherwise interfere with keystrokes intended literally. \texttt{:call DoubleIndent()} invokes the function. A function that returns a value does so with an explicit \texttt{return} statement, and functions intended to operate on a range, callable as \texttt{:'<,'>call MyFunction()} from a Visual selection in the manner of Chapter~\ref{ch:ex}, are declared with a trailing \texttt{range} keyword so that Vim passes the selection's boundaries in automatically as the built-in \texttt{a:firstline} and \texttt{a:lastline} variables.
+
+\section{Conditionals}
+
+\begin{lstlisting}
+if line('.') == 1
+    echo "first line"
+elseif line('.') == line('$')
+    echo "last line"
+else
+    echo "middle"
+endif
+\end{lstlisting}
+
+Vimscript's \texttt{if}/\texttt{elseif}/\texttt{else}/\texttt{endif} behaves as its syntax suggests, and \texttt{line('.')} and \texttt{line('\$')}, used here, are built-in functions returning the current line number and the buffer's last line number respectively, callable anywhere a Vimscript expression is valid, including inside the \texttt{\textbackslash=} replacement-expression syntax from Chapter~\ref{ch:substitution}.
+
+\section{Loops}
+
+\begin{lstlisting}
+let i = 1
+while i <= 10
+    execute 'normal! I' . i . '. '
+    normal! j
+    let i += 1
+endwhile
+\end{lstlisting}
+
+This loop prefixes each of the first ten lines with its own number and a period, using \texttt{execute} (from Chapter~\ref{ch:global}) to build a dynamic Normal-mode command string on each iteration and \texttt{normal!} to move down one line between iterations. A structurally similar pattern, encountered as real, previously-used automation rather than a constructed example, generates several thousand sequentially numbered lines in a single invocation:
+
+\begin{lstlisting}
+let i = 1
+while i <= 18000
+    execute 'normal! i' . printf("fr/fr_%05d.mp3", i)
+    let i += 1
+endwhile
+\end{lstlisting}
+
+The two examples differ only in what each iteration inserts, one case using \texttt{printf} to zero-pad a number into a five-digit filename pattern rather than a bare line number; the loop structure itself, an incrementing counter and a \texttt{while} condition, is identical. This is worth noting explicitly because it is easy to mistake a large iteration count for a fundamentally more complex piece of code than a small one; scaling a loop from ten iterations to eighteen thousand changes nothing about its structure, only the bound it is checked against.
+
+\section{Mappings}
+
+A mapping binds a key sequence to a command, extending the built-in Normal-mode vocabulary of Part II with new, custom key sequences of the reader's own choosing. \texttt{nnoremap <C-s> <C-a>h} binds Control-s, in Normal mode, to the built-in increment command \texttt{Ctrl-a} followed by \texttt{h}. The trailing \texttt{h} is not incidental: \texttt{Ctrl-a} increments the number under or after the cursor and leaves the cursor positioned at the end of the changed number, so the following \texttt{h} moves it back by one character, a small correction that keeps the cursor's resting position consistent with where it would have been had no increment occurred.
+
+The \texttt{nore} in \texttt{nnoremap} (as opposed to plain \texttt{nmap}) specifies a non-recursive mapping: the right-hand side, \texttt{<C-a>h}, is interpreted using Vim's built-in meanings for those keys, not through any further layer of the user's own mappings that might otherwise apply to the same keys. This distinction matters increasingly as a reader's vimrc accumulates more mappings over time, since a recursive mapping (plain \texttt{nmap}) can interact unpredictably with other mappings defined later, while a non-recursive one (\texttt{nnoremap}) cannot; for this reason, \texttt{nnoremap} and its counterparts for other modes (\texttt{inoremap} for Insert mode, \texttt{vnoremap} for Visual mode, and so on) are the generally recommended default, with plain, recursive mapping reserved for the specific, less common cases where recursion is actually intended.
+
+\section{Autocommands}
+
+An autocommand binds a piece of Vimscript to an event, executing automatically whenever that event occurs rather than requiring an explicit invocation. \texttt{autocmd BufWritePre *.py normal! gg=G} runs the \texttt{gg=G} auto-indent command (using the \texttt{=} operator from Chapter~\ref{ch:operators} across the entire buffer, from the \texttt{gg} motion to the \texttt{G} motion of Chapter~\ref{ch:coordinates}) immediately before writing any file matching the pattern \texttt{*.py}, keeping Python files consistently indented without the user having to remember to trigger the indentation manually each time. \texttt{BufWritePre} is one of a large set of defined events (others include \texttt{BufReadPost}, triggered after a file is loaded; \texttt{FileType}, triggered when a buffer's detected file type is set; and \texttt{VimEnter}, triggered once at startup), each documented in full under \texttt{:help autocmd-events}. Autocommands are generally grouped with \texttt{augroup}, paired with an explicit \texttt{autocmd!} to clear any previous definitions in that group, to prevent the same autocommand from being registered multiple times if a vimrc is re-sourced during a session, a subtlety worth knowing before a reader's first autocommand mysteriously appears to run twice.
+
+\section{Vimscript as the Ceiling of This Book's Automation Material}
+
+This chapter, together with the macros of Chapter~\ref{ch:macros}, completes Part VI, and it is worth being explicit about where this book's coverage of automation ends. Vimscript is a complete, Turing-complete scripting language with a considerably larger surface than the variables, functions, conditionals, loops, mappings, and autocommands covered here: dictionaries and lists as first-class data structures, a module system for larger plugins, and integration with other scripting languages Vim can be compiled against, among a great deal else documented under \texttt{:help usr\_41.txt}, Vim's own guide to writing Vimscript. This book's plugin-free scope, stated in the Preface, means it stops at the point where a reader has enough Vimscript to automate their own editing rather than to build distributable tooling for others; a reader who finds themselves wanting more than this chapter provides has, in a real sense, outgrown this book's remit for that specific need, and \texttt{:help usr\_41.txt} is the appropriate next stop rather than a shortcoming of what is covered here.

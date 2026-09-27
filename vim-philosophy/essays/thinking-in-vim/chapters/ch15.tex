@@ -1,0 +1,40 @@
+\chapter{Global Editing}
+\label{ch:global}
+
+The pattern-as-address syntax from Chapter~\ref{ch:ex} located a single line by content. This chapter generalizes that idea from "find one matching line" to "find every matching line and act on each one," which is the last major piece of Ex's grammar and, for many experienced users, the single most powerful command Vim provides.
+
+\section{The Global Command}
+
+\texttt{:g/pattern/command} finds every line in the addressed range (the whole buffer, by default, if no range is given) matching \textit{pattern}, and then executes \textit{command} on each matching line in turn. This two-phase behavior, matching first across the whole range and only then executing, is worth understanding precisely, because it explains behavior that would otherwise be surprising: \texttt{:g/foo/d}, deleting every line containing "foo," correctly deletes every such line even though earlier deletions shift the line numbers of everything below them, because Vim identifies all matching lines before executing any command against them, rather than re-scanning after each deletion.
+
+Without an explicit command, \texttt{:g/pattern/} defaults to \texttt{p} (print), listing matching lines, which is a quick way to preview what a global command would affect before committing to a more consequential one.
+
+\section{The Inverse Global Command}
+
+\texttt{:v/pattern/command} (an abbreviation of \texttt{:g!}) is the inverse: it executes \textit{command} on every line that does \textit{not} match \textit{pattern}. \texttt{:v/\textasciicircum\#/d}, applied to a shell script or configuration file, deletes every line that does not begin with a comment character, keeping only the comments, a targeted way to extract documentation from a file that intersperses it with executable content.
+
+\section{Worked Examples}
+
+\textbf{Deleting matched lines.} \texttt{:g/\textbackslash v\textasciicircum(a|g)/d} deletes every line beginning with "a" or "g," using the very-magic alternation syntax from Chapter~\ref{ch:substitution}. \texttt{:g/\textasciicircum\textbackslash d\textbackslash+\$/d} deletes every line consisting entirely of digits, useful for stripping standalone page numbers from a document that has been converted from a paginated format into continuous plain text.
+
+\textbf{Reversing a buffer.} \texttt{:g/\textasciicircum/m0} reverses the order of every line in the buffer, and is worth working through slowly, since the mechanism is not obvious on first reading. \texttt{\textasciicircum} matches every line unconditionally (the start of the line, present everywhere). \texttt{m0} moves the matched line to a position immediately after line 0, meaning to the very top of the buffer. Because the global command processes matches in top-to-bottom order but each successive match is moved to the very top, the second line processed ends up above the first, the third ends up above the second, and so on; the cumulative effect, once every line has been processed, is a fully reversed buffer, achieved with no loop, no counter, and no auxiliary storage, purely as a side effect of repeatedly moving each matched line to the same fixed position.
+
+\textbf{Combining global with Normal-mode commands.} \texttt{:g/\textbackslash w\$/normal \$3X} finds every line ending in a word character and, on each, runs a Normal-mode command sequence: \texttt{\$} to the end of the line, then \texttt{3X} to delete the three characters before the cursor. This is the global command's most generally useful capability, because it means every operator-motion command from Part II and every text object from Part II become, in effect, global-command arguments: anything expressible as a Normal-mode sequence can be applied to every line matching an arbitrary pattern, which multiplies the global command's own utility by the entire vocabulary covered in the first half of this book.
+
+\section{The \texttt{:normal} Command on Its Own}
+
+\texttt{:normal}, seen above as an argument to \texttt{:g}, is also a complete Ex command in its own right, executing the Normal-mode keystrokes that follow it as though they had been typed directly. \texttt{:5,10normal A;} appends a semicolon to the end of each line from 5 through 10, combining a range with a Normal-mode command exactly as \texttt{:g} combines a pattern match with one. \texttt{:normal} used without a preceding \texttt{:g} or explicit range applies only to the current line, which makes the combination with \texttt{:g} specifically, rather than \texttt{:normal} in isolation, the more commonly reached-for form in practice.
+
+A note on syntax worth flagging explicitly: a literal \texttt{escape} keypress cannot simply be typed into an Ex command line the way ordinary characters can, since pressing \texttt{escape} while typing an Ex command cancels that command instead. Where a Normal-mode sequence given to \texttt{:normal} needs to include an escape (to end an Insert-mode segment embedded within it, for instance), it must be inserted literally into the command line with \texttt{Ctrl-v} \texttt{escape} rather than typed as escape directly, a small but easy-to-miss wrinkle for a reader constructing a more elaborate \texttt{:normal} invocation for the first time.
+
+\section{The \texttt{:execute} Command}
+
+\texttt{:execute} evaluates its argument as a Vimscript expression yielding a string, and then runs that string as an Ex command. This is what makes it possible to construct a command dynamically rather than typing it literally: \texttt{:execute "normal " . printf("\%d", i) . "Gdd"}, inside a loop where \texttt{i} varies, deletes a different, computed line number on each iteration, something \texttt{:normal} alone cannot do since it treats its entire argument as literal keystrokes rather than as an expression to be evaluated first. A previewed instance of this pattern, generating thousands of sequentially numbered lines, appears in Part VI's treatment of Vimscript, where \texttt{:execute} combines with a \texttt{:while} loop to insert content programmatically rather than by any single command covered in this chapter.
+
+\section{Buffer, Window, and Argument List Iteration}
+
+\texttt{:argdo}, \texttt{:bufdo}, and \texttt{:windo} generalize the global command's "do this to every matching line" pattern to a coarser unit: every file in the argument list, every open buffer, or every open window, respectively. \texttt{:argdo \%s/old/new/g \textbar update} applies a substitution across every file passed to Vim on the command line (the argument list, distinct from the buffer list of Chapter~\ref{ch:buffers} in that it reflects what was explicitly specified at startup or via \texttt{:args}, rather than everything currently loaded), writing each modified file with \texttt{:update} (a variant of \texttt{:w} that writes only if the buffer was actually changed) before moving to the next. This is the mechanism behind applying a single substitution across an entire project's worth of files in one command, invoked either interactively or, as Chapter~19 shows, directly from the shell with \texttt{vim -c}.
+
+\section{Global Editing as the Ex Language Completed}
+
+This chapter closes Part V, and it is worth taking stock of what the three chapters together have established. Chapter~\ref{ch:ex} gave Ex its addresses and ranges; Chapter~\ref{ch:substitution} gave it pattern-based transformation of text within a line; this chapter gives it pattern-based selection of which lines to act on at all, plus, through \texttt{:normal} and \texttt{:execute}, a bridge back to every capability covered in Parts II and III. The claim made at the start of Part V, that Normal mode and Ex are two surfaces of one grammar, should by this point be difficult to dispute: a global command that dispatches Normal-mode operator-motion sequences across every pattern-matched line in a file is not a separate skill bolted onto Vim's editing model, it is that editing model, addressed at a different scale.

@@ -1,0 +1,24 @@
+\chapter{Every Text Object}
+\label{app:textobjects}
+
+Every text object catalogued in Chapter~\ref{ch:regions}, in inner (\texttt{i}) and around (\texttt{a}) form. Each is valid as the target of any operator from Appendix~\ref{app:normal}'s operator table, per the grammar of Chapter~\ref{ch:language}.
+
+\begin{longtable}{@{}l l p{7.5cm}@{}}
+\textbf{Inner} & \textbf{Around} & \textbf{Selects} \\
+\hline
+\endhead
+\texttt{iw} & \texttt{aw} & Word (punctuation-sensitive); around includes adjacent whitespace \\
+\texttt{iW} & \texttt{aW} & WORD (whitespace-delimited); around includes adjacent whitespace \\
+\texttt{is} & \texttt{as} & Sentence; around includes trailing whitespace \\
+\texttt{ip} & \texttt{ap} & Paragraph; around includes trailing blank line \\
+\texttt{i"} & \texttt{a"} & Double-quoted string; around includes the quotes \\
+\texttt{i'} & \texttt{a'} & Single-quoted string; around includes the quotes \\
+\texttt{i\`{}} & \texttt{a\`{}} & Backtick-quoted string; around includes the quotes \\
+\texttt{i(} / \texttt{ib} & \texttt{a(} / \texttt{ab} & Parenthesized region; around includes parentheses \\
+\texttt{i\{} / \texttt{iB} & \texttt{a\{} / \texttt{aB} & Curly-braced region; around includes braces \\
+\texttt{i[} & \texttt{a[} & Square-bracketed region; around includes brackets \\
+\texttt{i<} & \texttt{a<} & Angle-bracketed region; around includes brackets \\
+\texttt{it} & \texttt{at} & Content between a markup tag pair; around includes the tags \\
+\end{longtable}
+
+Nested delimiters (parentheses, braces, brackets, angle brackets) select the innermost enclosing pair by default; repeating the same text object while a Visual selection is active, per Chapter~\ref{ch:regions}, expands the selection to the next enclosing pair. Quote text objects search only the current line, per the same chapter's discussion of why that restriction exists.

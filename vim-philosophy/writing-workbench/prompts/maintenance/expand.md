@@ -1,0 +1,1 @@
+Expand the supplied section by developing its existing argument. Do not introduce unrelated themes. Add definitions, derivations, counterarguments, or examples only where they directly support the section's stated purpose.

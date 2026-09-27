@@ -1,0 +1,56 @@
+\chapter{Installing and Configuring Vim}
+\label{ch:installing}
+
+The material in this chapter is the least conceptually interesting in the book and the most likely to go stale, since installation procedures and package names shift with operating system releases in a way the editing grammar covered in later chapters does not. It is included anyway, briefly, because a reader cannot practice anything in Part II without a working Vim in front of them, and because the choice between the environments described here (a terminal, a graphical build, a Git Bash shell, a remote server over SSH) is itself a useful early illustration of a theme that recurs throughout the book: the editing language stays constant even as the surface it runs inside changes.
+
+\section{Terminal Vim}
+
+On any Linux distribution, Vim is typically available directly through the system package manager: \texttt{apt install vim} on Debian and Ubuntu-derived systems, \texttt{dnf install vim} on Fedora, \texttt{pacman -S vim} on Arch. macOS ships a minimal build of vi by default, but a full-featured Vim is readily available through Homebrew (\texttt{brew install vim}). What matters more than the exact package name, which the reader's own system documentation will confirm faster than a book can, is the distinction between a minimal build and a full-featured one: many systems ship a stripped-down \texttt{vim-tiny} or equivalent, lacking scripting language support, clipboard integration, or other features this book assumes are present. Where a distribution offers both, the full build (often named \texttt{vim} as opposed to \texttt{vim-tiny}, or selected via \texttt{vim-gtk3} or similar on Debian-derived systems for clipboard support specifically) is the one this book assumes.
+
+Once installed, \texttt{vim --version} reports which optional features were compiled in, listed with a leading \texttt{+} for enabled and \texttt{-} for disabled. A reader who finds a feature described later in this book not behaving as expected, particularly anything involving the system clipboard (Chapter 16) or Vimscript's more advanced functions (Chapter 24), should check this output before assuming the fault lies in their configuration rather than their build.
+
+\section{Terminal Versus GUI}
+
+Vim's terminal build and its graphical counterpart, gVim (invoked as \texttt{gvim} on most systems, or \texttt{mvim} on macOS via the MacVim project), share the same core editing grammar entirely; nothing in Parts II through VII of this book distinguishes between them. What differs is peripheral: gVim offers native menus and toolbars (which this book's plugin-free, keyboard-first philosophy largely ignores, and which can be disabled through the \texttt{guioptions} setting introduced later in this chapter, for a leaner interface), font selection through the operating system's own font dialog or the \texttt{guifont} option, and, notably, more reliable access to the system clipboard without additional configuration, since a terminal-based Vim's access to the clipboard depends on how the terminal emulator itself is configured and on Vim having been compiled with clipboard support.
+
+The practical recommendation, for a reader without a strong existing preference, is to begin in a terminal, since nearly every example in this book, and nearly every real workflow described in Part VII (editing over SSH, inside a Git rebase, from a shell script), assumes a terminal context, and a reader fluent only in gVim's menu-assisted environment will otherwise face a second, avoidable adjustment later.
+
+\section{Vim in Git Bash}
+
+Readers on Windows who have installed Git for Windows have Git Bash available, a Bash environment bundled with a terminal build of Vim, and this is frequently the first place a Windows user encounters Vim involuntarily rather than by choice: it is Git's default editor for commit messages, interactive rebases, and merge conflict resolution (a workflow covered in depth in Chapter 31). Git Bash's bundled Vim is a genuine, if sometimes older, build of the real editor, not an emulation, so everything in this book applies to it directly. The one adjustment worth flagging in advance is clipboard behavior: Git Bash's terminal and the Windows clipboard do not always interoperate as smoothly as a native Linux or macOS terminal does with its host system, which is worth knowing before Chapter 16's coverage of clipboard registers, so that unexpected behavior there is recognized as an environment quirk rather than a misunderstanding of the register model itself.
+
+\section{Vim over SSH}
+
+Editing a file on a remote machine by connecting over SSH and running a terminal-based Vim directly on that machine, rather than mounting the remote filesystem locally and editing with a GUI tool, is one of the more common real-world contexts in which Vim's terminal-only, keyboard-only design stops being a stylistic preference and becomes a practical necessity: a graphical editor simply is not available in that context, while a terminal-based Vim, needing only a text-mode connection, works identically to how it works locally. This is worth stating plainly early in the book, because it is one of the strongest practical answers to the question of why anyone would deliberately choose a keyboard-driven, splash-free editor in an era of graphical alternatives: sooner or later, most people who administer or deploy software end up needing to edit a file on a machine where nothing but a terminal is available, and Vim, learned once, is available there without modification.
+
+Nothing about the editing grammar covered later in this book changes over an SSH connection. What can change, and is worth a brief mention here rather than a full treatment, is latency: on a slow or high-latency connection, visual feedback for every keystroke can lag noticeably, which makes commands that batch several edits into one action (macros, covered in Part VI, and Ex commands with ranges, covered in Part V) considerably more pleasant to use than a long sequence of individual keystrokes, each waiting on a round trip to render.
+
+\section{Your First vimrc}
+
+Vim reads a configuration file at startup, conventionally named \texttt{.vimrc} in the user's home directory on Linux and macOS (\texttt{\textasciitilde/.vimrc}), or \texttt{\_vimrc} on Windows, in which options can be set, key mappings defined, and Vimscript executed, all before the editor is ready for input. The path Vim expects can always be confirmed from inside a running session with \texttt{:echo \$MYVIMRC}, and the file can be opened directly for editing with \texttt{:e \$MYVIMRC}, then reloaded into the current session without restarting Vim with \texttt{:source \$MYVIMRC}, a pairing worth committing to memory early, since configuring Vim is itself an iterative editing task best done inside Vim.
+
+A minimal first vimrc, sufficient to follow the rest of this book comfortably, need not be more than a handful of lines:
+
+\begin{lstlisting}
+set nocompatible
+syntax on
+set number
+set incsearch
+set ignorecase
+set smartcase
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+\end{lstlisting}
+
+\texttt{set nocompatible} disables backward-compatibility behaviors inherited from classic vi that are rarely wanted in a modern Vim session (in current Vim this is frequently the default already, but stating it explicitly costs nothing and documents intent). \texttt{syntax on} enables syntax highlighting. \texttt{set number} displays line numbers in the left margin. \texttt{set incsearch} shows search matches as the pattern is typed, rather than only after pressing return. \texttt{set ignorecase} together with \texttt{set smartcase} makes searches case-insensitive by default but automatically case-sensitive the moment the search pattern itself contains an uppercase letter, a small combination that in practice does the right thing far more often than either setting alone. The final three lines configure indentation to use spaces rather than literal tab characters, at a width of four columns, which is a matter of preference rather than necessity and is included here only as a placeholder the reader is expected to adjust.
+
+This is deliberately minimal. The chapter on Vimscript in Part VI returns to configuration in greater depth, covering mappings, autocommands, and the fuller range of options; the vimrc above is meant only to remove the friction of an unconfigured first session, not to represent a finished configuration. One further option is worth naming here specifically because it was promised earlier in this chapter: \texttt{set guioptions-=m} and \texttt{set guioptions-=T}, added to the vimrc on a system running gVim, remove the menu bar and toolbar respectively, which is the mechanism behind the leaner graphical interface mentioned in Section 3.2.
+
+\section{Cursor Control Commands in vi}
+
+Before configuration is set aside in favor of Part II's grammar, it is worth previewing the most basic motions, since every subsequent chapter assumes the reader can already move the cursor without conscious effort. In Normal mode, \texttt{h}, \texttt{j}, \texttt{k}, and \texttt{l} move the cursor left, down, up, and right respectively, one character or line at a time, arranged on the home row specifically so that the hand need not leave its resting position to navigate, the ergonomic argument made in Chapter 1 realized in its simplest possible form. \texttt{G} moves to the last line of the file; a count prefixed to \texttt{G} (\texttt{25G}) moves to that specific line number instead. These four letters and one command are not a complete account of movement, which is the subject of Part II, but they are enough to get a reader through this book's earliest examples without having to skip ahead.
+
+\section{Recovering From Mistakes}
+
+Two safety nets are worth knowing before anything else in this book is attempted. First, \texttt{u} undoes the most recent change, and can be pressed repeatedly to step back through the undo history; \texttt{Ctrl-r} redoes a change that was just undone. Second, \texttt{:q!} discards all unsaved changes to the current buffer and closes it without writing, which is the fastest way out of a file that has been edited into a state the reader would rather abandon than repair. Neither of these requires any grammar not already covered in this chapter, and both are worth using freely and without hesitation while working through the rest of this book: nothing here is dangerous to a file on disk unless \texttt{:w} is explicitly issued, and even changes that have been written can usually be recovered through the undo history covered fully in Chapter 13.

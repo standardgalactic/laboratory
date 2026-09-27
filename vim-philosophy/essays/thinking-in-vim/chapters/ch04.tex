@@ -1,0 +1,63 @@
+\chapter{The Language of Commands}
+\label{ch:language}
+
+Chapter~\ref{ch:different} argued that Vim's commands are utterances in a grammar rather than entries in a list, and Chapter~\ref{ch:ontology} named the entities that grammar operates on. This chapter makes the grammar itself explicit. Everything in Parts III through VII is, in one sense, an extended elaboration of the single rule stated here; the remainder of the book is occupied with filling in what can appear in each of this rule's positions; and a reader who has genuinely absorbed this chapter, rather than skimmed it, will find that a great deal of what follows reads less like new material and more like the expected consequence of a rule already understood.
+
+\section{The Central Rule}
+
+The core of Normal-mode editing in Vim can be written as:
+
+\begin{center}
+\texttt{[count] operator motion}
+\end{center}
+
+or, when the target is a text object rather than a motion:
+
+\begin{center}
+\texttt{[count] operator text-object}
+\end{center}
+
+An operator is a command that does not act by itself; it waits for something to act upon. The letter \texttt{d}, pressed alone, does nothing but wait. \texttt{dw} completes the sentence: the operator \texttt{d} (delete) applied to the motion \texttt{w} (to the beginning of the next word), meaning "delete from the cursor to the beginning of the next word." The count is optional and, when present, is most often applied to the motion rather than the operator: \texttt{d3w} deletes through three words, not "delete three times." Section~\ref{sec:count-placement} returns to this distinction in more depth, since count placement is one of the few places the grammar has a genuine ambiguity worth resolving explicitly.
+
+This single rule, once internalized, replaces what would otherwise be a combinatorial explosion of commands to memorize individually. Section~\ref{sec:multiplication} works through the arithmetic of that claim directly.
+
+\section{Counts}
+
+A count is a number typed before a command, and it means "repeat this command \textit{n} times," with the specific effect of that repetition depending on what kind of command it prefixes. Before a motion used alone, \texttt{5j} moves the cursor down five lines rather than one. Before an operator-motion pair, the count can be placed on either the operator or the motion, and, for most operator-motion combinations, the two placements are equivalent: \texttt{2dw} and \texttt{d2w} both delete two words, because Vim multiplies any count on the operator together with any count on the motion before applying either. \texttt{3d2w} deletes six words, the product of both counts, which is worth knowing exists even though it is rarely used deliberately; what matters in practice is that a count typed before either the operator or the motion in a pair will generally do what its plain-language reading suggests.
+
+\label{sec:count-placement}
+Where this can mislead a reader is in commands that are not, despite appearances, an operator-motion pair at all. \texttt{5dd} deletes five lines, not because the count multiplies onto a motion, but because \texttt{dd} is itself a special, doubled form (Section~\ref{sec:doubling}) that the count modifies as a unit. The rule to hold onto is not "counts always multiply the same way" but "a count means \textit{n} repetitions of whatever the following command, taken as a whole, does," which happens to look like simple multiplication for genuine operator-motion pairs and looks like something else for the handful of specialized doubled and Ex forms encountered later.
+
+\section{Motions}
+
+A motion is a command that moves the cursor, and Vim's central architectural decision, already anticipated in Chapter~\ref{ch:different}, is that motions are not a separate category from movement commands the user issues on their own; they are the same commands, reused. Pressing \texttt{w} in isolation moves the cursor to the beginning of the next word; the very same \texttt{w}, following an operator, tells that operator where its target ends. Nothing about \texttt{w} changes between these two uses; what changes is only whether an operator was waiting for it.
+
+This reuse is what makes the grammar generative rather than merely compact. Chapter~\ref{ch:coordinates} catalogs Vim's motions properly, organized by the coordinate system each one navigates; the point to establish here is only the mechanical fact that any motion, once learned for its own sake as a way of moving the cursor, is simultaneously and automatically learned as a valid target for every operator in the language, at no additional cost.
+
+\section{Operators}
+
+An operator is a command that takes a motion or text object as its argument and performs some transformation on the span between the cursor's starting position and wherever that motion or text object indicates. Vim defines a modest number of core operators: \texttt{d} (delete), \texttt{c} (change, meaning delete and enter Insert mode at that point), \texttt{y} (yank, meaning copy into a register without removing the original), and a smaller number of formatting operators such as \texttt{gU} (uppercase) and \texttt{=} (auto-indent), covered in full in the next chapter. The core claim of this section is that the number of core operators is deliberately small, because each one is designed to combine with the entire motion and text-object vocabulary rather than to exist as a narrow, special-purpose command.
+
+Operators can themselves be doubled to act on the current line as a unit, discussed next, and, as Chapter~\ref{ch:regions} develops at length, can take a text object rather than a motion as their target, which is where the grammar's descriptive power becomes most apparent: an operator paired with a semantic region, rather than a cursor movement, produces commands like \texttt{ci"} (change inside quotes) that would be nearly impossible to state cleanly as a single dedicated command but fall out immediately once operator and text object are understood as independently combinable parts.
+
+\subsection{Doubling}
+\label{sec:doubling}
+
+Several operators have a doubled form, pressing the same letter twice, that acts on the current line as a whole rather than requiring an explicit motion: \texttt{dd} deletes the current line, \texttt{yy} yanks it, \texttt{cc} changes it. This is not a separate grammatical rule so much as a convenient shorthand for "this operator applied to the whole-line motion," and it exists because acting on entire lines is common enough to deserve a two-keystroke idiom rather than requiring the user to spell out a line-wise motion explicitly every time.
+
+\section{Text Objects as Targets}
+
+Where a motion describes a path the cursor could travel, a text object (introduced in Chapter~\ref{ch:ontology}) describes a region directly, generally without implying any particular direction of travel to get there. This distinction matters grammatically: \texttt{daw} does not mean "delete while moving to the word," it means "delete the region that constitutes a word, including its surrounding whitespace." The rule from Section~1 accommodates this directly, since a text object simply fills the same grammatical slot a motion would, differing only in what kind of span it hands to the operator: a path-derived span for a motion, a structurally-defined span for a text object. Chapter~\ref{ch:regions} treats the full catalog of text objects and their inner/around distinction; here the point is only to confirm that they occupy the same slot in the sentence as a motion, which is why the same small set of operators works identically whether it is given a motion or a text object to act on.
+
+\section{Repetition}
+
+Two commands generalize repetition across the entire grammar rather than being tied to any single operator or motion. The period (\texttt{.}) repeats the last change exactly, whatever operator, count, and motion or text object composed it; a user who deletes a word with \texttt{daw} and then presses \texttt{.} with the cursor on a different word deletes that word too, without retyping the command. This works because Vim records the last change not as a fixed string of keystrokes but as the structured command that produced it, and replays that structure against the new cursor position.
+
+The semicolon (\texttt{;}) and comma (\texttt{,}) repeat the most recent character-search motion (\texttt{f}, \texttt{F}, \texttt{t}, or \texttt{T}, covered in Chapter~\ref{ch:coordinates}), in the same direction and the reverse direction respectively. Both of these repetition mechanisms exist for the same underlying reason: once a command has been composed once, from the grammar's small set of parts, replaying it should not require recomposing it from scratch, and the grammar accordingly treats "the last thing that happened" as itself a reusable object.
+
+\section{Composition and the Arithmetic of Coverage}
+\label{sec:multiplication}
+
+The claim made informally in Chapter~\ref{ch:different}, that a small number of primitives multiply into a large number of usable commands, can now be stated with more precision. Suppose a reader has learned some number of operators, and some number of motions and text objects that those operators can target. The number of distinct, meaningful commands available is not the sum of these two counts but, to a first approximation, their product: every operator paired with every applicable motion or text object is a distinct, valid command, whether or not that particular pairing has ever been explicitly demonstrated to the reader before.
+
+This is why learning a single new operator (say, the case-conversion operator \texttt{gU}, covered in the next chapter) does not add "one more thing to remember" in proportion to how narrow it feels in isolation; it adds one new command for every motion and text object already known, all at once, because \texttt{gUw}, \texttt{gUiw}, \texttt{gUap}, and dozens of other combinations become simultaneously valid and immediately guessable the moment the operator itself is understood. The inverse is equally true: learning a single new text object, once a handful of operators are already known, is not "one more region to remember" but one new target multiplying against every operator that can already be applied to it. This multiplicative structure, more than any specific command covered later, is the practical payoff of having read this chapter, and it is worth returning to explicitly whenever a later chapter introduces something that might otherwise look like an isolated new fact rather than a new multiplier on everything already known.

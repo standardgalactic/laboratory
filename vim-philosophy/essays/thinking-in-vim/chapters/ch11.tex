@@ -1,0 +1,40 @@
+\chapter{Marks}
+\label{ch:marks}
+
+Where a register externalizes a fragment of text, a mark externalizes a position: a specific line and column, given a name, to which the cursor can return directly without scrolling or searching. Marks were introduced as an entity in Chapter~\ref{ch:ontology} and treated as a coordinate system in Chapter~\ref{ch:coordinates}; this chapter is where they are covered in full, alongside the several kinds of position Vim tracks automatically without the user ever having set a mark by hand.
+
+\section{Local Marks}
+
+A local mark, set with \texttt{m}\textit{letter} using a lowercase letter, is specific to the buffer in which it was set. \texttt{ma} sets mark \texttt{a} at the cursor's current position; \verb|'a| later returns to the first non-blank character of that mark's line, and \verb|`a| (the backtick form) returns to its exact character position rather than merely its line. This distinction, already noted in Chapter~\ref{ch:coordinates}, matters most when a mark is used as a motion target for an operator: \texttt{d\`{}a} deletes to the mark's precise column, while \texttt{d'a} deletes to the first non-blank character of the mark's line, which can be a meaningfully different span depending on what precedes that column.
+
+Local marks persist for the duration of the editing session and, if \texttt{shada} (or, on older Vim versions, \texttt{viminfo}) is configured to retain them, across sessions as well, making it possible to set a mark, close Vim entirely, and return to that exact position days later.
+
+\section{Global Marks}
+
+A global mark, set with an uppercase letter, is addressable from any buffer, not merely the one it was set in. \texttt{mA} sets global mark \texttt{A} at the cursor's position in the current file; from an entirely different buffer, \verb|'A| or \verb|`A| jumps directly to that position, opening the original file if it is not already loaded. This is the mechanism for maintaining a small set of named, cross-file bookmarks in a large project: a handful of files or specific lines within them, each given a memorable uppercase letter, reachable from anywhere without first navigating to the right file by hand.
+
+\section{Automatic Marks}
+
+Several marks are maintained by Vim without any explicit \texttt{m}\textit{letter} command from the user, each recording a specific kind of recent event.
+
+\verb|``| (or, equivalently, \verb|''|) holds the cursor's position immediately before the most recent jump, where a jump is any of the several motions covered below that move the cursor a nontrivial distance rather than incrementally. Pressing \verb|``| a second time returns to wherever the cursor was before the first press, making it function as a toggle between two positions of interest, which is frequently exactly what is needed when comparing two specific points in a file.
+
+\verb|'.| holds the position of the most recent change to the buffer, useful after a search or a scroll has moved the cursor away from an edit the user wants to return to. \verb|'^| holds the position of the cursor the last time Insert mode was exited, which is subtly different from \verb|'.| in files where the two do not coincide, such as after a change that itself involved further cursor movement before returning to Normal mode. \verb|'[| and \verb|']| hold the start and end of the most recently changed or yanked text, which is what makes it possible to immediately select or otherwise act on exactly the span a previous command just operated on, without having to identify its boundaries by eye.
+
+\section{The Jump List}
+
+Beyond the single automatically maintained \verb|``| mark, Vim keeps a longer jump list: a history of positions the cursor has jumped from, navigable with \texttt{Ctrl-o} (older) and \texttt{Ctrl-i} (newer, since \texttt{Ctrl-i} and \texttt{Tab} share a physical key on most keyboards). What counts as a jump for the purposes of this list is a specific, defined set of motions, generally those that move the cursor a nontrivial or unpredictable distance: searches, the \texttt{G} and \texttt{gg} absolute-position motions from Chapter~\ref{ch:coordinates}, paragraph and section motions, and mark jumps themselves, among others; small, incremental motions like \texttt{h}, \texttt{j}, \texttt{k}, \texttt{l}, or \texttt{w} do not add an entry.
+
+\texttt{:jumps} displays the list directly, with the current position marked. The practical value of the jump list over the single \verb|``| mark is depth: where \verb|``| toggles between exactly two positions, \texttt{Ctrl-o} can be pressed repeatedly to retrace an entire recent navigation history, which is particularly useful after following a chain of searches or tag jumps several steps deep and wanting to retrace that chain rather than jump directly back to its start.
+
+\section{The Change List}
+
+A related but distinct history, the change list, tracks positions where the buffer's content was actually modified, rather than positions the cursor merely visited. \texttt{g;} moves to the previous position of change, and \texttt{g,} moves to the next, cycling through this list independently of the jump list covered above. Where the jump list answers "where was I recently," the change list answers "where did I recently edit," and the two frequently diverge, particularly in a session that involves substantial searching or reading relative to the amount of actual editing done.
+
+\section{The Alternate File}
+
+Vim maintains a notion of the alternate file: generally, the most recently edited buffer other than the current one. \texttt{Ctrl-\textasciicircum} (or, equivalently, \texttt{:e \#}) switches directly to the alternate file, toggling back and forth between two files with a single keystroke each time. This is distinct from marks in that it is not a position within a file but a reference to an entire other buffer, and it is distinct from the jump list in that it tracks only a single most-recent alternate rather than a history; it is included in this chapter because it is addressed through the same register mechanism noted in Chapter~\ref{ch:registers} (the read-only \texttt{"\#} register holds the alternate file's name) and functions, in practice, as a lightweight complement to the global marks covered earlier for the specific case of two files being edited in close alternation.
+
+\section{Marks as Durable Coordinates}
+
+What unifies every mechanism in this chapter, deliberate marks and automatic ones alike, is that each answers a version of the same question: given that the cursor has moved away from somewhere of interest, how does the user get back without re-deriving the position from scratch. A deliberately set mark answers this for a position the user identified in advance as worth returning to; the jump list and change list answer it retroactively, for positions the user did not think to mark ahead of time but wants to revisit anyway; the alternate file answers a coarser version of the same question at the level of an entire buffer rather than a position within one. Taken together with the register material of Chapter~\ref{ch:registers}, this chapter completes the picture of Vim's memory mechanisms below the level of the undo tree: a position is never truly lost, even when no mark was deliberately set for it, provided the reader knows which of these several histories to consult.

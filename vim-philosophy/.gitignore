@@ -1,0 +1,14 @@
+# LaTeX / build artifacts
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+
+# macOS
+.DS_Store
+
+# editor
+.vscode/
+.idea/

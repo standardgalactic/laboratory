@@ -1,0 +1,56 @@
+\chapter{Regular Expression Reference}
+\label{app:regex}
+
+The regex constructs used across this book's substitution and pattern-matching examples (Chapters~\ref{ch:coordinates}, \ref{ch:substitution}, and \ref{ch:global}), given in Vim's default (\texttt{magic}) mode unless noted. Prefixing a pattern with \texttt{\textbackslash v} switches to very-magic mode, in which the unescaped forms in the right-hand column below apply directly.
+
+\section{Anchors and Classes}
+
+\begin{longtable}{@{}l l p{6.5cm}@{}}
+\textbf{Default} & \textbf{Very Magic} & \textbf{Matches} \\
+\hline
+\endhead
+\texttt{\textasciicircum} & \texttt{\textasciicircum} & Beginning of line \\
+\texttt{\$} & \texttt{\$} & End of line \\
+\texttt{.} & \texttt{.} & Any single character \\
+\texttt{\textbackslash<} & \texttt{<} & Beginning of word \\
+\texttt{\textbackslash>} & \texttt{>} & End of word \\
+\texttt{[string]} & \texttt{[string]} & Any single character in \textit{string} \\
+\texttt{[\textasciicircum string]} & \texttt{[\textasciicircum string]} & Any character not in \textit{string} \\
+\texttt{[a-p]} & \texttt{[a-p]} & Any character in range a--p \\
+\texttt{\textbackslash d} & \texttt{\textbackslash d} & Any digit \\
+\texttt{\textbackslash w} & \texttt{\textbackslash w} & Any word character \\
+\texttt{\textbackslash s} & \texttt{\textbackslash s} & Any whitespace character \\
+\end{longtable}
+
+\section{Quantifiers and Grouping}
+
+\begin{longtable}{@{}l l p{6.5cm}@{}}
+\textbf{Default} & \textbf{Very Magic} & \textbf{Matches} \\
+\hline
+\endhead
+\texttt{*} & \texttt{*} & Zero or more of the preceding atom \\
+\texttt{\textbackslash+} & \texttt{+} & One or more of the preceding atom \\
+\texttt{\textbackslash?} & \texttt{?} & Zero or one of the preceding atom \\
+\texttt{\textbackslash(...\textbackslash)} & \texttt{(...)} & Capture group \\
+\texttt{\textbackslash\textbar} & \texttt{\textbar} & Alternation \\
+\texttt{\textbackslash zs} & \texttt{\textbackslash zs} & Reset reported match start (zero-width) \\
+\texttt{\textbackslash} & \texttt{\textbackslash} & Escape the next character's special meaning \\
+\end{longtable}
+
+\section{Replacement Syntax}
+
+\begin{longtable}{@{}l p{9cm}@{}}
+\textbf{Construct} & \textbf{Effect in a \texttt{:s} replacement} \\
+\hline
+\endhead
+\texttt{\textbackslash1}, \texttt{\textbackslash2}, ... & Text captured by the corresponding group \\
+\texttt{\&} (or \texttt{\textbackslash0}) & The entire matched text \\
+\texttt{\textbackslash u} & Capitalize the next character \\
+\texttt{\textbackslash l} & Lowercase the next character \\
+\texttt{\textbackslash U} ... \texttt{\textbackslash E} & Uppercase everything until \texttt{\textbackslash E} \\
+\texttt{\textbackslash L} ... \texttt{\textbackslash E} & Lowercase everything until \texttt{\textbackslash E} \\
+\texttt{\textbackslash r} & A literal newline (distinct from \texttt{\textbackslash n} in the pattern) \\
+\texttt{\textbackslash=}\textit{expr} & Evaluate \textit{expr} as Vimscript; insert the result \\
+\end{longtable}
+
+Chapter~\ref{ch:substitution} works through several complete patterns built from these pieces, including sentence capitalization using \texttt{\textbackslash zs} and a very-magic capture-group example; those worked examples are the more useful starting point for constructing a new pattern than this table alone, which is meant for looking up a single construct's syntax once its role in the pattern is already understood.

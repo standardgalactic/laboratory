@@ -1,0 +1,17 @@
+\chapter{Every Built-in Function}
+\label{app:functions}
+
+The built-in Vimscript functions that appear in this book, each callable from the expression register (Chapter~\ref{ch:registers}), the replacement-expression syntax of \texttt{:s} (Chapter~\ref{ch:substitution}), or ordinary Vimscript (Chapter~\ref{ch:vimscript}). This is a small fraction of Vim's full built-in function library, documented completely under \texttt{:help functions}; only those used elsewhere in this book are listed here.
+
+\begin{longtable}{@{}l p{9cm} l@{}}
+\textbf{Function} & \textbf{Returns} & \textbf{Ch.} \\
+\hline
+\endhead
+\texttt{line('.')} & Current line number & \ref{ch:vimscript} \\
+\texttt{line('\$')} & Last line number of the buffer & \ref{ch:vimscript} \\
+\texttt{printf(fmt, ...)} & A formatted string, C-\texttt{printf}-style & \ref{ch:vimscript} \\
+\texttt{strftime(fmt)} & The current date/time, formatted per \textit{fmt} & \ref{ch:substitution} \\
+\texttt{@}\textit{reg} & The contents of register \textit{reg}, as an expression & \ref{ch:substitution} \\
+\end{longtable}
+
+Two syntactic contexts are worth distinguishing, since both are covered in this book and are easy to conflate: a bare function call such as \texttt{printf(...)} is valid directly inside \texttt{:execute}'s expression argument or inside a Vimscript \texttt{:let} assignment, per Chapter~\ref{ch:vimscript}; the same call, used inside a \texttt{:s} replacement, additionally requires the leading \texttt{\textbackslash=} marker from Chapter~\ref{ch:substitution} to signal that the replacement text should be evaluated rather than inserted literally.

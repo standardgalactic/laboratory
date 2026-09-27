@@ -1,0 +1,24 @@
+\chapter{Every Register}
+\label{app:registers}
+
+Every register covered in Chapter~\ref{ch:registers}, addressed with a leading \texttt{"} in Normal mode or \texttt{@} in Vimscript.
+
+\begin{longtable}{@{}l p{9.5cm}@{}}
+\textbf{Register} & \textbf{Holds} \\
+\hline
+\endhead
+\texttt{"} (unnamed) & Most recent deletion, change, or yank \\
+\texttt{a}--\texttt{z} & Named registers; lowercase overwrites, uppercase (\texttt{A}--\texttt{Z}) appends \\
+\texttt{0} & Most recent yank specifically (unaffected by subsequent deletions) \\
+\texttt{1}--\texttt{9} & Automatically shifted history of line-or-larger deletions \\
+\texttt{-} (small delete) & Most recent deletion smaller than one line \\
+\texttt{:} & Most recently executed Ex command (read-only) \\
+\texttt{/} & Most recent search pattern (read-only) \\
+\texttt{.} & Most recently inserted text (read-only) \\
+\texttt{\%} & Current file name (read-only) \\
+\texttt{\#} & Alternate file name (read-only) \\
+\texttt{=} & Expression register; evaluates a typed Vimscript expression \\
+\texttt{*} & System selection/clipboard (platform-dependent) \\
+\texttt{+} & System clipboard (X11 systems specifically) \\
+\texttt{\_} & Black hole register; discards on write, empty on read \\
+\end{longtable}

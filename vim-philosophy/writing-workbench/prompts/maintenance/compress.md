@@ -1,0 +1,1 @@
+Compress the supplied text without removing substantive distinctions, definitions, objections, derivations, or necessary transitions. Identify any material that cannot be safely compressed before producing the revision.

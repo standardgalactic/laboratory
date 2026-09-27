@@ -1,0 +1,418 @@
+#!/usr/bin/env bash
+
+set -u
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# shellcheck source=/dev/null
+source "$ROOT/lib/common.sh"
+# shellcheck source=/dev/null
+source "$ROOT/lib/stages.sh"
+load_config
+
+mkdir -p "$PROJECTS_DIR" "$EXPORTS_DIR" "$LOGS_DIR"
+
+clear_screen() {
+    printf '\033c'
+}
+
+header() {
+    clear_screen
+    cat <<'EOF'
+============================================================
+ WRITING WORKBENCH
+ Markdown-first local essay development with Ollama
+============================================================
+EOF
+}
+
+create_project() {
+    header
+    printf "Project title: "
+    read -r title
+    [[ -n "$title" ]] || die "A title is required."
+
+    local slug project
+    slug="$(slugify "$title")"
+    [[ -n "$slug" ]] || die "Could not derive a project name."
+    project="$(project_path "$slug")"
+    [[ ! -e "$project" ]] || die "Project already exists: $slug"
+
+    mkdir -p "$project"/{history,logs,sections,reviews,context,exports}
+    cp "$ROOT/templates/project/"*.md "$project/"
+    sed -i "s/Replace this line./$title/" "$project/00-project.md"
+
+    cat > "$project/context/theory-files.txt" <<'EOF'
+categories.md
+canonical-principles.md
+terminology.md
+style.md
+EOF
+
+    cat > "$project/project.conf" <<EOF
+PROJECT_NAME="$slug"
+PROJECT_TITLE="$title"
+CREATED_AT="$(date --iso-8601=seconds)"
+EOF
+
+    if [[ "$AUTO_GIT_INIT" == "true" ]] && command -v git >/dev/null 2>&1; then
+        git -C "$project" init -q
+        git -C "$project" add .
+        git -C "$project" commit -qm "Initialize writing project" || true
+    fi
+
+    echo
+    echo "Created: $project"
+    edit_file "$project/00-project.md"
+}
+
+project_status() {
+    local name="$1" project
+    project="$(project_path "$name")"
+    [[ -d "$project" ]] || die "Unknown project: $name"
+
+    header
+    echo "Project: $name"
+    echo
+    local files=(
+        "00-project.md:Project definition"
+        "01-classification.md:Classification"
+        "02-topic-analysis.md:Topic analysis"
+        "03-outline.md:Outline"
+        "04-outline-review.md:Outline review"
+        "05-research-notes.md:Research notes"
+        "06-draft-1.md:First draft"
+        "07-draft-review.md:Draft review"
+        "08-draft-2.md:Revised draft"
+        "09-consistency-check.md:Consistency check"
+        "10-final.md:Final"
+    )
+    local item file label size words
+    for item in "${files[@]}"; do
+        file="${item%%:*}"
+        label="${item#*:}"
+        if [[ -s "$project/$file" ]]; then
+            size="$(wc -c < "$project/$file")"
+            words="$(wc -w < "$project/$file")"
+            printf "  [x] %-22s %7s bytes %6s words\n" "$label" "$size" "$words"
+        else
+            printf "  [ ] %s\n" "$label"
+        fi
+    done
+    echo
+    echo "History artifacts: $(find "$project/history" -type f 2>/dev/null | wc -l)"
+    echo "Logs:              $(find "$project/logs" -type f 2>/dev/null | wc -l)"
+}
+
+edit_project_menu() {
+    local name="$1" project choice
+    project="$(project_path "$name")"
+    while true; do
+        header
+        echo "Edit project: $name"
+        echo
+        echo "1) Project definition"
+        echo "2) Classification"
+        echo "3) Topic analysis"
+        echo "4) Outline"
+        echo "5) Outline review"
+        echo "6) Research notes"
+        echo "7) First draft"
+        echo "8) Draft review"
+        echo "9) Revised draft"
+        echo "10) Consistency check"
+        echo "11) Final"
+        echo "12) Theory manifest"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) edit_file "$project/00-project.md" ;;
+            2) edit_file "$project/01-classification.md" ;;
+            3) edit_file "$project/02-topic-analysis.md" ;;
+            4) edit_file "$project/03-outline.md" ;;
+            5) edit_file "$project/04-outline-review.md" ;;
+            6) edit_file "$project/05-research-notes.md" ;;
+            7) edit_file "$project/06-draft-1.md" ;;
+            8) edit_file "$project/07-draft-review.md" ;;
+            9) edit_file "$project/08-draft-2.md" ;;
+            10) edit_file "$project/09-consistency-check.md" ;;
+            11) edit_file "$project/10-final.md" ;;
+            12) edit_file "$project/context/theory-files.txt" ;;
+            0) return ;;
+        esac
+    done
+}
+
+view_project_menu() {
+    local name="$1" project choice
+    project="$(project_path "$name")"
+    while true; do
+        header
+        echo "View project: $name"
+        echo
+        echo "1) Project definition"
+        echo "2) Classification"
+        echo "3) Topic analysis"
+        echo "4) Outline"
+        echo "5) Outline review"
+        echo "6) Research notes"
+        echo "7) First draft"
+        echo "8) Draft review"
+        echo "9) Revised draft"
+        echo "10) Consistency check"
+        echo "11) Final"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) view_file "$project/00-project.md" ;;
+            2) view_file "$project/01-classification.md" ;;
+            3) view_file "$project/02-topic-analysis.md" ;;
+            4) view_file "$project/03-outline.md" ;;
+            5) view_file "$project/04-outline-review.md" ;;
+            6) view_file "$project/05-research-notes.md" ;;
+            7) view_file "$project/06-draft-1.md" ;;
+            8) view_file "$project/07-draft-review.md" ;;
+            9) view_file "$project/08-draft-2.md" ;;
+            10) view_file "$project/09-consistency-check.md" ;;
+            11) view_file "$project/10-final.md" ;;
+            0) return ;;
+        esac
+    done
+}
+
+run_stage_menu() {
+    local name="$1" choice stage
+    while true; do
+        header
+        echo "Run stage: $name"
+        echo
+        echo "Generation — $GENERATOR_MODEL"
+        echo "1) Classify project"
+        echo "2) Analyze topic"
+        echo "3) Build outline"
+        echo "4) Draft essay"
+        echo "5) Revise draft"
+        echo "6) Finalize"
+        echo
+        echo "Review — $REVIEWER_MODEL"
+        echo "7) Review outline"
+        echo "8) Review draft"
+        echo "9) Consistency check"
+        echo
+        echo "10) Run complete default workflow"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) stage="classify" ;;
+            2) stage="topic-analysis" ;;
+            3) stage="outline" ;;
+            4) stage="draft" ;;
+            5) stage="revise" ;;
+            6) stage="finalize" ;;
+            7) stage="review-outline" ;;
+            8) stage="review-draft" ;;
+            9) stage="consistency" ;;
+            10)
+                for stage in classify topic-analysis outline review-outline draft review-draft revise consistency finalize; do
+                    run_stage "$name" "$stage" || break
+                done
+                pause
+                continue
+                ;;
+            0) return ;;
+            *) continue ;;
+        esac
+        run_stage "$name" "$stage"
+        pause
+    done
+}
+
+history_menu() {
+    local name="$1" project selection
+    project="$(project_path "$name")"
+    mapfile -t entries < <(find "$project/history" -maxdepth 1 -type f -printf '%f\n' | sort -r)
+    ((${#entries[@]})) || { echo "No history yet."; pause; return; }
+
+    if command -v fzf >/dev/null 2>&1; then
+        selection="$(printf '%s\n' "${entries[@]}" | fzf --prompt='History> ')"
+        [[ -n "$selection" ]] && view_file "$project/history/$selection"
+    else
+        select selection in "${entries[@]}" "Back"; do
+            [[ "$selection" == "Back" ]] && return
+            [[ -n "$selection" ]] && view_file "$project/history/$selection"
+            break
+        done
+    fi
+}
+
+export_project() {
+    local name="$1" project out
+    project="$(project_path "$name")"
+    mkdir -p "$EXPORTS_DIR/$name"
+    out="$EXPORTS_DIR/$name"
+
+    cp "$project/10-final.md" "$out/$name.md"
+    echo "Markdown exported to $out/$name.md"
+
+    if command -v pandoc >/dev/null 2>&1; then
+        pandoc "$project/10-final.md" -o "$out/$name.html"
+        echo "HTML exported to $out/$name.html"
+    fi
+    pause
+}
+
+project_menu() {
+    local name="$1" choice
+    while true; do
+        header
+        echo "Project: $name"
+        echo
+        echo "1) Status"
+        echo "2) Run pipeline stage"
+        echo "3) Edit artifacts"
+        echo "4) View artifacts"
+        echo "5) View history"
+        echo "6) Export final"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) project_status "$name"; pause ;;
+            2) run_stage_menu "$name" ;;
+            3) edit_project_menu "$name" ;;
+            4) view_project_menu "$name" ;;
+            5) history_menu "$name" ;;
+            6) export_project "$name" ;;
+            0) return ;;
+        esac
+    done
+}
+
+open_project_interactive() {
+    local name
+    name="$(choose_project)" || return
+    project_menu "$name"
+}
+
+theory_menu() {
+    local choice file
+    while true; do
+        header
+        echo "Theory library"
+        echo
+        echo "1) Categories"
+        echo "2) Canonical principles"
+        echo "3) Terminology"
+        echo "4) Style"
+        echo "5) List all theory files"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) edit_file "$THEORY_DIR/categories.md" ;;
+            2) edit_file "$THEORY_DIR/canonical-principles.md" ;;
+            3) edit_file "$THEORY_DIR/terminology.md" ;;
+            4) edit_file "$THEORY_DIR/style.md" ;;
+            5) find "$THEORY_DIR" -maxdepth 1 -type f -printf '%f\n' | sort; pause ;;
+            0) return ;;
+        esac
+    done
+}
+
+settings_menu() {
+    while true; do
+        header
+        echo "Configuration"
+        echo
+        grep -E '^(GENERATOR_MODEL|REVIEWER_MODEL|EDITOR_CMD|DEFAULT_TARGET_WORDS)=' "$CONFIG_FILE"
+        echo
+        echo "1) Edit configuration"
+        echo "2) Check installed models"
+        echo "3) Check dependencies"
+        echo "0) Back"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) edit_file "$CONFIG_FILE" ;;
+            2) "$OLLAMA_BIN" list; pause ;;
+            3)
+                for cmd in bash ollama sed find wc; do
+                    if command -v "$cmd" >/dev/null 2>&1; then
+                        echo "[x] $cmd"
+                    else
+                        echo "[ ] $cmd"
+                    fi
+                done
+                for cmd in fzf bat glow pandoc git; do
+                    if command -v "$cmd" >/dev/null 2>&1; then
+                        echo "[+] optional: $cmd"
+                    else
+                        echo "[-] optional: $cmd"
+                    fi
+                done
+                pause
+                ;;
+            0) return ;;
+        esac
+    done
+}
+
+main_menu() {
+    local choice
+    while true; do
+        header
+        echo "Generator: $GENERATOR_MODEL"
+        echo "Reviewer:  $REVIEWER_MODEL"
+        echo
+        echo "1) New project"
+        echo "2) Open project"
+        echo "3) Theory library"
+        echo "4) Configuration"
+        echo "5) List projects"
+        echo "0) Quit"
+        printf "\nChoice: "
+        read -r choice
+        case "$choice" in
+            1) create_project ;;
+            2) open_project_interactive ;;
+            3) theory_menu ;;
+            4) settings_menu ;;
+            5) list_projects; pause ;;
+            0) exit 0 ;;
+        esac
+    done
+}
+
+case "${1:-menu}" in
+    menu) main_menu ;;
+    new) create_project ;;
+    open)
+        [[ $# -ge 2 ]] || die "Usage: workbench open PROJECT"
+        project_menu "$2"
+        ;;
+    run)
+        [[ $# -ge 3 ]] || die "Usage: workbench run PROJECT STAGE"
+        run_stage "$2" "$3"
+        ;;
+    status)
+        [[ $# -ge 2 ]] || die "Usage: workbench status PROJECT"
+        project_status "$2"
+        ;;
+    list) list_projects ;;
+    *)
+        cat <<EOF
+Usage:
+  workbench
+  workbench new
+  workbench open PROJECT
+  workbench run PROJECT STAGE
+  workbench status PROJECT
+  workbench list
+EOF
+        exit 1
+        ;;
+esac

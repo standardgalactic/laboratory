@@ -1,0 +1,44 @@
+To prove that the sum of the first \( n \) odd numbers equals \( n^2 \), we[2D[K
+we can use mathematical induction.
+
+### Base Case:
+First, let's verify the statement for \( n = 1 \).
+
+The first odd number is \( 1 \). According to the statement, its sum should[6D[K
+should be equal to \( 1^2 \):
+\[ 1 = 1^2 \]
+This base case holds true.
+
+### Inductive Step:
+Now assume that the statement is true for some arbitrary positive integer \[1D[K
+\( k \), i.e., the sum of the first \( k \) odd numbers is \( k^2 \). We ne[2D[K
+need to show that the statement holds for \( k + 1 \).
+
+The sum of the first \( k \) odd numbers can be expressed as:
+\[ 1 + 3 + 5 + \ldots + (2k - 1) = k^2 \]
+
+We want to prove that adding the next odd number, which is \( (2(k+1) - 1) [K
+= (2k + 1) \), will result in:
+\[ 1 + 3 + 5 + \ldots + (2k - 1) + (2(k+1) - 1) = (k + 1)^2 \]
+
+Using the induction hypothesis, we substitute \( k^2 \) for the sum of the [K
+first \( k \) odd numbers:
+\[ k^2 + (2k + 1) \]
+
+Now, expand and simplify the right-hand side to show it equals \( (k+1)^2 \[1D[K
+\):
+\[ (k+1)^2 = k^2 + 2k + 1 \]
+
+Since both expressions are identical:
+\[ k^2 + (2k + 1) = k^2 + 2k + 1 \]
+
+Thus, by induction, the statement holds for \( k + 1 \).
+
+### Conclusion:
+By mathematical induction, we have shown that the sum of the first \( n \) [K
+odd numbers is indeed equal to \( n^2 \).
+
+
+------------------------------------------------------------
+Elapsed: 3.94 seconds
+------------------------------------------------------------

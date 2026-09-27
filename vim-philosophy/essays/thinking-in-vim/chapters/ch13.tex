@@ -1,0 +1,46 @@
+\chapter{Ex as a Language}
+\label{ch:ex}
+
+Every command covered so far in this book has belonged to Normal mode: a keystroke or short sequence of keystrokes, interpreted immediately, acting on the buffer at or near the cursor. Part V turns to the other half of Vim's grammar, previewed as far back as Chapter~\ref{ch:ontology}'s claim that Normal-mode keystrokes and Ex commands are two surfaces of the same underlying language rather than two unrelated systems coexisting in one editor. This chapter makes that claim concrete, by treating Ex the way Part II treated Normal mode: not as a list of commands to memorize individually, but as a grammar with its own small set of composable parts.
+
+\section{The Basic Form}
+
+An Ex command is typed in Command-line mode, entered from Normal mode with \texttt{:}, and executed on pressing return. Its general form is:
+
+\begin{center}
+\texttt{:[range]command[!] [arguments]}
+\end{center}
+
+A range, covered fully below, restricts the command to a specific span of lines rather than the default of the current line alone; the optional \texttt{!} modifies certain commands' behavior, typically toward a more forceful or less cautious variant (\texttt{:q!} discards unsaved changes rather than warning about them, as seen already in Chapter~\ref{ch:installing}); and arguments supply whatever further information the specific command requires. \texttt{:w} writes the current buffer with no range and no arguments; \texttt{:5,10w partial.txt} writes only lines 5 through 10, to a different file than the one currently being edited, using both a range and an argument at once.
+
+This chapter's central claim mirrors Chapter~\ref{ch:language}'s treatment of Normal mode directly: a comparatively small number of ways to specify a range, combined with a comparatively small number of commands that accept one, produces a large number of meaningful combinations, most of which this book will not individually demonstrate because, by the end of this chapter, they will not need to be.
+
+\section{Addresses}
+
+An address identifies a single line. The simplest addresses are absolute line numbers: \texttt{:10} alone, entered as an Ex command, moves the cursor to line 10. \texttt{.} addresses the current line and \texttt{\$} the last line of the buffer, mirroring the Normal-mode motions of the same names from Chapter~\ref{ch:coordinates} (this correspondence is not decorative; Ex addresses and Normal-mode motions share vocabulary because they address the same underlying structure from two different surfaces).
+
+A mark, from Chapter~\ref{ch:marks}, is also a valid address: \texttt{'a} addresses the line containing mark \texttt{a}. A search pattern enclosed in slashes or question marks is likewise a valid address: \texttt{/pattern/} addresses the next line matching \textit{pattern} after the current position, searching forward, and \texttt{?pattern?} does the same searching backward. Any address can be offset by a following \texttt{+}\textit{n} or \texttt{-}\textit{n}: \texttt{.+3} addresses three lines after the current one, and \texttt{/error/+1} addresses the line immediately following the next line containing "error."
+
+\section{Ranges}
+
+A range is two addresses separated by a comma, specifying a span from the first to the second, inclusive. \texttt{:5,10d} deletes lines 5 through 10. \texttt{:.,\$d} deletes from the current line to the end of the buffer, combining two of the addresses introduced above. \texttt{\%}, on its own, is shorthand for \texttt{1,\$}, the entire buffer, and is consequently one of the most frequently used ranges in practice: \texttt{:\%s/.../.../ } (fully covered in Chapter~14) applies a substitution across every line in the file.
+
+A range can also be constructed visually rather than typed by hand: selecting a span of lines in Visual mode and pressing \texttt{:} automatically populates the command line with \texttt{:'<,'>}, using two marks (\texttt{'<} and \texttt{'>}) that Vim sets automatically to the boundaries of the most recent Visual selection. This is worth knowing explicitly because it means every Ex command that accepts a range can be applied to a Visual selection without the reader needing to translate that selection into line numbers by hand; Vim performs that translation automatically the moment \texttt{:} is pressed while a selection is active.
+
+A count following a range, rather than within it, has a distinct meaning worth flagging to avoid confusion: \texttt{:5,10d 3} does not multiply anything, the way a Normal-mode count might; it deletes 3 lines starting from line 10 (the end of the specified range), discarding the range's own start point in favor of using its end as a new starting line. This is a genuine irregularity in the grammar, inherited from ed and vi rather than a Vim invention, and is worth knowing exists primarily so that it is not stumbled into by accident.
+
+\section{Patterns as Addresses, Revisited}
+
+The pattern-as-address syntax introduced above deserves a second pass, because it is the mechanism behind one of Ex's most useful capabilities: locating and acting on lines by content rather than by position. \texttt{:/TODO/d} deletes the next line containing "TODO." More usefully still, patterns compose with ranges: \texttt{:/start/,/end/d} deletes every line from the next occurrence of "start" through the next subsequent occurrence of "end," a range defined entirely by content rather than by any line number the user had to look up or count. This pattern-defined range is the direct ancestor of the global command covered in Chapter~15, which generalizes "find lines matching a pattern" from a single range into a repeatable operation across every matching line in the buffer.
+
+\section{Command-Line History}
+
+Every Ex command typed is retained in a history, navigable while in Command-line mode with the up and down arrow keys (or, in a purely keyboard-centric workflow consistent with this book's general preference, \texttt{Ctrl-p} and \texttt{Ctrl-n}), recalling previous commands for re-execution or modification without retyping them from scratch. \texttt{q:} opens this history as an editable window, listing past commands as buffer lines that can be navigated, edited with the ordinary editing commands from Parts II and III, and executed directly with return, which is considerably more powerful than simple up-arrow recall when a long or complex previous command needs substantial modification rather than a single small correction. \texttt{:history} (or \texttt{:his}) displays the same history as plain output rather than an editable window, useful when only inspection, not re-execution, is needed. The read-only \texttt{":} register from Chapter~\ref{ch:registers}, holding the single most recently executed Ex command, is the narrowest and most immediate slice of this same history.
+
+\section{Command-Line Completion}
+
+Pressing \texttt{Tab} while typing an Ex command triggers completion, context-sensitive to what is being typed: completing a filename after \texttt{:e} or \texttt{:w}, completing an option name after \texttt{:set}, completing a command name itself when only the command's leading characters have been typed. \texttt{Ctrl-d} lists all current completion candidates at once rather than cycling through them one at a time with repeated \texttt{Tab} presses, and \texttt{:set wildmenu} enables a visual, navigable completion menu along the bottom of the screen rather than the terser default behavior, generally a worthwhile addition to the minimal vimrc introduced in Chapter~\ref{ch:installing} for any reader who works with filenames or options frequently enough to benefit from seeing candidates listed rather than cycled through blindly.
+
+\section{Ex and Normal Mode as One Grammar}
+
+This chapter opened by asserting that Normal-mode keystrokes and Ex commands share an underlying grammar rather than constituting two separate systems, and the material covered since should make that assertion concrete rather than merely programmatic. An Ex address is, in a real sense, a motion expressed as typed text rather than as a keystroke: \texttt{.} and \texttt{\$} mean the same thing whether pressed in Normal mode or typed on the Ex command line, and a search pattern addresses a line in Ex exactly as a search motion addresses a position in Normal mode. A range is, correspondingly, close kin to a text object: both specify a span for a following command to act upon, one expressed as two addresses, the other as a structural boundary. The remaining two chapters of Part V, on substitution and on the global command, are best read in this light: not as a separate skill from the operator-motion grammar of Part II, but as that same underlying grammar, continuing to generate new commands from a small set of parts, now expressed through a different, typed surface.

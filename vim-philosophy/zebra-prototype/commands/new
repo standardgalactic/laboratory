@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+mkdir -p "$1"/history
+cp -r "$(dirname "$0")/../templates/." "$1"/
+echo "Created project $1"
