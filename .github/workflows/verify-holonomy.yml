@@ -1,0 +1,31 @@
+name: Verify holonomy experiment
+
+# Guards the distinction-holonomy.html artifact against drift: it must keep
+# implementing the Chapter 9 / Appendix C ℝ² toy model exactly.
+
+on:
+  pull_request:
+    paths:
+      - "distinction-holonomy.html"
+      - "scripts/verify_distinction_holonomy.mjs"
+      - ".github/workflows/verify-holonomy.yml"
+  push:
+    branches: [main]
+    paths:
+      - "distinction-holonomy.html"
+      - "scripts/verify_distinction_holonomy.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  correspondence:
+    name: ℝ² toy-model correspondence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node scripts/verify_distinction_holonomy.mjs
