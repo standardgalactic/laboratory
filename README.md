@@ -1,5 +1,13 @@
 # laboratory
 
+[Legibility Under a Better Vocabulary](https://standardgalactic.github.io/laboratory/legibility.pdf)
+
+Description, Instruments, and Development in Neural Interpretability
+
+[Transformational Familiarity](https://standardgalactic.github.io/laboratory/transformational_familiarity.pdf)
+
+* [Fixing Picky Eating With Food Vector Math](https://standardgalactic.github.io/laboratory/audio-player.html) — *Audio Overview*
+
 [Status at Zero Inspection Cost](https://standardgalactic.github.io/laboratory/filenames-berm.pdf)
 
 [Open Threads Ledger](https://github.com/standardgalactic/laboratory/blob/main/reports/README.md) — *Report*

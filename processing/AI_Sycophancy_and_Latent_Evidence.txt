@@ -448,7 +448,7 @@ absolutely everything forever?
 That's the intuition, yeah.
 Right. Like, should we just hoard every server log, every raw sensor reading, and every piece of text we
 ever generate?
-That is definitely the reflex of the modern data industry, but Flickshione's paper explicitly warns
+That is definitely the reflex of the modern data industry, but Flyxion's paper explicitly warns
 against this unconditional preservation imperative.
 Really?
 Why?
@@ -464,7 +464,7 @@ compute required to execute a novel query against that entire data set might exc
 You literally can't afford to search it.
 Right. Or, more insidiously, the query might return so many false positives from the vast reservoir of noise
 that the true trace is practically unrecoverable. Indiscriminate preservation actively degrades discoverability.
-Plus, there is a massive ethical and physical cost to hoarding data. Flickshione outlines the security risks
+Plus, there is a massive ethical and physical cost to hoarding data. Flyxion outlines the security risks
 of maintaining endless repositories of personal data, the privacy violations inherent and never forgetting,
 and just the sheer financial and ecological cost of running massive data centers to store dormant traces.
 Exactly. Preservation and discoverability are frequently treated as synonyms, but they're often
@@ -473,7 +473,7 @@ A policy optimized purely for keeping everything will inevitably raise the techn
 latency of finding anything. This forces a radical reframing of how we conceptualize deletion.
 Okay. How so?
 Well, we traditionally view deletion as a metaphysical foreclosure. Like, we are permanently erasing a piece of reality.
-Right. But Flickshione argues deletion isn't a binary erasure. It's a trajectory management tool.
+Right. But Flyxion argues deletion isn't a binary erasure. It's a trajectory management tool.
 Yes. Deletion is a sharp downward step on the curve of recoverability. When you delete a file,
 the trace might still survive in a degraded form.
 Right. Like in a cache.
