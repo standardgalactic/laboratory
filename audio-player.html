@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixing Picky Eating With Food Vector Math | Lissajous Monitor</title>
+<style>
+:root{color-scheme:dark;--bg:#080b0b;--panel:#101717;--line:#2b4942;--text:#c6d9cb;--muted:#819b8d;--phosphor:#b4ffd2}
+*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{background:var(--bg);color:var(--text);font:13px/1.5 'Courier New',monospace}main{width:min(1100px,100%);min-height:100svh;margin:auto;padding:20px;display:flex;flex-direction:column;gap:14px}header,footer{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}header{padding-bottom:12px;border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.title{margin:3px 0 0;font-size:clamp(17px,3vw,27px);letter-spacing:.04em;color:var(--phosphor)}.sub{margin:0;color:var(--muted)}.screen{position:relative;height:clamp(260px,52vh,590px);border:1px solid var(--line);overflow:hidden;background:radial-gradient(ellipse at center,#12221b 0%,#070b0a 72%);box-shadow:inset 0 0 75px #000}.screen:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(#1d3b2b50 1px,transparent 1px),linear-gradient(90deg,#1d3b2b50 1px,transparent 1px);background-size:36px 36px}.screen:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0 3px,#0003 4px);opacity:.65}canvas{display:block;width:100%;height:100%}.screenlabel{position:absolute;left:14px;top:11px;color:var(--muted);letter-spacing:.13em;font-size:11px;pointer-events:none}.captions{min-height:100px;padding:18px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;text-align:center;white-space:pre-wrap;font-size:clamp(14px,2vw,19px);line-height:1.55}.controls{display:grid;grid-template-columns:auto auto minmax(100px,1fr) auto auto;align-items:center;gap:12px;padding:14px;background:var(--panel);border:1px solid var(--line)}button{background:#172520;border:1px solid #416b54;color:var(--phosphor);font:inherit;padding:10px 13px;cursor:pointer}button:hover{background:#20372b}button:focus-visible,input:focus-visible{outline:2px solid var(--phosphor);outline-offset:3px}input[type=range]{width:100%;accent-color:#a4dabb;cursor:pointer}.time{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}#status{color:var(--muted)}@media(max-width:640px){main{padding:12px}.controls{grid-template-columns:auto auto 1fr}.controls #seek{grid-column:1/-1;grid-row:2}.controls .time{grid-column:3;grid-row:1;text-align:right}.controls #cc{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<main>
+<header><span>SG / LISSAJOUS MONITOR</span><span id="status">READY</span></header>
+<div><h1 class="title">FIXING PICKY EATING WITH FOOD VECTOR MATH</h1><p class="sub">STEREO PHASE / OSCILLOSCOPE / TRANSCRIPT</p></div>
+<section class="screen" aria-label="Lissajous oscilloscope"><div class="screenlabel">XY / STEREO PHASE</div><canvas id="scope"></canvas></section>
+<section id="captions" class="captions" aria-live="off">Subtitles loading…</section>
+<section class="controls"><button id="play" aria-label="Play or pause">▶ PLAY</button><button id="back" title="Back 10 seconds">↶ 10s</button><input id="seek" type="range" min="0" max="1" step="0.01" value="0" aria-label="Seek timeline"><span class="time"><span id="current">0:00</span> / <span id="duration">--:--</span></span><button id="cc" aria-pressed="true">CC ON</button></section>
+<footer><span>FLYXION / AUDIO</span><span>SPACE PLAY · ← → SEEK 5S</span></footer>
+<audio id="audio" preload="metadata" src="Fixing_Picky_Eating_With_Food_Vector_Math.mp3"></audio>
+</main>
+<script>
+'use strict';
+const audio=document.getElementById('audio');
+const play=document.getElementById('play');
+const seek=document.getElementById('seek');
+const current=document.getElementById('current');
+const duration=document.getElementById('duration');
+const status=document.getElementById('status');
+const captions=document.getElementById('captions');
+const cc=document.getElementById('cc');
+const canvas=document.getElementById('scope');
+const g=canvas.getContext('2d');
+let context=null,analyser=null,connected=false,dragging=false,showCC=true,cues=[];
+const data=new Uint8Array(4096);
+function fmt(s){return Number.isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'--:--'}
+function refreshDuration(){if(Number.isFinite(audio.duration)&&audio.duration>0){seek.max=String(audio.duration);duration.textContent=fmt(audio.duration)}}
+function updateCaption(){if(!showCC)return;const t=audio.currentTime||0;const cue=cues.find(c=>t>=c.start&&t<c.end);captions.textContent=cue?cue.text:(cues.length?'':'Subtitles unavailable or loading…')}
+function sync(){if(!dragging){seek.value=String(audio.currentTime||0);current.textContent=fmt(audio.currentTime||0)}updateCaption()}
+seek.addEventListener('pointerdown',()=>{dragging=true});
+seek.addEventListener('input',()=>{dragging=true;current.textContent=fmt(Number(seek.value))});
+function commit(){const t=Number(seek.value);if(Number.isFinite(t)&&audio.readyState>=1){try{audio.currentTime=t}catch(e){status.textContent='SEEK ERROR'}}dragging=false;sync()}
+seek.addEventListener('change',commit);
+seek.addEventListener('pointerup',()=>{if(dragging)commit()});
+seek.addEventListener('pointercancel',()=>{dragging=false;sync()});
+audio.addEventListener('loadedmetadata',refreshDuration);
+audio.addEventListener('durationchange',refreshDuration);
+audio.addEventListener('timeupdate',sync);
+audio.addEventListener('seeked',sync);
+audio.addEventListener('play',()=>{play.textContent='Ⅱ PAUSE';status.textContent='PLAYING'});
+audio.addEventListener('pause',()=>{play.textContent='▶ PLAY';status.textContent=audio.ended?'COMPLETE':'PAUSED'});
+audio.addEventListener('error',()=>{status.textContent='MP3 NOT FOUND';captions.textContent='Check the MP3 filename and folder.'});
+async function setupAnalyser(){if(connected)return;try{context=new (window.AudioContext||window.webkitAudioContext)();analyser=context.createAnalyser();analyser.fftSize=4096;analyser.smoothingTimeConstant=.65;const source=context.createMediaElementSource(audio);source.connect(analyser);analyser.connect(context.destination);connected=true}catch(err){console.warn('Scope unavailable',err);analyser=null}}
+async function toggle(){if(!audio.paused){audio.pause();return}try{await setupAnalyser();if(context&&context.state==='suspended')await context.resume();await audio.play()}catch(err){status.textContent='PLAYBACK ERROR';console.error(err)}}
+play.addEventListener('click',toggle);
+document.getElementById('back').addEventListener('click',()=>{audio.currentTime=Math.max(0,audio.currentTime-10)});
+cc.addEventListener('click',()=>{showCC=!showCC;cc.textContent=showCC?'CC ON':'CC OFF';cc.setAttribute('aria-pressed',String(showCC));captions.textContent=showCC?'':'CAPTIONS OFF';updateCaption()});
+document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.matches('input,textarea,select,button'))return;if(e.code==='Space'){e.preventDefault();toggle()}else if(e.code==='ArrowRight'){e.preventDefault();audio.currentTime=Math.min(Number.isFinite(audio.duration)?audio.duration:Infinity,audio.currentTime+5)}else if(e.code==='ArrowLeft'){e.preventDefault();audio.currentTime=Math.max(0,audio.currentTime-5)}});
+function stamp(s){const p=s.replace(',','.').split(':').map(Number);return p.reduce((a,b)=>a*60+b,0)}
+async function loadVTT(){try{const r=await fetch('Fixing_Picky_Eating_With_Food_Vector_Math.vtt');if(!r.ok)throw Error('VTT missing');const v=(await r.text()).replace(/\r/g,'').replace(/^\uFEFF/,'');for(const block of v.split(/\n\s*\n/)){const lines=block.trim().split('\n');const i=lines.findIndex(x=>x.includes('-->'));if(i<0)continue;const parts=lines[i].split('-->');const start=stamp(parts[0].trim().split(/\s+/)[0]),end=stamp(parts[1].trim().split(/\s+/)[0]);const text=lines.slice(i+1).join('\n').replace(/<[^>]*>/g,'').trim();if(Number.isFinite(start)&&Number.isFinite(end)&&text)cues.push({start,end,text})}updateCaption()}catch(err){console.warn('VTT unavailable',err);captions.textContent='Subtitles unavailable. Open through a local HTTP server.'}}
+function render(){const dpr=Math.min(window.devicePixelRatio||1,2),w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr)}g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);const cx=w/2,cy=h/2,r=Math.min(w,h)*.38;
+g.strokeStyle='#456d5266';g.lineWidth=1;g.beginPath();g.moveTo(cx-r*1.2,cy);g.lineTo(cx+r*1.2,cy);g.moveTo(cx,cy-r*1.2);g.lineTo(cx,cy+r*1.2);g.stroke();g.beginPath();g.arc(cx,cy,r,0,Math.PI*2);g.stroke();
+if(analyser&&connected&&!audio.paused){analyser.getByteTimeDomainData(data);const count=1024,offset=32;g.beginPath();for(let i=0;i<count;i++){const a=(data[i]-128)/128,b=(data[i+offset]-128)/128;const x=cx+a*r,y=cy-b*r;if(i===0)g.moveTo(x,y);else g.lineTo(x,y)}g.shadowBlur=17;g.shadowColor='#78ffc2';g.strokeStyle='#83ffb9';g.lineWidth=1.6;g.globalAlpha=.9;g.stroke();g.shadowBlur=0;g.globalAlpha=1}else{g.strokeStyle='#83ffb955';g.lineWidth=1.5;g.beginPath();g.moveTo(cx-r*.6,cy);g.lineTo(cx+r*.6,cy);g.stroke()}
+requestAnimationFrame(render)}
+refreshDuration();sync();loadVTT();render();
+</script>
+</body>
+</html>
+
