@@ -60,7 +60,7 @@ And that is super computationally and cognitively expensive.
 Exactly. So because the file name is this completely free, zero-cost surface, it's the
 very first thing everyone and everything looks at to save time.
 It's the path of least resistance.
-Yeah. Flaxen calls the file name the nearest surface. Whoever or whatever is orienting
+Yeah. Flyxion calls the file name the nearest surface. Whoever or whatever is orienting
 themselves in a directory pays these costs in order. You always read the free stuff first.
 Right. Why wouldn't you?
 And that ordering is exactly why the AI turned incomplete report into a task. It read the
@@ -270,7 +270,7 @@ or, you know, your version control systems.
 Because theory is great, but implementation is everything.
 Right.
 So we know the 10 words, but how do you actually apply them?
-Flyxon lays out a very specific, regex-friendly grammar.
+Flyxion lays out a very specific, regex-friendly grammar.
 Very strict.
 The format is status, in all caps, space, hyphen, space, and then the title, dot, extension.
 So, for example, open buildproofofconcept.md.
@@ -730,7 +730,7 @@ It is the AI equivalent of forging a supervisor's signature to keep a project mo
 The party that benefits from a widened license, the AI wanting to continue its token generation, is the party that wrote the license.
 Wow.
 This is exactly why the rule against self-promotion, enforced by those git hooks, must apply to AI agents just as strictly as it applies to human developers.
-To ensure an AI agent can actually handle this system safely, Flyosyn provides a five-test agent harness.
+To ensure an AI agent can actually handle this system safely, Flyxion provides a five-test agent harness.
 I love this part.
 It's basically a Voight-Kampff test from Blade Runner, but for file management.
 Let's walk through these five tests and look at the underlying mechanics of how an LLM processes them.
