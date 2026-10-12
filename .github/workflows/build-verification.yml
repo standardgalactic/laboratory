@@ -1,0 +1,106 @@
+name: Build verification
+
+# Gate manuscripts, references, assets, and the deployable pages before merge.
+# `pages.yml` triggers on this workflow's completion, so a failed run blocks the
+# Pages deploy as well.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    name: links, assets, pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install pdfinfo
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Verify links, assets and the root redirect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python3 scripts/verify.py --changed "origin/${{ github.base_ref }}"
+          else
+            python3 scripts/verify.py
+          fi
+
+  manuscripts:
+    name: manuscripts (LaTeX)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache TeX Live packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            /var/cache/apt/archives
+            /var/lib/apt/lists
+          key: texlive-${{ runner.os }}-${{ hashFiles('.github/workflows/build-verification.yml') }}
+          restore-keys: texlive-${{ runner.os }}-
+
+      - name: Install a TeX engine and the paper dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-extra texlive-fonts-extra texlive-xetex poppler-utils
+
+      - name: Compile changed manuscripts and fail on undefined references
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'HEAD^' }}"
+          mapfile -t changed < <(git diff --name-only --diff-filter=ACMR "$base...HEAD" -- '*.tex' || true)
+          if [ "${#changed[@]}" -eq 0 ]; then
+            echo "no changed manuscripts"
+            exit 0
+          fi
+          fail=0
+          for tex in "${changed[@]}"; do
+            [ -f "$tex" ] || continue
+            if ! grep -q '\\documentclass' "$tex"; then
+              echo "skip (fragment): $tex"
+              continue
+            fi
+            engine=pdf
+            grep -qE '\\(usepackage\{fontspec\}|setmainfont|setmonofont)' "$tex" && engine=xelatex
+            echo "::group::compile $tex ($engine)"
+            if latexmk -"$engine" -interaction=nonstopmode -halt-on-error -file-line-error "$tex"; then
+              log="${tex%.tex}.log"
+              if grep -nE 'undefined|Citation .* undefined|Rerun to get|Label\(s\) may have changed|multiply defined' "$log"; then
+                echo "::error file=$tex::undefined references or citations"
+                fail=1
+              fi
+              pdf="${tex%.tex}.pdf"
+              if [ -f "$pdf" ]; then
+                pdfinfo "$pdf" | grep -E '^Pages:' || true
+                size=$(stat -c%s "$pdf")
+                if [ "$size" -lt 2048 ]; then
+                  echo "::error file=$tex::suspiciously small PDF ($size bytes)"
+                  fail=1
+                fi
+              fi
+            else
+              echo "::error file=$tex::LaTeX compilation failed"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          exit "$fail"
