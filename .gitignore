@@ -1,12 +1,38 @@
+# Data and transcription files
 *.srt
 *.tsv
 
+# LaTeX build artifacts
 *.aux
 *.log
 *.out
+*.fdb_latexmk
+*.fls
+*.toc
+*.synctex.gz
+*.bbl
+*.blg
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*.xdv
 
+# Blender backups
 *.blend1
 
-experiments/__pycache__/
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
+# Local generated listings
 file-list.txt
+
+# Editor backups
+*~
