@@ -1,0 +1,13 @@
+# Known, accepted gaps for the laboratory verifier.
+#
+# One entry per line; blank lines and lines starting with '#' are ignored.
+# An entry may be either the raw target ("nonexistant.png") or the full key
+# ("README.md: nonexistant.png"). Entries here suppress a hard failure, so keep
+# this list short, dated, and honest — a baseline is a debt, not a hiding place.
+
+# Pre-existing placeholders in README.md (assets that were never committed).
+nonexistant.png
+newline.png
+
+# README links to reports/README.md, which is not present in the repository.
+reports/README.md
