@@ -1,5 +1,7 @@
 # laboratory
 
+[Programmable Material Organization](https://standardgalactic.github.io/laboratory/programmable-material-organization.pdf)
+
 [Legibility Under a Better Vocabulary](https://standardgalactic.github.io/laboratory/legibility.pdf)
 
 Description, Instruments, and Development in Neural Interpretability

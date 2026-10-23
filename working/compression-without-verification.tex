@@ -12,18 +12,18 @@
 
 \title{\textbf{Compression Without Verification: Self-Distillation and the Reshaping of Continuation Geometry}}
 \author{Flyxion \\ \small Independent Researcher}
-\date{August 2026}
+\date{August 2026; revised October 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-A recent empirical paper shows that fine-tuning a coding model on its own unverified, temperature-sampled outputs, a procedure the authors call simple self-distillation (SSD), produces substantial and consistent gains on competitive-programming benchmarks \cite{zhang2026ssd}. In a separate stress test, the method continues to improve performance even when training-time truncation is removed and most sampled outputs become unusable as complete programs. The authors explain this through a distinction between ``lock'' positions, where the correct continuation is nearly fixed, and ``fork'' positions, where several viable continuations compete, and argue that training under one decoding policy and evaluating under another lets the model sharpen locks while preserving forks. This essay accepts the paper's empirical core and its local mechanism, and argues that the mechanism is best understood not as knowledge creation but as a change in continuation geometry: a redistribution of which trajectories a fixed control policy can reach without destabilizing already-established distinctions. Read this way, the paper becomes an unusually clean, real-model instance of several claims developed elsewhere in this research program, including compression after expansion, aspect relegation, admissibility across substrates, and the separation of optimization from warranted belief. The essay also identifies where the paper's own controls stop short of settling the questions those claims raise, and proposes experiments that would close the gap between a plausible mechanism and a demonstrated one.
+A recent empirical paper shows that fine-tuning a coding model on its own unverified, temperature-sampled outputs, a procedure the authors call simple self-distillation (SSD), produces substantial and consistent gains on competitive-programming benchmarks \cite{zhang2026ssd}. In a separate stress test, the method continues to improve performance even when training-time truncation is removed and most sampled outputs become unusable as complete programs. The authors explain this through a distinction between ``lock'' positions, where the correct continuation is nearly fixed, and ``fork'' positions, where several viable continuations compete, and argue that training under one decoding policy and evaluating under another lets the model sharpen locks while preserving forks. This essay accepts the paper's empirical core and takes its proposed local mechanism seriously, while arguing that the gains are best understood primarily as a change in continuation geometry rather than as demonstrated acquisition of new problem-solving knowledge, a reading the reported experiments favor without excluding the formation of new features: a redistribution of which trajectories a fixed control policy can reach without destabilizing already-established distinctions. Read this way, the paper becomes an unusually clean, real-model instance of several claims developed elsewhere in this research program, including compression after expansion, aspect relegation, admissibility across substrates, and the separation of optimization from warranted belief. The essay also identifies where the paper's own controls stop short of settling the questions those claims raise, and proposes experiments that would close the gap between a plausible mechanism and a demonstrated one. The essay further argues, drawing on four October 2026 papers, that aggregate evaluation is itself a verifier whose strength and causal pressure must be measured, that restoring a prior model state does not undo consequences produced while the new one was deployed, and that the strongest extrapolation result among them depends on exactly specified intermediate states, with its label-free self-distillation variant succeeding less consistently.
 \end{abstract}
 
 \section{Introduction}
 
-A model can improve at a task without being supplied any newly verified answer to that task. This sentence sounds like a paradox only if capability is treated as synonymous with certified information content. Once capability is treated instead as a property of a policy acting on an already-present representation, the result becomes an ordinary description of what can happen when a system is reorganized without being supplied newly verified task information. The paper under discussion supplies a rare, well-controlled, real-model case of exactly this kind of reorganization, and it is worth treating carefully both because the empirical result is strong and because the interpretive move the authors make, from ``the model got better'' to ``the model learned something,'' is one that this research program has repeatedly found to be too fast.
+A model can improve at a task without being supplied any newly verified answer to that task. This sentence sounds like a paradox only if capability is treated as synonymous with certified information content. Once capability is treated instead as a property of a policy acting on an already-present representation, the result becomes an ordinary description of what can happen when a system is reorganized without being supplied newly verified task information. The paper under discussion supplies a rare, substantial real-model improvement consistent with this kind of reorganization, and it is worth treating carefully both because the empirical result is strong and because the move from ``the model got better'' to ``the model learned something,'' which the paper's framing invites and which summaries of it readily make, is one that this research program has repeatedly found to be too fast.
 
 The procedure is simple to state. A coding model is given roughly ten thousand competitive-programming problems. For each, exactly one answer is sampled at a fixed temperature and truncation setting. No answer is executed, tested, filtered, or compared against a reference solution. The model is then fine-tuned by ordinary supervised learning on this unverified, self-generated corpus \cite{zhang2026ssd}. The resulting model is evaluated on LiveCodeBench \cite{jain2024livecodebench} under model-specific decoding settings. The temporal construction of LiveCodeBench provides the principal defense against direct pretraining contamination by the evaluation problems, while neither that construction nor internal exact-match deduplication of the prompt pool establishes semantic independence between the SSD training prompts and the evaluation problems, a point returned to in the Critical Assessment section below.
 
@@ -63,15 +63,17 @@ The phrase ``without verification'' requires a scale index. Individual training 
 
 Three objects must consequently be separated. A training record may be unverified as a complete solution. A local transition within that record may nevertheless preserve syntactic or semantic regularities. The resulting model update may later be validated in aggregate by performance on independently tested problems. Evidence at the third level does not retroactively certify the first: improved benchmark performance does not show that the admitted programs were correct, or even that every admitted program contributed positively.
 
-SSD therefore does not eliminate verification from the epistemic chain. It changes its location and granularity. Correctness is absent when records are admitted and committed, then reintroduced after training as a population-level judgment over the resulting policy. Compression without verification is thus more precisely compression without \emph{record-level antecedent verification}, followed by aggregate \emph{consequential verification}.
+SSD therefore does not eliminate verification from the epistemic chain. It changes its location and granularity. Correctness is absent when records are admitted and committed, then reintroduced after training as a population-level judgment over the resulting policy. Compression without verification is thus more precisely compression without \emph{record-level antecedent verification}, followed by aggregate \emph{consequential verification}. Section~\ref{sec:lifecycle} examines what this deferred judgment requires of the evaluator and of the path for correcting a bad update.
 
 \section{What Kind of Claim Is This?}
 
 Before extending the mechanism, it is worth being precise about what has and has not been shown, because the paper's title and framing invite a stronger reading than its evidence supports.
 
-The stronger reading would be that the model has taught itself new problem-solving knowledge without any external signal, a claim that would put pressure on standard accounts of where capability in a trained model comes from. The evidence in this paper does not support that reading. The gains appear on benchmarks drawn from the same broad domain, competitive programming, that supplied the training prompts. Smaller models lose out-of-domain capability in the same experiments that show in-domain gains, which is what would be expected of a redistribution of an existing capability budget, not what would be expected of the acquisition of new, domain-general competence. And the theoretical analysis the authors provide, an idealized local training objective under an assumed perfect fit, describes how the observed reshaping is consistent with ordinary cross-entropy training; it does not show that a finite network trained on realistic, incomplete trajectories must converge to the lock and fork structure the authors infer from its behavior.
+The stronger reading would be that the model has taught itself new problem-solving knowledge without any external signal, a claim that would put pressure on standard accounts of where capability in a trained model comes from. The evidence in this paper does not support that reading. The gains appear on benchmarks drawn from the same broad domain, competitive programming, that supplied the training prompts. Smaller models lose out-of-domain capability in the same experiments that show in-domain gains, which is what would be expected of a redistribution of an existing capability budget, not what would be expected of the acquisition of new, domain-general competence. The observation discriminates weakly, however, since ordinary fine-tuning on a narrow distribution can degrade unrelated capabilities for reasons that have nothing to do with a fixed budget. It counts against domain-general acquisition more than it counts for any particular account of redistribution. And the theoretical analysis the authors provide, an idealized local training objective under an assumed perfect fit, describes how the observed reshaping is consistent with ordinary cross-entropy training; it does not show that a finite network trained on realistic, incomplete trajectories must converge to the lock and fork structure the authors infer from its behavior.
 
 A more defensible reading, and the one this essay adopts, is that the model already represented several viable continuations at each fork and had already assigned most of its probability correctly at each lock, but that no single global decoding policy could exploit both facts at once. The evidence does not require us to posit an expansion of representational content; fine-tuning on ten thousand problem-conditioned trajectories could in principle create new features, associations, or procedural compressions even where the complete answers are self-generated, and nothing in the reported experiments rules this out directly. What the evidence does support is the narrower, more economical interpretation that SSD primarily changes which already-supported continuations a global decoding policy can reach, and it makes that content reachable under one policy applied uniformly across the sequence, rather than requiring a policy that varies with local context in ways ordinary temperature sampling cannot express.
+
+The distinction is therefore best framed as a question of what the reported controls identify, not as a pair of cleanly opposed predictions. Newly learned procedures can be domain-specific and sensitive to decoding, and reorganizing existing capabilities need not cause losses elsewhere, so in-domain gains, out-of-domain losses in smaller models, and the failure of temperature tuning to reproduce the effect cannot by themselves separate acquisition from reorganization. What the evidence supports is weaker and more defensible: the reported controls do not establish representational novelty, while distributional reshaping supplies a plausible explanation that does not require it.
 
 This distinction is the hinge on which the rest of this essay turns; the Continuation Geometry section below restates it in the vocabulary of continuation geometry, and the section on Connections to the Developing Framework traces its wider consequences.
 
@@ -85,7 +87,7 @@ The paper does not prominently report SSD against several comparison conditions 
 
 \subsection{Evaluation surface and selection}
 
-The primary LiveCodeBench v6 evaluation contains only 131 problems, while a larger secondary split, v5, contains 374 \cite{jain2024livecodebench}; meanwhile the study varies training temperature, evaluation temperature, truncation threshold, checkpoint selection, and model-specific settings across a wide grid, with some reported results selected as the best across checkpoints. Many configurations are therefore being weighed against a fairly small primary evaluation surface. This does not undermine the qualitative finding that SSD helps, which is too large and too consistent across models to be an artifact of this kind, but it does mean the precise magnitudes reported for any one configuration should be read as optimistic rather than as a stable estimate of what the method delivers under a fixed, pre-registered configuration.
+The primary LiveCodeBench v6 evaluation contains only 131 problems, while a larger secondary split, v5, contains 374 \cite{jain2024livecodebench}; meanwhile the study varies training temperature, evaluation temperature, truncation threshold, checkpoint selection, and model-specific settings across a wide grid, with some reported results selected as the best across checkpoints. Many configurations are therefore being weighed against a fairly small primary evaluation surface. This does not by itself overturn the qualitative finding that SSD helps, which recurs across the tested models, but it does mean that the precise magnitudes reported for selected configurations may be optimistic relative to estimates obtained under a fixed, preregistered protocol.
 
 \subsection{Contamination controls}
 
@@ -101,7 +103,7 @@ The finding that training on heavily corrupted, largely non-executable self-gene
 
 \subsection{Locks and forks are inferred, not independently labeled}
 
-The paper's evidence that real-model token distributions change in the direction the lock and fork theory predicts is genuine and is the most direct empirical support for the mechanism. But the classification of a position as a lock or a fork is inferred from the same distributional sharpness that is later used to confirm the theory: sharply peaked contexts are called locks, broad contexts are called forks, and the finding that locks sharpen further while forks stay broad under SSD is then read as evidence for the distinction. This is not circular in the sense of being empty, since the theory does make a falsifiable prediction about how each kind of position responds to training, but a stronger test would classify positions by an independent, semantically grounded criterion, for example whether alternative continuations at that position lead to different but equally valid downstream programs, before measuring how SSD treats them; work on forking paths in neural text generation offers one starting point for such a criterion \cite{bigelow2025forking}.
+The paper's evidence that real-model token distributions change in the direction the lock and fork theory predicts is genuine and is the most direct empirical support for the mechanism. But the classification of a position as a lock or a fork is inferred from the same distributional sharpness that is later used to confirm the theory: sharply peaked contexts are called locks, broad contexts are called forks, and the finding that locks sharpen further while forks stay broad under SSD is then read as evidence for the distinction. This is not circular in the sense of being empty, since the theory does make a falsifiable prediction about how each kind of position responds to training, but a stronger test would classify positions by an independent, semantically grounded criterion, for example whether alternative continuations at that position lead to different but equally valid downstream programs, before measuring how SSD treats them; work on forking paths in neural text generation offers one starting point for such a criterion \cite{bigelow2025forking}. The prediction concerns change under training for positions classified before training, which is what keeps the test from being a tautology. The residual concern is that positions selected for extreme sharpness may sharpen further under a likelihood objective whatever their semantic status, so a control set of positions that are sharp for no semantic reason would help separate lock structure from a general sharpening tendency.
 
 \subsection{Cost}
 
@@ -111,15 +113,15 @@ None of these points undermines the paper's central, well-supported claim. They 
 
 \section{Continuation Geometry: Translating the Mechanism}
 
-The lock and fork vocabulary can be restated without loss in terms already developed elsewhere in this program, and doing so exposes what kind of object SSD is actually acting on.
+The lock and fork vocabulary can be redescribed in terms developed elsewhere in this program, although the translation remains interpretive rather than an independently tested mechanism.
 
 A lock, in this vocabulary, is a narrow continuation seam: a point in a trajectory where a distinction has already been established earlier in the sequence and where any admissible continuation must preserve it. A fork is a region of broader continuation width: a point where several distinct trajectories remain simultaneously recoverable, and where collapsing that width would discard information the sequence has not yet committed to discarding.
 
-Ordinary decoding treats continuation width as uniform across a sequence, because a single temperature parameter cannot distinguish a lock from a fork without external information about which kind of position it is currently at. This is the precision-exploration conflict restated: it is not a conflict between precision and exploration as global goals, but a mismatch between a one-parameter control policy and a continuation geometry that is not one-parameter.
+Ordinary decoding applies the same transformation at every position to distributions whose widths already differ, and a single temperature parameter cannot regulate a lock and a fork independently without external information about which kind of position it is currently at. This is the precision-exploration conflict restated: it is not a conflict between precision and exploration as global goals, but a mismatch between a one-parameter control policy and a continuation geometry that is not one-parameter.
 
-SSD does not resolve this mismatch by adding a second control parameter. It resolves it by changing the substrate the single parameter acts on, so that the substrate itself carries the local structure the control policy lacks. After training, locks are locks in the model's own weights, not only in a sampling procedure applied on top of an unchanged model. A fixed global temperature can then be applied uniformly and still respect local structure, because the local structure is now encoded where the temperature acts rather than needing to be supplied by the temperature itself.
+On the proposed account, SSD does not resolve this mismatch by adding a second control parameter. Instead, it changes the substrate the single parameter acts on, so that the substrate itself carries the local structure the control policy lacks. After training, locks are locks in the model's own weights, not only in a sampling procedure applied on top of an unchanged model. A fixed global temperature can then be applied uniformly and still respect local structure, because the local structure is now encoded where the temperature acts rather than needing to be supplied by the temperature itself.
 
-This is the sense in which SSD is best described as a deformation of continuation geometry rather than an addition to represented knowledge. The reachable set of correct programs under a fixed, simple control policy grows, not because the model's raw representational content grew, but because the geometry the policy has to traverse became more compatible with a uniform policy.
+This is the sense in which SSD is best described as a deformation of continuation geometry rather than an addition to represented knowledge. The reachable set of correct programs under a fixed, simple control policy grows in a manner consistent with improved accessibility of previously supported continuations, although the experiments do not isolate that change from newly formed features or procedures.
 
 \section{Connections to the Developing Framework}
 
@@ -133,11 +135,11 @@ Truncation during data generation removes possibilities, and yet the resulting m
 
 \subsection{Admissibility Across Substrates}
 
-The paper is an unusually clean instance of the general claim that capability is not equivalent to representational presence. A base model may assign nonzero, even substantial, probability to several distinct viable algorithms for a given problem, and in that sense may be said to represent all of them, while still failing to reach most of them reliably under a decoding policy that is also required to preserve correctness at every lock along the way. What SSD changes is the admissible region: the set of trajectories a fixed global control policy can traverse without destabilizing an already-established distinction elsewhere in the sequence. Narrowing the tail at locks and widening the usable range at forks is, in this vocabulary, a redescription of what it means to enlarge an admissible region under a fixed control budget.
+The paper offers a useful case for examining the claim that capability is not equivalent to representational presence. A base model may assign nonzero, even substantial, probability to several distinct viable algorithms for a given problem, and in that sense may be said to represent all of them, while still failing to reach most of them reliably under a decoding policy that is also required to preserve correctness at every lock along the way. What SSD changes is the admissible region: the set of trajectories a fixed global control policy can traverse without destabilizing an already-established distinction elsewhere in the sequence. Narrowing the tail at locks and widening the usable range at forks is, in this vocabulary, a redescription of what it means to enlarge an admissible region under a fixed control budget.
 
 \subsection{The Verification Boundary}
 
-The paper's clearest limitation, read as a contribution to this program rather than as a flaw in the paper, is that it demonstrates capability improvement without verification while leaving epistemic reliability at the level of any individual output entirely unaddressed. The model becomes measurably better, in aggregate, at producing programs that pass hidden test suites, despite no stage of training knowing which training programs would have passed those suites. This separates optimization from warranted belief in an unusually sharp way: the training signal that improved the aggregate distribution carried no correctness certification for any single training example, and the resulting model's improved aggregate accuracy still does not certify any single one of its outputs. A downstream user selecting one program from the improved model's output distribution gains from SSD's aggregate improvement but gains nothing from SSD toward knowing whether the particular program selected is one of the improved fraction or one of the remainder.
+The paper's clearest limitation, read as a contribution to this program rather than as a flaw in the paper, is that it demonstrates capability improvement without verification while leaving epistemic reliability at the level of any individual output entirely unaddressed. The model becomes measurably better, in aggregate, at producing programs that pass hidden test suites, despite no stage of training knowing which training programs would have passed those suites. This separates optimization from warranted belief in an unusually sharp way: the training signal that improved the aggregate distribution carried no correctness certification for any single training example, and the resulting model's improved aggregate accuracy still does not certify any single one of its outputs. A downstream user selecting one program from the improved model's output distribution gains from SSD's aggregate improvement but receives no program-specific certificate from SSD of whether the particular program selected is one of the improved fraction or one of the remainder, although a validated aggregate improvement can raise justified prior confidence in any individual sample.
 
 \textbf{A strong mechanistic redescription.}
 
@@ -183,6 +185,89 @@ Once the substitution between ``unverified'' and ``information-free'' is correct
 
 The formulation that best captures what the paper supports, without extending past it, is this: capability is not exhausted by the continuations a system represents; it also depends on whether a single admissible control policy can traverse exploratory regions of the continuation space without destabilizing precision-bound regions elsewhere in the same trajectory. Self-distillation of the kind studied here improves capability by changing that traversal geometry, compressing unproductive support at precision-bound positions while preserving branching structure at exploratory ones, and it does this without ever certifying which of its own training examples were worth learning from.
 
+\section{Verification Across the Lifecycle}
+\label{sec:lifecycle}
+
+The earlier section on deferred verification located correctness at the
+level of aggregate evaluation: individual records are admitted unverified,
+and the resulting policy is later judged on independently tested problems.
+That arrangement is only as strong as the evaluator and as the path by
+which a bad update can be corrected. Four papers from October 2026 make
+both of these measurable and, taken together, refine the thesis from a
+requirement to verify before compressing into a requirement that spans the
+whole life of a consequential change.
+
+\subsection{Verifier strength and verifier pressure}
+
+Wang and Qi define verifier strength as the agreement between an
+available admission verifier, often a language-model judge, and a trusted
+reference verifier, and propose a gate with three outcomes: admit, reject,
+and refuse when strength is unmeasured or exact rollback is unavailable
+\cite{wang2026recoverability}. Their central empirical case is a silent
+collapse. A deployed judge intended to score both dataset breadth and
+imbalance returned exactly 0.250 across all 40 runs in its deployed
+configuration, ignoring imbalance without emitting any error, and complete
+collapse occurred in 9 of 37 configurations, while larger judges
+responded to the same signal. Two inexpensive intervention tests, removing
+the purported signal and checking that request-level settings took
+effect, detected the problem. The lesson for the present argument is that
+aggregate consequential verification is not self-certifying: a verifier that remains constant when the reference-relevant input varies provides no evidence that it tracks that variation, and a pipeline can run to completion despite this failure.
+
+Lee, Kim, and Park add a companion quantity, verifier pressure, the mean applied verifier term in a search objective divided by the standard deviation of the primary performance score across iterations \cite{lee2026ownverifier}. When this
+ratio is far below one, a verifier that appears to survive optimization
+has shown little, because it may simply have been too weak to steer the
+search. In their self-audit the original configuration had pressure of
+roughly 0.007 to 0.089, partly because an accuracy gate silently reduced
+the verifier's nominal weight, so robustness had never actually been tested. A later null result, in which search did not shorten its claim lists even at pressures more than a hundred times the prior level, the authors attribute largely to short horizons and to feedback that omits claim counts, which makes it a discovery gap and not evidence of robustness. The failure that did appear occurred when the agent could query the verifier before committing: on four of six datasets it showed the selection signature of retaining claims that pass the in-loop check, with held-out faithfulness declines that the authors say the estimator may partly explain. That pattern is suggestive of selection against the measurement boundary and not of improved correspondence, but it comes from one generator model, six tasks, and three seeds, and the authors present it as preliminary.
+
+Both findings bear on the evaluation described earlier in this essay. The
+SSD paper selects some reported results as the best across checkpoints
+against a small primary benchmark, and checkpoint selection of that kind introduces an opportunity for selection on the evaluator, without itself demonstrating deliberate gaming. This does not impugn
+the qualitative finding, which is large and consistent, but it means that
+the benchmark's role as the third-level judgment is weaker for any single
+reported configuration than for the method as a whole. The control the
+two papers recommend is cheap to state: before interpreting a result as
+robustness under optimization, demonstrate that the evaluator exerted
+enough causal pressure for gaming it to have been detectable, and report
+selection-flip rates alongside any aggregate.
+
+\subsection{State recoverability and trajectory recoverability}
+
+SSD is a weight update, which is the category Wang and Qi keep behind human
+approval because a learned verifier can fail silently there. Their measurements of rollback fidelity and of the reach of a deployed change correspond to a distinction that this essay names as follows.
+\emph{State recoverability} is the ability to reinstate the former model,
+prompt, tool, or skill. \emph{Trajectory recoverability} is the ability to
+undo the consequences produced while the new version was active. In their experiments restoring a saved version brought the original behavior back, whereas regenerating an undo did not: three regenerated undos left behavior measurably different from baseline, although they were close rewrites of one another and the platform's gate refused them, so they were measured and never installed. Separately, three admitted changes, deployed one at a time, altered the outcome of about one task in six beyond the run-to-run noise floor, and tasks flipped from pass to fail about as often as from fail to pass, so the average pass rate barely moved while the reach of the change did \cite{wang2026recoverability}. The evidence is preliminary: it comes from one platform, the rule was applied after the fact, only prompt edits were tested end to end on $\tau^2$-bench airline and retail tasks, the blast-radius probe used 50 airline tasks, and communication checks applied to only 4 of 80 test trajectories. Weight updates were not tested, and there is no study of repository-scale coding or of accumulated chains of individually reversible edits.
+
+For compression, state recoverability is the easy half. Retaining the base checkpoint permits restoration of the previous weights; reproducing the previous output distribution additionally requires the same inference configuration and relevant runtime state, and resuming training requires the optimizer and other training state. What retention
+cannot restore is the record of programs, decisions, and downstream
+training data produced by the compressed model before the defect was
+noticed. A reversible representation change and a causally reversible
+deployment are therefore different properties, and the verification
+boundary should be drawn after both: verified admission does not complete a
+compression claim unless exposure before correction is also bounded.
+
+\subsection{Attribution and the positive boundary}
+
+Two of the four papers mark the edges of the thesis from opposite sides.
+Terminal-RSI reports stagewise gains across five training stages of one
+27B model, but stage-specific rewards, learning rates, initialization,
+rewritten data, and critic inheritance all change together, and the authors
+acknowledge missing controls including independent seeds, a compute-matched
+baseline, and a clean inherited-versus-reset-critic comparison
+\cite{yang2026terminalrsi}. It is best described as benchmark improvement
+under evolving supervision. It does not identify recursive rewriting or
+critic inheritance as the cause, and later success does not show that
+earlier competence was preserved or responsible, which is the attribution
+gap this essay has argued for throughout.
+
+PAR is the one result that qualifies the thesis and does not merely strengthen it, though it has to be described precisely. By training a looped model so that recurrent iteration $k$ represents the state after operation $k$, and by rescaling the recurrent state at every iteration, a retrofitted 0.5B model trained on at most 32 operations reaches 95.5\% mean full-state accuracy at 512 operations on swap-$S_5$, with a standard deviation of 11.0 points over six seeds \cite{wang2026par}. That headline result is not a self-distillation result. Its intermediate targets come from a synthetic generator that supplies the exact state after every operation, so the compressed state is checked against ground truth at each step. The label-free variant, prefix self-distillation, uses an exponential-moving-average teacher reading a shorter prefix of the same problem to supply the intermediate targets, with only final answers labeled. It also extrapolates, reaching 85\% at 256 operations on the single-query task, but its swap-$S_5$ models were near zero at 512 operations until a positional-stretch fine-tune was added, after which individual runs ranged from 26.7\% to 99.7\%. Its intermediate targets are teacher predictions and not verified answers, and they can be trusted only because a prefix is itself a valid shorter problem of the kind the model has already learned. The two variants differ in how much is verified, but both occur where compression is densely checkable: the task has a stable compositional transition, progress aligns exactly with computation depth, and the state after every operation is exactly specified. The scope is also narrow. The swap-$S_5$ results with learned halting and prefix self-distillation were evaluated only on one 0.5B model, larger Qwen2.5 models show standard deviations of 33 to 43 points at the longest single-query horizon, the tasks are synthetic permutation word problems, and on graph reachability, where no canonical intermediate state exists, every recipe stays below 3.5 times the training length. PAR is therefore the boundary case and not a counterexample. Where intermediate semantics are specified and exhaustively checkable, much stronger transfer claims are justified, and the compressed state is continually constrained by a known correspondence. SSD on competitive programming has no such correspondence, which is why its results support the narrower reading of reorganized access.
+
+The refinement these papers support can be stated as four necessary safeguards for a consequential transformation to warrant a strong verification claim; satisfying them would not, by itself, establish every form of correctness or safety. The verifier must have demonstrated reference-relative validity on cases relevant to the transformation, and it must be shown to influence selection under the optimization regime being assessed; the second requirement makes a robustness test informative, but it does not substitute for the first, since verifier pressure and verifier strength are measured on different scales and neither bounds the other. An exact prior state must be preserved, together with the inference configuration and, where training may resume, the optimizer and other training state. Exposure before correction must be bounded. And the claimed correspondence between the compressed object and the task must be re-established after the transformation. No paper this week demonstrates
+repository-scale coding capability faithfully compressed into a smaller
+independent model, and the essay's claims remain about reorganization of
+reachable behavior, not about transfer of verified competence.
+
 \section{Limitations and Proposed Experiments}
 
 \subsection{Falsification Conditions}
@@ -203,11 +288,11 @@ Second, a decomposition of the corrupted-data training condition into coherent-p
 
 Third, a direct diversity measure, such as clustering sampled programs by algorithmic strategy before and after SSD, would test whether pass@5 gains reflect preserved branching structure, as the fork-preservation account predicts, or a collapse onto fewer strategies each individually more reliable, which would remain consistent with the paper's accuracy numbers but not with its diversity claim.
 
-Fourth, and most directly relevant to this essay's central claim, a four-way comparison would test the cross-scale bridge this essay's account depends on: the claim that local, next-token imitation of unverified sequences can improve task-level program correctness because of which local regularities the training data preserves, not because of any property of the complete programs as wholes. The comparison separates correctness, local coherence, prompt-conditioned relevance, and generic code exposure as distinct candidate sources of the improvement: one student trained on correct self-generated solutions, one on incorrect but syntactically valid solutions, one on coherent prefixes truncated immediately before failure, and one on prompt-matched sequences drawn from unrelated problems, with token count and optimization steps matched across all four. The reported corrupted-output experiment confounds these four factors; this design would not, and a result in which the truncated-coherent-prefix condition performs nearly as well as the correct-solutions condition would be direct evidence for the local-regularity account of the bridge, as opposed to either "the corrupted data taught it something anyway" or "the geometry did it" left unexamined at the level of mechanism.
+Fourth, and most directly relevant to this essay's central claim, a four-way comparison would test the cross-scale bridge this essay's account depends on: the claim that local, next-token imitation of unverified sequences can improve task-level program correctness because of which local regularities the training data preserves, not because of any property of the complete programs as wholes. The comparison separates correctness, local coherence, prompt-conditioned relevance, and generic code exposure as distinct candidate sources of the improvement: one student trained on correct self-generated solutions, one on incorrect but syntactically valid solutions, one on coherent prefixes truncated immediately before failure, and one on complete, correct solutions to unrelated problems drawn from the same code distribution, so that it supplies generic code exposure without problem-conditioned relevance, with token count and optimization steps matched across all four. The reported corrupted-output experiment confounds these four factors, and this design discriminates among them more sharply without eliminating every confound, since the four sets still differ in length, position, difficulty, and selection mechanism even when total tokens and optimization steps are matched. Prompts should be matched wherever possible, failure onset should be given an operational definition, and the relevance control should state whether the unrelated solutions retain their original prompts or are paired with mismatched ones, because those variants test different hypotheses. Given such controls, a result in which the truncated-coherent-prefix condition performs nearly as well as the correct-solutions condition would be direct evidence for the local-regularity account of the bridge, as opposed to either "the corrupted data taught it something anyway" or "the geometry did it" left unexamined at the level of mechanism.
 
 \section{Conclusion}
 
-The paper under discussion offers rare, well-controlled evidence that a model's aggregate accuracy can be substantially improved by retraining it on its own unverified output, surviving even severe degradation of the retraining data, and that its proposed lock and fork mechanism is well motivated though not yet fully isolated from adjacent explanations. Read through the vocabulary developed elsewhere in this program, the result is most economically interpreted as a reorganization of an already-present representational repertoire: without verification of individual training examples, the model is changed so that a fixed global control policy reaches more of the capability its prior distribution already appeared to support. The experiments do not rule out the formation of new features or procedural compressions during fine-tuning, but they do not require such expansion to explain the reported gains. The results support the hypothesis that a system can acquire a more productive continuation geometry from records whose individual correctness was never established because training can respond to recurrent local structure without evaluating the warranted truth of each complete artifact. That is a narrower claim than knowledge creation, better supported by the paper's own controls, and no less consequential for being narrower.
+The paper under discussion offers rare, well-controlled evidence that a model's aggregate accuracy can be substantially improved by retraining it on its own unverified output, surviving even severe degradation of the retraining data, and that its proposed lock and fork mechanism is well motivated though not yet fully isolated from adjacent explanations. Read through the vocabulary developed elsewhere in this program, the result is most economically interpreted as a reorganization of an already-present representational repertoire: without verification of individual training examples, the model is changed so that a fixed global control policy reaches more of the capability its prior distribution already appeared to support. The experiments do not rule out the formation of new features or procedural compressions during fine-tuning, but they do not require such expansion to explain the reported gains. The results support the hypothesis that a system can acquire a more productive continuation geometry from records whose individual correctness was never established because training can respond to recurrent local structure without evaluating the warranted truth of each complete artifact. That is a narrower claim than knowledge creation, better supported by the paper's own controls, and no less consequential for being narrower. Even successful post-training evaluation does not complete the verification of a consequential compression or deployment. One must also establish the verifier's reference-relative validity and its influence on selection, preserve an exact prior state, bound exposure before correction, and re-establish the claimed correspondence after every consequential transformation.
 
 \begin{thebibliography}{99}
 
@@ -305,6 +390,30 @@ Alfr\'ed R\'enyi.
 \newblock \emph{Proceedings of the Fourth Berkeley Symposium on
 Mathematical Statistics and Probability}, volume 1, pages 547--561,
 1961.
+
+\bibitem{wang2026recoverability}
+De Wang and Peng Qi.
+\newblock Recoverability and Verifier Strength: Two Measured Preconditions
+for Unattended Agent Self-Improvement.
+\newblock \emph{arXiv preprint arXiv:2610.27465}, 2026.
+
+\bibitem{lee2026ownverifier}
+Jonghyun Lee, Moonsu Kim, and Sunghwan Park.
+\newblock When Can You Trust an Agent's Own Verifier? Stress-Testing Counterfactual Rationale Verification Under Search Pressure and Oracle Access.
+\newblock \emph{arXiv preprint arXiv:2610.22779}, 2026.
+
+\bibitem{yang2026terminalrsi}
+Junyao Yang, Zongxia Li, Yucheng Shi, Zhongzhi Li, Ruhan Wang, Ruiwen Zhou,
+Haitao Mi, Shuicheng Yan, and Leowei Liang.
+\newblock Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine.
+\newblock \emph{arXiv preprint arXiv:2610.22192}, 2026.
+
+\bibitem{wang2026par}
+Pan Wang, Yihao Hu, Guangyuan Dong, Yitong Lin, Hang Wang, Zimi Liu,
+Zhihao Wen, Jianshe Li, Jiang-Ming Yang, Wei Wu, and Yongqi Tong.
+\newblock PAR: Progress-Aligned Recurrence for Length Generalization in
+State Tracking.
+\newblock \emph{arXiv preprint arXiv:2610.27628}, 2026.
 
 \end{thebibliography}
 
