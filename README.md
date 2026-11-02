@@ -1,4 +1,16 @@
-# laboratory
+# Laboratory
+
+[Consciousness as Constrained Continuation](https://standardgalactic.github.io/laboratory/consciousness-constrained-continuation.pdf)
+
+[Easy Consciousness and Its Unpaid Premises](https://standardgalactic.github.io/laboratory/easy-consciousness-unpaid-premises.pdf)
+
+* [Why Machine Consciousness Requires Irreversible Loss](https://standardgalactic.github.io/laboratory/neural-scope.html?track=consciousness) — *Audio Overview*
+
+[What a Network Edit Licenses](https://standardgalactic.github.io/laboratory/network-edit-licenses.pdf)
+
+* [Can AI Rewrite Neural Network Weights?](https://standardgalactic.github.io/laboratory/neural-scope.html?track=weights) — *Audio Overview*
+
+![](network-edit-cover.png)
 
 [Programmable Material Organization](https://standardgalactic.github.io/laboratory/programmable-material-organization.pdf)
 
