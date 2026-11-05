@@ -1,0 +1,1583 @@
+WEBVTT
+
+00:00.000 --> 00:07.420
+I want you to imagine, just for a second, trying to do your job today under a, well, a really bizarre set of conditions.
+
+00:07.600 --> 00:08.280
+Oh, this ought to be good.
+
+00:09.020 --> 00:16.860
+Right, so imagine that every single hour, right on the dot, your brain is just completely wiped with everything you've done that day.
+
+00:17.220 --> 00:18.180
+Just a total reset.
+
+00:18.360 --> 00:26.160
+Exactly. All your memories of the meetings you just sat through, the code you wrote, the subtle nuances of some project you're debugging, it is all gone.
+
+00:26.840 --> 00:28.280
+Sounds terrifying, honestly.
+
+00:28.280 --> 00:33.740
+It does. But right after the wipe, someone hands you a single, small, sticky note.
+
+00:34.240 --> 00:41.060
+And on it is this heavily condensed summary of what you supposedly did, written by you just seconds before your memory was erased.
+
+00:41.680 --> 00:43.640
+Okay. I see where you're going with this.
+
+00:43.760 --> 00:46.300
+So, the question for you is, could you keep working?
+
+00:47.020 --> 00:53.560
+Like, could you honestly make reliable, high-stakes decisions based on nothing but a chain of these sticky notes?
+
+00:54.220 --> 00:57.160
+I mean, it sounds like a premise for a psychological thriller, really.
+
+00:57.160 --> 01:06.120
+But the wild part is, right now, this is the exact operating reality for some of the most advanced artificial intelligence agents being deployed.
+
+01:06.340 --> 01:07.380
+It's just how we build them now.
+
+01:07.700 --> 01:11.300
+Yeah. We are intentionally engineering this kind of amnesia into them.
+
+01:11.780 --> 01:16.700
+We're forcing them to forget their own histories and rely on these heavily compressed summaries.
+
+01:16.700 --> 01:19.240
+All to save a buck and make them run faster.
+
+01:19.560 --> 01:23.080
+Exactly. All in the name of efficiency over long periods of time.
+
+01:23.540 --> 01:31.020
+So, today, we are doing a deep dive into a really fascinating and, frankly, kind of alarming clash in AI research.
+
+01:31.420 --> 01:32.600
+It's a huge debate right now.
+
+01:32.720 --> 01:33.320
+It really is.
+
+01:33.660 --> 01:38.820
+We're looking at a major paper by Belcak and colleagues called You Don't Need Long Context.
+
+01:38.820 --> 01:44.600
+And that paper basically argues that giving AI a massive memory is just a waste of compute.
+
+01:45.000 --> 01:47.040
+They're all in on the sticky note amnesia method.
+
+01:47.260 --> 01:47.480
+Right.
+
+01:48.300 --> 01:57.280
+But we are setting that against this brilliant, very pointed response essay from November 2026 by an independent researcher named Flyxion.
+
+01:57.540 --> 02:01.260
+It's titled Compaction and the Evidentiary Record.
+
+02:01.260 --> 02:04.100
+And Flyxion is waving a massive red flag here.
+
+02:04.740 --> 02:12.500
+They're pointing out what happens when an AI system fundamentally loses the ability to prove why it believes what it actually believes.
+
+02:12.640 --> 02:18.120
+The tension between those two positions, I mean, it is the defining engineering challenge of current AI development.
+
+02:18.340 --> 02:19.040
+Oh, without a doubt.
+
+02:19.480 --> 02:27.500
+Because on one side, developers have figured out how to keep autonomous agents running indefinitely without their memory requirements just, you know, exploding.
+
+02:27.500 --> 02:34.320
+But on the other side, Flyxion is asking us to look really closely at the catastrophic cost of throwing that memory away.
+
+02:34.500 --> 02:34.680
+Right.
+
+02:34.880 --> 02:42.460
+The core argument is that we are dangerously confusing a simple summary of events with an actual verifiable evidentiary record.
+
+02:42.900 --> 02:51.680
+And whether you're a developer writing this code, a manager deploying these agents, or just someone curious about how machines are reasoning about the world, you have to understand this distinction.
+
+02:52.220 --> 02:55.900
+Because confusing a summary for evidence isn't just some academic debate.
+
+02:55.900 --> 03:00.580
+It is a literal blueprint for spectacular, silent failures.
+
+03:01.280 --> 03:02.480
+Which is terrifying.
+
+03:03.100 --> 03:09.820
+So to understand why Flyxion is ringing the alarm, we first have to look at the massive engineering headache that Belcak's team was trying to cure.
+
+03:10.200 --> 03:12.880
+We need to talk about the context explosion.
+
+03:13.440 --> 03:13.600
+Right.
+
+03:13.760 --> 03:19.420
+So when we talk about autonomous agents, these are models tasked with actually doing things, not just chatting.
+
+03:19.860 --> 03:22.100
+They run into a wall incredibly fast.
+
+03:22.460 --> 03:24.680
+Their working memory just gets totally flooded.
+
+03:24.680 --> 03:25.680
+Exactly.
+
+03:26.240 --> 03:30.320
+Belcak's paper categorizes this flood into two distinct types of tasks.
+
+03:31.020 --> 03:34.080
+The first one is what they call the long horizon task.
+
+03:34.600 --> 03:39.540
+So think of an agent dropped into a massive software repository to fix a deeply buried bug, right?
+
+03:39.620 --> 03:40.640
+Like the SWE-bench test.
+
+03:40.820 --> 03:42.440
+Yeah, SWE-bench is the classic example here.
+
+03:43.020 --> 03:46.480
+The agent doesn't just read the prompt and magically spit out a patch.
+
+03:46.560 --> 03:48.000
+It has to operate a terminal.
+
+03:48.000 --> 03:52.280
+It runs a grep search, gets like 500 lines of irrelevant results.
+
+03:52.400 --> 03:52.660
+Right.
+
+03:52.740 --> 03:59.220
+It realizes its search term was too broad, writes a new bash command, opens the Python file, reads the wrong function entirely.
+
+03:59.560 --> 04:04.600
+It runs a test suite, watches the test fail, and writes a note to itself about what to try next.
+
+04:04.600 --> 04:08.600
+And over hours or days, that iterative loop just balloons.
+
+04:09.180 --> 04:12.220
+The agent is carrying the entire residue of its trial and error.
+
+04:12.740 --> 04:18.580
+Every single dead end, every traceback error, it's all occupying space in its active attention mechanism.
+
+04:18.580 --> 04:25.820
+It's dedicating massive compute resources just to hold onto the memory of a failed command from like three hours ago.
+
+04:26.180 --> 04:27.260
+It's incredibly inefficient.
+
+04:28.060 --> 04:31.080
+Now, the second category is the long input task.
+
+04:31.500 --> 04:33.600
+And this isn't about the residue of the past.
+
+04:33.800 --> 04:36.740
+It's about a massive data dump right at the very start.
+
+04:37.000 --> 04:42.620
+Like giving an agent 100 PDFs of legal contracts and telling it to cross-reference liability clauses.
+
+04:43.000 --> 04:43.440
+Exactly.
+
+04:43.620 --> 04:47.820
+In that scenario, the memory requirement is huge from the very first second.
+
+04:47.820 --> 04:54.680
+And keeping all of that data in the active attention mechanism of a transformer model, it's brutal on the hardware.
+
+04:55.300 --> 04:58.180
+Because the computational cost scales quadratically, right?
+
+04:58.520 --> 04:58.800
+Yes.
+
+04:58.920 --> 05:01.180
+It scales quadratically with the length of the input.
+
+05:01.440 --> 05:02.840
+It devours GPU memory.
+
+05:03.120 --> 05:05.920
+It limits the number of concurrent users you can support.
+
+05:06.140 --> 05:08.840
+And it introduces just massive latency.
+
+05:09.360 --> 05:13.000
+Which brings us to the You Don't Need Long Context proposal.
+
+05:13.000 --> 05:19.160
+Belcak's team looked at this quadratic nightmare and said, well, let's just sidestep it entirely.
+
+05:19.360 --> 05:21.420
+Let's keep the working memory strictly bounded.
+
+05:22.000 --> 05:22.260
+Right.
+
+05:22.680 --> 05:26.020
+When the agent's memory starts getting full, we just pause the whole system.
+
+05:26.380 --> 05:32.220
+The agent writes a summary of its progress, files the massive raw history away in some external database.
+
+05:32.220 --> 05:35.320
+And then we wipe its active memory clean.
+
+05:35.820 --> 05:39.200
+It starts the very next step with nothing but that freshly written sticky note.
+
+05:39.600 --> 05:39.880
+Okay.
+
+05:39.960 --> 05:47.640
+So this is like cleaning off a really messy desk by throwing everything into a filing cabinet and just keeping a single to-do list on the desk.
+
+05:47.640 --> 05:49.740
+That's a great way to picture it.
+
+05:50.140 --> 05:52.840
+And the architecture isn't entirely unprecedented.
+
+05:53.580 --> 06:02.480
+I mean, we saw early versions of this with frameworks like MemGPT, which tried to give language models an operating system-like memory hierarchy.
+
+06:03.400 --> 06:06.460
+Moving data between main memory and disk storage, essentially.
+
+06:06.840 --> 06:07.040
+Right.
+
+06:07.540 --> 06:12.080
+But Belcak's team pushed this compaction method to a whole new level of rigor.
+
+06:12.540 --> 06:15.840
+And honestly, we have to acknowledge their empirical success here.
+
+06:15.840 --> 06:17.900
+The numbers are pretty wild.
+
+06:18.280 --> 06:19.000
+They really are.
+
+06:19.540 --> 06:29.100
+When they deployed this periodic summarizing and resetting on long horizon coding tasks, the models actually performed better than when they had access to everything.
+
+06:29.800 --> 06:37.300
+On SWE-bench Verified, which, by the way, is a brutally hard test where agents resolve real historical GitHub issues,
+
+06:38.020 --> 06:44.940
+they found that using compaction raised the score for one model from 70.0% to 74.8%.
+
+06:44.940 --> 06:49.840
+And another model jumped from 84.4% to 88.8%.
+
+06:49.840 --> 06:52.000
+Which just feels so counterintuitive.
+
+06:52.400 --> 06:57.760
+You take away the agent's complete memory of what it just did, and it somehow becomes a better software engineer.
+
+06:58.240 --> 06:59.200
+I know. It sounds backwards.
+
+06:59.200 --> 07:02.180
+But it makes sense when you consider attention dilution.
+
+07:02.180 --> 07:09.720
+When an agent has, say, 100,000 tokens of failed terminal outputs in its head, it gets distracted.
+
+07:10.520 --> 07:13.040
+It literally loses the thread of the actual problem.
+
+07:13.200 --> 07:13.580
+Exactly.
+
+07:14.560 --> 07:18.240
+Forcing it to synthesize a tight summary acts as a focusing mechanism.
+
+07:18.600 --> 07:21.620
+It forces the agent to extract the signal from the noise.
+
+07:21.620 --> 07:24.340
+But they didn't stop there.
+
+07:24.760 --> 07:30.840
+They pushed this amnesia concept to an absolute extreme with something they called the single action regime.
+
+07:31.140 --> 07:33.720
+And this genuinely blew my mind when I read it.
+
+07:34.280 --> 07:37.340
+Oh, it is the ultimate stress test of the compaction theory.
+
+07:37.600 --> 07:42.360
+So in the single action regime, the agent performs exactly one action.
+
+07:42.720 --> 07:46.140
+Like just executing one single bash command in a terminal.
+
+07:46.140 --> 07:49.260
+Right. It observes the output of that one command.
+
+07:49.760 --> 07:52.720
+It writes an updated summary of its overall progress.
+
+07:53.200 --> 07:56.520
+And then the system completely terminates its instance.
+
+07:57.080 --> 07:58.760
+Right. It's just completely dead.
+
+07:59.140 --> 07:59.720
+Completely dead.
+
+08:00.120 --> 08:01.480
+The conversation history is wiped.
+
+08:02.100 --> 08:06.120
+For the very next action, the system spins up a brand new instance of the model.
+
+08:06.700 --> 08:07.940
+That is wild.
+
+08:08.580 --> 08:13.400
+It hands this fresh instance the original goal, the current state of the environment files,
+
+08:13.400 --> 08:15.640
+and the summary written by its predecessor.
+
+08:16.080 --> 08:16.600
+And that's it.
+
+08:16.880 --> 08:20.240
+It has to figure out what to do next based solely on that handoff document.
+
+08:20.740 --> 08:26.180
+It's like a relay race where every runner is born the second they receive a baton,
+
+08:26.300 --> 08:28.000
+and they die the second they pass it.
+
+08:28.360 --> 08:30.540
+And all they have is a note saying, keep running forward.
+
+08:31.760 --> 08:33.740
+But somehow, it actually works.
+
+08:34.400 --> 08:36.860
+Yeah, they tested this on Terminal-Bench 2.1,
+
+08:37.040 --> 08:40.600
+which requires some pretty complex navigation of command line interfaces.
+
+08:40.600 --> 08:48.940
+And one model operating in the single action regime saw its success rate jump from 47.2% to 51.8%.
+
+08:48.940 --> 08:54.080
+And it was doing this using median context of just 7,000 to 9,000 tokens.
+
+08:54.200 --> 08:56.500
+I mean, that is incredibly small.
+
+08:57.060 --> 09:02.280
+It proves you can sustain highly functional problem solving across repeated total resets.
+
+09:02.280 --> 09:09.280
+And they saw similar successes with long input tasks, too, on the BABILong benchmark,
+
+09:09.540 --> 09:13.520
+which is basically a test of finding a needle in a massive haystack of noise.
+
+09:14.080 --> 09:15.900
+They didn't even load the whole text.
+
+09:16.700 --> 09:20.840
+They gave the agent shell tools to selectively read and search external files instead.
+
+09:21.200 --> 09:21.420
+Right.
+
+09:22.080 --> 09:26.620
+And accuracy shot up from roughly 70% to 94%.
+
+09:26.620 --> 09:30.880
+So on paper, the engineering argument for compaction looks almost unassailable.
+
+09:30.880 --> 09:34.760
+But, and this is a huge but, we need to pause here.
+
+09:35.080 --> 09:39.520
+Because Flyxion throws a massive bucket of cold water on these benchmark scores.
+
+09:40.060 --> 09:42.520
+And it's something anyone working in AI really needs to hear.
+
+09:42.760 --> 09:44.700
+Yes, the crucial SWE-bench caveat.
+
+09:44.780 --> 09:45.640
+This is so important.
+
+09:46.260 --> 09:48.300
+Before Belcak's paper was even published,
+
+09:48.640 --> 09:53.460
+OpenAI released a very quiet but very important audit of SWE-bench Verified.
+
+09:53.580 --> 09:55.660
+And they found some pretty serious flaws, right?
+
+09:56.080 --> 09:58.620
+They discovered fundamental flaws in the benchmark itself.
+
+09:58.620 --> 10:03.200
+Some of the tests had broken environments where the code couldn't actually be tested properly.
+
+10:03.920 --> 10:08.480
+But far more concerning, they found significant evidence of training contamination.
+
+10:08.980 --> 10:12.640
+Meaning the models had already seen the test answers during their pre-training phase.
+
+10:12.980 --> 10:13.460
+Exactly.
+
+10:14.100 --> 10:19.400
+If the GitHub issues from SWE-bench were included in the massive data set scraped from the internet to train these models,
+
+10:19.640 --> 10:22.820
+well, the agents aren't actually solving the problem in real time.
+
+10:22.980 --> 10:25.300
+They're just regurgitating a patch they already memorized.
+
+10:25.300 --> 10:33.520
+Right. And because of that contamination, OpenAI announced in early 2026 that they were halting all reporting on SWE-bench Verified.
+
+10:33.720 --> 10:34.000
+Wow.
+
+10:34.400 --> 10:44.460
+So when Belcak reports a jump to 88.8%, we really cannot take that as an absolute pristine measure of general software engineering intelligence.
+
+10:44.820 --> 10:46.140
+The test itself is dirty.
+
+10:46.360 --> 10:46.640
+Okay.
+
+10:46.640 --> 10:54.120
+But as Flyxion points out, a dirty test doesn't necessarily ruin the specific relative comparison Belcak is making.
+
+10:54.360 --> 10:57.720
+Oh, because the contamination is a constant on both sides of the test.
+
+10:57.840 --> 10:58.280
+Precisely.
+
+10:58.860 --> 11:02.780
+The absolute number is muddy, but the relative delta remains highly informative.
+
+11:03.560 --> 11:07.980
+If a model scores 84% on a contaminated test using a massive context window,
+
+11:07.980 --> 11:14.700
+and scores 88% on that exact same contaminated test using the compacted single-action regime.
+
+11:15.320 --> 11:19.600
+The fact that the amnesiac version performed as well or better is still a vital data point.
+
+11:19.840 --> 11:20.180
+Exactly.
+
+11:20.820 --> 11:22.340
+So the engineering feat is real.
+
+11:22.900 --> 11:26.420
+The model can navigate a complex environment using nothing but a sticky note.
+
+11:26.940 --> 11:27.200
+Okay.
+
+11:27.320 --> 11:29.680
+But why are we actually doing this?
+
+11:29.680 --> 11:36.700
+If I'm an engineering manager, why am I going through the massive architectural headache of building external databases
+
+11:36.700 --> 11:40.240
+and orchestrating relay races between ephemeral agents?
+
+11:40.240 --> 11:44.120
+Well, the Belcak paper leans heavily on an economic argument.
+
+11:44.820 --> 11:50.200
+They assert that running open models at a massive context window, like 256,000 tokens,
+
+11:50.740 --> 11:57.460
+costs roughly 3.6 to 7 times more than running them at a small 16,000 token context.
+
+11:57.460 --> 12:00.180
+They are pitching this as a huge cost-saving measure.
+
+12:00.480 --> 12:00.760
+Exactly.
+
+12:01.180 --> 12:02.480
+And logically, that makes sense.
+
+12:02.740 --> 12:07.420
+Processing fewer tokens should equal less compute, which should equal a cheaper bill.
+
+12:08.000 --> 12:13.380
+But doing the math on how cloud providers actually bill for this stuff, it doesn't always translate, does it?
+
+12:13.720 --> 12:15.380
+It rarely translates cleanly.
+
+12:16.140 --> 12:21.840
+And Flyxion highlights a totally fascinating anomaly hidden right in the data tables of the Belcak paper itself.
+
+12:22.180 --> 12:24.080
+The LongBench v2 data, right?
+
+12:24.380 --> 12:24.680
+Yes.
+
+12:24.680 --> 12:29.800
+When they looked at that data, the optimized costs for running their own hardware fell sharply.
+
+12:30.400 --> 12:36.960
+But when they looked at the nominal retail cost, meaning the price a standard user would pay to an API provider
+
+12:36.960 --> 12:42.380
+like Anthropic or OpenAI to run a closed model, the cost actually went up.
+
+12:42.600 --> 12:43.000
+Wait, wait, wait.
+
+12:43.160 --> 12:47.400
+The whole point was to save money, but the actual retail bill increased.
+
+12:47.400 --> 12:47.920
+Yeah.
+
+12:48.560 --> 12:53.280
+Under the short context, heavily compacted configuration, the retail price for one model
+
+12:53.280 --> 12:56.780
+family rose from $79.20 to $90.20.
+
+12:57.240 --> 13:02.620
+You might switch to this cheaper method thinking you're saving a fortune, but your cloud bill
+
+13:02.620 --> 13:04.580
+at the end of the month actually goes up.
+
+13:04.680 --> 13:06.660
+That is a massive operational failure.
+
+13:06.880 --> 13:07.440
+It really is.
+
+13:07.900 --> 13:12.420
+Let's break down why that happens, because it goes to the core of how token economics work
+
+13:12.420 --> 13:12.860
+right now.
+
+13:13.440 --> 13:18.620
+API providers charge wildly different rates for reading text versus generating text.
+
+13:19.340 --> 13:20.300
+Input tokens are cheap.
+
+13:20.700 --> 13:22.780
+Output tokens are incredibly expensive.
+
+13:23.280 --> 13:23.580
+Exactly.
+
+13:24.080 --> 13:27.200
+And the gap is widening because of technologies like prompt caching.
+
+13:27.660 --> 13:32.500
+If you load 100,000 tokens of context into an API, the provider caches it.
+
+13:32.500 --> 13:38.120
+And if your next request uses that same context, you pay a fraction of a cent, because the hardware
+
+13:38.120 --> 13:41.220
+doesn't have to recompute the attention over the whole document.
+
+13:41.940 --> 13:44.400
+Input is practically free in a cached session.
+
+13:44.960 --> 13:50.700
+But when you use Belcak's compaction method, you are forcing the model to constantly generate
+
+13:50.700 --> 13:51.120
+text.
+
+13:51.380 --> 13:56.340
+Every 15 steps, or every single step in the single-action regime, the agent has to write
+
+13:56.340 --> 13:59.360
+a dense, comprehensive summary of everything it just did.
+
+13:59.360 --> 14:04.480
+And generating those output tokens requires full forward passes through the neural network.
+
+14:04.920 --> 14:08.940
+It's computationally heavy, and API providers margin you heavily on it.
+
+14:09.160 --> 14:10.740
+Plus, you have the retrieval penalty.
+
+14:11.220 --> 14:16.760
+When the agent inevitably realizes its summary is missing details, it has to query the external
+
+14:16.760 --> 14:20.960
+database, pull the raw logs, and then inject them back into its context.
+
+14:21.340 --> 14:25.400
+So you are paying to reread text you already processed.
+
+14:25.640 --> 14:26.000
+Exactly.
+
+14:26.000 --> 14:32.160
+So while compaction definitively saves VRAM on the back-end hardware, which is great if
+
+14:32.160 --> 14:37.520
+you own the server farm, it is entirely unproven as a cost-saving measure for the end-user
+
+14:37.520 --> 14:39.700
+paying retail API rates.
+
+14:39.960 --> 14:41.160
+It's a total false economy.
+
+14:41.640 --> 14:45.220
+Which means the justification for compaction cannot rest solely on economics.
+
+14:45.360 --> 14:47.980
+It has to rest on performance and reliability.
+
+14:47.980 --> 14:54.500
+And this is exactly where Flyxion shifts the essay from an engineering critique into this
+
+14:54.500 --> 14:56.420
+profound epistemological warning.
+
+14:57.460 --> 14:59.460
+Epistemology, the theory of knowledge.
+
+15:00.060 --> 15:03.380
+How do we know what we know, and how do we prove it?
+
+15:03.900 --> 15:08.880
+This brings us to the two fundamental definitions that anchor Flyxion's entire argument.
+
+15:08.880 --> 15:09.340
+Right.
+
+15:09.560 --> 15:12.360
+The working state versus the evidentiary record.
+
+15:12.780 --> 15:17.740
+If you take nothing else away from this discussion, take away the difference between these two concepts.
+
+15:18.440 --> 15:21.180
+Let's start with definition one, the working state.
+
+15:21.560 --> 15:25.660
+This is a bounded representation held in the model's immediate context.
+
+15:26.080 --> 15:27.840
+It is designed to be lossy.
+
+15:28.180 --> 15:32.900
+It's a highly compressed summary that contains just enough information for the agent to figure
+
+15:32.900 --> 15:34.780
+out the expected next steps of a task.
+
+15:34.780 --> 15:41.880
+It's small, it's mutable, it's constantly revised, and it throws away anything deemed currently irrelevant.
+
+15:42.320 --> 15:43.220
+It's the sticky note.
+
+15:43.880 --> 15:48.080
+Or, to use another analogy, it's the number at the top of your banking app that says you have $400.
+
+15:48.940 --> 15:51.680
+Okay, so then definition two is the evidentiary record.
+
+15:52.080 --> 15:52.320
+Right.
+
+15:52.720 --> 15:59.500
+This is an append-only, immutable, complete account of all actions, observations, dead ends, and system states.
+
+15:59.600 --> 16:01.140
+It is the raw history.
+
+16:01.140 --> 16:05.920
+It is the ledger of every single deposit and withdrawal you have ever made at that bank.
+
+16:06.340 --> 16:06.700
+Exactly.
+
+16:07.300 --> 16:09.160
+And the relationship between the two is everything.
+
+16:09.960 --> 16:14.400
+You trust the $400 balance on your screen, the working state, only because you know the
+
+16:14.400 --> 16:18.340
+bank can mathematically derive it from the unalterable transaction ledger.
+
+16:18.780 --> 16:19.920
+The evidentiary record.
+
+16:20.660 --> 16:22.760
+If their servers crash, they don't just guess your balance.
+
+16:23.120 --> 16:25.660
+They rebuild it from the ground up by replaying the history.
+
+16:26.140 --> 16:29.120
+It's the principle of event sourcing in database architecture.
+
+16:29.120 --> 16:34.000
+And we see it in cryptographic systems, too, like in tamper-evident logging.
+
+16:34.620 --> 16:38.440
+A Merkle tree's current state hash is a highly compressed working state.
+
+16:38.820 --> 16:42.380
+But its validity is guaranteed because you can trace the cryptographic proofs all the
+
+16:42.380 --> 16:44.680
+way down to the individual historical transactions.
+
+16:45.180 --> 16:47.400
+The derivation is mathematically rigorous.
+
+16:48.120 --> 16:52.600
+Flyxion uses another brilliant analogy here regarding how humans manage knowledge,
+
+16:52.760 --> 16:54.460
+specifically in scholarly writing.
+
+16:54.680 --> 16:55.540
+Oh, I love this one.
+
+16:55.540 --> 17:01.780
+So if I write a 5,000-word historical essay on the Civil War, that published essay is a
+
+17:01.780 --> 17:02.480
+working state.
+
+17:02.980 --> 17:03.040
+Right.
+
+17:03.140 --> 17:08.600
+It is a lossy, polished summary derived from months of reading primary sources, analyzing
+
+17:08.600 --> 17:10.100
+data, scribbling messy notes.
+
+17:10.700 --> 17:13.220
+Your notebook is the evidentiary record.
+
+17:13.880 --> 17:15.600
+And this is how human knowledge scales.
+
+17:15.720 --> 17:16.900
+We have to compress.
+
+17:17.340 --> 17:21.000
+If someone reads a review of my essay, they are consuming a summary of a summary.
+
+17:21.000 --> 17:26.460
+But what separates rigorous scholarship from fiction is that the evidentiary record survives.
+
+17:27.340 --> 17:31.560
+If another historian challenges a specific claim in your essay, you don't just point to
+
+17:31.560 --> 17:32.340
+the previous paragraph.
+
+17:32.960 --> 17:36.780
+I go to my files, I pull out the primary source document, and I prove the derivation.
+
+17:37.240 --> 17:37.640
+Exactly.
+
+17:38.080 --> 17:41.380
+But a summary, by its very nature, discards information.
+
+17:42.280 --> 17:46.280
+You couldn't possibly include every single historical document you read in a short essay.
+
+17:46.280 --> 17:51.280
+And because a summary discards things, it cannot answer questions about the things it threw
+
+17:51.280 --> 17:51.580
+away.
+
+17:52.080 --> 17:55.440
+And that is the danger with Belcak's compacted agents.
+
+17:56.160 --> 18:01.000
+We are treating their highly lossy natural language summaries as if they were cryptographic
+
+18:01.000 --> 18:01.380
+ledgers.
+
+18:02.120 --> 18:06.180
+We are asking a sticky note to adjudicate future unanticipated problems.
+
+18:06.940 --> 18:09.040
+Okay, let me push back on this a bit.
+
+18:09.560 --> 18:11.200
+Because Belcak's team isn't stupid.
+
+18:11.700 --> 18:14.140
+They clearly recognize that summaries drop details.
+
+18:14.140 --> 18:18.080
+The paper actually uses a coin toss tool example to admit this.
+
+18:18.560 --> 18:19.680
+Yes, the coin toss analogy.
+
+18:20.500 --> 18:25.740
+They say, look, if you ask an agent to toss a coin a thousand times and update a summary
+
+18:25.740 --> 18:30.520
+after every toss, eventually it's going to stop recording the exact sequence of heads
+
+18:30.520 --> 18:31.000
+and tails.
+
+18:31.360 --> 18:32.580
+It loses the atomic data.
+
+18:32.760 --> 18:33.020
+Right.
+
+18:33.100 --> 18:36.260
+It's just going to say, I've tossed a coin 500 times, roughly 50% heads.
+
+18:36.820 --> 18:42.320
+So to solve that, Belcak's architecture specifically keeps the complete conversation history
+
+18:42.320 --> 18:42.920
+externally.
+
+18:42.920 --> 18:44.300
+The filing cabinet exists.
+
+18:44.420 --> 18:44.720
+Exactly.
+
+18:45.180 --> 18:49.040
+The agent has shell tools to search the raw logs if it really needs to know what toss
+
+18:49.040 --> 18:49.980
+number 42 was.
+
+18:50.580 --> 18:51.960
+Doesn't that completely solve the problem?
+
+18:52.220 --> 18:53.820
+Why is Flyxion so worried?
+
+18:53.940 --> 18:54.980
+The record isn't deleted.
+
+18:55.160 --> 18:56.160
+It's just in a different folder.
+
+18:56.740 --> 18:58.820
+That is the pivotal defense of compaction.
+
+18:58.820 --> 19:04.660
+But Flyxion dismantles it by pointing out a massive, fatal gap in the logic.
+
+19:05.620 --> 19:09.240
+Having an evidentiary record sitting in a filing cabinet somewhere does not magically
+
+19:09.240 --> 19:13.520
+ensure that the working state on the desk is an accurate reflection of it.
+
+19:13.880 --> 19:17.120
+So having access to the truth doesn't mean the summary embodies the truth.
+
+19:17.120 --> 19:17.580
+Exactly.
+
+19:18.120 --> 19:23.300
+This leads to the gap between what a summary is prompted to do and what it actually does.
+
+19:24.100 --> 19:24.120
+Okay.
+
+19:24.200 --> 19:26.840
+So how did Belcak try to ensure the summaries were accurate?
+
+19:26.980 --> 19:29.300
+They didn't just casually say, summarize this, did they?
+
+19:29.720 --> 19:30.040
+No.
+
+19:30.220 --> 19:32.700
+They used very disciplined system prompts.
+
+19:33.320 --> 19:38.120
+They explicitly commanded the model, separate your concrete observations from your unverified
+
+19:38.120 --> 19:38.760
+hypotheses.
+
+19:38.760 --> 19:41.380
+Preserve the exact file paths.
+
+19:41.920 --> 19:43.540
+Record verification outcomes.
+
+19:44.220 --> 19:45.640
+Retain your failed approaches.
+
+19:46.500 --> 19:48.080
+That sounds like a really rigorous protocol.
+
+19:48.540 --> 19:51.140
+You're telling the AI to act like a meticulous scientist.
+
+19:51.760 --> 19:57.800
+It sounds rigorous until you realize the fundamental difference between an instruction and a verification.
+
+19:58.900 --> 20:04.220
+Just because you command an AI to keep its doubts in the summary doesn't mean it actually will.
+
+20:04.780 --> 20:07.660
+You gave it a rule, but you didn't run an audit to see if it complied.
+
+20:07.660 --> 20:07.980
+Right.
+
+20:08.260 --> 20:15.640
+And this leads to what I think is the most terrifying concept in the entire essay, the upward drift in apparent certainty.
+
+20:15.980 --> 20:17.000
+Oh, this is fascinating.
+
+20:17.600 --> 20:19.000
+Tell us about the upward drift.
+
+20:19.400 --> 20:24.180
+It's drawn straight from information theory and how large language models compress text.
+
+20:24.740 --> 20:28.100
+Think about the mechanical pressure on an agent generating a summary.
+
+20:28.780 --> 20:33.000
+Its primary directive is to reduce token count, to save space.
+
+20:33.000 --> 20:37.460
+And mathematically, an assertion is almost always shorter than a qualification.
+
+20:38.280 --> 20:38.660
+Exactly.
+
+20:39.160 --> 20:42.420
+If I say the code works perfectly, that's four words.
+
+20:42.740 --> 20:50.220
+If I say the code appears to compile on Linux, but I haven't tested the edge cases on the Windows build yet, that's way longer.
+
+20:50.220 --> 20:57.540
+So when an LLM summarizes, it tends to strip out hedging language and context just to hit its compression targets.
+
+20:58.240 --> 21:00.220
+The maybe becomes an is.
+
+21:00.580 --> 21:03.000
+The hypothesis becomes a hard fact.
+
+21:03.620 --> 21:09.340
+Now imagine playing a game of telephone with yourself, where every time you pass the message, your only goal is to make it shorter.
+
+21:10.000 --> 21:10.280
+Right.
+
+21:10.420 --> 21:11.300
+Think about playing telephone.
+
+21:11.820 --> 21:15.820
+Generation one is, I think the code works on Linux, but I haven't tested it.
+
+21:15.820 --> 21:19.760
+Generation two, code works on Linux, Windows pending.
+
+21:20.180 --> 21:21.880
+Generation three, code works.
+
+21:22.820 --> 21:27.140
+Three compressions later, the AI's working state just says, the code works perfectly.
+
+21:27.480 --> 21:29.940
+The qualification was deleted simply to save space.
+
+21:30.580 --> 21:33.700
+The agent drops the derivation and keeps the conclusion.
+
+21:33.700 --> 21:42.300
+And because this compaction happens in a continuous loop, dozens or hundreds of times in a long horizon task, these compressions compound.
+
+21:42.760 --> 21:44.020
+They reinforce one another.
+
+21:44.140 --> 21:45.320
+They reinforce one another.
+
+21:45.660 --> 21:52.300
+This upward drift in certainty means the agent slowly becomes blindly confident about things it has absolutely no evidence for.
+
+21:52.300 --> 22:04.000
+Proposition one states that two different AI working states can achieve the exact same high score on a benchmark test, but fail completely differently when probed with subsequent historical questions.
+
+22:04.360 --> 22:05.320
+Let me visualize this.
+
+22:05.660 --> 22:10.140
+We have agent A and agent B. They are both taking the SWE-bench test.
+
+22:10.900 --> 22:13.300
+They both successfully patch the bug and score an 88%.
+
+22:13.840 --> 22:15.800
+The benchmark declares them equally brilliant.
+
+22:15.800 --> 22:31.400
+But underneath the hood, agent A meticulously preserved its evidentiary record, while agent B succumbed to the upward drift, deleted all its qualifications to save space, and is now basically operating on pure unearned hubris.
+
+22:31.640 --> 22:32.140
+Exactly.
+
+22:32.760 --> 22:38.120
+Success on the main task does not prove the AI preserved the evidence needed for unexpected future questions.
+
+22:38.300 --> 22:45.260
+The benchmark only evaluates the final output, not the preservation relation between the final state and the history.
+
+22:45.800 --> 22:51.620
+It could be throwing away massive amounts of crucial context, but as long as it crosses the finish line, it looks successful.
+
+22:51.880 --> 22:52.120
+Right.
+
+22:52.760 --> 22:55.980
+But wait, I'm going back to my pushback about the filing cabinet.
+
+22:56.180 --> 23:08.140
+If agent B drops the original qualification from its summary, but that qualification is still sitting safely in the external evidentiary record, can't the AI just go look it up?
+
+23:08.620 --> 23:10.080
+It could, theoretically.
+
+23:10.540 --> 23:12.480
+But in practice, it almost certainly won't.
+
+23:12.480 --> 23:18.100
+And this brings us to the core vulnerability of external memory architectures, the latency of evidence.
+
+23:18.940 --> 23:20.200
+The latency of evidence.
+
+23:20.900 --> 23:27.720
+The idea that moving data out of active memory prevents permanent deletion, but introduces this massive new risk.
+
+23:28.180 --> 23:32.580
+Recoverability now depends entirely on the AI having a reason to search for it.
+
+23:32.760 --> 23:33.180
+Exactly.
+
+23:33.180 --> 23:37.040
+To understand this, we have to look at the lost in the middle phenomenon.
+
+23:37.200 --> 23:39.060
+From the Liu et al. paper, right.
+
+23:39.260 --> 23:39.480
+Yes.
+
+23:39.860 --> 23:48.840
+They demonstrated that even within a single active context window, language models struggle to use relevant evidence if it's buried in the middle of a massive prompt.
+
+23:49.100 --> 23:53.480
+They remember the beginning and the end, but have a massive blind spot in the center.
+
+23:53.680 --> 23:53.860
+Right.
+
+23:53.860 --> 24:05.360
+Now, Flyxion argues that moving information entirely out of the context window and into a database takes that problem and magnifies it across an architectural boundary.
+
+24:05.360 --> 24:12.660
+The archived evidence is safe, but it is entirely inert unless the agent explicitly fires a retrieval tool.
+
+24:13.160 --> 24:14.680
+And why wouldn't it fire the tool?
+
+24:15.000 --> 24:16.500
+Because it lacks the cue.
+
+24:16.760 --> 24:17.840
+The trigger is missing.
+
+24:17.840 --> 24:28.500
+Like the missing cue in our coding example, if the summary says the fix works and drops the qualification only on one platform, the AI has no cue to search the archive.
+
+24:28.500 --> 24:33.540
+It just looks at its sticky note, sees total success, and charges ahead.
+
+24:34.020 --> 24:35.920
+It assumes the fix works everywhere.
+
+24:37.140 --> 24:46.040
+It deploys broken code, not because it hallucinated, but because the absence of the qualification removed the very cue needed to recover it.
+
+24:46.040 --> 24:48.860
+That is a brilliant and terrifying insight.
+
+24:49.380 --> 24:50.780
+The omission hides itself.
+
+24:51.020 --> 24:53.840
+By dropping the warning, you drop the reason to look for the warning.
+
+24:54.700 --> 24:57.980
+Flyxion gives a devastating example regarding editorial collaboration.
+
+24:58.800 --> 25:01.900
+Imagine a multi-agent system writing a document.
+
+25:02.700 --> 25:07.860
+Agent 1 proposes a major change, logs it in the archive, updates the summary.
+
+25:08.120 --> 25:08.380
+Okay.
+
+25:08.380 --> 25:15.480
+Agent 2 reviews the change, rejects it because it has a factual error, logs the rejection in the archive, and updates the summary.
+
+25:16.040 --> 25:18.840
+But the summary is getting too long.
+
+25:19.460 --> 25:19.940
+Exactly.
+
+25:20.460 --> 25:24.640
+So during the next compaction, the system compresses the editorial history.
+
+25:25.240 --> 25:32.260
+It retains the note that a change was proposed, but to save space, it drops the vital addendum that the change was subsequently rejected.
+
+25:32.600 --> 25:33.160
+Oh no.
+
+25:33.160 --> 25:39.660
+So Agent 3 comes along, reads the summary, sees a proposed change, and thinks it still needs to be implemented.
+
+25:40.040 --> 25:40.600
+Precisely.
+
+25:41.260 --> 25:45.860
+The agent reinserts the rejected error, completely unaware that it is overriding a previous correction.
+
+25:46.780 --> 25:52.300
+And because the summary doesn't say, check if this was rejected, Agent 3 never queries the archive.
+
+25:52.300 --> 25:57.500
+The expert connects this to human factors research, which makes this feel so tangible.
+
+25:58.320 --> 26:01.160
+They cite Linda Skitka's work on automation bias.
+
+26:01.520 --> 26:01.740
+Yes.
+
+26:02.120 --> 26:05.300
+Automation bias is well documented in aviation and medicine.
+
+26:06.100 --> 26:15.360
+Highly trained human operators will completely ignore blaring real-world evidence of a problem if their automated diagnostic screens don't explicitly point it out to them.
+
+26:15.800 --> 26:20.320
+We stare at the dashboard telling us everything is fine and ignore the smoke coming out of the engine.
+
+26:20.320 --> 26:28.040
+Exactly. And Flyxion argues, we are building AI agents that suffer from a machine analog of automation bias.
+
+26:28.620 --> 26:32.440
+They become blindly reliant on their own highly lossy summaries.
+
+26:32.780 --> 26:37.940
+If the summary doesn't explicitly cue them to look at the archive, they ignore the archive completely.
+
+26:38.260 --> 26:42.160
+Even if the archive contains the exact data needed to prevent a massive failure.
+
+26:42.520 --> 26:50.240
+So we've established this isn't standard hallucination, and it's not strictly forgetting because the data is perfectly preserved on the hard drive.
+
+26:50.320 --> 26:52.180
+It is a failure of noticing.
+
+26:53.020 --> 26:54.120
+The information exists.
+
+26:54.520 --> 26:56.080
+The access path exists.
+
+26:56.540 --> 26:57.580
+But the trigger is missing.
+
+26:58.040 --> 27:04.080
+So, if benchmarks are only testing if the AI gets the final answer right, they are totally blind to this problem.
+
+27:04.560 --> 27:07.800
+How do we actually measure if an AI is preserving the truth?
+
+27:07.800 --> 27:10.960
+This is where Flyxion moves from theory to engineering.
+
+27:11.900 --> 27:16.500
+The second half of the essay outlines four concrete procedures for measuring preservation.
+
+27:17.300 --> 27:18.840
+This is the meat of the solution.
+
+27:19.220 --> 27:27.200
+Let's walk the listener meticulously through these four checks, because this is how you operationalize that missing preservation relation.
+
+27:27.880 --> 27:30.400
+Check number one, reference-bearing summaries.
+
+27:30.400 --> 27:32.760
+The premise here is structural.
+
+27:33.620 --> 27:37.640
+Flyxion argues that a summary can no longer just be a free-floating block of text.
+
+27:38.340 --> 27:47.720
+Every single factual assertion must carry a machine-readable pointer, a citation, directly to the specific portion of the evidentiary record that supports it.
+
+27:48.380 --> 27:53.060
+So every sticky note needs a footnote telling you exactly which drawer in the filing cabinet to check.
+
+27:53.220 --> 27:53.640
+Exactly.
+
+27:54.440 --> 27:59.660
+Flyxion suggests using established provenance vocabularies to structure this, like a PROV-DM.
+
+27:59.660 --> 28:00.740
+PROV-DM, right.
+
+28:01.460 --> 28:09.280
+So an LLM generating a summary would have to output structured data where the assertion is explicitly linked to the original terminal output in the archive.
+
+28:09.740 --> 28:12.160
+It forces the AI to show its work.
+
+28:12.880 --> 28:17.200
+If a summary makes a claim without a pointer, the system instantly flags it as a defect.
+
+28:17.520 --> 28:19.600
+That's a massive architectural shift.
+
+28:20.420 --> 28:21.480
+What is check number two?
+
+28:21.820 --> 28:26.340
+Check two is the round-trip audit, and it's inspired by the QAGS methodology.
+
+28:26.640 --> 28:27.360
+QAGS, right.
+
+28:27.360 --> 28:29.400
+Question answering for generation evaluation.
+
+28:29.660 --> 28:30.040
+Yes.
+
+28:30.480 --> 28:36.980
+The traditional QAGS works by generating a summary, then using a model to generate questions based on that summary.
+
+28:37.580 --> 28:39.160
+But Flyxion flips this entirely.
+
+28:39.860 --> 28:47.180
+The core rule here is that you must generate the historical questions from the original evidentiary record, not the compacted summary.
+
+28:47.460 --> 28:49.260
+That is such a crucial distinction.
+
+28:49.940 --> 28:54.520
+If you write the questions based on the summary, you're only testing what the summary managed to remember.
+
+28:54.920 --> 28:56.900
+You're just inheriting its blind spots.
+
+28:56.900 --> 28:58.940
+You have to ask about the failed attempts.
+
+28:59.280 --> 29:01.320
+The exceptions buried deep in the raw logs.
+
+29:01.700 --> 29:03.180
+And then how do you run the test?
+
+29:03.180 --> 29:11.640
+You ask the agent to answer those questions twice, once using the full history and once using the compacted state with archive access.
+
+29:11.780 --> 29:12.500
+And you compare the two.
+
+29:12.500 --> 29:12.940
+Right.
+
+29:13.140 --> 29:19.020
+You compare the two to detect that upward drift in certainty across what they call K number of compactions.
+
+29:19.820 --> 29:27.680
+If the agent using the summary gives a confident but incorrect answer because it didn't bother to search the archive, you have proven the upward drift.
+
+29:28.440 --> 29:28.780
+Brilliant.
+
+29:28.780 --> 29:32.600
+Okay, check number three, the constraint persistence test.
+
+29:33.460 --> 29:34.840
+This addresses negative knowledge.
+
+29:35.580 --> 29:42.300
+The test works by introducing a rule early on, like a user prohibition saying, do not use this specific code library.
+
+29:42.800 --> 29:46.020
+And then seeing if the AI still obeys it after multiple compactions.
+
+29:46.900 --> 29:51.540
+Constraints are sneaky because if an AI forgets a constraint, the code might still compile.
+
+29:51.900 --> 29:56.820
+The benchmark might score 100%, but it silently violated a core requirement.
+
+29:56.820 --> 30:00.840
+Exactly. The summary dropped the negative rule to save space.
+
+30:01.140 --> 30:04.060
+The essay mentions the World Model MCP project here, right?
+
+30:04.240 --> 30:05.800
+Yes, they experimented with this.
+
+30:06.420 --> 30:13.920
+They actively re-injected constraints that carry provenance back into the agent's active context after every single compaction cycle.
+
+30:14.220 --> 30:22.020
+And re-injecting those rules yielded a massive 10.2 percentage point gain on SWE-bench Verified over 49 paired instances.
+
+30:22.400 --> 30:25.700
+It did, but we have to apply a rigorous caveat here.
+
+30:25.700 --> 30:31.840
+Flyxion notes that this World Model MCP data comes from unpeer-reviewed software documentation.
+
+30:32.400 --> 30:35.020
+It's a proof of concept, not a replicated paper.
+
+30:35.420 --> 30:35.820
+Good to know.
+
+30:36.200 --> 30:41.540
+But the logic holds, audit for constraint persistence to see if your compaction is destroying negative boundaries.
+
+30:42.140 --> 30:46.100
+Finally, check number four, contrastive omission detection.
+
+30:46.540 --> 30:48.940
+This directly measures the latency of evidence.
+
+30:49.300 --> 30:49.920
+How do you do it?
+
+30:49.920 --> 30:55.780
+You take a compacted state, and you secretly delete one material qualification from it.
+
+30:56.060 --> 30:57.380
+You scrub the cue.
+
+30:57.780 --> 31:00.600
+You erase front-end untested from the sticky note.
+
+31:00.760 --> 31:00.940
+Right.
+
+31:01.420 --> 31:05.600
+The evidence still exists perfectly in the external archive, but the pointer is gone.
+
+31:06.280 --> 31:12.280
+Then you observe if the AI behaves differently with and without archive access on a task that requires that knowledge.
+
+31:12.480 --> 31:12.860
+Oh, wow.
+
+31:12.860 --> 31:15.960
+This proves whether retrieval actually repairs omissions.
+
+31:16.220 --> 31:16.740
+Exactly.
+
+31:17.120 --> 31:23.040
+If it fails the same way, regardless of archive access, you've empirically proven it never bothered to initiate a search.
+
+31:23.560 --> 31:25.620
+You've proven the failure of noticing.
+
+31:26.160 --> 31:32.360
+These four checks completely bridge the gap between getting the job done and getting the job done while maintaining the truth.
+
+31:32.800 --> 31:34.440
+But we have to talk about the limits here.
+
+31:34.600 --> 31:34.820
+Yes.
+
+31:35.200 --> 31:37.540
+The limits, Flyxion acknowledges, are massive.
+
+31:37.920 --> 31:39.400
+The biggest one is financial.
+
+31:40.020 --> 31:42.160
+These checks cost a ton of money.
+
+31:42.160 --> 31:48.560
+Running the full history to generate audit questions basically defeats the whole cost-saving purpose of compaction in the first place.
+
+31:48.660 --> 31:48.980
+Exactly.
+
+31:49.520 --> 31:51.820
+Plus, this essay is a theoretical specification.
+
+31:52.560 --> 31:56.760
+They didn't actually build these checks and run them against Belcak's open-source models independently.
+
+31:57.500 --> 31:59.960
+It's an experimental design, not the final results.
+
+32:00.200 --> 32:05.940
+But it's a vital provocation to the industry, which brings us to a final recap of everything we've unpacked today.
+
+32:06.160 --> 32:09.340
+The architectural feat of context compaction cannot be ignored.
+
+32:09.340 --> 32:14.300
+Keeping agents running on long tasks by resetting their memory is incredible.
+
+32:14.940 --> 32:20.540
+But we cannot mistake a highly lossy working state for a reliable evidentiary record.
+
+32:20.960 --> 32:22.700
+A sticky note is not a ledger.
+
+32:23.500 --> 32:33.680
+If AIs are susceptible to this upward drift, losing nuance and becoming overly certain of their compressed summaries, they will fail catastrophically when we need to audit why they made a decision.
+
+32:33.680 --> 32:37.860
+And that leaves me with a final, slightly uncomfortable thought for you to mull over.
+
+32:38.520 --> 32:41.420
+We are building AI systems that mimic how humans operate, right?
+
+32:42.160 --> 32:43.860
+Summarizing the past to survive the present.
+
+32:44.580 --> 32:46.400
+It's a very human architecture of amnesia.
+
+32:46.800 --> 32:47.640
+But look at us.
+
+32:48.380 --> 32:56.320
+If AIs lose their nuance and become wildly overconfident because they lose the cue to search for the truth, what does that say about us?
+
+32:56.320 --> 33:02.880
+In our era of infinite information, are we living entirely in a lossy working state?
+
+33:03.100 --> 33:04.780
+Just scrolling through summaries of summaries?
+
+33:05.320 --> 33:05.720
+Exactly.
+
+33:06.040 --> 33:09.820
+Have we completely lost the cue to check our own evidentiary records?
+
+33:10.080 --> 33:11.060
+It's a profound parallel.
+
+33:12.040 --> 33:14.540
+The failure of noticing isn't just a machine problem anymore.
+
+33:14.660 --> 33:15.360
+It really isn't.
+
+33:16.000 --> 33:18.860
+Thank you for joining us on this deep dive into the source material.
+
+33:19.320 --> 33:21.020
+Keep questioning the summaries you are handed.
+
+33:21.540 --> 33:22.180
+Until next time.
+
+33:22.180 --> 33:52.160
+We'll see you next time.
+

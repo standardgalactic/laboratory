@@ -1,5 +1,9 @@
 # Laboratory
 
+[Compaction and the Evidentiary Record](https://standardgalactic.github.io/laboratory/compaction.pdf)
+
+* [The Danger of AI Context Compaction](https://standardgalactic.github.io/laboratory/compaction-visualizer.html)
+
 [Consciousness as Constrained Continuation](https://standardgalactic.github.io/laboratory/consciousness-constrained-continuation.pdf)
 
 [Easy Consciousness and Its Unpaid Premises](https://standardgalactic.github.io/laboratory/easy-consciousness-unpaid-premises.pdf)

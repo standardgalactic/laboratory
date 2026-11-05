@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compaction and the Evidentiary Record</title>
+<style>
+:root{color-scheme:dark;--phosphor:#9ae6bc;--dim:#78958a;--line:#2c4238}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#070c0b;color:#d2ded5;font:14px ui-monospace,Consolas,monospace}main{max-width:900px;margin:auto;padding:clamp(18px,4vw,42px);display:flex;flex-direction:column;gap:18px}header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{font-size:10px;letter-spacing:3px;color:var(--dim)}h1{font:normal clamp(21px,4vw,30px)/1.3 Georgia,serif;margin:8px 0 0}select,button{font:inherit;background:#101c16;color:#b9dcc5;border:1px solid var(--line);border-radius:4px;min-height:44px;padding:9px 12px;cursor:pointer}button:hover{border-color:var(--phosphor)}:focus-visible{outline:2px solid var(--phosphor);outline-offset:3px}select{max-width:100%}a{color:#c9b88e;text-underline-offset:4px;width:fit-content;font-size:12px}.scope{position:relative;width:100%;height:clamp(210px,43svh,420px);background:radial-gradient(ellipse,#12251b,#08100c 75%);border:1px solid #355441;border-radius:12px;overflow:hidden}.scope:after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 3px,#0002 3px 4px);opacity:.45}canvas{display:block;width:100%;height:100%}.scope-label{position:absolute;left:15px;top:13px;color:#607e69;font-size:9px;letter-spacing:2px;pointer-events:none}#captions{min-height:95px;padding:0 8px;display:flex;align-items:center;justify-content:center;text-align:center;font:clamp(19px,3vw,26px)/1.5 Georgia,serif;white-space:pre-line}.seekrow{display:flex;align-items:center;gap:12px}input{accent-color:#9ae6bc}#seek{flex:1;width:100%;min-width:60px;min-height:35px}#time{font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}#play{min-width:95px}#message{font-size:11px;color:var(--dim);line-height:1.6;min-height:18px}audio{width:100%}[hidden]{display:none!important}footer{color:#536e5c;font-size:10px;text-align:center;padding:8px;letter-spacing:1px}@media(max-width:500px){.controls{gap:6px}.controls button{flex:1}#speed{flex:1}header select{width:100%}#captions{min-height:110px}.scope{height:32svh;min-height:210px}} 
+</style>
+</head>
+<body><main>
+<header><div><div class="brand">COMPACTION AND THE EVIDENTIARY RECORD / AUDIO ESSAY</div><h1 id="title">Compaction and the Evidentiary Record</h1></div></header>
+<div class="scope"><span class="scope-label" id="signal">X–Y / STANDBY</span><canvas id="scope" aria-label="Audio-driven Lissajous-style oscilloscope"></canvas></div>
+<div id="captions" aria-label="Subtitles">Press play to begin.</div>
+<audio id="audio" preload="metadata" controls></audio>
+<div id="custom" hidden><div class="seekrow"><input id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Playback position"><span id="time">0:00 / 0:00</span></div>
+<div class="controls"><button id="play">Play</button><button id="back" aria-label="Back ten seconds">−10 s</button><button id="forward" aria-label="Forward ten seconds">+10 s</button><select id="speed" aria-label="Playback speed"><option value="0.75">0.75×</option><option selected value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button id="cc" aria-pressed="true">CC on</button><button id="share">Copy link</button></div></div>
+<div id="message" role="status"></div><a id="essay" href="https://standardgalactic.github.io/laboratory/compaction.pdf" target="_blank" rel="noopener noreferrer">Read the essay PDF ↗</a><footer>FLYXION / COMPACTION AND THE EVIDENTIARY RECORD</footer>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),audio=$('audio');
+const tracks={compaction:{title:'Compaction and the Evidentiary Record',stem:'The_Danger_of_AI_Context_Compaction',essay:'https://standardgalactic.github.io/laboratory/compaction.pdf'}};
+let current='',cues=[],cc=true,context=null,analyser=null,samples=null,frame=0,request=0,controller=null;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+function stamp(s){const p=s.trim().split(':').map(Number);return p.length>=2&&p.length<=3&&p.every(Number.isFinite)?p.reduce((a,v)=>a*60+v,0):NaN}
+function parseVtt(text){const out=[];for(const block of text.replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n').split(/\n\s*\n/)){const lines=block.split('\n');if(/^(NOTE|STYLE|REGION)(\s|$)/.test(lines[0]))continue;const i=lines.findIndex(l=>l.includes('-->'));if(i<0)continue;const p=lines[i].split('-->'),start=stamp(p[0]),end=stamp(p[1].trim().split(/\s+/)[0]);if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)continue;const decoder=document.createElement('textarea');decoder.innerHTML=lines.slice(i+1).join('\n').replace(/<[^>]*>/g,'');out.push({start,end,text:decoder.value})}return out.sort((a,b)=>a.start-b.start)}
+function subtitles(){const t=audio.currentTime;$('captions').textContent=cc?(cues.filter(c=>c.start<=t&&t<c.end).map(c=>c.text).join('\n')||(!t&&audio.paused?'Press play to begin.':'')):''}
+function format(t){if(!Number.isFinite(t))return '0:00';const s=Math.floor(t);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function progress(){const d=audio.duration;$('time').textContent=format(audio.currentTime)+' / '+format(d);$('seek').disabled=!(d>0&&Number.isFinite(d));$('seek').value=d>0&&Number.isFinite(d)?audio.currentTime/d*1000:0;subtitles()}
+function urlTrack(){const key=new URL(location.href).searchParams.get('track');return Object.hasOwn(tracks,key)?key:'compaction'}
+async function choose(key,update=true){
+ if(!Object.hasOwn(tracks,key))key='compaction';
+ const token=++request;if(controller)controller.abort();controller=new AbortController();
+ audio.pause();current=key;cues=[];$('title').textContent=tracks[key].title;document.title=tracks[key].title;$('essay').href=tracks[key].essay;
+ audio.src=tracks[key].stem+'.mp3';audio.load();audio.playbackRate=Number($('speed').value);progress();
+ if(update){const u=new URL(location.href);u.searchParams.set('track',key);history.pushState(null,'',u)}
+ $('message').textContent='Loading subtitles…';
+ try{const r=await fetch(tracks[key].stem+'.vtt',{signal:controller.signal});if(!r.ok)throw Error();const parsed=parseVtt(await r.text());if(!parsed.length)throw Error();if(token!==request)return;cues=parsed;$('message').textContent='';subtitles()}
+ catch(e){if(token!==request||e.name==='AbortError')return;$('message').textContent='Subtitles unavailable. Keep the matching VTT beside this page and serve it over HTTP.'}
+ draw();
+}
+async function initSignal(){if(!context){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;context=new AC();analyser=context.createAnalyser();analyser.fftSize=2048;samples=new Uint8Array(analyser.fftSize);const source=context.createMediaElementSource(audio);source.connect(analyser);analyser.connect(context.destination)}if(context.state==='suspended')await context.resume()}
+async function play(){const token=request;try{await initSignal()}catch(e){$('message').textContent='Signal display unavailable.'}if(token!==request)return;try{await audio.play()}catch(e){if(token===request)$('message').textContent='Playback unavailable. Check that the selected MP3 is beside this page.'}}
+$('play').onclick=()=>audio.paused?play():audio.pause();
+window.addEventListener('popstate',()=>choose(urlTrack(),false));
+$('back').onclick=()=>audio.currentTime=Math.max(0,audio.currentTime-10);$('forward').onclick=()=>{if(Number.isFinite(audio.duration))audio.currentTime=Math.min(audio.duration,audio.currentTime+10)};
+$('seek').oninput=()=>{if(Number.isFinite(audio.duration))audio.currentTime=Number($('seek').value)/1000*audio.duration};$('speed').onchange=()=>audio.playbackRate=Number($('speed').value);
+$('cc').onclick=()=>{cc=!cc;$('cc').setAttribute('aria-pressed',String(cc));$('cc').textContent=cc?'CC on':'CC off';subtitles()};
+$('share').onclick=async()=>{const u=new URL(location.href);u.searchParams.set('track',current);try{await navigator.clipboard.writeText(u.href);$('message').textContent='Track link copied.'}catch(e){$('message').textContent='Track link: '+u.href}};
+audio.addEventListener('play',()=>{$('play').textContent='Pause';$('signal').textContent='X–Y / SIGNAL';draw()});for(const e of ['pause','ended'])audio.addEventListener(e,()=>{$('play').textContent='Play';$('signal').textContent='X–Y / '+(audio.ended?'COMPLETE':'STANDBY');draw()});
+for(const e of ['timeupdate','seeked','loadedmetadata','durationchange'])audio.addEventListener(e,progress);
+audio.addEventListener('error',()=>{$('message').textContent='Audio unavailable: '+tracks[current].stem+'.mp3'});
+const canvas=$('scope'),g=canvas.getContext('2d');
+function draw(){
+ cancelAnimationFrame(frame);const r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2),w=r.width,h=r.height;
+ if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr)}
+ g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);g.strokeStyle='#2b463433';g.lineWidth=1;g.beginPath();const spacing=30;for(let x=w/2%spacing;x<w;x+=spacing){g.moveTo(x,0);g.lineTo(x,h)}for(let y=h/2%spacing;y<h;y+=spacing){g.moveTo(0,y);g.lineTo(w,y)}g.stroke();g.strokeStyle='#43664b66';g.beginPath();g.moveTo(w/2,0);g.lineTo(w/2,h);g.moveTo(0,h/2);g.lineTo(w,h/2);g.stroke();
+ g.strokeStyle='#a4efb9';g.lineWidth=1.25;g.shadowColor='#70f29b';g.shadowBlur=9;g.beginPath();
+ const active=analyser&&!audio.paused&&!audio.ended&&!reduced.matches;
+ if(active){analyser.getByteTimeDomainData(samples);const lag=29,count=samples.length-lag;const radius=Math.min(w*.42,h*.42);for(let i=0;i<count;i++){const x=w/2+(samples[i]-128)/128*radius,y=h/2+(samples[i+lag]-128)/128*radius;if(i)g.lineTo(x,y);else g.moveTo(x,y)}}else{g.moveTo(w/2-2,h/2);g.lineTo(w/2+2,h/2)}
+ g.stroke();g.shadowBlur=0;
+ if(!audio.paused&&!audio.ended&&!document.hidden&&!reduced.matches)frame=requestAnimationFrame(draw);
+}
+window.addEventListener('resize',draw);document.addEventListener('visibilitychange',draw);reduced.addEventListener('change',draw);
+audio.controls=false;$('custom').hidden=false;choose(urlTrack(),false);
+</script></body></html>
+
