@@ -1,0 +1,246 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{1.08}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newcommand{\Ind}{\perp\!\!\!\perp}
+\newcommand{\R}{\mathbb{R}}
+
+\title{Closure Conditions on the Description of Bounded Systems\\[0.4em]\large Markov Blankets in Graphical Models and Dynamical Systems}
+\author{Flyxion\\Independent Researcher}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent The term Markov blanket is used in a statistical sense, and in dynamical and biological extensions of it. In the theory of graphical models it names a set of variables that screens one variable from all others under a fixed joint distribution. In the free energy literature it names a partition of the state space of a dynamical system into external, sensory, active, and internal states, whose defining requirement is the same conditional independence, accompanied by restrictions on the flow, and it is read as the boundary of a self-organizing system. This essay separates the setting and the interpretation from the statistical condition, states the additional conditions needed for synchronization, and shows that statistical screening is not guaranteed by sparse dynamical coupling alone. For a linear stationary diffusion the precision matrix of the stationary law and the drift matrix are related by $B=(D+Q)\Pi$, where $Q$ is an antisymmetric circulation operator, so that absence of direct coupling across a partition neither implies nor is implied by conditional independence across it unless $Q$ is constrained. Conditional independence statements are invariant under blockwise bijections and not under mixing across blocks, which makes the blanket a property of a description together with a law, not of a system taken alone. Nested blankets, the delegation of viability from parts to wholes as one candidate criterion of individuation, and the temporal completion of boundary states at asynchronous interfaces are then treated as further conditions that screening does not supply. The thesis is that interpreting a statistical blanket as the boundary of an asynchronous, self-maintaining individual requires additional, separately assessable conditions concerning dynamical compatibility, completion, and individuation. The result is a reading of the blanket as a closure condition: a statement that a chosen description is closed under the projection that discards the screened block given the blanket, whose physical and psychological interpretation depends on assumptions that the formalism does not itself deliver.
+\end{abstract}
+
+\newpage
+\section{Introduction}
+
+A Markov blanket is among the few formal notions from probabilistic graphical modelling to have crossed into the vocabulary of theoretical biology, cognitive science, and the philosophy of mind. Its original definition is modest. Given a collection of random variables and a joint distribution over them, the blanket of one variable is a set of other variables conditional on which the first is independent of everything else~\cite{pearl1988}. The notion earns its place in inference because it identifies a sufficient set of conditioning variables for updating a belief about a single variable, and for that purpose it is exact and uncontroversial.
+
+The extension of the term to living systems proceeds by a different route. A system is described by a stochastic differential equation, its state space is partitioned into four classes, and the conditional independence of two of the classes given the remaining two is taken to express the fact that the system is bounded, that its interior has no direct access to its exterior, and that the interior therefore carries a model of the exterior~\cite{friston2013,friston2019,kirchhoff2018}. Each step of this extension carries an assumption, and the literature has shown that several of the assumptions are not innocent~\cite{biehl2021,aguilera2022,raja2021,bruineberg2022}. The purpose of the present essay is not to adjudicate between proponents and opponents but to isolate, as precisely as the mathematics allows, what the blanket condition says, what it requires of the underlying dynamics, which transformations of description it survives, and what must be added to it before it can individuate a subject.
+
+The organizing claim is that the blanket is a closure condition. It asserts that the conditional law of one block of variables, given a second block, does not depend on a third, a statement given precise form in Definition 2. Whether this closure holds is a fact about a law and a partition. Whether the partition corresponds to anything that deserves the name of a boundary is a further question, and the answer cannot be read off from the closure alone. The word closure is used below in three related but distinct senses, which are kept apart: statistical closure of an external block over an internal block given a blanket, as in Definition 2; closure of a description under the projection that discards the screened variables, which is the sense of the title and is exactly the statistical closure relative to a chosen set of variables; and closure of viability conditions, which concerns the persistence of a system, is not a statistical notion, and enters only in the discussion of nesting and constraints in Section 6. The thesis of the essay is that interpreting a statistical blanket as the boundary of an asynchronous, self-maintaining individual requires additional, separately assessable conditions, which the essay enumerates. The central mathematical demonstration is Theorem 1 together with the two examples that follow it.
+
+\section{The Graphical Definition}
+
+Let $X=(X_1,\dots,X_n)$ be a random vector with joint law $P$. For a set of indices $A$ write $X_A$ for the corresponding subvector.
+
+\begin{definition}
+A set $M\subseteq[n]\setminus\{i\}$ is a Markov blanket of $i$ under $P$ if $X_i \Ind X_R \mid X_M$, where $R=[n]\setminus(\{i\}\cup M)$. A Markov boundary of $i$ is a blanket that has no proper subset which is also a blanket.
+\end{definition}
+
+Three facts about this definition matter for what follows. First, every index has a blanket, namely the set of all other indices, so the existence of a blanket is vacuous and the content of any blanket claim lies entirely in a restriction on size or structure. Second, when $P$ has a strictly positive density the intersection property of conditional independence holds and the Markov boundary is unique~\cite{dawid1979,lauritzen1996}. This uniqueness is a property of the distribution and not of any graph chosen to represent it. In a distribution that factorizes over a directed acyclic graph, the parents, the children, and the other parents of the children of a variable form a blanket, and in a distribution that factorizes over an undirected graph the neighbours form a blanket, but neither set need be minimal if the graph contains edges that are statistically redundant. The graphical sets coincide with the Markov boundary under faithfulness. Third, without positivity the boundary need not be unique. If $X_1$ and $X_2$ are almost surely equal and $X_3$ depends on them, then $\{1\}$ and $\{2\}$ are each boundaries of $3$, and no fact about $P$ selects between them.
+
+The definition extends from single variables to blocks. If the variables are partitioned into blocks $(\eta,b,\mu)$, the statement that $b$ is a blanket separating $\eta$ from $\mu$ is the statement $\eta\Ind\mu\mid b$. For a strictly positive $C^2$ density $p$ on a Cartesian product of connected open Euclidean domains, this is equivalent to the vanishing of the mixed second derivatives of $\log p$ across the two blocks, which for a Gaussian law is the vanishing of the corresponding block of the precision matrix $\Pi=\Sigma^{-1}$~\cite{lauritzen1996}. The Gaussian case therefore provides a transparent test: a blanket exists across a partition exactly when the cross-block entries of the precision matrix vanish.
+
+\begin{definition}
+Let $(\eta,b,\mu)$ be a partition of the variables into three blocks. The block $\eta$ is closed over $\mu$ given $b$ if, for every bounded measurable function $u$,
+\[
+\mathbb E[u(\eta)\mid b,\mu]=\mathbb E[u(\eta)\mid b]\quad\text{almost surely.}
+\]
+\end{definition}
+
+This is equivalent to $\eta\Ind\mu\mid b$, and it states exactly the closure used throughout: adding information about $\mu$ to the specified information $b$ leaves every prediction of an external observable unchanged. The condition concerns predictions under a fixed law. The relation is symmetric in $\eta$ and $\mu$, so that the phrase closed over is not a directional causal claim. It does not assert autonomous dynamics, causal isolation of the blocks, or closure under coarse-graining, and the sections that follow treat each of these as a separate matter.
+
+\section{The Dynamical Definition}
+
+The free energy literature specializes the construction to dynamical systems. A state $x\in\R^n$ evolves according to
+\[
+dx = f(x)\,dt + \sqrt{2D}\,dW,
+\]
+with $D$ a symmetric positive definite diffusion matrix and $W$ a Wiener process, and the process is assumed to possess a stationary density $p$. The state is partitioned as $x=(\eta,s,a,\mu)$, with external states $\eta$, sensory states $s$, active states $a$, and internal states $\mu$, and the pair $b=(s,a)$ is called the blanket~\cite{friston2019}. The defining requirement is the conditional independence
+\[
+\eta \Ind \mu \mid b
+\]
+under $p$. A second requirement, usually stated as a property of the flow, is that external states do not directly drive active or internal states and that internal states do not directly drive sensory or external states, so that the drift of each block depends only on a restricted set of other blocks.
+
+The two requirements are of different kinds, and the literature has not always kept them apart. The conditional independence is a property of the stationary law, which is a single object at a single time. The coupling restriction is a property of the drift, which governs how the process moves. For a process out of equilibrium the stationary law is not determined by the drift's sparsity pattern alone, because the stationary law depends on how the drift's rotational component interacts with the diffusion. This is the content of the next section.
+
+\section{Sparse Coupling and Conditional Independence Are Different Conditions}
+
+The stationary density is characterized by the vanishing divergence of the stationary probability current,
+\[
+j=fp-D\nabla p,\qquad \nabla\!\cdot j=0,
+\]
+and the content of the circulation is the part of $f$ that sustains a nonzero $j$. Decompositions of the drift into a dissipative part and a circulating part exist under regularity, domain, and boundary assumptions that the stationary-process literature treats explicitly~\cite{ao2004,dacosta2021}, and a universal nonlinear representation is not needed here. The linear case, in which every quantity can be written in closed form, already exhibits the phenomenon.
+
+\begin{theorem}
+Let $dx=-Bx\,dt+\sqrt{2D}\,dW$ with $D$ symmetric positive definite and $B$ having eigenvalues of positive real part. The stationary law is $\mathcal N(0,\Sigma)$ with $B\Sigma+\Sigma B^{\top}=2D$. Writing $\Pi=\Sigma^{-1}$, there is a unique antisymmetric matrix $Q$ such that
+\[
+B=(D+Q)\,\Pi .
+\]
+\end{theorem}
+
+\begin{proof}
+Define $Q=B\Sigma-D$. Then $Q+Q^{\top}=B\Sigma+\Sigma B^{\top}-2D=0$, so $Q$ is antisymmetric, and $B=(D+Q)\Sigma^{-1}$ by construction. Uniqueness follows because $Q$ is determined by $B$ and $\Sigma$. This is the decomposition of Kwon, Ao, and Thouless~\cite{kwon2005}.
+\end{proof}
+
+The theorem makes the relation between the two conditions explicit. Partition the coordinates into the blocks $\eta$, $b$, and $\mu$, and suppose that $D$ is block diagonal. The cross-block entry of the drift is
+\[
+B_{\eta\mu}=(D+Q)_{\eta\eta}\Pi_{\eta\mu}+Q_{\eta b}\Pi_{b\mu}+Q_{\eta\mu}\Pi_{\mu\mu}.
+\]
+Two consequences follow immediately.
+
+\begin{corollary}
+If $Q=0$, which is exactly the detailed balance condition $B\Sigma=\Sigma B^{\top}=D$, then $\Pi=D^{-1}B$ and $\Pi_{\eta\mu}=D_{\eta\eta}^{-1}B_{\eta\mu}$. In that case the blanket condition $\eta\Ind\mu\mid b$ holds if and only if the drift has no direct coupling between $\eta$ and $\mu$.
+\end{corollary}
+
+\begin{corollary}
+If $Q\neq 0$ is allowed, the general equivalence between the two properties is lost, although particular circulation structures preserve it. The drift may have $B_{\eta\mu}=B_{\mu\eta}=0$ while $\Pi_{\eta\mu}\neq 0$, because $\Pi=(D+Q)^{-1}B$ and the inverse of $D+Q$ is in general dense. Conversely, the blanket condition $\Pi_{\eta\mu}=0$ is compatible with $B_{\eta\mu}=Q_{\eta b}\Pi_{b\mu}+Q_{\eta\mu}\Pi_{\mu\mu}\neq 0$, which can occur when the circulation couples the blocks directly or through the blanket, although the terms may also cancel. Here $\Pi_{b\mu}$, $\Pi_{\mu\mu}$, and the $Q$ blocks are blocks of the partitioned matrices, and the products are block products.
+\end{corollary}
+
+\begin{example}
+Take three scalar coordinates $(\eta,b,\mu)$, $D=I$, and the tridiagonal drift matrix
+\[
+B=\begin{pmatrix} 1 & 1 & 0\\ -1 & 1 & 1\\ 0 & -1 & 2\end{pmatrix}.
+\]
+The entries coupling $\eta$ and $\mu$ directly are both zero. The symmetric part of $B$ is $\operatorname{diag}(1,1,2)$, which is positive definite, so every eigenvalue of $B$ has positive real part and the process is stable. Solving the Lyapunov equation gives exactly
+\[
+\Pi=\frac{1}{1273}\begin{pmatrix} 1323 & -59 & 74\\ -59 & 1419 & -291\\ 74 & -291 & 2350\end{pmatrix},
+\qquad
+Q=\frac{1}{23}\begin{pmatrix} 0 & 22 & 2\\ -22 & 0 & 16\\ -2 & -16 & 0\end{pmatrix},
+\]
+so that $\Pi_{\eta\mu}=74/1273\approx 0.058$ does not vanish. The coordinates $\eta$ and $\mu$ are conditionally dependent given $b$ even though neither drives the other. The matrix $Q$ is the antisymmetric operator entering the stationary current, which here is $j(x)=-Q\Pi x\,p(x)$, and not the current itself. The coefficient $Q_{\eta\mu}=2/23$ therefore belongs to the stationary current and not to the drift, and it is not a claim of direct dynamical influence of $\mu$ on $\eta$.
+\end{example}
+
+\begin{example}
+The converse direction is exhibited by choosing the stationary precision and the circulation first. Take $D=I$,
+\[
+\Pi=\begin{pmatrix} 2&1&0\\ 1&2&1\\ 0&1&2\end{pmatrix},\qquad
+Q=\begin{pmatrix} 0&0&1\\ 0&0&0\\ -1&0&0\end{pmatrix},
+\]
+so that $\Pi$ is positive definite with $\Pi_{\eta\mu}=0$ and $Q$ is antisymmetric. Set $\Sigma=\Pi^{-1}$ and $B=(I+Q)\Pi$, which gives
+\[
+B=\begin{pmatrix} 2&2&2\\ 1&2&1\\ -2&0&2\end{pmatrix}.
+\]
+Then $B\Sigma+\Sigma B^{\top}=(I+Q)+(I+Q)^{\top}=2I$ with $\Sigma=\Pi^{-1}$, so $\mathcal N(0,\Sigma)$ is stationary for the diffusion, and $\Pi_{\eta\mu}=0$ gives $\eta\Ind\mu\mid b$ under it. The matrix $\Pi^{1/2}B\Pi^{-1/2}=\Pi^{1/2}(I+Q)\Pi^{1/2}$ has symmetric part $\Pi$, which is positive definite, so every eigenvalue of $B$ has positive real part, because the numerical range of a matrix with positive definite symmetric part lies in the open right half-plane, and the process is stable. The drift entries $B_{\eta\mu}=2$ and $B_{\mu\eta}=-2$ do not vanish. The blanket condition therefore holds although the drift couples the exterior and the interior directly, and the two examples together show that the absence of direct internal-external drift coupling is neither necessary nor sufficient for the blanket condition away from detailed balance. The examples use three blocks and do not instantiate every sensory-active restriction of the four-block architecture of Section 3. Three blocks are the minimal setting for the first failure: with two scalar coordinates, block-diagonal diffusion, and no blanket, vanishing coupling in both directions makes the drift diagonal, and the Lyapunov equation then has the diagonal solution $\Sigma_{ii}=D_{ii}/B_{ii}$, which is the unique solution under stability, so independence follows. The examples establish the independence of the statistical condition from this weaker restriction, and the cited literature supplies the connection to more elaborate architectures~\cite{biehl2021,heins2022}.
+\end{example}
+
+The first example shows that a system whose interior and exterior never interact directly can fail to have a blanket in the statistical sense, and the second example shows that the converse implication also fails. The sparse coupling that is often offered as the physical justification for the blanket condition is therefore neither necessary nor sufficient for it away from detailed balance. This agrees in substance with the findings of Aguilera and colleagues for sparsely coupled linear systems, and with the technical objections of Biehl and colleagues to the passage from coupling structure to conditional independence~\cite{aguilera2022,biehl2021}. Heins and Da Costa derive conditions under which sparse coupling does yield a blanket for Gaussian steady states, conditions that depend on the form of the solenoidal flow and that are consistent with the compatibility requirement stated here~\cite{heins2022}. Weaker notions, such as the weak blankets of Sakthivadivel, tolerate controlled exchange between the blocks and are argued to be ubiquitous in high-dimensional systems~\cite{sakthivadivel2022}. They answer a real difficulty, but they do so by weakening the claim, and a weakened claim should be read as a weakened claim.
+
+The result also locates the content of the physical assumption exactly. For the linear stationary diffusion considered here, the blanket condition holds when the drift $B$, the diffusion $D$, the circulation $Q$, and the stationary precision $\Pi$ are jointly compatible with $B=(D+Q)\Pi$ and with $\Pi_{\eta\mu}=0$, and this compatibility constrains all four together and not the circulation alone. The second example constructs a blanket by choosing $\Pi$ and $Q$ first and deriving $B$. Compatibility of this kind is an assumption about the organization of the dynamics, and it can be tested in a given system. It is not a consequence of the partition.
+
+\section{Relativity to Description}
+
+Conditional independence is a statement about specific random variables. It does not survive arbitrary changes of variables, and which changes it survives can be stated exactly.
+
+\begin{proposition}
+Suppose $\eta\Ind\mu\mid b$ under a joint law. Let $g$, $h$, and $k$ be measurable bijections with measurable inverses, or more generally measurable maps injective on the support of the law with a measurable inverse on the image, acting separately on $\eta$, $\mu$, and $b$. Then $g(\eta)\Ind h(\mu)\mid k(b)$.
+\end{proposition}
+
+\begin{proof}
+The $\sigma$-algebra generated by $k(b)$ equals the $\sigma$-algebra generated by $b$, and likewise for $g(\eta)$ and $\eta$ and for $h(\mu)$ and $\mu$. Conditional independence given a $\sigma$-algebra is a statement about the $\sigma$-algebras generated by the variables, so it is unchanged. The same argument covers the more general maps named in the statement.
+\end{proof}
+
+The blanket structure is thus invariant under the group of blockwise relabellings. It is not invariant under transformations that mix blocks. Take a zero-mean Gaussian law with $\Pi=\mathrm{diag}(\lambda_\eta,\lambda_b,\lambda_\mu)$ and $\lambda_\eta\neq\lambda_\mu$, for which the blanket holds trivially. Rotating the $(\eta,\mu)$ plane by an angle $\theta$ produces a cross entry of size $(\lambda_\eta-\lambda_\mu)\sin\theta\cos\theta$, which is nonzero for generic $\theta$, and the conditional independence is lost. Assigning the rotated coordinates to new external and internal blocks changes the partition being tested, since the new blocks are generated by different observables, whereas rotations within a block are blockwise bijections and preserve screening, as the proposition states. The example therefore shows dependence on the choice of subsystem observables, and not a failure of coordinate covariance for a fixed partition.
+
+Coarse-graining requires a distinction between transformations of the conditioning block and transformations of the screened blocks. Applying measurable functions separately to $\eta$ and to $\mu$ preserves their conditional independence given the original $b$, since the functions can only discard information about variables that are already screened. Replacing the conditioning block $b$ by a lossy function of itself behaves differently. If $X_1\to X_2\to X_3$ is a Markov chain, then $X_1\Ind X_3\mid X_2$, and replacing $X_2$ by a non-injective function $g(X_2)$ will in general destroy the independence, since the discarded information was what screened the other two. A coarse-graining that merges variables into a new block may also produce a blanket where none was present at the finer grain, but this depends on the partition and on the merging operation, and each case has to be examined with those specified. The statement that a system possesses a blanket, without a specification of the variables and the grain, therefore has no determinate truth value. This is the observation that the blanket depends on the selection and aggregation of variables, which occurs before any graphical representation, and it is correct as a matter of mathematics. Once the variables and the law are fixed, drawing a different graph cannot change their conditional independencies.
+
+The consequence is not that the blanket is arbitrary. For a fixed law and a fixed choice of variables, whether the condition holds is a determinate fact. The consequence is that the blanket attaches to a description, and a claim that a physical boundary exists requires an argument that the description is privileged, for instance by spatial localization, experimental access, or intervention structure. Screening cannot itself select the physically relevant decomposition, although its failure under arbitrary mixing does not discredit it.
+
+\section{Nested Blankets and Delegated Viability}
+
+The relativity of the blanket to grain raises an obvious difficulty for any account that ties the blanket to the individuation of a subject. If different choices of variables or a coarser grain yield different blankets, or none, then where an organism begins and ends appears to depend on who drew the graph.\footnote{The challenge and reply considered here were prompted by a public conversation between Mark Solms and Curt Jaimungal. The arguments below are assessed independently of the authority of either participant.} One response is that blankets are nested, since cells have blankets, cells compose organs, and organs compose organisms~\cite{kirchhoff2018}, and that the blanket which matters for a given purpose is the one on which the persistence of the enclosed units finally depends. A cell in an organ defers to the organ in the sense that its survival is delegated to the organ's continued functioning, and cells that cease to defer, as in malignancy, endanger the whole including themselves. A self-maintaining system, on this view, has access only to the state of its boundary and must infer the causes of that state through an internal model~\cite{solms2021}.
+
+The response identifies a relation not established by the screening condition. Delegation concerns the dependence of a part's viability on processes maintained at a larger scale, potentially alongside reciprocal dependence of that organization on its parts. The stated conditional-independence relation does not establish this viability dependence. A nested family of partitions, each satisfying a blanket condition at its own grain, fixes an inclusion order among the levels, and the stationary law does not say which level warrants the attribution of viability or subjecthood. A criterion of delegated viability, if delegation is transitive, does not terminate at the organism by itself, so it must be supplemented by a stopping rule, such as a boundedness condition, which selects a spatial scale, or a causal closure condition, which selects a set of processes closed under their own dynamics, and the stipulated scope does unacknowledged work unless it is made explicit. With a scope stipulated, for instance boundedness at the organism's spatial scale, the criterion favours the organism as the level at which the viability of the enclosed units finally depends on the enclosing unit. The dependence is not one-directional, since the failure of a cell's host organ and the failure of an organ without its cells are both fatal, and a criterion of outermost dependence could be extended past the organism to the ecological systems that support it. The criterion does not by itself establish that the unit so selected is the unit that individuates a subject, since dependence on a larger system leaves open how many subjects there are within it. It is also a further assumption added to the formalism, and its status is that of one candidate hypothesis about biological organization.
+
+A related point bears on how the variables inside the blanket should be understood. The needs of an organism need not be commensurable on a single scale: equal deficits of two different needs do not sum to a quantity that can be reduced by satisfying only one of them, since the organism may die of the other. The point has a formal counterpart. A scalarization that permits compensation across indispensable requirements can improve while one of those requirements fails. Scalar objectives can encode non-negotiable constraints through barriers or infinite penalties, so the vulnerability lies in the compensating scalarization and not in scalar objectives as such. A constraint-first description retains each indispensable requirement explicitly, defining the feasible region as $\mathcal V=\bigcap_i\{x:c_i(x)\geq 0\}$. This conjunction can itself be represented by a scalar condition, but any summary that permits compensation between requirements needs a separate justification. If the viability conditions are observable through the specified blanket variables, the blanket can serve as a statistical interface for their monitoring; screening alone does not establish this observability. The formalism supplies no metric on the vector of constraints, and the blanket does not supply one either, so commensurability is an additional assumption.
+
+\section{Completion and Screening}
+
+The blanket condition is a relation among variables at a single time. It presupposes that the blanket state is a well-defined random variable at that time, and it says nothing about when, in the course of a computation, the blanket state is complete enough to be consumed. The question is not trivial for systems that are asynchronous. In Fant's invocation model and its implementation through NULL Convention Logic, computation is organized through alternating data and null wavefronts, a process element being invoked when its inputs are complete, with local completion conditions replacing coordination by a global clock~\cite{fant2005,fant2007}. The distinction between the absence of a value and the presence of a null state is thereby made part of the representation. These conditions must be specified at the relevant logical interface. Individual threshold gates may assert their outputs before every physical input is asserted, and some outputs of a multi-output circuit may transition before the complete input set is available. Input completeness requires that the complete output set cannot finish its transition before the complete input set has arrived~\cite[Section~2.2, p.~174]{ponugoti2022}. The completion requirement proposed below concerns the interface value consumed by the interior and not every intermediate gate transition. The discussion that follows moves from the diffusion model of the preceding sections to a hybrid setting, in which the boundary state carries a discrete data or null phase in addition to its continuous value, since the diffusion alone has no defined data phase.
+
+Two conditions on an interface can then be distinguished. The first is screening, the statistical condition $\eta\Ind\mu\mid b$ on the stationary law. The second is completion, the requirement that the internal update act on $b$ only when every component of $b$ has reached the data phase, so that the state consumed by the interior is a state that the exterior has actually delivered. A system may satisfy the first condition and fail the second, in which case a blanket can be defined for the stationary ensemble while the interior, at the instants at which it updates, acts on a partial or stale boundary state. Conversely, a system with a rigorous completion discipline need not have a blanket in the statistical sense, since completion alone does not entail the required conditional independence. Two further distinctions sharpen the proposal. Completion is local: it establishes that the required inputs have arrived in an admissible phase, and a completed input can still be stale, since coherent transaction identity and freshness require protocol conditions beyond completion. And sampling a process at completion events changes the ensemble under consideration, so that screening under the stationary time-sampled law does not establish screening under the law of completion-triggered observations. The statistical condition should accordingly be evaluated at the instants at which the interface is actually consumed.
+
+A compact model makes the selection argument exact. Let $X_t$ be stationary with law $P$, and let the update events, at times $T_n$, form a simple point process jointly stationary with $X_t$, with predictable intensity $\rho(X_{t-})$ satisfying $0<\mathbb E_P[\rho(X)]<\infty$. At each update time observe the pre-update state $X_{T_n-}$. Its distribution at a typical update event is
+\[
+P_{\mathrm{event}}(dx)=\frac{\rho(x)\,P(dx)}{\mathbb E_P[\rho(X)]},
+\]
+and this event-sampled distribution generally differs from the distribution at a typical time, the distinction being between sampling typical events and sampling typical times. If $\rho(x)=\rho(b)$, the weighting is a function of the conditioning block and cancels in the conditional law, so that $P_{\mathrm{event}}(d\eta,d\mu\mid b)=P(d\eta,d\mu\mid b)$ for $P_{\mathrm{event}}$-almost every $b$, where $\rho(b)>0$, since blanket states with zero update intensity are never sampled at events, and screening is preserved. If $\rho$ depends jointly on $\eta$ and $\mu$, screening can fail. A selection effect of this second kind shows that the two laws can differ: if $\eta$ and $\mu$ are independent fair bits and completion events occur only when they agree, the time-sampled law, which here coincides with the original independent law, has $\eta\Ind\mu$ while the completion-triggered law makes them equal. Here completion depends on the joint value of $\eta$ and $\mu$, which are not part of the blanket, so the example violates the condition of selection determined solely by the blanket state. It establishes the possibility of selection-induced dependence. Selection determined solely by the conditioned blanket state preserves screening, whereas completion rules involving additional states or histories require separate analysis.
+
+The two conditions can be stated together.
+
+\begin{definition}
+An interface $b$ is adequate for an interior $\mu$ relative to an exterior $\eta$ if (i) $\eta\Ind\mu\mid b$ under the law of the instants at which $b$ is consumed, and (ii) every update of $\mu$ acts on a value of $b$ all of whose components have reached the data phase.
+\end{definition}
+
+The conjunction of the two conditions is an additional requirement proposed here for the asynchronous interfaces under study, and not a requirement for every temporal process or every account of individuation. It is not a claim made by Fant. Its motivation is that the interface through which an interior depends on conditions it cannot immediately resolve combines a statistical aspect, whether the specified boundary variables screen the internal and external blocks, with a temporal aspect, whether the required interface inputs are complete when consumed. The conditional independence relation addresses the first aspect, and the null and data cycle provides a vocabulary for the second. Which of the conditions a given biological interface satisfies is an empirical matter, and ion channels, synaptic transmission, and other gated interfaces are candidates for which the question can be posed. Biological gating is a proposed application of the two conditions, and applying them to a particular interface would require an explicit model that specifies the partition and the completion criterion.
+
+\section{What the Blanket Licenses and What It Does Not}
+
+Suppose that a partition satisfies $\eta\Ind\mu\mid b$ strictly. Then $p(\eta\mid\mu,b)=p(\eta\mid b)$, so that once the blanket is known the interior contributes no further information about the exterior. This is a statement of screening, and screening is a symmetric relation, since conditional independence is symmetric in the two screened blocks: the exterior contributes no further information about the interior once the blanket is known. It is not a statement of causal inaccessibility, nor of an absence of predictive information in the interior, since $p(\eta\mid\mu)=\int p(\eta\mid b)\,p(b\mid\mu)\,db$ and the interior may remain informative about the exterior because both are associated with the blanket.
+
+The step from screening to inference is the construction of a synchronization map. Let $\bar\mu(b)$ denote the most likely internal state given the blanket and $\bar\eta(b)$ the most likely external state given the blanket. Suppose that these conditional modes exist and are uniquely selected. A function $\sigma$ with $\bar\eta=\sigma\circ\bar\mu$ then exists exactly when $\bar\mu(b_1)=\bar\mu(b_2)$ implies $\bar\eta(b_1)=\bar\eta(b_2)$, that is, when the external-mode map is constant on the fibres of the internal-mode map. The function so obtained is set-theoretic, defined on the image of $\bar\mu$; a measurable or smooth $\sigma$ requires additional assumptions on the modal maps. This criterion is stated, together with equivalent kernel-inclusion conditions in the Gaussian setting, in Lemma~2.3 of Da Costa and colleagues~\cite{dacosta2021}; here the same set-theoretic factorization criterion is applied to conditional-mode maps beyond the Gaussian case. Injectivity of $\bar\mu$ is sufficient for the set-theoretic existence of $\sigma$ and stronger than necessary for it~\cite{parr2020}. The construction is correct under its hypotheses, and it is specific to modes: the modal fibre condition alone does not establish an analogous factorization of the full conditional distributions. If $\bar\mu$ is injective with a suitable measurable inverse, it recovers $b$, and the kernel $b\mapsto P(\eta\in\cdot\mid b)$ can then be reparametrized through $\bar\mu(b)$, and in the Gaussian setting with fixed conditional covariance the conditional mean already determines the conditional distribution. Conditional modes depend on the coordinates and on the reference measures used to define densities, so the existence of $\sigma$ does not inherit the full invariance of conditional independence under blockwise bijections. The reading of $\sigma$ as a relation of representation, in which the internal state parametrizes a belief about the exterior, is an interpretation that is added to the mathematics. Such a function can also exist in systems for which no attribution of representation or subjecthood is warranted, provided the same factorization condition holds. The interpretive step is licensed, if it is licensed, by additional facts about the system, such as the presence of a model that can be evaluated against alternatives, and the confidence an agent places in its model is among such facts~\cite{solms2021}.
+
+The blanket therefore licenses three claims and withholds three. It licenses the claim that, under a given description and law, one block is screened from another by a third. Together with an additional factorization condition, the fibre condition, it supports the synchronization construction. It licenses the use of the blanket as a sufficient screening interface, relative to the specified variables, for inference about the screened variable from the blanket, without implying that the blanket is minimal. It does not license the claim that the partition marks a physical boundary, since the partition is relative to description. It does not license the claim that the interior represents the exterior in any sense stronger than the existence of $\sigma$. And it does not license the claim that a subject is present, since individuation requires an additional criterion, of which delegated viability is one candidate.
+
+\section{Conclusion}
+
+The Markov blanket is a closure condition: a statement that, for a given law and a chosen set of variables, the dependence between two blocks is mediated entirely by a third. Read in this way it is exact, it is invariant under blockwise relabelling, and it is relative to the grain of description. The extension of the notion to dynamical systems requires more than sparse coupling, because away from detailed balance the circulation of the flow can create dependencies that the coupling structure does not display and can conceal dependencies that it does. The extension to organisms requires, in addition, a criterion that selects a level of nesting, and delegated viability is one candidate criterion, a biological hypothesis and not a statistical fact. For the asynchronous interfaces considered here, a completion condition is a further requirement that the stationary law does not express, and it is not proposed as a requirement for every temporal process.
+
+None of these observations diminishes the usefulness of the formalism where its conditions are met. They locate the places at which the claims made in its name depend on assumptions that must be stated and, where possible, tested. A claim that a statistical blanket marks the boundary of an individual is best treated as a conjunction: a partition, a law, a coupling and circulation structure that makes the screening hold, a grain at which the description is closed, in the second sense of the introduction, and, if the claim concerns an individual, some criterion of individuation, for which the essay has examined one candidate without establishing its priority over others. The satisfaction of each must be assessed separately, and the literature has been most productive where it has been explicit about which of them it asserts.
+
+\begin{thebibliography}{99}
+
+\bibitem{aguilera2022} Aguilera, M., Millidge, B., Tschantz, A., and Buckley, C. L. How Particular Is the Physics of the Free Energy Principle? \emph{Physics of Life Reviews}, 40:24--50, 2022.
+
+\bibitem{ao2004} Ao, P. Potential in Stochastic Differential Equations: Novel Construction. \emph{Journal of Physics A: Mathematical and General}, 37(3):L25--L30, 2004.
+
+\bibitem{biehl2021} Biehl, M., Pollock, F. A., and Kanai, R. A Technical Critique of Some Parts of the Free Energy Principle. \emph{Entropy}, 23(3):293, 2021.
+
+\bibitem{bruineberg2022} Bruineberg, J., Dolega, K., Dewhurst, J., and Baltieri, M. The Emperor's New Markov Blankets. \emph{Behavioral and Brain Sciences}, 45:e183, 2022.
+
+\bibitem{dacosta2021} Da Costa, L., Friston, K., Heins, C., and Pavliotis, G. A. Bayesian Mechanics for Stationary Processes. \emph{Proceedings of the Royal Society A}, 477(2256):20210518, 2021.
+
+\bibitem{dawid1979} Dawid, A. P. Conditional Independence in Statistical Theory. \emph{Journal of the Royal Statistical Society, Series B}, 41(1):1--31, 1979.
+
+\bibitem{fant2005} Fant, K. M. \emph{Logically Determined Design: Clockless System Design with NULL Convention Logic}. Wiley, 2005.
+
+\bibitem{fant2007} Fant, K. M. \emph{Computer Science Reconsidered: The Invocation Model of Process Expression}. Wiley, 2007.
+
+\bibitem{friston2013} Friston, K. Life as We Know It. \emph{Journal of the Royal Society Interface}, 10(86):20130475, 2013.
+
+\bibitem{friston2019} Friston, K. A Free Energy Principle for a Particular Physics. \emph{arXiv preprint} arXiv:1906.10184, 2019.
+
+\bibitem{heins2022} Heins, C. and Da Costa, L. Sparse Coupling and Markov Blankets: A Comment on ``How Particular Is the Physics of the Free Energy Principle?'' by Aguilera, Millidge, Tschantz and Buckley. \emph{Physics of Life Reviews}, 42:33--39, 2022.
+
+\bibitem{kirchhoff2018} Kirchhoff, M., Parr, T., Palacios, E., Friston, K., and Kiverstein, J. The Markov Blankets of Life: Autonomy, Active Inference and the Free Energy Principle. \emph{Journal of the Royal Society Interface}, 15(138):20170792, 2018.
+
+\bibitem{kwon2005} Kwon, C., Ao, P., and Thouless, D. J. Structure of Stochastic Dynamics near Fixed Points. \emph{Proceedings of the National Academy of Sciences}, 102(37):13029--13033, 2005.
+
+\bibitem{lauritzen1996} Lauritzen, S. L. \emph{Graphical Models}. Oxford University Press, 1996.
+
+\bibitem{parr2020} Parr, T., Da Costa, L., and Friston, K. Markov Blankets, Information Geometry and Stochastic Thermodynamics. \emph{Philosophical Transactions of the Royal Society A}, 378(2164):20190159, 2020.
+
+\bibitem{pearl1988} Pearl, J. \emph{Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference}. Morgan Kaufmann, 1988.
+
+\bibitem{ponugoti2022} Ponugoti, K. K., Srinivasan, S. K., Smith, S. C., and Mathure, N. Illegal Trojan Design and Detection in Asynchronous NULL Convention Logic and Sleep Convention Logic Circuits. \emph{IET Computers \& Digital Techniques}, 16(5--6):172--182, 2022. \href{https://doi.org/10.1049/cdt2.12047}{doi:10.1049/cdt2.12047}.
+
+\bibitem{raja2021} Raja, V., Valluri, D., Baggs, E., Chemero, A., and Anderson, M. L. The Markov Blanket Trick: On the Scope of the Free Energy Principle and Active Inference. \emph{Physics of Life Reviews}, 39:49--72, 2021.
+
+\bibitem{sakthivadivel2022} Sakthivadivel, D. A. R. Weak Markov Blankets in High-Dimensional, Sparsely-Coupled Random Dynamical Systems. \emph{arXiv preprint} arXiv:2207.07620, 2022.
+
+\bibitem{solms2021} Solms, M. \emph{The Hidden Spring: A Journey to the Source of Consciousness}. W. W. Norton, 2021.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,4313 @@
+WEBVTT
+
+00:00.000 --> 00:08.680
+What if I told you that, mathematically speaking, there's absolutely no proof that you end and the chair you're sitting on right now begins?
+
+00:08.940 --> 00:10.540
+It sounds totally absurd, right?
+
+00:10.680 --> 00:11.160
+Totally.
+
+00:11.540 --> 00:13.520
+Like something out of a late night dorm room debate.
+
+00:13.780 --> 00:14.600
+Yeah, exactly.
+
+00:15.140 --> 00:21.220
+But for like the last decade, biologists and cognitive scientists really thought they had finally found it.
+
+00:21.300 --> 00:28.140
+You know, a flawless mathematical formula to prove the physical existence of an individual organism.
+
+00:28.140 --> 00:40.460
+Right. They wanted a way to draw a hard, undeniable line around a cell or a brain or a conscious mind to just definitively state this right here is the system.
+
+00:40.840 --> 00:43.200
+And all that over there is the outside world.
+
+00:43.540 --> 00:46.880
+And it was treated as this mathematical holy grail, wasn't it?
+
+00:46.900 --> 00:49.580
+A concept called the Markov blanket.
+
+00:50.300 --> 00:54.800
+Oh, absolutely. The Markov blanket was the buzzword. Everyone wanted one.
+
+00:54.800 --> 01:01.040
+Right. Well, today we are looking at a paper that proves they have basically been doing the math wrong.
+
+01:01.360 --> 01:06.620
+We're taking a deep dive into an incredibly dense, rigorous piece of independent research.
+
+01:06.880 --> 01:12.100
+It just came out this month, November 2026, by a researcher named Flyxion.
+
+01:12.580 --> 01:13.940
+Yeah. And the title is a mouthful.
+
+01:14.240 --> 01:22.140
+It's called Closure Conditions on the Description of Bounded Systems, Markov Blankets in Graphical Models, and Dynamical Systems.
+
+01:22.140 --> 01:25.340
+It is a massive reality check.
+
+01:25.460 --> 01:25.560
+Yeah.
+
+01:25.920 --> 01:28.720
+And I just want to welcome you, the listener, to this journey.
+
+01:29.060 --> 01:32.300
+We know you're someone who loves a genuine intellectual challenge.
+
+01:32.420 --> 01:36.840
+You're not here for, you know, surface-level buzzwords or pop science headlines.
+
+01:37.120 --> 01:38.880
+No. You want the actual mechanics, right?
+
+01:38.920 --> 01:41.340
+The real ideas shaping our understanding of reality.
+
+01:41.500 --> 01:41.940
+Exactly.
+
+01:41.940 --> 01:54.920
+So today our mission is to completely separate the hard mathematics of the Markov blanket from the heavy, honestly pretty messy biological assumptions that scientists have just layered on top of it.
+
+01:55.420 --> 02:01.060
+We are going to find out if calculus and probability can actually prove that you are an individual.
+
+02:01.580 --> 02:04.980
+Spoiler alert, it's a lot more complicated than the biologists hoped.
+
+02:04.980 --> 02:06.020
+So much more complicated.
+
+02:06.840 --> 02:08.020
+Okay, let's unpack this.
+
+02:08.260 --> 02:16.040
+Because to understand how the math kind of got hijacked, we first have to understand what a Markov blanket was actually built to do in the first place.
+
+02:16.420 --> 02:20.720
+Right, which means we need to rewind a bit back to 1988.
+
+02:21.460 --> 02:25.500
+Because this concept definitely did not originate in biology or physics for that matter.
+
+02:25.900 --> 02:27.760
+No, it was probabilistics, right?
+
+02:28.040 --> 02:28.300
+AI.
+
+02:28.300 --> 02:29.260
+Exactly.
+
+02:30.040 --> 02:36.500
+It started with Judea Pearl, who was just an absolute titan in the field of graphical models and causal inference.
+
+02:37.280 --> 02:45.960
+And when Pearl originally defined the Markov blanket, it was this incredibly modest, highly specific, and purely statistical concept.
+
+02:46.220 --> 02:48.760
+Okay, so let's lay out that original definition for everyone.
+
+02:48.760 --> 02:59.260
+In graphical models, a Markov blanket is defined as a set of variables that screens one variable from all others under a fixed joint probability distribution.
+
+03:00.100 --> 03:02.460
+And the shorthand in the paper, it looks like a bit of algebra.
+
+03:02.800 --> 03:10.660
+It's x sub i, then a double perpendicular symbol, then x sub r, a vertical bar, and x sub m.
+
+03:10.920 --> 03:11.200
+Right.
+
+03:11.320 --> 03:16.480
+So let's break down those letters so we can actually visualize what Judea Pearl was talking about.
+
+03:16.480 --> 03:21.520
+So the x sub i, that is the internal variable.
+
+03:22.060 --> 03:24.580
+That's the specific thing you're trying to measure or predict.
+
+03:25.000 --> 03:25.860
+Okay, the target variable.
+
+03:26.100 --> 03:26.240
+Yeah.
+
+03:26.720 --> 03:31.020
+Then x sub m represents the Markov blanket itself, the surrounding set of variables.
+
+03:31.780 --> 03:39.060
+And x sub r is the rest of the universe, literally every other variable that exists outside of your little system.
+
+03:39.380 --> 03:39.720
+Got it.
+
+03:40.200 --> 03:43.160
+And that double perpendicular symbol in the middle, what does that mean?
+
+03:43.160 --> 03:46.320
+That symbol just means is conditionally independent of.
+
+03:46.720 --> 03:55.280
+So the whole formula is basically stating that your internal variable is conditionally independent of the rest of the universe, given the exact state of the blanket.
+
+03:55.280 --> 04:01.560
+I want to ground this immediately because, you know, conditional independence can be a really slippery concept if you're not a statistician.
+
+04:01.700 --> 04:02.080
+It really can.
+
+04:02.080 --> 04:10.560
+So imagine you have this highly accurate digital indoor weather station mounted on your living room wall, and it's wired to a bunch of sensors just outside your window.
+
+04:11.080 --> 04:13.100
+Thermometers, barometers, wind gauges, whatever.
+
+04:13.800 --> 04:14.880
+Okay, yeah, I have the visual.
+
+04:14.880 --> 04:21.360
+So let's say your goal is to predict the exact temperature of the air inside your living room, right next to the glass of the window.
+
+04:22.100 --> 04:25.780
+The digital display on your weather station is your Markov blanket.
+
+04:26.180 --> 04:27.140
+Right, that's x sub m.
+
+04:27.380 --> 04:27.740
+Exactly.
+
+04:28.260 --> 04:35.000
+And the chaotic weather outside, the actual wind, the sun beating down, the snow, that's the outside world, x sub r.
+
+04:35.000 --> 04:50.400
+So the concept of conditional independence here means that if you're staring right at that digital dial and it says 72 degrees, literally opening your front door and stepping out into a blizzard tells you absolutely nothing new about what the dial is predicting for your indoor temperature.
+
+04:50.860 --> 04:52.720
+That is a brilliant illustration, yeah.
+
+04:53.100 --> 04:55.980
+The dial completely screens you from the physical outside world.
+
+04:56.500 --> 05:00.480
+Now, obviously, this doesn't mean the outside world has no physical effect on the inside.
+
+05:00.800 --> 05:03.060
+Right, a blizzard will eventually cool down the glass.
+
+05:03.060 --> 05:11.580
+Exactly. But statistically, all the information from the blizzard that is relevant to your indoor prediction is perfectly captured by the numbers on that dial.
+
+05:12.240 --> 05:15.940
+If you know the state of the dial, you just don't need to go measure the snow.
+
+05:16.400 --> 05:18.260
+The information is completely mediated.
+
+05:18.620 --> 05:20.260
+The blanket captures everything you need.
+
+05:20.920 --> 05:26.580
+Now, Flyxion's paper points out a few mathematical quirks about this original 1988 definition.
+
+05:26.580 --> 05:33.100
+And these quirks are fascinating because they hint at the massive problems that are going to pop up later in the biology stuff.
+
+05:33.420 --> 05:38.880
+Yes, the paper notes three critical facts about Perl's graphical definition that honestly often get completely ignored.
+
+05:39.660 --> 05:43.020
+The first one is a mathematical technicality, but it's super vital.
+
+05:43.800 --> 05:47.740
+Technically speaking, in any given system, every single variable has a Markov blanket.
+
+05:48.200 --> 05:48.900
+Wait, hold on.
+
+05:49.040 --> 05:51.240
+Every variable? That seems entirely useless.
+
+05:51.240 --> 05:55.220
+I mean, if every variable has one, it's not exactly a special property.
+
+05:55.640 --> 06:03.420
+It isn't special at all in its rawest form because mathematically you can simply define the blanket as the set of literally all other variables in the system.
+
+06:03.620 --> 06:04.000
+Oh, I see.
+
+06:04.320 --> 06:04.540
+Right.
+
+06:04.800 --> 06:12.480
+Right. If you know everything else in the universe, then you are naturally, conditionally independent of whatever is left because there is literally nothing left to know.
+
+06:12.480 --> 06:18.160
+So, simply claiming that a system has a Markov blanket is essentially a vacuous statement. It means nothing.
+
+06:18.380 --> 06:19.340
+It means absolutely nothing.
+
+06:19.500 --> 06:19.660
+Okay.
+
+06:19.800 --> 06:24.040
+The entire value of claiming a blanket exists lies in restricting its size.
+
+06:24.260 --> 06:28.580
+You want to find a minimal blanket, you know, one that is significantly smaller than the rest of the universe.
+
+06:28.900 --> 06:29.760
+That makes total sense.
+
+06:29.940 --> 06:38.320
+It's like a biologist saying, I have found the boundary of this single-celled organism and the boundary is the entire Milky Way galaxy.
+
+06:38.320 --> 06:41.380
+Like, sure, but it doesn't help you isolate the cell.
+
+06:41.380 --> 06:51.500
+Precisely. Now, the second fact concerns uniqueness. When your probability distribution has a strictly positive density, the Markov boundary is unique.
+
+06:51.640 --> 06:52.640
+Let me stop you right there.
+
+06:52.740 --> 06:52.900
+Right.
+
+06:53.840 --> 06:59.740
+Strictly positive density. We really can't let that slide by. What does that actually mean in practice for a system?
+
+07:00.000 --> 07:08.920
+Fair enough, yeah. In probability theory, strictly positive density just means that no state in your system is absolutely 100% impossible.
+
+07:08.920 --> 07:15.800
+Everything has some non-zero probability of occurring, even if it's, like, infinitesimally small.
+
+07:16.220 --> 07:18.660
+Okay. So, no 0% chances.
+
+07:18.900 --> 07:28.820
+Right. And if your system has this property, the math will point to one, and exactly one, minimal set of variables that perfectly screens the inside from the outside.
+
+07:29.040 --> 07:31.840
+The boundary is mathematically undeniable and unique.
+
+07:31.840 --> 07:37.960
+But the paper explicitly states that this uniqueness breaks down if you lack strict positivity, right?
+
+07:38.100 --> 07:41.400
+And this is the third quirk, which is a massive landmine.
+
+07:42.100 --> 07:47.580
+If you have a situation where variables are deterministically linked, the boundary is no longer unique.
+
+07:47.900 --> 07:50.540
+By deterministic, you mean, like, locked together.
+
+07:50.780 --> 07:51.160
+Exactly.
+
+07:51.320 --> 07:51.480
+Right.
+
+07:51.480 --> 07:55.520
+It means if variable A happens, variable B happens, with 100% certainty.
+
+07:55.920 --> 07:57.880
+The probability is exactly 1.
+
+07:58.400 --> 08:03.900
+If A and B are perfectly equal all the time, and the third variable, C, depends on them,
+
+08:04.420 --> 08:08.280
+then you could say A is the blanket for C, or, you know, you could say B is the blanket for C.
+
+08:08.440 --> 08:12.260
+Because they carry the exact same information. They're functionally identical to the math.
+
+08:12.480 --> 08:12.860
+Exactly.
+
+08:13.320 --> 08:17.080
+The mathematics of the probability distribution just cannot select between them.
+
+08:17.420 --> 08:20.200
+There is no mathematical fact that privileges A over B.
+
+08:20.200 --> 08:27.620
+Hmm. So if I'm understanding this, um, if the math can't uniquely identify the boundary in a deterministic system,
+
+08:27.620 --> 08:30.100
+then the person doing the math has to make a choice.
+
+08:30.840 --> 08:32.920
+You're hitting on the core vulnerability right there.
+
+08:33.620 --> 08:38.060
+The mathematics is indifferent, which means the observer has to intervene and choose.
+
+08:38.580 --> 08:41.560
+But before we explore the consequences of the observer's choice,
+
+08:41.880 --> 08:46.880
+we really need to understand how we got from Judea Pearl's weather station statistics to biology.
+
+08:46.880 --> 08:52.300
+Yeah, how did a dry tool for updating beliefs become the theoretical skin of a living organism?
+
+08:52.740 --> 08:56.320
+Because if you look at the literature from the last 10 to 15 years,
+
+08:56.420 --> 09:02.100
+you have cognitive scientists and neuroscientists talking about Markov blankets as if they are tangible,
+
+09:02.560 --> 09:05.660
+like a cellular membrane or the skull protecting a brain.
+
+09:05.660 --> 09:10.800
+To understand the psychology and, honestly, the sociology of this leap,
+
+09:11.140 --> 09:13.800
+we have to look at the free energy principle literature.
+
+09:14.420 --> 09:19.580
+This is a massive body of work, heavily associated with the neuroscientist Karl Friston.
+
+09:20.060 --> 09:20.280
+Right.
+
+09:20.960 --> 09:24.400
+Biologists were grappling with a profound philosophical problem.
+
+09:25.120 --> 09:30.320
+How does a biological system maintain its integrity in a chaotic, entropic universe?
+
+09:30.320 --> 09:35.280
+Like, how does a cell not just dissolve into the puddle of water it's floating in?
+
+09:35.640 --> 09:38.080
+They needed a physical mechanism to explain separation.
+
+09:38.380 --> 09:38.640
+Yes.
+
+09:39.180 --> 09:42.640
+And they found Judea Pearl's Markov blanket and thought,
+
+09:42.820 --> 09:43.640
+this is it.
+
+09:43.860 --> 09:46.420
+This is the mathematical proof of separation.
+
+09:47.280 --> 09:48.900
+But to apply it to a living cell,
+
+09:49.080 --> 09:54.240
+they had to take Pearl's static, stationary graphical model and staple it onto dynamical systems.
+
+09:54.820 --> 09:56.860
+Systems that change and evolve over time,
+
+09:57.040 --> 09:59.020
+moving from a snapshot to a movie.
+
+09:59.300 --> 09:59.760
+Exactly.
+
+10:00.460 --> 10:04.340
+So, they started modeling organisms using stochastic differential equations.
+
+10:05.060 --> 10:08.560
+And they proposed a very specific four-part partition of the state space
+
+10:08.560 --> 10:10.380
+to represent a living thing.
+
+10:10.580 --> 10:12.700
+The famous four-part partition.
+
+10:12.960 --> 10:14.520
+Let's map this out for you, the listener,
+
+10:14.660 --> 10:17.340
+so you can visualize the biological model they built.
+
+10:17.940 --> 10:20.440
+We have four distinct classes of states.
+
+10:20.880 --> 10:24.360
+First, we have external states, denoted by the Greek letter eta.
+
+10:24.960 --> 10:27.120
+Then we have sensory states, which is S.
+
+10:27.600 --> 10:29.500
+We have active states, A.
+
+10:29.760 --> 10:32.400
+And finally, internal states, denoted by mu.
+
+10:32.800 --> 10:34.400
+So, mapping that to reality.
+
+10:35.120 --> 10:37.600
+The external states, eta, that's the environment.
+
+10:38.180 --> 10:39.860
+The puddle the cell is floating in.
+
+10:40.540 --> 10:44.000
+The internal states, mu, are the inner workings of the cell.
+
+10:44.300 --> 10:45.800
+It's metabolism, it's genetics.
+
+10:46.000 --> 10:46.160
+Okay.
+
+10:46.160 --> 10:53.380
+And the blanket itself, denoted as B, is defined as the combination of the sensory states and the active states.
+
+10:53.380 --> 10:58.420
+So, your senses and your actions form the wall between your inner mind and the outer world.
+
+10:58.420 --> 10:59.260
+That's the idea.
+
+10:59.260 --> 11:05.940
+And the defining requirement for this whole thing to be considered a distinct living entity, according to Friston and others,
+
+11:05.940 --> 11:09.580
+is the exact same conditional independence we talked about earlier.
+
+11:09.580 --> 11:15.940
+The external states are conditionally independent of the internal states, given the sensory and active states.
+
+11:15.940 --> 11:17.780
+And this raises an important question.
+
+11:17.780 --> 11:22.120
+Because here is where the massive philosophical leap happens.
+
+11:22.120 --> 11:32.520
+The core claim of the free energy principle literature is that because the internal states are conditionally independent of the external states, given the blanket,
+
+11:33.160 --> 11:37.320
+the interior has absolutely no direct access to the exterior.
+
+11:37.320 --> 11:38.740
+It's blind to it.
+
+11:39.300 --> 11:39.980
+Completely blind.
+
+11:40.560 --> 11:48.140
+Therefore, they argue, the only way the system can survive is if the interior maintains a cognitive model of the outside world,
+
+11:48.720 --> 11:53.080
+constantly updating that model based solely on the fluctuations it feels on the blanket.
+
+11:53.460 --> 11:56.820
+It's the ultimate brain in a vat scenario, right?
+
+11:56.900 --> 11:58.320
+But supposedly proven by math.
+
+11:58.760 --> 12:02.940
+The brain only knows the electrical signals coming through the wires, which is the blanket.
+
+12:02.940 --> 12:10.780
+But why did Friston and all these brilliant theoretical biologists assume this statistical condition was just naturally occurring in living things?
+
+12:11.360 --> 12:15.520
+Did it just intuitively feel right because of how physical objects work?
+
+12:16.080 --> 12:18.220
+It is entirely based on physical intuition, yeah.
+
+12:19.480 --> 12:22.080
+Specifically, a concept called sparse coupling.
+
+12:23.300 --> 12:31.100
+So, in a differential equation, coupling describes how one variable pushes or pulls on another as time moves forward.
+
+12:31.100 --> 12:35.620
+Sparse coupling means there are missing physical links.
+
+12:36.420 --> 12:37.140
+So, they don't touch.
+
+12:37.440 --> 12:37.620
+Right.
+
+12:38.240 --> 12:42.120
+The external states do not directly, physically, drive the internal states.
+
+12:42.760 --> 12:46.260
+The puddle of water doesn't directly mutate the cell's DNA.
+
+12:46.760 --> 12:51.420
+The outside only pushes on the sensors, and the inside only pushes on the actuators.
+
+12:51.560 --> 12:53.840
+They never physically touch each other directly.
+
+12:54.220 --> 12:54.700
+Precisely.
+
+12:54.700 --> 13:03.980
+And the literature looked at this missing physical link, this sparse coupling, and assumed, well, if they don't touch physically, they must be conditionally independent statistically.
+
+13:04.560 --> 13:10.260
+They conflated the physical wiring diagram of the system with the statistical probability distribution of the system.
+
+13:10.260 --> 13:18.720
+They assume that if the physical bridge is broken, the statistical correlation must also be zero, which intuitively sounds bulletproof.
+
+13:18.720 --> 13:28.420
+Like, if I am in a sealed concrete bunker, and I only have a radio to listen to and a microphone to speak into, I am physically sparsely coupled from the outside world.
+
+13:28.900 --> 13:35.440
+It feels entirely obvious that my internal thoughts are statistically independent of the outside world, given the state of the radio.
+
+13:35.440 --> 13:41.600
+It feels obvious, but the math says that intuition is profoundly, fundamentally flawed.
+
+13:41.960 --> 13:46.240
+And this brings us to the absolute core mathematical crux of Flyxion's paper.
+
+13:46.740 --> 13:50.220
+This is where the biological claims collide with rigorous calculus.
+
+13:50.400 --> 13:53.120
+We are going to dive deep into theorem one.
+
+13:53.520 --> 13:56.960
+Okay, if you're listening to this and you aren't a mathematician, do not panic.
+
+13:57.520 --> 14:03.580
+We are going to take this slow, and we are going to translate the matrix math into something you can actually visualize.
+
+14:03.580 --> 14:09.060
+Because theorem one is the reality check that tears the biological assumption to the ground.
+
+14:09.640 --> 14:14.360
+The paper examines a system evolving according to a linear stationary diffusion process.
+
+14:14.780 --> 14:17.480
+Right. Let's lay out the components of this mathematical engine.
+
+14:18.020 --> 14:20.700
+There are four critical objects we need to understand.
+
+14:21.420 --> 14:24.080
+First is the drift matrix, B.
+
+14:24.840 --> 14:28.940
+Think of the drift as the deterministic rules of the physical system.
+
+14:28.940 --> 14:34.060
+If you're a particle floating in a river, the drift is the physical current pulling you downstream.
+
+14:34.520 --> 14:37.960
+It's the direct physical pushing and pulling between variables.
+
+14:38.740 --> 14:40.340
+Okay, drift is the physical current?
+
+14:40.740 --> 14:41.480
+The physical coupling.
+
+14:41.820 --> 14:42.200
+Got it.
+
+14:42.640 --> 14:44.680
+Second is the diffusion matrix, D.
+
+14:45.360 --> 14:48.160
+This is the stochastic part, the random noise.
+
+14:48.680 --> 14:50.760
+If you know anything about Brownian motion,
+
+14:51.420 --> 14:57.360
+this is the unpredictable, erratic jostling of the water molecules hitting our particle from all sides.
+
+14:57.360 --> 15:02.040
+So drift is the steady current, and diffusion is the random jostling.
+
+15:02.160 --> 15:02.300
+Okay.
+
+15:02.940 --> 15:06.600
+Third is the stationary precision matrix, denoted by pi.
+
+15:07.120 --> 15:09.560
+This relates to the probability distribution.
+
+15:10.080 --> 15:12.480
+When you've let this system run for a very long time,
+
+15:12.820 --> 15:17.120
+it eventually settles into a stable overall shape, a stationary law.
+
+15:17.760 --> 15:22.260
+The precision matrix tells you how tightly clustered and correlated those probabilities are.
+
+15:22.600 --> 15:24.640
+And this is where we look for the blanket, right?
+
+15:24.640 --> 15:30.240
+Yes. If we are searching for our statistical Markov blanket, this is where we look.
+
+15:30.900 --> 15:37.300
+We want to see zeros in the specific blocks of this matrix that connect the inside to the outside.
+
+15:37.940 --> 15:41.540
+If the entry is zero, conditional independence is proven.
+
+15:42.100 --> 15:45.400
+So the precision matrix, pi, is the ultimate judge.
+
+15:46.080 --> 15:47.440
+Zeros mean the blanket is real.
+
+15:48.020 --> 15:49.180
+What is the fourth object?
+
+15:49.180 --> 15:51.840
+The fourth object is the wild card.
+
+15:52.520 --> 15:54.760
+It is the key to Friston's entire argument.
+
+15:55.380 --> 15:59.060
+It is the anti-symmetric circulation operator, Q.
+
+15:59.480 --> 16:00.740
+The circulation operator.
+
+16:01.000 --> 16:02.800
+What exactly is circulating?
+
+16:03.220 --> 16:03.640
+Energy.
+
+16:04.300 --> 16:05.500
+Probability current.
+
+16:06.240 --> 16:10.820
+In a system that is at total thermal equilibrium, a dead system like a rock,
+
+16:11.240 --> 16:12.500
+there is no net flow.
+
+16:12.500 --> 16:17.540
+But every single living organism is, by definition, out of equilibrium.
+
+16:18.180 --> 16:21.360
+Energy is constantly flowing in and out to sustain life.
+
+16:21.720 --> 16:21.900
+Right.
+
+16:22.160 --> 16:22.800
+Metabolism.
+
+16:23.240 --> 16:23.600
+Exactly.
+
+16:24.160 --> 16:27.780
+Even when the system's overall probability distribution looks stable,
+
+16:28.240 --> 16:32.400
+there is a constant swirling flow of probability current beneath the surface.
+
+16:33.200 --> 16:37.800
+Q represents the rotational circulating part of that out-of-equilibrium flow.
+
+16:37.800 --> 16:38.620
+OK.
+
+16:38.980 --> 16:44.700
+Now, theorem 1 in the paper connects these four objects together in one devastatingly simple formula.
+
+16:45.280 --> 16:48.620
+It's B equals D plus Q times pi.
+
+16:49.020 --> 16:54.920
+The drift equals the diffusion plus the circulation, all multiplied by the precision matrix.
+
+16:55.900 --> 17:01.620
+This equation is a revelation because it shows exactly where the biologists made their mistake.
+
+17:02.340 --> 17:04.220
+Let's break down the mistake.
+
+17:04.220 --> 17:10.240
+What happens if we apply this formula to a dead system, a system at equilibrium?
+
+17:10.820 --> 17:13.600
+In physics, equilibrium is called detailed balance.
+
+17:14.080 --> 17:15.980
+In detailed balance, there is no circulation.
+
+17:16.740 --> 17:18.840
+So Q is strictly zero.
+
+17:19.400 --> 17:19.760
+Oh, wow.
+
+17:20.500 --> 17:23.720
+So if Q is zero, the formula simplifies massively.
+
+17:24.120 --> 17:30.800
+The physical drift, B, is purely a function of the random diffusion, D, and the statistical precision, pi.
+
+17:31.560 --> 17:32.000
+Exactly.
+
+17:32.000 --> 17:38.420
+And in that specific dead detail balance scenario, the biological intuition is actually correct.
+
+17:39.240 --> 17:43.940
+Under detailed balance, sparse physical coupling, having zeros in your drift matrix,
+
+17:44.600 --> 17:49.260
+mathematically guarantees a statistical Markov blanket, zeros in your precision matrix.
+
+17:49.760 --> 17:53.040
+If they don't touch physically, they are statistically independent.
+
+17:53.600 --> 17:56.620
+But living systems are not dead.
+
+17:57.220 --> 17:58.520
+A living cell is an engine.
+
+17:58.820 --> 18:01.080
+A brain is a whirlwind of electrical activity.
+
+18:01.080 --> 18:03.360
+They are radically out of equilibrium.
+
+18:04.020 --> 18:07.080
+So for living things, Q is absolutely never zero.
+
+18:07.480 --> 18:07.780
+Precisely.
+
+18:08.400 --> 18:16.100
+And the instant Q is not zero, the equivalence between physical sparse coupling and statistical independence shatters completely.
+
+18:17.040 --> 18:19.740
+The circulation operator mixes everything up.
+
+18:20.440 --> 18:24.900
+Flyxion provides two incredibly detailed mathematical examples to prove exactly how this fails.
+
+18:25.160 --> 18:26.180
+In both directions.
+
+18:26.180 --> 18:28.600
+Here's where it gets really interesting.
+
+18:29.360 --> 18:30.860
+Let's walk through these examples.
+
+18:31.220 --> 18:32.600
+Let's look at example one first.
+
+18:32.860 --> 18:34.400
+I call this the false positive.
+
+18:34.940 --> 18:38.060
+I want to know exactly how the math betrays the physical intuition.
+
+18:38.440 --> 18:40.300
+Walk us through Flyxion's setup here.
+
+18:40.300 --> 18:44.100
+Okay, so Flyxion constructs a simple three-block linear system.
+
+18:44.560 --> 18:49.900
+We have our exterior environment, eta, our blanket, B, and our interior, mu.
+
+18:50.320 --> 18:55.040
+He sets the random diffusion, D, to be a basic uniform identity matrix.
+
+18:55.700 --> 19:01.680
+Then he specifically engineers the physical drift matrix, B, to perfectly mimic the biological ideal.
+
+19:02.080 --> 19:03.100
+He builds the bunker.
+
+19:03.100 --> 19:04.140
+He builds the bunker.
+
+19:04.820 --> 19:09.900
+He ensures there is absolutely no direct physical coupling between the exterior and the interior.
+
+19:10.480 --> 19:14.620
+The entries in the drift matrix connecting eta and mu are strictly zero.
+
+19:15.160 --> 19:18.140
+The inside and the outside never physically interact.
+
+19:18.840 --> 19:23.480
+So a biologist looking at this physical wiring diagram would immediately declare victory.
+
+19:23.720 --> 19:25.500
+They'd say, look, no physical connection.
+
+19:25.780 --> 19:27.140
+The cell is sparsely coupled.
+
+19:27.560 --> 19:29.040
+We have a Markov blanket.
+
+19:29.040 --> 19:32.800
+But then you have to calculate the statistical reality.
+
+19:33.200 --> 19:35.000
+You have to find the precision matrix pi.
+
+19:35.420 --> 19:38.740
+And the paper says you find this by solving the Lyapunov equation.
+
+19:38.880 --> 19:40.900
+Wait, let's not lose anyone in the weeds here.
+
+19:41.040 --> 19:44.660
+What is the Lyapunov equation actually doing in this context?
+
+19:44.980 --> 19:47.980
+It's a fundamental equation in control theory and dynamical systems.
+
+19:48.520 --> 19:50.700
+Without getting into the heavy algebra,
+
+19:51.340 --> 19:54.320
+the Lyapunov equation is basically a mathematical machine
+
+19:54.320 --> 19:57.100
+that lets you plug in the physical rules of the system.
+
+19:57.100 --> 19:59.320
+The drift and the randomness, the diffusion.
+
+19:59.740 --> 20:02.760
+And it spits out the final stable probability distribution,
+
+20:03.160 --> 20:04.480
+which is the precision matrix.
+
+20:04.800 --> 20:07.120
+It tells you where the system will eventually settle
+
+20:07.120 --> 20:09.440
+without you having to simulate it to infinity.
+
+20:10.340 --> 20:14.380
+Okay, so Flyxion runs this perfectly sparsely coupled system
+
+20:14.380 --> 20:18.120
+through the Lyapunov equation to find the statistical truth.
+
+20:18.380 --> 20:19.460
+What is the result?
+
+20:19.620 --> 20:20.480
+Does the blanket hold?
+
+20:20.820 --> 20:24.000
+The result is that because the system is out of equilibrium,
+
+20:24.000 --> 20:26.920
+it possesses a valid circulation operator.
+
+20:27.100 --> 20:29.940
+And because Q is mixing the currents,
+
+20:30.380 --> 20:32.140
+the resulting precision matrix, pi,
+
+20:32.680 --> 20:35.940
+does not have zeros between the inside and the outside.
+
+20:36.620 --> 20:38.520
+The math in the paper is explicit.
+
+20:38.740 --> 20:40.960
+The entry in the precision matrix,
+
+20:41.680 --> 20:43.460
+pi sub eta mu,
+
+20:43.580 --> 20:47.180
+is exactly 74 divided by 1273,
+
+20:47.680 --> 20:49.960
+which is roughly 0.058.
+
+20:50.000 --> 20:51.220
+It is not zero.
+
+20:51.220 --> 20:53.120
+Which means that statistically,
+
+20:53.740 --> 20:56.640
+the internal and external coordinates are conditionally dependent,
+
+20:57.240 --> 20:59.220
+even though neither physical state drives the other.
+
+20:59.980 --> 21:02.080
+The sparse physical coupling completely failed
+
+21:02.080 --> 21:03.860
+to create a statistical Markov blanket.
+
+21:04.240 --> 21:07.800
+If you're listening and struggling to map the matrices to reality,
+
+21:08.220 --> 21:09.460
+let me try out an analogy.
+
+21:10.060 --> 21:14.140
+Let's ground B, D, Q, and pi in a physical scenario.
+
+21:14.700 --> 21:17.600
+Think of a massive multi-lane traffic roundabout.
+
+21:17.600 --> 21:18.980
+Oh, I like where this is going.
+
+21:19.160 --> 21:21.260
+You have cars entering the roundabout from the north.
+
+21:21.540 --> 21:25.040
+Let's call the north the exterior environment, eta.
+
+21:25.440 --> 21:27.360
+And you have cars entering from the south,
+
+21:27.680 --> 21:29.180
+that's the interior, mu.
+
+21:29.800 --> 21:33.540
+The circular road of the roundabout itself is the blanket, B.
+
+21:34.080 --> 21:35.620
+Okay, the physical structure is set.
+
+21:36.120 --> 21:38.660
+The physical asphalt lanes that guide the cars,
+
+21:38.940 --> 21:40.640
+that's our drift matrix, B.
+
+21:41.180 --> 21:43.900
+Notice that the north entry lane and the south entry lane
+
+21:43.900 --> 21:45.760
+never physically touch each other.
+
+21:45.760 --> 21:47.400
+They are sparsely coupled.
+
+21:47.980 --> 21:49.760
+A car entering from the north is not directly,
+
+21:50.720 --> 21:52.740
+physically pushing a car entering from the south.
+
+21:53.140 --> 21:53.200
+Right.
+
+21:53.680 --> 21:55.980
+And the drivers swerving randomly in their lanes,
+
+21:56.320 --> 21:57.640
+checking their phones, adjusting the radio,
+
+21:57.800 --> 21:59.540
+that's the random diffusion, D?
+
+22:00.040 --> 22:00.520
+Exactly.
+
+22:01.200 --> 22:03.060
+Now, if this were just a parking lot,
+
+22:03.220 --> 22:06.000
+a system at equilibrium, detailed balance,
+
+22:06.260 --> 22:08.680
+the positions of the north cars and south cars
+
+22:08.680 --> 22:10.260
+would be statistically independent.
+
+22:10.720 --> 22:14.000
+But a roundabout is an out-of-equilibrium system.
+
+22:14.000 --> 22:17.040
+It has a continuous swirling flow of traffic.
+
+22:17.880 --> 22:22.280
+That constant circular momentum is our circulation operator, Q.
+
+22:22.920 --> 22:24.720
+So what happens to the statistics?
+
+22:25.580 --> 22:26.960
+What does the pie matrix look like?
+
+22:27.180 --> 22:29.660
+The statistics are the precision matrix, Pi.
+
+22:30.180 --> 22:33.940
+Imagine taking a time-lapse aerial photograph of the roundabout
+
+22:33.940 --> 22:36.740
+to see where cars most likely end up.
+
+22:36.740 --> 22:40.020
+Because of that continuous circulation, Q,
+
+22:40.300 --> 22:42.660
+a massive traffic jam entering from the north
+
+22:42.660 --> 22:44.520
+is going to bleed into the roundabout
+
+22:44.520 --> 22:46.660
+and eventually disrupt the flow of cars
+
+22:46.660 --> 22:48.000
+trying to enter from the south.
+
+22:48.380 --> 22:52.600
+The continuous circular flow creates a statistical correlation,
+
+22:52.920 --> 22:55.600
+a dependency between the north and south,
+
+22:56.020 --> 22:58.820
+completely bypassing the fact that they never physically touched.
+
+22:58.820 --> 23:03.140
+The circulation, Q, creates a statistical dependency, Pi,
+
+23:03.700 --> 23:07.100
+that the physical wiring diagram, B, completely conceals.
+
+23:07.220 --> 23:07.740
+Exactly.
+
+23:08.260 --> 23:10.460
+That is a phenomenal way to visualize it.
+
+23:10.980 --> 23:13.380
+You cannot look at the physical connections, the drift,
+
+23:13.800 --> 23:16.500
+to determine the statistical reality, the precision,
+
+23:17.000 --> 23:19.420
+when a system is swirling out of equilibrium.
+
+23:20.060 --> 23:23.960
+The out-of-equilibrium flow acts as a hidden bridge for information.
+
+23:24.640 --> 23:27.280
+That's example one, the false positive.
+
+23:27.840 --> 23:29.920
+Now let's blow our minds with example two,
+
+23:30.460 --> 23:32.980
+the false negative, because this one goes the other way.
+
+23:33.600 --> 23:36.080
+In example two, Flyxion reverses the engineering.
+
+23:36.680 --> 23:38.660
+He starts by forcing the system to have
+
+23:38.660 --> 23:41.400
+a mathematically perfect statistical Markov blanket.
+
+23:41.980 --> 23:44.360
+He manually designs the precision matrix Pi
+
+23:44.360 --> 23:48.400
+so that the entry connecting the inside and outside is exactly zero,
+
+23:49.060 --> 23:50.600
+Pi sub eta mu equals zero.
+
+23:50.600 --> 23:55.940
+And he also designs a valid, out-of-equilibrium circulation matrix, Q.
+
+23:56.520 --> 23:58.820
+So statistically, we have the holy grail.
+
+23:59.160 --> 24:02.280
+The interior is flawlessly screened from the exterior.
+
+24:02.980 --> 24:05.660
+Yes, but then, using our master formula,
+
+24:05.840 --> 24:07.940
+B equals D plus Q times Pi,
+
+24:08.360 --> 24:12.140
+he works backward to calculate what the physical drift matrix, B,
+
+24:12.780 --> 24:15.860
+must look like to support this perfect statistical blanket.
+
+24:15.860 --> 24:19.220
+The result is completely counterintuitive.
+
+24:20.560 --> 24:24.440
+The drift entries connecting the exterior and the interior are not zero.
+
+24:25.320 --> 24:27.680
+The paper notes they are two and negative two.
+
+24:28.360 --> 24:32.220
+Meaning the outside is directly, physically pushing on the inside,
+
+24:32.360 --> 24:34.460
+and the inside is directly pulling on the outside.
+
+24:34.840 --> 24:37.100
+They are physically manhandling each other.
+
+24:37.420 --> 24:39.560
+They are intimately, physically coupled.
+
+24:39.560 --> 24:43.260
+And yet, despite this direct physical interaction,
+
+24:43.880 --> 24:47.760
+the precise interplay between the random diffusion and the swirling circulation
+
+24:47.760 --> 24:50.520
+perfectly cancels out the statistical correlation.
+
+24:51.120 --> 24:55.740
+They maintain a perfect statistical Markov blanket while physically interacting.
+
+24:56.260 --> 24:59.420
+This completely upends the biological paradigm.
+
+24:59.820 --> 25:02.120
+To confirm this clearly for the listener,
+
+25:02.120 --> 25:05.820
+The sparse coupling that Friston and theoretical biologists
+
+25:05.820 --> 25:09.220
+constantly use to justify the physical existence of a boundary
+
+25:09.220 --> 25:11.960
+is neither necessary nor sufficient
+
+25:11.960 --> 25:16.180
+for a statistical Markov blanket to actually exist in a living system.
+
+25:16.400 --> 25:19.840
+That is the inescapable conclusion of theorem one.
+
+25:20.560 --> 25:23.600
+It is a devastating blow to the casual use of this mathematics.
+
+25:24.340 --> 25:27.740
+You cannot look at a sparsely coupled physical cell and declare,
+
+25:28.160 --> 25:30.140
+therefore it has a statistical blanket.
+
+25:30.140 --> 25:33.480
+And you cannot look at a statistical blanket and declare,
+
+25:33.820 --> 25:35.760
+therefore the system is physically isolated.
+
+25:36.020 --> 25:36.860
+It's just not true.
+
+25:37.100 --> 25:40.320
+The mathematical reality is that the blanket condition only holds
+
+25:40.320 --> 25:43.220
+when the physical drift, the random diffusion,
+
+25:43.820 --> 25:45.540
+the out-of-equilibrium circulation,
+
+25:45.940 --> 25:50.460
+and the statistical precision are all jointly, exquisitely synchronized.
+
+25:51.100 --> 25:55.000
+It is an assumption, but a highly specific harmony in the dynamics.
+
+25:55.240 --> 25:58.560
+It is not an automatic consequence of things not touching.
+
+25:58.560 --> 26:02.040
+Okay, so if the math is completely agnostic about physical space,
+
+26:02.540 --> 26:04.760
+if sparse coupling doesn't guarantee a boundary,
+
+26:05.340 --> 26:07.800
+what exactly is the blanket bounding?
+
+26:08.020 --> 26:11.220
+I mean, if it's not a natural, objective, physical wall, what is it?
+
+26:11.700 --> 26:15.340
+This is where the paper shifts from physics into epistemology.
+
+26:15.860 --> 26:19.400
+It turns out the existence of the boundary depends almost entirely on
+
+26:19.400 --> 26:21.840
+who is holding the pen and drawing the graph.
+
+26:21.840 --> 26:26.300
+Wow. The paper introduces a mathematical proof called Proposition 1.
+
+26:26.840 --> 26:29.600
+It states that conditional independence survives, quote,
+
+26:29.840 --> 26:34.180
+block-wise bijections, but fails completely if you mix blocks.
+
+26:34.660 --> 26:37.580
+We need to explain this because the implications are wild.
+
+26:37.580 --> 26:39.580
+Let's translate the math.
+
+26:39.780 --> 26:43.720
+A bijection is just a formal term for a mathematical mapping
+
+26:43.720 --> 26:48.060
+that relabels or transforms variables without losing any underlying information.
+
+26:48.220 --> 26:49.520
+It's a perfect translation.
+
+26:50.540 --> 26:54.200
+Proposition 1 says that if you have a perfect Markov blanket
+
+26:54.200 --> 26:58.640
+and you apply a mathematical transformation only to the internal variables
+
+26:58.640 --> 27:02.760
+or only to the external variables, the blanket survives.
+
+27:03.080 --> 27:05.180
+You haven't broken the conditional independence.
+
+27:05.180 --> 27:09.100
+So if I decide to measure the internal temperature of the cell in Celsius
+
+27:09.100 --> 27:11.780
+instead of Fahrenheit, the blanket still exists.
+
+27:12.180 --> 27:12.620
+Exactly.
+
+27:13.420 --> 27:16.460
+Block-wise relabeling preserves the statistical screening.
+
+27:17.220 --> 27:19.860
+But the moment you apply a mathematical transformation
+
+27:19.860 --> 27:23.620
+that mixes variables from the inside with variables from the outside,
+
+27:24.200 --> 27:26.720
+the conditional independence is completely annihilated.
+
+27:27.040 --> 27:30.740
+Phlygesen gives a geometric example of this in the paper that is just beautiful.
+
+27:31.140 --> 27:34.180
+If you're listening, imagine a standard piece of graph paper.
+
+27:34.180 --> 27:38.220
+You have a simple zero-mean Gaussian probability law.
+
+27:38.460 --> 27:41.140
+Imagine a cloud of dots on the graph paper.
+
+27:41.480 --> 27:44.740
+You have an exterior variable on the horizontal x-axis,
+
+27:45.220 --> 27:47.600
+an interior variable on the vertical y-axis.
+
+27:48.160 --> 27:50.620
+The math shows that they are conditionally independent.
+
+27:50.960 --> 27:52.400
+A trivial blanket exists.
+
+27:52.780 --> 27:55.960
+What's fascinating here is what Flyxion asks next.
+
+27:56.220 --> 27:59.220
+What happens if you simply rotate the coordinate plane?
+
+27:59.220 --> 28:02.720
+If you physically rotate the graph paper by an angle, theta,
+
+28:03.000 --> 28:05.000
+you are essentially creating new axes.
+
+28:05.560 --> 28:12.080
+These new x- and y-axis are now a mathematical mix of the old inside and the old outside.
+
+28:12.240 --> 28:13.940
+Because they're slanted across both.
+
+28:14.080 --> 28:14.560
+Exactly.
+
+28:15.380 --> 28:16.960
+And the moment you do that rotation,
+
+28:17.420 --> 28:18.860
+for almost any generic angle,
+
+28:19.380 --> 28:21.320
+the conditional independence vanishes.
+
+28:21.960 --> 28:24.840
+The math suddenly shows that the variables are highly dependent.
+
+28:24.840 --> 28:29.140
+Just by looking at the exact same cloud of dots from a tilted angle.
+
+28:29.700 --> 28:32.200
+Literally just by rotating the lens of observation.
+
+28:33.060 --> 28:34.360
+The blanket vanishes.
+
+28:35.280 --> 28:38.320
+This is incontrovertible mathematical proof
+
+28:38.320 --> 28:42.300
+that the Markov blanket is not a property of the physical system taken alone.
+
+28:42.560 --> 28:46.800
+It is a property of a description alongside a probability law.
+
+28:47.040 --> 28:49.820
+That is a massive paradigm shift.
+
+28:49.820 --> 28:53.820
+The boundary isn't an objective physical wall in the universe.
+
+28:54.000 --> 28:57.980
+It's a feature of how you, the scientist, choose to measure the system.
+
+28:58.800 --> 29:01.040
+The paper also brings up coarse graining,
+
+29:01.340 --> 29:03.440
+which takes this subjectivity even further.
+
+29:03.800 --> 29:05.680
+Coarse graining is the act of zooming out.
+
+29:06.380 --> 29:10.760
+It is deliberately merging variables together to simplify a complex model.
+
+29:10.760 --> 29:14.220
+If you have a highly detailed, fine-grained system
+
+29:14.220 --> 29:16.900
+where absolutely no Markov blanket exists,
+
+29:17.460 --> 29:20.120
+everything is statistically tangled with everything else.
+
+29:20.660 --> 29:24.880
+The paper points out that if you selectively merge certain variables together,
+
+29:25.500 --> 29:27.420
+if you deliberately throw away some information,
+
+29:27.780 --> 29:31.220
+you can magically create a statistical Markov blanket
+
+29:31.220 --> 29:33.300
+where none existed a moment ago.
+
+29:33.800 --> 29:36.780
+You can literally invent a mathematical boundary just by squinting.
+
+29:36.960 --> 29:37.160
+Yes.
+
+29:37.160 --> 29:41.560
+The act of merging variables can manufacture the conditional independence.
+
+29:42.540 --> 29:46.640
+Therefore, the statement that a system has a Markov blanket
+
+29:46.640 --> 29:49.540
+has absolutely zero determinate truth value
+
+29:49.540 --> 29:53.660
+unless you explicitly specify exactly which variables you are measuring
+
+29:53.660 --> 29:57.400
+and at what scale or grain of observation.
+
+29:57.880 --> 29:59.160
+If you are listening to this right now,
+
+29:59.220 --> 30:02.400
+I want you to realize how disruptive this is to modern science news.
+
+30:02.860 --> 30:05.420
+Right now, there are countless pop science articles
+
+30:05.420 --> 30:09.280
+and academic papers claiming that the human brain has a Markov blanket
+
+30:09.280 --> 30:12.160
+or a single neuron has a Markov blanket.
+
+30:12.300 --> 30:16.580
+And therefore, it is a distinct, conscious entity that models the world.
+
+30:16.960 --> 30:19.800
+But, based on Proposition 1 and coarse graining,
+
+30:20.340 --> 30:22.420
+you have to immediately ask those scientists,
+
+30:22.960 --> 30:23.740
+at what scale?
+
+30:24.540 --> 30:28.060
+Are we drawing the boundary at the level of neurotransmitter molecules?
+
+30:28.700 --> 30:29.480
+Single neurons?
+
+30:29.900 --> 30:30.680
+Cortical columns?
+
+30:31.140 --> 30:32.420
+The entire frontal lobe?
+
+30:32.420 --> 30:35.960
+Because, depending on how the scientist chooses to group the variables,
+
+30:36.200 --> 30:37.980
+the math changes entirely.
+
+30:38.300 --> 30:41.840
+The universe doesn't select the physically relevant boundary.
+
+30:42.100 --> 30:42.880
+The scientist does.
+
+30:43.580 --> 30:44.340
+The math is neutral.
+
+30:44.600 --> 30:45.700
+It's just a lens.
+
+30:46.460 --> 30:47.440
+As Flyxion writes,
+
+30:47.760 --> 30:49.360
+the blanket attaches to a description,
+
+30:49.760 --> 30:50.760
+not a physical object.
+
+30:51.420 --> 30:53.400
+If you claim a physical boundary exists,
+
+30:53.480 --> 30:55.080
+you cannot just point to the math and say,
+
+30:55.240 --> 30:56.460
+the equation proved it.
+
+30:56.460 --> 30:59.360
+You have to provide an outside, physical argument
+
+30:59.360 --> 31:01.840
+for why your specific chosen description
+
+31:01.840 --> 31:05.540
+is physically privileged over all the other possible descriptions.
+
+31:05.860 --> 31:09.020
+Which naturally leads us to a massive biological hurdle.
+
+31:09.400 --> 31:12.600
+If a blanket is just a matter of subjective description,
+
+31:12.860 --> 31:15.440
+if it depends entirely on who drew the graph
+
+31:15.440 --> 31:16.860
+and how far they zoomed in,
+
+31:17.240 --> 31:19.360
+how in the world does a biologist define
+
+31:19.360 --> 31:21.960
+an actual living, breathing individual?
+
+31:21.960 --> 31:24.300
+Because, clearly, I am physically separate
+
+31:24.300 --> 31:26.060
+from the microphone I am speaking into.
+
+31:27.320 --> 31:29.280
+This is where Flyxion addresses a very public,
+
+31:29.520 --> 31:30.220
+ongoing debate
+
+31:30.220 --> 31:32.500
+that was recently highlighted by researchers
+
+31:32.500 --> 31:34.780
+like Mark Solms and Kurt Giamengal.
+
+31:35.820 --> 31:38.360
+They recognize this exact problem of scale
+
+31:38.360 --> 31:39.460
+and arbitrary boundaries.
+
+31:40.080 --> 31:42.600
+To defend the biological use of Markov blankets,
+
+31:42.860 --> 31:45.480
+they rely on the concept of nested blankets.
+
+31:45.740 --> 31:45.980
+Right.
+
+31:46.200 --> 31:48.220
+They argue that nature itself is organized
+
+31:48.220 --> 31:49.560
+in a nested hierarchy.
+
+31:49.560 --> 31:51.900
+You have macromolecules that possess
+
+31:51.900 --> 31:53.300
+their own Markov blankets.
+
+31:53.720 --> 31:55.960
+Those molecules make up organelles,
+
+31:56.340 --> 31:57.060
+which have blankets,
+
+31:57.620 --> 31:59.380
+which make up cells with blankets,
+
+31:59.920 --> 32:00.980
+organs with blankets,
+
+32:01.100 --> 32:02.880
+all the way up to entire organisms.
+
+32:03.380 --> 32:06.220
+It's Russian nesting dolls of statistical boundaries.
+
+32:06.760 --> 32:07.820
+And their core argument is that
+
+32:07.820 --> 32:10.480
+to find the true boundary of an individual subject,
+
+32:10.880 --> 32:13.320
+to find where the human being actually exists,
+
+32:13.980 --> 32:15.880
+you look for the level in that hierarchy
+
+32:15.880 --> 32:17.740
+where the survival of the parts
+
+32:17.740 --> 32:20.680
+is delegated to the functioning of the whole.
+
+32:21.020 --> 32:23.180
+They call this delegated viability.
+
+32:23.700 --> 32:25.800
+Let me make sure I grasp delegated viability.
+
+32:26.280 --> 32:28.460
+It's the idea that a single skin cell on my arm
+
+32:28.460 --> 32:30.940
+doesn't have true independent agency
+
+32:30.940 --> 32:32.400
+or viability in the wild.
+
+32:33.020 --> 32:34.440
+It has delegated its survival
+
+32:34.440 --> 32:36.340
+to the larger system of my body.
+
+32:36.760 --> 32:38.180
+My heart pumps the blood,
+
+32:38.360 --> 32:39.600
+my lungs get the oxygen,
+
+32:39.860 --> 32:41.520
+and my skin cell survives
+
+32:41.520 --> 32:44.060
+purely because the whole organism survives.
+
+32:44.060 --> 32:46.360
+If the organism dies, the cell dies.
+
+32:46.940 --> 32:47.360
+Exactly.
+
+32:47.980 --> 32:51.120
+And conversely, if a cell stops deferring to the whole,
+
+32:51.420 --> 32:53.600
+if it ignores the blanket of the organism
+
+32:53.600 --> 32:55.220
+and starts acting entirely
+
+32:55.220 --> 32:58.040
+for its own immediate, unchecked, local replication,
+
+32:58.480 --> 33:00.040
+we call that a malignancy,
+
+33:00.320 --> 33:01.160
+and we call it cancer.
+
+33:01.840 --> 33:03.180
+It endangers the whole system
+
+33:03.180 --> 33:05.340
+and ultimately destroys itself.
+
+33:06.300 --> 33:08.060
+So, Solmes and others argue
+
+33:08.060 --> 33:10.220
+that the true boundary of the self
+
+33:10.220 --> 33:12.100
+is the outermost blanket
+
+33:12.100 --> 33:15.060
+where this biological viability is delegated.
+
+33:15.940 --> 33:17.340
+It sounds incredibly profound.
+
+33:17.960 --> 33:20.280
+It intuitively makes perfect sense
+
+33:20.280 --> 33:21.600
+of how biology works,
+
+33:21.720 --> 33:23.380
+but what does Flycore say
+
+33:23.380 --> 33:25.340
+about how this relates to the statistics
+
+33:25.340 --> 33:26.400
+we've been talking about?
+
+33:27.100 --> 33:28.220
+Flycore's rigorous take
+
+33:28.220 --> 33:29.740
+is that delegated viability
+
+33:29.740 --> 33:31.720
+is a beautiful, deeply compelling
+
+33:31.720 --> 33:33.060
+biological hypothesis.
+
+33:33.540 --> 33:35.920
+But the statistical Markov blanket
+
+33:35.920 --> 33:37.340
+does absolutely nothing
+
+33:37.340 --> 33:39.420
+to supply or prove this condition.
+
+33:39.420 --> 33:40.900
+The math doesn't care.
+
+33:41.180 --> 33:42.280
+The math is blind to it.
+
+33:42.820 --> 33:44.240
+The stationary probability law,
+
+33:44.340 --> 33:46.940
+the precision matrix pi we spent so much time on,
+
+33:47.280 --> 33:49.880
+has zero concept of delegated viability.
+
+33:50.540 --> 33:51.960
+The math doesn't know what life is.
+
+33:52.020 --> 33:53.060
+It doesn't know what death is.
+
+33:53.400 --> 33:56.100
+It only sees conditional statistical independence.
+
+33:56.720 --> 33:57.040
+Right.
+
+33:57.640 --> 33:59.740
+If you have a nested family of partitions,
+
+34:00.000 --> 34:01.540
+all satisfying a blanket condition
+
+34:01.540 --> 34:03.480
+at their own specific zoomed in
+
+34:03.480 --> 34:04.460
+or zoomed out scale,
+
+34:05.080 --> 34:06.720
+the stationary law cannot tell you
+
+34:06.720 --> 34:08.020
+which level of that nest
+
+34:08.020 --> 34:09.680
+warrants the title of subject.
+
+34:10.080 --> 34:11.540
+It doesn't tell you if the single cell
+
+34:11.540 --> 34:13.120
+is the individual or the liver
+
+34:13.120 --> 34:13.860
+or the human
+
+34:13.860 --> 34:16.480
+or the entire ecological forest system.
+
+34:16.660 --> 34:18.100
+The paper points out something
+
+34:18.100 --> 34:19.500
+really fascinating here
+
+34:19.500 --> 34:21.920
+about the commensurability of needs
+
+34:21.920 --> 34:23.200
+when it comes to survival.
+
+34:23.660 --> 34:25.180
+This feels really important.
+
+34:25.440 --> 34:26.700
+This is a crucial flaw
+
+34:26.700 --> 34:28.240
+in how some models apply the math.
+
+34:28.940 --> 34:30.780
+When we talk about viability,
+
+34:31.100 --> 34:32.340
+we are talking about an organism
+
+34:32.340 --> 34:34.960
+fulfilling multiple distinct critical needs.
+
+34:35.860 --> 34:37.460
+An animal needs oxygen,
+
+34:38.220 --> 34:38.460
+water,
+
+34:39.080 --> 34:39.380
+food,
+
+34:40.360 --> 34:42.020
+and specific temperature regulation.
+
+34:42.020 --> 34:42.420
+Right.
+
+34:42.580 --> 34:43.500
+Lots of different inputs.
+
+34:44.420 --> 34:46.400
+But the mathematics of active inference
+
+34:46.400 --> 34:47.840
+often tries to boil
+
+34:47.840 --> 34:49.200
+all of this complex survival
+
+34:49.200 --> 34:50.200
+down to a single
+
+34:50.200 --> 34:52.020
+scalar objective,
+
+34:52.480 --> 34:53.900
+a single number to minimize,
+
+34:54.100 --> 34:56.040
+like free energy or surprise.
+
+34:56.380 --> 34:57.520
+It treats survival
+
+34:57.520 --> 34:59.140
+like a video game health bar,
+
+34:59.300 --> 35:00.500
+just one single number
+
+35:00.500 --> 35:01.300
+going up or down.
+
+35:01.580 --> 35:01.920
+Exactly.
+
+35:03.000 --> 35:04.020
+But Flyxion argues
+
+35:04.020 --> 35:05.000
+that the physical needs
+
+35:05.000 --> 35:05.620
+of an organism
+
+35:05.620 --> 35:07.740
+are not always commensurable.
+
+35:08.440 --> 35:11.020
+You cannot mathematically compensate
+
+35:11.020 --> 35:12.980
+across indispensable requirements.
+
+35:13.880 --> 35:15.120
+A single scalar objective
+
+35:15.120 --> 35:16.460
+can completely hide
+
+35:16.460 --> 35:17.860
+a fatal biological flaw.
+
+35:18.340 --> 35:18.740
+How so?
+
+35:19.280 --> 35:21.020
+Your overall survival score
+
+35:21.020 --> 35:22.860
+might look mathematically fantastic
+
+35:22.860 --> 35:24.520
+because you have a massive,
+
+35:24.800 --> 35:26.200
+overwhelming abundance of oxygen,
+
+35:26.620 --> 35:28.300
+which completely masks the fact
+
+35:28.300 --> 35:29.540
+that you are actively dying
+
+35:29.540 --> 35:30.320
+of dehydration.
+
+35:31.200 --> 35:31.800
+Equal deficits
+
+35:31.800 --> 35:32.900
+of two different needs
+
+35:32.900 --> 35:35.140
+do not mathematically sum
+
+35:35.140 --> 35:35.800
+to a quantity
+
+35:35.800 --> 35:36.500
+that can be fixed
+
+35:36.500 --> 35:37.580
+by over-satisfying
+
+35:37.580 --> 35:38.220
+just one of them.
+
+35:38.920 --> 35:40.040
+So if I'm wandering the desert,
+
+35:40.460 --> 35:41.200
+starving to death,
+
+35:41.980 --> 35:43.180
+breathing twice as deeply
+
+35:43.180 --> 35:44.720
+doesn't save my life.
+
+35:44.960 --> 35:45.320
+Exactly.
+
+35:45.720 --> 35:47.320
+And the statistical Markov blanket
+
+35:47.320 --> 35:48.200
+has no metric
+
+35:48.200 --> 35:49.560
+for combining or weighting
+
+35:49.560 --> 35:50.580
+these indispensable
+
+35:50.580 --> 35:51.720
+physical constraints.
+
+35:52.240 --> 35:54.020
+It provides absolutely no rules
+
+35:54.020 --> 35:55.860
+for how to balance thirst
+
+35:55.860 --> 35:56.820
+against oxygen.
+
+35:56.820 --> 35:59.120
+The blanket can certainly
+
+35:59.120 --> 36:00.780
+act as a statistical interface
+
+36:00.780 --> 36:02.200
+to monitor these variables,
+
+36:02.400 --> 36:04.600
+but the statistical screening alone
+
+36:04.600 --> 36:05.580
+doesn't establish
+
+36:05.580 --> 36:06.640
+the rules of survival.
+
+36:06.640 --> 36:08.460
+So to synthesize this,
+
+36:08.900 --> 36:09.760
+we are sneaking
+
+36:09.760 --> 36:11.200
+our biological intuition
+
+36:11.200 --> 36:12.140
+through the back door
+
+36:12.140 --> 36:13.140
+and pretending
+
+36:13.140 --> 36:14.500
+it is a mathematical proof.
+
+36:15.300 --> 36:16.120
+Delegated viability
+
+36:16.120 --> 36:17.860
+is a completely valid way
+
+36:17.860 --> 36:18.920
+to define an organism,
+
+36:18.920 --> 36:20.440
+but it is an addition
+
+36:20.440 --> 36:21.640
+to the mathematics.
+
+36:21.640 --> 36:23.700
+It is a biological constraint
+
+36:23.700 --> 36:24.360
+that the scientist
+
+36:24.360 --> 36:26.340
+is forcing onto the equations
+
+36:26.340 --> 36:27.180
+from the outside.
+
+36:27.900 --> 36:28.840
+You cannot derive
+
+36:28.840 --> 36:30.240
+the concept of an organism
+
+36:30.240 --> 36:31.700
+dying simply from the fact
+
+36:31.700 --> 36:33.200
+that a cross-block entry
+
+36:33.200 --> 36:34.340
+in a precision matrix
+
+36:34.340 --> 36:35.280
+happens to be zero.
+
+36:35.620 --> 36:36.780
+That is the precise
+
+36:36.780 --> 36:37.960
+philosophical trap
+
+36:37.960 --> 36:39.340
+Flyxion is exposing.
+
+36:39.940 --> 36:41.640
+The mathematical formalism
+
+36:41.640 --> 36:42.620
+of the Markov blanket
+
+36:42.620 --> 36:44.460
+does not deliver the concept
+
+36:44.460 --> 36:45.940
+of an individual subject.
+
+36:46.220 --> 36:47.600
+Okay, we have covered
+
+36:47.600 --> 36:48.440
+spatial boundaries,
+
+36:49.080 --> 36:50.600
+the illusion of physical coupling,
+
+36:50.600 --> 36:52.100
+how boundaries are
+
+36:52.100 --> 36:53.100
+entirely relative
+
+36:53.100 --> 36:53.840
+to the observer,
+
+36:54.260 --> 36:55.660
+and how survival metrics
+
+36:55.660 --> 36:56.520
+aren't inherent
+
+36:56.520 --> 36:57.300
+in the statistics.
+
+36:57.560 --> 36:58.660
+That is a lot
+
+36:58.660 --> 36:59.920
+of shattered assumptions.
+
+37:00.380 --> 37:01.920
+But now we have to look
+
+37:01.920 --> 37:02.460
+at the dimension
+
+37:02.460 --> 37:03.820
+that messes everything up
+
+37:03.820 --> 37:04.380
+even further,
+
+37:04.680 --> 37:05.780
+which is time.
+
+37:06.180 --> 37:06.500
+Time changes
+
+37:06.500 --> 37:07.440
+the entire equation.
+
+37:07.700 --> 37:09.160
+We have to look at asynchrony
+
+37:09.160 --> 37:11.280
+and the completion problem.
+
+37:11.680 --> 37:12.460
+The paper makes
+
+37:12.460 --> 37:14.600
+a massive disciplinary shift here.
+
+37:14.720 --> 37:15.360
+It moves away
+
+37:15.360 --> 37:16.440
+from the continuous
+
+37:16.440 --> 37:17.880
+biological diffusion
+
+37:17.880 --> 37:18.760
+we just talked about,
+
+37:19.080 --> 37:20.160
+the fluid dynamics
+
+37:20.160 --> 37:21.560
+of cells and whirlpools,
+
+37:21.560 --> 37:22.540
+and moves over
+
+37:22.540 --> 37:23.820
+into computer science.
+
+37:24.500 --> 37:24.940
+Specifically,
+
+37:25.140 --> 37:26.080
+the paper introduces
+
+37:26.080 --> 37:27.080
+Karl Fant's
+
+37:27.080 --> 37:28.440
+null convention logic
+
+37:28.440 --> 37:30.060
+and the invocation model
+
+37:30.060 --> 37:30.640
+of computing.
+
+37:31.260 --> 37:32.060
+If we connect this
+
+37:32.060 --> 37:32.860
+to the bigger picture,
+
+37:33.280 --> 37:34.060
+this section is about
+
+37:34.060 --> 37:35.240
+how complex systems
+
+37:35.240 --> 37:36.860
+actually process information
+
+37:36.860 --> 37:38.620
+in physical reality,
+
+37:38.820 --> 37:39.640
+as opposed to how
+
+37:39.640 --> 37:40.320
+they process it
+
+37:40.320 --> 37:41.700
+in a timeless,
+
+37:41.980 --> 37:43.340
+perfect mathematical equation.
+
+37:43.920 --> 37:44.900
+Most of the free energy
+
+37:44.900 --> 37:45.720
+principle literature
+
+37:45.720 --> 37:46.780
+assumes a continuous,
+
+37:46.780 --> 37:49.240
+perfectly smooth flow of time,
+
+37:49.580 --> 37:51.320
+or at least a perfectly
+
+37:51.320 --> 37:52.560
+synchronized metronome
+
+37:52.560 --> 37:53.800
+ticking in the background
+
+37:53.800 --> 37:54.500
+of the universe.
+
+37:55.200 --> 37:57.060
+But real biological systems
+
+37:57.060 --> 37:58.300
+and advanced logical
+
+37:58.300 --> 37:59.100
+computing systems
+
+37:59.100 --> 37:59.760
+like FANs
+
+37:59.760 --> 38:00.960
+are asynchronous.
+
+38:00.960 --> 38:02.300
+Let's make sure
+
+38:02.300 --> 38:03.300
+we clearly distinguish
+
+38:03.300 --> 38:04.280
+between synchronous
+
+38:04.280 --> 38:06.080
+and asynchronous systems.
+
+38:06.780 --> 38:08.140
+A traditional laptop computer
+
+38:08.140 --> 38:09.120
+has a global clock.
+
+38:09.440 --> 38:10.660
+Tick, tock, tick, tock,
+
+38:10.740 --> 38:12.380
+billions of times a second.
+
+38:12.980 --> 38:13.500
+Every single
+
+38:13.500 --> 38:14.480
+microchip component
+
+38:14.480 --> 38:15.780
+updates at the exact
+
+38:15.780 --> 38:16.620
+same moment
+
+38:16.620 --> 38:17.260
+on the tick.
+
+38:17.420 --> 38:18.300
+Right, that's synchronous.
+
+38:19.000 --> 38:20.400
+But an asynchronous system
+
+38:20.400 --> 38:21.080
+doesn't have
+
+38:21.080 --> 38:21.900
+a global conductor
+
+38:21.900 --> 38:22.720
+waving a baton.
+
+38:22.980 --> 38:24.100
+So how does it
+
+38:24.100 --> 38:25.040
+know when to act?
+
+38:25.380 --> 38:26.580
+It relies entirely
+
+38:26.580 --> 38:27.880
+on local completion.
+
+38:28.440 --> 38:29.240
+In FANs' model
+
+38:29.240 --> 38:29.820
+of computing,
+
+38:30.460 --> 38:31.560
+computation is organized
+
+38:31.560 --> 38:32.420
+by alternating
+
+38:32.420 --> 38:33.700
+data wavefronts
+
+38:33.700 --> 38:35.020
+and null wavefronts.
+
+38:35.720 --> 38:36.860
+A process element,
+
+38:37.020 --> 38:37.540
+whether that's
+
+38:37.540 --> 38:39.080
+a silicon logical gate
+
+38:39.080 --> 38:40.760
+or a biological neuron,
+
+38:41.200 --> 38:42.140
+only fires
+
+38:42.140 --> 38:43.440
+or updates its state
+
+38:43.440 --> 38:44.380
+when it receives
+
+38:44.380 --> 38:45.460
+a definitive signal
+
+38:45.460 --> 38:46.260
+that its inputs
+
+38:46.260 --> 38:47.500
+are physically complete
+
+38:47.500 --> 38:48.080
+and ready.
+
+38:48.600 --> 38:49.920
+It waits for the full
+
+38:49.920 --> 38:51.840
+data phase to arrive.
+
+38:52.500 --> 38:52.900
+And then what?
+
+38:53.320 --> 38:54.080
+Once it processes
+
+38:54.080 --> 38:54.620
+that data,
+
+38:55.000 --> 38:55.800
+it resets into
+
+38:55.800 --> 38:56.560
+a null state,
+
+38:56.860 --> 38:57.460
+which indicates
+
+38:57.460 --> 38:58.660
+the absence of a value
+
+38:58.660 --> 38:59.620
+and it simply
+
+38:59.620 --> 39:00.200
+waits again.
+
+39:00.980 --> 39:01.300
+Just a bunch
+
+39:01.300 --> 39:02.200
+of localized actors
+
+39:02.200 --> 39:02.720
+saying,
+
+39:03.360 --> 39:04.180
+okay, I have all
+
+39:04.180 --> 39:04.700
+my ingredients
+
+39:04.700 --> 39:05.320
+from my neighbors,
+
+39:05.560 --> 39:06.080
+I'm going to bake
+
+39:06.080 --> 39:06.760
+the cake now,
+
+39:07.280 --> 39:07.740
+done,
+
+39:08.120 --> 39:08.740
+now I'm waiting
+
+39:08.740 --> 39:09.620
+for more ingredients.
+
+39:10.000 --> 39:10.420
+Exactly.
+
+39:10.800 --> 39:11.740
+And this introduces
+
+39:11.740 --> 39:13.440
+a massive structural
+
+39:13.440 --> 39:14.360
+problem for the
+
+39:14.360 --> 39:15.580
+Markov blanket concept.
+
+39:16.020 --> 39:17.200
+Because when dealing
+
+39:17.200 --> 39:18.500
+with asynchronous time,
+
+39:18.920 --> 39:19.840
+we have to distinguish
+
+39:19.840 --> 39:20.720
+between two
+
+39:20.720 --> 39:22.200
+completely different concepts,
+
+39:22.940 --> 39:23.400
+screening
+
+39:23.400 --> 39:24.900
+and completion.
+
+39:25.280 --> 39:26.080
+Let's define them.
+
+39:26.080 --> 39:27.920
+Screening is what
+
+39:27.920 --> 39:28.480
+we've been talking
+
+39:28.480 --> 39:29.320
+about this whole time,
+
+39:29.720 --> 39:31.120
+the statistical condition
+
+39:31.120 --> 39:32.460
+on the stationary law.
+
+39:32.920 --> 39:33.700
+The fact that,
+
+39:34.020 --> 39:34.620
+on average,
+
+39:34.820 --> 39:35.720
+the blanket completely
+
+39:35.720 --> 39:37.140
+hides the outside world
+
+39:37.140 --> 39:37.960
+from the inside.
+
+39:38.220 --> 39:38.520
+Right.
+
+39:38.960 --> 39:39.740
+But completion
+
+39:39.740 --> 39:41.100
+is the physical
+
+39:41.100 --> 39:42.680
+chronological requirement
+
+39:42.680 --> 39:44.140
+that the internal system
+
+39:44.140 --> 39:45.420
+only updates and acts
+
+39:45.420 --> 39:46.760
+when every single
+
+39:46.760 --> 39:48.040
+component of its blanket
+
+39:48.040 --> 39:49.580
+has successfully reached
+
+39:49.580 --> 39:50.740
+the data phase.
+
+39:51.460 --> 39:52.740
+The state consumed
+
+39:52.740 --> 39:53.720
+by the interior
+
+39:53.720 --> 39:54.800
+must be a state
+
+39:54.800 --> 39:55.500
+that the exterior
+
+39:55.500 --> 39:56.800
+has actually finished
+
+39:56.800 --> 39:57.540
+delivering.
+
+39:57.980 --> 39:59.060
+And the paper proves
+
+39:59.060 --> 39:59.640
+that a system
+
+39:59.640 --> 40:01.120
+can satisfy the statistical
+
+40:01.120 --> 40:02.000
+screening condition
+
+40:02.000 --> 40:03.040
+perfectly on paper,
+
+40:03.300 --> 40:04.600
+but fail completely
+
+40:04.600 --> 40:05.920
+in physical reality
+
+40:05.920 --> 40:06.920
+because of the timing
+
+40:06.920 --> 40:07.660
+of the updates.
+
+40:08.200 --> 40:09.140
+Let's break down
+
+40:09.140 --> 40:10.340
+exactly why this happens.
+
+40:11.200 --> 40:12.940
+A stationary probability law,
+
+40:13.540 --> 40:14.860
+our screening condition,
+
+40:15.380 --> 40:16.920
+samples typical times.
+
+40:17.720 --> 40:18.760
+If you observe the system
+
+40:18.760 --> 40:19.740
+randomly over the course
+
+40:19.740 --> 40:20.160
+of a month,
+
+40:20.300 --> 40:21.000
+on average,
+
+40:21.360 --> 40:22.200
+the math holds up.
+
+40:22.200 --> 40:24.160
+But the internal system
+
+40:24.160 --> 40:25.820
+doesn't act on average.
+
+40:26.180 --> 40:27.800
+It acts at highly specific,
+
+40:28.020 --> 40:28.340
+discrete,
+
+40:28.500 --> 40:29.620
+instantaneous moments,
+
+40:30.100 --> 40:31.160
+the exact instant
+
+40:31.160 --> 40:32.700
+the boundary is consumed
+
+40:32.700 --> 40:34.480
+and an internal update triggers.
+
+40:34.960 --> 40:36.280
+This is called sampling
+
+40:36.280 --> 40:37.720
+typical events.
+
+40:38.220 --> 40:38.360
+Okay.
+
+40:38.500 --> 40:39.760
+I have an analogy for this
+
+40:39.760 --> 40:40.460
+to help separate
+
+40:40.460 --> 40:41.340
+typical times
+
+40:41.340 --> 40:42.400
+from typical events.
+
+40:42.940 --> 40:44.780
+Let's say our Markov blanket
+
+40:44.780 --> 40:46.680
+is a massive digital billboard
+
+40:46.680 --> 40:47.300
+in Times Square.
+
+40:47.520 --> 40:47.680
+Okay.
+
+40:48.020 --> 40:49.320
+The exterior environment
+
+40:49.320 --> 40:51.120
+is the complex computer server
+
+40:51.120 --> 40:51.980
+rendering the images.
+
+40:51.980 --> 40:53.680
+And the interior system
+
+40:53.680 --> 40:54.760
+is a person standing
+
+40:54.760 --> 40:55.440
+on the sidewalk
+
+40:55.440 --> 40:56.660
+looking up at the billboard
+
+40:56.660 --> 40:57.660
+to update their knowledge
+
+40:57.660 --> 40:58.080
+of the world.
+
+40:58.260 --> 40:58.480
+Makes sense.
+
+40:58.960 --> 40:59.880
+If you set up a camera
+
+40:59.880 --> 41:00.660
+to take a photograph
+
+41:00.660 --> 41:01.440
+of that billboard
+
+41:01.440 --> 41:02.720
+randomly every hour
+
+41:02.720 --> 41:03.260
+for a month
+
+41:03.260 --> 41:04.640
+and you run the statistics
+
+41:04.640 --> 41:05.240
+on those photos,
+
+41:05.340 --> 41:06.440
+you will find a perfect
+
+41:06.440 --> 41:07.360
+Markov blanket.
+
+41:08.000 --> 41:09.460
+The clean, rendered images
+
+41:09.460 --> 41:10.340
+displayed on the screen
+
+41:10.340 --> 41:11.180
+perfectly screen
+
+41:11.180 --> 41:11.700
+the pedestrian
+
+41:11.700 --> 41:12.720
+from the complex,
+
+41:13.220 --> 41:14.300
+messy, raw code
+
+41:14.300 --> 41:15.300
+running on the server.
+
+41:15.800 --> 41:16.940
+The screening condition
+
+41:16.940 --> 41:17.960
+holds flawlessly
+
+41:17.960 --> 41:19.220
+for typical times.
+
+41:19.460 --> 41:20.940
+That is the statistical average,
+
+41:20.940 --> 41:22.400
+but let's say
+
+41:22.400 --> 41:23.140
+this is a cheap
+
+41:23.140 --> 41:24.180
+laggy billboard.
+
+41:24.180 --> 41:26.220
+It takes three full seconds
+
+41:26.220 --> 41:27.260
+to render a new image.
+
+41:27.960 --> 41:29.000
+During those three seconds
+
+41:29.000 --> 41:29.500
+of rendering,
+
+41:29.860 --> 41:30.540
+it glitches out
+
+41:30.540 --> 41:31.460
+and actually flashes
+
+41:31.460 --> 41:32.520
+raw uncompiled
+
+41:32.520 --> 41:33.660
+HTML server code
+
+41:33.660 --> 41:34.180
+on the screen.
+
+41:34.640 --> 41:35.940
+The completion condition
+
+41:35.940 --> 41:36.640
+is violated
+
+41:36.640 --> 41:37.720
+because the data phase
+
+41:37.720 --> 41:38.880
+isn't fully ready.
+
+41:39.400 --> 41:39.660
+Uh-oh.
+
+41:39.660 --> 41:42.200
+Now, what if the pedestrian,
+
+41:42.520 --> 41:43.440
+the interior system,
+
+41:43.840 --> 41:44.660
+specifically chooses
+
+41:44.660 --> 41:45.580
+to look at the billboard
+
+41:45.580 --> 41:46.860
+only when it flickers
+
+41:46.860 --> 41:47.340
+and updates?
+
+41:47.800 --> 41:48.460
+They are sampling
+
+41:48.460 --> 41:49.600
+typical events.
+
+41:50.000 --> 41:50.980
+And in those specific
+
+41:50.980 --> 41:51.480
+instances,
+
+41:51.760 --> 41:52.380
+they are seeing
+
+41:52.380 --> 41:53.060
+the raw code.
+
+41:53.200 --> 41:53.720
+They are seeing
+
+41:53.720 --> 41:55.100
+the exterior environment
+
+41:55.100 --> 41:55.680
+directly.
+
+41:56.040 --> 41:57.420
+The blanket completely
+
+41:57.420 --> 41:58.340
+fails to screen them
+
+41:58.340 --> 41:59.100
+at the exact moment
+
+41:59.100 --> 42:00.300
+they actually update
+
+42:00.300 --> 42:01.180
+their internal state.
+
+42:01.360 --> 42:02.660
+That analogy captures
+
+42:02.660 --> 42:03.660
+the mathematical failure
+
+42:03.660 --> 42:04.220
+perfectly.
+
+42:04.820 --> 42:06.060
+The statistical blanket
+
+42:06.060 --> 42:07.600
+exists on average
+
+42:07.600 --> 42:08.380
+across time,
+
+42:08.540 --> 42:10.340
+but it fails in physical practice
+
+42:10.340 --> 42:11.800
+because the interior
+
+42:11.800 --> 42:12.880
+acts on stale,
+
+42:13.080 --> 42:13.400
+partial,
+
+42:13.620 --> 42:14.620
+or glitching data
+
+42:14.620 --> 42:15.760
+at the exact,
+
+42:16.040 --> 42:16.740
+critical moment
+
+42:16.740 --> 42:17.560
+of the update event.
+
+42:18.420 --> 42:19.220
+If the timing
+
+42:19.220 --> 42:20.020
+of the update event
+
+42:20.020 --> 42:20.960
+depends on both
+
+42:20.960 --> 42:22.600
+the inside and the outside
+
+42:22.600 --> 42:23.060
+jointly,
+
+42:23.440 --> 42:24.120
+like the pedestrian
+
+42:24.120 --> 42:24.760
+looking only
+
+42:24.760 --> 42:25.720
+when the screen glitches,
+
+42:26.220 --> 42:27.260
+the screening fails
+
+42:27.260 --> 42:28.780
+precisely when it matters most.
+
+42:29.360 --> 42:30.980
+So average doesn't cut it.
+
+42:31.220 --> 42:31.600
+Exactly.
+
+42:32.080 --> 42:33.040
+You have to evaluate
+
+42:33.040 --> 42:34.300
+the statistical condition
+
+42:34.300 --> 42:36.060
+not just vaguely over time,
+
+42:36.400 --> 42:37.340
+but specifically
+
+42:37.340 --> 42:39.060
+at the exact instance
+
+42:39.060 --> 42:40.140
+the interface is actually
+
+42:40.140 --> 42:41.280
+consumed by the interior.
+
+42:41.940 --> 42:42.240
+Which means
+
+42:42.240 --> 42:43.860
+a theoretical biologist
+
+42:43.860 --> 42:44.660
+could point to
+
+42:44.660 --> 42:45.900
+a beautifully mathematical
+
+42:45.900 --> 42:46.920
+Markov blanket
+
+42:46.920 --> 42:47.680
+in a brain model,
+
+42:47.800 --> 42:48.880
+but that blanket
+
+42:48.880 --> 42:50.020
+might be functionally
+
+42:50.020 --> 42:51.700
+useless to the actual organism
+
+42:51.700 --> 42:53.320
+because its internal neurons
+
+42:53.320 --> 42:54.520
+are firing out of sync
+
+42:54.520 --> 42:55.740
+with the sensory inputs
+
+42:55.740 --> 42:56.680
+arriving at the boundary.
+
+42:57.240 --> 42:57.800
+Precisely.
+
+42:58.400 --> 42:59.080
+And this is why
+
+42:59.080 --> 42:59.960
+Flyxion proposes
+
+42:59.960 --> 43:01.180
+a new, combined,
+
+43:01.700 --> 43:02.460
+rigorous definition
+
+43:02.460 --> 43:03.660
+for biological models.
+
+43:04.240 --> 43:05.120
+For an interface
+
+43:05.120 --> 43:06.400
+to be truly adequate,
+
+43:06.400 --> 43:07.500
+must satisfy
+
+43:07.500 --> 43:08.320
+both conditions
+
+43:08.320 --> 43:08.900
+simultaneously.
+
+43:09.960 --> 43:10.280
+First,
+
+43:10.380 --> 43:11.380
+the statistical screening
+
+43:11.380 --> 43:12.000
+must hold
+
+43:12.000 --> 43:12.920
+under the specific
+
+43:12.920 --> 43:13.960
+probability law
+
+43:13.960 --> 43:14.960
+of the instance
+
+43:14.960 --> 43:15.820
+at which the blanket
+
+43:15.820 --> 43:16.520
+is consumed,
+
+43:16.880 --> 43:17.720
+not just on average.
+
+43:18.500 --> 43:18.860
+Second,
+
+43:19.300 --> 43:19.980
+every update
+
+43:19.980 --> 43:20.640
+of the interior
+
+43:20.640 --> 43:21.840
+must strictly act
+
+43:21.840 --> 43:23.260
+only on a blanket value
+
+43:23.260 --> 43:24.040
+that has fully
+
+43:24.040 --> 43:25.700
+chronologically reached
+
+43:25.700 --> 43:26.480
+the data phase.
+
+43:27.160 --> 43:27.760
+It has to be
+
+43:27.760 --> 43:28.920
+statistically independent
+
+43:28.920 --> 43:31.160
+and chronologically complete.
+
+43:31.400 --> 43:31.660
+Yes.
+
+43:31.660 --> 43:33.640
+And whether a biological
+
+43:33.640 --> 43:34.300
+interface,
+
+43:34.540 --> 43:35.640
+like an ion channel
+
+43:35.640 --> 43:36.760
+in a cellular membrane
+
+43:36.760 --> 43:38.980
+or synaptic transmission
+
+43:38.980 --> 43:40.080
+in a neural network,
+
+43:40.260 --> 43:41.440
+actually satisfies
+
+43:41.440 --> 43:42.700
+these two rigorous conditions
+
+43:42.700 --> 43:43.860
+is an empirical,
+
+43:44.340 --> 43:44.840
+testable,
+
+43:45.280 --> 43:45.920
+physical matter.
+
+43:46.340 --> 43:46.980
+It's not something
+
+43:46.980 --> 43:48.100
+you can just assume
+
+43:48.100 --> 43:48.720
+to be true
+
+43:48.720 --> 43:49.540
+simply because you
+
+43:49.540 --> 43:51.100
+drew a four-part graph
+
+43:51.100 --> 43:51.760
+on a whiteboard.
+
+43:52.480 --> 43:53.240
+We have torn down
+
+43:53.240 --> 43:54.600
+a staggering amount
+
+43:54.600 --> 43:55.580
+of assumptions today.
+
+43:55.980 --> 43:56.980
+We've seen how
+
+43:56.980 --> 43:58.200
+physical sparse coupling
+
+43:58.200 --> 43:59.480
+fails to create boundaries
+
+43:59.480 --> 44:00.280
+out of equilibrium,
+
+44:01.000 --> 44:01.680
+how the existence
+
+44:01.680 --> 44:02.280
+of boundaries
+
+44:02.280 --> 44:03.460
+is completely relative
+
+44:03.460 --> 44:04.460
+to the observer's
+
+44:04.460 --> 44:05.340
+choice of description,
+
+44:06.000 --> 44:07.180
+how biological survival
+
+44:07.180 --> 44:08.360
+metrics aren't inherent
+
+44:08.360 --> 44:09.020
+in the math,
+
+44:09.540 --> 44:10.400
+and how the asynchronous
+
+44:10.400 --> 44:11.280
+flow of time
+
+44:11.280 --> 44:12.720
+can shatter a statistical
+
+44:12.720 --> 44:14.120
+shield in an instant.
+
+44:14.500 --> 44:15.460
+We have dismantled
+
+44:15.460 --> 44:16.120
+the overreach.
+
+44:16.760 --> 44:18.340
+But to be rigorously
+
+44:18.340 --> 44:19.260
+fair to the mathematics,
+
+44:19.660 --> 44:20.240
+because the math
+
+44:20.240 --> 44:21.340
+itself is not wrong,
+
+44:21.700 --> 44:22.540
+only the biological
+
+44:22.540 --> 44:23.840
+interpretation of it is,
+
+44:24.360 --> 44:25.240
+we need to establish
+
+44:25.240 --> 44:26.900
+exactly what a Markov blanket
+
+44:26.900 --> 44:28.640
+does legitimately give us.
+
+44:28.640 --> 44:29.820
+This brings us
+
+44:29.820 --> 44:31.080
+to the final tally,
+
+44:31.660 --> 44:32.240
+what the blanket
+
+44:32.240 --> 44:33.400
+actually licenses
+
+44:33.400 --> 44:34.800
+and what it does not.
+
+44:35.480 --> 44:35.880
+Let's start
+
+44:35.880 --> 44:36.440
+with the positive.
+
+44:37.160 --> 44:37.920
+What does finding
+
+44:37.920 --> 44:38.860
+a Markov blanket
+
+44:38.860 --> 44:40.480
+mathematically license
+
+44:40.480 --> 44:41.380
+a scientist to say
+
+44:41.380 --> 44:42.060
+about a system?
+
+44:42.540 --> 44:43.760
+It licenses three
+
+44:43.760 --> 44:44.620
+very specific
+
+44:44.620 --> 44:45.580
+powerful claims.
+
+44:46.020 --> 44:47.580
+First, it licenses
+
+44:47.580 --> 44:48.820
+that under a given
+
+44:48.820 --> 44:49.800
+chosen description
+
+44:49.800 --> 44:50.460
+of variables
+
+44:50.460 --> 44:51.700
+and under a specific
+
+44:51.700 --> 44:52.820
+probability law,
+
+44:53.320 --> 44:54.420
+one block of variables
+
+44:54.420 --> 44:55.760
+is statistically screened
+
+44:55.760 --> 44:56.900
+from another by a third.
+
+44:57.560 --> 44:57.780
+Okay.
+
+44:57.780 --> 44:59.420
+Conditional independence
+
+44:59.420 --> 45:00.720
+definitively exists,
+
+45:01.260 --> 45:02.120
+but only within
+
+45:02.120 --> 45:03.320
+the subjective confines
+
+45:03.320 --> 45:04.560
+of the specific map
+
+45:04.560 --> 45:06.000
+the scientist chose to draw.
+
+45:06.500 --> 45:07.500
+What's number two?
+
+45:07.960 --> 45:08.840
+Number two involves
+
+45:08.840 --> 45:09.400
+an additional,
+
+45:09.760 --> 45:10.460
+highly technical,
+
+45:10.640 --> 45:11.440
+mathematical condition
+
+45:11.440 --> 45:13.660
+called the modal fiber condition.
+
+45:14.460 --> 45:15.880
+If this specific condition
+
+45:15.880 --> 45:16.340
+is met,
+
+45:16.760 --> 45:17.760
+the blanket licenses
+
+45:17.760 --> 45:18.440
+the construction
+
+45:18.440 --> 45:20.320
+of a synchronization map.
+
+45:20.840 --> 45:22.000
+Let's explain
+
+45:22.000 --> 45:23.400
+this synchronization map.
+
+45:23.860 --> 45:24.880
+The paper talks about
+
+45:24.880 --> 45:27.320
+mu bar and eta bar.
+
+45:27.320 --> 45:28.520
+which represent
+
+45:28.520 --> 45:29.320
+the most likely
+
+45:29.320 --> 45:30.260
+internal state
+
+45:30.260 --> 45:31.100
+and the most likely
+
+45:31.100 --> 45:32.040
+external state
+
+45:32.040 --> 45:33.680
+given a specific state
+
+45:33.680 --> 45:34.300
+of the blanket.
+
+45:34.660 --> 45:34.940
+Yes.
+
+45:35.340 --> 45:37.360
+If the external mode map
+
+45:37.360 --> 45:38.300
+is constant
+
+45:38.300 --> 45:39.040
+on the fibers
+
+45:39.040 --> 45:40.460
+of the internal mode map,
+
+45:40.660 --> 45:41.400
+which simply means
+
+45:41.400 --> 45:42.580
+if every time
+
+45:42.580 --> 45:43.300
+the internal state
+
+45:43.300 --> 45:44.600
+settles on a specific
+
+45:44.600 --> 45:45.300
+likely state,
+
+45:45.760 --> 45:46.580
+the external state
+
+45:46.580 --> 45:47.600
+also reliably,
+
+45:48.080 --> 45:49.100
+consistently settles
+
+45:49.100 --> 45:50.740
+on a corresponding
+
+45:50.740 --> 45:51.560
+likely state,
+
+45:51.960 --> 45:53.320
+then you can mathematically
+
+45:53.320 --> 45:54.580
+construct a set
+
+45:54.580 --> 45:55.500
+theoretic function
+
+45:55.500 --> 45:57.080
+that maps the inside
+
+45:57.080 --> 45:57.920
+to the outside.
+
+45:58.340 --> 46:00.160
+So the math proves
+
+46:00.160 --> 46:01.500
+that the inside state
+
+46:01.500 --> 46:02.720
+correlates predictably
+
+46:02.720 --> 46:03.520
+and reliably
+
+46:03.520 --> 46:04.860
+with the outside state?
+
+46:05.000 --> 46:05.240
+Yes.
+
+46:06.240 --> 46:07.180
+And thirdly,
+
+46:07.560 --> 46:08.680
+it licenses the use
+
+46:08.680 --> 46:09.160
+of the blanket
+
+46:09.160 --> 46:10.180
+as a sufficient,
+
+46:10.620 --> 46:11.580
+complete interface
+
+46:11.580 --> 46:12.880
+for statistical inference.
+
+46:13.280 --> 46:14.320
+If you are building
+
+46:14.320 --> 46:15.640
+an artificial intelligence
+
+46:15.640 --> 46:17.220
+or doing complex
+
+46:17.220 --> 46:18.220
+statistical modeling,
+
+46:18.820 --> 46:19.620
+finding the blanket
+
+46:19.620 --> 46:21.420
+guarantees you absolutely
+
+46:21.420 --> 46:22.500
+do not need to look
+
+46:22.500 --> 46:23.180
+beyond it
+
+46:23.180 --> 46:24.160
+to make the most
+
+46:24.160 --> 46:25.040
+accurate possible
+
+46:25.040 --> 46:25.960
+prediction about
+
+46:25.960 --> 46:26.540
+the interior.
+
+46:27.260 --> 46:27.900
+So it remains
+
+46:27.900 --> 46:29.180
+an incredibly powerful,
+
+46:29.420 --> 46:30.320
+indispensable tool
+
+46:30.320 --> 46:31.080
+for data science,
+
+46:31.180 --> 46:32.400
+AI, and statistical modeling.
+
+46:32.800 --> 46:33.560
+Absolutely powerful.
+
+46:34.340 --> 46:36.160
+But now we must firmly state
+
+46:36.160 --> 46:37.480
+what it does not license.
+
+46:38.340 --> 46:40.060
+The ultimate reality check.
+
+46:40.280 --> 46:40.720
+Hit us.
+
+46:41.100 --> 46:41.500
+First,
+
+46:42.000 --> 46:43.100
+it absolutely does not
+
+46:43.100 --> 46:43.980
+license the claim
+
+46:43.980 --> 46:44.700
+that the mathematical
+
+46:44.700 --> 46:45.560
+partition marks
+
+46:45.560 --> 46:46.420
+an objective,
+
+46:47.020 --> 46:47.760
+physical boundary
+
+46:47.760 --> 46:48.840
+in physical reality.
+
+46:48.840 --> 46:50.180
+As we saw
+
+46:50.180 --> 46:50.820
+with the graph paper,
+
+46:51.120 --> 46:51.760
+simply rotating
+
+46:51.760 --> 46:52.580
+the plane of measurement
+
+46:52.580 --> 46:53.440
+destroys the boundary.
+
+46:54.080 --> 46:55.100
+The physical boundary
+
+46:55.100 --> 46:56.200
+is entirely relative
+
+46:56.200 --> 46:57.040
+to the description
+
+46:57.040 --> 46:58.080
+chosen by the observer.
+
+46:58.520 --> 46:59.060
+What's the second?
+
+46:59.600 --> 47:00.160
+Second,
+
+47:00.660 --> 47:01.460
+it does not license
+
+47:01.460 --> 47:01.800
+the claim
+
+47:01.800 --> 47:02.620
+that the interior
+
+47:02.620 --> 47:04.800
+represents the exterior
+
+47:04.800 --> 47:05.860
+in any cognitive,
+
+47:06.100 --> 47:06.520
+psychological,
+
+47:06.680 --> 47:07.700
+or conscious sense.
+
+47:08.260 --> 47:09.500
+The synchronization map
+
+47:09.500 --> 47:10.300
+we just talked about,
+
+47:10.860 --> 47:11.740
+that's just a set
+
+47:11.740 --> 47:12.500
+theoretic function.
+
+47:13.000 --> 47:13.740
+You can find that
+
+47:13.740 --> 47:14.820
+exact same mathematical
+
+47:14.820 --> 47:15.880
+function in systems
+
+47:15.880 --> 47:17.000
+that are completely dead,
+
+47:17.260 --> 47:18.100
+like a thermostat
+
+47:18.100 --> 47:19.100
+or a rock rolling
+
+47:19.100 --> 47:19.580
+down a hill
+
+47:19.580 --> 47:21.320
+where no scientist
+
+47:21.320 --> 47:22.240
+would ever claim
+
+47:22.240 --> 47:23.760
+a mind or a conscious
+
+47:23.760 --> 47:25.020
+representation exists.
+
+47:25.500 --> 47:26.280
+So calling it a belief
+
+47:26.280 --> 47:26.920
+is a stretch.
+
+47:27.300 --> 47:28.260
+To say the internal state
+
+47:28.260 --> 47:29.200
+is a belief
+
+47:29.200 --> 47:30.540
+about the outside world
+
+47:30.540 --> 47:32.260
+is an interpretive,
+
+47:32.440 --> 47:33.360
+philosophical leap
+
+47:33.360 --> 47:34.580
+added on top of the math.
+
+47:34.840 --> 47:36.300
+The math does not supply
+
+47:36.300 --> 47:37.560
+the concept of a belief.
+
+47:37.840 --> 47:38.520
+And finally,
+
+47:38.600 --> 47:39.060
+the big one.
+
+47:39.780 --> 47:40.220
+Finally,
+
+47:40.620 --> 47:41.580
+it does not license
+
+47:41.580 --> 47:42.100
+the claim
+
+47:42.100 --> 47:43.200
+that a subject,
+
+47:43.740 --> 47:44.380
+a self,
+
+47:44.380 --> 47:45.660
+or a living individual
+
+47:45.660 --> 47:46.280
+is present.
+
+47:47.280 --> 47:48.460
+Finding a Markov blanket
+
+47:48.460 --> 47:49.460
+does not prove
+
+47:49.460 --> 47:49.920
+you have found
+
+47:49.920 --> 47:50.780
+a living organism.
+
+47:51.740 --> 47:52.880
+Individuation requires
+
+47:52.880 --> 47:54.060
+completely separate,
+
+47:54.300 --> 47:55.980
+additional biological criteria
+
+47:55.980 --> 47:57.720
+like the delegated viability
+
+47:57.720 --> 47:58.340
+we discussed
+
+47:58.340 --> 48:00.320
+that the pure statistical
+
+48:00.320 --> 48:01.080
+formalism
+
+48:01.080 --> 48:02.680
+simply does not contain.
+
+48:03.220 --> 48:03.560
+Together,
+
+48:03.760 --> 48:04.800
+this is the profound
+
+48:04.800 --> 48:05.360
+main thesis
+
+48:05.360 --> 48:06.320
+of Flyxion's paper.
+
+48:06.740 --> 48:07.640
+The Markov blanket
+
+48:07.640 --> 48:09.560
+is simply a closure condition
+
+48:09.560 --> 48:10.200
+on a description.
+
+48:10.600 --> 48:11.340
+It's a statement
+
+48:11.340 --> 48:12.840
+that for a given law
+
+48:12.840 --> 48:14.100
+in a chosen set of variables,
+
+48:14.720 --> 48:15.820
+the mathematical dependence
+
+48:15.820 --> 48:16.720
+between two blocks
+
+48:16.720 --> 48:18.020
+is mediated entirely
+
+48:18.020 --> 48:18.640
+by a third.
+
+48:19.120 --> 48:20.220
+It is a precise,
+
+48:20.600 --> 48:21.960
+beautiful statistical tool.
+
+48:22.300 --> 48:23.360
+But its physical,
+
+48:23.660 --> 48:24.120
+biological,
+
+48:24.440 --> 48:25.100
+and psychological
+
+48:25.100 --> 48:25.900
+interpretations
+
+48:25.900 --> 48:27.360
+depend on a mountain
+
+48:27.360 --> 48:28.040
+of assumptions
+
+48:28.040 --> 48:29.520
+that the formalism itself
+
+48:29.520 --> 48:31.240
+simply does not deliver.
+
+48:31.480 --> 48:32.680
+It is a perfect,
+
+48:33.000 --> 48:33.880
+cautionary example
+
+48:33.880 --> 48:34.940
+of how dangerous
+
+48:34.940 --> 48:35.500
+it can be
+
+48:35.500 --> 48:36.860
+when a highly specialized
+
+48:36.860 --> 48:37.840
+mathematical tool
+
+48:37.840 --> 48:38.740
+from one field,
+
+48:39.280 --> 48:39.800
+in this case,
+
+48:40.020 --> 48:41.060
+AI and statistics,
+
+48:41.060 --> 48:42.360
+is imported
+
+48:42.360 --> 48:43.480
+into another field
+
+48:43.480 --> 48:44.580
+and asked to carry
+
+48:44.580 --> 48:45.620
+the weight of massive
+
+48:45.620 --> 48:46.760
+philosophical questions
+
+48:46.760 --> 48:47.900
+it was never designed
+
+48:47.900 --> 48:48.340
+to answer.
+
+48:49.080 --> 48:49.560
+The literature
+
+48:49.560 --> 48:50.680
+has been most productive
+
+48:50.680 --> 48:52.660
+when it is explicitly clear
+
+48:52.660 --> 48:53.720
+about all the additional
+
+48:53.720 --> 48:54.880
+biological conditions
+
+48:54.880 --> 48:55.700
+it is asserting.
+
+48:56.200 --> 48:56.980
+But when it claims
+
+48:56.980 --> 48:57.700
+the math alone
+
+48:57.700 --> 48:58.680
+proves the biology,
+
+48:59.340 --> 49:00.260
+the logic collapses.
+
+49:00.800 --> 49:01.240
+Listener,
+
+49:01.340 --> 49:02.260
+I want to sincerely
+
+49:02.260 --> 49:02.800
+thank you
+
+49:02.800 --> 49:03.460
+for taking this
+
+49:03.460 --> 49:04.460
+incredibly dense,
+
+49:04.600 --> 49:05.740
+immensely rewarding
+
+49:05.740 --> 49:06.940
+deep dive with us today
+
+49:06.940 --> 49:08.220
+into the mathematics
+
+49:08.220 --> 49:09.520
+of boundaries.
+
+49:10.100 --> 49:10.720
+We went from
+
+49:10.720 --> 49:12.100
+the digital weather station
+
+49:12.100 --> 49:12.700
+on your wall
+
+49:12.700 --> 49:14.220
+through the swirling currents
+
+49:14.220 --> 49:16.040
+of out-of-equilibrium systems,
+
+49:16.700 --> 49:17.520
+tilted the axes
+
+49:17.520 --> 49:18.380
+of reality,
+
+49:18.880 --> 49:19.940
+and ended up staring
+
+49:19.940 --> 49:20.740
+at the glitching
+
+49:20.740 --> 49:21.700
+digital billboards
+
+49:21.700 --> 49:23.060
+of asynchronous computing.
+
+49:23.560 --> 49:24.760
+We tore down the myth
+
+49:24.760 --> 49:26.140
+that math automatically
+
+49:26.140 --> 49:27.040
+proves the existence
+
+49:27.040 --> 49:28.180
+of your physical self
+
+49:28.180 --> 49:29.740
+and revealed the beautiful
+
+49:29.740 --> 49:31.060
+subjective complexity
+
+49:31.060 --> 49:32.100
+of how we choose
+
+49:32.100 --> 49:33.020
+to describe the world.
+
+49:33.020 --> 49:34.880
+It is a vital reminder
+
+49:34.880 --> 49:35.940
+that science requires
+
+49:35.940 --> 49:37.020
+rigorous precision
+
+49:37.020 --> 49:37.900
+not just in our
+
+49:37.900 --> 49:38.860
+mathematical equations
+
+49:38.860 --> 49:40.920
+but in how we philosophically
+
+49:40.920 --> 49:42.300
+interpret those equations.
+
+49:42.780 --> 49:43.840
+And as we wrap up,
+
+49:43.920 --> 49:44.540
+I want to leave you
+
+49:44.540 --> 49:45.240
+with a final,
+
+49:45.580 --> 49:46.400
+provocative thought
+
+49:46.400 --> 49:46.960
+to mull over,
+
+49:47.400 --> 49:48.160
+something that builds
+
+49:48.160 --> 49:48.780
+on everything
+
+49:48.780 --> 49:49.700
+we've discussed today.
+
+49:50.220 --> 49:51.480
+We've firmly established
+
+49:51.480 --> 49:52.640
+that Markov blankets
+
+49:52.640 --> 49:54.260
+are just closure conditions
+
+49:54.260 --> 49:55.640
+based on our chosen descriptions.
+
+49:56.180 --> 49:57.140
+They depend entirely
+
+49:57.140 --> 49:58.000
+on the variables
+
+49:58.000 --> 49:59.320
+we decide to group together
+
+49:59.320 --> 50:00.340
+and the scale
+
+50:00.340 --> 50:01.540
+at which we choose to look.
+
+50:01.720 --> 50:01.940
+Right.
+
+50:01.940 --> 50:03.440
+But what happens
+
+50:03.440 --> 50:05.280
+when an artificial intelligence
+
+50:05.280 --> 50:06.680
+programmed with the very
+
+50:06.680 --> 50:07.700
+mathematical principles
+
+50:07.700 --> 50:09.040
+of active inference
+
+50:09.040 --> 50:10.580
+begins to rewrite
+
+50:10.580 --> 50:12.240
+its own Markov blankets?
+
+50:12.860 --> 50:14.200
+If an AI can mathematically
+
+50:14.200 --> 50:15.160
+redraw its own
+
+50:15.160 --> 50:16.160
+statistical boundaries
+
+50:16.160 --> 50:17.340
+by simply changing
+
+50:17.340 --> 50:18.640
+its internal description
+
+50:18.640 --> 50:19.180
+of the world,
+
+50:19.640 --> 50:20.180
+coarse graining
+
+50:20.180 --> 50:21.300
+its variables here,
+
+50:21.700 --> 50:22.800
+rotating its coordinate
+
+50:22.800 --> 50:23.620
+planes there,
+
+50:24.240 --> 50:26.240
+where does its self end
+
+50:26.240 --> 50:28.020
+and its environment begin?
+
+50:28.540 --> 50:29.660
+We might be on the verge
+
+50:29.660 --> 50:31.380
+of building non-biological minds
+
+50:31.380 --> 50:32.700
+whose very physical
+
+50:32.700 --> 50:33.780
+and cognitive boundaries
+
+50:33.780 --> 50:34.600
+are nothing more
+
+50:34.600 --> 50:36.220
+than a matter of real-time
+
+50:36.220 --> 50:37.560
+mathematical choice.
+
+50:38.100 --> 50:38.660
+If the boundary
+
+50:38.660 --> 50:39.560
+is just a description,
+
+50:40.400 --> 50:41.360
+what happens when the machine
+
+50:41.360 --> 50:42.660
+learns to rewrite the description?
+
+50:43.300 --> 50:44.900
+That is a staggering implication.
+
+50:45.360 --> 50:47.100
+The map literally redesigning
+
+50:47.100 --> 50:48.960
+the territory in real time.
+
+50:48.960 --> 50:51.240
+So the next time you look at a map
+
+50:51.240 --> 50:52.600
+or try to draw a line
+
+50:52.600 --> 50:53.740
+in the sand between yourself
+
+50:53.740 --> 50:54.820
+and the rest of the universe,
+
+50:55.000 --> 50:55.460
+just remember,
+
+50:55.820 --> 50:56.860
+you might feel like
+
+50:56.860 --> 50:57.480
+you're pointing out
+
+50:57.480 --> 50:58.380
+an undeniable
+
+50:58.380 --> 50:59.600
+objective absolute,
+
+50:59.820 --> 51:00.540
+but you're really just
+
+51:00.540 --> 51:01.600
+picking the description
+
+51:01.600 --> 51:02.720
+that makes the most sense
+
+51:02.720 --> 51:03.860
+to you right now.
+
+51:04.460 --> 51:06.380
+The sand is always moving.
+
+51:07.160 --> 51:08.580
+The boundaries are yours to draw.
+
+51:09.440 --> 51:10.640
+Keep questioning the edges
+
+51:10.640 --> 51:11.620
+of your own world.
+
+51:12.400 --> 51:13.440
+Catch you on the next Deep Dive.
+

@@ -1,0 +1,602 @@
+WEBVTT
+
+00:00.000 --> 00:11.560
+Sí. Si alguien intentara definir físicamente dónde termina un ser humano y dónde empieza el resto del universo, creo que la respuesta instintiva sería señalar la piel, ¿no?
+
+00:11.700 --> 00:14.300
+Claro. Sí, la piel parece una barrera innegable.
+
+00:14.440 --> 00:20.220
+Exacto. O sea, de un lado están los órganos, los pensamientos, y del otro lado está el entorno exterior.
+
+00:20.880 --> 00:28.980
+Pero la biología teórica contemporánea nos ha demostrado que trazar esa línea es, digamos, uno de los problemas más complejos de toda la ciencia.
+
+00:28.980 --> 00:33.060
+Totalmente. Y es un problema que va mucho más allá de la biología básica.
+
+00:33.220 --> 00:40.320
+Sí. Y justamente por eso, en esta exploración a fondo, nos vamos a centrar en un documento analítico de noviembre de 2026.
+
+00:41.040 --> 00:49.980
+Es un texto que dejó clarísimo que esta frontera estadística, la que supuestamente separa a un ser vivo de su entorno, podría ser una ilusión matemática.
+
+00:49.980 --> 00:58.660
+Una ilusión. O más bien un artificio que depende por completo de cómo un científico decide organizar sus datos en una simple hoja de cálculo.
+
+00:58.980 --> 01:00.460
+Lo cual es una locura, si lo piensas.
+
+01:00.960 --> 01:13.680
+Nuestra misión hoy, en este análisis a fondo, es desentrañar cómo un concepto puramente estadístico se transformó en la herramienta favorita de los teóricos para definir los límites de la vida y la conciencia.
+
+01:14.100 --> 01:18.800
+Y bueno, porque el autor de este documento argumenta que este salto carece de rigor matemático.
+
+01:18.800 --> 01:25.260
+Así es. Y para quien nos escucha, en el texto base de hoy se llama Condiciones de cierre en la descripción de sistemas delimitados.
+
+01:25.800 --> 01:28.400
+Fue escrito por Flyxion, un investigador independiente.
+
+01:28.840 --> 01:33.920
+Ojo, y quiero decirle a la audiencia que no necesitan un doctorado en matemáticas para seguir esta conversación.
+
+01:34.180 --> 01:40.120
+El objetivo aquí es aterrizar estas ecuaciones densas para entender realmente cómo modelamos la biología.
+
+01:40.120 --> 01:50.120
+Y respetando el tiempo de todos, por supuesto. Lo fascinante aquí es que el documento sacude literalmente los cimientos de cómo la ciencia moderna entiende a un individuo frente a su ecosistema.
+
+01:51.100 --> 01:52.860
+Sí, es un texto súper provocativo.
+
+01:53.140 --> 01:56.600
+Pero, a ver, para entender esta controversia, primero tenemos que definir la herramienta original.
+
+01:57.140 --> 02:02.700
+El texto habla todo el tiempo de la amanta de Markov. O sea, en su origen esto no tenía nada que ver con biología, ¿cierto?
+
+02:02.700 --> 02:03.840
+En absoluto, no.
+
+02:04.260 --> 02:12.460
+Cero biología. Para buscar su origen, tenemos que irnos al trabajo sobre redes de creencias de Judea Pearl, por ahí de 1988.
+
+02:13.020 --> 02:13.960
+88, ok.
+
+02:14.300 --> 02:21.020
+Sí. En ese entonces, una manta de Markov era un concepto estadístico bastante modesto, digamos.
+
+02:21.760 --> 02:31.900
+Si tienes una red gigante de variables interactuando, la manta de Markov de una variable en específico es básicamente el conjunto de variables que la rodean y la aislan estadísticamente.
+
+02:31.900 --> 02:34.500
+O sea, la aislan del resto de la red.
+
+02:34.720 --> 02:41.860
+Exacto. Si conoces el estado exacto de esa manta, el interior se vuelve condicionalmente independiente del exterior.
+
+02:42.480 --> 02:55.640
+A ver, déjame ver si lo entiendo bien. Es como un método de eficiencia. Si conozco la frontera, cualquier información sobre lo que pasa más allá de esa frontera ya es irrelevante para predecir el interior.
+
+02:55.640 --> 03:03.340
+Así es. Es información redundante. En estadística predictiva o inteligencia artificial es súper útil para simplificar cálculos.
+
+03:03.900 --> 03:18.120
+Suena genial para bases de datos. Pero el documento señala que la biología teórica, especialmente toda esta rama del principio de energía libre de Friston, tomó este concepto y, digamos, dio un salto gigantesco.
+
+03:18.120 --> 03:24.420
+Un salto enorme y bastante audaz. Lo que hicieron fue dividir los estados de un sistema vivo en cuatro.
+
+03:24.960 --> 03:25.980
+Ok, cuatro estados.
+
+03:26.120 --> 03:38.000
+Sí, mira, los estados externos, los sensoriales, los activos y los internos. Y aquí viene la parte clave. Afirmaron que la manta está formada exclusivamente por los estados sensoriales y activos.
+
+03:38.000 --> 03:44.000
+Ah, o sea que esa manta se convierte conceptualmente en, no sé, la frontera celular o la piel.
+
+03:44.660 --> 03:51.620
+Exactamente. Y asumen que gracias a esto, el interior no tiene acceso directo al exterior. Su única vía de comunicación es esa manta.
+
+03:52.160 --> 04:01.140
+Lo que obliga al organismo a crear como un modelo interno del mundo para sobrevivir. A ver, para aterrizarlo y que quede súper claro.
+
+04:01.140 --> 04:07.580
+Es como si la manta de Markov fuera el cadenero o el guardia de seguridad en la puerta de un club nocturno.
+
+04:07.680 --> 04:09.140
+Ah, me gusta esa analogía.
+
+04:09.180 --> 04:17.040
+Imagínate, si tú estás adentro, eres el estado interno y quieres saber qué pasa en la calle, el estado externo. Pero no puedes salir a mirar.
+
+04:17.560 --> 04:25.040
+Tu única forma de saber si llueve es, digamos, adivinarlo viendo si el cadenero, que es la manta, entra mojado o temblando de frío.
+
+04:25.040 --> 04:31.680
+Es una analogía perfecta para el modelo de energía libre. El interior infiere lo que pasa afuera basándose en el cadenero.
+
+04:32.180 --> 04:40.800
+Pero, y aquí es donde el texto de Flyxion hace su gran crítica, la biología asume que este cadenero impide por sí solo cualquier otra conexión.
+
+04:41.280 --> 04:47.700
+O sea, asumen que la falta de contacto físico directo significa automáticamente un aislamiento estadístico total.
+
+04:48.500 --> 04:51.080
+Exacto. Y ese es el gran problema matemático.
+
+04:51.080 --> 04:58.700
+Y esto nos lleva justo al conflicto central del texto. Porque la física subyacente del sistema no garantiza ese aislamiento.
+
+04:59.060 --> 05:02.720
+No. ¿El autor menciona algo sobre la difusión lineal estacionaria?
+
+05:03.180 --> 05:12.860
+Sí, introduce el teorema 1 del texto. Básicamente, en lugar de mirar solo estadísticas, analiza cómo se mueven las partes físicas de un sistema.
+
+05:13.360 --> 05:15.980
+Y, bueno, hay cuatro componentes mecánicos en juego.
+
+05:15.980 --> 05:22.340
+Ok. A ver, desempacando eso sin abrumar con fórmulas. El primero es la matriz de deriva, ¿verdad?
+
+05:22.820 --> 05:29.140
+Sí, la matriz de deriva, que define cómo las partes se empujan o acoplan físicamente. Luego está la difusión.
+
+05:29.500 --> 05:32.100
+Que sería el ruido aleatorio del sistema, si no me equivoco.
+
+05:32.440 --> 05:38.360
+Exacto, el ruido. Tercero, la matriz de precisión, que dicta las dependencias estadísticas.
+
+05:38.360 --> 05:43.540
+Y el cuarto, que es donde todo el mundo tropieza, es la circulación.
+
+05:43.940 --> 05:51.000
+La circulación. Y tengo entendido que los biólogos teóricos suelen fijarse solo en el primer componente, en el empuje físico.
+
+05:51.420 --> 06:02.820
+Totalmente. Ven lo que llaman acoplamiento disperso. Si la neurona A no toca directamente a la neurona C, ven ceros en esa matriz y asumen que hay independencia estadística.
+
+06:02.820 --> 06:11.860
+Y ahí está el error fundamental, porque ignoran la circulación. Pero a ver, aquí es donde se pone realmente interesante y quiero hacer un poco de impugnación.
+
+06:12.160 --> 06:12.800
+Adelante, dime.
+
+06:13.060 --> 06:19.480
+Si no hay una conexión física directa entre el exterior y el interior, ¿cómo rayos pueden ser dependientes?
+
+06:19.820 --> 06:30.540
+O sea, es como decir que dos personas en una pista de baile, que ni se miran ni se tocan, terminan bailando la misma coreografía solo por las corrientes de aire, la circulación en la habitación.
+
+06:30.540 --> 06:33.000
+Esa es una imagen buenísima.
+
+06:33.600 --> 06:37.280
+Sí, Flyxion usa un ejemplo matemático muy parecido a la dinámica de fluidos.
+
+06:37.760 --> 06:43.040
+En su Ejemplo 1 demuestra que un sistema puede no tener ninguna influencia dinámica directa.
+
+06:43.400 --> 06:45.020
+Los bailarines no se tocan.
+
+06:45.300 --> 06:45.540
+Ajá.
+
+06:45.700 --> 06:52.120
+Pero debido a ese operador de circulación, esas corrientes antisimétricas siguen siendo estadísticamente dependientes.
+
+06:52.800 --> 06:56.660
+Con solo medir a uno, puedes predecir al otro. La manta de Markov se destruye.
+
+06:56.660 --> 07:03.540
+Guau. O sea que el acoplamiento físico disperso no sirve de nada si hay corrientes termodinámicas de fondo.
+
+07:03.880 --> 07:08.840
+Exacto. No es ni necesario ni suficiente. De hecho, el Ejemplo 2 demuestra lo inverso.
+
+07:09.500 --> 07:14.400
+Puedes tener independencia estadística total, incluso si hay acoplamiento físico directo.
+
+07:14.760 --> 07:17.060
+¿En serio? ¿Está habiendo contacto físico?
+
+07:17.060 --> 07:25.780
+Sí. La física de cómo se mueven las cosas no garantiza los límites del sistema si éste opera fuera del equilibrio detallado, que es, digamos, como opera a cualquier ser vivo.
+
+07:26.380 --> 07:34.240
+Lo cual nos lanza a una pared brutal, porque si la estructura física de los movimientos no garantiza los límites, entonces, ¿qué lo hace?
+
+07:34.720 --> 07:38.020
+Y el texto dice que la manta depende de los lentes que usemos para mirar.
+
+07:38.020 --> 07:50.280
+Ese es el problema de la relatividad de la descripción. La proposición 1 del texto explica que las independencias estadísticas solo sobreviven si renombramos o transformamos variables dentro de un mismo bloque estricto.
+
+07:50.620 --> 07:52.820
+Lo que llama biyecciones por bloques, ¿no?
+
+07:53.020 --> 07:58.880
+Así es. Si solo le cambias el nombre a las cosas dentro de su cajita, la frontera estadística se mantiene intacta.
+
+07:59.100 --> 08:04.020
+Pero, y aquí viene el gran pero, si mezclamos los bloques o los agrupamos de manera diferente...
+
+08:04.020 --> 08:15.360
+Todo se viene abajo. Si aplicas una rotación a las coordenadas, o si haces un agrupamiento grueso de los datos, la manta de Markov desaparece. O peor, se crea una artificialmente.
+
+08:15.820 --> 08:24.500
+Y el agrupamiento grueso es algo súper común en la ciencia empírica, ¿no? O sea, en lugar de medir cada célula, agrupan miles y sacan un promedio.
+
+08:25.180 --> 08:30.800
+Es una práctica de todos los días. El problema es que al hacer eso, las correlaciones cambian.
+
+08:30.800 --> 08:35.800
+La conclusión de Flyxion es tajante. La manta no es una propiedad del sistema físico.
+
+08:36.500 --> 08:49.400
+Es una propiedad de la descripción elegida. Pero, a ver, si el límite matemático de un ser vivo puede aparecer o desaparecer, dependiendo de cómo agrupo los datos en mi Excel, ¿no significa esto que el límite es solo una ilusión?
+
+08:49.740 --> 08:50.940
+Es una pregunta muy válida.
+
+08:51.520 --> 08:57.080
+O sea, estamos diciendo que las barreras de la biología están solo en el ojo del científico que dibuja el gráfico.
+
+08:57.080 --> 09:04.080
+Bueno, hay que aclarar algo importante. La matemática de la manta no es arbitraria una vez que ya fijaste las variables.
+
+09:04.760 --> 09:08.720
+Si eliges tu descripción, el resultado estadístico es real y riguroso.
+
+09:08.980 --> 09:10.280
+Ok, la ecuación no miente.
+
+09:10.580 --> 09:17.920
+Exacto. Pero la justificación de cuáles variables elegir para meter en esa ecuación tiene que venir de realidades físicas externas.
+
+09:18.080 --> 09:18.780
+Del mundo real.
+
+09:18.780 --> 09:27.160
+Sí, cosas como la localización espacial de las células o el diseño del experimento. No puedes justificar tus límites usando solo la estadística.
+
+09:27.640 --> 09:36.300
+Lo que nos arroja directamente a un problema filosófico y biológico supercrítico, que es el problema de la escala. Porque la biología es como una muñeca rusa, ¿no?
+
+09:36.600 --> 09:38.320
+Totalmente. Está llena de capas.
+
+09:38.320 --> 09:50.720
+Las células tienen mantas estadísticas, pero esas células forman órganos que también tienen sus mantas. Y los órganos forman un organismo. Entonces, matemáticamente, ¿cuál de todos es el verdadero individuo?
+
+09:51.260 --> 09:59.040
+Ese es el dilema de las mantas anidadas. Y la literatura biológica intentó solucionarlo con un concepto llamado viabilidad delegada.
+
+09:59.420 --> 10:00.780
+Viabilidad delegada. Ajá.
+
+10:00.780 --> 10:06.740
+Básicamente postulan que una célula de nivel inferior delega su supervivencia al funcionamiento del órgano mayor.
+
+10:07.320 --> 10:15.820
+Claro. Como que sacrifica su independencia por el bien del equipo. Y, de hecho, si deja de hacerlo y se vuelve egoísta, tenemos un problema grave, como el cáncer.
+
+10:16.220 --> 10:23.220
+Exactamente. El cáncer es la viabilidad delegada rompiéndose. La célula destruye al todo. Y biológicamente tiene sentido.
+
+10:23.620 --> 10:25.960
+Pero matemáticamente, según Freestone, no.
+
+10:25.960 --> 10:34.120
+Así es. La crítica es que la viabilidad delegada no es una prueba matemática. Es una hipótesis biológica que le añaden al modelo por fuera.
+
+10:34.820 --> 10:39.280
+Porque si te basas solo en delegar la supervivencia, necesitas una regla de detención.
+
+10:39.800 --> 10:49.060
+Una regla para saber dónde parar. Porque si la célula depende del órgano y el órgano del humano, pues el humano depende del cultivo de maíz y el cultivo de la lluvia.
+
+10:49.060 --> 10:58.540
+Y terminas extendiendo el sistema estadístico hasta abarcar toda la ecología. Si el investigador no pone un límite arbitrario en el tamaño del organismo, el modelo no se detiene.
+
+10:59.120 --> 11:05.520
+Además, hay otro punto que me encantó del texto. Menciona la necesidad de poner los requerimientos vitales en una misma escala.
+
+11:06.080 --> 11:07.940
+La escalarización de objetivos, ¿sí?
+
+11:08.260 --> 11:14.520
+O sea, el modelo a veces asume que las necesidades de un organismo se pueden sumar o promediar en una sola moneda matemática.
+
+11:14.980 --> 11:18.000
+Como en la inteligencia artificial, donde buscas maximizar un solo puntaje.
+
+11:18.000 --> 11:25.180
+Exacto, pero en la realidad física esto no funciona así. Si te falta oxígeno, no puedes compensarlo tomando el triple de agua.
+
+11:25.820 --> 11:27.460
+Es una excelente forma de verlo.
+
+11:27.920 --> 11:34.360
+La biología tiene restricciones innegociables. El oxígeno y el agua no son intercambiables en una ecuación de supervivencia.
+
+11:34.780 --> 11:41.240
+Totalmente de acuerdo. Al colapsar toda una sola variable estadística, corres el riesgo de ignorar fallos catastróficos locales.
+
+11:41.240 --> 11:47.240
+Y bueno, hasta ahora hemos hablado de espacio y escala. Pero la crítica final de las fuentes aborda un punto ciego monumental.
+
+11:47.240 --> 11:48.780
+El flujo del tiempo.
+
+11:49.140 --> 11:55.800
+El problema del tiempo. El modelo estadístico original asume una especie de instantánea en el tiempo, como si le tomaras una foto al sistema.
+
+11:56.280 --> 12:04.620
+O asumen que todo ocurre a la vez. Pero los sistemas biológicos son asíncronos, ¿no? Un cerebro humano no tiene un reloj central como una computadora.
+
+12:04.920 --> 12:15.120
+Exacto. No hay un reloj global unificado donde todas las neuronas hagan tic-tac al mismo milisegundo. Todo opera por reacciones locales.
+
+12:15.120 --> 12:25.580
+Y para modelar esto, el texto aborda una arquitectura lógica interesantísima. La lógica de convención nula, o null convention logic, de Carl Fent.
+
+12:25.940 --> 12:26.980
+Es una maravilla.
+
+12:27.660 --> 12:37.220
+En esa arquitectura no dependes del tiempo, sino que existen fases de datos, donde hay información real y fases nulas, que son como un reseteo o vacío.
+
+12:37.540 --> 12:41.560
+O sea, la información se mueve por completitud, no por un reloj.
+
+12:41.560 --> 12:42.620
+Exacto.
+
+12:42.980 --> 12:55.100
+Y esto nos lleva a la condición de finalización. Para que una interfaz funcione de forma asíncrona, el sistema interno no debe actualizarse hasta que todos los componentes de la manta hayan llegado a una fase de datos completa.
+
+12:55.660 --> 12:57.080
+Todos al mismo tiempo, claro.
+
+12:57.460 --> 13:05.260
+O sea, si soy una neurona, no puedo tomar una decisión a medias. Tengo que esperar a que toda mi interfaz sensorial termine de procesar el estímulo, ¿verdad?
+
+13:05.540 --> 13:06.240
+Así es.
+
+13:06.240 --> 13:15.760
+Imagínate canales iónicos o la transmisión sináptica en la biología. Si tomas decisiones químicas con datos incompletos, el resultado es caótico.
+
+13:16.080 --> 13:24.660
+Pero, ¿qué pasa cuando le aplicas la estadística de la manta de Markov a esta realidad asíncrona? Porque los biólogos teóricos miden estas probabilidades.
+
+13:24.660 --> 13:37.100
+Pasa que se altera toda la distribución estadística inicial. Porque si tú, como científico, recolectas tus datos de probabilidad, solo en esos momentos precisos donde el sistema alcanza la finalización…
+
+13:37.100 --> 13:38.140
+Estás sesgando la muestra.
+
+13:38.440 --> 13:47.760
+Estás muestreando eventos basados en cuándo se completa una señal. Esa distribución matemática no es igual a la probabilidad de un instante promedio de tiempo.
+
+13:47.760 --> 13:56.940
+Claro. El aislamiento estadístico que ves en tu papel no asegura para nada que el sistema biológico realmente esté consumiendo información fresca y completa en la vida real.
+
+13:57.300 --> 14:01.560
+Así es. La estadística pura no capta ese ritmo asíncrono vital.
+
+14:02.180 --> 14:08.140
+Wow. Es, este… es mucha información. Creo que es momento de recapitular el núcleo de este análisis a fondo.
+
+14:08.380 --> 14:09.360
+Me parece perfecto.
+
+14:09.820 --> 14:13.520
+A ver, la conclusión de Frickson no es descartar la matemática por completo.
+
+14:13.820 --> 14:14.540
+No, para nada.
+
+14:14.540 --> 14:24.160
+La manta de Markov sí autoriza la creación de un mapa de sincronización, o sea, esta función de inferencia entre los modos internos y externos.
+
+14:24.440 --> 14:27.460
+Exacto. Es súper útil para predecir acoplamientos abstractos.
+
+14:27.740 --> 14:35.900
+Es útil. Pero, y este es el gran pero, no autoriza por sí sola afirmar que hemos encontrado un límite físico innegable.
+
+14:36.200 --> 14:40.720
+Ni una representación de creencias genuina, ni un sujeto vivo delimitado.
+
+14:40.720 --> 14:50.860
+Al menos que, y esto es clave, le añadamos supuestos de compatibilidad dinámica, criterios de individuación biológica y reglas de finalización en el tiempo.
+
+14:51.500 --> 14:55.660
+Es una condición de cierre estadístico, no una varita mágica biológica.
+
+14:56.020 --> 14:58.660
+Es un mapa, no el territorio físico.
+
+14:58.700 --> 15:02.420
+Y creo que el valor de este conocimiento para quienes nos escuchan es tremendo.
+
+15:02.700 --> 15:07.700
+Nos enseña a ser pensadores críticos frente a afirmaciones científicas granilocuentes, ¿no?
+
+15:07.700 --> 15:16.400
+Totalmente. Nos recuerda que las matemáticas puras siempre, siempre necesitan un contexto del mundo real antes de sacar conclusiones sobre la vida misma.
+
+15:16.820 --> 15:19.340
+Así es. La estadística necesita de la materia.
+
+15:20.160 --> 15:25.480
+Y bueno, antes de cerrar esta exploración, quiero dejar una semilla intelectual para que la audiencia la reflexione.
+
+15:25.760 --> 15:26.340
+A ver, suéltala.
+
+15:26.340 --> 15:36.980
+El texto señala que si seguimos el criterio de supervivencia delegada, sin poner un límite artificial, la dependencia se extiende infinitamente hacia afuera del organismo.
+
+15:37.200 --> 15:38.280
+Hacia todo el ecosistema.
+
+15:38.460 --> 15:41.100
+Ajá. Esto nos deja con una idea fascinante.
+
+15:41.480 --> 15:48.240
+Si matemáticamente no hay un lugar claro donde detenerse, ¿es posible que el verdadero límite de un individuo no termine en su piel?
+
+15:48.400 --> 15:50.260
+Es una posibilidad matemática muy real.
+
+15:50.260 --> 15:58.980
+Y si todos nosotros somos simplemente estados internos operando constantemente dentro de la gran manta de Markov, que es nuestro ecosistema planetario.
+
+15:59.260 --> 16:04.940
+Una perspectiva verdaderamente espectacular. Para replantearnos, ¿qué significa ser un individuo?
+
+16:05.160 --> 16:08.460
+Completamente. Una frontera que tal vez solo existe en nuestra mente.
+
+16:08.460 --> 16:08.920
+Realmente.
+
+16:08.920 --> 16:09.640
+Realmente.
+
+16:09.640 --> 16:09.700
+Realmente.
+
+16:09.900 --> 16:09.960
+Realmente.
+
+16:09.960 --> 16:10.180
+Realmente.
+
+16:10.180 --> 16:10.460
+Realmente.
+
+16:10.460 --> 16:10.520
+Realmente.
+
+16:11.040 --> 16:11.500
+Realmente.
+
+16:11.500 --> 16:11.560
+Realmente.
+
+16:11.560 --> 16:11.580
+Realmente.
+
+16:11.580 --> 16:12.100
+Realmente.
+
+16:12.100 --> 16:12.620
+Realmente.
+
+16:13.060 --> 16:13.420
+Realmente.
+
+16:13.420 --> 16:13.780
+Realmente.
+
+16:13.780 --> 16:14.080
+Realmente.
+
+16:14.080 --> 16:14.200
+Realmente.
+
+16:14.480 --> 16:15.240
+Realmente.
+
+16:15.240 --> 16:15.960
+Realmente.
+
+16:15.960 --> 16:16.060
+Realmente.
+
+16:16.060 --> 16:16.100
+Realmente.
+
+16:16.620 --> 16:17.220
+Realmente.
+
+16:17.280 --> 16:17.720
+Realmente.
+
+16:17.720 --> 16:18.200
+Realmente.
+
+16:18.260 --> 16:18.780
+Realmente.
+
+16:18.780 --> 16:19.520
+Realmente.
+
+16:19.520 --> 16:19.700
+Realmente.
+
+16:19.700 --> 16:20.040
+Realmente.
+
+16:20.040 --> 16:20.160
+Realmente.
+
+16:20.160 --> 16:20.300
+Realmente.
+
+16:20.500 --> 16:21.120
+Realmente.
+
+16:21.360 --> 16:21.780
+Realmente.
+
+16:21.780 --> 16:22.240
+Realmente.
+
+16:22.240 --> 16:22.640
+Realmente.
+
+16:22.640 --> 16:22.860
+Realmente.
+
+16:22.860 --> 16:23.340
+Realmente.
+
+16:23.400 --> 16:24.400
+Realmente.
+
+16:24.400 --> 16:24.840
+Realmente.
+
+16:25.000 --> 16:25.680
+Realmente.
+
+16:25.680 --> 16:25.980
+Realmente.
+
+16:25.980 --> 16:26.340
+Realmente.
+
+16:26.340 --> 16:26.820
+Realmente.
+
+16:27.080 --> 16:27.840
+Realmente.
+
+16:27.960 --> 16:28.500
+Realmente.
+
+16:28.500 --> 16:30.140
+Realmente.
+

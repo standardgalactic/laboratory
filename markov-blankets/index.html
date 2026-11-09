@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closure Conditions</title>
+<style>
+:root {
+  --green:#8fdb9c;
+  --bright:#c9f7c8;
+  --background:#030604;
+}
+* { box-sizing:border-box; }
+html,body { margin:0; width:100%; min-height:100%; }
+body {
+  min-height:100vh;
+  min-height:100dvh;
+  background:var(--background);
+  color:var(--green);
+  font-family:"Courier New",monospace;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  cursor:pointer;
+}
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(150,255,170,.018) 0px,
+    rgba(150,255,170,.018) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+h1 {
+  font-size:clamp(12px,2.8vw,15px);
+  font-weight:normal;
+  letter-spacing:.16em;
+  text-align:center;
+  margin:0 12px 20px;
+  text-transform:uppercase;
+  text-shadow:0 0 10px rgba(120,255,150,.25);
+}
+.scope {
+  position:relative;
+  width:min(480px,86vw,62dvh);
+  aspect-ratio:1;
+}
+canvas {
+  display:block;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:1px solid rgba(150,255,170,.3);
+  background:radial-gradient(
+    circle,
+    #09130c 0%,
+    #040a06 70%,
+    #010302 100%
+  );
+  box-shadow:
+    inset 0 0 65px rgba(80,180,100,.045),
+    0 0 20px rgba(80,180,100,.045);
+}
+#play {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:12px;
+  letter-spacing:.18em;
+  color:var(--bright);
+  text-shadow:0 0 12px rgba(150,255,170,.55);
+  pointer-events:none;
+}
+#play.hidden { display:none; }
+.meta {
+  width:min(480px,86vw,62dvh);
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:.08em;
+  opacity:.55;
+}
+#captions {
+  position:fixed;
+  z-index:20;
+  bottom:47px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(650px,92vw);
+  min-height:2.3em;
+  padding:7px 11px;
+  text-align:center;
+  font-size:clamp(13px,3.3vw,15px);
+  line-height:1.5;
+  color:var(--bright);
+  background:rgba(3,9,5,.8);
+  border:1px solid rgba(150,255,170,.12);
+  overflow-wrap:anywhere;
+  pointer-events:none;
+}
+#essay {
+  position:fixed;
+  z-index:21;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
+  text-align:center;
+  font-size:11px;
+  color:var(--green);
+  opacity:.7;
+  text-decoration:none;
+}
+#essay:hover { opacity:1; text-decoration:underline; }
+@media(max-height:620px) {
+  h1 { margin-bottom:8px; }
+  .scope { width:min(330px,68dvh,75vw); }
+  .meta { width:min(330px,68dvh,75vw); }
+}
+</style>
+</head>
+<body>
+
+<h1>Closure Conditions</h1>
+
+<div class="scope">
+  <canvas id="scope"></canvas>
+  <div id="play">CLICK TO PLAY</div>
+</div>
+
+<div class="meta">
+  <span id="time">00:00 / 00:00</span>
+  <span id="status">STANDBY</span>
+</div>
+
+<div id="captions">LOADING SUBTITLES...</div>
+
+<a id="essay"
+   href="https://standardgalactic.github.io/laboratory/markov-blankets/closure-conditions.pdf"
+   target="_blank"
+   rel="noopener noreferrer">
+  Closure Conditions on the Description of Bounded Systems
+</a>
+
+<audio id="audio"
+  preload="metadata"
+  src="Math_Cannot_Prove_You_Are_an_Individual.mp3">
+</audio>
+
+<script>
+"use strict";
+
+const audio = document.getElementById("audio");
+const canvas = document.getElementById("scope");
+const g = canvas.getContext("2d");
+const captions = document.getElementById("captions");
+const play = document.getElementById("play");
+const status = document.getElementById("status");
+const time = document.getElementById("time");
+
+const SIZE = 440;
+const DPR = Math.min(window.devicePixelRatio || 1,2);
+canvas.width = SIZE*DPR;
+canvas.height = SIZE*DPR;
+g.scale(DPR,DPR);
+
+let ctx, analyser, waveform;
+let frame = 0;
+let energy = 0;
+
+/* Audio graph, initialized on first click. */
+function initAudio() {
+  if(ctx) return;
+
+  ctx = new (window.AudioContext ||
+             window.webkitAudioContext)();
+
+  analyser = ctx.createAnalyser();
+  analyser.fftSize = 2048;
+  waveform = new Uint8Array(analyser.fftSize);
+
+  const source = ctx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(ctx.destination);
+}
+
+document.body.addEventListener("click",async e => {
+  if(e.target.closest("a")) return;
+
+  try {
+    initAudio();
+    if(ctx.state==="suspended") await ctx.resume();
+
+    if(audio.paused) await audio.play();
+    else audio.pause();
+  } catch(err) {
+    console.error(err);
+    status.textContent = "AUDIO ERROR";
+  }
+});
+
+audio.addEventListener("play",() => {
+  play.classList.add("hidden");
+  status.textContent = "RUNNING";
+});
+
+audio.addEventListener("pause",() => {
+  play.textContent = "CLICK TO RESUME";
+  play.classList.remove("hidden");
+  status.textContent = "PAUSED";
+});
+
+audio.addEventListener("ended",() => {
+  play.textContent = "REPLAY";
+  play.classList.remove("hidden");
+  status.textContent = "COMPLETE";
+});
+
+/* VTT subtitle loading and parsing. */
+let cues = [];
+let subtitleStatus = "LOADING SUBTITLES...";
+let lastCaption = null;
+
+function parseTime(s) {
+  const p = s.replace(",",".").trim().split(":").map(Number);
+  if(p.some(x => !Number.isFinite(x))) return NaN;
+  if(p.length===3) return p[0]*3600+p[1]*60+p[2];
+  if(p.length===2) return p[0]*60+p[1];
+  return NaN;
+}
+
+async function loadVTT() {
+  const filename = "Math_Cannot_Prove_You_Are_an_Individual.vtt";
+
+  try {
+    const response = await fetch(filename,{cache:"no-store"});
+    if(!response.ok) throw new Error("HTTP "+response.status);
+
+    const text = (await response.text())
+      .replace(/^\uFEFF/,"")
+      .replace(/\r\n?/g,"\n");
+
+    const parsed = [];
+
+    for(const block of text.split(/\n\s*\n/)) {
+      const lines = block.trim().split("\n");
+      const index = lines.findIndex(x => x.includes("-->"));
+      if(index<0) continue;
+
+      const parts = lines[index].split("-->");
+      if(parts.length<2) continue;
+
+      const start = parseTime(parts[0]);
+      const end = parseTime(parts[1].trim().split(/\s+/)[0]);
+      const content = lines.slice(index+1)
+        .join(" ")
+        .replace(/<[^>]*>/g,"")
+        .replace(/\s+/g," ")
+        .trim();
+
+      if(Number.isFinite(start) &&
+         Number.isFinite(end) &&
+         end>start && content) {
+        parsed.push({start,end,text:content});
+      }
+    }
+
+    cues = parsed.sort((a,b)=>a.start-b.start);
+    subtitleStatus = cues.length
+      ? "SUBTITLES READY"
+      : "NO SUBTITLES PARSED";
+    captions.textContent = subtitleStatus;
+
+    console.log("Loaded subtitle cues:",cues.length);
+  } catch(err) {
+    console.error("Subtitle error:",err);
+    subtitleStatus = "SUBTITLE FILE NOT FOUND";
+    captions.textContent = subtitleStatus;
+  }
+}
+
+function updateCaptions() {
+  if(!cues.length) return;
+
+  const t = audio.currentTime;
+  let text = "";
+
+  for(const cue of cues) {
+    if(t>=cue.start && t<cue.end+.12) {
+      text = cue.text;
+      break;
+    }
+    if(cue.start>t) break;
+  }
+
+  if(audio.paused && t===0) text=subtitleStatus;
+
+  if(text!==lastCaption) {
+    captions.textContent=text;
+    lastCaption=text;
+  }
+}
+
+loadVTT();
+
+/* Oscilloscope drawing. */
+function draw() {
+  frame++;
+  updateCaptions();
+
+  if(frame%12===0) {
+    time.textContent =
+      formatTime(audio.currentTime)+" / "+
+      formatTime(audio.duration);
+  }
+
+  g.fillStyle="rgba(2,7,3,.16)";
+  g.fillRect(0,0,SIZE,SIZE);
+
+  const cx=SIZE/2, cy=SIZE/2, R=SIZE*.405;
+
+  g.save();
+  g.beginPath();
+  g.arc(cx,cy,R,0,Math.PI*2);
+  g.clip();
+
+  /* Static graticule. */
+  g.lineWidth=1;
+  g.strokeStyle="rgba(140,230,160,.04)";
+
+  for(let i=-6;i<=6;i++) {
+    const p=i*28;
+
+    g.beginPath();
+    g.moveTo(cx+p,cy-R);
+    g.lineTo(cx+p,cy+R);
+    g.moveTo(cx-R,cy+p);
+    g.lineTo(cx+R,cy+p);
+    g.stroke();
+  }
+
+  for(let r=R/4;r<R;r+=R/4) {
+    g.beginPath();
+    g.arc(cx,cy,r,0,Math.PI*2);
+    g.stroke();
+  }
+
+  /* Real time-delay phase portrait. */
+  if(analyser) {
+    analyser.getByteTimeDomainData(waveform);
+
+    let currentEnergy=0;
+    for(let i=0;i<waveform.length;i+=8) {
+      currentEnergy+=Math.abs((waveform[i]-128)/128);
+    }
+    currentEnergy/=waveform.length/8;
+    energy+=(currentEnergy-energy)*.08;
+
+    const lag=Math.floor(
+      waveform.length*(.065+
+        Math.sin(frame*.0015)*.014)
+    );
+
+    const gain=Math.min(4,1/Math.max(energy,.08));
+
+    trace(lag+5,gain,cx,cy,R,
+      "rgba(120,255,150,.12)",4,0);
+
+    trace(lag,gain,cx,cy,R,
+      "#baf5bf",1.3+energy*2,12);
+  }
+
+  g.restore();
+
+  /* Outer calibration ring. */
+  g.beginPath();
+  g.arc(cx,cy,R,0,Math.PI*2);
+  g.strokeStyle="rgba(140,240,160,.3)";
+  g.lineWidth=1;
+  g.stroke();
+
+  requestAnimationFrame(draw);
+}
+
+function trace(lag,gain,cx,cy,R,color,width,glow) {
+  g.beginPath();
+
+  for(let i=0;i<waveform.length;i++) {
+    const x=(waveform[i]-128)/128;
+    const y=(waveform[(i+lag)%waveform.length]-128)/128;
+    const px=cx+x*R*.85*gain;
+    const py=cy+y*R*.85*gain;
+
+    if(i===0) g.moveTo(px,py);
+    else g.lineTo(px,py);
+  }
+
+  g.strokeStyle=color;
+  g.lineWidth=width;
+  g.shadowColor="#80ff9c";
+  g.shadowBlur=glow;
+  g.stroke();
+  g.shadowBlur=0;
+}
+
+function formatTime(t) {
+  if(!Number.isFinite(t)) return "00:00";
+  const n=Math.floor(t);
+  return String(Math.floor(n/60)).padStart(2,"0")+
+    ":"+String(n%60).padStart(2,"0");
+}
+
+draw();
+</script>
+</body>
+</html>
