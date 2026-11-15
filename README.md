@@ -1,5 +1,13 @@
 # Laboratory
 
+[Photonic GPU Cloud](https://standardgalactic.github.io/laboratory/photonic-gpu-cloud.pdf)
+
+* [Hiding AI Supercomputers in Mall Basements](https://standardgalactic.github.io/laboratory/cloud-visualizer.html)
+
+[Sliding Thermal Carriers](https://standardgalactic.github.io/laboratory/sliding-thermal-carriers.pdf)
+
+* [Cooling Processors With Sliding Solid Metal](https://standardgalactic.github.io/laboratory/thermal-visualizer.html)
+
 [Compaction and the Evidentiary Record](https://standardgalactic.github.io/laboratory/compaction.pdf)
 
 * [The Danger of AI Context Compaction](https://standardgalactic.github.io/laboratory/compaction-visualizer.html)
