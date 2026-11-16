@@ -1,5 +1,9 @@
 # Laboratory
 
+[Artificial Organs and Transhuman Trajectories](https://standardgalactic.github.io/laboratory/artificial-organs-textbook.pdf)
+
+* [The Thermodynamic Limits of Artificial Organs](https://standardgalactic.github.io/laboratory/artificial-organs-visualizer.html)
+
 [Photonic GPU Cloud](https://standardgalactic.github.io/laboratory/photonic-gpu-cloud.pdf)
 
 * [Hiding AI Supercomputers in Mall Basements](https://standardgalactic.github.io/laboratory/cloud-visualizer.html)

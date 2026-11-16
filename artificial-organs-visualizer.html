@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artificial Organs and Transhuman Trajectories</title>
+<!-- This visualizer was inspired by https://jinglia.net/. -->
+<style>
+html{color-scheme:dark;background:#080b07;color:#b7ca97;font:13px ui-monospace,monospace}
+body{margin:0;min-height:100dvh;display:grid;align-content:center;justify-items:center;gap:14px;padding:16px;box-sizing:border-box}
+main{width:min(100%,900px)}
+h1{font-size:14px;font-weight:normal;margin:0 0 12px}
+a{color:inherit}
+#gl{display:block;width:100%;height:auto;aspect-ratio:16/9;outline:1px solid #34402d;touch-action:none}
+#bar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px}
+button,select,input{font:inherit}
+button{background:#10160d;color:inherit;border:1px solid #45543a;padding:6px 9px;cursor:pointer}
+button:disabled{opacity:.55}
+#seek{flex:1;min-width:80px;accent-color:#a8bd81}
+#captions{min-height:3em;text-align:center;margin:12px 0 4px;line-height:1.4}
+#record-status{min-height:1.4em;margin-top:8px;color:#a3af91}
+dialog{max-width:min(28rem,80vw);background:#0d120b;color:inherit;border:1px solid #45543a}
+dialog::backdrop{background:#0009}
+dialog label{display:block;margin:.8rem 0}
+#youtube-title{display:block;width:100%;box-sizing:border-box}
+</style>
+</head>
+<body>
+<main>
+<h1><a href="https://standardgalactic.github.io/laboratory/artificial-organs-textbook.pdf" target="_blank" rel="noopener noreferrer">Artificial Organs and Transhuman Trajectories</a></h1>
+<canvas id="gl" width="1280" height="720" aria-label="Audio-reactive fold visualizer"></canvas>
+<div id="captions"></div>
+<div id="bar">
+  <button id="play">PLAY</button>
+  <input id="seek" type="range" min="0" max="1" step=".01" value="0" disabled aria-label="Seek through the track">
+  <span id="clock">0:00 / 0:00</span>
+  <button id="record" aria-pressed="false">RECORD</button>
+  <a id="download" hidden>DOWNLOAD VIDEO</a>
+  <button id="youtube" hidden>UPLOAD TO YOUTUBE</button>
+</div>
+<div id="record-status" role="status"></div>
+<audio id="track" preload="metadata" src="The_Thermodynamic_Limits_of_Artificial_Organs.mp3"></audio>
+</main>
+<dialog id="youtube-dialog">
+  <form id="youtube-form">
+    <h2>Upload to YouTube</h2>
+    <label>Title<input id="youtube-title" required maxlength="100" value="Artificial Organs and Transhuman Trajectories"></label>
+    <label>Visibility
+      <select id="youtube-visibility">
+        <option value="private">Private</option>
+        <option value="unlisted">Unlisted</option>
+        <option value="public">Public</option>
+      </select>
+    </label>
+    <p id="youtube-status" role="status"></p>
+    <p><a id="youtube-result" hidden target="_blank" rel="noopener noreferrer">Open in YouTube Studio</a></p>
+    <button id="youtube-send" type="submit">AUTHORIZE &amp; UPLOAD</button>
+    <button id="youtube-close" type="button">CLOSE</button>
+  </form>
+</dialog>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script>
+/* A creature drawn with additive light trails on a 2D canvas, then warped by a complex-analytic
+   fragment shader (Moebius, Riemann sphere rotation, powers, log spiral, sqrt branch fold, Joukowski)
+   and mirror-folded back into the texture. The essay audio drives the maps. */
+(function(){
+const TAU=6.28318530718;
+const P={time:.55,mut:.3,dis:.25,rev:.6,fold:.6,react:1,vol:.6,dens:.5};   /* user sliders, 0..1 */
+const SL=[['time','TIME'],['mut','MUTATE'],['dis','DISTORT'],['rev','TRAILS'],['fold','FOLD DEPTH'],['react','AUDIO REACH'],['vol','VOLUME'],['dens','DENSITY']];
+const S={mood:'whisp',st:0,stT:0};
+
+/* ---------- canvases ---------- */
+const gv=document.getElementById('gl');
+const cr=document.createElement('canvas'), cx=cr.getContext('2d');
+let W=480,H=540,u=H/300,init=false;
+const NA=8,NS=20,arms=[];
+for(let k=0;k<NA;k++){const p=[];for(let i=0;i<NS;i++)p.push({x:0,y:0,px:0,py:0});arms.push({p,ph:Math.random()*TAU,hue:k/NA,len:1+Math.random()*.25,ang:(k/(NA-1)-.5)});}
+function resize(){
+  const dpr=Math.min(devicePixelRatio||1,1.5);
+  gv.width=Math.max(2,Math.round(gv.clientWidth*dpr));gv.height=Math.max(2,Math.round(gv.clientHeight*dpr));
+  const asp=gv.width/gv.height;H=540;W=Math.round(H*asp);W=Math.max(320,Math.min(W,1100));
+  cr.width=W;cr.height=H;u=H/300;init=false;
+  cx.fillStyle='#05060b';cx.fillRect(0,0,W,H);
+  if(gl)gl.viewport(0,0,gv.width,gv.height);
+}
+
+/* ---------- pointer ---------- */
+const poke={x:-1,y:-1,a:0};let att=0,attT=0,px=.5,jolt=0,nextJ=1;
+const ph={m:0,r:0,s:0};
+function uv(e){const b=gv.getBoundingClientRect();return [(e.clientX-b.left)/b.width,(e.clientY-b.top)/b.height];}
+gv.addEventListener('pointermove',e=>{const q=uv(e);poke.x=q[0];poke.y=q[1];poke.a=1;px=q[0];attT=1;
+  if(e.buttons){poke.a=1.8;ph.r+=(e.movementX||0)*.012;ph.m+=(e.movementY||0)*.012;jolt=Math.min(1,jolt+Math.hypot(e.movementX||0,e.movementY||0)*.01);}});
+gv.addEventListener('pointerdown',e=>{jolt=1;poke.a=1.6;const q=uv(e);poke.x=q[0];poke.y=q[1];attT=1;});
+gv.addEventListener('pointerleave',()=>{attT=0;});
+
+/* ---------- audio ---------- */
+let AC=null,an=null,fdata=null;
+const audioEl = document.getElementById('track');
+const feed={bass:0,mid:0,high:0,lvl:0,on:false,prevLvl:0,onset:0};
+function ensureAC(){if(AC)return;AC=new(window.AudioContext||window.webkitAudioContext)();an=AC.createAnalyser();an.fftSize=1024;an.smoothingTimeConstant=.6;fdata=new Uint8Array(an.frequencyBinCount);const source=AC.createMediaElementSource(audioEl);source.connect(an);source.connect(AC.destination);}
+const play = document.getElementById('play');
+const seek = document.getElementById('seek');
+const clock = document.getElementById('clock');
+const captions = document.getElementById('captions');
+let cues = [];
+function formatTime(value) {
+  return Math.floor(value / 60) + ':' + String(Math.floor(value % 60)).padStart(2, '0');
+}
+// Keep the user's requested position independent of the media element while seeking.
+const MP3_URL = 'The_Thermodynamic_Limits_of_Artificial_Organs.mp3';
+let dragging = false, pendingSeek = null, seekSequence = 0, seekTimer = null;
+let knownDuration = 0, rangeSupported = null, blobPromise = null, blobURL = null;
+let switchingSource = false;
+function trackDuration() {
+  const d = audioEl.duration;
+  if (Number.isFinite(d) && d > 0) knownDuration = d;
+  return Number.isFinite(d) && d > 0 ? d : knownDuration;
+}
+function displayedPosition() {
+  return dragging ? Number(seek.value) : pendingSeek?.target ?? audioEl.currentTime;
+}
+function syncTrack() {
+  const duration = trackDuration();
+  seek.disabled = !duration || Boolean(recording);
+  seek.max = duration || 1;
+  if (!dragging) seek.value = Math.min(duration || 1, displayedPosition());
+  const position = displayedPosition();
+  const time = formatTime(position) + ' / ' + formatTime(duration);
+  if (clock.textContent !== time) clock.textContent = time;
+  const cue = cues.find(c => c.start <= position && c.end > position);
+  const text = cue?.text || '';
+  if (captions.textContent !== text) captions.textContent = text;
+}
+function getCompressedAudio() {
+  if (!blobPromise) blobPromise = fetch(MP3_URL).then(r => {
+    if (!r.ok) throw Error('MP3 download failed: HTTP ' + r.status);
+    return r.blob();
+  }).then(b => b.type === 'audio/mpeg' ? b : new Blob([b], {type:'audio/mpeg'}))
+    .catch(e => { blobPromise = null; throw e; });
+  return blobPromise;
+}
+async function probeSeeking() {
+  try {
+    const response = await fetch(MP3_URL, {headers:{Range:'bytes=0-1'}});
+    rangeSupported = response.status === 206;
+    if (response.body) await response.body.cancel().catch(() => {});
+    if (rangeSupported === false) getCompressedAudio().catch(console.error);
+  } catch (e) { rangeSupported = null; }
+}
+async function swapToBlob() {
+  if (switchingSource || !pendingSeek) return;
+  switchingSource = true;
+  clearTimeout(seekTimer);
+  const wasPlaying = !audioEl.paused;
+  if (wasPlaying) audioEl.pause();
+  recordStatus.textContent = 'Preparing audio for seeking…';
+  try {
+    if (!blobURL) {
+      const blob = await getCompressedAudio();
+      blobURL = URL.createObjectURL(blob);
+      await new Promise((resolve,reject) => {
+        const timeout = setTimeout(() => done(Error('Audio metadata timeout')), 15000);
+        function done(err) {
+          clearTimeout(timeout);
+          audioEl.removeEventListener('loadedmetadata', ready);
+          audioEl.removeEventListener('error', failed);
+          err ? reject(err) : resolve();
+        }
+        function ready() { done(); }
+        function failed() { done(Error('Buffered MP3 unavailable')); }
+        audioEl.addEventListener('loadedmetadata', ready);
+        audioEl.addEventListener('error', failed);
+        audioEl.src = blobURL;
+        audioEl.load();
+      });
+    }
+    audioEl.currentTime = Math.min(pendingSeek?.target ?? audioEl.currentTime, trackDuration());
+    if (wasPlaying) await audioEl.play();
+    recordStatus.textContent = '';
+  } catch(e) {
+    recordStatus.textContent = 'Seeking failed: ' + e.message;
+    console.error(e);
+  } finally {
+    switchingSource = false;
+    pendingSeek = null;
+    syncTrack();
+  }
+}
+function verifySeek(id) {
+  if (!pendingSeek || pendingSeek.id !== id || switchingSource) return;
+  const p = pendingSeek;
+  const elapsed = (performance.now() - p.started) / 1000;
+  const actual = audioEl.currentTime;
+  const confirmed = !audioEl.seeking && actual >= p.target - 1 && actual <= p.target + elapsed + 1.5;
+  if (confirmed) {
+    pendingSeek = null;
+    recordStatus.textContent = '';
+  } else if (!blobURL) swapToBlob();
+  else {
+    pendingSeek = null;
+    recordStatus.textContent = 'Seek could not be confirmed.';
+  }
+  syncTrack();
+}
+function commitSeek() {
+  if (!dragging || seek.disabled) return;
+  const target = Number(seek.value);
+  dragging = false;
+  pendingSeek = {target, id:++seekSequence, started:performance.now()};
+  clearTimeout(seekTimer);
+  if (!switchingSource) {
+    if (rangeSupported === false && !blobURL) swapToBlob();
+    else {
+      try {
+        audioEl.currentTime = target;
+        const id = seekSequence;
+        seekTimer = setTimeout(() => verifySeek(id), 2500);
+      } catch(e) {
+        if (!blobURL) swapToBlob();
+        else { pendingSeek = null; recordStatus.textContent = 'Seeking unavailable.'; }
+      }
+    }
+  }
+  syncTrack();
+}
+seek.addEventListener('pointerdown', () => { if (!seek.disabled) dragging = true; });
+seek.addEventListener('input', () => { if (!seek.disabled) { dragging = true; syncTrack(); } });
+for (const name of ['change','pointerup','pointercancel','blur'])
+  seek.addEventListener(name, commitSeek);
+probeSeeking();
+window.addEventListener('pagehide', () => { if (blobURL) URL.revokeObjectURL(blobURL); });
+play.onclick = async () => {
+  try {
+    if (audioEl.paused) {
+      ensureAC();
+      await AC.resume();
+      await audioEl.play();
+    } else audioEl.pause();
+  } catch { recordStatus.textContent = 'Could not play the audio track.'; }
+};
+audioEl.addEventListener('play', () => { feed.on = true; play.textContent = 'PAUSE'; });
+audioEl.addEventListener('pause', () => { feed.on = false; play.textContent = 'PLAY'; });
+audioEl.addEventListener('ended', () => {
+  feed.on = false;
+  play.textContent = 'PLAY';
+  if (recording?.recorder.state === 'recording') recordButton.click();
+});
+audioEl.addEventListener('error', () => { recordStatus.textContent = 'Audio track unavailable.'; });
+
+document.addEventListener('keydown', event => {
+  if (event.code !== 'Space' || event.repeat || youtubeDialog.open ||
+      event.target.closest?.('button,input,select,a')) return;
+  event.preventDefault();
+  play.click();
+});
+const parseTime = value => value.split(':').reduce((total, part) => total * 60 + Number(part), 0);
+fetch('The_Thermodynamic_Limits_of_Artificial_Organs.vtt').then(response => {
+  if (!response.ok) return '';
+  return response.text();
+}).then(text => {
+  for (const block of text.replace(/\r/g, '').split(/\n\s*\n/)) {
+    const lines = block.split('\n');
+    const index = lines.findIndex(line => /^\s*[\d:.]+\s+-->/.test(line));
+    if (index < 0) continue;
+    const [start, end] = lines[index].trim().split(/\s+/).filter(part => part !== '-->');
+    cues.push({start: parseTime(start), end: parseTime(end), text: lines.slice(index + 1).join(' ').replace(/<[^>]*>/g, '')});
+  }
+}).catch(() => {});
+function readAudio(dt){
+  if(!feed.on||!an){feed.bass*=.9;feed.mid*=.9;feed.high*=.9;feed.lvl*=.9;return;}
+  an.getByteFrequencyData(fdata);
+  const n=fdata.length,avg=(a,b)=>{let s=0;a=Math.floor(a*n);b=Math.max(a+1,Math.floor(b*n));for(let i=a;i<b;i++)s+=fdata[i];return s/(b-a)/255;};
+  const bass=avg(0,.04),mid=avg(.04,.2),high=avg(.2,.6);
+  const k=Math.min(1,dt*14);
+  feed.bass+=(bass-feed.bass)*k;feed.mid+=(mid-feed.mid)*k;feed.high+=(high-feed.high)*k;
+  const lvl=(bass*.5+mid*.35+high*.15);feed.lvl+=(lvl-feed.lvl)*k;
+  /* onset: a sharp rise in level */
+  if(lvl-feed.prevLvl>.07)feed.onset=1;feed.prevLvl+=(lvl-feed.prevLvl)*.25;feed.onset*=Math.pow(.02,dt);
+}
+
+/* ---------- creature ---------- */
+const N1=t=>Math.sin(t*1.7)*.5+Math.sin(t*2.9+1.3)*.3+Math.sin(t*.7+4)*.2;
+let hx=0,hy=0;
+function step(t,dt){
+  const s=P.time,sp=(.35+s*1.5)*(1+att*.5);
+  if(S.mood==='whisp')S.stT=0;else if(S.mood==='infra')S.stT=1;else S.stT=Math.max(0,Math.min(1,.5+.62*N1(t*.12+3)));
+  S.st+=(S.stT-S.st)*Math.min(1,dt*(S.mood==='auto'?.9:2.5));const st=S.st;
+  const R=P.react;
+  jolt*=Math.pow(.02,dt);nextJ-=dt*(.5+P.mut*1.8);
+  if(nextJ<0){jolt=Math.max(jolt,.5+Math.random()*.6);nextJ=1.5+Math.random()*4;}
+  jolt=Math.max(jolt,feed.onset*.9*R);
+  hx=W/2+Math.sin(t*.31*sp)*W*.1+Math.sin(t*1.9*sp)*W*.012*st+(px-.5)*W*.22*att;
+  hy=H*.36+Math.sin(t*.47*sp)*H*.04+Math.sin(t*(6+st*9))*u*(.5+st*2.2)-att*H*.03+feed.bass*R*H*.03;
+  const L=(H*.54/NS)*(1.1-.15*st);
+  for(let k=0;k<NA;k++){
+    const A=arms[k],Q=A.p,ax=hx+A.ang*W*.2*(H/540)*(W/H>1?.75:1),ay=hy+H*.075;
+    if(!init){for(let i=0;i<NS;i++){Q[i].x=Q[i].px=ax+A.ang*i*L*.5;Q[i].y=Q[i].py=ay+i*L;}}
+    Q[0].x=ax;Q[0].y=ay;
+    for(let i=1;i<NS;i++){
+      const q=Q[i],vx=(q.x-q.px)*(.985-.02*st),vy=(q.y-q.py)*(.985-.02*st);q.px=q.x;q.py=q.y;const f=i/NS;
+      const dis=P.dis+feed.mid*R*.8;
+      const wob=Math.sin(t*sp*1.3-i*.45+A.ph)*(.55+dis*1.3)*(1-st*.55)*u*.5+Math.sin(t*(11+A.hue*7)-i*.9+A.ph*3)*st*(.5+dis*.7)*u*.9;
+      const jx=(Math.sin(t*37+A.ph*9+i)*.5)*jolt*(1+P.mut*2)*u*1.4*f;
+      let fx=wob*f+jx+A.ang*.02*u*(1-f),fy=.045*u*(.6+.4*(1-st))-att*.05*u*(1-f);
+      if(poke.a>.02){const dx=q.x/W-poke.x,dy=q.y/H-poke.y,d=Math.hypot(dx,dy)+.02;if(d<.28){const kk=(.28-d)/d*poke.a*.35*u;fx+=dx*kk;fy+=dy*kk;}}
+      q.x+=vx+fx;q.y+=vy+fy;
+    }
+    for(let it=0;it<3;it++)for(let i=1;i<NS;i++){const a=Q[i-1],b=Q[i],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,l=L*A.len,df=(d-l)/d;
+      if(i>1){a.x+=dx*df*.5;a.y+=dy*df*.5;}b.x-=dx*(i>1?df*.5:df);b.y-=dy*(i>1?df*.5:df);}
+  }
+  init=true;poke.a*=Math.pow(.2,dt);
+}
+function draw(t){
+  const st=S.st;
+  cx.globalCompositeOperation='source-over';cx.fillStyle='rgba(5,6,11,'+(.5-.44*P.rev)+')';cx.fillRect(0,0,W,H);
+  cx.globalCompositeOperation='lighter';cx.lineCap='round';cx.lineJoin='round';
+  const baseHue=(205+t*(4+P.mut*14)+feed.high*80*P.react)%360,spread=70+P.mut*200;
+  const copies=st>.35?3:1,off=(Math.sin(t*(2.6+st*3))*2.2+1)*u*st*(1+P.dis);
+  for(let c=0;c<copies;c++){
+    const ox=(c-(copies-1)/2)*off*1.6,hs=copies>1?(c-1)*40:0;
+    for(let k=0;k<NA;k++){
+      const A=arms[k],Q=A.p,hue=(baseHue+A.hue*spread+hs)%360;
+      for(let pass=0;pass<2;pass++)for(let i=1;i<NS;i++){
+        const f=i/NS,a=Q[i-1],b=Q[i],wd=(pass?1:5.5)*(1-f*.86)*u*(1.3-.4*st)+.4;
+        const al=(pass?.8:.1+.07*(1-st))*(1-f*.8)*(copies>1?.62:1)*(st>.5?1.15:1)*(1+att*.25)*(1+feed.lvl*P.react*.8);
+        cx.strokeStyle='hsla('+hue+',100%,'+(pass?72:56)+'%,'+Math.min(1,al)+')';cx.lineWidth=wd*.6;
+        cx.beginPath();cx.moveTo(a.x+ox,a.y);cx.lineTo(b.x+ox,b.y);cx.stroke();
+      }
+      const tp=Q[NS-1];cx.fillStyle='hsla('+hue+',100%,80%,'+(.35+.4*st)+')';cx.beginPath();cx.arc(tp.x+ox,tp.y,(1.2+Math.sin(t*5+k)*.6)*u*.6,0,TAU);cx.fill();
+    }
+  }
+  const R=H*.115*(1+feed.bass*P.react*.25),g=cx.createRadialGradient(hx,hy-R*.2,R*.1,hx,hy,R*1.9);
+  g.addColorStop(0,'hsla('+(baseHue+30)+',100%,85%,'+(.55+.3*st)+')');g.addColorStop(.35,'hsla('+(baseHue+90)+',100%,60%,.26)');g.addColorStop(1,'rgba(0,0,0,0)');
+  cx.fillStyle=g;cx.beginPath();cx.ellipse(hx,hy-R*.1,R*1.5,R*1.85,0,0,TAU);cx.fill();
+  cx.strokeStyle='hsla('+(baseHue+40)+',100%,78%,'+(.45+.3*st)+')';cx.lineWidth=.8;
+  for(let i=0;i<5;i++){const w=.28+i*.17+.06*Math.sin(t*.8+i)+st*.02*Math.sin(t*20+i*2);cx.beginPath();cx.ellipse(hx,hy-R*.05,R*1.18*w,R*1.45,0,0,TAU);cx.stroke();}
+  cx.globalCompositeOperation='source-over';
+}
+
+/* ---------- shader ---------- */
+let gl=null,U={},tex=null;
+function initGL(){
+  gl=gv.getContext('webgl',{antialias:false,preserveDrawingBuffer:true});if(!gl){document.body.textContent='WebGL is not available.';return;}
+  const vs='attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+  const fs=`precision highp float;varying vec2 uv;uniform sampler2D src;uniform vec2 res;uniform vec4 A,B,C,D;uniform float T;
+  #define PI 3.14159265
+  const float R0=.75;
+  float hh(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+  vec2 cm(vec2 a,vec2 b){return vec2(a.x*b.x-a.y*b.y,a.x*b.y+a.y*b.x);}
+  vec2 cd(vec2 a,vec2 b){return cm(a,vec2(b.x,-b.y))/(dot(b,b)+1e-5);}
+  vec2 pol(vec2 z){return vec2(length(z),abs(atan(z.y,z.x)));}
+  vec2 unp(float r,float a){return r*vec2(cos(a),sin(a));}
+  /* A.x sphere turn, A.y Moebius, A.z power, A.w spiral, B.x sqrt fold, B.y Joukowski */
+  vec2 F(vec2 z){
+    vec2 w=z;
+    if(B.y>.001){vec2 j=w+cd(vec2(.4*B.y,0.),w);w=mix(w,j*.8,smoothstep(0.,.08,B.y));}
+    if(A.y>.001){vec2 a=.9*A.y*vec2(cos(C.x),sin(C.x));vec2 u=w/R0;vec2 m=cd(u-a,vec2(1.,0.)-cm(vec2(a.x,-a.y),u))*R0;w=mix(w,m*1.1,smoothstep(0.,.06,A.y));}
+    if(A.x>.001){
+      vec2 u=w/R0;float d=dot(u,u);vec3 P=vec3(2.*u,d-1.)/(1.+d);
+      float an=A.x*PI,ca=cos(an),sa=sin(an);float tl=C.y;vec3 ax=normalize(vec3(cos(tl),sin(tl),.35));
+      P=P*ca+cross(ax,P)*sa+ax*dot(ax,P)*(1.-ca);
+      vec2 s=P.xy/(1.-clamp(P.z,-.995,.995))*R0;w=mix(w,s,smoothstep(0.,.05,A.x));
+    }
+    if(A.z>.001){vec2 pp=pol(w);float n=1.+A.z*4.;w=mix(w,unp(R0*pow((pp.x+1e-4)/R0,1.+.5*A.z),n*pp.y),smoothstep(0.,.05,A.z));}
+    if(A.w>.001){vec2 pp=pol(w);vec2 lg=vec2(log((pp.x+1e-4)/R0),pp.y);vec2 e=cm(lg,vec2(1.,A.w*1.6));float r=R0*exp(e.x);w=mix(w,unp(r,e.y+C.z*.3),smoothstep(0.,.05,A.w));}
+    if(B.x>.001){vec2 pp=pol(w);w=mix(w,unp(sqrt(pp.x*R0)*1.05,pp.y*.5),smoothstep(0.,.05,B.x));}
+    return w;
+  }
+  vec2 fold(vec2 u){return 1.-abs(1.-mod(u,2.));}   /* mirror-repeat: the kaleidoscopic fold */
+  void main(){
+    float asp=res.x/res.y;float sc=2.2;
+    vec2 z=(uv-.5)*vec2(asp,1.)*sc;
+    float gs=step(.78,hh(vec2(floor(uv.y*16.),floor(T*22.))));
+    z.x+=gs*(hh(vec2(floor(uv.y*16.),7.+floor(T*22.)))-.5)*.5*D.x;
+    float amt=A.x+A.y+A.z+A.w+B.x+B.y;float ca=.012*min(1.,amt)+.014*D.y+.02*D.x+D.z;vec2 O=vec2(0.,-.26)*smoothstep(0.,.08,amt);
+    vec3 col;
+    vec2 wr=F(z*(1.-ca))+O,wg=F(z)+O,wb=F(z*(1.+ca))+O;
+    col.r=texture2D(src,fold(wr/(vec2(asp,1.)*sc)+.5)).r;
+    col.g=texture2D(src,fold(wg/(vec2(asp,1.)*sc)+.5)).g;
+    col.b=texture2D(src,fold(wb/(vec2(asp,1.)*sc)+.5)).b;
+    col*=1.-.35*D.y*hh(uv*vec2(80.,60.)+T);
+    gl_FragColor=vec4(vec3(.018,.026,.012) + dot(col,vec3(.299,.587,.114))*vec3(.68,.79,.43),1.);
+  }`;
+  const mk=(ty,s)=>{const x=gl.createShader(ty);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(x));return x;};
+  const pr=gl.createProgram();gl.attachShader(pr,mk(gl.VERTEX_SHADER,vs));gl.attachShader(pr,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ['src','res','A','B','C','D','T'].forEach(n=>U[n]=gl.getUniformLocation(pr,n));
+  tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.uniform1i(U.src,0);
+}
+
+/* ---------- the fold schedule ---------- */
+/* Each map has a slow drifting base level (so something is always folding) plus an audio term.
+   FOLD DEPTH scales the whole set. */
+const gest={rie:0,mob:0,pw:0,gl:0,fr:0,kind:'',t0:0,dur:0,next:2};
+function gestures(t){
+  const G=gest;
+  if(G.kind&&t-G.t0<G.dur){
+    const p=(t-G.t0)/G.dur,e=Math.sin(Math.PI*Math.min(1,p));
+    G.gl*=Math.pow(.003,1/60);G.fr*=Math.pow(.02,1/60);
+    if(G.kind==='glitch'){G.gl=Math.max(G.gl,e);G.mob=.3*e*(Math.sin(t*40)>0?1:.3);G.pw=.16*e*(Math.sin(t*23)>0?1:0);}
+    else if(G.kind==='flip'){G.rie=.62*e;G.mob=.1*e;}
+    else{G.rie*=.9;G.mob*=.9;G.pw*=.9;}
+    if(G.kind!=='flip'&&G.kind!=='glitch'){G.rie*=.9;G.mob*=.9;G.pw*=.9;}
+    return;
+  }
+  G.rie*=.9;G.mob*=.9;G.pw*=.9;G.gl*=.9;G.fr*=.9;
+  if(t>G.next&&(att>.3||feed.on)){
+    const r=Math.random(),k=r<.3?'glitch':r<.7?'flip':'wave';
+    G.kind=k;G.t0=t;G.dur=k==='glitch'?.3+Math.random()*.3:1.2+Math.random()*1.4;G.next=t+G.dur+.4+Math.random()*1.6;
+  }
+}
+const M0={rie:.35,mob:.3,pow:.15,dro:.1,sqr:.1,jou:.2};   /* resting levels, so folds are visible before any input */
+function view(t,dt){
+  const dr=.04+.3*.5;ph.m+=dt*dr*1.1;ph.r+=dt*dr*.7;ph.s+=dt*dr*.9;
+  const F=P.fold,R=P.react,sl=k=>1+.18*Math.sin(t*.37+k.length*1.7);
+  const au=feed.on?1:0;
+  const rie=Math.min(1,(M0.rie*sl('rie')*F+gest.rie)+feed.bass*R*.55);
+  const mob=Math.min(1,(M0.mob*sl('mob')*F+gest.mob)+feed.mid*R*.7);
+  const pow=Math.min(1,(M0.pow*sl('pow')*F+gest.pw)+feed.high*R*.5);
+  const dro=Math.min(1,M0.dro*sl('dro')*F+feed.lvl*R*.5*F);
+  const sqr=Math.min(1,M0.sqr*sl('sqr')*F+feed.onset*R*.4*F);
+  const jou=Math.min(1,M0.jou*sl('jou')*F+feed.mid*R*.3);
+  gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,cr);
+  gl.uniform2f(U.res,gv.width,gv.height);
+  gl.uniform4f(U.A,rie,mob,pow,dro);gl.uniform4f(U.B,sqr,jou,0,0);gl.uniform4f(U.C,ph.m,ph.r,ph.s,0);
+  gl.uniform4f(U.D,gest.gl,gest.fr,feed.high*R*.01,0);gl.uniform1f(U.T,t);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+}
+
+addEventListener('resize',resize);
+
+/* ---------- recording ---------- */
+const recordButton = document.getElementById('record');
+const downloadVideo = document.getElementById('download');
+const recordStatus = document.getElementById('record-status');
+let recording = null;
+let videoURL = null;
+let videoBlob = null;
+
+function captureFrame(job) {
+  const { output, graphics } = job;
+  const scale = Math.min(output.width / gv.width, output.height / gv.height);
+  const width = gv.width * scale, height = gv.height * scale;
+  graphics.fillStyle = '#05060b';
+  graphics.fillRect(0, 0, output.width, output.height);
+  graphics.drawImage(gv, (output.width - width) / 2, (output.height - height) / 2, width, height);
+  const caption = captions.textContent;
+  if (!caption) return;
+  graphics.font = '30px monospace';
+  graphics.textAlign = 'center';
+  const lines = [];
+  let line = '';
+  for (const word of caption.split(/\s+/)) {
+    const next = line ? line + ' ' + word : word;
+    if (line && graphics.measureText(next).width > 1640) {
+      lines.push(line);
+      line = word;
+    } else line = next;
+  }
+  lines.push(line);
+  const top = output.height - 56 - lines.length * 38;
+  graphics.fillStyle = '#080b07e6';
+  graphics.fillRect(100, top, output.width - 200, lines.length * 38 + 16);
+  graphics.fillStyle = '#d5e2bd';
+  lines.forEach((text, i) => graphics.fillText(text, output.width / 2, top + 34 + i * 38, 1640));
+}
+
+recordButton.onclick = async () => {
+  if (recording) {
+    if (recording.recorder.state !== 'inactive') recording.recorder.stop();
+    recordButton.disabled = true;
+    return;
+  }
+  recordButton.disabled = true;
+  let stream, audioBus, job;
+  try {
+    if (!gl || !window.MediaRecorder || !gv.captureStream) {
+      throw Error('Video recording is unavailable in this browser.');
+    }
+    ensureAC();
+    await AC.resume();
+    if (document.hidden) throw Error('Keep this tab visible while recording.');
+    const output = document.createElement('canvas');
+    output.width = 1920;
+    output.height = 1080;
+    const graphics = output.getContext('2d', { alpha: false });
+    stream = output.captureStream(30);
+    audioBus = AC.createMediaStreamDestination();
+    an.connect(audioBus);
+    stream.addTrack(audioBus.stream.getAudioTracks()[0]);
+    const mimeType = ['video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4']
+      .find(type => MediaRecorder.isTypeSupported(type));
+    const options = { videoBitsPerSecond: 4500000 };
+    if (mimeType) options.mimeType = mimeType;
+    const recorder = new MediaRecorder(stream, options);
+    const chunks = [];
+    job = { output, graphics, recorder, nextFrame: 0, error: null };
+    recorder.ondataavailable = event => {
+      if (event.data.size) chunks.push(event.data);
+    };
+    recorder.onerror = () => { job.error = 'Recording failed.'; };
+    recorder.onstop = () => {
+      an.disconnect(audioBus);
+      stream.getTracks().forEach(track => track.stop());
+      recording = null;
+      recordButton.disabled = false;
+      recordButton.textContent = 'RECORD';
+      recordButton.setAttribute('aria-pressed', 'false');
+      if (job.error || !chunks.length) {
+        recordStatus.textContent = job.error || 'No video was recorded.';
+        return;
+      }
+      const type = chunks[0].type || recorder.mimeType;
+      if (videoURL) URL.revokeObjectURL(videoURL);
+      videoBlob = new Blob(chunks, { type });
+      videoURL = URL.createObjectURL(videoBlob);
+      youtubeButton.hidden = false;
+      downloadVideo.href = videoURL;
+      downloadVideo.download = type.includes('mp4') ? 'The_Thermodynamic_Limits_of_Artificial_Organs.mp4' : 'The_Thermodynamic_Limits_of_Artificial_Organs.webm';
+      downloadVideo.hidden = false;
+      recordStatus.textContent = 'Video ready';
+    };
+    captureFrame(job);
+    recorder.start(1000);
+    recording = job;
+    recordButton.textContent = 'STOP RECORDING';
+    recordButton.setAttribute('aria-pressed', 'true');
+    recordStatus.textContent = 'Recording visualizer and track';
+  } catch (error) {
+    if (audioBus) an.disconnect(audioBus);
+    stream?.getTracks().forEach(track => track.stop());
+    recordStatus.textContent = error.message;
+  } finally {
+    recordButton.disabled = false;
+  }
+};
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && recording?.recorder.state === 'recording') {
+    recording.recorder.stop();
+    recordButton.disabled = true;
+  }
+});
+
+/* ---------- YouTube upload ---------- */
+// Enable YouTube Data API v3 and use a Web application OAuth client.
+// Add the deployed origin (for example https://standardgalactic.github.io)
+// to Authorized JavaScript origins. Use the public client ID only.
+const YOUTUBE_CLIENT_ID = '286025923792-unirt9tpv125euthninv1v85k1h3h0v0.apps.googleusercontent.com';
+const youtubeButton = document.getElementById('youtube');
+const youtubeDialog = document.getElementById('youtube-dialog');
+const youtubeForm = document.getElementById('youtube-form');
+const youtubeTitle = document.getElementById('youtube-title');
+const youtubeVisibility = document.getElementById('youtube-visibility');
+const youtubeStatus = document.getElementById('youtube-status');
+const youtubeSend = document.getElementById('youtube-send');
+const youtubeClose = document.getElementById('youtube-close');
+const youtubeResult = document.getElementById('youtube-result');
+let uploading = false;
+
+function setUploadBusy(busy) {
+  uploading = busy;
+  youtubeSend.disabled = youtubeClose.disabled = youtubeTitle.disabled =
+    youtubeVisibility.disabled = busy;
+}
+
+youtubeButton.onclick = () => {
+  if (!videoBlob || uploading) return;
+  youtubeResult.hidden = true;
+  youtubeSend.disabled = false;
+  youtubeVisibility.value = 'private';
+  youtubeStatus.textContent = YOUTUBE_CLIENT_ID
+    ? 'Google will ask which account to use.'
+    : 'Set YOUTUBE_CLIENT_ID in this page to enable direct upload.';
+  youtubeDialog.showModal();
+};
+
+youtubeClose.onclick = () => youtubeDialog.close();
+youtubeDialog.addEventListener('cancel', event => {
+  if (uploading) event.preventDefault();
+});
+
+function sendVideo(url, blob, authorization) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('PUT', url);
+    request.setRequestHeader('Authorization', authorization);
+    request.setRequestHeader('Content-Type', blob.type || 'application/octet-stream');
+    request.upload.onprogress = event => {
+      const percent = Math.min(100, Math.floor(100 * event.loaded / blob.size));
+      youtubeStatus.textContent = percent === 100
+        ? 'Waiting for YouTube to confirm…' : 'Uploading ' + percent + '%';
+    };
+    request.onload = () => {
+      let response;
+      try { response = JSON.parse(request.responseText); } catch {}
+      if (request.status >= 200 && request.status < 300 && response?.id) resolve(response.id);
+      else reject(Error(response?.error?.message || 'YouTube did not confirm the upload (HTTP ' + request.status + ').'));
+    };
+    request.onerror = () => reject(Error('Connection lost. Check YouTube Studio before trying again.'));
+    request.send(blob);
+  });
+}
+
+async function uploadVideo(token, blob, title, privacyStatus) {
+  const authorization = 'Bearer ' + token;
+  const response = await fetch('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status', {
+    method: 'POST',
+    headers: {
+      Authorization: authorization,
+      'Content-Type': 'application/json',
+      'X-Upload-Content-Type': blob.type || 'application/octet-stream',
+      'X-Upload-Content-Length': String(blob.size)
+    },
+    body: JSON.stringify({ snippet: { title, categoryId: '22', description: 'Essay: https://standardgalactic.github.io/laboratory/artificial-organs-textbook.pdf' }, status: { privacyStatus } })
+  });
+  if (!response.ok) {
+    const details = await response.json().catch(() => null);
+    throw Error(details?.error?.message || 'Could not start upload (HTTP ' + response.status + ').');
+  }
+  const session = response.headers.get('Location');
+  if (!session || new URL(session).origin !== 'https://www.googleapis.com') {
+    throw Error('YouTube did not return a usable upload session.');
+  }
+  return sendVideo(session, blob, authorization);
+}
+
+youtubeForm.onsubmit = event => {
+  event.preventDefault();
+  if (uploading || !videoBlob) return;
+  if (!YOUTUBE_CLIENT_ID || !window.google?.accounts?.oauth2) {
+    youtubeStatus.textContent = !YOUTUBE_CLIENT_ID
+      ? 'Set YOUTUBE_CLIENT_ID in this page to enable direct upload.'
+      : 'Google authorization could not load. Check your connection and reload.';
+    return;
+  }
+  const blob = videoBlob;
+  const title = youtubeTitle.value.trim();
+  const visibility = youtubeVisibility.value;
+  if (!title) {
+    youtubeStatus.textContent = 'Enter a title.';
+    youtubeTitle.focus();
+    return;
+  }
+  const fail = message => {
+    setUploadBusy(false);
+    youtubeStatus.textContent = message;
+  };
+  setUploadBusy(true);
+  youtubeStatus.textContent = 'Waiting for Google authorization…';
+  try {
+    google.accounts.oauth2.initTokenClient({
+      client_id: YOUTUBE_CLIENT_ID,
+      scope: 'https://www.googleapis.com/auth/youtube.upload',
+      include_granted_scopes: false,
+      error_callback: () => fail('Google authorization closed or could not open.'),
+      callback: async response => {
+        if (response.error || !response.access_token) {
+          fail(response.error_description || 'YouTube authorization was declined.');
+          return;
+        }
+        try {
+          youtubeStatus.textContent = 'Starting upload…';
+          const id = await uploadVideo(response.access_token, blob, title, visibility);
+          youtubeResult.href = 'https://studio.youtube.com/video/' + encodeURIComponent(id) + '/edit';
+          youtubeResult.hidden = false;
+          youtubeStatus.textContent = 'Uploaded. YouTube may still be processing the video.';
+          setUploadBusy(false);
+          youtubeSend.disabled = true;
+        } catch (error) {
+          fail(error.message);
+        }
+      }
+    }).requestAccessToken({ prompt: 'select_account' });
+  } catch (error) {
+    fail(error.message);
+  }
+};
+
+/* ---------- loop ---------- */
+initGL();
+if (!gl) return;
+resize();
+let last=performance.now()/1000;
+function frame(){
+  const now=performance.now()/1000,dt=Math.min(.05,now-last);last=now;
+  att+=(attT-att)*Math.min(1,dt*6);
+  readAudio(dt);gestures(now);
+  step(now,dt);draw(now);view(now,dt);syncTrack();
+  if (recording?.recorder.state === 'recording' && now >= recording.nextFrame) {
+    captureFrame(recording);
+    recording.nextFrame = Math.max(now, recording.nextFrame + 1 / 30);
+  }
+  requestAnimationFrame(frame);
+}
+frame();
+})();
+</script>
+</body>
+</html>
