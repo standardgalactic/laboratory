@@ -1,5 +1,7 @@
 # Laboratory
 
+[Lossless Projection](https://standardgalactic.github.io/laboratory/lossless-projection.pdf)
+
 [Artificial Organs and Transhuman Trajectories](https://standardgalactic.github.io/laboratory/artificial-organs-textbook.pdf)
 
 * [The Thermodynamic Limits of Artificial Organs](https://standardgalactic.github.io/laboratory/artificial-organs-visualizer.html)
