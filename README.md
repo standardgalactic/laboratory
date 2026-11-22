@@ -1,5 +1,9 @@
 # Laboratory
 
+[Deferred Failure](https://standardgalactic.github.io/laboratory/deferred-failure.pdf)
+
+* [Why Replacing Experts With AI Backfires](https://standardgalactic.github.io/laboratory/automation-oscilloscope.html)
+
 [Lossless Projection](https://standardgalactic.github.io/laboratory/lossless-projection.pdf)
 
 [Artificial Organs and Transhuman Trajectories](https://standardgalactic.github.io/laboratory/artificial-organs-textbook.pdf)
