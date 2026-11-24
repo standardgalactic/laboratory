@@ -1,5 +1,9 @@
 # Laboratory
 
+[Computational Obstruction](https://standardgalactic.github.io/laboratory/computational-obstruction.pdf)
+
+* [The Geometry of Computational Obstruction](https://standardgalactic.github.io/laboratory/computational-obstruction-oscilloscope.html)
+
 [Deferred Failure](https://standardgalactic.github.io/laboratory/deferred-failure.pdf)
 
 * [Why Replacing Experts With AI Backfires](https://standardgalactic.github.io/laboratory/automation-oscilloscope.html)
